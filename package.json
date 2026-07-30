@@ -1,0 +1,17 @@
+{
+  "name": "pptx-pipeline-workspace",
+  "version": "0.0.0-private",
+  "private": true,
+  "license": "MIT",
+  "type": "module",
+  "engines": {
+    "node": "^22.0.0 || ^24.0.0"
+  },
+  "scripts": {
+    "test": "node --test tests/*.test.mjs",
+    "check:forbidden": "node scripts/check-forbidden-materials.mjs --mode index",
+    "check:provenance": "node scripts/check-provenance.mjs --mode index",
+    "check:public-tree": "npm run check:forbidden && npm run check:provenance",
+    "check:working-tree": "node scripts/check-forbidden-materials.mjs --mode working-tree && node scripts/check-provenance.mjs --mode working-tree"
+  }
+}

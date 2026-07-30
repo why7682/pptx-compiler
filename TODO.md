@@ -12,8 +12,20 @@ criterion is recorded in the repository.
 | M0-001 | DONE | Create a new workspace and independent Git tree without copying predecessor content. | Only planning text is present; parent repository ignores this nested tree. |
 | M0-002 | DONE | Record the project boundary, handoff, private-fixture policy, target architecture, and release gates. | The documents linked from `README.md` agree on scope and status. |
 | M0-003 | DONE | Select the working name, monorepo shape, MIT license, copyright holder, and repository-local public Git identity. | Dated decisions, official-registry name check, MIT license text, and local Git identity verification are recorded. |
-| M0-004 | NEXT | Implement the bounded provenance and forbidden-material gates in `docs/M0-004_HANDOFF.md`. | Every tracked/admitted file has machine-readable provenance; mutations covering forbidden paths/text/extensions/magic, symlinks, oversize files, missing/invalid records, and private-output leakage are rejected. |
-| M0-005 | PENDING | Define the public support matrix and compatibility policy. | Each input, OOXML feature, platform, and evidence level is marked supported, experimental, manual, or unsupported. |
+| M0-004 | DONE | Implement the bounded provenance and forbidden-material gates in `docs/M0-004_HANDOFF.md`. | Every tracked/admitted file has machine-readable provenance; mutations covering forbidden paths/text/extensions/magic, symlinks, oversize files, missing/invalid records, and private-output leakage are rejected. |
+| M0-005 | NEXT | Define the public support matrix and compatibility policy. | Each input, OOXML feature, platform, and evidence level is marked supported, experimental, manual, or unsupported. |
+
+### M0-004 completion evidence — 2026-07-30
+
+- `npm test`: 33/33 passed, comprising 2 passing baselines and 31 rejection
+  mutations.
+- `npm run check:public-tree`: staged forbidden-material and exact per-file
+  provenance gates passed for the complete slice.
+- `git diff --check`: passed.
+- The bounded independent read-only review found four issues; all were fixed,
+  regression-tested, and the closing review reported no blocking findings.
+- The local run used Node.js 23.7.0 only as development verification. Node.js
+  22.x/24.x and cross-platform evidence remains assigned to public CI work.
 
 ## M1 — Public, self-contained foundation
 

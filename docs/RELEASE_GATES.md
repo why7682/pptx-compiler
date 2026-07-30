@@ -82,3 +82,18 @@ The reviewed tarball hash must equal the published tarball hash.
 - npm package metadata: <https://docs.npmjs.com/cli/configuring-npm/package-json/>
 - OpenSSF Scorecard: <https://github.com/ossf/scorecard>
 - GitHub security policy guidance: <https://docs.github.com/en/code-security/how-tos/report-and-fix-vulnerabilities/configure-vulnerability-reporting/add-security-policy>
+
+## Executable foundation gates
+
+M0-004 makes the G0 admission boundary executable without third-party runtime
+dependencies:
+
+- `npm run check:public-tree` checks the staged Git index using the staged
+  policy, schema, and provenance records;
+- `npm run check:working-tree` diagnoses tracked and non-ignored untracked
+  working-tree files without following symlinks;
+- `npm test` proves deterministic reports and fail-closed behavior with
+  repository-owned temporary text fixtures and 31 rejection mutations.
+
+Both CLIs emit deterministic human output by default and accept `--json` for a
+versioned machine report. A configuration error is itself a gate failure.

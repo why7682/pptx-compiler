@@ -8,8 +8,8 @@ No item below is decided merely because a recommendation is recorded.
 | D-002 | ACCEPTED | License | Use the MIT License. | User selected MIT after reviewing the Apache-2.0 trade-off; official MIT text is present in `LICENSE`. |
 | D-003 | ACCEPTED | Public Git author identity | Use the user-approved repository-local identity; do not duplicate its personal fields in tracked planning files. | Local `git config` verification completed. |
 | D-004 | ACCEPTED | Repository shape | Use a private-root npm monorepo with separately publishable core, CLI, and optional adapters. | User decision recorded; dependency-direction tests remain required. |
-| D-005 | OPEN | Runtime support | Begin with actively supported Node LTS releases on Linux, Windows, and macOS; document exact versions at implementation time. | CI matrix and dependency support. |
-| D-006 | OPEN | Schema source of truth | Prefer JSON Schema as normative with generated/verified TypeScript types. | Prototype round-trip and error-quality comparison. |
+| D-005 | ACCEPTED | Runtime support | Support Node.js 22.x and 24.x LTS on Linux, Windows, and macOS; the private root manifest enforces these release lines. | The official Node.js release table listed both lines as LTS on 2026-07-30; cross-platform CI evidence remains due in M3-004. |
+| D-006 | ACCEPTED | Schema source of truth | Use JSON Schema Draft 2020-12 as normative; generated or verified TypeScript types remain a later consumer. | M0-004 validates the bounded provenance contract from its checked-in schema and rejects structural, enum, rights, date, and version mutations. |
 | D-007 | OPEN | Public formula font | Select an OFL-compatible math font for SVG examples; do not redistribute proprietary fonts. | License file and rendered conformance proof. |
 | D-008 | OPEN | Pandoc integration | Optional external adapter, never bundled with core. | License/attribution review and absence behavior tests. |
 | D-009 | OPEN | Unsupported high-risk OOXML | Reject macros, ActiveX, OLE, embedded packages, and unsafe external relationships in 0.x. | Threat-model review and mutation tests. |
@@ -46,6 +46,15 @@ same change.
   Once the synthetic public fixture completes the executable CLI flow and the
   public-preflight scan passes, create a public repository. Select the hosting
   account/organization at that gate.
+- **D-005 accepted:** support the actively supported Node.js 22.x and 24.x LTS
+  release lines on Linux, Windows, and macOS. The private workspace manifest
+  declares `^22.0.0 || ^24.0.0`; the local Node.js 23 development run is not
+  support evidence. The official release status was checked at
+  <https://nodejs.org/en/about/previous-releases> on 2026-07-30.
+- **D-006 accepted:** JSON Schema Draft 2020-12 is the normative schema source.
+  M0-004 uses a dependency-free, fail-closed evaluator for the bounded
+  provenance schema and rejects unsupported schema keywords. Type generation
+  and broader shared schema tooling remain in M1-002.
 
 ## MIT versus Apache-2.0 review
 

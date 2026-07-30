@@ -12,7 +12,7 @@ For every new session, read only:
 1. `HANDOFF.md`
 2. `TODO.md`
 
-For the current `M0-004` task, then read:
+For maintenance or audit of the completed `M0-004` gates, then read:
 
 3. `docs/M0-004_HANDOFF.md`
 4. `docs/PROVENANCE_LEDGER.md`
@@ -75,7 +75,7 @@ changing product scope, public contracts, packages, or dependency direction.
 
 - Implement the smallest complete vertical slice that advances the current
   TODO dependency.
-- For `M0-004`, do not scan the predecessor repository, start a broad multi-agent
+- When maintaining `M0-004`, do not scan the predecessor repository, start a broad multi-agent
   fan-out, or load presentation assets. The exact task is self-contained in
   `docs/M0-004_HANDOFF.md`. One bounded independent review after implementation
   is sufficient.

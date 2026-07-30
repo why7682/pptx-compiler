@@ -1,0 +1,282 @@
+{
+  "schemaVersion": 1,
+  "maxFileBytes": 1048576,
+  "approvedExecutablePaths": [],
+  "approvedPublicIdentities": [
+    "Elliot Wu"
+  ],
+  "copyrightIdentityRule": {
+    "id": "unapproved-copyright-identity",
+    "patternFragments": [
+      "Copyright \\(c\\) ",
+      "[0-9]{4} ",
+      "([^\\r\\n]+)"
+    ],
+    "flags": "gi"
+  },
+  "forbiddenExtensions": [
+    {
+      "id": "forbidden-presentation-extension",
+      "extensions": [
+        ".odp",
+        ".pot",
+        ".potm",
+        ".potx",
+        ".pps",
+        ".ppsm",
+        ".ppsx",
+        ".ppt",
+        ".pptm",
+        ".pptx"
+      ]
+    },
+    {
+      "id": "forbidden-document-binary-extension",
+      "extensions": [
+        ".pdf"
+      ]
+    },
+    {
+      "id": "forbidden-font-extension",
+      "extensions": [
+        ".eot",
+        ".otf",
+        ".ttc",
+        ".ttf",
+        ".woff",
+        ".woff2"
+      ]
+    },
+    {
+      "id": "forbidden-archive-extension",
+      "extensions": [
+        ".7z",
+        ".bz2",
+        ".gz",
+        ".rar",
+        ".tar",
+        ".tgz",
+        ".xz",
+        ".zip"
+      ]
+    },
+    {
+      "id": "forbidden-executable-extension",
+      "extensions": [
+        ".bat",
+        ".cmd",
+        ".com",
+        ".dll",
+        ".dylib",
+        ".exe",
+        ".msi",
+        ".ps1",
+        ".sh",
+        ".so"
+      ]
+    }
+  ],
+  "forbiddenBasenames": [
+    {
+      "id": "local-environment-file",
+      "names": [
+        ".env",
+        ".env.development",
+        ".env.local",
+        ".env.production",
+        ".env.test",
+        ".npmrc",
+        ".pypirc"
+      ]
+    },
+    {
+      "id": "private-manifest-file",
+      "names": [
+        ".private-fixtures.json",
+        "local-fixtures.json",
+        "private-evidence.json",
+        "private-fixtures.json",
+        "private-manifest.json"
+      ]
+    }
+  ],
+  "forbiddenPathSegments": [
+    {
+      "id": "forbidden-worktree-directory",
+      "segments": [
+        ".worktrees",
+        "worktrees"
+      ]
+    },
+    {
+      "id": "forbidden-generated-output-directory",
+      "segments": [
+        "artifacts",
+        "build",
+        "coverage",
+        "dist",
+        "review-evidence",
+        "review-output"
+      ]
+    },
+    {
+      "id": "forbidden-private-output-directory",
+      "segments": [
+        "private-fixtures",
+        "private-output"
+      ]
+    }
+  ],
+  "pathRules": [
+    {
+      "id": "local-environment-path",
+      "patternFragments": [
+        "(?:^|/)",
+        "\\.env",
+        "(?:\\.[A-Za-z0-9_-]+)?$"
+      ],
+      "flags": "i",
+      "exceptPaths": [
+        ".env.example"
+      ]
+    },
+    {
+      "id": "private-manifest-path",
+      "patternFragments": [
+        "(?:^|/)",
+        "(?:local|private)[_-]",
+        "(?:evidence|fixture|manifest)s?",
+        "\\.(?:json|ya?ml)$"
+      ],
+      "flags": "i",
+      "exceptPaths": []
+    }
+  ],
+  "magicRules": [
+    {
+      "id": "forbidden-zip-magic",
+      "hexPrefixes": [
+        "504b0304",
+        "504b0506",
+        "504b0708"
+      ]
+    },
+    {
+      "id": "forbidden-pdf-magic",
+      "hexPrefixes": [
+        "25504446"
+      ]
+    },
+    {
+      "id": "forbidden-ole-magic",
+      "hexPrefixes": [
+        "d0cf11e0a1b11ae1"
+      ]
+    },
+    {
+      "id": "forbidden-font-magic",
+      "hexPrefixes": [
+        "00010000",
+        "4f54544f",
+        "74746366",
+        "774f4631",
+        "774f4632"
+      ]
+    },
+    {
+      "id": "forbidden-archive-magic",
+      "hexPrefixes": [
+        "1f8b08",
+        "377abcaf271c",
+        "526172211a0700",
+        "526172211a070100"
+      ]
+    },
+    {
+      "id": "forbidden-executable-magic",
+      "hexPrefixes": [
+        "4d5a",
+        "7f454c46",
+        "cafebabe",
+        "cffaedfe",
+        "cefaedfe"
+      ]
+    }
+  ],
+  "textRules": [
+    {
+      "id": "absolute-local-user-path",
+      "patternFragments": [
+        "(?:^|[\\s\\\"'=(])",
+        "(?:file://)?",
+        "(?:/(?:Users|home)/",
+        "[A-Za-z0-9._-]+/",
+        "[^\\s\\\"'<>]+",
+        "|[A-Za-z]:[\\\\/]",
+        "[^\\\\/\\s\\\"']+[\\\\/]",
+        "[^\\s\\\"']+)"
+      ],
+      "flags": "gm"
+    },
+    {
+      "id": "host-specific-volume-path",
+      "patternFragments": [
+        "(?:^|[\\s\\\"'=(])",
+        "/(?:Volumes|mnt)/",
+        "[A-Za-z0-9._-]+/",
+        "[^\\s\\\"'<>]+"
+      ],
+      "flags": "gm"
+    },
+    {
+      "id": "private-key-marker",
+      "patternFragments": [
+        "-----BEGIN",
+        "(?: [A-Z0-9]+)?",
+        " PRIVATE",
+        " KEY-----"
+      ],
+      "flags": "g"
+    },
+    {
+      "id": "credential-assignment",
+      "patternFragments": [
+        "(?:^|\\b)",
+        "(?:api|access|secret|private)[_-]?",
+        "(?:key|token)",
+        "\\s*[:=]\\s*[\\\"']?",
+        "[A-Za-z0-9_./+=-]{12,}"
+      ],
+      "flags": "gim"
+    },
+    {
+      "id": "cloud-access-key",
+      "patternFragments": [
+        "A",
+        "KIA",
+        "[0-9A-Z]{16}"
+      ],
+      "flags": "g"
+    },
+    {
+      "id": "private-fixture-identifier",
+      "patternFragments": [
+        "PRIVATE_",
+        "(?:DECK|FIXTURE|TEMPLATE)_",
+        "(?:ID|NAME)",
+        "\\s*[:=]\\s*",
+        "[A-Za-z0-9_-]{4,}"
+      ],
+      "flags": "gi"
+    },
+    {
+      "id": "unapproved-email-address",
+      "patternFragments": [
+        "[A-Z0-9._%+-]+",
+        "@",
+        "[A-Z0-9.-]+\\.[A-Z]{2,}"
+      ],
+      "flags": "gi"
+    }
+  ]
+}

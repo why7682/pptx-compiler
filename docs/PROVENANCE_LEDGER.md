@@ -73,4 +73,35 @@ independent_review: compared with the OSI-published MIT text
 notes: Do not paraphrase the operative license text.
 ```
 
-No implementation or fixture entry has been admitted yet.
+## Machine-readable source
+
+`provenance/records.json` is now the normative per-file source. It contains one
+exact, canonical repository-relative record for every admitted file, including
+itself. `schemas/provenance-record.schema.json` defines the versioned JSON
+Schema Draft 2020-12 contract. `npm run check:provenance` compares the records
+with the Git index and rejects missing, duplicate, orphaned, traversing,
+unsorted, invalid, or pending entries.
+
+### M0-004 implementation set
+
+```yaml
+paths:
+  - package.json
+  - policy/forbidden-materials.json
+  - provenance/records.json
+  - schemas/provenance-record.schema.json
+  - scripts/check-forbidden-materials.mjs
+  - scripts/check-provenance.mjs
+  - tests/policy-gates.test.mjs
+kind: new-clean-room
+origin: bounded M0-004 contract in docs/M0-004_HANDOFF.md
+original_author_or_holder: Elliot Wu
+created_or_reviewed_on: 2026-07-30
+license_or_rights_basis: MIT
+third_party_dependencies: []
+private_information_review: passed; synthetic runtime-constructed mutations only
+project_constant_removal: passed; no predecessor code or identifier inspected
+public_fixture_conformance: applicable; 21 forbidden-material and 10 provenance mutations
+independent_review: passed; closing review reported no blocking findings
+notes: The machine-readable records contain the exact per-file fields and status.
+```
