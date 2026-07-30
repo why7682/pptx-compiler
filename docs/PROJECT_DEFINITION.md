@@ -44,7 +44,11 @@ templates, fonts, helpers, or assets.
 Editability is capability-specific. The tool never infers native editability
 from visual similarity.
 
-## Initial supported capabilities
+## Target initial capabilities
+
+These are roadmap targets, not current support claims. The normative current
+state is in `policy/support-matrix.json`; its claim switch remains false until a
+public executable vertical slice has complete conformance evidence.
 
 - PPTX/POTX package inspection and feature classification;
 - hash-bound template profile and project overlay;

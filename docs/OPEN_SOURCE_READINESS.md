@@ -5,7 +5,8 @@
 Publication is feasible, but the predecessor is a research-grade, project-bound
 system rather than a releasable general package. The correct strategy is a
 clean-room extraction into this empty-history repository, not a rename or bulk
-copy. The current readiness level is `plan-only / pre-alpha`.
+copy. The current readiness level is `foundation-policy / pre-alpha`: admission
+and support-claim gates are executable, while PPTX product capabilities are not.
 
 ## Reusable foundations observed in the predecessor
 
@@ -25,9 +26,9 @@ redistributable code and do not establish generic support.
 1. **Distribution boundary:** a package dry-run produced a 1,440,242,285-byte
    tarball and 1,751,118,178 unpacked bytes, including worktree and generated
    data. A positive package allowlist and binary-magic leak gate are mandatory.
-2. **Rights:** MIT is selected for new clean-room work and the bootstrap files
-   have provenance entries, but executable per-file enforcement is absent and
-   no predecessor template has been admitted for redistribution.
+2. **Rights:** MIT is selected and executable exact per-file provenance is in
+   place, but no predecessor code or template has been admitted for
+   redistribution.
 3. **Self-containment:** parts of inspection and rendering depend on managed or
    private helpers, fixed project roots, and project-specific identifiers.
 4. **Capability truth:** registry metadata can claim support without a generic
@@ -36,8 +37,9 @@ redistributable code and do not establish generic support.
    for accepting arbitrary external PPTX/POTX files.
 6. **Public fixture:** a clean, rights-owned synthetic fixture and conformance
    suite do not yet exist.
-7. **Package surface:** there is no public CLI/API contract, semantic-versioning
-   policy, package allowlist, compatibility matrix, or clean-install smoke test.
+7. **Package surface:** the compatibility/versioning policy now exists, but
+   there is no public CLI/API implementation, package allowlist, or clean-install
+   smoke test.
 8. **Community/security:** contribution, governance, vulnerability reporting,
    CI hardening, dependency/licensing audit, SBOM, and release provenance remain
    to be created.
@@ -59,8 +61,9 @@ Pandoc's upstream licensing and source are documented at
 
 ## Recommended milestones
 
-1. **Bootstrap:** complete executable provenance/exclusion controls, the
-   synthetic fixture, compatibility policy, and remaining threat-model limits.
+1. **Bootstrap:** executable provenance/exclusion controls and compatibility
+   policy are complete; the synthetic fixture and remaining threat-model limits
+   are next.
 2. **Foundation:** explicit context/schemas, distributable inspector, secure
    archive/XML layer.
 3. **Vertical slice:** capability dispatcher, clone/fill, one native component,

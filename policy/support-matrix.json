@@ -1,0 +1,673 @@
+{
+  "schemaVersion": 1,
+  "matrixVersion": "0.1.0",
+  "updatedOn": "2026-07-31",
+  "productStage": "pre-alpha-contract-only",
+  "supportClaimsEnabled": false,
+  "statusDefinitions": {
+    "supported": {
+      "meaning": "The exact declared scope has a dispatchable implementation and complete public conformance evidence.",
+      "claimRule": "Capabilities also require metadata, executor, input/output schemas, conformance fixture, and QA assertions."
+    },
+    "experimental": {
+      "meaning": "A bounded path or contract exists but stability, coverage, or required evidence is incomplete.",
+      "claimRule": "Must be labeled experimental at every API, CLI, and documentation boundary."
+    },
+    "manual": {
+      "meaning": "The result depends on an explicit trusted human or external-runtime gate.",
+      "claimRule": "Must remain unresolved until recorded manual evidence exists and can never become an automatic pass."
+    },
+    "unsupported": {
+      "meaning": "The current product does not accept or promise the item.",
+      "claimRule": "Reject or report unavailable before output mutation; never silently flatten or infer a fallback."
+    }
+  },
+  "dimensions": {
+    "inputs": [
+      {
+        "id": "capability-overlay",
+        "label": "Data-only capability overlay and semantic bindings",
+        "status": "unsupported",
+        "disposition": "unavailable",
+        "currentBasis": "The public schema and resolver do not exist in this repository.",
+        "limitations": ["Planning text is not an accepted input contract."],
+        "roadmap": "M1-002 and M2-001",
+        "evidence": { "level": "none", "artifacts": [] }
+      },
+      {
+        "id": "deck-slide-spec",
+        "label": "Versioned deck and slide specification",
+        "status": "unsupported",
+        "disposition": "unavailable",
+        "currentBasis": "No DeckSpec or SlideSpec schema or dispatcher exists.",
+        "limitations": ["No data can currently be validated or rendered."],
+        "roadmap": "M1-002 and M2-001",
+        "evidence": { "level": "none", "artifacts": [] }
+      },
+      {
+        "id": "jpeg-asset",
+        "label": "Local JPEG asset",
+        "status": "unsupported",
+        "disposition": "unavailable",
+        "currentBasis": "No asset policy, decoder boundary, or placement executor exists.",
+        "limitations": ["Local files are not searched or implicitly admitted."],
+        "roadmap": "M1-002 and M2-003",
+        "evidence": { "level": "none", "artifacts": [] }
+      },
+      {
+        "id": "latex-formula",
+        "label": "LaTeX formula input",
+        "status": "unsupported",
+        "disposition": "unavailable",
+        "currentBasis": "The optional Pandoc/OMML adapter is not implemented.",
+        "limitations": ["Pandoc is not bundled and predecessor observations are not public evidence."],
+        "roadmap": "M2-004",
+        "evidence": { "level": "none", "artifacts": [] }
+      },
+      {
+        "id": "macro-enabled-presentation",
+        "label": "Macro-enabled presentation or template",
+        "status": "unsupported",
+        "disposition": "reject",
+        "currentBasis": "Macros are outside the 0.x trusted input boundary.",
+        "limitations": ["Executable rejection is not proven until secure ingestion exists."],
+        "roadmap": "M1-005",
+        "evidence": { "level": "none", "artifacts": [] }
+      },
+      {
+        "id": "other-office-or-design-input",
+        "label": "PDF, office, design, HTML, or image document import",
+        "status": "unsupported",
+        "disposition": "reject",
+        "currentBasis": "Semantic import from arbitrary document/design formats is a 0.x non-goal.",
+        "limitations": ["Individual local image assets are separate future inputs, not document import."],
+        "roadmap": "No 0.x roadmap",
+        "evidence": { "level": "none", "artifacts": [] }
+      },
+      {
+        "id": "png-asset",
+        "label": "Local PNG asset",
+        "status": "unsupported",
+        "disposition": "unavailable",
+        "currentBasis": "No asset policy, decoder boundary, or placement executor exists.",
+        "limitations": ["Local files are not searched or implicitly admitted."],
+        "roadmap": "M1-002 and M2-003",
+        "evidence": { "level": "none", "artifacts": [] }
+      },
+      {
+        "id": "potx-template",
+        "label": "User-owned POTX template",
+        "status": "unsupported",
+        "disposition": "unavailable",
+        "currentBasis": "No secure archive ingestion or template inspector exists.",
+        "limitations": ["The repository gate intentionally rejects committed POTX binaries."],
+        "roadmap": "M1-004 and M1-005",
+        "evidence": { "level": "none", "artifacts": [] }
+      },
+      {
+        "id": "pptx-template",
+        "label": "User-owned PPTX template",
+        "status": "unsupported",
+        "disposition": "unavailable",
+        "currentBasis": "No secure archive ingestion or template inspector exists.",
+        "limitations": ["The repository gate intentionally rejects committed PPTX binaries."],
+        "roadmap": "M1-004 and M1-005",
+        "evidence": { "level": "none", "artifacts": [] }
+      },
+      {
+        "id": "project-config",
+        "label": "Versioned project configuration",
+        "status": "unsupported",
+        "disposition": "unavailable",
+        "currentBasis": "ProjectConfig and ProjectContext are architecture contracts only.",
+        "limitations": ["Unknown fields and versions have no implemented consumer yet."],
+        "roadmap": "M1-002 and M1-003",
+        "evidence": { "level": "none", "artifacts": [] }
+      },
+      {
+        "id": "svg-asset",
+        "label": "Local SVG asset",
+        "status": "unsupported",
+        "disposition": "unavailable",
+        "currentBasis": "No SVG safety profile or placement executor exists.",
+        "limitations": ["External references, scripts, and font behavior remain unspecified."],
+        "roadmap": "M1-002 and M2-003",
+        "evidence": { "level": "none", "artifacts": [] }
+      },
+      {
+        "id": "template-profile-index",
+        "label": "Template profile and normalized index",
+        "status": "unsupported",
+        "disposition": "unavailable",
+        "currentBasis": "The schema and distributable inspector are not implemented.",
+        "limitations": ["No private helper can substitute for the public inspector."],
+        "roadmap": "M1-002 and M1-004",
+        "evidence": { "level": "none", "artifacts": [] }
+      },
+      {
+        "id": "unknown-input",
+        "label": "Unknown or unlisted input",
+        "status": "unsupported",
+        "disposition": "reject",
+        "currentBasis": "The public input boundary is positive and explicit.",
+        "limitations": ["No extension, content, or compatibility inference is allowed."],
+        "roadmap": "Requires an explicit future matrix and contract revision",
+        "evidence": { "level": "none", "artifacts": [] }
+      }
+    ],
+    "ooxmlFeatures": [
+      {
+        "id": "activex",
+        "label": "ActiveX controls",
+        "status": "unsupported",
+        "disposition": "reject",
+        "currentBasis": "ActiveX is high-risk and outside the 0.x input policy.",
+        "limitations": ["Rejection mutations are deferred to secure ingestion."],
+        "roadmap": "M1-005 rejection policy",
+        "evidence": { "level": "none", "artifacts": [] }
+      },
+      {
+        "id": "animations-transitions",
+        "label": "Animations and transitions",
+        "status": "unsupported",
+        "disposition": "reject",
+        "currentBasis": "Arbitrary animation behavior is a 0.x non-goal.",
+        "limitations": ["No preservation or mutation guarantee exists."],
+        "roadmap": "No 0.x roadmap",
+        "evidence": { "level": "none", "artifacts": [] }
+      },
+      {
+        "id": "charts",
+        "label": "Native charts",
+        "status": "unsupported",
+        "disposition": "unavailable",
+        "currentBasis": "Native chart generation has not been specified.",
+        "limitations": ["No schema, executor, fixture, or QA assertions exist."],
+        "roadmap": "Deferred beyond the initial vertical slice",
+        "evidence": { "level": "none", "artifacts": [] }
+      },
+      {
+        "id": "content-types-and-relationships",
+        "label": "Content types and internal relationships",
+        "status": "unsupported",
+        "disposition": "unavailable",
+        "currentBasis": "Relationship validation is a target contract only.",
+        "limitations": ["No secure parser or public mutation suite exists."],
+        "roadmap": "M1-005 and M2-005",
+        "evidence": { "level": "none", "artifacts": [] }
+      },
+      {
+        "id": "digital-signatures",
+        "label": "Package digital signatures",
+        "status": "unsupported",
+        "disposition": "reject",
+        "currentBasis": "Signature preservation and verification are unspecified.",
+        "limitations": ["No signed-package compatibility promise exists."],
+        "roadmap": "No 0.x roadmap",
+        "evidence": { "level": "none", "artifacts": [] }
+      },
+      {
+        "id": "drawingml-shapes",
+        "label": "Native DrawingML text and shapes",
+        "status": "unsupported",
+        "disposition": "unavailable",
+        "currentBasis": "A minimal native component is planned but not implemented.",
+        "limitations": ["No editability or rendering claim exists."],
+        "roadmap": "M2-003",
+        "evidence": { "level": "none", "artifacts": [] }
+      },
+      {
+        "id": "embedded-fonts",
+        "label": "Embedded fonts",
+        "status": "unsupported",
+        "disposition": "reject",
+        "currentBasis": "Font redistribution and embedded-font handling are outside the current rights boundary.",
+        "limitations": ["User-installed font naming does not authorize font redistribution."],
+        "roadmap": "Requires a separate rights and security decision",
+        "evidence": { "level": "none", "artifacts": [] }
+      },
+      {
+        "id": "embedded-packages",
+        "label": "Embedded packages and files",
+        "status": "unsupported",
+        "disposition": "reject",
+        "currentBasis": "Embedded payloads are high-risk and outside the 0.x policy.",
+        "limitations": ["Rejection mutations are deferred to secure ingestion."],
+        "roadmap": "M1-005 rejection policy",
+        "evidence": { "level": "none", "artifacts": [] }
+      },
+      {
+        "id": "external-relationships",
+        "label": "External OOXML relationships",
+        "status": "unsupported",
+        "disposition": "reject",
+        "currentBasis": "Network and external target resolution are outside the trusted boundary.",
+        "limitations": ["No relationship may trigger network access."],
+        "roadmap": "M1-005 rejection policy",
+        "evidence": { "level": "none", "artifacts": [] }
+      },
+      {
+        "id": "macros-vba",
+        "label": "VBA and macro parts",
+        "status": "unsupported",
+        "disposition": "reject",
+        "currentBasis": "Executable macro content is outside the 0.x policy.",
+        "limitations": ["No macro preservation or execution claim exists."],
+        "roadmap": "M1-005 rejection policy",
+        "evidence": { "level": "none", "artifacts": [] }
+      },
+      {
+        "id": "masters-layouts-themes",
+        "label": "Slide masters, layouts, and themes",
+        "status": "unsupported",
+        "disposition": "unavailable",
+        "currentBasis": "Template inspection and clone/fill behavior are not implemented.",
+        "limitations": ["No preservation or binding guarantee exists."],
+        "roadmap": "M1-004 and M2-002",
+        "evidence": { "level": "none", "artifacts": [] }
+      },
+      {
+        "id": "media-audio-video",
+        "label": "Audio and video media",
+        "status": "unsupported",
+        "disposition": "reject",
+        "currentBasis": "Media preservation, codecs, and external references are unspecified.",
+        "limitations": ["No package or playback compatibility promise exists."],
+        "roadmap": "No 0.x roadmap",
+        "evidence": { "level": "none", "artifacts": [] }
+      },
+      {
+        "id": "native-omml",
+        "label": "Native OMML formula shape",
+        "status": "unsupported",
+        "disposition": "unavailable",
+        "currentBasis": "The optional transplantation adapter is not implemented in this repository.",
+        "limitations": ["Predecessor automation evidence is inadmissible; native editability also needs a manual gate."],
+        "roadmap": "M2-004 and COMPAT-OMML-001",
+        "evidence": { "level": "none", "artifacts": [] }
+      },
+      {
+        "id": "notes-comments",
+        "label": "Speaker notes and comments",
+        "status": "unsupported",
+        "disposition": "reject",
+        "currentBasis": "Notes/comments preservation and private-content redaction are unspecified.",
+        "limitations": ["These parts may contain undisclosed private content."],
+        "roadmap": "Requires an explicit feature and privacy contract",
+        "evidence": { "level": "none", "artifacts": [] }
+      },
+      {
+        "id": "ole-objects",
+        "label": "OLE objects",
+        "status": "unsupported",
+        "disposition": "reject",
+        "currentBasis": "OLE payloads are high-risk and outside the 0.x policy.",
+        "limitations": ["Rejection mutations are deferred to secure ingestion."],
+        "roadmap": "M1-005 rejection policy",
+        "evidence": { "level": "none", "artifacts": [] }
+      },
+      {
+        "id": "package-container",
+        "label": "OPC ZIP package container",
+        "status": "unsupported",
+        "disposition": "unavailable",
+        "currentBasis": "Secure ZIP/XML ingestion is not implemented.",
+        "limitations": ["No archive limit, traversal, duplicate, or bomb defense is executable yet."],
+        "roadmap": "M1-005",
+        "evidence": { "level": "none", "artifacts": [] }
+      },
+      {
+        "id": "raster-image-parts",
+        "label": "PNG and JPEG image parts",
+        "status": "unsupported",
+        "disposition": "unavailable",
+        "currentBasis": "Image-part validation and placement are not implemented.",
+        "limitations": ["No metadata, size, decoder, or relationship policy exists."],
+        "roadmap": "M1-005 and M2-003",
+        "evidence": { "level": "none", "artifacts": [] }
+      },
+      {
+        "id": "slide-text",
+        "label": "Native slide text",
+        "status": "unsupported",
+        "disposition": "unavailable",
+        "currentBasis": "No semantic binding or clone/fill executor exists.",
+        "limitations": ["No editability, overflow, or font claim exists."],
+        "roadmap": "M2-002 and M2-003",
+        "evidence": { "level": "none", "artifacts": [] }
+      },
+      {
+        "id": "svg-image-parts",
+        "label": "SVG image parts",
+        "status": "unsupported",
+        "disposition": "unavailable",
+        "currentBasis": "No SVG safety profile or DrawingML placement exists.",
+        "limitations": ["Scripts, links, fonts, and renderer variance remain unspecified."],
+        "roadmap": "M1-005 and M2-003",
+        "evidence": { "level": "none", "artifacts": [] }
+      },
+      {
+        "id": "tables",
+        "label": "Native tables",
+        "status": "unsupported",
+        "disposition": "unavailable",
+        "currentBasis": "Native table generation has not been specified.",
+        "limitations": ["No schema, executor, fixture, or QA assertions exist."],
+        "roadmap": "Deferred beyond the initial vertical slice",
+        "evidence": { "level": "none", "artifacts": [] }
+      },
+      {
+        "id": "unknown-ooxml-feature",
+        "label": "Unknown or unlisted OOXML feature",
+        "status": "unsupported",
+        "disposition": "reject",
+        "currentBasis": "Unknown package features fail closed.",
+        "limitations": ["No preservation-by-default or image-flattening fallback is allowed."],
+        "roadmap": "Requires explicit classification, contract, and conformance evidence",
+        "evidence": { "level": "none", "artifacts": [] }
+      },
+      {
+        "id": "vendor-extension-xml",
+        "label": "Unknown vendor extension XML",
+        "status": "unsupported",
+        "disposition": "reject",
+        "currentBasis": "Unknown vendor XML is outside the 0.x preservation contract.",
+        "limitations": ["Silent round-trip preservation is not promised."],
+        "roadmap": "Requires explicit feature classification and tests",
+        "evidence": { "level": "none", "artifacts": [] }
+      }
+    ],
+    "capabilities": [
+      {
+        "id": "asset-placement",
+        "label": "Local raster and SVG asset placement",
+        "status": "unsupported",
+        "disposition": "unavailable",
+        "currentBasis": "No dispatchable asset executor exists.",
+        "limitations": ["No accepted asset input policy exists."],
+        "roadmap": "M2-003",
+        "evidence": { "level": "none", "artifacts": [] }
+      },
+      {
+        "id": "collateral-mutation-qa",
+        "label": "Source isolation and collateral mutation QA",
+        "status": "unsupported",
+        "disposition": "unavailable",
+        "currentBasis": "The QA report schemas and executable checks do not exist.",
+        "limitations": ["Planning requirements are not execution evidence."],
+        "roadmap": "M1-002 and M2-005",
+        "evidence": { "level": "none", "artifacts": [] }
+      },
+      {
+        "id": "formula-transplant",
+        "label": "Optional native OMML formula transplantation",
+        "status": "unsupported",
+        "disposition": "unavailable",
+        "currentBasis": "No public adapter, schema, fixture, or QA contract exists.",
+        "limitations": ["Pandoc is external and manual editability evidence remains outstanding."],
+        "roadmap": "M2-004 and COMPAT-OMML-001",
+        "evidence": { "level": "none", "artifacts": [] }
+      },
+      {
+        "id": "native-drawingml",
+        "label": "Minimal native DrawingML component",
+        "status": "unsupported",
+        "disposition": "unavailable",
+        "currentBasis": "No capability definition or executor exists.",
+        "limitations": ["No editability or geometry QA claim exists."],
+        "roadmap": "M2-003",
+        "evidence": { "level": "none", "artifacts": [] }
+      },
+      {
+        "id": "package-inspection",
+        "label": "PPTX/POTX package inspection and feature classification",
+        "status": "unsupported",
+        "disposition": "unavailable",
+        "currentBasis": "No distributable inspector or secure package layer exists.",
+        "limitations": ["Private or managed helpers are inadmissible."],
+        "roadmap": "M1-004 and M1-005",
+        "evidence": { "level": "none", "artifacts": [] }
+      },
+      {
+        "id": "source-slide-clone-fill",
+        "label": "Data-driven source-slide clone and fill",
+        "status": "unsupported",
+        "disposition": "unavailable",
+        "currentBasis": "No generic executor or semantic binding implementation exists.",
+        "limitations": ["No fixture-specific fallback is allowed."],
+        "roadmap": "M2-002",
+        "evidence": { "level": "none", "artifacts": [] }
+      },
+      {
+        "id": "staged-create-only-assembly",
+        "label": "Create-only staged assembly and atomic publication",
+        "status": "unsupported",
+        "disposition": "unavailable",
+        "currentBasis": "No assembly implementation exists.",
+        "limitations": ["No source immutability or atomicity evidence exists."],
+        "roadmap": "M2-005",
+        "evidence": { "level": "none", "artifacts": [] }
+      },
+      {
+        "id": "template-profile-binding",
+        "label": "Hash-bound template profile and semantic binding",
+        "status": "unsupported",
+        "disposition": "unavailable",
+        "currentBasis": "No profile schema, inspector, or resolver exists.",
+        "limitations": ["Missing or ambiguous bindings have no executable diagnostic yet."],
+        "roadmap": "M1-002, M1-004, and M2-002",
+        "evidence": { "level": "none", "artifacts": [] }
+      }
+    ],
+    "platforms": [
+      {
+        "id": "browser-runtime",
+        "label": "Browser runtime",
+        "status": "unsupported",
+        "disposition": "unavailable",
+        "currentBasis": "The declared runtime is Node.js, not a browser.",
+        "limitations": ["No browser package, storage, or security contract exists."],
+        "roadmap": "No 0.x roadmap",
+        "evidence": { "level": "none", "artifacts": [] }
+      },
+      {
+        "id": "linux-node-22",
+        "label": "Linux with Node.js 22.x LTS",
+        "status": "experimental",
+        "disposition": "accept-with-warning",
+        "currentBasis": "The runtime line is declared, but public cross-platform CI is not present.",
+        "limitations": ["No PPTX product capability exists; this is only the runtime envelope."],
+        "roadmap": "M3-004",
+        "evidence": { "level": "none", "artifacts": [] }
+      },
+      {
+        "id": "linux-node-24",
+        "label": "Linux with Node.js 24.x LTS",
+        "status": "experimental",
+        "disposition": "accept-with-warning",
+        "currentBasis": "The runtime line is declared, but public cross-platform CI is not present.",
+        "limitations": ["No PPTX product capability exists; this is only the runtime envelope."],
+        "roadmap": "M3-004",
+        "evidence": { "level": "none", "artifacts": [] }
+      },
+      {
+        "id": "macos-node-22",
+        "label": "macOS with Node.js 22.x LTS",
+        "status": "experimental",
+        "disposition": "accept-with-warning",
+        "currentBasis": "The runtime line is declared, but public cross-platform CI is not present.",
+        "limitations": ["No PPTX product capability exists; this is only the runtime envelope."],
+        "roadmap": "M3-004",
+        "evidence": { "level": "none", "artifacts": [] }
+      },
+      {
+        "id": "macos-node-24",
+        "label": "macOS with Node.js 24.x LTS",
+        "status": "experimental",
+        "disposition": "accept-with-warning",
+        "currentBasis": "The runtime line is declared, but public cross-platform CI is not present.",
+        "limitations": ["No PPTX product capability exists; this is only the runtime envelope."],
+        "roadmap": "M3-004",
+        "evidence": { "level": "none", "artifacts": [] }
+      },
+      {
+        "id": "macos-powerpoint-automation",
+        "label": "Trusted macOS PowerPoint automation",
+        "status": "manual",
+        "disposition": "report-manual-gate",
+        "currentBasis": "The architecture permits an optional trusted/manual adapter outside public PR CI.",
+        "limitations": ["No adapter exists and no private artifact may enter Git or public CI."],
+        "roadmap": "D-010 and COMPAT-OMML-001",
+        "evidence": {
+          "level": "manual-trusted",
+          "artifacts": [
+            {
+              "type": "contract",
+              "path": "docs/PRIVATE_FIXTURE_POLICY.md",
+              "note": "Defines the trusted local evidence boundary."
+            }
+          ]
+        }
+      },
+      {
+        "id": "unsupported-runtime-or-platform",
+        "label": "Any undeclared runtime or platform",
+        "status": "unsupported",
+        "disposition": "reject",
+        "currentBasis": "The supported runtime envelope is positive and explicit.",
+        "limitations": ["No compatibility inference from another Node or operating-system version is allowed."],
+        "roadmap": "Requires an explicit decision and CI matrix revision",
+        "evidence": { "level": "none", "artifacts": [] }
+      },
+      {
+        "id": "windows-node-22",
+        "label": "Windows with Node.js 22.x LTS",
+        "status": "experimental",
+        "disposition": "accept-with-warning",
+        "currentBasis": "The runtime line is declared, but public cross-platform CI is not present.",
+        "limitations": ["No PPTX product capability exists; this is only the runtime envelope."],
+        "roadmap": "M3-004",
+        "evidence": { "level": "none", "artifacts": [] }
+      },
+      {
+        "id": "windows-node-24",
+        "label": "Windows with Node.js 24.x LTS",
+        "status": "experimental",
+        "disposition": "accept-with-warning",
+        "currentBasis": "The runtime line is declared, but public cross-platform CI is not present.",
+        "limitations": ["No PPTX product capability exists; this is only the runtime envelope."],
+        "roadmap": "M3-004",
+        "evidence": { "level": "none", "artifacts": [] }
+      },
+      {
+        "id": "windows-powerpoint-automation",
+        "label": "Windows PowerPoint automation",
+        "status": "unsupported",
+        "disposition": "unavailable",
+        "currentBasis": "No Windows automation adapter or trusted-runner policy exists.",
+        "limitations": ["Desktop PowerPoint is never required by public CI."],
+        "roadmap": "No current roadmap",
+        "evidence": { "level": "none", "artifacts": [] }
+      }
+    ],
+    "evidenceLevels": [
+      {
+        "id": "automated-public-synthetic",
+        "label": "Automated public synthetic conformance evidence",
+        "status": "experimental",
+        "disposition": "accept-with-warning",
+        "currentBasis": "Foundation policy-gate tests exist, but no public PPTX fixture or product flow exists.",
+        "limitations": ["Cannot support a PPTX capability until its complete conformance artifacts exist."],
+        "roadmap": "M1-001 through M3-004",
+        "evidence": {
+          "level": "automated-public",
+          "artifacts": [
+            {
+              "type": "contract",
+              "path": "docs/RELEASE_GATES.md",
+              "note": "Defines the public evidence requirements."
+            }
+          ]
+        }
+      },
+      {
+        "id": "compilation-only",
+        "label": "Compilation or syntax success only",
+        "status": "unsupported",
+        "disposition": "reject",
+        "currentBasis": "Compilation is explicitly insufficient release or support evidence.",
+        "limitations": ["Does not prove dispatch, mutation safety, output correctness, or compatibility."],
+        "roadmap": "Never sufficient by itself",
+        "evidence": { "level": "none", "artifacts": [] }
+      },
+      {
+        "id": "manual-trusted-runtime",
+        "label": "Trusted manual or desktop-runtime evidence",
+        "status": "manual",
+        "disposition": "report-manual-gate",
+        "currentBasis": "The architecture and private-fixture policy define a manual evidence lane.",
+        "limitations": ["Cannot be promoted to an automated pass or required by public CI."],
+        "roadmap": "D-010 and capability-specific ManualGate contracts",
+        "evidence": {
+          "level": "manual-trusted",
+          "artifacts": [
+            {
+              "type": "contract",
+              "path": "docs/PRIVATE_FIXTURE_POLICY.md",
+              "note": "Constrains trusted local evidence and redaction."
+            }
+          ]
+        }
+      },
+      {
+        "id": "predecessor-observation",
+        "label": "Predecessor implementation observation",
+        "status": "unsupported",
+        "disposition": "reject",
+        "currentBasis": "Predecessor observations are design inputs, not evidence for this repository.",
+        "limitations": ["Cannot establish rights, implementation, conformance, or public support."],
+        "roadmap": "Replace only with clean-room public evidence",
+        "evidence": { "level": "none", "artifacts": [] }
+      },
+      {
+        "id": "private-compatibility-probe",
+        "label": "Optional private compatibility probe",
+        "status": "manual",
+        "disposition": "report-manual-gate",
+        "currentBasis": "Private probes may identify narrow compatibility defects or evidence.",
+        "limitations": ["Never required for reproduction and never generalizes to arbitrary templates."],
+        "roadmap": "Capability-specific compatibility testing after public conformance",
+        "evidence": {
+          "level": "private-compatibility",
+          "artifacts": [
+            {
+              "type": "contract",
+              "path": "docs/PRIVATE_FIXTURE_POLICY.md",
+              "note": "Defines the optional private-probe boundary."
+            }
+          ]
+        }
+      },
+      {
+        "id": "unavailable-evidence",
+        "label": "Missing or unavailable evidence",
+        "status": "unsupported",
+        "disposition": "reject",
+        "currentBasis": "Missing evidence remains visible and cannot be converted to pass.",
+        "limitations": ["No support claim may be made."],
+        "roadmap": "Supply the evidence required by the exact item contract",
+        "evidence": { "level": "none", "artifacts": [] }
+      },
+      {
+        "id": "visual-only-review",
+        "label": "Visual similarity or screenshot review only",
+        "status": "unsupported",
+        "disposition": "reject",
+        "currentBasis": "Visual plausibility does not prove OOXML validity, editability, or collateral isolation.",
+        "limitations": ["May supplement but never replace structural and capability evidence."],
+        "roadmap": "Never sufficient by itself",
+        "evidence": { "level": "none", "artifacts": [] }
+      }
+    ]
+  }
+}

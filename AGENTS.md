@@ -20,6 +20,13 @@ For maintenance or audit of the completed `M0-004` gates, then read:
 6. `docs/RELEASE_GATES.md`
 7. `docs/DECISIONS.md`
 
+For maintenance or audit of the completed `M0-005` support contract, read:
+
+3. `docs/M0-005_HANDOFF.md`
+4. `docs/SUPPORT_MATRIX.md`
+5. `docs/COMPATIBILITY_POLICY.md`
+6. `policy/support-matrix.json`
+
 Read `docs/PROJECT_DEFINITION.md` and `docs/ARCHITECTURE_TARGET.md` only before
 changing product scope, public contracts, packages, or dependency direction.
 
@@ -79,6 +86,8 @@ changing product scope, public contracts, packages, or dependency direction.
   fan-out, or load presentation assets. The exact task is self-contained in
   `docs/M0-004_HANDOFF.md`. One bounded independent review after implementation
   is sufficient.
+- When maintaining `M0-005`, do not turn roadmap targets or predecessor
+  observations into current support. The machine-readable matrix is normative.
 - Add tests with every executable capability.
 - Update the architecture, support matrix, provenance ledger, and release gates
   in the same change when their contract changes.

@@ -17,6 +17,8 @@ No item below is decided merely because a recommendation is recorded.
 | D-011 | ACCEPTED | Copyright holder | Elliot Wu. | User stated that no employer, university, collaborator, or other holder applies to the new clean-room project. Third-party dependencies and migrated candidates still require separate rights review. |
 | D-012 | ACCEPTED | npm package scope timing | Defer scoped-versus-unscoped package names until M3-002 package metadata work. | User explicitly deferred the choice; no package manifest or registry reservation is created now. |
 | D-013 | ACCEPTED | Git remote timing and visibility | Keep no remote until the public synthetic-fixture CLI flow is executable; after a fresh public-preflight gate, create the repository as public. | User selected post-executable timing and public visibility; hosting account/organization remains open. |
+| D-014 | ACCEPTED | Public support taxonomy | Use exactly `supported`, `experimental`, `manual`, and `unsupported`, with a global claim switch and machine-checked evidence/disposition rules. | M0-005 matrix/schema/checker plus 13 overclaim/drift mutations. |
+| D-015 | ACCEPTED | 0.x contract compatibility | Breaking contract changes increment the minor version with migration notes; patches remain compatible within a minor except an immediate documented safety demotion; unknown versions/fields fail closed. | M0-005 compatibility policy and schema-version mutations. |
 
 Record a decision by changing its status to `ACCEPTED`, adding the date and
 rationale below the table, and updating every affected contract/TODO in the
@@ -55,6 +57,15 @@ same change.
   M0-004 uses a dependency-free, fail-closed evaluator for the bounded
   provenance schema and rejects unsupported schema keywords. Type generation
   and broader shared schema tooling remain in M1-002.
+- **D-014 accepted:** public status is restricted to `supported`,
+  `experimental`, `manual`, or `unsupported`. The normative matrix has a global
+  claim switch, exact item scope, explicit catch-alls, and evidence rules. It is
+  false at M0-005 completion, so no PPTX capability is currently supported.
+- **D-015 accepted:** during 0.x, incompatible public contract changes require a
+  minor-version increment, migration notes, and negative tests. Patches remain
+  backward-compatible within their minor contract except that an unsafe claim
+  may be demoted immediately with an explicit security/compatibility notice.
+  Unknown versions and fields fail closed absent an explicit tested migration.
 
 ## MIT versus Apache-2.0 review
 

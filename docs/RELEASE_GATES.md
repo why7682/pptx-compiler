@@ -34,6 +34,7 @@ evidence by itself.
 
 ## G3 — Capability correctness
 
+- the shipped support matrix passes its schema and semantic overclaim gate;
 - every supported capability has an executor, schemas, conformance fixture,
   deterministic output, negative tests, and QA assertions;
 - source template is unchanged and output publication is create-only;
@@ -97,3 +98,8 @@ dependencies:
 
 Both CLIs emit deterministic human output by default and accept `--json` for a
 versioned machine report. A configuration error is itself a gate failure.
+
+M0-005 adds `npm run check:support-matrix`. It validates the staged 60-row
+matrix, explicit catch-alls, claim switch, status/disposition/evidence
+combinations, required capability evidence, deterministic IDs, and admitted
+evidence paths. It is part of `npm run check:public-tree`.

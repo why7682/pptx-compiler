@@ -3,10 +3,10 @@
 ## Current state
 
 This is an independent, clean-history workspace created to extract a generic
-PPTX rendering and QA pipeline from a private predecessor project. Only plans,
-contracts, safety rules, and release gates have been created. No code, binary
-fixture, design asset, dependency lockfile, prompt log, or predecessor Git
-history has been copied.
+PPTX rendering and QA pipeline from a private predecessor project. It now has
+plans, contracts, dependency-free foundation policy gates, and synthetic text
+mutation tests. No PPTX product implementation, binary fixture, design asset,
+dependency lockfile, prompt log, or predecessor Git history has been copied.
 
 The project uses the MIT License with Elliot Wu as the declared copyright
 holder. The working name, monorepo shape, and repository-local public Git author
@@ -18,6 +18,11 @@ forbidden-material and exact per-file provenance gates. The bounded suite has 2
 passing baselines and 31 rejection mutations. Its independent read-only review
 closed with no blocking findings.
 
+`M0-005` is complete: the versioned public support matrix covers 60 input,
+OOXML, capability, platform, and evidence items. Its global claim switch is
+false, so no PPTX capability is currently represented as supported. A
+dependency-free staged/working-tree gate rejects matrix overclaims and drift.
+
 The repository has no remote. Keep it local until the public synthetic-fixture
 flow can run `init -> inspect -> validate -> render -> qa`. After that executable
 checkpoint and a fresh public-preflight scan, create a **public** repository;
@@ -26,9 +31,10 @@ unscoped package decision is also deferred until package metadata is designed.
 
 ## Immediate objective
 
-The next dependency is `M0-005`: define the public support matrix and
-compatibility policy. Do not begin it, inspect predecessor code, or migrate any
-candidate until the user explicitly continues and the task is bounded.
+The next dependency is `M1-001`: create the repository-owned synthetic
+PPTX/POTX fixture generator from reviewed text-only OOXML parts. Do not begin
+it, load a presentation asset, or admit OOXML text until the user explicitly
+continues and the task is bounded with provenance and security limits.
 
 ## First commands after switching workspace
 
@@ -42,14 +48,15 @@ git remote -v
 ```
 
 The private root package has no dependencies, so no install step is required.
-Run `npm test` and `npm run check:public-tree` to revalidate the completed gate.
+Run `npm test` and `npm run check:public-tree` to revalidate the completed
+admission and support-contract gates.
 
 ## Next work session
 
-1. Confirm the M0-004 acceptance commands still pass on the clean checkout.
-2. Bound `M0-005` from the public project contracts before implementation.
-3. Keep predecessor code and presentation assets out of scope until an
-   admission task explicitly invokes the completed gates.
+1. Confirm the M0-004/M0-005 acceptance commands pass on the clean checkout.
+2. Bound `M1-001` before creating any fixture part or generator code.
+3. Keep predecessor code and presentation assets out of scope; the public
+   fixture begins from repository-owned, reviewed text OOXML only.
 
 ## Known predecessor findings
 

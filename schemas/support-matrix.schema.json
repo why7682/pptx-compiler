@@ -1,0 +1,220 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:pptx-pipeline:schema:support-matrix:1",
+  "title": "PPTX Pipeline public support matrix",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schemaVersion",
+    "matrixVersion",
+    "updatedOn",
+    "productStage",
+    "supportClaimsEnabled",
+    "statusDefinitions",
+    "dimensions"
+  ],
+  "properties": {
+    "schemaVersion": {
+      "const": 1
+    },
+    "matrixVersion": {
+      "type": "string",
+      "pattern": "^0\\.[1-9][0-9]*\\.[0-9]+$"
+    },
+    "updatedOn": {
+      "type": "string",
+      "format": "date"
+    },
+    "productStage": {
+      "enum": [
+        "pre-alpha-contract-only",
+        "alpha",
+        "beta",
+        "stable"
+      ]
+    },
+    "supportClaimsEnabled": {
+      "type": "boolean"
+    },
+    "statusDefinitions": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "supported",
+        "experimental",
+        "manual",
+        "unsupported"
+      ],
+      "properties": {
+        "supported": { "$ref": "#/$defs/statusDefinition" },
+        "experimental": { "$ref": "#/$defs/statusDefinition" },
+        "manual": { "$ref": "#/$defs/statusDefinition" },
+        "unsupported": { "$ref": "#/$defs/statusDefinition" }
+      }
+    },
+    "dimensions": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "inputs",
+        "ooxmlFeatures",
+        "capabilities",
+        "platforms",
+        "evidenceLevels"
+      ],
+      "properties": {
+        "inputs": { "$ref": "#/$defs/items" },
+        "ooxmlFeatures": { "$ref": "#/$defs/items" },
+        "capabilities": { "$ref": "#/$defs/items" },
+        "platforms": { "$ref": "#/$defs/items" },
+        "evidenceLevels": { "$ref": "#/$defs/items" }
+      }
+    }
+  },
+  "$defs": {
+    "statusDefinition": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "meaning",
+        "claimRule"
+      ],
+      "properties": {
+        "meaning": {
+          "type": "string",
+          "minLength": 1
+        },
+        "claimRule": {
+          "type": "string",
+          "minLength": 1
+        }
+      }
+    },
+    "items": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "$ref": "#/$defs/item"
+      }
+    },
+    "item": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "id",
+        "label",
+        "status",
+        "disposition",
+        "currentBasis",
+        "limitations",
+        "roadmap",
+        "evidence"
+      ],
+      "properties": {
+        "id": {
+          "type": "string",
+          "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$"
+        },
+        "label": {
+          "type": "string",
+          "minLength": 1
+        },
+        "status": {
+          "enum": [
+            "experimental",
+            "manual",
+            "supported",
+            "unsupported"
+          ]
+        },
+        "disposition": {
+          "enum": [
+            "accept",
+            "accept-with-warning",
+            "reject",
+            "report-manual-gate",
+            "unavailable"
+          ]
+        },
+        "currentBasis": {
+          "type": "string",
+          "minLength": 1
+        },
+        "limitations": {
+          "type": "array",
+          "minItems": 1,
+          "uniqueItems": true,
+          "items": {
+            "type": "string",
+            "minLength": 1
+          }
+        },
+        "roadmap": {
+          "type": "string",
+          "minLength": 1
+        },
+        "evidence": {
+          "$ref": "#/$defs/evidence"
+        }
+      }
+    },
+    "evidence": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "level",
+        "artifacts"
+      ],
+      "properties": {
+        "level": {
+          "enum": [
+            "automated-public",
+            "manual-trusted",
+            "none",
+            "private-compatibility"
+          ]
+        },
+        "artifacts": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": {
+            "$ref": "#/$defs/artifact"
+          }
+        }
+      }
+    },
+    "artifact": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "type",
+        "path",
+        "note"
+      ],
+      "properties": {
+        "type": {
+          "enum": [
+            "contract",
+            "conformance-fixture",
+            "cross-platform-ci",
+            "executor",
+            "input-schema",
+            "manual-gate",
+            "metadata",
+            "output-schema",
+            "private-probe",
+            "qa-assertions"
+          ]
+        },
+        "path": {
+          "type": "string",
+          "pattern": "^[ -~]+$"
+        },
+        "note": {
+          "type": "string",
+          "minLength": 1
+        }
+      }
+    }
+  }
+}

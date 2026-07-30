@@ -49,12 +49,12 @@
       "origin": "user-directed clean-room project planning",
       "copyrightHolderOrSourceAuthority": "Elliot Wu",
       "license": { "spdxExpression": "MIT" },
-      "reviewedOn": "2026-07-30",
+      "reviewedOn": "2026-07-31",
       "thirdPartyDependencies": [],
       "privateInformationReview": { "status": "passed", "notes": "Policy text contains no private fixture identity." },
       "projectConstantCleanup": { "status": "passed", "notes": "No predecessor constants admitted." },
       "publicConformance": { "status": "not-applicable", "notes": "Contributor instruction text only." },
-      "independentReview": { "status": "passed", "notes": "Bootstrap review plus the M0-004 closeout update were reviewed." },
+      "independentReview": { "status": "not-applicable", "notes": "M0-005 routing update did not require independent review." },
       "notes": "Repository-owned contributor instructions."
     },
     {
@@ -63,12 +63,12 @@
       "origin": "user-directed clean-room project planning",
       "copyrightHolderOrSourceAuthority": "Elliot Wu",
       "license": { "spdxExpression": "MIT" },
-      "reviewedOn": "2026-07-30",
+      "reviewedOn": "2026-07-31",
       "thirdPartyDependencies": [],
       "privateInformationReview": { "status": "passed", "notes": "Only approved public project identity is present." },
       "projectConstantCleanup": { "status": "passed", "notes": "Findings are generic and contain no predecessor identifiers." },
       "publicConformance": { "status": "not-applicable", "notes": "Handoff text only." },
-      "independentReview": { "status": "passed", "notes": "Bootstrap review plus the M0-004 closeout update were reviewed." },
+      "independentReview": { "status": "not-applicable", "notes": "M0-005 closeout update did not require independent review." },
       "notes": "Repository-owned project handoff."
     },
     {
@@ -91,12 +91,12 @@
       "origin": "user-directed clean-room project planning",
       "copyrightHolderOrSourceAuthority": "Elliot Wu",
       "license": { "spdxExpression": "MIT" },
-      "reviewedOn": "2026-07-30",
+      "reviewedOn": "2026-07-31",
       "thirdPartyDependencies": [],
       "privateInformationReview": { "status": "passed", "notes": "No private information present." },
       "projectConstantCleanup": { "status": "passed", "notes": "No predecessor constants admitted." },
       "publicConformance": { "status": "not-applicable", "notes": "Project overview only." },
-      "independentReview": { "status": "passed", "notes": "Covered by the completed bootstrap policy review." },
+      "independentReview": { "status": "not-applicable", "notes": "M0-005 status update did not require independent review." },
       "notes": "Repository-owned project overview."
     },
     {
@@ -105,12 +105,12 @@
       "origin": "user-directed clean-room project planning",
       "copyrightHolderOrSourceAuthority": "Elliot Wu",
       "license": { "spdxExpression": "MIT" },
-      "reviewedOn": "2026-07-30",
+      "reviewedOn": "2026-07-31",
       "thirdPartyDependencies": [],
       "privateInformationReview": { "status": "passed", "notes": "No private information present." },
       "projectConstantCleanup": { "status": "passed", "notes": "No predecessor constants admitted." },
       "publicConformance": { "status": "not-applicable", "notes": "Planning status only." },
-      "independentReview": { "status": "passed", "notes": "Bootstrap review plus the M0-004 closeout update were reviewed." },
+      "independentReview": { "status": "not-applicable", "notes": "M0-005 evidence update did not require independent review." },
       "notes": "Repository-owned dependency-ordered plan."
     },
     {
@@ -119,13 +119,27 @@
       "origin": "user-directed clean-room project planning",
       "copyrightHolderOrSourceAuthority": "Elliot Wu",
       "license": { "spdxExpression": "MIT" },
-      "reviewedOn": "2026-07-30",
+      "reviewedOn": "2026-07-31",
       "thirdPartyDependencies": [],
       "privateInformationReview": { "status": "passed", "notes": "No private information present." },
       "projectConstantCleanup": { "status": "passed", "notes": "Architecture is stated generically." },
       "publicConformance": { "status": "not-applicable", "notes": "Architecture plan only." },
-      "independentReview": { "status": "passed", "notes": "Covered by the completed bootstrap architecture review." },
+      "independentReview": { "status": "not-applicable", "notes": "M0-005 public-contract addition did not require independent review." },
       "notes": "Repository-owned target architecture."
+    },
+    {
+      "path": "docs/COMPATIBILITY_POLICY.md",
+      "kind": "new-clean-room",
+      "origin": "M0-005 clean-room support contract from repository public requirements",
+      "copyrightHolderOrSourceAuthority": "Elliot Wu",
+      "license": { "spdxExpression": "MIT" },
+      "reviewedOn": "2026-07-31",
+      "thirdPartyDependencies": [],
+      "privateInformationReview": { "status": "passed", "notes": "Contains generic public compatibility rules only." },
+      "projectConstantCleanup": { "status": "passed", "notes": "No predecessor behavior or identifier admitted." },
+      "publicConformance": { "status": "applicable", "notes": "Status and evidence rules are enforced by the support-matrix gate." },
+      "independentReview": { "status": "not-applicable", "notes": "No independent review required for this policy slice." },
+      "notes": "Human compatibility and contract-versioning policy."
     },
     {
       "path": "docs/DECISIONS.md",
@@ -133,12 +147,12 @@
       "origin": "user-directed clean-room project planning",
       "copyrightHolderOrSourceAuthority": "Elliot Wu",
       "license": { "spdxExpression": "MIT" },
-      "reviewedOn": "2026-07-30",
+      "reviewedOn": "2026-07-31",
       "thirdPartyDependencies": [],
       "privateInformationReview": { "status": "passed", "notes": "Contains only approved public project identity." },
       "projectConstantCleanup": { "status": "passed", "notes": "No predecessor constants admitted." },
       "publicConformance": { "status": "not-applicable", "notes": "Decision record only." },
-      "independentReview": { "status": "passed", "notes": "M0-004 bounded read-only review closed with no blocking findings." },
+      "independentReview": { "status": "not-applicable", "notes": "M0-005 decision additions did not require independent review." },
       "notes": "Repository-owned decision register."
     },
     {
@@ -154,6 +168,20 @@
       "publicConformance": { "status": "not-applicable", "notes": "Implementation handoff only." },
       "independentReview": { "status": "passed", "notes": "Covered by the completed bootstrap handoff review." },
       "notes": "Normative bounded contract for M0-004."
+    },
+    {
+      "path": "docs/M0-005_HANDOFF.md",
+      "kind": "new-clean-room",
+      "origin": "M0-005 clean-room support contract from repository public requirements",
+      "copyrightHolderOrSourceAuthority": "Elliot Wu",
+      "license": { "spdxExpression": "MIT" },
+      "reviewedOn": "2026-07-31",
+      "thirdPartyDependencies": [],
+      "privateInformationReview": { "status": "passed", "notes": "Contains no private fixture, path, or identifier." },
+      "projectConstantCleanup": { "status": "passed", "notes": "Task is bounded entirely from public repository contracts." },
+      "publicConformance": { "status": "not-applicable", "notes": "Implementation contract only." },
+      "independentReview": { "status": "not-applicable", "notes": "No independent review required for this policy slice." },
+      "notes": "Normative bounded contract for M0-005."
     },
     {
       "path": "docs/NAME_AVAILABILITY.md",
@@ -175,12 +203,12 @@
       "origin": "user-directed clean-room project planning",
       "copyrightHolderOrSourceAuthority": "Elliot Wu",
       "license": { "spdxExpression": "MIT" },
-      "reviewedOn": "2026-07-30",
+      "reviewedOn": "2026-07-31",
       "thirdPartyDependencies": [],
       "privateInformationReview": { "status": "passed", "notes": "No private information present." },
       "projectConstantCleanup": { "status": "passed", "notes": "Readiness criteria are generic." },
       "publicConformance": { "status": "not-applicable", "notes": "Readiness plan only." },
-      "independentReview": { "status": "passed", "notes": "Covered by the completed bootstrap release review." },
+      "independentReview": { "status": "not-applicable", "notes": "M0-005 readiness update did not require independent review." },
       "notes": "Repository-owned open-source readiness plan."
     },
     {
@@ -203,12 +231,12 @@
       "origin": "user-directed clean-room project planning",
       "copyrightHolderOrSourceAuthority": "Elliot Wu",
       "license": { "spdxExpression": "MIT" },
-      "reviewedOn": "2026-07-30",
+      "reviewedOn": "2026-07-31",
       "thirdPartyDependencies": [],
       "privateInformationReview": { "status": "passed", "notes": "No private information present." },
       "projectConstantCleanup": { "status": "passed", "notes": "Scope is stated generically." },
       "publicConformance": { "status": "not-applicable", "notes": "Project scope text only." },
-      "independentReview": { "status": "passed", "notes": "Covered by the completed bootstrap scope review." },
+      "independentReview": { "status": "not-applicable", "notes": "M0-005 claim clarification did not require independent review." },
       "notes": "Repository-owned project definition."
     },
     {
@@ -217,12 +245,12 @@
       "origin": "user-directed clean-room project planning",
       "copyrightHolderOrSourceAuthority": "Elliot Wu",
       "license": { "spdxExpression": "MIT" },
-      "reviewedOn": "2026-07-30",
+      "reviewedOn": "2026-07-31",
       "thirdPartyDependencies": [],
       "privateInformationReview": { "status": "passed", "notes": "No private information present." },
       "projectConstantCleanup": { "status": "passed", "notes": "No predecessor constants admitted." },
       "publicConformance": { "status": "not-applicable", "notes": "Human-readable policy summary only." },
-      "independentReview": { "status": "passed", "notes": "M0-004 bounded read-only review closed with no blocking findings." },
+      "independentReview": { "status": "not-applicable", "notes": "M0-005 admission summary did not require independent review." },
       "notes": "Human policy companion to the machine-readable records."
     },
     {
@@ -231,13 +259,27 @@
       "origin": "user-directed clean-room project planning",
       "copyrightHolderOrSourceAuthority": "Elliot Wu",
       "license": { "spdxExpression": "MIT" },
-      "reviewedOn": "2026-07-30",
+      "reviewedOn": "2026-07-31",
       "thirdPartyDependencies": [],
       "privateInformationReview": { "status": "passed", "notes": "No private information present." },
       "projectConstantCleanup": { "status": "passed", "notes": "Release criteria are generic." },
       "publicConformance": { "status": "not-applicable", "notes": "Release policy only." },
-      "independentReview": { "status": "passed", "notes": "M0-004 bounded read-only review closed with no blocking findings." },
+      "independentReview": { "status": "not-applicable", "notes": "M0-005 gate addition did not require independent review." },
       "notes": "Repository-owned release gates."
+    },
+    {
+      "path": "docs/SUPPORT_MATRIX.md",
+      "kind": "new-clean-room",
+      "origin": "M0-005 clean-room support contract from repository public requirements",
+      "copyrightHolderOrSourceAuthority": "Elliot Wu",
+      "license": { "spdxExpression": "MIT" },
+      "reviewedOn": "2026-07-31",
+      "thirdPartyDependencies": [],
+      "privateInformationReview": { "status": "passed", "notes": "Contains generic public feature classes and aggregate counts only." },
+      "projectConstantCleanup": { "status": "passed", "notes": "No predecessor feature identifier or evidence admitted." },
+      "publicConformance": { "status": "applicable", "notes": "Summarizes the normative checked 60-row matrix without broadening it." },
+      "independentReview": { "status": "not-applicable", "notes": "No independent review required for this policy slice." },
+      "notes": "Human-readable support-matrix summary."
     },
     {
       "path": "docs/THREAT_MODEL.md",
@@ -245,26 +287,26 @@
       "origin": "user-directed clean-room project planning",
       "copyrightHolderOrSourceAuthority": "Elliot Wu",
       "license": { "spdxExpression": "MIT" },
-      "reviewedOn": "2026-07-30",
+      "reviewedOn": "2026-07-31",
       "thirdPartyDependencies": [],
       "privateInformationReview": { "status": "passed", "notes": "No private information present." },
       "projectConstantCleanup": { "status": "passed", "notes": "Threats are stated generically." },
       "publicConformance": { "status": "not-applicable", "notes": "Threat-model text only." },
-      "independentReview": { "status": "passed", "notes": "Covered by the completed bootstrap security review." },
+      "independentReview": { "status": "not-applicable", "notes": "M0-005 overclaim control addition did not require independent review." },
       "notes": "Repository-owned threat model."
     },
     {
       "path": "package.json",
       "kind": "new-clean-room",
-      "origin": "M0-004 clean-room implementation from repository contract",
+      "origin": "M0-004 and M0-005 clean-room foundation implementation",
       "copyrightHolderOrSourceAuthority": "Elliot Wu",
       "license": { "spdxExpression": "MIT" },
-      "reviewedOn": "2026-07-30",
+      "reviewedOn": "2026-07-31",
       "thirdPartyDependencies": [],
       "privateInformationReview": { "status": "passed", "notes": "Private root metadata contains no personal or remote metadata." },
       "projectConstantCleanup": { "status": "passed", "notes": "No predecessor package metadata admitted." },
-      "publicConformance": { "status": "applicable", "notes": "Defines the complete M0-004 test and gate commands." },
-      "independentReview": { "status": "passed", "notes": "M0-004 bounded read-only review closed with no blocking findings." },
+      "publicConformance": { "status": "applicable", "notes": "Defines the complete admission and support-contract test/gate commands." },
+      "independentReview": { "status": "not-applicable", "notes": "M0-005 script update did not require independent review." },
       "notes": "Dependency-free private workspace manifest; it is not publishable."
     },
     {
@@ -282,17 +324,31 @@
       "notes": "Normative versioned forbidden-material policy."
     },
     {
+      "path": "policy/support-matrix.json",
+      "kind": "new-clean-room",
+      "origin": "M0-005 clean-room support contract from repository public requirements",
+      "copyrightHolderOrSourceAuthority": "Elliot Wu",
+      "license": { "spdxExpression": "MIT" },
+      "reviewedOn": "2026-07-31",
+      "thirdPartyDependencies": [],
+      "privateInformationReview": { "status": "passed", "notes": "Uses generic feature classes, public roadmap IDs, and public contract paths only." },
+      "projectConstantCleanup": { "status": "passed", "notes": "No predecessor implementation, asset, or identifier admitted." },
+      "publicConformance": { "status": "applicable", "notes": "Contains 60 checked rows and zero supported PPTX claims." },
+      "independentReview": { "status": "not-applicable", "notes": "No independent review required for this policy slice." },
+      "notes": "Normative versioned public support matrix."
+    },
+    {
       "path": "provenance/records.json",
       "kind": "new-clean-room",
       "origin": "M0-004 clean-room implementation from repository contract",
       "copyrightHolderOrSourceAuthority": "Elliot Wu",
       "license": { "spdxExpression": "MIT" },
-      "reviewedOn": "2026-07-30",
+      "reviewedOn": "2026-07-31",
       "thirdPartyDependencies": [],
       "privateInformationReview": { "status": "passed", "notes": "Records contain only approved public and generic source-authority information." },
       "projectConstantCleanup": { "status": "passed", "notes": "Every admitted path is repository-relative and generic." },
       "publicConformance": { "status": "applicable", "notes": "Self-covered by the exact-path provenance gate." },
-      "independentReview": { "status": "passed", "notes": "M0-004 bounded read-only review closed with no blocking findings." },
+      "independentReview": { "status": "not-applicable", "notes": "M0-005 exact-record additions did not require independent review." },
       "notes": "Normative per-file provenance source, including its own record."
     },
     {
@@ -308,6 +364,20 @@
       "publicConformance": { "status": "applicable", "notes": "Invalid enum, rights, status, date, and structural mutations are checked." },
       "independentReview": { "status": "passed", "notes": "M0-004 bounded read-only review closed with no blocking findings." },
       "notes": "Normative JSON Schema Draft 2020-12 provenance contract."
+    },
+    {
+      "path": "schemas/support-matrix.schema.json",
+      "kind": "new-clean-room",
+      "origin": "M0-005 clean-room support contract and JSON Schema 2020-12",
+      "copyrightHolderOrSourceAuthority": "Elliot Wu",
+      "license": { "spdxExpression": "MIT" },
+      "reviewedOn": "2026-07-31",
+      "thirdPartyDependencies": [],
+      "privateInformationReview": { "status": "passed", "notes": "Schema contains no private information." },
+      "projectConstantCleanup": { "status": "passed", "notes": "Schema fields are generic support and evidence concepts." },
+      "publicConformance": { "status": "applicable", "notes": "Structural, enum, version, and unknown-field mutations are rejected." },
+      "independentReview": { "status": "not-applicable", "notes": "No independent review required for this policy slice." },
+      "notes": "Normative JSON Schema Draft 2020-12 support-matrix contract."
     },
     {
       "path": "scripts/check-forbidden-materials.mjs",
@@ -329,13 +399,27 @@
       "origin": "M0-004 clean-room implementation from repository contract",
       "copyrightHolderOrSourceAuthority": "Elliot Wu",
       "license": { "spdxExpression": "MIT" },
-      "reviewedOn": "2026-07-30",
+      "reviewedOn": "2026-07-31",
       "thirdPartyDependencies": [],
       "privateInformationReview": { "status": "passed", "notes": "Invalid record paths are reported through JSON pointers without value disclosure." },
       "projectConstantCleanup": { "status": "passed", "notes": "No predecessor identifiers or file assumptions are present." },
-      "publicConformance": { "status": "applicable", "notes": "Passing and 10 provenance mutations execute the CLI." },
-      "independentReview": { "status": "passed", "notes": "M0-004 bounded read-only review closed with no blocking findings." },
-      "notes": "Fail-closed exact-path provenance and bounded JSON Schema gate."
+      "publicConformance": { "status": "applicable", "notes": "Passing and 10 provenance mutations execute the CLI; its bounded validator also checks the support schema." },
+      "independentReview": { "status": "not-applicable", "notes": "M0-005 validator export did not require independent review." },
+      "notes": "Fail-closed exact-path provenance gate and shared bounded JSON Schema evaluator."
+    },
+    {
+      "path": "scripts/check-support-matrix.mjs",
+      "kind": "new-clean-room",
+      "origin": "M0-005 clean-room implementation from repository public contracts",
+      "copyrightHolderOrSourceAuthority": "Elliot Wu",
+      "license": { "spdxExpression": "MIT" },
+      "reviewedOn": "2026-07-31",
+      "thirdPartyDependencies": [],
+      "privateInformationReview": { "status": "passed", "notes": "Diagnostics contain paths, rule IDs, and JSON pointers without input content." },
+      "projectConstantCleanup": { "status": "passed", "notes": "No predecessor identifiers or project-specific feature dispatch exists." },
+      "publicConformance": { "status": "applicable", "notes": "Checks 60 rows and 13 support overclaim/drift mutations." },
+      "independentReview": { "status": "not-applicable", "notes": "No independent review required for this policy slice." },
+      "notes": "Fail-closed staged and working-tree support-matrix gate."
     },
     {
       "path": "tests/policy-gates.test.mjs",
@@ -350,6 +434,20 @@
       "publicConformance": { "status": "applicable", "notes": "Covers stable pass reports and 31 fail-closed mutations." },
       "independentReview": { "status": "passed", "notes": "M0-004 bounded read-only review closed with no blocking findings." },
       "notes": "Dependency-free mutation tests using isolated temporary Git repositories."
+    },
+    {
+      "path": "tests/support-matrix.test.mjs",
+      "kind": "new-clean-room",
+      "origin": "M0-005 clean-room implementation from repository public contracts",
+      "copyrightHolderOrSourceAuthority": "Elliot Wu",
+      "license": { "spdxExpression": "MIT" },
+      "reviewedOn": "2026-07-31",
+      "thirdPartyDependencies": [],
+      "privateInformationReview": { "status": "passed", "notes": "Uses repository-owned synthetic in-memory mutations only." },
+      "projectConstantCleanup": { "status": "passed", "notes": "No predecessor identifier, asset, or path appears." },
+      "publicConformance": { "status": "applicable", "notes": "Covers one baseline and 13 rejection mutations." },
+      "independentReview": { "status": "not-applicable", "notes": "No independent review required for this policy slice." },
+      "notes": "Dependency-free support-matrix overclaim and drift tests."
     }
   ]
 }

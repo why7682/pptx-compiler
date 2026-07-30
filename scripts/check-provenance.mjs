@@ -175,8 +175,8 @@ function resolveReference(rootSchema, reference) {
   return current;
 }
 
-function assertSupportedSchema(schema) {
-  if (!isPlainObject(schema) || schema.$schema !== EXPECTED_META_SCHEMA || schema.$id !== EXPECTED_SCHEMA_ID) {
+export function assertSupportedSchema(schema, { expectedId = EXPECTED_SCHEMA_ID } = {}) {
+  if (!isPlainObject(schema) || schema.$schema !== EXPECTED_META_SCHEMA || schema.$id !== expectedId) {
     throw new Error("unsupported provenance JSON Schema authority or identifier");
   }
   const supported = new Set([
@@ -219,7 +219,7 @@ function validDate(value) {
   return !Number.isNaN(parsed.valueOf()) && parsed.toISOString().slice(0, 10) === value;
 }
 
-function validateJson(instance, schema, rootSchema, pointer = "") {
+export function validateJson(instance, schema, rootSchema, pointer = "") {
   const errors = [];
   if (schema.$ref !== undefined) {
     errors.push(...validateJson(instance, resolveReference(rootSchema, schema.$ref), rootSchema, pointer));

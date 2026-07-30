@@ -45,7 +45,8 @@ The first versioned contracts are:
 - `CapabilityDefinition`, `CapabilityExecutor`, and `CapabilityRegistry`;
 - `ProjectOverlay` and `ShapeBinding`;
 - `DeckSpec` and `SlideSpec`;
-- `BuildArtifact`, `QaReport`, and `ManualGate`.
+- `BuildArtifact`, `QaReport`, and `ManualGate`;
+- `SupportMatrix` and the public compatibility policy.
 
 Each contract receives a JSON Schema and TypeScript type generated or checked
 from one normative source. Unknown fields and version mismatches are handled by

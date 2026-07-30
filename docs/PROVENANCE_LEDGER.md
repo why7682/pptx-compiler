@@ -105,3 +105,27 @@ public_fixture_conformance: applicable; 21 forbidden-material and 10 provenance 
 independent_review: passed; closing review reported no blocking findings
 notes: The machine-readable records contain the exact per-file fields and status.
 ```
+
+### M0-005 support-contract set
+
+```yaml
+paths:
+  - docs/COMPATIBILITY_POLICY.md
+  - docs/M0-005_HANDOFF.md
+  - docs/SUPPORT_MATRIX.md
+  - policy/support-matrix.json
+  - schemas/support-matrix.schema.json
+  - scripts/check-support-matrix.mjs
+  - tests/support-matrix.test.mjs
+kind: new-clean-room
+origin: repository public contracts and bounded M0-005 implementation contract
+original_author_or_holder: Elliot Wu
+created_or_reviewed_on: 2026-07-31
+license_or_rights_basis: MIT
+third_party_dependencies: []
+private_information_review: passed; public generic feature classes only
+project_constant_removal: passed; no predecessor code, identifier, or asset inspected
+public_fixture_conformance: applicable; 60 matrix rows and 13 rejection mutations
+independent_review: not-applicable; no independent review required for this policy slice
+notes: The machine-readable records contain exact per-file admission fields.
+```

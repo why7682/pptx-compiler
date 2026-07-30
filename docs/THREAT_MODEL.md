@@ -49,6 +49,8 @@
 - use positive Git/package allowlists and inspect binary magic;
 - separate public PR, trusted release, and PowerPoint/self-hosted workflows;
 - bind release provenance to the reviewed commit and tarball digest.
+- validate support claims against a versioned positive matrix; unknown items and
+  missing evidence remain explicit failures.
 
 Quantitative archive limits and residual risks are decided during M1-005 and
 must be reflected in the public compatibility policy.

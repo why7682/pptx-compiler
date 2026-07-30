@@ -5,10 +5,11 @@ compiler and quality-assurance toolkit.
 
 ## Status
 
-This repository is a plan-only bootstrap licensed under the MIT License. It
-contains no migrated production code or presentation assets and is not yet a
-releasable software package. Do not publish a package until the P0 provenance,
-security, and packaging gates in [TODO.md](TODO.md) pass.
+This repository is a foundation-policy pre-alpha licensed under the MIT
+License. It contains executable clean-room admission and support-matrix gates,
+but no migrated production code, presentation asset, inspector, or renderer.
+It is not yet a releasable software package. Do not publish until the release
+gates in [TODO.md](TODO.md) pass.
 
 ## Intended function
 
@@ -30,14 +31,15 @@ and OOXML feature matrix will be explicit and fail closed.
 
 1. Read [HANDOFF.md](HANDOFF.md).
 2. Read [TODO.md](TODO.md).
-3. For the current task, follow
-   [docs/M0-004_HANDOFF.md](docs/M0-004_HANDOFF.md).
+3. For the completed support boundary, read
+   [docs/SUPPORT_MATRIX.md](docs/SUPPORT_MATRIX.md) and
+   [docs/COMPATIBILITY_POLICY.md](docs/COMPATIBILITY_POLICY.md).
 4. Load broader project/architecture documents only when the handoff routes to
    them.
 
-There is intentionally no package manifest or install command yet. The first
-implementation slice begins after the clean-room provenance and exclusion rules
-are executable rather than documentary only.
+The private root package has no dependencies; `npm test` and
+`npm run check:public-tree` verify the current foundation. The next task is the
+repository-owned synthetic fixture generator, not renderer migration.
 
 ## License
 

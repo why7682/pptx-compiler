@@ -13,7 +13,7 @@ criterion is recorded in the repository.
 | M0-002 | DONE | Record the project boundary, handoff, private-fixture policy, target architecture, and release gates. | The documents linked from `README.md` agree on scope and status. |
 | M0-003 | DONE | Select the working name, monorepo shape, MIT license, copyright holder, and repository-local public Git identity. | Dated decisions, official-registry name check, MIT license text, and local Git identity verification are recorded. |
 | M0-004 | DONE | Implement the bounded provenance and forbidden-material gates in `docs/M0-004_HANDOFF.md`. | Every tracked/admitted file has machine-readable provenance; mutations covering forbidden paths/text/extensions/magic, symlinks, oversize files, missing/invalid records, and private-output leakage are rejected. |
-| M0-005 | NEXT | Define the public support matrix and compatibility policy. | Each input, OOXML feature, platform, and evidence level is marked supported, experimental, manual, or unsupported. |
+| M0-005 | DONE | Define the public support matrix and compatibility policy. | Each input, OOXML feature, platform, and evidence level is marked supported, experimental, manual, or unsupported. |
 
 ### M0-004 completion evidence — 2026-07-30
 
@@ -27,11 +27,23 @@ criterion is recorded in the repository.
 - The local run used Node.js 23.7.0 only as development verification. Node.js
   22.x/24.x and cross-platform evidence remains assigned to public CI work.
 
+### M0-005 completion evidence — 2026-07-31
+
+- The normative matrix contains 60 sorted, unique rows across all required
+  dimensions, zero `supported` items, and an explicit false global claim switch.
+- `npm test`: 47/47 passed, including 44 total rejection mutations; 13 are
+  support-matrix overclaim and drift mutations.
+- `npm run check:public-tree`: staged forbidden-material, provenance, and
+  support-matrix gates passed for the complete slice.
+- `git diff --cached --check`: passed.
+- The compatibility policy defines status promotion/demotion, evidence scope,
+  fail-closed resolution, manual/private boundaries, and 0.x versioning.
+
 ## M1 — Public, self-contained foundation
 
 | ID | Status | Task | Exit criterion |
 | --- | --- | --- | --- |
-| M1-001 | PENDING | Create a repository-owned synthetic PPTX/POTX fixture generator from reviewed text-only OOXML parts. | Generated decks are deterministic, contain no third-party branding/content, and pass an independent provenance review. |
+| M1-001 | NEXT | Create a repository-owned synthetic PPTX/POTX fixture generator from reviewed text-only OOXML parts. | Generated decks are deterministic, contain no third-party branding/content, and pass an independent provenance review. |
 | M1-002 | PENDING | Define versioned schemas for project config, template profile/index, capability registry/overlay, slide spec, build artifact, and QA report. | Valid and mutation-invalid fixtures pass/fail predictably on every supported Node version. |
 | M1-003 | PENDING | Implement `ProjectContext` and remove ambient root-path assumptions. | Core APIs accept explicit paths/dependencies; scans find no project-root singleton or absolute path. |
 | M1-004 | PENDING | Implement a distributable template inspector without managed/private helpers. | A clean installation inspects the synthetic fixture and emits a deterministic, path-redacted index. |
