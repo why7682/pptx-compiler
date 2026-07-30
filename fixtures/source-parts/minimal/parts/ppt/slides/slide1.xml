@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<p:sld xmlns:a="http://schemas.openxmlformats.org/drawingml/2006/main" xmlns:r="http://schemas.openxmlformats.org/officeDocument/2006/relationships" xmlns:p="http://schemas.openxmlformats.org/presentationml/2006/main">
+  <p:cSld name="Synthetic Text Slide">
+    <p:spTree>
+      <p:nvGrpSpPr>
+        <p:cNvPr id="1" name=""/>
+        <p:cNvGrpSpPr/>
+        <p:nvPr/>
+      </p:nvGrpSpPr>
+      <p:grpSpPr>
+        <a:xfrm>
+          <a:off x="0" y="0"/>
+          <a:ext cx="0" cy="0"/>
+          <a:chOff x="0" y="0"/>
+          <a:chExt cx="0" cy="0"/>
+        </a:xfrm>
+      </p:grpSpPr>
+      <p:sp>
+        <p:nvSpPr>
+          <p:cNvPr id="2" name="Synthetic Title"/>
+          <p:cNvSpPr txBox="1"/>
+          <p:nvPr/>
+        </p:nvSpPr>
+        <p:spPr>
+          <a:xfrm>
+            <a:off x="914400" y="1285875"/>
+            <a:ext cx="10363200" cy="1143000"/>
+          </a:xfrm>
+          <a:prstGeom prst="rect"><a:avLst/></a:prstGeom>
+          <a:noFill/>
+          <a:ln><a:noFill/></a:ln>
+        </p:spPr>
+        <p:txBody>
+          <a:bodyPr anchor="ctr"/>
+          <a:lstStyle/>
+          <a:p>
+            <a:pPr algn="ctr"/>
+            <a:r>
+              <a:rPr lang="en-US" sz="2800" b="1">
+                <a:solidFill><a:schemeClr val="tx1"/></a:solidFill>
+                <a:latin typeface="Synthetic Sans"/>
+              </a:rPr>
+              <a:t>Synthetic Fixture</a:t>
+            </a:r>
+            <a:endParaRPr lang="en-US"/>
+          </a:p>
+        </p:txBody>
+      </p:sp>
+      <p:sp>
+        <p:nvSpPr>
+          <p:cNvPr id="3" name="Synthetic Description"/>
+          <p:cNvSpPr txBox="1"/>
+          <p:nvPr/>
+        </p:nvSpPr>
+        <p:spPr>
+          <a:xfrm>
+            <a:off x="1371600" y="2971800"/>
+            <a:ext cx="9448800" cy="914400"/>
+          </a:xfrm>
+          <a:prstGeom prst="rect"><a:avLst/></a:prstGeom>
+          <a:noFill/>
+          <a:ln><a:noFill/></a:ln>
+        </p:spPr>
+        <p:txBody>
+          <a:bodyPr anchor="ctr"/>
+          <a:lstStyle/>
+          <a:p>
+            <a:pPr algn="ctr"/>
+            <a:r>
+              <a:rPr lang="en-US" sz="1600">
+                <a:solidFill><a:schemeClr val="tx2"/></a:solidFill>
+                <a:latin typeface="Synthetic Sans"/>
+              </a:rPr>
+              <a:t>Repository-owned text-only OOXML</a:t>
+            </a:r>
+            <a:endParaRPr lang="en-US"/>
+          </a:p>
+        </p:txBody>
+      </p:sp>
+    </p:spTree>
+  </p:cSld>
+  <p:clrMapOvr>
+    <a:masterClrMapping/>
+  </p:clrMapOvr>
+</p:sld>

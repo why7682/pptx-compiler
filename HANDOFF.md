@@ -4,9 +4,10 @@
 
 This is an independent, clean-history workspace created to extract a generic
 PPTX rendering and QA pipeline from a private predecessor project. It now has
-plans, contracts, dependency-free foundation policy gates, and synthetic text
-mutation tests. No PPTX product implementation, binary fixture, design asset,
-dependency lockfile, prompt log, or predecessor Git history has been copied.
+plans, contracts, dependency-free foundation policy gates, reviewed text-only
+OOXML fixture parts, and synthetic mutation tests. No PPTX product implementation,
+tracked binary fixture, design asset, dependency lockfile, prompt log, or
+predecessor Git history has been copied.
 
 The project uses the MIT License with Elliot Wu as the declared copyright
 holder. The working name, monorepo shape, and repository-local public Git author
@@ -23,6 +24,13 @@ OOXML, capability, platform, and evidence items. Its global claim switch is
 false, so no PPTX capability is currently represented as supported. A
 dependency-free staged/working-tree gate rejects matrix overclaims and drift.
 
+`M1-001` is complete: 12 independently reviewed, repository-owned text parts
+generate deterministic ignored PPTX and POTX archives through a dependency-free,
+create-only ZIP writer. The suite locks the minimal internal graph, content
+types, owner references, source limits, high-risk exclusions, ZIP metadata, and
+publication behavior. This is public test-data production, not PPTX ingestion
+or rendering support; the global support switch remains false.
+
 The repository has no remote. Keep it local until the public synthetic-fixture
 flow can run `init -> inspect -> validate -> render -> qa`. After that executable
 checkpoint and a fresh public-preflight scan, create a **public** repository;
@@ -31,10 +39,10 @@ unscoped package decision is also deferred until package metadata is designed.
 
 ## Immediate objective
 
-The next dependency is `M1-001`: create the repository-owned synthetic
-PPTX/POTX fixture generator from reviewed text-only OOXML parts. Do not begin
-it, load a presentation asset, or admit OOXML text until the user explicitly
-continues and the task is bounded with provenance and security limits.
+The next dependency is `M1-002`: define the first versioned JSON Schema
+contracts. Keep schema work independent of predecessor code and do not turn the
+synthetic producer into a general ZIP/XML parser; secure ingestion remains
+`M1-005`.
 
 ## First commands after switching workspace
 
@@ -53,10 +61,10 @@ admission and support-contract gates.
 
 ## Next work session
 
-1. Confirm the M0-004/M0-005 acceptance commands pass on the clean checkout.
-2. Bound `M1-001` before creating any fixture part or generator code.
-3. Keep predecessor code and presentation assets out of scope; the public
-   fixture begins from repository-owned, reviewed text OOXML only.
+1. Confirm the M0-004 through M1-001 acceptance commands pass on the clean checkout.
+2. Read the compatibility policy before versioning M1-002 public schemas.
+3. Keep predecessor code, presentation assets, and generated archives out of
+   Git; use only the reviewed text fixture for future public tests.
 
 ## Known predecessor findings
 

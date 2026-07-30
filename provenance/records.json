@@ -46,7 +46,7 @@
     {
       "path": "AGENTS.md",
       "kind": "new-clean-room",
-      "origin": "user-directed clean-room project planning",
+      "origin": "user-directed clean-room planning with M1-001 fixture-maintenance routing",
       "copyrightHolderOrSourceAuthority": "Elliot Wu",
       "license": { "spdxExpression": "MIT" },
       "reviewedOn": "2026-07-31",
@@ -54,7 +54,7 @@
       "privateInformationReview": { "status": "passed", "notes": "Policy text contains no private fixture identity." },
       "projectConstantCleanup": { "status": "passed", "notes": "No predecessor constants admitted." },
       "publicConformance": { "status": "not-applicable", "notes": "Contributor instruction text only." },
-      "independentReview": { "status": "not-applicable", "notes": "M0-005 routing update did not require independent review." },
+      "independentReview": { "status": "passed", "notes": "Bounded M1-001 provenance/security review closed with no blocking findings." },
       "notes": "Repository-owned contributor instructions."
     },
     {
@@ -68,7 +68,7 @@
       "privateInformationReview": { "status": "passed", "notes": "Only approved public project identity is present." },
       "projectConstantCleanup": { "status": "passed", "notes": "Findings are generic and contain no predecessor identifiers." },
       "publicConformance": { "status": "not-applicable", "notes": "Handoff text only." },
-      "independentReview": { "status": "not-applicable", "notes": "M0-005 closeout update did not require independent review." },
+      "independentReview": { "status": "passed", "notes": "M1-001 mechanical closeout was independently confirmed consistent with the reviewed implementation." },
       "notes": "Repository-owned project handoff."
     },
     {
@@ -96,7 +96,7 @@
       "privateInformationReview": { "status": "passed", "notes": "No private information present." },
       "projectConstantCleanup": { "status": "passed", "notes": "No predecessor constants admitted." },
       "publicConformance": { "status": "not-applicable", "notes": "Project overview only." },
-      "independentReview": { "status": "not-applicable", "notes": "M0-005 status update did not require independent review." },
+      "independentReview": { "status": "passed", "notes": "M1-001 mechanical closeout was independently confirmed consistent with the reviewed implementation." },
       "notes": "Repository-owned project overview."
     },
     {
@@ -110,7 +110,7 @@
       "privateInformationReview": { "status": "passed", "notes": "No private information present." },
       "projectConstantCleanup": { "status": "passed", "notes": "No predecessor constants admitted." },
       "publicConformance": { "status": "not-applicable", "notes": "Planning status only." },
-      "independentReview": { "status": "not-applicable", "notes": "M0-005 evidence update did not require independent review." },
+      "independentReview": { "status": "passed", "notes": "M1-001 completion evidence and counts were independently confirmed." },
       "notes": "Repository-owned dependency-ordered plan."
     },
     {
@@ -184,6 +184,20 @@
       "notes": "Normative bounded contract for M0-005."
     },
     {
+      "path": "docs/M1-001_HANDOFF.md",
+      "kind": "new-clean-room",
+      "origin": "M1-001 clean-room fixture contract from ECMA-376 and repository requirements",
+      "copyrightHolderOrSourceAuthority": "Elliot Wu",
+      "license": { "spdxExpression": "MIT" },
+      "reviewedOn": "2026-07-31",
+      "thirdPartyDependencies": [],
+      "privateInformationReview": { "status": "passed", "notes": "Contains public standards URLs and generic synthetic-fixture paths only." },
+      "projectConstantCleanup": { "status": "passed", "notes": "No predecessor behavior, identifier, path, or asset was admitted." },
+      "publicConformance": { "status": "applicable", "notes": "Defines the bounded deterministic fixture and verification contract." },
+      "independentReview": { "status": "passed", "notes": "Bounded M1-001 provenance/security review closed with no blocking findings." },
+      "notes": "Normative bounded contract for M1-001."
+    },
+    {
       "path": "docs/NAME_AVAILABILITY.md",
       "kind": "new-clean-room",
       "origin": "user-directed clean-room project planning",
@@ -250,7 +264,7 @@
       "privateInformationReview": { "status": "passed", "notes": "No private information present." },
       "projectConstantCleanup": { "status": "passed", "notes": "No predecessor constants admitted." },
       "publicConformance": { "status": "not-applicable", "notes": "Human-readable policy summary only." },
-      "independentReview": { "status": "not-applicable", "notes": "M0-005 admission summary did not require independent review." },
+      "independentReview": { "status": "passed", "notes": "Bounded M1-001 provenance/security review closed with no blocking findings." },
       "notes": "Human policy companion to the machine-readable records."
     },
     {
@@ -263,8 +277,8 @@
       "thirdPartyDependencies": [],
       "privateInformationReview": { "status": "passed", "notes": "No private information present." },
       "projectConstantCleanup": { "status": "passed", "notes": "Release criteria are generic." },
-      "publicConformance": { "status": "not-applicable", "notes": "Release policy only." },
-      "independentReview": { "status": "not-applicable", "notes": "M0-005 gate addition did not require independent review." },
+      "publicConformance": { "status": "applicable", "notes": "Records the executable synthetic-fixture producer boundary without promoting input support." },
+      "independentReview": { "status": "passed", "notes": "Bounded M1-001 provenance/security review closed with no blocking findings." },
       "notes": "Repository-owned release gates."
     },
     {
@@ -278,7 +292,7 @@
       "privateInformationReview": { "status": "passed", "notes": "Contains generic public feature classes and aggregate counts only." },
       "projectConstantCleanup": { "status": "passed", "notes": "No predecessor feature identifier or evidence admitted." },
       "publicConformance": { "status": "applicable", "notes": "Summarizes the normative checked 60-row matrix without broadening it." },
-      "independentReview": { "status": "not-applicable", "notes": "No independent review required for this policy slice." },
+      "independentReview": { "status": "passed", "notes": "Bounded M1-001 provenance/security review closed with no blocking findings." },
       "notes": "Human-readable support-matrix summary."
     },
     {
@@ -296,17 +310,199 @@
       "notes": "Repository-owned threat model."
     },
     {
+      "path": "fixtures/source-parts/minimal/fixture.json",
+      "kind": "new-clean-room",
+      "origin": "independently authored M1-001 text fixture from ECMA-376 and public PresentationML documentation",
+      "copyrightHolderOrSourceAuthority": "Elliot Wu",
+      "license": { "spdxExpression": "MIT" },
+      "reviewedOn": "2026-07-31",
+      "thirdPartyDependencies": [],
+      "privateInformationReview": { "status": "passed", "notes": "Contains only generic fixture identifiers, public MIME types, and resource limits." },
+      "projectConstantCleanup": { "status": "passed", "notes": "Positive allowlist contains no predecessor or private fixture path." },
+      "publicConformance": { "status": "applicable", "notes": "Normative source-part and variant manifest for the synthetic PPTX/POTX pair." },
+      "independentReview": { "status": "passed", "notes": "Bounded M1-001 provenance/security review closed with no blocking findings." },
+      "notes": "Repository-owned fixture manifest; generated archives remain ignored."
+    },
+    {
+      "path": "fixtures/source-parts/minimal/parts/[Content_Types].xml",
+      "kind": "new-clean-room",
+      "origin": "independently authored M1-001 text fixture from ECMA-376 content-type requirements",
+      "copyrightHolderOrSourceAuthority": "Elliot Wu",
+      "license": { "spdxExpression": "MIT" },
+      "reviewedOn": "2026-07-31",
+      "thirdPartyDependencies": [],
+      "privateInformationReview": { "status": "passed", "notes": "Contains only public OOXML MIME identifiers and one controlled variant token." },
+      "projectConstantCleanup": { "status": "passed", "notes": "No copied package content or private part name is present." },
+      "publicConformance": { "status": "applicable", "notes": "Declares exact content types for the reviewed minimal fixture parts." },
+      "independentReview": { "status": "passed", "notes": "Bounded M1-001 provenance/security review closed with no blocking findings." },
+      "notes": "Repository-owned text-only OPC content-type part."
+    },
+    {
+      "path": "fixtures/source-parts/minimal/parts/_rels/.rels",
+      "kind": "new-clean-room",
+      "origin": "independently authored M1-001 text fixture from ECMA-376 OPC relationship requirements",
+      "copyrightHolderOrSourceAuthority": "Elliot Wu",
+      "license": { "spdxExpression": "MIT" },
+      "reviewedOn": "2026-07-31",
+      "thirdPartyDependencies": [],
+      "privateInformationReview": { "status": "passed", "notes": "Contains only the public package-to-presentation relationship." },
+      "projectConstantCleanup": { "status": "passed", "notes": "No private target, external URI, or predecessor identifier is present." },
+      "publicConformance": { "status": "applicable", "notes": "Connects the package root to the synthetic presentation part." },
+      "independentReview": { "status": "passed", "notes": "Bounded M1-001 provenance/security review closed with no blocking findings." },
+      "notes": "Repository-owned text-only root relationship part."
+    },
+    {
+      "path": "fixtures/source-parts/minimal/parts/ppt/_rels/presentation.xml.rels",
+      "kind": "new-clean-room",
+      "origin": "independently authored M1-001 text fixture from public PresentationML relationship requirements",
+      "copyrightHolderOrSourceAuthority": "Elliot Wu",
+      "license": { "spdxExpression": "MIT" },
+      "reviewedOn": "2026-07-31",
+      "thirdPartyDependencies": [],
+      "privateInformationReview": { "status": "passed", "notes": "Contains four generic internal relationships only." },
+      "projectConstantCleanup": { "status": "passed", "notes": "No external target or predecessor part identifier is present." },
+      "publicConformance": { "status": "applicable", "notes": "Connects the presentation to its master, properties, single slide, and theme." },
+      "independentReview": { "status": "passed", "notes": "Bounded M1-001 provenance/security review closed with no blocking findings." },
+      "notes": "Repository-owned text-only presentation relationship part."
+    },
+    {
+      "path": "fixtures/source-parts/minimal/parts/ppt/presProps.xml",
+      "kind": "new-clean-room",
+      "origin": "independently authored M1-001 text fixture from public PresentationML minimum-part documentation",
+      "copyrightHolderOrSourceAuthority": "Elliot Wu",
+      "license": { "spdxExpression": "MIT" },
+      "reviewedOn": "2026-07-31",
+      "thirdPartyDependencies": [],
+      "privateInformationReview": { "status": "passed", "notes": "Empty presentation properties contain no identity or application metadata." },
+      "projectConstantCleanup": { "status": "passed", "notes": "No source-deck properties or private metadata are present." },
+      "publicConformance": { "status": "applicable", "notes": "Provides the minimal presentation-properties root part." },
+      "independentReview": { "status": "passed", "notes": "Bounded M1-001 provenance/security review closed with no blocking findings." },
+      "notes": "Repository-owned text-only presentation properties."
+    },
+    {
+      "path": "fixtures/source-parts/minimal/parts/ppt/presentation.xml",
+      "kind": "new-clean-room",
+      "origin": "independently authored M1-001 text fixture from public PresentationML structure documentation",
+      "copyrightHolderOrSourceAuthority": "Elliot Wu",
+      "license": { "spdxExpression": "MIT" },
+      "reviewedOn": "2026-07-31",
+      "thirdPartyDependencies": [],
+      "privateInformationReview": { "status": "passed", "notes": "Contains generic one-slide dimensions and independently selected schema-range identifiers only." },
+      "projectConstantCleanup": { "status": "passed", "notes": "All identifiers and dimensions were selected for this synthetic fixture rather than copied from a source deck." },
+      "publicConformance": { "status": "applicable", "notes": "Declares one master, one slide, widescreen dimensions, and default text language." },
+      "independentReview": { "status": "passed", "notes": "Bounded M1-001 provenance/security review closed with no blocking findings." },
+      "notes": "Repository-owned text-only PresentationML main part."
+    },
+    {
+      "path": "fixtures/source-parts/minimal/parts/ppt/slideLayouts/_rels/slideLayout1.xml.rels",
+      "kind": "new-clean-room",
+      "origin": "independently authored M1-001 text fixture from public PresentationML relationship requirements",
+      "copyrightHolderOrSourceAuthority": "Elliot Wu",
+      "license": { "spdxExpression": "MIT" },
+      "reviewedOn": "2026-07-31",
+      "thirdPartyDependencies": [],
+      "privateInformationReview": { "status": "passed", "notes": "Contains one generic internal relationship only." },
+      "projectConstantCleanup": { "status": "passed", "notes": "No external target or predecessor part identifier is present." },
+      "publicConformance": { "status": "applicable", "notes": "Connects the synthetic layout back to its master." },
+      "independentReview": { "status": "passed", "notes": "Bounded M1-001 provenance/security review closed with no blocking findings." },
+      "notes": "Repository-owned text-only layout relationship part."
+    },
+    {
+      "path": "fixtures/source-parts/minimal/parts/ppt/slideLayouts/slideLayout1.xml",
+      "kind": "new-clean-room",
+      "origin": "independently authored M1-001 blank layout from public PresentationML structure documentation",
+      "copyrightHolderOrSourceAuthority": "Elliot Wu",
+      "license": { "spdxExpression": "MIT" },
+      "reviewedOn": "2026-07-31",
+      "thirdPartyDependencies": [],
+      "privateInformationReview": { "status": "passed", "notes": "Contains a generic synthetic name and empty shape tree only." },
+      "projectConstantCleanup": { "status": "passed", "notes": "No private template layout or copied geometry is present." },
+      "publicConformance": { "status": "applicable", "notes": "Provides the single blank layout required by the fixture graph." },
+      "independentReview": { "status": "passed", "notes": "Bounded M1-001 provenance/security review closed with no blocking findings." },
+      "notes": "Repository-owned text-only blank slide layout."
+    },
+    {
+      "path": "fixtures/source-parts/minimal/parts/ppt/slideMasters/_rels/slideMaster1.xml.rels",
+      "kind": "new-clean-room",
+      "origin": "independently authored M1-001 text fixture from public PresentationML relationship requirements",
+      "copyrightHolderOrSourceAuthority": "Elliot Wu",
+      "license": { "spdxExpression": "MIT" },
+      "reviewedOn": "2026-07-31",
+      "thirdPartyDependencies": [],
+      "privateInformationReview": { "status": "passed", "notes": "Contains two generic internal relationships only." },
+      "projectConstantCleanup": { "status": "passed", "notes": "No external target or predecessor part identifier is present." },
+      "publicConformance": { "status": "applicable", "notes": "Connects the synthetic master to its layout and theme." },
+      "independentReview": { "status": "passed", "notes": "Bounded M1-001 provenance/security review closed with no blocking findings." },
+      "notes": "Repository-owned text-only master relationship part."
+    },
+    {
+      "path": "fixtures/source-parts/minimal/parts/ppt/slideMasters/slideMaster1.xml",
+      "kind": "new-clean-room",
+      "origin": "independently authored M1-001 minimal master from public PresentationML structure documentation",
+      "copyrightHolderOrSourceAuthority": "Elliot Wu",
+      "license": { "spdxExpression": "MIT" },
+      "reviewedOn": "2026-07-31",
+      "thirdPartyDependencies": [],
+      "privateInformationReview": { "status": "passed", "notes": "Contains a generic name, independently selected schema-range layout ID, empty shape tree, color map, and empty styles." },
+      "projectConstantCleanup": { "status": "passed", "notes": "No private master content, branding, or copied formatting is present." },
+      "publicConformance": { "status": "applicable", "notes": "Provides the single master and layout reference for the fixture graph." },
+      "independentReview": { "status": "passed", "notes": "Bounded M1-001 provenance/security review closed with no blocking findings." },
+      "notes": "Repository-owned text-only slide master."
+    },
+    {
+      "path": "fixtures/source-parts/minimal/parts/ppt/slides/_rels/slide1.xml.rels",
+      "kind": "new-clean-room",
+      "origin": "independently authored M1-001 text fixture from public PresentationML relationship requirements",
+      "copyrightHolderOrSourceAuthority": "Elliot Wu",
+      "license": { "spdxExpression": "MIT" },
+      "reviewedOn": "2026-07-31",
+      "thirdPartyDependencies": [],
+      "privateInformationReview": { "status": "passed", "notes": "Contains one generic internal relationship only." },
+      "projectConstantCleanup": { "status": "passed", "notes": "No external target or predecessor part identifier is present." },
+      "publicConformance": { "status": "applicable", "notes": "Connects the single synthetic slide to its blank layout." },
+      "independentReview": { "status": "passed", "notes": "Bounded M1-001 provenance/security review closed with no blocking findings." },
+      "notes": "Repository-owned text-only slide relationship part."
+    },
+    {
+      "path": "fixtures/source-parts/minimal/parts/ppt/slides/slide1.xml",
+      "kind": "new-clean-room",
+      "origin": "independently authored M1-001 synthetic slide from public PresentationML structure documentation",
+      "copyrightHolderOrSourceAuthority": "Elliot Wu",
+      "license": { "spdxExpression": "MIT" },
+      "reviewedOn": "2026-07-31",
+      "thirdPartyDependencies": [],
+      "privateInformationReview": { "status": "passed", "notes": "Contains only the generic fixture title and repository-owned source description." },
+      "projectConstantCleanup": { "status": "passed", "notes": "Text, IDs, positions, and fictional font name were authored for this fixture." },
+      "publicConformance": { "status": "applicable", "notes": "Provides two editable DrawingML text boxes on one synthetic slide." },
+      "independentReview": { "status": "passed", "notes": "Bounded M1-001 provenance/security review closed with no blocking findings." },
+      "notes": "Repository-owned text-only synthetic slide; no third-party brand content."
+    },
+    {
+      "path": "fixtures/source-parts/minimal/parts/ppt/theme/theme1.xml",
+      "kind": "new-clean-room",
+      "origin": "independently authored M1-001 neutral theme from public DrawingML theme structure",
+      "copyrightHolderOrSourceAuthority": "Elliot Wu",
+      "license": { "spdxExpression": "MIT" },
+      "reviewedOn": "2026-07-31",
+      "thirdPartyDependencies": [],
+      "privateInformationReview": { "status": "passed", "notes": "Contains generic synthetic names, original color values, and a fictional font name." },
+      "projectConstantCleanup": { "status": "passed", "notes": "No private theme, proprietary font file, or third-party branding is present." },
+      "publicConformance": { "status": "applicable", "notes": "Provides the minimal color, font, fill, line, and effect scheme used by the fixture." },
+      "independentReview": { "status": "passed", "notes": "Bounded M1-001 provenance/security review closed with no blocking findings." },
+      "notes": "Repository-owned text-only synthetic DrawingML theme."
+    },
+    {
       "path": "package.json",
       "kind": "new-clean-room",
-      "origin": "M0-004 and M0-005 clean-room foundation implementation",
+      "origin": "M0-004 through M1-001 clean-room foundation implementation",
       "copyrightHolderOrSourceAuthority": "Elliot Wu",
       "license": { "spdxExpression": "MIT" },
       "reviewedOn": "2026-07-31",
       "thirdPartyDependencies": [],
       "privateInformationReview": { "status": "passed", "notes": "Private root metadata contains no personal or remote metadata." },
       "projectConstantCleanup": { "status": "passed", "notes": "No predecessor package metadata admitted." },
-      "publicConformance": { "status": "applicable", "notes": "Defines the complete admission and support-contract test/gate commands." },
-      "independentReview": { "status": "not-applicable", "notes": "M0-005 script update did not require independent review." },
+      "publicConformance": { "status": "applicable", "notes": "Defines the admission, support-contract, test, and synthetic-fixture generation commands." },
+      "independentReview": { "status": "passed", "notes": "Bounded M1-001 provenance/security review closed with no blocking findings." },
       "notes": "Dependency-free private workspace manifest; it is not publishable."
     },
     {
@@ -333,14 +529,14 @@
       "thirdPartyDependencies": [],
       "privateInformationReview": { "status": "passed", "notes": "Uses generic feature classes, public roadmap IDs, and public contract paths only." },
       "projectConstantCleanup": { "status": "passed", "notes": "No predecessor implementation, asset, or identifier admitted." },
-      "publicConformance": { "status": "applicable", "notes": "Contains 60 checked rows and zero supported PPTX claims." },
-      "independentReview": { "status": "not-applicable", "notes": "No independent review required for this policy slice." },
+      "publicConformance": { "status": "applicable", "notes": "Contains 60 checked rows, zero supported PPTX claims, and exact M1-001 synthetic evidence paths." },
+      "independentReview": { "status": "passed", "notes": "Bounded M1-001 provenance/security review closed with no blocking findings." },
       "notes": "Normative versioned public support matrix."
     },
     {
       "path": "provenance/records.json",
       "kind": "new-clean-room",
-      "origin": "M0-004 clean-room implementation from repository contract",
+      "origin": "M0-004 provenance contract with exact clean-room records through M1-001",
       "copyrightHolderOrSourceAuthority": "Elliot Wu",
       "license": { "spdxExpression": "MIT" },
       "reviewedOn": "2026-07-31",
@@ -348,7 +544,7 @@
       "privateInformationReview": { "status": "passed", "notes": "Records contain only approved public and generic source-authority information." },
       "projectConstantCleanup": { "status": "passed", "notes": "Every admitted path is repository-relative and generic." },
       "publicConformance": { "status": "applicable", "notes": "Self-covered by the exact-path provenance gate." },
-      "independentReview": { "status": "not-applicable", "notes": "M0-005 exact-record additions did not require independent review." },
+      "independentReview": { "status": "passed", "notes": "Bounded M1-001 provenance/security review closed with no blocking findings." },
       "notes": "Normative per-file provenance source, including its own record."
     },
     {
@@ -422,6 +618,20 @@
       "notes": "Fail-closed staged and working-tree support-matrix gate."
     },
     {
+      "path": "scripts/generate-synthetic-fixtures.mjs",
+      "kind": "new-clean-room",
+      "origin": "M1-001 clean-room implementation from reviewed public standards and repository contract",
+      "copyrightHolderOrSourceAuthority": "Elliot Wu",
+      "license": { "spdxExpression": "MIT" },
+      "reviewedOn": "2026-07-31",
+      "thirdPartyDependencies": [],
+      "privateInformationReview": { "status": "passed", "notes": "Reports only public fixture names, byte counts, and hashes; no input paths are emitted." },
+      "projectConstantCleanup": { "status": "passed", "notes": "Dependency-free implementation uses only the reviewed manifest and generic package rules." },
+      "publicConformance": { "status": "applicable", "notes": "Builds deterministic PPTX/POTX archives and rejects unsafe source, graph, and publication mutations." },
+      "independentReview": { "status": "passed", "notes": "Bounded M1-001 provenance/security review closed with no blocking findings." },
+      "notes": "Dependency-free deterministic synthetic fixture generator."
+    },
+    {
       "path": "tests/policy-gates.test.mjs",
       "kind": "new-clean-room",
       "origin": "M0-004 clean-room implementation from repository contract",
@@ -446,8 +656,22 @@
       "privateInformationReview": { "status": "passed", "notes": "Uses repository-owned synthetic in-memory mutations only." },
       "projectConstantCleanup": { "status": "passed", "notes": "No predecessor identifier, asset, or path appears." },
       "publicConformance": { "status": "applicable", "notes": "Covers one baseline and 13 rejection mutations." },
-      "independentReview": { "status": "not-applicable", "notes": "No independent review required for this policy slice." },
+      "independentReview": { "status": "passed", "notes": "Bounded M1-001 provenance/security review closed with no blocking findings." },
       "notes": "Dependency-free support-matrix overclaim and drift tests."
+    },
+    {
+      "path": "tests/synthetic-fixture.test.mjs",
+      "kind": "new-clean-room",
+      "origin": "M1-001 clean-room tests from repository fixture, security, and determinism contracts",
+      "copyrightHolderOrSourceAuthority": "Elliot Wu",
+      "license": { "spdxExpression": "MIT" },
+      "reviewedOn": "2026-07-31",
+      "thirdPartyDependencies": [],
+      "privateInformationReview": { "status": "passed", "notes": "Uses only repository-owned source text and runtime-created temporary mutations." },
+      "projectConstantCleanup": { "status": "passed", "notes": "Contains no predecessor identifier, asset, path, or fixture hash." },
+      "publicConformance": { "status": "applicable", "notes": "Checks deterministic ZIP bytes, minimal graph, content isolation, atomic publication, and rejection mutations." },
+      "independentReview": { "status": "passed", "notes": "Bounded M1-001 provenance/security review closed with no blocking findings." },
+      "notes": "Dependency-free public synthetic-fixture conformance and mutation tests."
     }
   ]
 }

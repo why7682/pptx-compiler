@@ -43,11 +43,32 @@ criterion is recorded in the repository.
 
 | ID | Status | Task | Exit criterion |
 | --- | --- | --- | --- |
-| M1-001 | NEXT | Create a repository-owned synthetic PPTX/POTX fixture generator from reviewed text-only OOXML parts. | Generated decks are deterministic, contain no third-party branding/content, and pass an independent provenance review. |
-| M1-002 | PENDING | Define versioned schemas for project config, template profile/index, capability registry/overlay, slide spec, build artifact, and QA report. | Valid and mutation-invalid fixtures pass/fail predictably on every supported Node version. |
+| M1-001 | DONE | Create a repository-owned synthetic PPTX/POTX fixture generator from reviewed text-only OOXML parts. | Generated decks are deterministic, contain no third-party branding/content, and pass an independent provenance review. |
+| M1-002 | NEXT | Define versioned schemas for project config, template profile/index, capability registry/overlay, slide spec, build artifact, and QA report. | Valid and mutation-invalid fixtures pass/fail predictably on every supported Node version. |
 | M1-003 | PENDING | Implement `ProjectContext` and remove ambient root-path assumptions. | Core APIs accept explicit paths/dependencies; scans find no project-root singleton or absolute path. |
 | M1-004 | PENDING | Implement a distributable template inspector without managed/private helpers. | A clean installation inspects the synthetic fixture and emits a deterministic, path-redacted index. |
 | M1-005 | PENDING | Implement secure ZIP/XML ingestion. | Tests cover traversal, symlinks, zip bombs, member/size limits, duplicates, case conflicts, malformed XML, external relationships, macros, ActiveX, and embedded objects. |
+
+### M1-001 completion evidence — 2026-07-31
+
+- A positive manifest admits exactly 12 repository-owned UTF-8/LF OOXML parts;
+  no presentation, image, font, private fixture, or predecessor file was used.
+- The dependency-free generator produces ignored PPTX and POTX archives that
+  differ only in the reviewed main-part content type. ZIP entry order, bytes,
+  timestamp, permissions, CRC-32, comments, and extra fields are deterministic.
+- `npm test`: 75/75 passed, including 66 rejection mutations; the M1-001 suite
+  contributes 28 tests and 22 focused rejection mutations.
+- All 12 source parts passed local XML well-formedness checks, and both generated
+  variants passed archive integrity checks. Public tests independently parse the
+  ZIP records and do not depend on those local tools.
+- The bounded independent provenance/security review found four blocking
+  validation gaps. Canonical tag forms, exact Default/Override content types,
+  high-risk namespace prefixes, and element-bound relationship references were
+  fixed and regression-tested; the closing review reported no blocking findings.
+- `npm run check:public-tree` and `git diff --cached --check` passed on the staged
+  48-file tree. The global support-claim switch remains false.
+- Local verification used Node.js 23.7.0. Supported Node.js 22.x/24.x and
+  cross-platform evidence remain assigned to public CI work.
 
 ## M2 — Generic rendering vertical slice
 

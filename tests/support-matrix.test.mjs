@@ -10,12 +10,16 @@ const matrix = JSON.parse(await readFile(path.join(projectRoot, "policy", "suppo
 const schema = JSON.parse(await readFile(path.join(projectRoot, "schemas", "support-matrix.schema.json"), "utf8"));
 const summary = await readFile(path.join(projectRoot, "docs", "SUPPORT_MATRIX.md"), "utf8");
 const admittedPaths = new Set([
+  "docs/M1-001_HANDOFF.md",
   "docs/PRIVATE_FIXTURE_POLICY.md",
   "docs/RELEASE_GATES.md",
+  "fixtures/source-parts/minimal/fixture.json",
   "package.json",
   "policy/support-matrix.json",
   "schemas/support-matrix.schema.json",
+  "scripts/generate-synthetic-fixtures.mjs",
   "scripts/check-support-matrix.mjs",
+  "tests/synthetic-fixture.test.mjs",
   "tests/support-matrix.test.mjs"
 ]);
 

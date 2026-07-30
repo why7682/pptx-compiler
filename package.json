@@ -9,6 +9,7 @@
   },
   "scripts": {
     "test": "node --test tests/*.test.mjs",
+    "generate:fixtures": "node scripts/generate-synthetic-fixtures.mjs --output-dir fixtures/generated",
     "check:forbidden": "node scripts/check-forbidden-materials.mjs --mode index",
     "check:provenance": "node scripts/check-provenance.mjs --mode index",
     "check:support-matrix": "node scripts/check-support-matrix.mjs --mode index",

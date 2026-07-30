@@ -129,3 +129,42 @@ public_fixture_conformance: applicable; 60 matrix rows and 13 rejection mutation
 independent_review: not-applicable; no independent review required for this policy slice
 notes: The machine-readable records contain exact per-file admission fields.
 ```
+
+### M1-001 synthetic-fixture set
+
+```yaml
+paths:
+  - docs/M1-001_HANDOFF.md
+  - fixtures/source-parts/minimal/fixture.json
+  - fixtures/source-parts/minimal/parts/[Content_Types].xml
+  - fixtures/source-parts/minimal/parts/_rels/.rels
+  - fixtures/source-parts/minimal/parts/ppt/_rels/presentation.xml.rels
+  - fixtures/source-parts/minimal/parts/ppt/presProps.xml
+  - fixtures/source-parts/minimal/parts/ppt/presentation.xml
+  - fixtures/source-parts/minimal/parts/ppt/slideLayouts/_rels/slideLayout1.xml.rels
+  - fixtures/source-parts/minimal/parts/ppt/slideLayouts/slideLayout1.xml
+  - fixtures/source-parts/minimal/parts/ppt/slideMasters/_rels/slideMaster1.xml.rels
+  - fixtures/source-parts/minimal/parts/ppt/slideMasters/slideMaster1.xml
+  - fixtures/source-parts/minimal/parts/ppt/slides/_rels/slide1.xml.rels
+  - fixtures/source-parts/minimal/parts/ppt/slides/slide1.xml
+  - fixtures/source-parts/minimal/parts/ppt/theme/theme1.xml
+  - scripts/generate-synthetic-fixtures.mjs
+  - tests/synthetic-fixture.test.mjs
+kind: new-clean-room
+origin: independently authored from the M1-001 contract, ECMA-376, and public
+  Microsoft PresentationML structure documentation; no example source copied
+original_author_or_holder: Elliot Wu
+created_or_reviewed_on: 2026-07-31
+license_or_rights_basis: MIT
+third_party_dependencies: []
+private_information_review: passed; generic synthetic text and public format identifiers only
+project_constant_removal: passed; no predecessor code, asset, identifier, or private path inspected
+public_fixture_conformance: applicable; deterministic PPTX/POTX generation and failure mutations
+independent_review: passed; bounded review closed after four validation classes were fixed and regression-tested
+notes: Generated archives remain ignored and are not provenance inputs or tracked artifacts.
+```
+
+The XML namespace, relationship-type, and MIME strings are interoperability
+identifiers from the public format specification. They do not convey third-
+party presentation content. The fictional `Synthetic Sans` typeface name does
+not identify or redistribute a font file.

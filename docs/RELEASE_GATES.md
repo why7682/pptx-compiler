@@ -103,3 +103,9 @@ M0-005 adds `npm run check:support-matrix`. It validates the staged 60-row
 matrix, explicit catch-alls, claim switch, status/disposition/evidence
 combinations, required capability evidence, deterministic IDs, and admitted
 evidence paths. It is part of `npm run check:public-tree`.
+
+M1-001 adds `npm run generate:fixtures` and the synthetic-fixture tests. The
+generator admits only its reviewed text-part allowlist, rejects source/graph
+drift and high-risk markers, creates deterministic PPTX/POTX archives in an
+ignored directory, and refuses overwrite. This is producer-side public test
+evidence only; it is not the secure ingestion gate required by G2.

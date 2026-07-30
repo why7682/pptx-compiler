@@ -5,11 +5,13 @@ compiler and quality-assurance toolkit.
 
 ## Status
 
-This repository is a foundation-policy pre-alpha licensed under the MIT
-License. It contains executable clean-room admission and support-matrix gates,
-but no migrated production code, presentation asset, inspector, or renderer.
-It is not yet a releasable software package. Do not publish until the release
-gates in [TODO.md](TODO.md) pass.
+This repository is a foundation pre-alpha licensed under the MIT License. It
+contains executable clean-room admission and support-matrix gates plus a
+repository-owned text-to-PPTX/POTX synthetic fixture generator. Generated
+archives are ignored test data; there is still no migrated production code,
+accepted presentation input, inspector, or renderer. It is not yet a releasable
+software package. Do not publish until the release gates in [TODO.md](TODO.md)
+pass.
 
 ## Intended function
 
@@ -39,7 +41,7 @@ and OOXML feature matrix will be explicit and fail closed.
 
 The private root package has no dependencies; `npm test` and
 `npm run check:public-tree` verify the current foundation. The next task is the
-repository-owned synthetic fixture generator, not renderer migration.
+versioned schema set in `M1-002`, not renderer migration.
 
 ## License
 

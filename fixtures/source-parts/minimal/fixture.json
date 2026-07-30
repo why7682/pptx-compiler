@@ -1,0 +1,37 @@
+{
+  "schemaVersion": 1,
+  "fixtureId": "minimal-text-presentation",
+  "standardProfile": "ECMA-376 Transitional PresentationML",
+  "fixedZipDate": "2000-01-01T00:00:00Z",
+  "limits": {
+    "maxPartBytes": 262144,
+    "maxPackageBytes": 1048576,
+    "maxParts": 32
+  },
+  "parts": [
+    { "path": "[Content_Types].xml", "source": "parts/[Content_Types].xml", "template": true },
+    { "path": "_rels/.rels", "source": "parts/_rels/.rels", "template": false },
+    { "path": "ppt/_rels/presentation.xml.rels", "source": "parts/ppt/_rels/presentation.xml.rels", "template": false },
+    { "path": "ppt/presProps.xml", "source": "parts/ppt/presProps.xml", "template": false },
+    { "path": "ppt/presentation.xml", "source": "parts/ppt/presentation.xml", "template": false },
+    { "path": "ppt/slideLayouts/_rels/slideLayout1.xml.rels", "source": "parts/ppt/slideLayouts/_rels/slideLayout1.xml.rels", "template": false },
+    { "path": "ppt/slideLayouts/slideLayout1.xml", "source": "parts/ppt/slideLayouts/slideLayout1.xml", "template": false },
+    { "path": "ppt/slideMasters/_rels/slideMaster1.xml.rels", "source": "parts/ppt/slideMasters/_rels/slideMaster1.xml.rels", "template": false },
+    { "path": "ppt/slideMasters/slideMaster1.xml", "source": "parts/ppt/slideMasters/slideMaster1.xml", "template": false },
+    { "path": "ppt/slides/_rels/slide1.xml.rels", "source": "parts/ppt/slides/_rels/slide1.xml.rels", "template": false },
+    { "path": "ppt/slides/slide1.xml", "source": "parts/ppt/slides/slide1.xml", "template": false },
+    { "path": "ppt/theme/theme1.xml", "source": "parts/ppt/theme/theme1.xml", "template": false }
+  ],
+  "variants": [
+    {
+      "id": "potx",
+      "filename": "synthetic-minimal.potx",
+      "mainContentType": "application/vnd.openxmlformats-officedocument.presentationml.template.main+xml"
+    },
+    {
+      "id": "pptx",
+      "filename": "synthetic-minimal.pptx",
+      "mainContentType": "application/vnd.openxmlformats-officedocument.presentationml.presentation.main+xml"
+    }
+  ]
+}

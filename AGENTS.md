@@ -27,6 +27,14 @@ For maintenance or audit of the completed `M0-005` support contract, read:
 5. `docs/COMPATIBILITY_POLICY.md`
 6. `policy/support-matrix.json`
 
+For maintenance or audit of the completed `M1-001` synthetic fixture, read:
+
+3. `docs/M1-001_HANDOFF.md`
+4. `fixtures/source-parts/minimal/fixture.json`
+5. `docs/PROVENANCE_LEDGER.md`
+6. `docs/PRIVATE_FIXTURE_POLICY.md`
+7. `docs/RELEASE_GATES.md`
+
 Read `docs/PROJECT_DEFINITION.md` and `docs/ARCHITECTURE_TARGET.md` only before
 changing product scope, public contracts, packages, or dependency direction.
 
@@ -88,6 +96,8 @@ changing product scope, public contracts, packages, or dependency direction.
   is sufficient.
 - When maintaining `M0-005`, do not turn roadmap targets or predecessor
   observations into current support. The machine-readable matrix is normative.
+- When maintaining `M1-001`, edit only reviewed text source parts. Never commit
+  generated PPTX/POTX binaries or use an existing presentation as source data.
 - Add tests with every executable capability.
 - Update the architecture, support matrix, provenance ledger, and release gates
   in the same change when their contract changes.

@@ -99,8 +99,8 @@
         "label": "User-owned POTX template",
         "status": "unsupported",
         "disposition": "unavailable",
-        "currentBasis": "No secure archive ingestion or template inspector exists.",
-        "limitations": ["The repository gate intentionally rejects committed POTX binaries."],
+        "currentBasis": "The repository can generate its own ignored synthetic POTX, but no secure archive ingestion or template inspector exists.",
+        "limitations": ["Generated fixture output is test data; user-owned POTX input remains unavailable and committed POTX binaries are rejected."],
         "roadmap": "M1-004 and M1-005",
         "evidence": { "level": "none", "artifacts": [] }
       },
@@ -109,8 +109,8 @@
         "label": "User-owned PPTX template",
         "status": "unsupported",
         "disposition": "unavailable",
-        "currentBasis": "No secure archive ingestion or template inspector exists.",
-        "limitations": ["The repository gate intentionally rejects committed PPTX binaries."],
+        "currentBasis": "The repository can generate its own ignored synthetic PPTX, but no secure archive ingestion or template inspector exists.",
+        "limitations": ["Generated fixture output is test data; user-owned PPTX input remains unavailable and committed PPTX binaries are rejected."],
         "roadmap": "M1-004 and M1-005",
         "evidence": { "level": "none", "artifacts": [] }
       },
@@ -191,8 +191,8 @@
         "label": "Content types and internal relationships",
         "status": "unsupported",
         "disposition": "unavailable",
-        "currentBasis": "Relationship validation is a target contract only.",
-        "limitations": ["No secure parser or public mutation suite exists."],
+        "currentBasis": "The synthetic-fixture producer validates its fixed internal graph before packaging.",
+        "limitations": ["This does not parse or validate arbitrary packages; secure untrusted ingestion remains absent."],
         "roadmap": "M1-005 and M2-005",
         "evidence": { "level": "none", "artifacts": [] }
       },
@@ -261,8 +261,8 @@
         "label": "Slide masters, layouts, and themes",
         "status": "unsupported",
         "disposition": "unavailable",
-        "currentBasis": "Template inspection and clone/fill behavior are not implemented.",
-        "limitations": ["No preservation or binding guarantee exists."],
+        "currentBasis": "The synthetic source set includes one repository-owned master, blank layout, and theme as test data only.",
+        "limitations": ["Template inspection and clone/fill are not implemented, so no preservation or binding guarantee exists."],
         "roadmap": "M1-004 and M2-002",
         "evidence": { "level": "none", "artifacts": [] }
       },
@@ -576,7 +576,7 @@
         "label": "Automated public synthetic conformance evidence",
         "status": "experimental",
         "disposition": "accept-with-warning",
-        "currentBasis": "Foundation policy-gate tests exist, but no public PPTX fixture or product flow exists.",
+        "currentBasis": "Foundation gates and a deterministic repository-owned synthetic PPTX/POTX generator have public automated tests.",
         "limitations": ["Cannot support a PPTX capability until its complete conformance artifacts exist."],
         "roadmap": "M1-001 through M3-004",
         "evidence": {
@@ -584,8 +584,23 @@
           "artifacts": [
             {
               "type": "contract",
-              "path": "docs/RELEASE_GATES.md",
-              "note": "Defines the public evidence requirements."
+              "path": "docs/M1-001_HANDOFF.md",
+              "note": "Defines the bounded synthetic-fixture source, generation, and claim contract."
+            },
+            {
+              "type": "conformance-fixture",
+              "path": "fixtures/source-parts/minimal/fixture.json",
+              "note": "Positive allowlist for the reviewed text-only public fixture source."
+            },
+            {
+              "type": "executor",
+              "path": "scripts/generate-synthetic-fixtures.mjs",
+              "note": "Deterministically creates ignored PPTX/POTX archives from reviewed text parts."
+            },
+            {
+              "type": "qa-assertions",
+              "path": "tests/synthetic-fixture.test.mjs",
+              "note": "Checks archive determinism, internal structure, source policy, publication, and rejection mutations."
             }
           ]
         }

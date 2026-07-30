@@ -9,7 +9,8 @@ not broaden any machine-readable claim.
 The project is `pre-alpha-contract-only`, and `supportClaimsEnabled` is `false`.
 There is no supported PPTX input, OOXML feature, renderer capability, or output
 flow yet. The executable code currently in this repository protects admission
-and validates this policy; it does not inspect or render presentations.
+and validates this policy. It also creates ignored, repository-owned synthetic
+PPTX/POTX test data; it does not inspect, accept, or render user presentations.
 
 | Dimension | Items | Supported | Experimental | Manual | Unsupported |
 | --- | ---: | ---: | ---: | ---: | ---: |
@@ -44,7 +45,8 @@ Roadmap entries describe intended work only. They do not change current status.
 ## Important boundaries
 
 - PPTX/POTX inputs remain unsupported until the public inspector and secure
-  ZIP/XML layer exist and pass their mutation suites.
+  ZIP/XML layer exist and pass their mutation suites. Producing the bounded
+  synthetic fixture does not make arbitrary packages accepted input.
 - Macros, ActiveX, OLE, embedded packages, external relationships, embedded
   fonts, unknown vendor XML, and every unlisted OOXML feature have a target
   disposition of `reject`. That rejection is not executable PPTX evidence yet.
