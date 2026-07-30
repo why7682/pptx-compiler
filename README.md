@@ -29,9 +29,11 @@ and OOXML feature matrix will be explicit and fail closed.
 ## Start here
 
 1. Read [HANDOFF.md](HANDOFF.md).
-2. Read [docs/PROJECT_DEFINITION.md](docs/PROJECT_DEFINITION.md).
-3. Resolve the open decisions in [docs/DECISIONS.md](docs/DECISIONS.md).
-4. Work through [TODO.md](TODO.md) in dependency order.
+2. Read [TODO.md](TODO.md).
+3. For the current task, follow
+   [docs/M0-004_HANDOFF.md](docs/M0-004_HANDOFF.md).
+4. Load broader project/architecture documents only when the handoff routes to
+   them.
 
 There is intentionally no package manifest or install command yet. The first
 implementation slice begins after the clean-room provenance and exclusion rules

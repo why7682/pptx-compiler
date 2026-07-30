@@ -35,6 +35,7 @@ paths:
   - TODO.md
   - docs/ARCHITECTURE_TARGET.md
   - docs/DECISIONS.md
+  - docs/M0-004_HANDOFF.md
   - docs/NAME_AVAILABILITY.md
   - docs/OPEN_SOURCE_READINESS.md
   - docs/PRIVATE_FIXTURE_POLICY.md

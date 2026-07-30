@@ -15,6 +15,8 @@ No item below is decided merely because a recommendation is recorded.
 | D-009 | OPEN | Unsupported high-risk OOXML | Reject macros, ActiveX, OLE, embedded packages, and unsafe external relationships in 0.x. | Threat-model review and mutation tests. |
 | D-010 | OPEN | PowerPoint evidence adapter | Keep macOS automation optional, trusted/manual, and outside public PR CI. | Least-privilege workflow and redaction review. |
 | D-011 | ACCEPTED | Copyright holder | Elliot Wu. | User stated that no employer, university, collaborator, or other holder applies to the new clean-room project. Third-party dependencies and migrated candidates still require separate rights review. |
+| D-012 | ACCEPTED | npm package scope timing | Defer scoped-versus-unscoped package names until M3-002 package metadata work. | User explicitly deferred the choice; no package manifest or registry reservation is created now. |
+| D-013 | ACCEPTED | Git remote timing and visibility | Keep no remote until the public synthetic-fixture CLI flow is executable; after a fresh public-preflight gate, create the repository as public. | User selected post-executable timing and public visibility; hosting account/organization remains open. |
 
 Record a decision by changing its status to `ACCEPTED`, adding the date and
 rationale below the table, and updating every affected contract/TODO in the
@@ -37,6 +39,13 @@ same change.
 - **D-011 accepted:** Elliot Wu is the copyright holder for this new clean-room
   project. This does not grant rights to import third-party or predecessor files;
   each candidate remains subject to the provenance gate.
+- **D-012 accepted:** defer the npm scoped-versus-unscoped decision until
+  publishable package metadata is designed. The current unscoped-name E404 is
+  time-bounded evidence only.
+- **D-013 accepted:** do not create a remote during planning or foundation work.
+  Once the synthetic public fixture completes the executable CLI flow and the
+  public-preflight scan passes, create a public repository. Select the hosting
+  account/organization at that gate.
 
 ## MIT versus Apache-2.0 review
 

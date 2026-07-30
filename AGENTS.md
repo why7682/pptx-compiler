@@ -4,15 +4,24 @@ These instructions apply to the complete repository.
 
 ## Read order
 
-Before implementation, read:
+Use progressive disclosure to avoid repeatedly loading the complete project
+history.
+
+For every new session, read only:
 
 1. `HANDOFF.md`
-2. `docs/PROJECT_DEFINITION.md`
-3. `docs/ARCHITECTURE_TARGET.md`
-4. `docs/PRIVATE_FIXTURE_POLICY.md`
-5. `docs/RELEASE_GATES.md`
-6. `docs/DECISIONS.md`
-7. `TODO.md`
+2. `TODO.md`
+
+For the current `M0-004` task, then read:
+
+3. `docs/M0-004_HANDOFF.md`
+4. `docs/PROVENANCE_LEDGER.md`
+5. `docs/PRIVATE_FIXTURE_POLICY.md`
+6. `docs/RELEASE_GATES.md`
+7. `docs/DECISIONS.md`
+
+Read `docs/PROJECT_DEFINITION.md` and `docs/ARCHITECTURE_TARGET.md` only before
+changing product scope, public contracts, packages, or dependency direction.
 
 ## Clean-room extraction
 
@@ -66,6 +75,10 @@ Before implementation, read:
 
 - Implement the smallest complete vertical slice that advances the current
   TODO dependency.
+- For `M0-004`, do not scan the predecessor repository, start a broad multi-agent
+  fan-out, or load presentation assets. The exact task is self-contained in
+  `docs/M0-004_HANDOFF.md`. One bounded independent review after implementation
+  is sufficient.
 - Add tests with every executable capability.
 - Update the architecture, support matrix, provenance ledger, and release gates
   in the same change when their contract changes.

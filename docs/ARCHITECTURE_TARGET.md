@@ -31,9 +31,10 @@ examples/
 docs/adr/
 ```
 
-The exact package split is a decision for M0-003/M0-005. The dependency
-direction is fixed: `core` cannot import CLI, platform adapters, labs, private
-fixtures, or a presentation project.
+The monorepo and high-level package split are accepted. Exact npm scopes and
+publishable package names are deferred until package metadata is implemented.
+The dependency direction is fixed: `core` cannot import CLI, platform adapters,
+labs, private fixtures, or a presentation project.
 
 ## Public contracts
 

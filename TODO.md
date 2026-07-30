@@ -12,7 +12,7 @@ criterion is recorded in the repository.
 | M0-001 | DONE | Create a new workspace and independent Git tree without copying predecessor content. | Only planning text is present; parent repository ignores this nested tree. |
 | M0-002 | DONE | Record the project boundary, handoff, private-fixture policy, target architecture, and release gates. | The documents linked from `README.md` agree on scope and status. |
 | M0-003 | DONE | Select the working name, monorepo shape, MIT license, copyright holder, and repository-local public Git identity. | Dated decisions, official-registry name check, MIT license text, and local Git identity verification are recorded. |
-| M0-004 | NEXT | Establish per-file provenance and a forbidden-material manifest. | Every migrated or newly written source has a ledger entry; CI rejects excluded content. |
+| M0-004 | NEXT | Implement the bounded provenance and forbidden-material gates in `docs/M0-004_HANDOFF.md`. | Every tracked/admitted file has machine-readable provenance; mutations covering forbidden paths/text/extensions/magic, symlinks, oversize files, missing/invalid records, and private-output leakage are rejected. |
 | M0-005 | PENDING | Define the public support matrix and compatibility policy. | Each input, OOXML feature, platform, and evidence level is marked supported, experimental, manual, or unsupported. |
 
 ## M1 — Public, self-contained foundation
@@ -40,10 +40,11 @@ criterion is recorded in the repository.
 | ID | Status | Task | Exit criterion |
 | --- | --- | --- | --- |
 | M3-001 | PENDING | Implement `init`, `doctor`, `inspect`, `onboard`, `validate`, `render`, `qa`, and `diff`. | Commands have stable exit codes, JSON output mode, path redaction, and end-to-end tests. |
-| M3-002 | PENDING | Create a private workspace root and explicit publishable packages. | Each published package declares `files`, `exports`, `types`, `bin` where applicable, license, repository, and engines. |
+| M3-002 | PENDING | Create a private workspace root and explicit publishable packages; decide scoped versus unscoped npm names at this point. | Each published package declares `files`, `exports`, `types`, `bin` where applicable, license, repository, and engines. |
 | M3-003 | PENDING | Add repository and npm leakage gates. | Tarball is at most 5 MiB compressed/20 MiB unpacked, at most 300 files/1 MiB each, matches an allowlist, contains no forbidden magic/extensions, and installs in an empty directory. |
 | M3-004 | PENDING | Add Linux, Windows, and macOS public CI plus security scanning. | Typecheck, lint, unit, mutation, schema, fixture, archive, CLI, package, secret/PII/path, license, SBOM, and clean-install jobs pass without model/GUI/private inputs. |
 | M3-005 | PENDING | Add support, security, contribution, governance, changelog, and release documentation. | A new contributor can reproduce the public test suite and report a vulnerability privately. |
+| M3-006 | DEFERRED | After the public synthetic-fixture `init -> inspect -> validate -> render -> qa` flow is executable, pass a fresh public-preflight scan and create the Git hosting repository as public. | User selects the hosting account/organization; public remote contains only reviewed clean history and no release claim beyond executable evidence. |
 
 ## M4 — Release progression
 
