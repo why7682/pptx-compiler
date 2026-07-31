@@ -1,0 +1,41 @@
+{
+  "schemaVersion": "0.1.0",
+  "contractType": "project-overlay",
+  "projectOverlayId": "synthetic-project-overlay",
+  "projectId": "synthetic-project",
+  "templateProfileId": "synthetic-template-profile",
+  "templateIndexId": "synthetic-template-index",
+  "templateSha256": "0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef",
+  "capabilityRegistryId": "public-contract-registry",
+  "registryVersion": "0.1.0",
+  "capabilitySelections": [
+    {
+      "capabilitySelectionId": "clone-content",
+      "capabilityId": "source-slide-clone-fill",
+      "capabilityVersion": "0.1.0",
+      "experimentalOptIn": false,
+      "bindings": [
+        { "role": "body", "shapeBindingId": "body-binding" },
+        { "role": "title", "shapeBindingId": "title-binding" }
+      ]
+    }
+  ],
+  "shapeBindings": [
+    {
+      "shapeBindingId": "body-binding",
+      "containerKind": "slide",
+      "containerKey": "slide-1",
+      "shapeKey": "body-placeholder",
+      "expectedKind": "placeholder",
+      "cardinality": "exactly-one"
+    },
+    {
+      "shapeBindingId": "title-binding",
+      "containerKind": "slide",
+      "containerKey": "slide-1",
+      "shapeKey": "title-placeholder",
+      "expectedKind": "placeholder",
+      "cardinality": "exactly-one"
+    }
+  ]
+}

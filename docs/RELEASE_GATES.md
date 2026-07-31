@@ -109,3 +109,14 @@ generator admits only its reviewed text-part allowlist, rejects source/graph
 drift and high-risk markers, creates deterministic PPTX/POTX archives in an
 ignored directory, and refuses overwrite. This is producer-side public test
 evidence only; it is not the secure ingestion gate required by G2.
+
+M1-002 adds `npm run check:contracts` and
+`npm run generate:contract-types`. The contract gate validates the exact
+versioned schema/fixture manifest, registered references, closed root objects,
+cross-document semantic links, safe relative paths, QA/manual aggregation, and
+generated TypeScript drift. QA evidence must cover every rendered slide through
+its selected capability contract; slide-scoped checks cannot cover another
+slide, and referenced error diagnostics cannot aggregate to pass.
+Schema-conformance examples are explicitly barred from serving as executor or
+support evidence. The staged contract gate is part of
+`npm run check:public-tree`.

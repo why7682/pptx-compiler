@@ -9,8 +9,9 @@ not broaden any machine-readable claim.
 The project is `pre-alpha-contract-only`, and `supportClaimsEnabled` is `false`.
 There is no supported PPTX input, OOXML feature, renderer capability, or output
 flow yet. The executable code currently in this repository protects admission
-and validates this policy. It also creates ignored, repository-owned synthetic
-PPTX/POTX test data; it does not inspect, accept, or render user presentations.
+and validates this policy. It also validates the version `0.1.0` data-contract
+shapes and creates ignored, repository-owned synthetic PPTX/POTX test data; it
+does not inspect, accept, dispatch, or render user presentations.
 
 | Dimension | Items | Supported | Experimental | Manual | Unsupported |
 | --- | ---: | ---: | ---: | ---: | ---: |
@@ -47,6 +48,10 @@ Roadmap entries describe intended work only. They do not change current status.
 - PPTX/POTX inputs remain unsupported until the public inspector and secure
   ZIP/XML layer exist and pass their mutation suites. Producing the bounded
   synthetic fixture does not make arbitrary packages accepted input.
+- ProjectConfig, profile/index, registry/overlay, and deck/slide schemas now
+  have automated contract evidence. Their status remains `unsupported` because
+  no runtime consumer, resolver, or dispatcher exists; schema-only fixtures are
+  explicitly not capability conformance evidence.
 - Macros, ActiveX, OLE, embedded packages, external relationships, embedded
   fonts, unknown vendor XML, and every unlisted OOXML feature have a target
   disposition of `reject`. That rejection is not executable PPTX evidence yet.
@@ -64,9 +69,14 @@ Run:
 
 ```sh
 npm run check:support-matrix
+npm run check:contracts
 ```
 
 The gate reads the staged matrix and schema by default, validates their
 structure and semantic status combinations, requires catch-all rows, checks
 evidence paths against admitted files, and rejects overclaims. Use
 `--mode working-tree` only for pre-staging diagnostics.
+
+The contract gate separately validates the staged `0.1.0` schema manifest,
+positive examples, cross-document semantics, and generated TypeScript. Passing
+it does not alter any support status.

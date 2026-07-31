@@ -69,6 +69,11 @@ Every stable data boundary carries a schema version. Unknown versions and
 unknown fields fail closed unless an explicit migration contract is implemented
 and tested.
 
+The first data-contract set is `0.1.0`. Its manifest registers exact absolute
+schema identifiers; there is no `latest` alias, network schema resolution, or
+implicit migration. Checked-in TypeScript declarations are generated from the
+normative JSON Schemas and do not weaken runtime validation.
+
 - An incompatible schema or behavior change during 0.x increments the minor
   version and includes migration notes and negative tests.
 - A patch release remains backward-compatible within its minor contract and may

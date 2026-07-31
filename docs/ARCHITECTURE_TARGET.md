@@ -52,6 +52,14 @@ Each contract receives a JSON Schema and TypeScript type generated or checked
 from one normative source. Unknown fields and version mismatches are handled by
 an explicit compatibility policy.
 
+M1-002 implements data-contract version `0.1.0` for `ProjectConfig`,
+`TemplateProfile`, `TemplateIndex`, `CapabilityRegistry`, `ProjectOverlay`,
+`DeckSpec`, `BuildArtifact`, and `QaReport`, including the nested data
+structures named above. JSON Schema remains normative and the checked-in
+TypeScript declarations are generated from it. `ProjectContext` stays a runtime
+contract for M1-003; `CapabilityExecutor` and capability-specific schemas stay
+in M2-001. A registry string naming an executor is not dispatchability evidence.
+
 ## Capability resolution
 
 ```text

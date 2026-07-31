@@ -1,0 +1,59 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:pptx-pipeline:schema:capability-registry:0.1.0",
+  "title": "PPTX Pipeline CapabilityRegistry",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schemaVersion", "contractType", "capabilityRegistryId", "registryVersion", "capabilities"],
+  "properties": {
+    "schemaVersion": { "$ref": "urn:pptx-pipeline:schema:shared:0.1.0#/$defs/schemaVersion" },
+    "contractType": { "const": "capability-registry" },
+    "capabilityRegistryId": { "$ref": "urn:pptx-pipeline:schema:shared:0.1.0#/$defs/semanticId" },
+    "registryVersion": { "$ref": "urn:pptx-pipeline:schema:shared:0.1.0#/$defs/semanticVersion" },
+    "capabilities": {
+      "type": "array",
+      "minItems": 1,
+      "maxItems": 1024,
+      "items": { "$ref": "#/$defs/capabilityDefinition" }
+    }
+  },
+  "$defs": {
+    "capabilityDefinition": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "capabilityId",
+        "capabilityVersion",
+        "supportMatrixItemId",
+        "executorId",
+        "inputSchemaId",
+        "outputSchemaId",
+        "qaContractId",
+        "requiredBindingRoles",
+        "conformanceFixtureIds"
+      ],
+      "properties": {
+        "capabilityId": { "$ref": "urn:pptx-pipeline:schema:shared:0.1.0#/$defs/semanticId" },
+        "capabilityVersion": { "$ref": "urn:pptx-pipeline:schema:shared:0.1.0#/$defs/semanticVersion" },
+        "supportMatrixItemId": { "$ref": "urn:pptx-pipeline:schema:shared:0.1.0#/$defs/semanticId" },
+        "executorId": { "$ref": "urn:pptx-pipeline:schema:shared:0.1.0#/$defs/contractReference" },
+        "inputSchemaId": { "$ref": "urn:pptx-pipeline:schema:shared:0.1.0#/$defs/contractReference" },
+        "outputSchemaId": { "$ref": "urn:pptx-pipeline:schema:shared:0.1.0#/$defs/contractReference" },
+        "qaContractId": { "$ref": "urn:pptx-pipeline:schema:shared:0.1.0#/$defs/contractReference" },
+        "requiredBindingRoles": {
+          "type": "array",
+          "minItems": 1,
+          "maxItems": 64,
+          "uniqueItems": true,
+          "items": { "$ref": "urn:pptx-pipeline:schema:shared:0.1.0#/$defs/semanticId" }
+        },
+        "conformanceFixtureIds": {
+          "type": "array",
+          "maxItems": 256,
+          "uniqueItems": true,
+          "items": { "$ref": "urn:pptx-pipeline:schema:shared:0.1.0#/$defs/semanticId" }
+        }
+      }
+    }
+  }
+}

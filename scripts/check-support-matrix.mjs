@@ -6,7 +6,7 @@ import path from "node:path";
 import process from "node:process";
 import { spawnSync } from "node:child_process";
 import { fileURLToPath } from "node:url";
-import { assertSupportedSchema, validateJson } from "./check-provenance.mjs";
+import { assertSupportedSchema, validateJson } from "./lib/json-schema.mjs";
 
 const REPORT_SCHEMA_VERSION = 1;
 const EXPECTED_SCHEMA_ID = "urn:pptx-pipeline:schema:support-matrix:1";
@@ -167,7 +167,7 @@ export function validateSupportMatrix(document, schema, { admittedPaths } = {}) 
   } catch {
     return [finding("support-matrix-schema-configuration")];
   }
-  for (const error of validateJson(document, schema, schema)) {
+  for (const error of validateJson(document, schema)) {
     findings.push(finding("support-matrix-schema-validation", error.pointer || "/"));
   }
   if (!isPlainObject(document) || !isPlainObject(document.dimensions)) {

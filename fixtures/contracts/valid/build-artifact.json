@@ -1,0 +1,32 @@
+{
+  "schemaVersion": "0.1.0",
+  "contractType": "build-artifact",
+  "buildId": "synthetic-build",
+  "projectId": "synthetic-project",
+  "deckId": "synthetic-deck",
+  "templateProfileId": "synthetic-template-profile",
+  "templateIndexId": "synthetic-template-index",
+  "capabilityRegistryId": "public-contract-registry",
+  "registryVersion": "0.1.0",
+  "projectOverlayId": "synthetic-project-overlay",
+  "templateSha256": "0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef",
+  "slides": [
+    {
+      "slideId": "slide-1",
+      "capabilityId": "source-slide-clone-fill",
+      "capabilityVersion": "0.1.0"
+    }
+  ],
+  "changedParts": [
+    "[Content_Types].xml",
+    "ppt/presentation.xml",
+    "ppt/slides/slide1.xml"
+  ],
+  "qaReportId": "synthetic-qa-report",
+  "output": {
+    "format": "pptx",
+    "publishPath": "workspace/output/synthetic-deck.pptx",
+    "sha256": "abcdef0123456789abcdef0123456789abcdef0123456789abcdef0123456789",
+    "byteLength": 4096
+  }
+}

@@ -1,0 +1,52 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:pptx-pipeline:schema:template-profile:0.1.0",
+  "title": "PPTX Pipeline TemplateProfile",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schemaVersion",
+    "contractType",
+    "templateProfileId",
+    "templateIndexId",
+    "templateFormat",
+    "templateSha256",
+    "slideSizeEmu",
+    "layoutBindings"
+  ],
+  "properties": {
+    "schemaVersion": { "$ref": "urn:pptx-pipeline:schema:shared:0.1.0#/$defs/schemaVersion" },
+    "contractType": { "const": "template-profile" },
+    "templateProfileId": { "$ref": "urn:pptx-pipeline:schema:shared:0.1.0#/$defs/semanticId" },
+    "templateIndexId": { "$ref": "urn:pptx-pipeline:schema:shared:0.1.0#/$defs/semanticId" },
+    "templateFormat": { "enum": ["potx", "pptx"] },
+    "templateSha256": { "$ref": "urn:pptx-pipeline:schema:shared:0.1.0#/$defs/sha256" },
+    "slideSizeEmu": { "$ref": "#/$defs/slideSize" },
+    "layoutBindings": {
+      "type": "array",
+      "minItems": 1,
+      "maxItems": 256,
+      "items": { "$ref": "#/$defs/layoutBinding" }
+    }
+  },
+  "$defs": {
+    "slideSize": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["cx", "cy"],
+      "properties": {
+        "cx": { "$ref": "urn:pptx-pipeline:schema:shared:0.1.0#/$defs/emuExtent" },
+        "cy": { "$ref": "urn:pptx-pipeline:schema:shared:0.1.0#/$defs/emuExtent" }
+      }
+    },
+    "layoutBinding": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["layoutKey", "semanticRole"],
+      "properties": {
+        "layoutKey": { "$ref": "urn:pptx-pipeline:schema:shared:0.1.0#/$defs/semanticId" },
+        "semanticRole": { "$ref": "urn:pptx-pipeline:schema:shared:0.1.0#/$defs/semanticId" }
+      }
+    }
+  }
+}

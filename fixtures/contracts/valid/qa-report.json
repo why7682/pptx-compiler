@@ -1,0 +1,37 @@
+{
+  "schemaVersion": "0.1.0",
+  "contractType": "qa-report",
+  "qaReportId": "synthetic-qa-report",
+  "buildId": "synthetic-build",
+  "projectId": "synthetic-project",
+  "deckId": "synthetic-deck",
+  "templateProfileId": "synthetic-template-profile",
+  "templateIndexId": "synthetic-template-index",
+  "capabilityRegistryId": "public-contract-registry",
+  "registryVersion": "0.1.0",
+  "projectOverlayId": "synthetic-project-overlay",
+  "templateSha256": "0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef",
+  "decision": "pass",
+  "checks": [
+    {
+      "checkId": "archive-integrity",
+      "qaContractId": "urn:pptx-pipeline:fixture-placeholder:qa:source-slide-clone-fill:0.1.0",
+      "scopeKind": "build",
+      "scopeId": "synthetic-build",
+      "outcome": "pass",
+      "manualGateIds": [],
+      "diagnosticIds": []
+    },
+    {
+      "checkId": "source-isolation",
+      "qaContractId": "urn:pptx-pipeline:fixture-placeholder:qa:source-slide-clone-fill:0.1.0",
+      "scopeKind": "build",
+      "scopeId": "synthetic-build",
+      "outcome": "pass",
+      "manualGateIds": [],
+      "diagnosticIds": []
+    }
+  ],
+  "manualGates": [],
+  "diagnostics": []
+}

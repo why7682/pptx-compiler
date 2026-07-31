@@ -1,0 +1,18 @@
+{
+  "schemaVersion": "0.1.0",
+  "contractType": "deck-spec",
+  "deckId": "synthetic-deck",
+  "projectId": "synthetic-project",
+  "templateProfileId": "synthetic-template-profile",
+  "projectOverlayId": "synthetic-project-overlay",
+  "slides": [
+    {
+      "slideId": "slide-1",
+      "capabilitySelectionId": "clone-content",
+      "payload": {
+        "body": ["Synthetic body"],
+        "title": "Synthetic title"
+      }
+    }
+  ]
+}

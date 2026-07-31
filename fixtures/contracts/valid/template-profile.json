@@ -1,0 +1,18 @@
+{
+  "schemaVersion": "0.1.0",
+  "contractType": "template-profile",
+  "templateProfileId": "synthetic-template-profile",
+  "templateIndexId": "synthetic-template-index",
+  "templateFormat": "potx",
+  "templateSha256": "0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef",
+  "slideSizeEmu": {
+    "cx": 12192000,
+    "cy": 6858000
+  },
+  "layoutBindings": [
+    {
+      "layoutKey": "content-layout",
+      "semanticRole": "content"
+    }
+  ]
+}

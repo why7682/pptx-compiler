@@ -29,20 +29,43 @@
         "label": "Data-only capability overlay and semantic bindings",
         "status": "unsupported",
         "disposition": "unavailable",
-        "currentBasis": "The public schema and resolver do not exist in this repository.",
-        "limitations": ["Planning text is not an accepted input contract."],
+        "currentBasis": "Version 0.1.0 CapabilityRegistry and ProjectOverlay schemas have public mutation tests, but no resolver or executor exists.",
+        "limitations": ["Schema-conformance examples are not accepted runtime inputs or capability evidence."],
         "roadmap": "M1-002 and M2-001",
-        "evidence": { "level": "none", "artifacts": [] }
+        "evidence": {
+          "level": "automated-public",
+          "artifacts": [
+            {
+              "type": "input-schema",
+              "path": "schemas/contracts/capability-registry.schema.json",
+              "note": "Closed registry metadata contract; referenced executors and capability schemas are not implemented by this artifact."
+            },
+            {
+              "type": "input-schema",
+              "path": "schemas/contracts/project-overlay.schema.json",
+              "note": "Closed overlay and semantic-binding contract without a runtime resolver."
+            }
+          ]
+        }
       },
       {
         "id": "deck-slide-spec",
         "label": "Versioned deck and slide specification",
         "status": "unsupported",
         "disposition": "unavailable",
-        "currentBasis": "No DeckSpec or SlideSpec schema or dispatcher exists.",
-        "limitations": ["No data can currently be validated or rendered."],
+        "currentBasis": "Version 0.1.0 DeckSpec and SlideSpec schemas have public mutation tests, but no dispatcher exists.",
+        "limitations": ["The open payload still requires capability-specific schema validation before dispatch."],
         "roadmap": "M1-002 and M2-001",
-        "evidence": { "level": "none", "artifacts": [] }
+        "evidence": {
+          "level": "automated-public",
+          "artifacts": [
+            {
+              "type": "input-schema",
+              "path": "schemas/contracts/deck-spec.schema.json",
+              "note": "Base deck/slide contract only; no payload dispatcher or renderer is present."
+            }
+          ]
+        }
       },
       {
         "id": "jpeg-asset",
@@ -119,10 +142,19 @@
         "label": "Versioned project configuration",
         "status": "unsupported",
         "disposition": "unavailable",
-        "currentBasis": "ProjectConfig and ProjectContext are architecture contracts only.",
-        "limitations": ["Unknown fields and versions have no implemented consumer yet."],
+        "currentBasis": "The version 0.1.0 ProjectConfig schema and fail-closed mutations exist; ProjectContext is not implemented.",
+        "limitations": ["No runtime consumer accepts the document or resolves its explicit paths yet."],
         "roadmap": "M1-002 and M1-003",
-        "evidence": { "level": "none", "artifacts": [] }
+        "evidence": {
+          "level": "automated-public",
+          "artifacts": [
+            {
+              "type": "input-schema",
+              "path": "schemas/contracts/project-config.schema.json",
+              "note": "Closed data contract with safe relative-path syntax; runtime containment remains M1-003."
+            }
+          ]
+        }
       },
       {
         "id": "svg-asset",
@@ -139,10 +171,24 @@
         "label": "Template profile and normalized index",
         "status": "unsupported",
         "disposition": "unavailable",
-        "currentBasis": "The schema and distributable inspector are not implemented.",
-        "limitations": ["No private helper can substitute for the public inspector."],
+        "currentBasis": "Version 0.1.0 TemplateProfile and TemplateIndex schemas have public mutation tests; the inspector is not implemented.",
+        "limitations": ["Schema-valid index data does not prove safe package ingestion or inspection."],
         "roadmap": "M1-002 and M1-004",
-        "evidence": { "level": "none", "artifacts": [] }
+        "evidence": {
+          "level": "automated-public",
+          "artifacts": [
+            {
+              "type": "input-schema",
+              "path": "schemas/contracts/template-index.schema.json",
+              "note": "Normalized index shape only; no package reader or inspector is present."
+            },
+            {
+              "type": "input-schema",
+              "path": "schemas/contracts/template-profile.schema.json",
+              "note": "Profile-to-index binding contract only."
+            }
+          ]
+        }
       },
       {
         "id": "unknown-input",
@@ -393,10 +439,29 @@
         "label": "Source isolation and collateral mutation QA",
         "status": "unsupported",
         "disposition": "unavailable",
-        "currentBasis": "The QA report schemas and executable checks do not exist.",
-        "limitations": ["Planning requirements are not execution evidence."],
+        "currentBasis": "Version 0.1.0 BuildArtifact/QaReport schemas and aggregate mutations exist; executable isolation and collateral checks do not.",
+        "limitations": ["A schema-valid QA record cannot self-prove source isolation, atomic publication, or collateral safety."],
         "roadmap": "M1-002 and M2-005",
-        "evidence": { "level": "none", "artifacts": [] }
+        "evidence": {
+          "level": "automated-public",
+          "artifacts": [
+            {
+              "type": "output-schema",
+              "path": "schemas/contracts/build-artifact.schema.json",
+              "note": "Published-artifact data shape only; no assembly or publication executor exists."
+            },
+            {
+              "type": "output-schema",
+              "path": "schemas/contracts/qa-report.schema.json",
+              "note": "QA/manual aggregation data shape only; checks are not executed by this artifact."
+            },
+            {
+              "type": "qa-assertions",
+              "path": "tests/contracts.test.mjs",
+              "note": "Rejects invalid QA aggregation, publication, scope, and manual-gate combinations at the contract layer."
+            }
+          ]
+        }
       },
       {
         "id": "formula-transplant",
@@ -453,10 +518,34 @@
         "label": "Hash-bound template profile and semantic binding",
         "status": "unsupported",
         "disposition": "unavailable",
-        "currentBasis": "No profile schema, inspector, or resolver exists.",
-        "limitations": ["Missing or ambiguous bindings have no executable diagnostic yet."],
+        "currentBasis": "Version 0.1.0 profile/index/overlay schemas reject ambiguous contract bindings; no inspector or runtime resolver exists.",
+        "limitations": ["Schema-conformance cannot prove an indexed shape came from safely inspected package bytes."],
         "roadmap": "M1-002, M1-004, and M2-002",
-        "evidence": { "level": "none", "artifacts": [] }
+        "evidence": {
+          "level": "automated-public",
+          "artifacts": [
+            {
+              "type": "input-schema",
+              "path": "schemas/contracts/template-index.schema.json",
+              "note": "Normalized index shape without an inspector."
+            },
+            {
+              "type": "input-schema",
+              "path": "schemas/contracts/template-profile.schema.json",
+              "note": "Hash-bound profile shape without digest execution."
+            },
+            {
+              "type": "input-schema",
+              "path": "schemas/contracts/project-overlay.schema.json",
+              "note": "Semantic binding shape without runtime resolution."
+            },
+            {
+              "type": "qa-assertions",
+              "path": "tests/contracts.test.mjs",
+              "note": "Rejects duplicate, dangling, colliding, and role-incomplete synthetic bindings."
+            }
+          ]
+        }
       }
     ],
     "platforms": [
@@ -576,7 +665,7 @@
         "label": "Automated public synthetic conformance evidence",
         "status": "experimental",
         "disposition": "accept-with-warning",
-        "currentBasis": "Foundation gates and a deterministic repository-owned synthetic PPTX/POTX generator have public automated tests.",
+        "currentBasis": "Foundation gates, deterministic repository-owned PPTX/POTX generation, and schema-only data-contract conformance have public automated tests.",
         "limitations": ["Cannot support a PPTX capability until its complete conformance artifacts exist."],
         "roadmap": "M1-001 through M3-004",
         "evidence": {
@@ -601,6 +690,16 @@
               "type": "qa-assertions",
               "path": "tests/synthetic-fixture.test.mjs",
               "note": "Checks archive determinism, internal structure, source policy, publication, and rejection mutations."
+            },
+            {
+              "type": "contract",
+              "path": "docs/M1-002_HANDOFF.md",
+              "note": "Defines the first versioned data-contract and schema-only fixture claim boundary."
+            },
+            {
+              "type": "qa-assertions",
+              "path": "tests/contracts.test.mjs",
+              "note": "Checks positive schemas, cross-document semantics, generated types, and fail-closed mutations."
             }
           ]
         }

@@ -44,8 +44,8 @@ criterion is recorded in the repository.
 | ID | Status | Task | Exit criterion |
 | --- | --- | --- | --- |
 | M1-001 | DONE | Create a repository-owned synthetic PPTX/POTX fixture generator from reviewed text-only OOXML parts. | Generated decks are deterministic, contain no third-party branding/content, and pass an independent provenance review. |
-| M1-002 | NEXT | Define versioned schemas for project config, template profile/index, capability registry/overlay, slide spec, build artifact, and QA report. | Valid and mutation-invalid fixtures pass/fail predictably on every supported Node version. |
-| M1-003 | PENDING | Implement `ProjectContext` and remove ambient root-path assumptions. | Core APIs accept explicit paths/dependencies; scans find no project-root singleton or absolute path. |
+| M1-002 | DONE | Define versioned schemas for project config, template profile/index, capability registry/overlay, slide spec, build artifact, and QA report. | Valid and mutation-invalid fixtures pass/fail predictably on every supported Node version. |
+| M1-003 | NEXT | Implement `ProjectContext` and remove ambient root-path assumptions. | Core APIs accept explicit paths/dependencies; scans find no project-root singleton or absolute path. |
 | M1-004 | PENDING | Implement a distributable template inspector without managed/private helpers. | A clean installation inspects the synthetic fixture and emits a deterministic, path-redacted index. |
 | M1-005 | PENDING | Implement secure ZIP/XML ingestion. | Tests cover traversal, symlinks, zip bombs, member/size limits, duplicates, case conflicts, malformed XML, external relationships, macros, ActiveX, and embedded objects. |
 
@@ -69,6 +69,25 @@ criterion is recorded in the repository.
   48-file tree. The global support-claim switch remains false.
 - Local verification used Node.js 23.7.0. Supported Node.js 22.x/24.x and
   cross-platform evidence remain assigned to public CI work.
+
+### M1-002 completion evidence — 2026-07-31
+
+- Contract version `0.1.0` contains eight closed root schemas, one registered
+  shared-definition schema, eight positive text fixtures, and 22 generated
+  TypeScript exports from the normative JSON Schemas.
+- The dependency-free contract gate rejects unregistered references, unknown
+  keywords/versions/fields, unsafe relative paths, duplicate or dangling IDs,
+  ambiguous bindings, cross-document version/hash drift, invalid publication
+  targets, incorrect QA/manual aggregation, and generated-type drift.
+- `npm test`: 146/146 passed, including 135 total rejection mutations. The
+  contract suite contributes 70 tests (2 positive and 68 rejection mutations);
+  one additional provenance-authority regression belongs to the M1-002 slice.
+- The identical 146-test suite passed on Node.js 22.23.1 and Node.js 24.14.0,
+  satisfying the two declared runtime lines. Linux/Windows and broader
+  cross-platform evidence remains assigned to M3-004.
+- The fixture manifest is machine-marked `schema-conformance-only`; placeholder
+  executor/schema/QA references and fictional artifact values are not runtime
+  evidence. `supportClaimsEnabled` remains false and no matrix row is promoted.
 
 ## M2 — Generic rendering vertical slice
 

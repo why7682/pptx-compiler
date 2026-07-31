@@ -290,6 +290,15 @@ test("provenance gate passes and emits byte-stable JSON", async (t) => {
   assert.equal(first.stdout, second.stdout);
 });
 
+test("mutation: provenance schema authority identifier is fixed", async (t) => {
+  const { root } = await initializeProvenanceRepository(t);
+  const mutatedSchema = JSON.parse(schemaSource);
+  mutatedSchema.$id = "urn:pptx-pipeline:schema:synthetic-other:1";
+  await writeRelative(root, "schemas/provenance-record.schema.json", `${JSON.stringify(mutatedSchema, null, 2)}\n`);
+  git(root, "add", "-A");
+  assertRejected(runGate(provenanceScript, root), "provenance-configuration-error");
+});
+
 test("mutation: missing provenance record is rejected", async (t) => {
   const { root } = await initializeProvenanceRepository(t);
   await writeRelative(root, "missing.txt", "synthetic\n");

@@ -6,10 +6,10 @@ import path from "node:path";
 import process from "node:process";
 import { spawnSync } from "node:child_process";
 import { fileURLToPath } from "node:url";
+import { assertSupportedSchema, validateJson } from "./lib/json-schema.mjs";
 
 const REPORT_SCHEMA_VERSION = 1;
 const RECORD_SCHEMA_VERSION = 1;
-const EXPECTED_META_SCHEMA = "https://json-schema.org/draft/2020-12/schema";
 const EXPECTED_SCHEMA_ID = "urn:pptx-pipeline:schema:provenance-record:1";
 const DEFAULT_SCHEMA_PATH = "schemas/provenance-record.schema.json";
 const DEFAULT_RECORDS_PATH = "provenance/records.json";
@@ -153,156 +153,6 @@ function parseJson(content, label) {
   }
 }
 
-function escapePointer(value) {
-  return value.replaceAll("~", "~0").replaceAll("/", "~1");
-}
-
-function resolveReference(rootSchema, reference) {
-  if (typeof reference !== "string" || !reference.startsWith("#/")) {
-    throw new Error("only local JSON Schema references are supported");
-  }
-  let current = rootSchema;
-  for (const encoded of reference.slice(2).split("/")) {
-    const key = encoded.replaceAll("~1", "/").replaceAll("~0", "~");
-    if (!isPlainObject(current) || !(key in current)) {
-      throw new Error("JSON Schema reference does not resolve");
-    }
-    current = current[key];
-  }
-  if (!isPlainObject(current)) {
-    throw new Error("JSON Schema reference does not resolve to a schema object");
-  }
-  return current;
-}
-
-export function assertSupportedSchema(schema, { expectedId = EXPECTED_SCHEMA_ID } = {}) {
-  if (!isPlainObject(schema) || schema.$schema !== EXPECTED_META_SCHEMA || schema.$id !== expectedId) {
-    throw new Error("unsupported provenance JSON Schema authority or identifier");
-  }
-  const supported = new Set([
-    "$schema", "$id", "$defs", "$ref", "title", "description", "type", "additionalProperties",
-    "required", "properties", "const", "enum", "oneOf", "items", "minItems", "uniqueItems",
-    "minLength", "pattern", "format"
-  ]);
-  const visit = (node) => {
-    if (!isPlainObject(node)) throw new Error("schema nodes must be objects");
-    for (const keyword of Object.keys(node)) {
-      if (!supported.has(keyword)) {
-        throw new Error(`unsupported JSON Schema keyword ${keyword}`);
-      }
-    }
-    if (node.properties !== undefined) {
-      if (!isPlainObject(node.properties)) throw new Error("schema properties must be an object");
-      for (const child of Object.values(node.properties)) visit(child);
-    }
-    if (node.$defs !== undefined) {
-      if (!isPlainObject(node.$defs)) throw new Error("schema $defs must be an object");
-      for (const child of Object.values(node.$defs)) visit(child);
-    }
-    if (node.items !== undefined) visit(node.items);
-    if (node.oneOf !== undefined) {
-      if (!Array.isArray(node.oneOf) || node.oneOf.length === 0) throw new Error("schema oneOf must be non-empty");
-      for (const child of node.oneOf) visit(child);
-    }
-    if (node.$ref !== undefined) resolveReference(schema, node.$ref);
-  };
-  visit(schema);
-}
-
-function jsonEqual(left, right) {
-  return JSON.stringify(left) === JSON.stringify(right);
-}
-
-function validDate(value) {
-  if (!/^\d{4}-\d{2}-\d{2}$/.test(value)) return false;
-  const parsed = new Date(`${value}T00:00:00.000Z`);
-  return !Number.isNaN(parsed.valueOf()) && parsed.toISOString().slice(0, 10) === value;
-}
-
-export function validateJson(instance, schema, rootSchema, pointer = "") {
-  const errors = [];
-  if (schema.$ref !== undefined) {
-    errors.push(...validateJson(instance, resolveReference(rootSchema, schema.$ref), rootSchema, pointer));
-  }
-  if (schema.const !== undefined && !jsonEqual(instance, schema.const)) {
-    errors.push({ pointer, keyword: "const" });
-  }
-  if (schema.enum !== undefined && (!Array.isArray(schema.enum) || !schema.enum.some((item) => jsonEqual(item, instance)))) {
-    errors.push({ pointer, keyword: "enum" });
-  }
-  if (schema.oneOf !== undefined) {
-    const matches = schema.oneOf.filter((candidate) => validateJson(instance, candidate, rootSchema, pointer).length === 0);
-    if (matches.length !== 1) errors.push({ pointer, keyword: "oneOf" });
-  }
-
-  if (schema.type !== undefined) {
-    const matchesType =
-      (schema.type === "object" && isPlainObject(instance)) ||
-      (schema.type === "array" && Array.isArray(instance)) ||
-      (schema.type === "string" && typeof instance === "string") ||
-      (schema.type === "integer" && Number.isInteger(instance)) ||
-      (schema.type === "number" && typeof instance === "number" && Number.isFinite(instance)) ||
-      (schema.type === "boolean" && typeof instance === "boolean") ||
-      (schema.type === "null" && instance === null);
-    if (!matchesType) {
-      errors.push({ pointer, keyword: "type" });
-      return errors;
-    }
-  }
-
-  if (isPlainObject(instance)) {
-    if (schema.required !== undefined) {
-      if (!Array.isArray(schema.required)) throw new Error("schema required must be an array");
-      for (const key of schema.required) {
-        if (!Object.hasOwn(instance, key)) {
-          errors.push({ pointer: `${pointer}/${escapePointer(key)}`, keyword: "required" });
-        }
-      }
-    }
-    if (schema.properties !== undefined) {
-      for (const [key, value] of Object.entries(instance)) {
-        if (Object.hasOwn(schema.properties, key)) {
-          errors.push(...validateJson(value, schema.properties[key], rootSchema, `${pointer}/${escapePointer(key)}`));
-        } else if (schema.additionalProperties === false) {
-          errors.push({ pointer: `${pointer}/${escapePointer(key)}`, keyword: "additionalProperties" });
-        }
-      }
-    }
-  }
-
-  if (Array.isArray(instance)) {
-    if (schema.minItems !== undefined && instance.length < schema.minItems) {
-      errors.push({ pointer, keyword: "minItems" });
-    }
-    if (schema.uniqueItems === true) {
-      for (let left = 0; left < instance.length; left += 1) {
-        for (let right = left + 1; right < instance.length; right += 1) {
-          if (jsonEqual(instance[left], instance[right])) {
-            errors.push({ pointer: `${pointer}/${right}`, keyword: "uniqueItems" });
-          }
-        }
-      }
-    }
-    if (schema.items !== undefined) {
-      for (let index = 0; index < instance.length; index += 1) {
-        errors.push(...validateJson(instance[index], schema.items, rootSchema, `${pointer}/${index}`));
-      }
-    }
-  }
-
-  if (typeof instance === "string") {
-    if (schema.minLength !== undefined && [...instance].length < schema.minLength) {
-      errors.push({ pointer, keyword: "minLength" });
-    }
-    if (schema.pattern !== undefined && !(new RegExp(schema.pattern, "u")).test(instance)) {
-      errors.push({ pointer, keyword: "pattern" });
-    }
-    if (schema.format === "date" && !validDate(instance)) {
-      errors.push({ pointer, keyword: "format" });
-    }
-  }
-  return errors;
-}
 
 function finding(filePath, ruleId, location) {
   const result = { path: filePath, ruleId, severity: "error" };
@@ -415,8 +265,8 @@ export async function checkProvenance({
     }
     const schema = parseJson(schemaContent, "provenance schema");
     const recordsDocument = parseJson(recordsContent, "provenance records");
-    assertSupportedSchema(schema);
-    const schemaErrors = validateJson(recordsDocument, schema, schema)
+    assertSupportedSchema(schema, { expectedId: EXPECTED_SCHEMA_ID });
+    const schemaErrors = validateJson(recordsDocument, schema)
       .sort((left, right) => compareText(left.pointer, right.pointer) || compareText(left.keyword, right.keyword));
     const findings = schemaErrors.map((error) =>
       finding(relativeRecords, "provenance-schema-validation", { jsonPointer: error.pointer || "/" })

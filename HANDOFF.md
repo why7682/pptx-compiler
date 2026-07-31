@@ -4,10 +4,11 @@
 
 This is an independent, clean-history workspace created to extract a generic
 PPTX rendering and QA pipeline from a private predecessor project. It now has
-plans, contracts, dependency-free foundation policy gates, reviewed text-only
-OOXML fixture parts, and synthetic mutation tests. No PPTX product implementation,
-tracked binary fixture, design asset, dependency lockfile, prompt log, or
-predecessor Git history has been copied.
+plans, versioned data contracts, dependency-free foundation policy gates,
+reviewed text-only OOXML fixture parts, generated TypeScript declarations, and
+synthetic mutation tests. No PPTX product implementation, tracked binary
+fixture, design asset, dependency lockfile, prompt log, or predecessor Git
+history has been copied.
 
 The project uses the MIT License with Elliot Wu as the declared copyright
 holder. The working name, monorepo shape, and repository-local public Git author
@@ -31,6 +32,15 @@ types, owner references, source limits, high-risk exclusions, ZIP metadata, and
 publication behavior. This is public test-data production, not PPTX ingestion
 or rendering support; the global support switch remains false.
 
+`M1-002` is complete: eight closed root schemas plus shared definitions form
+contract version `0.1.0`. A dependency-free staged gate validates registered
+references, positive examples, cross-document keys/bindings, safe relative
+paths, QA/manual aggregation, and generated TypeScript drift. The example
+bundle is machine-marked `schema-conformance-only`; its placeholder executor
+references and fictional build/QA records are not runtime or support evidence.
+The 146-test suite passes on Node.js 22.23.1 and 24.14.0; cross-platform OS
+evidence remains M3-004.
+
 The repository has no remote. Keep it local until the public synthetic-fixture
 flow can run `init -> inspect -> validate -> render -> qa`. After that executable
 checkpoint and a fresh public-preflight scan, create a **public** repository;
@@ -39,10 +49,11 @@ unscoped package decision is also deferred until package metadata is designed.
 
 ## Immediate objective
 
-The next dependency is `M1-002`: define the first versioned JSON Schema
-contracts. Keep schema work independent of predecessor code and do not turn the
-synthetic producer into a general ZIP/XML parser; secure ingestion remains
-`M1-005`.
+The next dependency is `M1-003`: implement `ProjectContext` so core APIs receive
+explicit paths and dependencies rather than discovering an ambient repository
+root. Keep it independent of predecessor code, preserve the `0.1.0`
+`ProjectConfig` boundary, and do not turn it into template inspection or secure
+ZIP/XML ingestion.
 
 ## First commands after switching workspace
 
@@ -57,14 +68,14 @@ git remote -v
 
 The private root package has no dependencies, so no install step is required.
 Run `npm test` and `npm run check:public-tree` to revalidate the completed
-admission and support-contract gates.
+admission, support, fixture, and data-contract gates.
 
 ## Next work session
 
-1. Confirm the M0-004 through M1-001 acceptance commands pass on the clean checkout.
-2. Read the compatibility policy before versioning M1-002 public schemas.
+1. Confirm the M0-004 through M1-002 acceptance commands pass on the clean checkout.
+2. Read `docs/M1-002_HANDOFF.md` before consuming `ProjectConfig` in M1-003.
 3. Keep predecessor code, presentation assets, and generated archives out of
-   Git; use only the reviewed text fixture for future public tests.
+   Git; use only repository-owned text/synthetic contract fixtures for tests.
 
 ## Known predecessor findings
 

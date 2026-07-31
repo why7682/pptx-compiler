@@ -11,15 +11,25 @@ const schema = JSON.parse(await readFile(path.join(projectRoot, "schemas", "supp
 const summary = await readFile(path.join(projectRoot, "docs", "SUPPORT_MATRIX.md"), "utf8");
 const admittedPaths = new Set([
   "docs/M1-001_HANDOFF.md",
+  "docs/M1-002_HANDOFF.md",
   "docs/PRIVATE_FIXTURE_POLICY.md",
   "docs/RELEASE_GATES.md",
   "fixtures/source-parts/minimal/fixture.json",
   "package.json",
   "policy/support-matrix.json",
   "schemas/support-matrix.schema.json",
+  "schemas/contracts/build-artifact.schema.json",
+  "schemas/contracts/capability-registry.schema.json",
+  "schemas/contracts/deck-spec.schema.json",
+  "schemas/contracts/project-config.schema.json",
+  "schemas/contracts/project-overlay.schema.json",
+  "schemas/contracts/qa-report.schema.json",
+  "schemas/contracts/template-index.schema.json",
+  "schemas/contracts/template-profile.schema.json",
   "scripts/generate-synthetic-fixtures.mjs",
   "scripts/check-support-matrix.mjs",
   "tests/synthetic-fixture.test.mjs",
+  "tests/contracts.test.mjs",
   "tests/support-matrix.test.mjs"
 ]);
 

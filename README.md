@@ -6,12 +6,12 @@ compiler and quality-assurance toolkit.
 ## Status
 
 This repository is a foundation pre-alpha licensed under the MIT License. It
-contains executable clean-room admission and support-matrix gates plus a
-repository-owned text-to-PPTX/POTX synthetic fixture generator. Generated
-archives are ignored test data; there is still no migrated production code,
-accepted presentation input, inspector, or renderer. It is not yet a releasable
-software package. Do not publish until the release gates in [TODO.md](TODO.md)
-pass.
+contains executable clean-room admission, support-matrix, and versioned-contract
+gates plus a repository-owned text-to-PPTX/POTX synthetic fixture generator.
+Generated archives are ignored test data, and contract examples are schema-only
+fixtures; there is still no accepted presentation input, inspector, dispatcher,
+or renderer. It is not yet a releasable software package. Do not publish until
+the release gates in [TODO.md](TODO.md) pass.
 
 ## Intended function
 
@@ -36,12 +36,14 @@ and OOXML feature matrix will be explicit and fail closed.
 3. For the completed support boundary, read
    [docs/SUPPORT_MATRIX.md](docs/SUPPORT_MATRIX.md) and
    [docs/COMPATIBILITY_POLICY.md](docs/COMPATIBILITY_POLICY.md).
-4. Load broader project/architecture documents only when the handoff routes to
+4. For the versioned data contracts, read
+   [docs/M1-002_HANDOFF.md](docs/M1-002_HANDOFF.md).
+5. Load broader project/architecture documents only when the handoff routes to
    them.
 
 The private root package has no dependencies; `npm test` and
-`npm run check:public-tree` verify the current foundation. The next task is the
-versioned schema set in `M1-002`, not renderer migration.
+`npm run check:public-tree` verify the current foundation. The next task is
+explicit `ProjectContext` injection in `M1-003`, not renderer migration.
 
 ## License
 

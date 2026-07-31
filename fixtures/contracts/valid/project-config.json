@@ -1,0 +1,32 @@
+{
+  "schemaVersion": "0.1.0",
+  "contractType": "project-config",
+  "projectId": "synthetic-project",
+  "template": {
+    "sourcePath": "workspace/template.potx",
+    "profileId": "synthetic-template-profile",
+    "profilePath": "fixtures/contracts/valid/template-profile.json",
+    "indexId": "synthetic-template-index",
+    "indexPath": "fixtures/contracts/valid/template-index.json"
+  },
+  "capabilityRegistry": {
+    "registryId": "public-contract-registry",
+    "registryVersion": "0.1.0",
+    "path": "fixtures/contracts/valid/capability-registry.json"
+  },
+  "projectOverlay": {
+    "overlayId": "synthetic-project-overlay",
+    "path": "fixtures/contracts/valid/project-overlay.json"
+  },
+  "paths": {
+    "assetRoot": "workspace/assets",
+    "stagingRoot": "workspace/staging",
+    "outputRoot": "workspace/output"
+  },
+  "policies": {
+    "experimentalCapabilities": "require-explicit-opt-in",
+    "unknownFeatures": "reject",
+    "ambiguousBindings": "reject",
+    "sourceMutation": "reject"
+  }
+}

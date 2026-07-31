@@ -1,0 +1,19 @@
+{
+  "schemaVersion": "0.1.0",
+  "contractType": "capability-registry",
+  "capabilityRegistryId": "public-contract-registry",
+  "registryVersion": "0.1.0",
+  "capabilities": [
+    {
+      "capabilityId": "source-slide-clone-fill",
+      "capabilityVersion": "0.1.0",
+      "supportMatrixItemId": "source-slide-clone-fill",
+      "executorId": "urn:pptx-pipeline:fixture-placeholder:executor:source-slide-clone-fill:0.1.0",
+      "inputSchemaId": "urn:pptx-pipeline:fixture-placeholder:input:source-slide-clone-fill:0.1.0",
+      "outputSchemaId": "urn:pptx-pipeline:fixture-placeholder:output:source-slide-clone-fill:0.1.0",
+      "qaContractId": "urn:pptx-pipeline:fixture-placeholder:qa:source-slide-clone-fill:0.1.0",
+      "requiredBindingRoles": ["body", "title"],
+      "conformanceFixtureIds": []
+    }
+  ]
+}

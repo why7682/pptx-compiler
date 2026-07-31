@@ -19,6 +19,7 @@ No item below is decided merely because a recommendation is recorded.
 | D-013 | ACCEPTED | Git remote timing and visibility | Keep no remote until the public synthetic-fixture CLI flow is executable; after a fresh public-preflight gate, create the repository as public. | User selected post-executable timing and public visibility; hosting account/organization remains open. |
 | D-014 | ACCEPTED | Public support taxonomy | Use exactly `supported`, `experimental`, `manual`, and `unsupported`, with a global claim switch and machine-checked evidence/disposition rules. | M0-005 matrix/schema/checker plus 13 overclaim/drift mutations. |
 | D-015 | ACCEPTED | 0.x contract compatibility | Breaking contract changes increment the minor version with migration notes; patches remain compatible within a minor except an immediate documented safety demotion; unknown versions/fields fail closed. | M0-005 compatibility policy and schema-version mutations. |
+| D-016 | ACCEPTED | First public data-contract set | Use contract version `0.1.0`, eight closed root documents, registered shared references, generated TypeScript declarations, and explicitly schema-only synthetic examples. | M1-002 manifest, shared validator, cross-document gate, and positive/negative fixtures. |
 
 Record a decision by changing its status to `ACCEPTED`, adding the date and
 rationale below the table, and updating every affected contract/TODO in the
@@ -54,9 +55,10 @@ same change.
   support evidence. The official release status was checked at
   <https://nodejs.org/en/about/previous-releases> on 2026-07-30.
 - **D-006 accepted:** JSON Schema Draft 2020-12 is the normative schema source.
-  M0-004 uses a dependency-free, fail-closed evaluator for the bounded
-  provenance schema and rejects unsupported schema keywords. Type generation
-  and broader shared schema tooling remain in M1-002.
+  M1-002 extracts a dependency-free, fail-closed evaluator for the repository's
+  bounded keyword subset, adds registered absolute references, and generates
+  checked-in TypeScript declarations. Unsupported keywords still fail closed;
+  this evaluator is not claimed as a complete JSON Schema implementation.
 - **D-014 accepted:** public status is restricted to `supported`,
   `experimental`, `manual`, or `unsupported`. The normative matrix has a global
   claim switch, exact item scope, explicit catch-alls, and evidence rules. It is
@@ -66,6 +68,11 @@ same change.
   backward-compatible within their minor contract except that an unsafe claim
   may be demoted immediately with an explicit security/compatibility notice.
   Unknown versions and fields fail closed absent an explicit tested migration.
+- **D-016 accepted:** the first data-contract version is `0.1.0`. Eight root
+  schemas share registered definitions and generate TypeScript from the
+  normative schemas. Their positive examples are marked
+  `schema-conformance-only`; placeholder executor/schema/QA identifiers and a
+  fictional build record are never implementation or support evidence.
 
 ## MIT versus Apache-2.0 review
 

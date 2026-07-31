@@ -46,7 +46,7 @@
     {
       "path": "AGENTS.md",
       "kind": "new-clean-room",
-      "origin": "user-directed clean-room planning with M1-001 fixture-maintenance routing",
+      "origin": "user-directed clean-room planning with M1-002 contract-maintenance routing",
       "copyrightHolderOrSourceAuthority": "Elliot Wu",
       "license": { "spdxExpression": "MIT" },
       "reviewedOn": "2026-07-31",
@@ -54,7 +54,7 @@
       "privateInformationReview": { "status": "passed", "notes": "Policy text contains no private fixture identity." },
       "projectConstantCleanup": { "status": "passed", "notes": "No predecessor constants admitted." },
       "publicConformance": { "status": "not-applicable", "notes": "Contributor instruction text only." },
-      "independentReview": { "status": "passed", "notes": "Bounded M1-001 provenance/security review closed with no blocking findings." },
+      "independentReview": { "status": "passed", "notes": "Bounded M1-002 closing review confirmed the contract-maintenance routing." },
       "notes": "Repository-owned contributor instructions."
     },
     {
@@ -68,7 +68,7 @@
       "privateInformationReview": { "status": "passed", "notes": "Only approved public project identity is present." },
       "projectConstantCleanup": { "status": "passed", "notes": "Findings are generic and contain no predecessor identifiers." },
       "publicConformance": { "status": "not-applicable", "notes": "Handoff text only." },
-      "independentReview": { "status": "passed", "notes": "M1-001 mechanical closeout was independently confirmed consistent with the reviewed implementation." },
+      "independentReview": { "status": "passed", "notes": "M1-002 closing state and next dependency were checked against the reviewed implementation." },
       "notes": "Repository-owned project handoff."
     },
     {
@@ -96,7 +96,7 @@
       "privateInformationReview": { "status": "passed", "notes": "No private information present." },
       "projectConstantCleanup": { "status": "passed", "notes": "No predecessor constants admitted." },
       "publicConformance": { "status": "not-applicable", "notes": "Project overview only." },
-      "independentReview": { "status": "passed", "notes": "M1-001 mechanical closeout was independently confirmed consistent with the reviewed implementation." },
+      "independentReview": { "status": "passed", "notes": "M1-002 public claim boundary was checked against the reviewed implementation." },
       "notes": "Repository-owned project overview."
     },
     {
@@ -110,7 +110,7 @@
       "privateInformationReview": { "status": "passed", "notes": "No private information present." },
       "projectConstantCleanup": { "status": "passed", "notes": "No predecessor constants admitted." },
       "publicConformance": { "status": "not-applicable", "notes": "Planning status only." },
-      "independentReview": { "status": "passed", "notes": "M1-001 completion evidence and counts were independently confirmed." },
+      "independentReview": { "status": "passed", "notes": "M1-002 completion evidence, dependency order, and final counts were independently checked." },
       "notes": "Repository-owned dependency-ordered plan."
     },
     {
@@ -123,8 +123,8 @@
       "thirdPartyDependencies": [],
       "privateInformationReview": { "status": "passed", "notes": "No private information present." },
       "projectConstantCleanup": { "status": "passed", "notes": "Architecture is stated generically." },
-      "publicConformance": { "status": "not-applicable", "notes": "Architecture plan only." },
-      "independentReview": { "status": "not-applicable", "notes": "M0-005 public-contract addition did not require independent review." },
+      "publicConformance": { "status": "applicable", "notes": "Records the implemented versioned contract boundary without implying runtime support." },
+      "independentReview": { "status": "passed", "notes": "M1-002 architecture status was checked against schemas, gates, and excluded runtime work." },
       "notes": "Repository-owned target architecture."
     },
     {
@@ -138,7 +138,7 @@
       "privateInformationReview": { "status": "passed", "notes": "Contains generic public compatibility rules only." },
       "projectConstantCleanup": { "status": "passed", "notes": "No predecessor behavior or identifier admitted." },
       "publicConformance": { "status": "applicable", "notes": "Status and evidence rules are enforced by the support-matrix gate." },
-      "independentReview": { "status": "not-applicable", "notes": "No independent review required for this policy slice." },
+      "independentReview": { "status": "passed", "notes": "M1-002 versioning and support-claim rules were checked against the contract gate." },
       "notes": "Human compatibility and contract-versioning policy."
     },
     {
@@ -152,7 +152,7 @@
       "privateInformationReview": { "status": "passed", "notes": "Contains only approved public project identity." },
       "projectConstantCleanup": { "status": "passed", "notes": "No predecessor constants admitted." },
       "publicConformance": { "status": "not-applicable", "notes": "Decision record only." },
-      "independentReview": { "status": "not-applicable", "notes": "M0-005 decision additions did not require independent review." },
+      "independentReview": { "status": "passed", "notes": "M1-002 contract-authority and generation decisions were independently checked." },
       "notes": "Repository-owned decision register."
     },
     {
@@ -196,6 +196,20 @@
       "publicConformance": { "status": "applicable", "notes": "Defines the bounded deterministic fixture and verification contract." },
       "independentReview": { "status": "passed", "notes": "Bounded M1-001 provenance/security review closed with no blocking findings." },
       "notes": "Normative bounded contract for M1-001."
+    },
+    {
+      "path": "docs/M1-002_HANDOFF.md",
+      "kind": "new-clean-room",
+      "origin": "M1-002 clean-room data-contract implementation from repository public requirements and JSON Schema Draft 2020-12",
+      "copyrightHolderOrSourceAuthority": "Elliot Wu",
+      "license": { "spdxExpression": "MIT" },
+      "reviewedOn": "2026-07-31",
+      "thirdPartyDependencies": [],
+      "privateInformationReview": { "status": "passed", "notes": "Contains only public contract names, generic paths, and synthetic identifiers." },
+      "projectConstantCleanup": { "status": "passed", "notes": "No predecessor implementation, asset, identifier, or private path was admitted." },
+      "publicConformance": { "status": "applicable", "notes": "Defines the bounded versioned-schema, cross-document, type-generation, and verification contract." },
+      "independentReview": { "status": "passed", "notes": "Bounded M1-002 closing review findings were fixed and regression-tested." },
+      "notes": "Normative bounded contract for M1-002."
     },
     {
       "path": "docs/NAME_AVAILABILITY.md",
@@ -264,7 +278,7 @@
       "privateInformationReview": { "status": "passed", "notes": "No private information present." },
       "projectConstantCleanup": { "status": "passed", "notes": "No predecessor constants admitted." },
       "publicConformance": { "status": "not-applicable", "notes": "Human-readable policy summary only." },
-      "independentReview": { "status": "passed", "notes": "Bounded M1-001 provenance/security review closed with no blocking findings." },
+      "independentReview": { "status": "passed", "notes": "M1-002 admission set and its 24 exact new-file records were independently checked." },
       "notes": "Human policy companion to the machine-readable records."
     },
     {
@@ -277,8 +291,8 @@
       "thirdPartyDependencies": [],
       "privateInformationReview": { "status": "passed", "notes": "No private information present." },
       "projectConstantCleanup": { "status": "passed", "notes": "Release criteria are generic." },
-      "publicConformance": { "status": "applicable", "notes": "Records the executable synthetic-fixture producer boundary without promoting input support." },
-      "independentReview": { "status": "passed", "notes": "Bounded M1-001 provenance/security review closed with no blocking findings." },
+      "publicConformance": { "status": "applicable", "notes": "Records the executable fixture and versioned-contract gates without promoting input support." },
+      "independentReview": { "status": "passed", "notes": "M1-002 gate description was checked against its staged and working-tree implementation." },
       "notes": "Repository-owned release gates."
     },
     {
@@ -292,7 +306,7 @@
       "privateInformationReview": { "status": "passed", "notes": "Contains generic public feature classes and aggregate counts only." },
       "projectConstantCleanup": { "status": "passed", "notes": "No predecessor feature identifier or evidence admitted." },
       "publicConformance": { "status": "applicable", "notes": "Summarizes the normative checked 60-row matrix without broadening it." },
-      "independentReview": { "status": "passed", "notes": "Bounded M1-001 provenance/security review closed with no blocking findings." },
+      "independentReview": { "status": "passed", "notes": "M1-002 schema evidence and unchanged unsupported statuses were independently checked." },
       "notes": "Human-readable support-matrix summary."
     },
     {
@@ -308,6 +322,132 @@
       "publicConformance": { "status": "not-applicable", "notes": "Threat-model text only." },
       "independentReview": { "status": "not-applicable", "notes": "M0-005 overclaim control addition did not require independent review." },
       "notes": "Repository-owned threat model."
+    },
+    {
+      "path": "fixtures/contracts/README.md",
+      "kind": "new-clean-room",
+      "origin": "M1-002 repository-owned synthetic schema-conformance corpus",
+      "copyrightHolderOrSourceAuthority": "Elliot Wu",
+      "license": { "spdxExpression": "MIT" },
+      "reviewedOn": "2026-07-31",
+      "thirdPartyDependencies": [],
+      "privateInformationReview": { "status": "passed", "notes": "Describes generic synthetic identifiers and repository-relative paths only." },
+      "projectConstantCleanup": { "status": "passed", "notes": "No predecessor implementation, asset, identifier, or private path was admitted." },
+      "publicConformance": { "status": "applicable", "notes": "Documents the schema-conformance-only boundary and explicitly disclaims capability evidence." },
+      "independentReview": { "status": "passed", "notes": "Bounded M1-002 closing review findings were fixed and regression-tested." },
+      "notes": "Human guide for the valid contract fixture bundle."
+    },
+    {
+      "path": "fixtures/contracts/valid/build-artifact.json",
+      "kind": "new-clean-room",
+      "origin": "M1-002 repository-owned synthetic schema-conformance corpus",
+      "copyrightHolderOrSourceAuthority": "Elliot Wu",
+      "license": { "spdxExpression": "MIT" },
+      "reviewedOn": "2026-07-31",
+      "thirdPartyDependencies": [],
+      "privateInformationReview": { "status": "passed", "notes": "Contains generic synthetic identifiers, fake digests, and repository-relative paths only." },
+      "projectConstantCleanup": { "status": "passed", "notes": "No predecessor implementation, asset, identifier, or private path was admitted." },
+      "publicConformance": { "status": "applicable", "notes": "Schema-valid BuildArtifact document used only for contract conformance and cross-document tests." },
+      "independentReview": { "status": "passed", "notes": "Bounded M1-002 closing review findings were fixed and regression-tested." },
+      "notes": "Synthetic schema fixture; it is not build or capability evidence."
+    },
+    {
+      "path": "fixtures/contracts/valid/capability-registry.json",
+      "kind": "new-clean-room",
+      "origin": "M1-002 repository-owned synthetic schema-conformance corpus",
+      "copyrightHolderOrSourceAuthority": "Elliot Wu",
+      "license": { "spdxExpression": "MIT" },
+      "reviewedOn": "2026-07-31",
+      "thirdPartyDependencies": [],
+      "privateInformationReview": { "status": "passed", "notes": "Contains generic synthetic identifiers and placeholder URNs only." },
+      "projectConstantCleanup": { "status": "passed", "notes": "No predecessor implementation, asset, identifier, or private path was admitted." },
+      "publicConformance": { "status": "applicable", "notes": "Schema-valid CapabilityRegistry document used only for contract conformance and reference tests." },
+      "independentReview": { "status": "passed", "notes": "Bounded M1-002 closing review findings were fixed and regression-tested." },
+      "notes": "Synthetic schema fixture; placeholder executors and contracts are not support evidence."
+    },
+    {
+      "path": "fixtures/contracts/valid/deck-spec.json",
+      "kind": "new-clean-room",
+      "origin": "M1-002 repository-owned synthetic schema-conformance corpus",
+      "copyrightHolderOrSourceAuthority": "Elliot Wu",
+      "license": { "spdxExpression": "MIT" },
+      "reviewedOn": "2026-07-31",
+      "thirdPartyDependencies": [],
+      "privateInformationReview": { "status": "passed", "notes": "Contains generic synthetic identifiers and bounded payload data only." },
+      "projectConstantCleanup": { "status": "passed", "notes": "No predecessor implementation, asset, identifier, or private path was admitted." },
+      "publicConformance": { "status": "applicable", "notes": "Schema-valid DeckSpec document used only for contract conformance, ordering, and reference tests." },
+      "independentReview": { "status": "passed", "notes": "Bounded M1-002 closing review findings were fixed and regression-tested." },
+      "notes": "Synthetic schema fixture; it is not renderer input evidence."
+    },
+    {
+      "path": "fixtures/contracts/valid/project-config.json",
+      "kind": "new-clean-room",
+      "origin": "M1-002 repository-owned synthetic schema-conformance corpus",
+      "copyrightHolderOrSourceAuthority": "Elliot Wu",
+      "license": { "spdxExpression": "MIT" },
+      "reviewedOn": "2026-07-31",
+      "thirdPartyDependencies": [],
+      "privateInformationReview": { "status": "passed", "notes": "Contains generic synthetic identifiers and safe repository-relative paths only." },
+      "projectConstantCleanup": { "status": "passed", "notes": "No predecessor implementation, asset, identifier, or private path was admitted." },
+      "publicConformance": { "status": "applicable", "notes": "Schema-valid ProjectConfig document used only for contract conformance and path-policy tests." },
+      "independentReview": { "status": "passed", "notes": "Bounded M1-002 closing review findings were fixed and regression-tested." },
+      "notes": "Synthetic schema fixture; it is not onboarding or build evidence."
+    },
+    {
+      "path": "fixtures/contracts/valid/project-overlay.json",
+      "kind": "new-clean-room",
+      "origin": "M1-002 repository-owned synthetic schema-conformance corpus",
+      "copyrightHolderOrSourceAuthority": "Elliot Wu",
+      "license": { "spdxExpression": "MIT" },
+      "reviewedOn": "2026-07-31",
+      "thirdPartyDependencies": [],
+      "privateInformationReview": { "status": "passed", "notes": "Contains generic synthetic identifiers and binding names only." },
+      "projectConstantCleanup": { "status": "passed", "notes": "No predecessor implementation, asset, identifier, or private path was admitted." },
+      "publicConformance": { "status": "applicable", "notes": "Schema-valid ProjectOverlay document used only for contract conformance and binding tests." },
+      "independentReview": { "status": "passed", "notes": "Bounded M1-002 closing review findings were fixed and regression-tested." },
+      "notes": "Synthetic schema fixture; it is not template compatibility evidence."
+    },
+    {
+      "path": "fixtures/contracts/valid/qa-report.json",
+      "kind": "new-clean-room",
+      "origin": "M1-002 repository-owned synthetic schema-conformance corpus",
+      "copyrightHolderOrSourceAuthority": "Elliot Wu",
+      "license": { "spdxExpression": "MIT" },
+      "reviewedOn": "2026-07-31",
+      "thirdPartyDependencies": [],
+      "privateInformationReview": { "status": "passed", "notes": "Contains generic synthetic identifiers and placeholder QA contract URNs only." },
+      "projectConstantCleanup": { "status": "passed", "notes": "No predecessor implementation, asset, identifier, or private path was admitted." },
+      "publicConformance": { "status": "applicable", "notes": "Schema-valid QAReport document used only for contract conformance, scope, and aggregation tests." },
+      "independentReview": { "status": "passed", "notes": "Bounded M1-002 closing review findings were fixed and regression-tested." },
+      "notes": "Synthetic schema fixture; it is not actual QA evidence."
+    },
+    {
+      "path": "fixtures/contracts/valid/template-index.json",
+      "kind": "new-clean-room",
+      "origin": "M1-002 repository-owned synthetic schema-conformance corpus",
+      "copyrightHolderOrSourceAuthority": "Elliot Wu",
+      "license": { "spdxExpression": "MIT" },
+      "reviewedOn": "2026-07-31",
+      "thirdPartyDependencies": [],
+      "privateInformationReview": { "status": "passed", "notes": "Contains generic synthetic identifiers, fake digests, and package-part paths only." },
+      "projectConstantCleanup": { "status": "passed", "notes": "No predecessor implementation, asset, identifier, or private path was admitted." },
+      "publicConformance": { "status": "applicable", "notes": "Schema-valid TemplateIndex document used only for contract conformance, ordering, and graph tests." },
+      "independentReview": { "status": "passed", "notes": "Bounded M1-002 closing review findings were fixed and regression-tested." },
+      "notes": "Synthetic schema fixture; it does not identify or index a private deck."
+    },
+    {
+      "path": "fixtures/contracts/valid/template-profile.json",
+      "kind": "new-clean-room",
+      "origin": "M1-002 repository-owned synthetic schema-conformance corpus",
+      "copyrightHolderOrSourceAuthority": "Elliot Wu",
+      "license": { "spdxExpression": "MIT" },
+      "reviewedOn": "2026-07-31",
+      "thirdPartyDependencies": [],
+      "privateInformationReview": { "status": "passed", "notes": "Contains generic synthetic identifiers, fake digests, and feature names only." },
+      "projectConstantCleanup": { "status": "passed", "notes": "No predecessor implementation, asset, identifier, or private path was admitted." },
+      "publicConformance": { "status": "applicable", "notes": "Schema-valid TemplateProfile document used only for contract conformance and feature tests." },
+      "independentReview": { "status": "passed", "notes": "Bounded M1-002 closing review findings were fixed and regression-tested." },
+      "notes": "Synthetic schema fixture; it does not identify or profile a private deck."
     },
     {
       "path": "fixtures/source-parts/minimal/fixture.json",
@@ -494,15 +634,15 @@
     {
       "path": "package.json",
       "kind": "new-clean-room",
-      "origin": "M0-004 through M1-001 clean-room foundation implementation",
+      "origin": "M0-004 through M1-002 clean-room foundation implementation",
       "copyrightHolderOrSourceAuthority": "Elliot Wu",
       "license": { "spdxExpression": "MIT" },
       "reviewedOn": "2026-07-31",
       "thirdPartyDependencies": [],
       "privateInformationReview": { "status": "passed", "notes": "Private root metadata contains no personal or remote metadata." },
       "projectConstantCleanup": { "status": "passed", "notes": "No predecessor package metadata admitted." },
-      "publicConformance": { "status": "applicable", "notes": "Defines the admission, support-contract, test, and synthetic-fixture generation commands." },
-      "independentReview": { "status": "passed", "notes": "Bounded M1-001 provenance/security review closed with no blocking findings." },
+      "publicConformance": { "status": "applicable", "notes": "Defines admission, support, fixture, versioned-contract, type-generation, and test commands." },
+      "independentReview": { "status": "passed", "notes": "M1-002 scripts and public/working gate composition were independently checked." },
       "notes": "Dependency-free private workspace manifest; it is not publishable."
     },
     {
@@ -529,14 +669,14 @@
       "thirdPartyDependencies": [],
       "privateInformationReview": { "status": "passed", "notes": "Uses generic feature classes, public roadmap IDs, and public contract paths only." },
       "projectConstantCleanup": { "status": "passed", "notes": "No predecessor implementation, asset, or identifier admitted." },
-      "publicConformance": { "status": "applicable", "notes": "Contains 60 checked rows, zero supported PPTX claims, and exact M1-001 synthetic evidence paths." },
-      "independentReview": { "status": "passed", "notes": "Bounded M1-001 provenance/security review closed with no blocking findings." },
+      "publicConformance": { "status": "applicable", "notes": "Contains 60 checked rows, zero supported PPTX claims, and exact M1-001/M1-002 evidence paths." },
+      "independentReview": { "status": "passed", "notes": "M1-002 evidence updates and unchanged support statuses were independently checked." },
       "notes": "Normative versioned public support matrix."
     },
     {
       "path": "provenance/records.json",
       "kind": "new-clean-room",
-      "origin": "M0-004 provenance contract with exact clean-room records through M1-001",
+      "origin": "M0-004 provenance contract with exact clean-room records through M1-002",
       "copyrightHolderOrSourceAuthority": "Elliot Wu",
       "license": { "spdxExpression": "MIT" },
       "reviewedOn": "2026-07-31",
@@ -544,8 +684,148 @@
       "privateInformationReview": { "status": "passed", "notes": "Records contain only approved public and generic source-authority information." },
       "projectConstantCleanup": { "status": "passed", "notes": "Every admitted path is repository-relative and generic." },
       "publicConformance": { "status": "applicable", "notes": "Self-covered by the exact-path provenance gate." },
-      "independentReview": { "status": "passed", "notes": "Bounded M1-001 provenance/security review closed with no blocking findings." },
+      "independentReview": { "status": "passed", "notes": "M1-002 exact-path coverage and admission fields were independently checked." },
       "notes": "Normative per-file provenance source, including its own record."
+    },
+    {
+      "path": "schemas/contracts/build-artifact.schema.json",
+      "kind": "new-clean-room",
+      "origin": "M1-002 clean-room data contract from repository requirements and JSON Schema Draft 2020-12",
+      "copyrightHolderOrSourceAuthority": "Elliot Wu",
+      "license": { "spdxExpression": "MIT" },
+      "reviewedOn": "2026-07-31",
+      "thirdPartyDependencies": [],
+      "privateInformationReview": { "status": "passed", "notes": "Contains generic public contract vocabulary only." },
+      "projectConstantCleanup": { "status": "passed", "notes": "No predecessor implementation, asset, identifier, or private path was admitted." },
+      "publicConformance": { "status": "applicable", "notes": "Validated by the manifest gate, generated type check, valid bundle, and rejection mutations." },
+      "independentReview": { "status": "passed", "notes": "Bounded M1-002 closing review findings were fixed and regression-tested." },
+      "notes": "Version 0.1.0 closed BuildArtifact schema."
+    },
+    {
+      "path": "schemas/contracts/capability-registry.schema.json",
+      "kind": "new-clean-room",
+      "origin": "M1-002 clean-room data contract from repository requirements and JSON Schema Draft 2020-12",
+      "copyrightHolderOrSourceAuthority": "Elliot Wu",
+      "license": { "spdxExpression": "MIT" },
+      "reviewedOn": "2026-07-31",
+      "thirdPartyDependencies": [],
+      "privateInformationReview": { "status": "passed", "notes": "Contains generic public contract vocabulary only." },
+      "projectConstantCleanup": { "status": "passed", "notes": "No predecessor implementation, asset, identifier, or private path was admitted." },
+      "publicConformance": { "status": "applicable", "notes": "Validated by the manifest gate, generated type check, valid bundle, and rejection mutations." },
+      "independentReview": { "status": "passed", "notes": "Bounded M1-002 closing review findings were fixed and regression-tested." },
+      "notes": "Version 0.1.0 closed CapabilityRegistry schema; registry entries do not assert support."
+    },
+    {
+      "path": "schemas/contracts/deck-spec.schema.json",
+      "kind": "new-clean-room",
+      "origin": "M1-002 clean-room data contract from repository requirements and JSON Schema Draft 2020-12",
+      "copyrightHolderOrSourceAuthority": "Elliot Wu",
+      "license": { "spdxExpression": "MIT" },
+      "reviewedOn": "2026-07-31",
+      "thirdPartyDependencies": [],
+      "privateInformationReview": { "status": "passed", "notes": "Contains generic public contract vocabulary only." },
+      "projectConstantCleanup": { "status": "passed", "notes": "No predecessor implementation, asset, identifier, or private path was admitted." },
+      "publicConformance": { "status": "applicable", "notes": "Validated by the manifest gate, generated type check, valid bundle, and rejection mutations." },
+      "independentReview": { "status": "passed", "notes": "Bounded M1-002 closing review findings were fixed and regression-tested." },
+      "notes": "Version 0.1.0 closed DeckSpec schema with bounded second-stage capability payloads."
+    },
+    {
+      "path": "schemas/contracts/manifest.json",
+      "kind": "new-clean-room",
+      "origin": "M1-002 clean-room contract manifest from repository requirements",
+      "copyrightHolderOrSourceAuthority": "Elliot Wu",
+      "license": { "spdxExpression": "MIT" },
+      "reviewedOn": "2026-07-31",
+      "thirdPartyDependencies": [],
+      "privateInformationReview": { "status": "passed", "notes": "Contains generic schema, fixture, and generated-type paths only." },
+      "projectConstantCleanup": { "status": "passed", "notes": "No predecessor implementation, asset, identifier, or private path was admitted." },
+      "publicConformance": { "status": "applicable", "notes": "Exact closed inventory, contract version, schema IDs, fixtures, and generated output are enforced by the contract gate." },
+      "independentReview": { "status": "passed", "notes": "Bounded M1-002 closing review findings were fixed and regression-tested." },
+      "notes": "Normative contract-set manifest; fixtures are explicitly schema-conformance-only."
+    },
+    {
+      "path": "schemas/contracts/project-config.schema.json",
+      "kind": "new-clean-room",
+      "origin": "M1-002 clean-room data contract from repository requirements and JSON Schema Draft 2020-12",
+      "copyrightHolderOrSourceAuthority": "Elliot Wu",
+      "license": { "spdxExpression": "MIT" },
+      "reviewedOn": "2026-07-31",
+      "thirdPartyDependencies": [],
+      "privateInformationReview": { "status": "passed", "notes": "Contains generic public contract vocabulary only." },
+      "projectConstantCleanup": { "status": "passed", "notes": "No predecessor implementation, asset, identifier, or private path was admitted." },
+      "publicConformance": { "status": "applicable", "notes": "Validated by the manifest gate, generated type check, valid bundle, and rejection mutations." },
+      "independentReview": { "status": "passed", "notes": "Bounded M1-002 closing review findings were fixed and regression-tested." },
+      "notes": "Version 0.1.0 closed ProjectConfig schema with safe repository-relative paths."
+    },
+    {
+      "path": "schemas/contracts/project-overlay.schema.json",
+      "kind": "new-clean-room",
+      "origin": "M1-002 clean-room data contract from repository requirements and JSON Schema Draft 2020-12",
+      "copyrightHolderOrSourceAuthority": "Elliot Wu",
+      "license": { "spdxExpression": "MIT" },
+      "reviewedOn": "2026-07-31",
+      "thirdPartyDependencies": [],
+      "privateInformationReview": { "status": "passed", "notes": "Contains generic public contract vocabulary only." },
+      "projectConstantCleanup": { "status": "passed", "notes": "No predecessor implementation, asset, identifier, or private path was admitted." },
+      "publicConformance": { "status": "applicable", "notes": "Validated by the manifest gate, generated type check, valid bundle, and rejection mutations." },
+      "independentReview": { "status": "passed", "notes": "Bounded M1-002 closing review findings were fixed and regression-tested." },
+      "notes": "Version 0.1.0 closed ProjectOverlay schema."
+    },
+    {
+      "path": "schemas/contracts/qa-report.schema.json",
+      "kind": "new-clean-room",
+      "origin": "M1-002 clean-room data contract from repository requirements and JSON Schema Draft 2020-12",
+      "copyrightHolderOrSourceAuthority": "Elliot Wu",
+      "license": { "spdxExpression": "MIT" },
+      "reviewedOn": "2026-07-31",
+      "thirdPartyDependencies": [],
+      "privateInformationReview": { "status": "passed", "notes": "Contains generic public contract vocabulary only." },
+      "projectConstantCleanup": { "status": "passed", "notes": "No predecessor implementation, asset, identifier, or private path was admitted." },
+      "publicConformance": { "status": "applicable", "notes": "Validated by the manifest gate, generated type check, valid bundle, and rejection mutations." },
+      "independentReview": { "status": "passed", "notes": "Bounded M1-002 closing review findings were fixed and regression-tested." },
+      "notes": "Version 0.1.0 closed QAReport schema with explicit scope and manual-gate evidence states."
+    },
+    {
+      "path": "schemas/contracts/shared.schema.json",
+      "kind": "new-clean-room",
+      "origin": "M1-002 clean-room data contract from repository requirements and JSON Schema Draft 2020-12",
+      "copyrightHolderOrSourceAuthority": "Elliot Wu",
+      "license": { "spdxExpression": "MIT" },
+      "reviewedOn": "2026-07-31",
+      "thirdPartyDependencies": [],
+      "privateInformationReview": { "status": "passed", "notes": "Contains generic public contract vocabulary only." },
+      "projectConstantCleanup": { "status": "passed", "notes": "No predecessor implementation, asset, identifier, or private path was admitted." },
+      "publicConformance": { "status": "applicable", "notes": "Validated through all root schemas, generated type output, valid bundle, and rejection mutations." },
+      "independentReview": { "status": "passed", "notes": "Bounded M1-002 closing review findings were fixed and regression-tested." },
+      "notes": "Version 0.1.0 shared definitions for identifiers, hashes, paths, geometry, and diagnostics."
+    },
+    {
+      "path": "schemas/contracts/template-index.schema.json",
+      "kind": "new-clean-room",
+      "origin": "M1-002 clean-room data contract from repository requirements and JSON Schema Draft 2020-12",
+      "copyrightHolderOrSourceAuthority": "Elliot Wu",
+      "license": { "spdxExpression": "MIT" },
+      "reviewedOn": "2026-07-31",
+      "thirdPartyDependencies": [],
+      "privateInformationReview": { "status": "passed", "notes": "Contains generic public contract vocabulary only." },
+      "projectConstantCleanup": { "status": "passed", "notes": "No predecessor implementation, asset, identifier, or private path was admitted." },
+      "publicConformance": { "status": "applicable", "notes": "Validated by the manifest gate, generated type check, valid bundle, and rejection mutations." },
+      "independentReview": { "status": "passed", "notes": "Bounded M1-002 closing review findings were fixed and regression-tested." },
+      "notes": "Version 0.1.0 closed TemplateIndex schema preserving source and z-order semantics."
+    },
+    {
+      "path": "schemas/contracts/template-profile.schema.json",
+      "kind": "new-clean-room",
+      "origin": "M1-002 clean-room data contract from repository requirements and JSON Schema Draft 2020-12",
+      "copyrightHolderOrSourceAuthority": "Elliot Wu",
+      "license": { "spdxExpression": "MIT" },
+      "reviewedOn": "2026-07-31",
+      "thirdPartyDependencies": [],
+      "privateInformationReview": { "status": "passed", "notes": "Contains generic public contract vocabulary only." },
+      "projectConstantCleanup": { "status": "passed", "notes": "No predecessor implementation, asset, identifier, or private path was admitted." },
+      "publicConformance": { "status": "applicable", "notes": "Validated by the manifest gate, generated type check, valid bundle, and rejection mutations." },
+      "independentReview": { "status": "passed", "notes": "Bounded M1-002 closing review findings were fixed and regression-tested." },
+      "notes": "Version 0.1.0 closed TemplateProfile schema."
     },
     {
       "path": "schemas/provenance-record.schema.json",
@@ -576,6 +856,20 @@
       "notes": "Normative JSON Schema Draft 2020-12 support-matrix contract."
     },
     {
+      "path": "scripts/check-contracts.mjs",
+      "kind": "new-clean-room",
+      "origin": "M1-002 clean-room contract gate from repository requirements and JSON Schema Draft 2020-12",
+      "copyrightHolderOrSourceAuthority": "Elliot Wu",
+      "license": { "spdxExpression": "MIT" },
+      "reviewedOn": "2026-07-31",
+      "thirdPartyDependencies": [],
+      "privateInformationReview": { "status": "passed", "notes": "Diagnostics expose only admitted repository-relative paths, rule IDs, and JSON pointers." },
+      "projectConstantCleanup": { "status": "passed", "notes": "Dependency-free implementation contains no predecessor identifier, asset, or private path." },
+      "publicConformance": { "status": "applicable", "notes": "Enforces exact inventory, schemas, generated types, cross-document semantics, fail-closed QA, and no support promotion." },
+      "independentReview": { "status": "passed", "notes": "Bounded M1-002 closing review findings were fixed and regression-tested." },
+      "notes": "Fail-closed staged and working-tree contract-bundle gate and deterministic type generator."
+    },
+    {
       "path": "scripts/check-forbidden-materials.mjs",
       "kind": "new-clean-room",
       "origin": "M0-004 clean-room implementation from repository contract",
@@ -592,16 +886,16 @@
     {
       "path": "scripts/check-provenance.mjs",
       "kind": "new-clean-room",
-      "origin": "M0-004 clean-room implementation from repository contract",
+      "origin": "M0-004 clean-room gate refactored in M1-002 to use the shared bounded schema evaluator",
       "copyrightHolderOrSourceAuthority": "Elliot Wu",
       "license": { "spdxExpression": "MIT" },
       "reviewedOn": "2026-07-31",
       "thirdPartyDependencies": [],
       "privateInformationReview": { "status": "passed", "notes": "Invalid record paths are reported through JSON pointers without value disclosure." },
       "projectConstantCleanup": { "status": "passed", "notes": "No predecessor identifiers or file assumptions are present." },
-      "publicConformance": { "status": "applicable", "notes": "Passing and 10 provenance mutations execute the CLI; its bounded validator also checks the support schema." },
-      "independentReview": { "status": "not-applicable", "notes": "M0-005 validator export did not require independent review." },
-      "notes": "Fail-closed exact-path provenance gate and shared bounded JSON Schema evaluator."
+      "publicConformance": { "status": "applicable", "notes": "Passing baseline and 11 provenance mutations execute the CLI, including fixed schema-authority enforcement." },
+      "independentReview": { "status": "passed", "notes": "M1-002 review caught and verified the restored fixed provenance schema identifier." },
+      "notes": "Fail-closed exact-path provenance gate using the shared bounded JSON Schema evaluator."
     },
     {
       "path": "scripts/check-support-matrix.mjs",
@@ -614,7 +908,7 @@
       "privateInformationReview": { "status": "passed", "notes": "Diagnostics contain paths, rule IDs, and JSON pointers without input content." },
       "projectConstantCleanup": { "status": "passed", "notes": "No predecessor identifiers or project-specific feature dispatch exists." },
       "publicConformance": { "status": "applicable", "notes": "Checks 60 rows and 13 support overclaim/drift mutations." },
-      "independentReview": { "status": "not-applicable", "notes": "No independent review required for this policy slice." },
+      "independentReview": { "status": "passed", "notes": "M1-002 shared-evaluator refactor and fixed support schema authority were independently checked." },
       "notes": "Fail-closed staged and working-tree support-matrix gate."
     },
     {
@@ -632,17 +926,45 @@
       "notes": "Dependency-free deterministic synthetic fixture generator."
     },
     {
-      "path": "tests/policy-gates.test.mjs",
+      "path": "scripts/lib/json-schema.mjs",
       "kind": "new-clean-room",
-      "origin": "M0-004 clean-room implementation from repository contract",
+      "origin": "M1-002 clean-room bounded evaluator from JSON Schema Draft 2020-12 semantics required by repository schemas",
       "copyrightHolderOrSourceAuthority": "Elliot Wu",
       "license": { "spdxExpression": "MIT" },
-      "reviewedOn": "2026-07-30",
+      "reviewedOn": "2026-07-31",
+      "thirdPartyDependencies": [],
+      "privateInformationReview": { "status": "passed", "notes": "Pure in-memory schema and instance evaluation emits no input values." },
+      "projectConstantCleanup": { "status": "passed", "notes": "Dependency-free implementation contains no predecessor identifier, asset, or private path." },
+      "publicConformance": { "status": "applicable", "notes": "Supported keyword shapes, registered references, cycles, unknown keywords, formats, equality, and bounds have rejection tests." },
+      "independentReview": { "status": "passed", "notes": "Bounded M1-002 closing review findings were fixed and regression-tested, including provenance authority preservation." },
+      "notes": "Bounded Draft 2020-12 subset evaluator shared by public gates; unsupported constructs fail closed."
+    },
+    {
+      "path": "tests/contracts.test.mjs",
+      "kind": "new-clean-room",
+      "origin": "M1-002 clean-room tests from repository data-contract, security, and support-claim requirements",
+      "copyrightHolderOrSourceAuthority": "Elliot Wu",
+      "license": { "spdxExpression": "MIT" },
+      "reviewedOn": "2026-07-31",
+      "thirdPartyDependencies": [],
+      "privateInformationReview": { "status": "passed", "notes": "Uses repository-owned synthetic JSON and isolated temporary mutations only." },
+      "projectConstantCleanup": { "status": "passed", "notes": "Contains no predecessor identifier, asset, fixture hash, or private path." },
+      "publicConformance": { "status": "applicable", "notes": "Covers two positive test cases and 68 focused rejection mutations." },
+      "independentReview": { "status": "passed", "notes": "Bounded M1-002 closing review findings were fixed and regression-tested." },
+      "notes": "Dependency-free schema, semantic-bundle, generated-type, and overclaim tests."
+    },
+    {
+      "path": "tests/policy-gates.test.mjs",
+      "kind": "new-clean-room",
+      "origin": "M0-004 clean-room tests with an M1-002 provenance-authority regression",
+      "copyrightHolderOrSourceAuthority": "Elliot Wu",
+      "license": { "spdxExpression": "MIT" },
+      "reviewedOn": "2026-07-31",
       "thirdPartyDependencies": [],
       "privateInformationReview": { "status": "passed", "notes": "All sensitive-looking inputs and local paths are assembled only at runtime from fragments." },
       "projectConstantCleanup": { "status": "passed", "notes": "Temporary fixtures are repository-owned synthetic text." },
-      "publicConformance": { "status": "applicable", "notes": "Covers stable pass reports and 31 fail-closed mutations." },
-      "independentReview": { "status": "passed", "notes": "M0-004 bounded read-only review closed with no blocking findings." },
+      "publicConformance": { "status": "applicable", "notes": "Covers stable pass reports and 32 fail-closed mutations." },
+      "independentReview": { "status": "passed", "notes": "M1-002 review reproduced and closed the provenance schema-authority regression." },
       "notes": "Dependency-free mutation tests using isolated temporary Git repositories."
     },
     {
@@ -656,7 +978,7 @@
       "privateInformationReview": { "status": "passed", "notes": "Uses repository-owned synthetic in-memory mutations only." },
       "projectConstantCleanup": { "status": "passed", "notes": "No predecessor identifier, asset, or path appears." },
       "publicConformance": { "status": "applicable", "notes": "Covers one baseline and 13 rejection mutations." },
-      "independentReview": { "status": "passed", "notes": "Bounded M1-001 provenance/security review closed with no blocking findings." },
+      "independentReview": { "status": "passed", "notes": "M1-002 admitted evidence paths and unchanged overclaim assertions were independently checked." },
       "notes": "Dependency-free support-matrix overclaim and drift tests."
     },
     {
@@ -672,6 +994,20 @@
       "publicConformance": { "status": "applicable", "notes": "Checks deterministic ZIP bytes, minimal graph, content isolation, atomic publication, and rejection mutations." },
       "independentReview": { "status": "passed", "notes": "Bounded M1-001 provenance/security review closed with no blocking findings." },
       "notes": "Dependency-free public synthetic-fixture conformance and mutation tests."
+    },
+    {
+      "path": "types/contracts.d.ts",
+      "kind": "generated",
+      "origin": "deterministically generated from schemas/contracts/manifest.json and its M1-002 JSON Schemas by scripts/check-contracts.mjs",
+      "copyrightHolderOrSourceAuthority": "Elliot Wu",
+      "license": { "spdxExpression": "MIT" },
+      "reviewedOn": "2026-07-31",
+      "thirdPartyDependencies": [],
+      "privateInformationReview": { "status": "passed", "notes": "Contains only public contract names and types derived from repository schemas." },
+      "projectConstantCleanup": { "status": "passed", "notes": "Generator input contains no predecessor identifier, asset, or private path." },
+      "publicConformance": { "status": "applicable", "notes": "Byte equality with deterministic regeneration is enforced by the contract gate and drift mutation." },
+      "independentReview": { "status": "passed", "notes": "Bounded M1-002 closing review findings were fixed and regression-tested." },
+      "notes": "Generated TypeScript declarations; do not edit by hand."
     }
   ]
 }

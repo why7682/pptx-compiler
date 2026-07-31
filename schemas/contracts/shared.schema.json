@@ -1,0 +1,63 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:pptx-pipeline:schema:shared:0.1.0",
+  "title": "PPTX Pipeline shared contract definitions",
+  "$defs": {
+    "schemaVersion": {
+      "const": "0.1.0"
+    },
+    "semanticId": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 96,
+      "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$"
+    },
+    "semanticVersion": {
+      "type": "string",
+      "maxLength": 32,
+      "pattern": "^(?:0|[1-9][0-9]*)\\.(?:0|[1-9][0-9]*)\\.(?:0|[1-9][0-9]*)$"
+    },
+    "contractReference": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 256,
+      "pattern": "^urn:pptx-pipeline:[a-z0-9][a-z0-9:.-]*$"
+    },
+    "relativePath": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 512,
+      "pattern": "^(?!.*(?:^|/)\\.{1,2}(?:/|$))[A-Za-z0-9._-]+(?:/[A-Za-z0-9._-]+)*$"
+    },
+    "packagePartPath": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 512,
+      "pattern": "^(?!.*(?:^|/)\\.{1,2}(?:/|$))[A-Za-z0-9._-]+(?:/[A-Za-z0-9._-]+)*$"
+    },
+    "sha256": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{64}$"
+    },
+    "ooxmlId": {
+      "type": "integer",
+      "minimum": 1,
+      "maximum": 4294967295
+    },
+    "emuCoordinate": {
+      "type": "integer",
+      "minimum": 0,
+      "maximum": 2147483647
+    },
+    "emuExtent": {
+      "type": "integer",
+      "minimum": 1,
+      "maximum": 2147483647
+    },
+    "byteLength": {
+      "type": "integer",
+      "minimum": 1,
+      "maximum": 9007199254740991
+    }
+  }
+}

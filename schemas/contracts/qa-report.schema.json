@@ -1,0 +1,138 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:pptx-pipeline:schema:qa-report:0.1.0",
+  "title": "PPTX Pipeline QaReport",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schemaVersion",
+    "contractType",
+    "qaReportId",
+    "buildId",
+    "projectId",
+    "deckId",
+    "templateProfileId",
+    "templateIndexId",
+    "capabilityRegistryId",
+    "registryVersion",
+    "projectOverlayId",
+    "templateSha256",
+    "decision",
+    "checks",
+    "manualGates",
+    "diagnostics"
+  ],
+  "properties": {
+    "schemaVersion": { "$ref": "urn:pptx-pipeline:schema:shared:0.1.0#/$defs/schemaVersion" },
+    "contractType": { "const": "qa-report" },
+    "qaReportId": { "$ref": "urn:pptx-pipeline:schema:shared:0.1.0#/$defs/semanticId" },
+    "buildId": { "$ref": "urn:pptx-pipeline:schema:shared:0.1.0#/$defs/semanticId" },
+    "projectId": { "$ref": "urn:pptx-pipeline:schema:shared:0.1.0#/$defs/semanticId" },
+    "deckId": { "$ref": "urn:pptx-pipeline:schema:shared:0.1.0#/$defs/semanticId" },
+    "templateProfileId": { "$ref": "urn:pptx-pipeline:schema:shared:0.1.0#/$defs/semanticId" },
+    "templateIndexId": { "$ref": "urn:pptx-pipeline:schema:shared:0.1.0#/$defs/semanticId" },
+    "capabilityRegistryId": { "$ref": "urn:pptx-pipeline:schema:shared:0.1.0#/$defs/semanticId" },
+    "registryVersion": { "$ref": "urn:pptx-pipeline:schema:shared:0.1.0#/$defs/semanticVersion" },
+    "projectOverlayId": { "$ref": "urn:pptx-pipeline:schema:shared:0.1.0#/$defs/semanticId" },
+    "templateSha256": { "$ref": "urn:pptx-pipeline:schema:shared:0.1.0#/$defs/sha256" },
+    "decision": { "enum": ["blocked", "fail", "pass"] },
+    "checks": {
+      "type": "array",
+      "minItems": 1,
+      "maxItems": 8192,
+      "items": { "$ref": "#/$defs/qaCheck" }
+    },
+    "manualGates": {
+      "type": "array",
+      "maxItems": 1024,
+      "items": { "$ref": "#/$defs/manualGate" }
+    },
+    "diagnostics": {
+      "type": "array",
+      "maxItems": 8192,
+      "items": { "$ref": "#/$defs/diagnostic" }
+    }
+  },
+  "$defs": {
+    "qaCheck": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["checkId", "qaContractId", "scopeKind", "scopeId", "outcome", "manualGateIds", "diagnosticIds"],
+      "properties": {
+        "checkId": { "$ref": "urn:pptx-pipeline:schema:shared:0.1.0#/$defs/semanticId" },
+        "qaContractId": { "$ref": "urn:pptx-pipeline:schema:shared:0.1.0#/$defs/contractReference" },
+        "scopeKind": { "enum": ["build", "deck", "slide"] },
+        "scopeId": { "$ref": "urn:pptx-pipeline:schema:shared:0.1.0#/$defs/semanticId" },
+        "outcome": { "enum": ["fail", "manual", "pass", "unavailable"] },
+        "manualGateIds": {
+          "type": "array",
+          "maxItems": 64,
+          "uniqueItems": true,
+          "items": { "$ref": "urn:pptx-pipeline:schema:shared:0.1.0#/$defs/semanticId" }
+        },
+        "diagnosticIds": {
+          "type": "array",
+          "maxItems": 256,
+          "uniqueItems": true,
+          "items": { "$ref": "urn:pptx-pipeline:schema:shared:0.1.0#/$defs/semanticId" }
+        }
+      }
+    },
+    "manualGate": {
+      "oneOf": [
+        { "$ref": "#/$defs/unresolvedManualGate" },
+        { "$ref": "#/$defs/unavailableManualGate" },
+        { "$ref": "#/$defs/resolvedManualGate" }
+      ]
+    },
+    "unresolvedManualGate": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["manualGateId", "supportMatrixItemId", "scopeKind", "scopeId", "status"],
+      "properties": {
+        "manualGateId": { "$ref": "urn:pptx-pipeline:schema:shared:0.1.0#/$defs/semanticId" },
+        "supportMatrixItemId": { "$ref": "urn:pptx-pipeline:schema:shared:0.1.0#/$defs/semanticId" },
+        "scopeKind": { "enum": ["build", "deck", "slide"] },
+        "scopeId": { "$ref": "urn:pptx-pipeline:schema:shared:0.1.0#/$defs/semanticId" },
+        "status": { "const": "unresolved" }
+      }
+    },
+    "unavailableManualGate": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["manualGateId", "supportMatrixItemId", "scopeKind", "scopeId", "status"],
+      "properties": {
+        "manualGateId": { "$ref": "urn:pptx-pipeline:schema:shared:0.1.0#/$defs/semanticId" },
+        "supportMatrixItemId": { "$ref": "urn:pptx-pipeline:schema:shared:0.1.0#/$defs/semanticId" },
+        "scopeKind": { "enum": ["build", "deck", "slide"] },
+        "scopeId": { "$ref": "urn:pptx-pipeline:schema:shared:0.1.0#/$defs/semanticId" },
+        "status": { "const": "unavailable" }
+      }
+    },
+    "resolvedManualGate": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["manualGateId", "supportMatrixItemId", "scopeKind", "scopeId", "status", "evidenceRecordId"],
+      "properties": {
+        "manualGateId": { "$ref": "urn:pptx-pipeline:schema:shared:0.1.0#/$defs/semanticId" },
+        "supportMatrixItemId": { "$ref": "urn:pptx-pipeline:schema:shared:0.1.0#/$defs/semanticId" },
+        "scopeKind": { "enum": ["build", "deck", "slide"] },
+        "scopeId": { "$ref": "urn:pptx-pipeline:schema:shared:0.1.0#/$defs/semanticId" },
+        "status": { "enum": ["failed", "passed"] },
+        "evidenceRecordId": { "$ref": "urn:pptx-pipeline:schema:shared:0.1.0#/$defs/contractReference" }
+      }
+    },
+    "diagnostic": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["diagnosticId", "severity", "code", "scopeKind", "scopeId"],
+      "properties": {
+        "diagnosticId": { "$ref": "urn:pptx-pipeline:schema:shared:0.1.0#/$defs/semanticId" },
+        "severity": { "enum": ["error", "info", "warning"] },
+        "code": { "$ref": "urn:pptx-pipeline:schema:shared:0.1.0#/$defs/semanticId" },
+        "scopeKind": { "enum": ["build", "deck", "slide"] },
+        "scopeId": { "$ref": "urn:pptx-pipeline:schema:shared:0.1.0#/$defs/semanticId" }
+      }
+    }
+  }
+}

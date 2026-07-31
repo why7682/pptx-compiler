@@ -35,6 +35,14 @@ For maintenance or audit of the completed `M1-001` synthetic fixture, read:
 6. `docs/PRIVATE_FIXTURE_POLICY.md`
 7. `docs/RELEASE_GATES.md`
 
+For maintenance or audit of the completed `M1-002` data contracts, read:
+
+3. `docs/M1-002_HANDOFF.md`
+4. `schemas/contracts/manifest.json`
+5. `docs/COMPATIBILITY_POLICY.md`
+6. `docs/SUPPORT_MATRIX.md`
+7. `docs/PROVENANCE_LEDGER.md`
+
 Read `docs/PROJECT_DEFINITION.md` and `docs/ARCHITECTURE_TARGET.md` only before
 changing product scope, public contracts, packages, or dependency direction.
 
@@ -98,6 +106,10 @@ changing product scope, public contracts, packages, or dependency direction.
   observations into current support. The machine-readable matrix is normative.
 - When maintaining `M1-001`, edit only reviewed text source parts. Never commit
   generated PPTX/POTX binaries or use an existing presentation as source data.
+- When maintaining `M1-002`, keep JSON Schema normative, regenerate rather than
+  hand-edit `types/contracts.d.ts`, and preserve the schema-only fixture claim.
+  Do not treat a syntactically valid registry, build artifact, or QA report as
+  proof that an executor or presentation flow exists.
 - Add tests with every executable capability.
 - Update the architecture, support matrix, provenance ledger, and release gates
   in the same change when their contract changes.
