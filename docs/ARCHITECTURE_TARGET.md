@@ -66,9 +66,13 @@ authority; its publishable package/type surface remains M3-002.
 M1-004 implements `TemplatePackageView` as a runtime-only, already-parsed
 semantic graph and a pure inspector that validates that graph and emits the
 normative `TemplateIndex`. Core performs no filesystem, archive, decompression,
-or XML I/O. The current producer class is restricted to the reviewed public
-fixture lane; secure conversion of untrusted PPTX/POTX bytes into an equivalent
-view remains M1-005. A view label is not a security credential.
+or XML I/O. M1-005 adds a separate one-step consumer that reads only the source
+bound by `ProjectContext`, validates a fixed bounded ZIP/XML/OPC profile, and
+creates the same view with producer class `secure-ooxml-ingestion`. The direct
+semantic API still treats every producer label as structural metadata rather
+than a security credential; only the high-level opened-handle-to-index chain is
+secure-ingestion evidence. The grammar remains limited to the repository-owned
+public minimal fixture class and fails closed on unknown vocabulary.
 `CapabilityExecutor` and capability-specific schemas stay in M2-001. A registry
 string naming an executor is not dispatchability evidence.
 

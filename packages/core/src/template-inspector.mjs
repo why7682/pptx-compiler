@@ -8,6 +8,8 @@ const PROJECT_CONTEXT_TYPE = "project-context";
 const TEMPLATE_INDEX_TYPE = "template-index";
 const PACKAGE_VIEW_TYPE = "template-package-view";
 const REVIEWED_PRODUCER_CLASS = "reviewed-fixture-producer";
+const SECURE_PRODUCER_CLASS = "secure-ooxml-ingestion";
+const ALLOWED_PRODUCER_CLASSES = new Set([REVIEWED_PRODUCER_CLASS, SECURE_PRODUCER_CLASS]);
 
 const SAFE_RELATIVE_PATH = /^(?!.*(?:^|\/)\.{1,2}(?:\/|$))[A-Za-z0-9._-]+(?:\/[A-Za-z0-9._-]+)*$/u;
 const SEMANTIC_ID = /^[a-z0-9]+(?:-[a-z0-9]+)*$/u;
@@ -932,8 +934,9 @@ function validateFeatureFacts(view, graph) {
 /**
  * Normalize an explicit, already parsed template-package view into a frozen
  * TemplateIndex. This API performs no filesystem, archive, or XML I/O. The
- * current producer class is limited to the reviewed public fixture lane; a
- * secure untrusted-input producer remains a separate ingestion boundary.
+ * Producer labels are structural metadata, not security credentials. The
+ * reviewed-fixture and secure-ingestion classes are admitted here, but only the
+ * separate one-step ingestion API proves its filesystem/ZIP/XML origin chain.
  */
 export function inspectTemplate(options) {
   assertExactDataRecord(
@@ -969,7 +972,7 @@ export function inspectTemplate(options) {
   );
   if (dataProperty(view, "viewVersion") !== TEMPLATE_PACKAGE_VIEW_VERSION ||
       dataProperty(view, "viewType") !== PACKAGE_VIEW_TYPE ||
-      dataProperty(view, "producerClass") !== REVIEWED_PRODUCER_CLASS) {
+      !ALLOWED_PRODUCER_CLASSES.has(dataProperty(view, "producerClass"))) {
     fail(ERROR_CODES.VIEW_INVALID, "/packageView");
   }
   const sourceLocation = dataProperty(view, "sourceLocation");

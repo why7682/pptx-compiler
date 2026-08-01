@@ -110,5 +110,9 @@ a future public, reproducible evidence contract explicitly promotes it.
 Security rejection overrides compatibility preservation. Unsafe external
 relationships, macros, ActiveX, OLE, embedded payloads, archive/XML limit
 violations, or unknown high-risk parts are not preserved merely to improve
-round-trip fidelity. Quantitative archive/XML limits and their mutation evidence
-remain an M1-005 responsibility.
+round-trip fidelity. M1-005 enforces the fixed 1 MiB archive, 32-member,
+256 KiB member, 1 MiB expanded-total, 100:1 compression, depth-64 XML, and
+50,000-element package ceilings documented in `docs/M1-005_HANDOFF.md`.
+Callers cannot relax them. This implemented rejection profile is public
+security evidence, not a compatibility promise: inputs outside the exact
+minimal positive grammar remain unsupported and fail closed.

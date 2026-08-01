@@ -12,7 +12,11 @@ flow yet. The executable code currently in this repository protects admission
 and validates this policy. It also validates the version `0.1.0` data-contract
 shapes, creates ignored repository-owned synthetic PPTX/POTX test data, and
 normalizes that reviewed lane's explicit parsed package view into a redacted
-TemplateIndex. It does not open, accept, dispatch, or render user presentations.
+TemplateIndex. A separate internal lane now opens the `ProjectContext`-bound
+source and validates the public minimal fixture through fixed filesystem,
+ZIP/XML/OPC, relationship, and high-risk rejection controls. This is bounded
+security evidence, not a published input or arbitrary-template compatibility
+claim; the project still does not dispatch or render user presentations.
 
 | Dimension | Items | Supported | Experimental | Manual | Unsupported |
 | --- | ---: | ---: | ---: | ---: | ---: |
@@ -46,21 +50,25 @@ Roadmap entries describe intended work only. They do not change current status.
 
 ## Important boundaries
 
-- PPTX/POTX inputs remain unsupported. The pure semantic inspector does not
-  open archives or parse XML; secure ZIP/XML ingestion and accepted CLI input
-  remain M1-005/M3 work. Producing and inspecting the bounded synthetic lane
-  does not make arbitrary packages accepted input.
+- PPTX/POTX inputs remain unsupported. `inspectTemplateSource()` proves only a
+  fixed, narrow source-to-index path for the repository-owned minimal grammar;
+  no package/CLI is published and no arbitrary template class is promised.
+  The direct semantic inspector still performs no archive/XML I/O and a caller
+  package-view label still proves no origin.
 - ProjectConfig now has automated schema evidence and a pure in-memory
   `ProjectContext` consumer that resolves explicit paths lexically. It remains
   `unsupported`: there is no config file/CLI loader, filesystem-safe input
   opening, or accepted presentation flow.
-- Profile/index has automated schema evidence plus a reviewed-fixture semantic
-  inspector, but no secure input or profile/overlay resolver. Registry/overlay
-  and deck/slide schemas still have no runtime resolver or dispatcher.
+- Profile/index has automated schema evidence, a reviewed-fixture semantic
+  inspector, and a bounded secure-ingestion producer, but no profile/overlay
+  resolver. Registry/overlay and deck/slide schemas still have no runtime
+  resolver or dispatcher.
   Schema-only fixtures are explicitly not capability conformance evidence.
-- Macros, ActiveX, OLE, embedded packages, external relationships, embedded
-  fonts, unknown vendor XML, and every unlisted OOXML feature have a target
-  disposition of `reject`. That rejection is not executable PPTX evidence yet.
+- Macros, ActiveX, OLE, embedded packages, and external relationships have
+  executable rejection mutations in the bounded ingestion lane. Embedded
+  fonts, unknown vendor XML, and every unlisted OOXML feature also retain a
+  `reject` disposition; none of these rejection results is compatibility or
+  capability support.
 - Native charts, tables, arbitrary animations, media, notes/comments, and
   digital-signature handling have no 0.x support promise unless a later matrix
   revision says otherwise.

@@ -51,6 +51,22 @@ For maintenance or audit of the completed `M1-003` runtime context, read:
 6. `docs/SUPPORT_MATRIX.md`
 7. `docs/PROVENANCE_LEDGER.md`
 
+For maintenance or audit of the completed `M1-004` semantic inspector, read:
+
+3. `docs/M1-004_HANDOFF.md`
+4. `packages/core/src/template-inspector.mjs`
+5. `schemas/contracts/template-index.schema.json`
+6. `docs/SUPPORT_MATRIX.md`
+7. `docs/PROVENANCE_LEDGER.md`
+
+For maintenance or audit of the completed `M1-005` secure ingestion lane, read:
+
+3. `docs/M1-005_HANDOFF.md`
+4. `docs/THREAT_MODEL.md`
+5. `docs/COMPATIBILITY_POLICY.md`
+6. `docs/SUPPORT_MATRIX.md`
+7. `docs/PROVENANCE_LEDGER.md`
+
 Read `docs/PROJECT_DEFINITION.md` and `docs/ARCHITECTURE_TARGET.md` only before
 changing product scope, public contracts, packages, or dependency direction.
 
@@ -122,6 +138,13 @@ changing product scope, public contracts, packages, or dependency direction.
   validator dependency. Keep context construction lexical and side-effect-free;
   filesystem identity, symlink, TOCTOU, archive, and XML defenses belong at the
   consumer's time of use.
+- When maintaining `M1-004`, keep semantic inspection independent from file,
+  ZIP, decompression, and XML I/O. A package-view producer label is structural
+  metadata, not a security credential.
+- When maintaining `M1-005`, preserve the fixed non-relaxable limits and the
+  one-step high-level boundary. Unknown ZIP/XML/OPC/PresentationML constructs
+  fail closed; do not broaden the grammar without new public positive and
+  mutation evidence and a support-matrix review.
 - Add tests with every executable capability.
 - Update the architecture, support matrix, provenance ledger, and release gates
   in the same change when their contract changes.

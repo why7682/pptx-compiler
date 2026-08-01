@@ -5,8 +5,10 @@
 Publication is feasible, but the predecessor is a research-grade, project-bound
 system rather than a releasable general package. The correct strategy is a
 clean-room extraction into this empty-history repository, not a rename or bulk
-copy. The current readiness level is `foundation-policy / pre-alpha`: admission
-and support-claim gates are executable, while PPTX product capabilities are not.
+copy. The current readiness level is `foundation-security / pre-alpha`:
+admission, support-claim, data-contract, explicit-context, semantic-inspection,
+and bounded secure-ingestion gates are executable, while PPTX product
+capabilities are not.
 
 ## Reusable foundations observed in the predecessor
 
@@ -33,10 +35,13 @@ redistributable code and do not establish generic support.
    private helpers, fixed project roots, and project-specific identifiers.
 4. **Capability truth:** registry metadata can claim support without a generic
    dispatchable executor. Structural onboarding has not proved generic render.
-5. **Untrusted input:** archive/XML/relationship controls are not yet sufficient
-   for accepting arbitrary external PPTX/POTX files.
-6. **Public fixture:** a clean, rights-owned synthetic fixture and conformance
-   suite do not yet exist.
+5. **Untrusted input compatibility:** M1-005 provides fixed resource and
+   high-risk rejection controls for the public minimal grammar, but it does not
+   establish arbitrary external PPTX/POTX compatibility or fully atomic
+   hostile-directory containment on every Node platform.
+6. **Public fixture breadth:** the rights-owned synthetic fixture and mutation
+   suite now exist, but additional positive compatibility classes require
+   separate evidence and cannot be inferred from the minimal fixture.
 7. **Package surface:** the compatibility/versioning policy now exists, but
    there is no public CLI/API implementation, package allowlist, or clean-install
    smoke test.
@@ -61,11 +66,11 @@ Pandoc's upstream licensing and source are documented at
 
 ## Recommended milestones
 
-1. **Bootstrap:** executable provenance/exclusion controls and compatibility
-   policy are complete; the synthetic fixture and remaining threat-model limits
-   are next.
-2. **Foundation:** explicit context/schemas, distributable inspector, secure
-   archive/XML layer.
+1. **Bootstrap:** executable provenance/exclusion controls, compatibility
+   policy, and the synthetic fixture are complete.
+2. **Foundation:** explicit context/schemas, semantic inspector, and the bounded
+   secure archive/XML layer are complete; publishable package metadata remains
+   later work.
 3. **Vertical slice:** capability dispatcher, clone/fill, one native component,
    assembly, QA, optional OMML adapter.
 4. **Product surface:** CLI/API, package split, docs, compatibility matrix,

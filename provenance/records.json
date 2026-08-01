@@ -240,6 +240,20 @@
       "notes": "Normative bounded semantic-inspector contract; not an arbitrary PPTX/POTX input or npm installation claim."
     },
     {
+      "path": "docs/M1-005_HANDOFF.md",
+      "kind": "new-clean-room",
+      "origin": "M1-005 clean-room secure-ingestion contract from repository requirements, public text OOXML, ECMA-376 OPC, PKWARE APPNOTE, and Node.js filesystem/zlib documentation",
+      "copyrightHolderOrSourceAuthority": "Elliot Wu",
+      "license": { "spdxExpression": "MIT" },
+      "reviewedOn": "2026-08-01",
+      "thirdPartyDependencies": [],
+      "privateInformationReview": { "status": "passed", "notes": "Contains only public contracts, fixed generic limits, standards links, and redacted residual-risk descriptions." },
+      "projectConstantCleanup": { "status": "passed", "notes": "No predecessor implementation, private fixture, presentation binary, private path, or managed helper was inspected or admitted." },
+      "publicConformance": { "status": "applicable", "notes": "Defines the stable-file, ZIP, XML, OPC, relationship, narrow vocabulary, high-risk rejection, and support-claim boundaries." },
+      "independentReview": { "status": "passed", "notes": "The bounded M1-005 closing security review confirmed the fail-closed content-type grammar, single-snapshot digest binding, and adversarial coverage fixes, with no remaining blocker or high finding." },
+      "notes": "Normative bounded M1-005 handoff; not a general XML/ZIP parser, arbitrary-template claim, CLI, renderer, or npm installation claim."
+    },
+    {
       "path": "docs/NAME_AVAILABILITY.md",
       "kind": "new-clean-room",
       "origin": "user-directed clean-room project planning",
@@ -688,6 +702,20 @@
       "notes": "Dependency-free private workspace manifest; it is not publishable."
     },
     {
+      "path": "packages/core/src/ooxml-package-view.mjs",
+      "kind": "new-clean-room",
+      "origin": "M1-005 clean-room namespace-expanded OPC and PresentationML mapping from public ECMA-376 identifiers, repository contracts, and repository-owned text fixture structure",
+      "copyrightHolderOrSourceAuthority": "Elliot Wu",
+      "license": { "spdxExpression": "MIT" },
+      "reviewedOn": "2026-08-01",
+      "thirdPartyDependencies": [],
+      "privateInformationReview": { "status": "passed", "notes": "Package views and errors omit source names, text, typefaces, paths, and attribute values; only normalized technical facts are returned." },
+      "projectConstantCleanup": { "status": "passed", "notes": "Contains no fixture ID, private identifier, predecessor code, presentation asset, local path, or managed helper." },
+      "publicConformance": { "status": "applicable", "notes": "Exact content-type, relationship, theme/master/layout/slide vocabulary, graph coverage, and high-risk rejection execute against runtime-generated archives." },
+      "independentReview": { "status": "passed", "notes": "The bounded M1-005 closing security review confirmed the fail-closed content-type grammar and single-snapshot package-view binding, with no remaining blocker or high finding." },
+      "notes": "Dependency-free narrow OOXML-to-TemplatePackageView mapping; unknown vocabulary fails closed."
+    },
+    {
       "path": "packages/core/src/project-context.mjs",
       "kind": "new-clean-room",
       "origin": "M1-003 clean-room implementation from the repository runtime-context contract and ProjectConfig 0.1.0",
@@ -702,6 +730,48 @@
       "notes": "Dependency-free core runtime context using only the Node.js path built-in; no package metadata is introduced."
     },
     {
+      "path": "packages/core/src/secure-template-ingestion.mjs",
+      "kind": "new-clean-room",
+      "origin": "M1-005 clean-room high-level boundary from repository ProjectContext and security requirements plus public Node.js filesystem API documentation",
+      "copyrightHolderOrSourceAuthority": "Elliot Wu",
+      "license": { "spdxExpression": "MIT" },
+      "reviewedOn": "2026-08-01",
+      "thirdPartyDependencies": [],
+      "privateInformationReview": { "status": "passed", "notes": "Errors expose stable codes and fixed public pointers without OS messages, source locations, member names, or XML values." },
+      "projectConstantCleanup": { "status": "passed", "notes": "Contains no ambient root, fixture identity, predecessor code, private path, network/process hook, extraction path, or managed helper." },
+      "publicConformance": { "status": "applicable", "notes": "ProjectContext-only source selection, symlink/type/containment/identity checks, exact-size snapshotting, redaction, and one-step index production execute publicly." },
+      "independentReview": { "status": "passed", "notes": "The bounded M1-005 closing security review confirmed that callers cannot inject paths, parsers, package views, resolvers, limits, or mismatched archive bytes, with no remaining blocker or high finding." },
+      "notes": "Dependency-free one-step secure-ingestion API with a documented portable Node TOCTOU residual."
+    },
+    {
+      "path": "packages/core/src/secure-zip.mjs",
+      "kind": "new-clean-room",
+      "origin": "M1-005 clean-room bounded ZIP implementation from public PKWARE APPNOTE records and Node.js zlib documentation",
+      "copyrightHolderOrSourceAuthority": "Elliot Wu",
+      "license": { "spdxExpression": "MIT" },
+      "reviewedOn": "2026-08-01",
+      "thirdPartyDependencies": [],
+      "privateInformationReview": { "status": "passed", "notes": "Stable errors use archive entry ordinals and never disclose member names or payload bytes." },
+      "projectConstantCleanup": { "status": "passed", "notes": "Contains only public ZIP signatures, fixed generic limits, and independently authored parsing logic." },
+      "publicConformance": { "status": "applicable", "notes": "Stored/DEFLATE positives and traversal, alias, count/size/ratio, flags, method, CRC, layout, trailing-data, and nested-archive mutations execute publicly." },
+      "independentReview": { "status": "passed", "notes": "The bounded M1-005 closing security review rechecked archive layout, output bounds, digest binding, and adversarial mutations with no remaining blocker or high finding." },
+      "notes": "Non-extracting fixed ZIP profile; ZIP64, encryption, data descriptors, extras, comments, and ambiguous layouts fail closed."
+    },
+    {
+      "path": "packages/core/src/strict-xml.mjs",
+      "kind": "new-clean-room",
+      "origin": "M1-005 clean-room bounded XML 1.0 subset parser from public XML namespace semantics and repository security requirements",
+      "copyrightHolderOrSourceAuthority": "Elliot Wu",
+      "license": { "spdxExpression": "MIT" },
+      "reviewedOn": "2026-08-01",
+      "thirdPartyDependencies": [],
+      "privateInformationReview": { "status": "passed", "notes": "Stable errors contain fixed pointers only and never include XML text, names, attribute values, or source paths." },
+      "projectConstantCleanup": { "status": "passed", "notes": "Contains no fixture vocabulary, predecessor parser, private identifier, external resolver, or network dependency." },
+      "publicConformance": { "status": "applicable", "notes": "Fatal UTF-8, references, namespace expansion, duplicate attributes, malformed markup, forbidden DTD/PI/comment/CDATA, and resource bounds execute publicly." },
+      "independentReview": { "status": "passed", "notes": "The bounded M1-005 closing security review rechecked namespace-expanded fail-closed parsing and resource-limit coverage with no remaining blocker or high finding." },
+      "notes": "Namespace-aware narrow XML parser, not a general XML implementation."
+    },
+    {
       "path": "packages/core/src/template-inspector.mjs",
       "kind": "new-clean-room",
       "origin": "M1-004 clean-room implementation from TemplateIndex 0.1.0, ProjectContext 0.1.0, and the bounded semantic package-view contract",
@@ -713,7 +783,7 @@
       "projectConstantCleanup": { "status": "passed", "notes": "Core contains no fixture IDs, names, text, local paths, managed helpers, ambient root, archive parser, or XML parser." },
       "publicConformance": { "status": "applicable", "notes": "Deterministic graph normalization, exact validation, redaction, bounds, immutability, and fail-closed mutations execute publicly." },
       "independentReview": { "status": "passed", "notes": "Unbounded caller-view copying and non-exact slide-size validation findings were fixed and independently rechecked." },
-      "notes": "Pure semantic inspector for an already parsed reviewed-fixture package view; secure ingestion remains M1-005."
+      "notes": "Pure semantic inspector for an already parsed bounded package view; producer labels are structural metadata, while only the M1-005 high-level operation establishes secure origin."
     },
     {
       "path": "policy/forbidden-materials.json",
@@ -1066,17 +1136,31 @@
       "notes": "Dependency-free ProjectContext runtime, immutability, path, dependency, redaction, and scope tests."
     },
     {
+      "path": "tests/secure-template-ingestion.test.mjs",
+      "kind": "new-clean-room",
+      "origin": "M1-005 clean-room conformance tests from the repository filesystem, archive, XML, OPC, high-risk, redaction, and support-claim exit criteria",
+      "copyrightHolderOrSourceAuthority": "Elliot Wu",
+      "license": { "spdxExpression": "MIT" },
+      "reviewedOn": "2026-08-01",
+      "thirdPartyDependencies": [],
+      "privateInformationReview": { "status": "passed", "notes": "Uses only repository-owned text sources, runtime-generated archives, synthetic secrets, and isolated temporary directories; no mutation binary is tracked." },
+      "projectConstantCleanup": { "status": "passed", "notes": "Contains no predecessor code, private fixture, private identifier, presentation asset, or committed local path." },
+      "publicConformance": { "status": "applicable", "notes": "Covers exact PPTX/POTX results and filesystem, ZIP, compression, XML, namespace, relationship, high-risk, option, redaction, and dependency-boundary mutations." },
+      "independentReview": { "status": "passed", "notes": "The bounded M1-005 closing security review reproduced the focused suite and confirmed that the added content-type and snapshot-binding regressions close the reported findings, with no remaining blocker or high finding." },
+      "notes": "Dependency-free runtime-generated secure-ingestion conformance and adversarial mutation suite."
+    },
+    {
       "path": "tests/support-matrix.test.mjs",
       "kind": "new-clean-room",
-      "origin": "M0-005 clean-room tests updated in M1-004 for exact semantic-inspection evidence paths and overclaim assertions",
+      "origin": "M0-005 clean-room tests updated through M1-005 for exact semantic-inspection and secure-ingestion evidence paths plus overclaim assertions",
       "copyrightHolderOrSourceAuthority": "Elliot Wu",
       "license": { "spdxExpression": "MIT" },
       "reviewedOn": "2026-08-01",
       "thirdPartyDependencies": [],
       "privateInformationReview": { "status": "passed", "notes": "Uses repository-owned synthetic in-memory mutations only." },
       "projectConstantCleanup": { "status": "passed", "notes": "No predecessor identifier, asset, or path appears." },
-      "publicConformance": { "status": "applicable", "notes": "Covers one baseline, 13 rejection mutations, exact admitted M1-004 evidence paths, and zero supported claims." },
-      "independentReview": { "status": "passed", "notes": "M1-004 evidence-path additions and unchanged fail-closed support assertions were independently checked." },
+      "publicConformance": { "status": "applicable", "notes": "Covers one baseline, rejection mutations, exact admitted M1-005 evidence paths, and zero supported claims." },
+      "independentReview": { "status": "passed", "notes": "M1-005 evidence-path additions and unchanged fail-closed support assertions were included in the bounded closing review." },
       "notes": "Dependency-free support-matrix overclaim and drift tests."
     },
     {

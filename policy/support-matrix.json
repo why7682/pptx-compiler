@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "matrixVersion": "0.1.0",
-  "updatedOn": "2026-07-31",
+  "updatedOn": "2026-08-01",
   "productStage": "pre-alpha-contract-only",
   "supportClaimsEnabled": false,
   "statusDefinitions": {
@@ -92,10 +92,24 @@
         "label": "Macro-enabled presentation or template",
         "status": "unsupported",
         "disposition": "reject",
-        "currentBasis": "Macros are outside the 0.x trusted input boundary.",
-        "limitations": ["Executable rejection is not proven until secure ingestion exists."],
-        "roadmap": "M1-005",
-        "evidence": { "level": "none", "artifacts": [] }
+        "currentBasis": "The bounded secure-ingestion lane rejects macro-enabled content types, VBA paths, and macro relationship types before semantic inspection.",
+        "limitations": ["This is rejection evidence for the narrow public profile, not macro compatibility or a published input flow."],
+        "roadmap": "Maintain rejection policy",
+        "evidence": {
+          "level": "automated-public",
+          "artifacts": [
+            {
+              "type": "contract",
+              "path": "packages/core/src/ooxml-package-view.mjs",
+              "note": "Fail-closed high-risk path, content-type, relationship-type, and XML vocabulary checks."
+            },
+            {
+              "type": "qa-assertions",
+              "path": "tests/secure-template-ingestion.test.mjs",
+              "note": "Runtime-generated macro-enabled content-type, VBA part, and macro relationship rejection mutations."
+            }
+          ]
+        }
       },
       {
         "id": "other-office-or-design-input",
@@ -122,20 +136,48 @@
         "label": "User-owned POTX template",
         "status": "unsupported",
         "disposition": "unavailable",
-        "currentBasis": "The reviewed fixture lane can generate POTX bytes and normalize its explicit parsed package view, but no secure archive/XML ingestion accepts user-owned POTX.",
-        "limitations": ["Generated fixture output is test data; user-owned POTX input remains unavailable and committed POTX binaries are rejected."],
-        "roadmap": "M1-005 and M3-001",
-        "evidence": { "level": "none", "artifacts": [] }
+        "currentBasis": "A bounded internal source-to-index lane securely ingests the repository-owned minimal POTX grammar, but no published package/CLI or arbitrary user-template compatibility class exists.",
+        "limitations": ["The positive grammar is deliberately narrow; generated fixture output is test data and committed POTX binaries remain rejected."],
+        "roadmap": "M3-001 plus explicit future compatibility evidence",
+        "evidence": {
+          "level": "automated-public",
+          "artifacts": [
+            {
+              "type": "contract",
+              "path": "packages/core/src/secure-template-ingestion.mjs",
+              "note": "One-step ProjectContext-bound stable-file-to-index boundary with fixed limits."
+            },
+            {
+              "type": "qa-assertions",
+              "path": "tests/secure-template-ingestion.test.mjs",
+              "note": "Exact public POTX golden plus filesystem, ZIP, XML, OPC, and high-risk rejection mutations."
+            }
+          ]
+        }
       },
       {
         "id": "pptx-template",
         "label": "User-owned PPTX template",
         "status": "unsupported",
         "disposition": "unavailable",
-        "currentBasis": "The reviewed fixture lane can generate PPTX bytes and normalize its explicit parsed package view, but no secure archive/XML ingestion accepts user-owned PPTX.",
-        "limitations": ["Generated fixture output is test data; user-owned PPTX input remains unavailable and committed PPTX binaries are rejected."],
-        "roadmap": "M1-005 and M3-001",
-        "evidence": { "level": "none", "artifacts": [] }
+        "currentBasis": "A bounded internal source-to-index lane securely ingests the repository-owned minimal PPTX grammar, but no published package/CLI or arbitrary user-template compatibility class exists.",
+        "limitations": ["The positive grammar is deliberately narrow; generated fixture output is test data and committed PPTX binaries remain rejected."],
+        "roadmap": "M3-001 plus explicit future compatibility evidence",
+        "evidence": {
+          "level": "automated-public",
+          "artifacts": [
+            {
+              "type": "contract",
+              "path": "packages/core/src/secure-template-ingestion.mjs",
+              "note": "One-step ProjectContext-bound stable-file-to-index boundary with fixed limits."
+            },
+            {
+              "type": "qa-assertions",
+              "path": "tests/secure-template-ingestion.test.mjs",
+              "note": "Exact public PPTX result plus filesystem, ZIP, XML, OPC, and high-risk rejection mutations."
+            }
+          ]
+        }
       },
       {
         "id": "project-config",
@@ -181,12 +223,17 @@
         "label": "Template profile and normalized index",
         "status": "unsupported",
         "disposition": "unavailable",
-        "currentBasis": "Version 0.1.0 schemas and the pure semantic inspector emit a deterministic TemplateIndex from the reviewed fixture package view; no secure package input or profile resolver exists.",
-        "limitations": ["A schema-valid index or caller-supplied package view does not prove safe archive/XML ingestion."],
+        "currentBasis": "Version 0.1.0 schemas, the pure semantic inspector, and the bounded source-to-index lane emit a deterministic TemplateIndex for the public minimal profile; no TemplateProfile resolver exists.",
+        "limitations": ["Only the one-step secure-ingestion API proves its own archive/XML chain; a schema-valid index or direct caller-supplied view does not."],
         "roadmap": "M1-002, M1-004, M1-005, and M2-002",
         "evidence": {
           "level": "automated-public",
           "artifacts": [
+            {
+              "type": "contract",
+              "path": "packages/core/src/secure-template-ingestion.mjs",
+              "note": "Bounded stable-file, ZIP/XML/OPC, package-view, and semantic-inspection chain for the public minimal profile."
+            },
             {
               "type": "contract",
               "path": "packages/core/src/template-inspector.mjs",
@@ -206,6 +253,11 @@
               "type": "input-schema",
               "path": "schemas/contracts/template-profile.schema.json",
               "note": "Profile-to-index binding contract only."
+            },
+            {
+              "type": "qa-assertions",
+              "path": "tests/secure-template-ingestion.test.mjs",
+              "note": "Secure source-to-index positive and fail-closed mutation evidence."
             },
             {
               "type": "qa-assertions",
@@ -232,10 +284,17 @@
         "label": "ActiveX controls",
         "status": "unsupported",
         "disposition": "reject",
-        "currentBasis": "ActiveX is high-risk and outside the 0.x input policy.",
-        "limitations": ["Rejection mutations are deferred to secure ingestion."],
-        "roadmap": "M1-005 rejection policy",
-        "evidence": { "level": "none", "artifacts": [] }
+        "currentBasis": "ActiveX is high-risk and the bounded secure-ingestion lane rejects ActiveX part paths and markers.",
+        "limitations": ["Rejection is proven only for the fail-closed bounded profile; no preservation or compatibility promise exists."],
+        "roadmap": "Maintain rejection policy",
+        "evidence": {
+          "level": "automated-public",
+          "artifacts": [{
+            "type": "qa-assertions",
+            "path": "tests/secure-template-ingestion.test.mjs",
+            "note": "Runtime-generated ActiveX path and high-risk vocabulary rejection evidence."
+          }]
+        }
       },
       {
         "id": "animations-transitions",
@@ -262,10 +321,24 @@
         "label": "Content types and internal relationships",
         "status": "unsupported",
         "disposition": "unavailable",
-        "currentBasis": "The synthetic-fixture producer validates its fixed internal graph before packaging.",
-        "limitations": ["This does not parse or validate arbitrary packages; secure untrusted ingestion remains absent."],
-        "roadmap": "M1-005 and M2-005",
-        "evidence": { "level": "none", "artifacts": [] }
+        "currentBasis": "The bounded ingestion lane parses exact content types and internal relationships, requires complete coverage, and emits only a fully consumed normalized graph.",
+        "limitations": ["The admitted grammar is the public minimal profile, not arbitrary-package compatibility or mutation support."],
+        "roadmap": "M2-005 for assembly and collateral validation",
+        "evidence": {
+          "level": "automated-public",
+          "artifacts": [
+            {
+              "type": "contract",
+              "path": "packages/core/src/ooxml-package-view.mjs",
+              "note": "Namespace-expanded content-type and relationship validation with exact part coverage."
+            },
+            {
+              "type": "qa-assertions",
+              "path": "tests/secure-template-ingestion.test.mjs",
+              "note": "Internal target, external target, content-type, unknown-vocabulary, and graph mutations."
+            }
+          ]
+        }
       },
       {
         "id": "digital-signatures",
@@ -302,30 +375,51 @@
         "label": "Embedded packages and files",
         "status": "unsupported",
         "disposition": "reject",
-        "currentBasis": "Embedded payloads are high-risk and outside the 0.x policy.",
-        "limitations": ["Rejection mutations are deferred to secure ingestion."],
-        "roadmap": "M1-005 rejection policy",
-        "evidence": { "level": "none", "artifacts": [] }
+        "currentBasis": "Embedded payloads are high-risk and the bounded ingestion lane rejects embedded-package/object paths and relationship markers.",
+        "limitations": ["No preservation, extraction, or compatibility promise exists."],
+        "roadmap": "Maintain rejection policy",
+        "evidence": {
+          "level": "automated-public",
+          "artifacts": [{
+            "type": "qa-assertions",
+            "path": "tests/secure-template-ingestion.test.mjs",
+            "note": "Runtime-generated embedded-object member rejection evidence."
+          }]
+        }
       },
       {
         "id": "external-relationships",
         "label": "External OOXML relationships",
         "status": "unsupported",
         "disposition": "reject",
-        "currentBasis": "Network and external target resolution are outside the trusted boundary.",
-        "limitations": ["No relationship may trigger network access."],
-        "roadmap": "M1-005 rejection policy",
-        "evidence": { "level": "none", "artifacts": [] }
+        "currentBasis": "The bounded ingestion lane rejects TargetMode, URI schemes, authorities, absolute targets, suffixes, encoding, and package-root escape without network resolution.",
+        "limitations": ["No relationship may trigger network access; external-link preservation is not promised."],
+        "roadmap": "Maintain rejection policy",
+        "evidence": {
+          "level": "automated-public",
+          "artifacts": [{
+            "type": "qa-assertions",
+            "path": "tests/secure-template-ingestion.test.mjs",
+            "note": "External TargetMode, URI target, and root-escape relationship mutations."
+          }]
+        }
       },
       {
         "id": "macros-vba",
         "label": "VBA and macro parts",
         "status": "unsupported",
         "disposition": "reject",
-        "currentBasis": "Executable macro content is outside the 0.x policy.",
+        "currentBasis": "Executable macro content is outside the 0.x policy and is rejected by path, content-type, and relationship checks.",
         "limitations": ["No macro preservation or execution claim exists."],
-        "roadmap": "M1-005 rejection policy",
-        "evidence": { "level": "none", "artifacts": [] }
+        "roadmap": "Maintain rejection policy",
+        "evidence": {
+          "level": "automated-public",
+          "artifacts": [{
+            "type": "qa-assertions",
+            "path": "tests/secure-template-ingestion.test.mjs",
+            "note": "Macro-enabled main type, VBA part, and macro relationship rejection mutations."
+          }]
+        }
       },
       {
         "id": "masters-layouts-themes",
@@ -372,20 +466,46 @@
         "label": "OLE objects",
         "status": "unsupported",
         "disposition": "reject",
-        "currentBasis": "OLE payloads are high-risk and outside the 0.x policy.",
-        "limitations": ["Rejection mutations are deferred to secure ingestion."],
-        "roadmap": "M1-005 rejection policy",
-        "evidence": { "level": "none", "artifacts": [] }
+        "currentBasis": "OLE payloads are high-risk and the bounded ingestion lane rejects OLE vocabulary and embedded-object members.",
+        "limitations": ["No OLE preservation, extraction, or execution claim exists."],
+        "roadmap": "Maintain rejection policy",
+        "evidence": {
+          "level": "automated-public",
+          "artifacts": [{
+            "type": "qa-assertions",
+            "path": "tests/secure-template-ingestion.test.mjs",
+            "note": "OLE element and embedded-object member rejection mutations."
+          }]
+        }
       },
       {
         "id": "package-container",
         "label": "OPC ZIP package container",
         "status": "unsupported",
         "disposition": "unavailable",
-        "currentBasis": "Secure ZIP/XML ingestion is not implemented.",
-        "limitations": ["No archive limit, traversal, duplicate, or bomb defense is executable yet."],
-        "roadmap": "M1-005",
-        "evidence": { "level": "none", "artifacts": [] }
+        "currentBasis": "A non-extracting bounded ZIP/XML profile enforces fixed size/count/ratio limits, canonical paths, exact local/central layout, CRC, and fail-closed XML parsing.",
+        "limitations": ["Only stored and DEFLATE archives within the public narrow profile are admitted; ZIP64, extras, data descriptors, encryption, and arbitrary OOXML remain unsupported."],
+        "roadmap": "Maintain the bounded security profile; expand only with explicit evidence",
+        "evidence": {
+          "level": "automated-public",
+          "artifacts": [
+            {
+              "type": "contract",
+              "path": "packages/core/src/secure-zip.mjs",
+              "note": "Fixed non-extracting ZIP profile with member, layout, CRC, compression, and nesting controls."
+            },
+            {
+              "type": "contract",
+              "path": "packages/core/src/strict-xml.mjs",
+              "note": "Fatal UTF-8 namespace-aware bounded XML subset without DTD/entity/network resolution."
+            },
+            {
+              "type": "qa-assertions",
+              "path": "tests/secure-template-ingestion.test.mjs",
+              "note": "Traversal, duplicate/case, count/size/ratio bomb, ambiguous ZIP, malformed XML, and namespace mutations."
+            }
+          ]
+        }
       },
       {
         "id": "raster-image-parts",
@@ -513,12 +633,17 @@
         "label": "PPTX/POTX package inspection and feature classification",
         "status": "unsupported",
         "disposition": "unavailable",
-        "currentBasis": "A distributable pure semantic inspector normalizes the reviewed public fixture package view; no secure package/XML ingestion or dispatchable capability exists.",
-        "limitations": ["The caller-supplied view is not a security credential; private or managed helpers remain inadmissible."],
-        "roadmap": "M1-005 and M2-001",
+        "currentBasis": "The pure semantic inspector and a bounded ProjectContext-bound ZIP/XML/OPC producer inspect the public minimal fixture class; no dispatchable capability or published CLI exists.",
+        "limitations": ["The accepted grammar is deliberately narrow, and a caller-supplied view or producer label is not a security credential."],
+        "roadmap": "M2-001 and M3-001",
         "evidence": {
           "level": "automated-public",
           "artifacts": [
+            {
+              "type": "contract",
+              "path": "packages/core/src/secure-template-ingestion.mjs",
+              "note": "One-step stable-file-to-index boundary; callers cannot inject paths, parsers, views, resolvers, or relaxed limits."
+            },
             {
               "type": "contract",
               "path": "packages/core/src/template-inspector.mjs",
@@ -528,6 +653,11 @@
               "type": "conformance-fixture",
               "path": "fixtures/inspection/expected-potx-template-index.json",
               "note": "Deterministic output for the public synthetic lane only."
+            },
+            {
+              "type": "qa-assertions",
+              "path": "tests/secure-template-ingestion.test.mjs",
+              "note": "Exact stored/DEFLATE public results plus filesystem, archive, XML, relationship, vocabulary, and high-risk mutations."
             },
             {
               "type": "qa-assertions",
@@ -563,7 +693,7 @@
         "status": "unsupported",
         "disposition": "unavailable",
         "currentBasis": "The semantic inspector binds its index to the reviewed archive digest and explicit ProjectConfig IDs; no TemplateProfile/ProjectOverlay runtime resolver exists.",
-        "limitations": ["A caller-supplied package view and digest field cannot prove secure ingestion or semantic role correctness."],
+        "limitations": ["Only the one-step secure-ingestion API proves its archive digest chain; direct caller-supplied views still cannot prove origin or semantic role correctness."],
         "roadmap": "M1-002, M1-004, and M2-002",
         "evidence": {
           "level": "automated-public",

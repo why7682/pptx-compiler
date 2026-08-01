@@ -57,5 +57,30 @@
 - validate support claims against a versioned positive matrix; unknown items and
   missing evidence remain explicit failures.
 
-Quantitative archive limits and residual risks are decided during M1-005 and
-must be reflected in the public compatibility policy.
+## M1-005 implemented input boundary
+
+The secure-ingestion lane never extracts a member. It reads at most a 1 MiB
+stable source snapshot and admits at most 32 contiguous stored/DEFLATE entries,
+256 KiB compressed/expanded per entry, 1 MiB declared expanded total, a 100:1
+ratio, and a 128 KiB central directory. It rejects ZIP64, encryption, data
+descriptors, extras/comments, multi-disk archives, prefixes/trailing bytes,
+duplicate/case-aliased paths, archive symlinks/special entries, overlap/gaps,
+CRC/size drift, nested archives, and DEFLATE trailing data.
+
+XML is fatal UTF-8 with no BOM, DTD, declared entities, comments, CDATA, or
+post-declaration processing instructions. Limits are 256 KiB per part, depth
+64, 10,000 elements and attributes per part, 50,000 elements per package, 32
+attributes per element, 4 KiB per attribute, and bounded text. Namespace names
+are expanded before an exact PresentationML allowlist is applied. All parts,
+content types, relationships, and nodes must be consumed. External targets,
+macros, ActiveX, OLE, embedded payloads, and unknown features are rejected.
+
+The filesystem reader rejects symbolic-link components, verifies canonical
+containment, uses a read-only `FileHandle` plus `O_NOFOLLOW` where exposed, and
+compares file/path identity before and after its exact-size read. Portable
+Node.js does not provide a cross-platform descriptor-relative `openat2`-style
+walk. Hostile concurrent ancestor replacement, hard-link/bind-mount aliases,
+unusual Windows reparse points, and weak network-filesystem identity semantics
+remain residual threats. Strong hostile-directory isolation requires a native
+broker or a trusted already-open handle. This limitation prevents an
+arbitrary-hostile-directory claim but does not permit a support promotion.

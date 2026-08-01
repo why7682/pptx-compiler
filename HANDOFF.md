@@ -6,10 +6,11 @@ This is an independent, clean-history workspace created to extract a generic
 PPTX rendering and QA pipeline from a private predecessor project. It now has
 plans, versioned data contracts, dependency-free foundation policy gates,
 reviewed text-only OOXML fixture parts, generated TypeScript declarations, a
-pure explicit-root runtime context, a pure semantic inspector for the reviewed
-fixture lane, and synthetic mutation tests. No arbitrary PPTX/POTX ingestion or
-rendering implementation, tracked binary fixture, design asset, dependency
-lockfile, prompt log, or predecessor Git history has been copied.
+pure explicit-root runtime context, a pure semantic inspector, bounded secure
+ZIP/XML ingestion for the public minimal fixture class, and synthetic mutation
+tests. No arbitrary PPTX/POTX compatibility layer or rendering implementation,
+tracked binary fixture, design asset, dependency lockfile, prompt log, or
+predecessor Git history has been copied.
 
 The project uses the MIT License with Elliot Wu as the declared copyright
 holder. The working name, monorepo shape, and repository-local public Git author
@@ -61,6 +62,16 @@ empty feature list. The 344-test suite passes on Node.js 22.23.1 and 24.14.0;
 the independent closing review reports no remaining blocker. This is not secure
 ZIP/XML ingestion, arbitrary-template support, or npm clean-install evidence.
 
+`M1-005` is complete: the high-level inspector derives its source only from a
+frozen `ProjectContext`, takes one bounded stable file snapshot, validates a
+fixed non-extracting ZIP profile, parses a namespace-aware bounded XML subset,
+and maps only the public minimal OPC/PresentationML vocabulary. Traversal,
+symlinks, archive bombs and ambiguity, malformed XML, external relationships,
+macros, ActiveX, embedded objects, and unknown vocabulary fail closed. The
+422-test suite passes on Node.js 22.23.1 and 24.14.0; the bounded closing review
+reports no remaining blocker or high finding. The portable filesystem race
+residual is documented, and no input or capability support claim was promoted.
+
 The repository has no remote. Keep it local until the public synthetic-fixture
 flow can run `init -> inspect -> validate -> render -> qa`. After that executable
 checkpoint and a fresh public-preflight scan, create a **public** repository;
@@ -69,11 +80,10 @@ unscoped package decision is also deferred until package metadata is designed.
 
 ## Immediate objective
 
-The next dependency is `M1-005`: implement secure ZIP/XML ingestion that can
-produce trustworthy package views for the semantic inspector. Enforce canonical
-filesystem opening, archive/resource limits, XML/parser limits, relationship
-and high-risk part policy, and fail-closed unknown vocabulary. Do not broaden
-the current reviewed-fixture producer into an arbitrary-input claim.
+The next dependency is `M2-001`: define the executable capability interface and
+dispatcher. A capability must not become dispatchable or `supported` until its
+metadata, executor, input/output schemas, conformance fixture, and QA assertions
+all exist. Preserve the M1-005 fail-closed ingestion and zero-support boundary.
 
 ## First commands after switching workspace
 
@@ -89,12 +99,12 @@ git remote -v
 The private root package has no dependencies, so no install step is required.
 Run `npm test`, `npm run inspect:synthetic`, and `npm run check:public-tree` to
 revalidate the completed admission, support, fixture, data-contract,
-runtime-context, and semantic-inspector gates.
+runtime-context, semantic-inspector, and secure-ingestion gates.
 
 ## Next work session
 
-1. Confirm the M0-004 through M1-004 acceptance commands pass on the clean checkout.
-2. Read `docs/M1-004_HANDOFF.md` before designing the M1-005 secure producer.
+1. Confirm the M0-004 through M1-005 acceptance commands pass on the clean checkout.
+2. Read `docs/M1-005_HANDOFF.md` before designing the M2-001 dispatcher.
 3. Keep predecessor code, presentation assets, and generated archives out of
    Git; use only repository-owned text/synthetic contract fixtures for tests.
 

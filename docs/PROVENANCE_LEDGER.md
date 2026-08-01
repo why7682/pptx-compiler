@@ -273,6 +273,57 @@ notes: This slice accepts only an already parsed reviewed-fixture package view.
   clean-install evidence.
 ```
 
+### M1-005 secure-ingestion set
+
+```yaml
+paths:
+  - AGENTS.md
+  - HANDOFF.md
+  - README.md
+  - TODO.md
+  - docs/ARCHITECTURE_TARGET.md
+  - docs/COMPATIBILITY_POLICY.md
+  - docs/DECISIONS.md
+  - docs/M1-005_HANDOFF.md
+  - docs/OPEN_SOURCE_READINESS.md
+  - docs/PROVENANCE_LEDGER.md
+  - docs/RELEASE_GATES.md
+  - docs/SUPPORT_MATRIX.md
+  - docs/THREAT_MODEL.md
+  - packages/core/src/ooxml-package-view.mjs
+  - packages/core/src/secure-template-ingestion.mjs
+  - packages/core/src/secure-zip.mjs
+  - packages/core/src/strict-xml.mjs
+  - packages/core/src/template-inspector.mjs
+  - policy/support-matrix.json
+  - tests/secure-template-ingestion.test.mjs
+  - tests/support-matrix.test.mjs
+kind: new-clean-room; existing planning/contracts updated in place
+origin: independently authored from the M1-005 TODO exit criterion, existing
+  public contracts and text-only fixture, ECMA-376 OPC, PKWARE APPNOTE, and
+  documented Node.js filesystem/zlib APIs; no predecessor implementation,
+  private fixture, or presentation binary was inspected
+original_author_or_holder: Elliot Wu
+created_or_reviewed_on: 2026-08-01
+license_or_rights_basis: MIT
+third_party_dependencies: []
+private_information_review: passed; errors and output expose only stable codes,
+  public pointers, and normalized technical facts; mutations are created only
+  at runtime in temporary directories
+project_constant_removal: passed; product code contains no fixture ID, private
+  path, private text, managed helper, ambient root, or presentation asset
+public_fixture_conformance: applicable; exact stored/DEFLATE PPTX/POTX results
+  plus filesystem, ZIP, XML, OPC, relationship, vocabulary, resource, and
+  high-risk rejection mutations
+independent_review: passed; the bounded closing security review confirmed that
+  the content-type child fail-open, archive-snapshot/digest binding, and
+  adversarial-coverage findings were fixed, with no remaining blocker or high
+  finding
+notes: No generated archive or mutation corpus binary is tracked. The fixed
+  public minimal grammar is a security baseline, not arbitrary-template or
+  capability support.
+```
+
 The XML namespace, relationship-type, and MIME strings are interoperability
 identifiers from the public format specification. They do not convey third-
 party presentation content. The fictional `Synthetic Sans` typeface name does

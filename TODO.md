@@ -47,7 +47,7 @@ criterion is recorded in the repository.
 | M1-002 | DONE | Define versioned schemas for project config, template profile/index, capability registry/overlay, slide spec, build artifact, and QA report. | Valid and mutation-invalid fixtures pass/fail predictably on every supported Node version. |
 | M1-003 | DONE | Implement `ProjectContext` and remove ambient root-path assumptions. | Core APIs accept explicit paths/dependencies; scans find no project-root singleton or absolute path. |
 | M1-004 | DONE | Implement a distributable template inspector without managed/private helpers. | A clean installation inspects the synthetic fixture and emits a deterministic, path-redacted index. |
-| M1-005 | NEXT | Implement secure ZIP/XML ingestion. | Tests cover traversal, symlinks, zip bombs, member/size limits, duplicates, case conflicts, malformed XML, external relationships, macros, ActiveX, and embedded objects. |
+| M1-005 | DONE | Implement secure ZIP/XML ingestion. | Tests cover traversal, symlinks, zip bombs, member/size limits, duplicates, case conflicts, malformed XML, external relationships, macros, ActiveX, and embedded objects. |
 
 ### M1-001 completion evidence — 2026-07-31
 
@@ -143,11 +143,39 @@ criterion is recorded in the repository.
   no PPTX/POTX file input, secure ingestion, capability, render, or QA support
   is claimed.
 
+### M1-005 completion evidence — 2026-08-01
+
+- `inspectTemplateSource` accepts only a frozen `ProjectContext` plus the exact
+  `TemplateIndex` validator. It reads one identity-checked, size-bounded file
+  snapshot and binds both parsing and the emitted archive digest to those same
+  detached bytes.
+- The dependency-free ingestion path enforces fixed ZIP, XML, OPC,
+  relationship, PresentationML, and package-wide limits. It never extracts
+  members and rejects traversal, symlink components, bombs, duplicate/case
+  aliases, ambiguous records, malformed or unmodeled XML, external targets,
+  macros, ActiveX, OLE, and embedded packages/objects.
+- `npm test`: 422/422 passed. The M1-005 suite contributes 78 test nodes,
+  including exact stored/DEFLATE POTX/PPTX results and adversarial filesystem,
+  ZIP, XML, namespace, graph, high-risk, redaction, and dependency-boundary
+  cases.
+- The identical 422-test suite passed on Node.js 22.23.1 and Node.js 24.14.0.
+  Cross-platform OS evidence, including Windows junction/reparse behavior,
+  remains M3-004.
+- The bounded independent closing review's blocker and two high findings were
+  fixed: content-type entries now reject hidden children, package views and
+  digests derive from one snapshot, and regression coverage exercises both.
+  Re-review found no remaining blocker or high finding. The portable Node
+  descriptor-relative-walk/TOCTOU residual remains explicitly documented.
+- Working-tree and staged forbidden-material, exact provenance, support-matrix,
+  and versioned-contract gates passed. `supportClaimsEnabled` remains false;
+  every support row remains non-supported, so this security baseline is not an
+  arbitrary-template compatibility or capability claim.
+
 ## M2 — Generic rendering vertical slice
 
 | ID | Status | Task | Exit criterion |
 | --- | --- | --- | --- |
-| M2-001 | PENDING | Define the executable capability interface and dispatcher. | `supported` cannot be registered without executor, schemas, conformance fixture, and QA contract. |
+| M2-001 | NEXT | Define the executable capability interface and dispatcher. | `supported` cannot be registered without executor, schemas, conformance fixture, and QA contract. |
 | M2-002 | PENDING | Implement data-driven source-slide clone/fill with semantic shape bindings. | No fixture-specific slide/shape identifiers exist in source; missing or ambiguous bindings fail closed. |
 | M2-003 | PENDING | Implement a minimal native DrawingML component capability. | One data-only slide spec renders through the same dispatcher and remains editable. |
 | M2-004 | PENDING | Parameterize the optional Pandoc/OMML adapter and isolate it from core. | Pandoc is detected as an external optional dependency; formula transplant and failure behavior have conformance tests and attribution review. |

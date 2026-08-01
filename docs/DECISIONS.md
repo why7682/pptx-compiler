@@ -12,7 +12,7 @@ No item below is decided merely because a recommendation is recorded.
 | D-006 | ACCEPTED | Schema source of truth | Use JSON Schema Draft 2020-12 as normative; generated or verified TypeScript types remain a later consumer. | M0-004 validates the bounded provenance contract from its checked-in schema and rejects structural, enum, rights, date, and version mutations. |
 | D-007 | OPEN | Public formula font | Select an OFL-compatible math font for SVG examples; do not redistribute proprietary fonts. | License file and rendered conformance proof. |
 | D-008 | OPEN | Pandoc integration | Optional external adapter, never bundled with core. | License/attribution review and absence behavior tests. |
-| D-009 | OPEN | Unsupported high-risk OOXML | Reject macros, ActiveX, OLE, embedded packages, and unsafe external relationships in 0.x. | Threat-model review and mutation tests. |
+| D-009 | ACCEPTED | Unsupported high-risk OOXML | Reject macros, ActiveX, OLE, embedded packages, and unsafe external relationships in 0.x. | M1-005 bounded high-risk path/content-type/relationship/XML mutations and unchanged unsupported matrix rows. |
 | D-010 | OPEN | PowerPoint evidence adapter | Keep macOS automation optional, trusted/manual, and outside public PR CI. | Least-privilege workflow and redaction review. |
 | D-011 | ACCEPTED | Copyright holder | Elliot Wu. | User stated that no employer, university, collaborator, or other holder applies to the new clean-room project. Third-party dependencies and migrated candidates still require separate rights review. |
 | D-012 | ACCEPTED | npm package scope timing | Defer scoped-versus-unscoped package names until M3-002 package metadata work. | User explicitly deferred the choice; no package manifest or registry reservation is created now. |
@@ -22,6 +22,7 @@ No item below is decided merely because a recommendation is recorded.
 | D-016 | ACCEPTED | First public data-contract set | Use contract version `0.1.0`, eight closed root documents, registered shared references, generated TypeScript declarations, and explicitly schema-only synthetic examples. | M1-002 manifest, shared validator, cross-document gate, and positive/negative fixtures. |
 | D-017 | ACCEPTED | ProjectContext boundary | Use a pure runtime context with an explicit absolute root and injected exact ProjectConfig validator; defer filesystem identity and time-of-use safety to actual consumers. | M1-003 context source, path/dependency mutations, ambient-root scan, and explicit M1-005/M2-005 security boundary. |
 | D-018 | ACCEPTED | Template inspection versus secure ingestion | Keep core inspection as a pure normalization of an explicit parsed package view; admit only the reviewed public fixture producer in M1-004 and defer untrusted file/ZIP/XML conversion to M1-005. | M1-004 source, public execution golden, graph/redaction mutations, clean-directory module-closure smoke, and unchanged false support switch. |
+| D-019 | ACCEPTED | Initial secure-ingestion profile | Use a non-relaxable narrow ZIP/XML/OPC profile and a one-step `ProjectContext` source-to-index API; document portable Node filesystem race limits instead of claiming hostile-directory atomic containment. | M1-005 stored/DEFLATE positives, filesystem/archive/XML/OOXML mutation suite, exact public golden, residual-risk review, and unchanged false support switch. |
 
 Record a decision by changing its status to `ACCEPTED`, adding the date and
 rationale below the table, and updating every affected contract/TODO in the
@@ -91,6 +92,20 @@ same change.
   M1-005 must implement and prove the separate untrusted filesystem, ZIP, XML,
   relationship, high-risk-part, and resource-limit boundary before another
   producer class or user-owned input can be admitted.
+- **D-009 accepted:** the 0.x high-risk policy is rejection, not preservation or
+  quarantine. The M1-005 high-level boundary rejects macros/VBA, ActiveX, OLE,
+  embedded packages/objects, and external relationships through independent
+  path, content-type, relationship, and XML vocabulary checks. These tests do
+  not promote any compatibility row.
+- **D-019 accepted:** the first secure-ingestion profile is deliberately narrow
+  and non-configurable: 1 MiB archive, 32 members, 256 KiB per member, 1 MiB
+  expanded total, 100:1 compression ratio, bounded strict XML, and an exact
+  public minimal OOXML grammar. `inspectTemplateSource()` accepts no alternate
+  path/parser/view/limits. It uses stable opened-handle identity checks and
+  `O_NOFOLLOW` where available, while explicitly retaining the portable Node
+  TOCTOU residual recorded in the threat model. `TemplatePackageView` remains
+  version `0.1.0` because its exact data shape did not change; admitting a new
+  producer class is additive and the label itself remains non-authoritative.
 
 ## MIT versus Apache-2.0 review
 

@@ -594,7 +594,7 @@ test("package-view identity and source binding mutations fail closed", async (t)
   const cases = [
     ["view version", (view) => { view.viewVersion = "0.2.0"; }, "TEMPLATE_INSPECTION_VIEW_INVALID"],
     ["view type", (view) => { view.viewType = "archive-view"; }, "TEMPLATE_INSPECTION_VIEW_INVALID"],
-    ["producer class", (view) => { view.producerClass = "secure-opc-ingestion"; }, "TEMPLATE_INSPECTION_VIEW_INVALID"],
+    ["producer class", (view) => { view.producerClass = "unreviewed-producer"; }, "TEMPLATE_INSPECTION_VIEW_INVALID"],
     ["source location", (view) => { view.sourceLocation = path.join(context.projectRoot, "other.potx"); }, "TEMPLATE_INSPECTION_SOURCE_MISMATCH"],
     ["format extension", (view) => { view.templateFormat = "pptx"; }, "TEMPLATE_INSPECTION_SOURCE_MISMATCH"],
     ["unknown format", (view) => { view.templateFormat = "ppsx"; }, "TEMPLATE_INSPECTION_VIEW_INVALID"],

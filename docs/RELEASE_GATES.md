@@ -137,3 +137,16 @@ copies only the core sources and runtime-generated public view to an empty
 directory and executes from an unrelated cwd. This is not npm tarball/install
 evidence and does not satisfy G2: arbitrary file opening, ZIP/XML safety, and a
 secure package-view producer remain M1-005.
+
+M1-005 adds `inspectTemplateSource()` as the bounded G2 foundation lane. It
+derives its source solely from `ProjectContext`, checks path components and an
+opened-handle identity before/after an exact-size read, and performs all ZIP,
+XML, OPC, relationship, and narrow OOXML validation in memory without
+extraction or network resolution. Fixed limits and residual cross-platform
+TOCTOU constraints are documented in `docs/M1-005_HANDOFF.md`. Public mutations
+cover traversal, symlinks, archive/member/ratio limits, duplicate/case aliases,
+ambiguous ZIP formats, malformed/entity-bearing XML, unknown vocabulary,
+external relationships, macros, ActiveX, OLE, and embedded objects. This
+satisfies the bounded public G2 baseline for the synthetic minimal profile; it
+does not establish arbitrary-template compatibility, package installation, a
+CLI, a renderer capability, or any supported matrix row.

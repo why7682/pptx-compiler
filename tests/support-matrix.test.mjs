@@ -18,6 +18,10 @@ const admittedPaths = new Set([
   "fixtures/inspection/expected-potx-template-index.json",
   "package.json",
   "packages/core/src/project-context.mjs",
+  "packages/core/src/ooxml-package-view.mjs",
+  "packages/core/src/secure-template-ingestion.mjs",
+  "packages/core/src/secure-zip.mjs",
+  "packages/core/src/strict-xml.mjs",
   "packages/core/src/template-inspector.mjs",
   "policy/support-matrix.json",
   "schemas/support-matrix.schema.json",
@@ -34,6 +38,7 @@ const admittedPaths = new Set([
   "tests/synthetic-fixture.test.mjs",
   "tests/contracts.test.mjs",
   "tests/project-context.test.mjs",
+  "tests/secure-template-ingestion.test.mjs",
   "tests/support-matrix.test.mjs",
   "tests/template-inspector.test.mjs"
 ]);
