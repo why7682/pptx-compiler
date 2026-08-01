@@ -43,6 +43,14 @@ For maintenance or audit of the completed `M1-002` data contracts, read:
 6. `docs/SUPPORT_MATRIX.md`
 7. `docs/PROVENANCE_LEDGER.md`
 
+For maintenance or audit of the completed `M1-003` runtime context, read:
+
+3. `docs/M1-003_HANDOFF.md`
+4. `packages/core/src/project-context.mjs`
+5. `schemas/contracts/project-config.schema.json`
+6. `docs/SUPPORT_MATRIX.md`
+7. `docs/PROVENANCE_LEDGER.md`
+
 Read `docs/PROJECT_DEFINITION.md` and `docs/ARCHITECTURE_TARGET.md` only before
 changing product scope, public contracts, packages, or dependency direction.
 
@@ -110,6 +118,10 @@ changing product scope, public contracts, packages, or dependency direction.
   hand-edit `types/contracts.d.ts`, and preserve the schema-only fixture claim.
   Do not treat a syntactically valid registry, build artifact, or QA report as
   proof that an executor or presentation flow exists.
+- When maintaining `M1-003`, require an explicit absolute project root and
+  validator dependency. Keep context construction lexical and side-effect-free;
+  filesystem identity, symlink, TOCTOU, archive, and XML defenses belong at the
+  consumer's time of use.
 - Add tests with every executable capability.
 - Update the architecture, support matrix, provenance ledger, and release gates
   in the same change when their contract changes.

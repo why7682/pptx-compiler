@@ -5,10 +5,10 @@
 This is an independent, clean-history workspace created to extract a generic
 PPTX rendering and QA pipeline from a private predecessor project. It now has
 plans, versioned data contracts, dependency-free foundation policy gates,
-reviewed text-only OOXML fixture parts, generated TypeScript declarations, and
-synthetic mutation tests. No PPTX product implementation, tracked binary
-fixture, design asset, dependency lockfile, prompt log, or predecessor Git
-history has been copied.
+reviewed text-only OOXML fixture parts, generated TypeScript declarations, a
+pure explicit-root runtime context, and synthetic mutation tests. No PPTX
+product implementation, tracked binary fixture, design asset, dependency
+lockfile, prompt log, or predecessor Git history has been copied.
 
 The project uses the MIT License with Elliot Wu as the declared copyright
 holder. The working name, monorepo shape, and repository-local public Git author
@@ -41,6 +41,14 @@ references and fictional build/QA records are not runtime or support evidence.
 The 146-test suite passes on Node.js 22.23.1 and 24.14.0; cross-platform OS
 evidence remains M3-004.
 
+`M1-003` is complete: `ProjectContext` revalidates a detached frozen
+`ProjectConfig 0.1.0` snapshot through an explicit synchronous dependency and
+resolves eight locations beneath an explicit absolute root. It rejects lexical
+escape, overlapping/case-aliased roots, all 10 case-only input-document role
+aliases, and source/write conflicts without filesystem I/O or ambient root
+discovery. The 225-test suite passes on Node.js 22.23.1 and 24.14.0. This is path
+modeling, not template inspection or symlink/TOCTOU-safe input opening.
+
 The repository has no remote. Keep it local until the public synthetic-fixture
 flow can run `init -> inspect -> validate -> render -> qa`. After that executable
 checkpoint and a fresh public-preflight scan, create a **public** repository;
@@ -49,11 +57,10 @@ unscoped package decision is also deferred until package metadata is designed.
 
 ## Immediate objective
 
-The next dependency is `M1-003`: implement `ProjectContext` so core APIs receive
-explicit paths and dependencies rather than discovering an ambient repository
-root. Keep it independent of predecessor code, preserve the `0.1.0`
-`ProjectConfig` boundary, and do not turn it into template inspection or secure
-ZIP/XML ingestion.
+The next dependency is `M1-004`: implement a distributable template inspector
+that consumes the explicit `ProjectContext` and produces a deterministic,
+path-redacted index for the repository-owned synthetic fixture. Keep secure
+untrusted ZIP/XML ingestion in M1-005 and do not import managed/private helpers.
 
 ## First commands after switching workspace
 
@@ -68,12 +75,12 @@ git remote -v
 
 The private root package has no dependencies, so no install step is required.
 Run `npm test` and `npm run check:public-tree` to revalidate the completed
-admission, support, fixture, and data-contract gates.
+admission, support, fixture, data-contract, and runtime-context gates.
 
 ## Next work session
 
-1. Confirm the M0-004 through M1-002 acceptance commands pass on the clean checkout.
-2. Read `docs/M1-002_HANDOFF.md` before consuming `ProjectConfig` in M1-003.
+1. Confirm the M0-004 through M1-003 acceptance commands pass on the clean checkout.
+2. Read `docs/M1-003_HANDOFF.md` before consuming `ProjectContext` in M1-004.
 3. Keep predecessor code, presentation assets, and generated archives out of
    Git; use only repository-owned text/synthetic contract fixtures for tests.
 

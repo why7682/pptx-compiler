@@ -48,10 +48,13 @@ Roadmap entries describe intended work only. They do not change current status.
 - PPTX/POTX inputs remain unsupported until the public inspector and secure
   ZIP/XML layer exist and pass their mutation suites. Producing the bounded
   synthetic fixture does not make arbitrary packages accepted input.
-- ProjectConfig, profile/index, registry/overlay, and deck/slide schemas now
-  have automated contract evidence. Their status remains `unsupported` because
-  no runtime consumer, resolver, or dispatcher exists; schema-only fixtures are
-  explicitly not capability conformance evidence.
+- ProjectConfig now has automated schema evidence and a pure in-memory
+  `ProjectContext` consumer that resolves explicit paths lexically. It remains
+  `unsupported`: there is no config file/CLI loader, filesystem-safe input
+  opening, or accepted presentation flow.
+- Profile/index, registry/overlay, and deck/slide schemas have automated
+  contract evidence but no runtime resolver or dispatcher. Schema-only fixtures
+  are explicitly not capability conformance evidence.
 - Macros, ActiveX, OLE, embedded packages, external relationships, embedded
   fonts, unknown vendor XML, and every unlisted OOXML feature have a target
   disposition of `reject`. That rejection is not executable PPTX evidence yet.

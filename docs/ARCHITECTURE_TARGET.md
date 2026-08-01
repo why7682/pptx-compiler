@@ -48,17 +48,23 @@ The first versioned contracts are:
 - `BuildArtifact`, `QaReport`, and `ManualGate`;
 - `SupportMatrix` and the public compatibility policy.
 
-Each contract receives a JSON Schema and TypeScript type generated or checked
-from one normative source. Unknown fields and version mismatches are handled by
-an explicit compatibility policy.
+Each serialized data contract receives a JSON Schema and TypeScript type
+generated or checked from one normative source. Runtime-only contracts keep one
+executable source shape and receive their publishable type surface with package
+metadata. Unknown fields and version mismatches are handled by an explicit
+compatibility policy.
 
 M1-002 implements data-contract version `0.1.0` for `ProjectConfig`,
 `TemplateProfile`, `TemplateIndex`, `CapabilityRegistry`, `ProjectOverlay`,
 `DeckSpec`, `BuildArtifact`, and `QaReport`, including the nested data
 structures named above. JSON Schema remains normative and the checked-in
-TypeScript declarations are generated from it. `ProjectContext` stays a runtime
-contract for M1-003; `CapabilityExecutor` and capability-specific schemas stay
-in M2-001. A registry string naming an executor is not dispatchability evidence.
+TypeScript declarations are generated from it. M1-003 implements
+`ProjectContext` as a side-effect-free runtime contract composed from an
+explicit absolute root, the normative `ProjectConfig`, and an injected schema
+validator. It resolves only lexical locations and creates no second serialized
+authority; its publishable package/type surface remains M3-002.
+`CapabilityExecutor` and capability-specific schemas stay in M2-001. A registry
+string naming an executor is not dispatchability evidence.
 
 ## Capability resolution
 

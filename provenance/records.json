@@ -46,15 +46,15 @@
     {
       "path": "AGENTS.md",
       "kind": "new-clean-room",
-      "origin": "user-directed clean-room planning with M1-002 contract-maintenance routing",
+      "origin": "user-directed clean-room planning with maintenance routing through M1-003",
       "copyrightHolderOrSourceAuthority": "Elliot Wu",
       "license": { "spdxExpression": "MIT" },
-      "reviewedOn": "2026-07-31",
+      "reviewedOn": "2026-08-01",
       "thirdPartyDependencies": [],
       "privateInformationReview": { "status": "passed", "notes": "Policy text contains no private fixture identity." },
       "projectConstantCleanup": { "status": "passed", "notes": "No predecessor constants admitted." },
       "publicConformance": { "status": "not-applicable", "notes": "Contributor instruction text only." },
-      "independentReview": { "status": "passed", "notes": "Bounded M1-002 closing review confirmed the contract-maintenance routing." },
+      "independentReview": { "status": "passed", "notes": "Bounded M1-003 closing review confirmed the runtime-context routing and deferred security boundary." },
       "notes": "Repository-owned contributor instructions."
     },
     {
@@ -63,12 +63,12 @@
       "origin": "user-directed clean-room project planning",
       "copyrightHolderOrSourceAuthority": "Elliot Wu",
       "license": { "spdxExpression": "MIT" },
-      "reviewedOn": "2026-07-31",
+      "reviewedOn": "2026-08-01",
       "thirdPartyDependencies": [],
       "privateInformationReview": { "status": "passed", "notes": "Only approved public project identity is present." },
       "projectConstantCleanup": { "status": "passed", "notes": "Findings are generic and contain no predecessor identifiers." },
       "publicConformance": { "status": "not-applicable", "notes": "Handoff text only." },
-      "independentReview": { "status": "passed", "notes": "M1-002 closing state and next dependency were checked against the reviewed implementation." },
+      "independentReview": { "status": "passed", "notes": "M1-003 closing state, evidence, claim boundary, and next dependency were checked against the reviewed implementation." },
       "notes": "Repository-owned project handoff."
     },
     {
@@ -91,12 +91,12 @@
       "origin": "user-directed clean-room project planning",
       "copyrightHolderOrSourceAuthority": "Elliot Wu",
       "license": { "spdxExpression": "MIT" },
-      "reviewedOn": "2026-07-31",
+      "reviewedOn": "2026-08-01",
       "thirdPartyDependencies": [],
       "privateInformationReview": { "status": "passed", "notes": "No private information present." },
       "projectConstantCleanup": { "status": "passed", "notes": "No predecessor constants admitted." },
       "publicConformance": { "status": "not-applicable", "notes": "Project overview only." },
-      "independentReview": { "status": "passed", "notes": "M1-002 public claim boundary was checked against the reviewed implementation." },
+      "independentReview": { "status": "passed", "notes": "M1-003 status and unchanged presentation-support boundary were checked against the reviewed implementation." },
       "notes": "Repository-owned project overview."
     },
     {
@@ -105,12 +105,12 @@
       "origin": "user-directed clean-room project planning",
       "copyrightHolderOrSourceAuthority": "Elliot Wu",
       "license": { "spdxExpression": "MIT" },
-      "reviewedOn": "2026-07-31",
+      "reviewedOn": "2026-08-01",
       "thirdPartyDependencies": [],
       "privateInformationReview": { "status": "passed", "notes": "No private information present." },
       "projectConstantCleanup": { "status": "passed", "notes": "No predecessor constants admitted." },
       "publicConformance": { "status": "not-applicable", "notes": "Planning status only." },
-      "independentReview": { "status": "passed", "notes": "M1-002 completion evidence, dependency order, and final counts were independently checked." },
+      "independentReview": { "status": "passed", "notes": "M1-003 completion evidence, dependency order, test counts, and residual scope were independently checked." },
       "notes": "Repository-owned dependency-ordered plan."
     },
     {
@@ -119,12 +119,12 @@
       "origin": "user-directed clean-room project planning",
       "copyrightHolderOrSourceAuthority": "Elliot Wu",
       "license": { "spdxExpression": "MIT" },
-      "reviewedOn": "2026-07-31",
+      "reviewedOn": "2026-08-01",
       "thirdPartyDependencies": [],
       "privateInformationReview": { "status": "passed", "notes": "No private information present." },
       "projectConstantCleanup": { "status": "passed", "notes": "Architecture is stated generically." },
-      "publicConformance": { "status": "applicable", "notes": "Records the implemented versioned contract boundary without implying runtime support." },
-      "independentReview": { "status": "passed", "notes": "M1-002 architecture status was checked against schemas, gates, and excluded runtime work." },
+      "publicConformance": { "status": "applicable", "notes": "Records the serialized-data and runtime-only contract boundaries without implying presentation support." },
+      "independentReview": { "status": "passed", "notes": "M1-003 architecture status and side-effect-free core boundary were checked against implementation and tests." },
       "notes": "Repository-owned target architecture."
     },
     {
@@ -147,12 +147,12 @@
       "origin": "user-directed clean-room project planning",
       "copyrightHolderOrSourceAuthority": "Elliot Wu",
       "license": { "spdxExpression": "MIT" },
-      "reviewedOn": "2026-07-31",
+      "reviewedOn": "2026-08-01",
       "thirdPartyDependencies": [],
       "privateInformationReview": { "status": "passed", "notes": "Contains only approved public project identity." },
       "projectConstantCleanup": { "status": "passed", "notes": "No predecessor constants admitted." },
       "publicConformance": { "status": "not-applicable", "notes": "Decision record only." },
-      "independentReview": { "status": "passed", "notes": "M1-002 contract-authority and generation decisions were independently checked." },
+      "independentReview": { "status": "passed", "notes": "M1-003 explicit-root, injected-validator, and consumer-time security decision was independently checked." },
       "notes": "Repository-owned decision register."
     },
     {
@@ -210,6 +210,20 @@
       "publicConformance": { "status": "applicable", "notes": "Defines the bounded versioned-schema, cross-document, type-generation, and verification contract." },
       "independentReview": { "status": "passed", "notes": "Bounded M1-002 closing review findings were fixed and regression-tested." },
       "notes": "Normative bounded contract for M1-002."
+    },
+    {
+      "path": "docs/M1-003_HANDOFF.md",
+      "kind": "new-clean-room",
+      "origin": "M1-003 clean-room runtime-context contract from repository requirements and ProjectConfig 0.1.0",
+      "copyrightHolderOrSourceAuthority": "Elliot Wu",
+      "license": { "spdxExpression": "MIT" },
+      "reviewedOn": "2026-08-01",
+      "thirdPartyDependencies": [],
+      "privateInformationReview": { "status": "passed", "notes": "Contains only public contract names and generic repository-relative paths." },
+      "projectConstantCleanup": { "status": "passed", "notes": "No predecessor implementation, asset, identifier, private fixture, or ambient root was admitted." },
+      "publicConformance": { "status": "applicable", "notes": "Defines the explicit-root runtime boundary, lexical invariants, and deferred consumer-time security work." },
+      "independentReview": { "status": "passed", "notes": "The bounded M1-003 review finding was fixed across all input-document role pairs; closing review reported no remaining blocker." },
+      "notes": "Normative bounded runtime contract for M1-003; not a serialized schema or filesystem safety claim."
     },
     {
       "path": "docs/NAME_AVAILABILITY.md",
@@ -273,12 +287,12 @@
       "origin": "user-directed clean-room project planning",
       "copyrightHolderOrSourceAuthority": "Elliot Wu",
       "license": { "spdxExpression": "MIT" },
-      "reviewedOn": "2026-07-31",
+      "reviewedOn": "2026-08-01",
       "thirdPartyDependencies": [],
       "privateInformationReview": { "status": "passed", "notes": "No private information present." },
       "projectConstantCleanup": { "status": "passed", "notes": "No predecessor constants admitted." },
       "publicConformance": { "status": "not-applicable", "notes": "Human-readable policy summary only." },
-      "independentReview": { "status": "passed", "notes": "M1-002 admission set and its 24 exact new-file records were independently checked." },
+      "independentReview": { "status": "passed", "notes": "M1-003 admission set and its three exact new-file records were independently checked." },
       "notes": "Human policy companion to the machine-readable records."
     },
     {
@@ -287,12 +301,12 @@
       "origin": "user-directed clean-room project planning",
       "copyrightHolderOrSourceAuthority": "Elliot Wu",
       "license": { "spdxExpression": "MIT" },
-      "reviewedOn": "2026-07-31",
+      "reviewedOn": "2026-08-01",
       "thirdPartyDependencies": [],
       "privateInformationReview": { "status": "passed", "notes": "No private information present." },
       "projectConstantCleanup": { "status": "passed", "notes": "Release criteria are generic." },
-      "publicConformance": { "status": "applicable", "notes": "Records the executable fixture and versioned-contract gates without promoting input support." },
-      "independentReview": { "status": "passed", "notes": "M1-002 gate description was checked against its staged and working-tree implementation." },
+      "publicConformance": { "status": "applicable", "notes": "Records the executable context gate and its explicit exclusion from filesystem and presentation support." },
+      "independentReview": { "status": "passed", "notes": "M1-003 gate description was checked against implementation, mutations, and deferred consumer-time controls." },
       "notes": "Repository-owned release gates."
     },
     {
@@ -301,12 +315,12 @@
       "origin": "M0-005 clean-room support contract from repository public requirements",
       "copyrightHolderOrSourceAuthority": "Elliot Wu",
       "license": { "spdxExpression": "MIT" },
-      "reviewedOn": "2026-07-31",
+      "reviewedOn": "2026-08-01",
       "thirdPartyDependencies": [],
       "privateInformationReview": { "status": "passed", "notes": "Contains generic public feature classes and aggregate counts only." },
       "projectConstantCleanup": { "status": "passed", "notes": "No predecessor feature identifier or evidence admitted." },
       "publicConformance": { "status": "applicable", "notes": "Summarizes the normative checked 60-row matrix without broadening it." },
-      "independentReview": { "status": "passed", "notes": "M1-002 schema evidence and unchanged unsupported statuses were independently checked." },
+      "independentReview": { "status": "passed", "notes": "M1-003 lexical runtime evidence and unchanged unsupported presentation/input statuses were independently checked." },
       "notes": "Human-readable support-matrix summary."
     },
     {
@@ -646,6 +660,20 @@
       "notes": "Dependency-free private workspace manifest; it is not publishable."
     },
     {
+      "path": "packages/core/src/project-context.mjs",
+      "kind": "new-clean-room",
+      "origin": "M1-003 clean-room implementation from the repository runtime-context contract and ProjectConfig 0.1.0",
+      "copyrightHolderOrSourceAuthority": "Elliot Wu",
+      "license": { "spdxExpression": "MIT" },
+      "reviewedOn": "2026-08-01",
+      "thirdPartyDependencies": [],
+      "privateInformationReview": { "status": "passed", "notes": "Errors expose stable codes and public JSON pointers without input values or absolute paths." },
+      "projectConstantCleanup": { "status": "passed", "notes": "Pure implementation contains no predecessor identifier, asset, private path, root discovery, or presentation logic." },
+      "publicConformance": { "status": "applicable", "notes": "Explicit-root construction, validation dependency, immutable snapshots, lexical containment, and path-separation mutations execute publicly." },
+      "independentReview": { "status": "passed", "notes": "The bounded review's input-document alias finding was fixed and all 10 role pairs were regression-tested." },
+      "notes": "Dependency-free core runtime context using only the Node.js path built-in; no package metadata is introduced."
+    },
+    {
       "path": "policy/forbidden-materials.json",
       "kind": "new-clean-room",
       "origin": "M0-004 clean-room implementation from repository contract",
@@ -665,26 +693,26 @@
       "origin": "M0-005 clean-room support contract from repository public requirements",
       "copyrightHolderOrSourceAuthority": "Elliot Wu",
       "license": { "spdxExpression": "MIT" },
-      "reviewedOn": "2026-07-31",
+      "reviewedOn": "2026-08-01",
       "thirdPartyDependencies": [],
       "privateInformationReview": { "status": "passed", "notes": "Uses generic feature classes, public roadmap IDs, and public contract paths only." },
       "projectConstantCleanup": { "status": "passed", "notes": "No predecessor implementation, asset, or identifier admitted." },
-      "publicConformance": { "status": "applicable", "notes": "Contains 60 checked rows, zero supported PPTX claims, and exact M1-001/M1-002 evidence paths." },
-      "independentReview": { "status": "passed", "notes": "M1-002 evidence updates and unchanged support statuses were independently checked." },
+      "publicConformance": { "status": "applicable", "notes": "Contains 60 checked rows, zero supported PPTX claims, and exact evidence paths through M1-003." },
+      "independentReview": { "status": "passed", "notes": "M1-003 runtime-context evidence and unchanged unsupported input/capability statuses were independently checked." },
       "notes": "Normative versioned public support matrix."
     },
     {
       "path": "provenance/records.json",
       "kind": "new-clean-room",
-      "origin": "M0-004 provenance contract with exact clean-room records through M1-002",
+      "origin": "M0-004 provenance contract with exact clean-room records through M1-003",
       "copyrightHolderOrSourceAuthority": "Elliot Wu",
       "license": { "spdxExpression": "MIT" },
-      "reviewedOn": "2026-07-31",
+      "reviewedOn": "2026-08-01",
       "thirdPartyDependencies": [],
       "privateInformationReview": { "status": "passed", "notes": "Records contain only approved public and generic source-authority information." },
       "projectConstantCleanup": { "status": "passed", "notes": "Every admitted path is repository-relative and generic." },
       "publicConformance": { "status": "applicable", "notes": "Self-covered by the exact-path provenance gate." },
-      "independentReview": { "status": "passed", "notes": "M1-002 exact-path coverage and admission fields were independently checked." },
+      "independentReview": { "status": "passed", "notes": "M1-003 exact-path coverage, admission fields, and review closure were independently checked." },
       "notes": "Normative per-file provenance source, including its own record."
     },
     {
@@ -968,17 +996,31 @@
       "notes": "Dependency-free mutation tests using isolated temporary Git repositories."
     },
     {
-      "path": "tests/support-matrix.test.mjs",
+      "path": "tests/project-context.test.mjs",
       "kind": "new-clean-room",
-      "origin": "M0-005 clean-room implementation from repository public contracts",
+      "origin": "M1-003 clean-room tests from repository explicit-context, path, dependency, and claim-boundary requirements",
       "copyrightHolderOrSourceAuthority": "Elliot Wu",
       "license": { "spdxExpression": "MIT" },
-      "reviewedOn": "2026-07-31",
+      "reviewedOn": "2026-08-01",
+      "thirdPartyDependencies": [],
+      "privateInformationReview": { "status": "passed", "notes": "Uses the public schema-only ProjectConfig and runtime-constructed synthetic roots and unsafe strings." },
+      "projectConstantCleanup": { "status": "passed", "notes": "Contains no predecessor identifier, presentation asset, fixture digest, or committed absolute local path." },
+      "publicConformance": { "status": "applicable", "notes": "Covers 79 test nodes including 60 focused rejection mutations and ambient-root/out-of-scope source scans." },
+      "independentReview": { "status": "passed", "notes": "The bounded review finding was closed with exhaustive input-document case-alias mutations and no remaining blocker." },
+      "notes": "Dependency-free ProjectContext runtime, immutability, path, dependency, redaction, and scope tests."
+    },
+    {
+      "path": "tests/support-matrix.test.mjs",
+      "kind": "new-clean-room",
+      "origin": "M0-005 clean-room tests updated in M1-003 for exact runtime-context evidence paths",
+      "copyrightHolderOrSourceAuthority": "Elliot Wu",
+      "license": { "spdxExpression": "MIT" },
+      "reviewedOn": "2026-08-01",
       "thirdPartyDependencies": [],
       "privateInformationReview": { "status": "passed", "notes": "Uses repository-owned synthetic in-memory mutations only." },
       "projectConstantCleanup": { "status": "passed", "notes": "No predecessor identifier, asset, or path appears." },
-      "publicConformance": { "status": "applicable", "notes": "Covers one baseline and 13 rejection mutations." },
-      "independentReview": { "status": "passed", "notes": "M1-002 admitted evidence paths and unchanged overclaim assertions were independently checked." },
+      "publicConformance": { "status": "applicable", "notes": "Covers one baseline, 13 rejection mutations, and exact admitted M1-003 evidence paths." },
+      "independentReview": { "status": "passed", "notes": "M1-003 evidence-path additions and unchanged overclaim assertions were independently checked." },
       "notes": "Dependency-free support-matrix overclaim and drift tests."
     },
     {

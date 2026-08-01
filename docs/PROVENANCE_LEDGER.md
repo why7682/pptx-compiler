@@ -212,6 +212,33 @@ notes: The fixture bundle and placeholder executor/QA references are not runtime
   per-file admission fields.
 ```
 
+### M1-003 ProjectContext set
+
+```yaml
+paths:
+  - docs/M1-003_HANDOFF.md
+  - packages/core/src/project-context.mjs
+  - tests/project-context.test.mjs
+kind: new-clean-room
+origin: independently authored from the M1-003 TODO exit criterion and the
+  normative ProjectConfig 0.1.0 contract; no predecessor implementation was
+  inspected
+original_author_or_holder: Elliot Wu
+created_or_reviewed_on: 2026-08-01
+license_or_rights_basis: MIT
+third_party_dependencies: []
+private_information_review: passed; runtime-created synthetic absolute roots
+  and canonical repository-relative contract paths only
+project_constant_removal: passed; no predecessor code, asset, identifier,
+  private fixture metadata, or ambient root was admitted
+public_fixture_conformance: applicable; 79 context test nodes with 60 focused
+  path/dependency rejection mutations
+independent_review: passed; one case-only input-document alias finding was fixed
+  across all 10 role pairs and the closing review reported no remaining blocker
+notes: This slice performs no filesystem or presentation I/O and is not secure
+  ingestion, inspector, capability, render, QA, or support evidence.
+```
+
 The XML namespace, relationship-type, and MIME strings are interoperability
 identifiers from the public format specification. They do not convey third-
 party presentation content. The fictional `Synthetic Sans` typeface name does

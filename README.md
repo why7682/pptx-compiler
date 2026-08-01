@@ -7,11 +7,12 @@ compiler and quality-assurance toolkit.
 
 This repository is a foundation pre-alpha licensed under the MIT License. It
 contains executable clean-room admission, support-matrix, and versioned-contract
-gates plus a repository-owned text-to-PPTX/POTX synthetic fixture generator.
-Generated archives are ignored test data, and contract examples are schema-only
-fixtures; there is still no accepted presentation input, inspector, dispatcher,
-or renderer. It is not yet a releasable software package. Do not publish until
-the release gates in [TODO.md](TODO.md) pass.
+gates, a pure explicit-root `ProjectContext`, and a repository-owned
+text-to-PPTX/POTX synthetic fixture generator. Generated archives are ignored
+test data, and contract examples are schema-only fixtures; there is still no
+accepted file input, presentation inspector, dispatcher, or renderer. It is not
+yet a releasable software package. Do not publish until the release gates in
+[TODO.md](TODO.md) pass.
 
 ## Intended function
 
@@ -38,12 +39,15 @@ and OOXML feature matrix will be explicit and fail closed.
    [docs/COMPATIBILITY_POLICY.md](docs/COMPATIBILITY_POLICY.md).
 4. For the versioned data contracts, read
    [docs/M1-002_HANDOFF.md](docs/M1-002_HANDOFF.md).
-5. Load broader project/architecture documents only when the handoff routes to
+5. For the explicit runtime context, read
+   [docs/M1-003_HANDOFF.md](docs/M1-003_HANDOFF.md).
+6. Load broader project/architecture documents only when the handoff routes to
    them.
 
 The private root package has no dependencies; `npm test` and
-`npm run check:public-tree` verify the current foundation. The next task is
-explicit `ProjectContext` injection in `M1-003`, not renderer migration.
+`npm run check:public-tree` verify the current foundation. The next task is the
+bounded public template inspector in `M1-004`, not ZIP/XML ingestion or
+renderer migration.
 
 ## License
 

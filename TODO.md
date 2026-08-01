@@ -45,8 +45,8 @@ criterion is recorded in the repository.
 | --- | --- | --- | --- |
 | M1-001 | DONE | Create a repository-owned synthetic PPTX/POTX fixture generator from reviewed text-only OOXML parts. | Generated decks are deterministic, contain no third-party branding/content, and pass an independent provenance review. |
 | M1-002 | DONE | Define versioned schemas for project config, template profile/index, capability registry/overlay, slide spec, build artifact, and QA report. | Valid and mutation-invalid fixtures pass/fail predictably on every supported Node version. |
-| M1-003 | NEXT | Implement `ProjectContext` and remove ambient root-path assumptions. | Core APIs accept explicit paths/dependencies; scans find no project-root singleton or absolute path. |
-| M1-004 | PENDING | Implement a distributable template inspector without managed/private helpers. | A clean installation inspects the synthetic fixture and emits a deterministic, path-redacted index. |
+| M1-003 | DONE | Implement `ProjectContext` and remove ambient root-path assumptions. | Core APIs accept explicit paths/dependencies; scans find no project-root singleton or absolute path. |
+| M1-004 | NEXT | Implement a distributable template inspector without managed/private helpers. | A clean installation inspects the synthetic fixture and emits a deterministic, path-redacted index. |
 | M1-005 | PENDING | Implement secure ZIP/XML ingestion. | Tests cover traversal, symlinks, zip bombs, member/size limits, duplicates, case conflicts, malformed XML, external relationships, macros, ActiveX, and embedded objects. |
 
 ### M1-001 completion evidence — 2026-07-31
@@ -88,6 +88,29 @@ criterion is recorded in the repository.
 - The fixture manifest is machine-marked `schema-conformance-only`; placeholder
   executor/schema/QA references and fictional artifact values are not runtime
   evidence. `supportClaimsEnabled` remains false and no matrix row is promoted.
+
+### M1-003 completion evidence — 2026-08-01
+
+- `packages/core/src/project-context.mjs` constructs a detached, deeply frozen
+  runtime context from an explicit absolute root, `ProjectConfig 0.1.0`, and an
+  exact injected validator. It performs no filesystem or presentation I/O.
+- All eight configured locations are lexically contained below the explicit
+  root. Three project roots remain pairwise non-overlapping, five input-document
+  roles reject all 10 case-only aliases, and template/write conflicts fail
+  closed without adding a control-file-under-write restriction.
+- The complete suite is 225/225: the M1-003 suite contributes 79 test nodes and
+  60 focused rejection mutations, bringing the repository total to 195 focused
+  rejection mutations.
+- The identical 225-test suite passed on Node.js 22.23.1 and Node.js 24.14.0.
+  Cross-platform OS evidence, including Windows filesystem edge cases, remains
+  M3-004.
+- The bounded independent review found one input-document case-alias gap. The
+  implementation and all 10 role-pair mutations were added; the closing review
+  reported no remaining blocker.
+- Working-tree and staged forbidden-material, exact provenance, support-matrix,
+  and versioned-contract gates passed. `supportClaimsEnabled` remains false;
+  no file input, inspector, secure ingestion, capability, render, or QA support
+  is claimed.
 
 ## M2 — Generic rendering vertical slice
 

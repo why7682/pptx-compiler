@@ -120,3 +120,10 @@ slide, and referenced error diagnostics cannot aggregate to pass.
 Schema-conformance examples are explicitly barred from serving as executor or
 support evidence. The staged contract gate is part of
 `npm run check:public-tree`.
+
+M1-003 adds the side-effect-free `ProjectContext` runtime contract. It requires
+an explicit absolute root and exact injected ProjectConfig validator, produces
+detached frozen path/config snapshots, rejects lexical escape and case-folded
+root/write-target aliases, and contains no cwd/environment/Git root discovery.
+These tests establish explicit wiring only: they do not satisfy G2 filesystem,
+symlink, TOCTOU, archive, or XML gates, which remain consumer-time work.

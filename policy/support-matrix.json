@@ -142,16 +142,26 @@
         "label": "Versioned project configuration",
         "status": "unsupported",
         "disposition": "unavailable",
-        "currentBasis": "The version 0.1.0 ProjectConfig schema and fail-closed mutations exist; ProjectContext is not implemented.",
-        "limitations": ["No runtime consumer accepts the document or resolves its explicit paths yet."],
-        "roadmap": "M1-002 and M1-003",
+        "currentBasis": "The version 0.1.0 schema and a pure ProjectContext consumer validate an in-memory config and resolve its explicit paths lexically.",
+        "limitations": ["No config file or CLI loader, filesystem-safe input opening, template inspector, or accepted presentation flow exists."],
+        "roadmap": "M1-002, M1-003, and M3-001",
         "evidence": {
           "level": "automated-public",
           "artifacts": [
             {
               "type": "input-schema",
               "path": "schemas/contracts/project-config.schema.json",
-              "note": "Closed data contract with safe relative-path syntax; runtime containment remains M1-003."
+              "note": "Closed data contract with canonical relative-path syntax."
+            },
+            {
+              "type": "contract",
+              "path": "packages/core/src/project-context.mjs",
+              "note": "Pure explicit-root runtime context with lexical containment; this is not filesystem-safe input opening."
+            },
+            {
+              "type": "qa-assertions",
+              "path": "tests/project-context.test.mjs",
+              "note": "Covers explicit roots/dependencies, immutability, aliases, traversal syntax, redacted errors, and ambient-root source scans."
             }
           ]
         }

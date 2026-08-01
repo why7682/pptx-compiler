@@ -16,6 +16,7 @@ const admittedPaths = new Set([
   "docs/RELEASE_GATES.md",
   "fixtures/source-parts/minimal/fixture.json",
   "package.json",
+  "packages/core/src/project-context.mjs",
   "policy/support-matrix.json",
   "schemas/support-matrix.schema.json",
   "schemas/contracts/build-artifact.schema.json",
@@ -30,6 +31,7 @@ const admittedPaths = new Set([
   "scripts/check-support-matrix.mjs",
   "tests/synthetic-fixture.test.mjs",
   "tests/contracts.test.mjs",
+  "tests/project-context.test.mjs",
   "tests/support-matrix.test.mjs"
 ]);
 
