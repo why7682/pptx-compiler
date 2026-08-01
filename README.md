@@ -8,11 +8,13 @@ compiler and quality-assurance toolkit.
 This repository is a foundation pre-alpha licensed under the MIT License. It
 contains executable clean-room admission, support-matrix, and versioned-contract
 gates, a pure explicit-root `ProjectContext`, and a repository-owned
-text-to-PPTX/POTX synthetic fixture generator. Generated archives are ignored
-test data, and contract examples are schema-only fixtures; there is still no
-accepted file input, presentation inspector, dispatcher, or renderer. It is not
-yet a releasable software package. Do not publish until the release gates in
-[TODO.md](TODO.md) pass.
+text-to-PPTX/POTX synthetic fixture generator. A pure semantic inspector now
+normalizes the reviewed fixture lane's explicit parsed package view into a
+deterministic redacted `TemplateIndex`; it does not open ZIP/XML input.
+Generated archives are ignored test data, and contract examples are schema-only
+fixtures; there is still no accepted file input, secure ingestion, dispatcher,
+or renderer. It is not yet a releasable software package. Do not publish until
+the release gates in [TODO.md](TODO.md) pass.
 
 ## Intended function
 
@@ -41,13 +43,15 @@ and OOXML feature matrix will be explicit and fail closed.
    [docs/M1-002_HANDOFF.md](docs/M1-002_HANDOFF.md).
 5. For the explicit runtime context, read
    [docs/M1-003_HANDOFF.md](docs/M1-003_HANDOFF.md).
-6. Load broader project/architecture documents only when the handoff routes to
+6. For the semantic inspector boundary, read
+   [docs/M1-004_HANDOFF.md](docs/M1-004_HANDOFF.md).
+7. Load broader project/architecture documents only when the handoff routes to
    them.
 
-The private root package has no dependencies; `npm test` and
-`npm run check:public-tree` verify the current foundation. The next task is the
-bounded public template inspector in `M1-004`, not ZIP/XML ingestion or
-renderer migration.
+The private root package has no dependencies; `npm test`,
+`npm run inspect:synthetic`, and `npm run check:public-tree` verify the current
+foundation. The next task is secure ZIP/XML ingestion in `M1-005`, not renderer
+migration or arbitrary-template support.
 
 ## License
 

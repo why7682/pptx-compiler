@@ -10,6 +10,7 @@
   "scripts": {
     "test": "node --test tests/*.test.mjs",
     "generate:fixtures": "node scripts/generate-synthetic-fixtures.mjs --output-dir fixtures/generated",
+    "inspect:synthetic": "node scripts/inspect-synthetic-fixture.mjs",
     "generate:contract-types": "node scripts/check-contracts.mjs --write-types",
     "check:forbidden": "node scripts/check-forbidden-materials.mjs --mode index",
     "check:provenance": "node scripts/check-provenance.mjs --mode index",

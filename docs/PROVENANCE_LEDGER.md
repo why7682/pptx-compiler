@@ -239,6 +239,40 @@ notes: This slice performs no filesystem or presentation I/O and is not secure
   ingestion, inspector, capability, render, QA, or support evidence.
 ```
 
+### M1-004 semantic template-inspector set
+
+```yaml
+paths:
+  - docs/M1-004_HANDOFF.md
+  - fixtures/inspection/expected-potx-template-index.json
+  - packages/core/src/template-inspector.mjs
+  - scripts/generate-synthetic-fixtures.mjs
+  - scripts/inspect-synthetic-fixture.mjs
+  - tests/template-inspector.test.mjs
+kind: new-clean-room; the expected index is a deterministic generated golden
+origin: independently authored from the M1-004 exit criterion, the normative
+  TemplateIndex 0.1.0 contract, and the reviewed repository-owned text fixture;
+  no predecessor implementation, private fixture, or presentation binary was
+  inspected
+original_author_or_holder: Elliot Wu
+created_or_reviewed_on: 2026-08-01
+license_or_rights_basis: MIT
+third_party_dependencies: []
+private_information_review: passed; the golden contains only normalized public
+  technical facts and no names, slide text, local paths, or private identifiers
+project_constant_removal: passed; core contains no fixture constants, managed
+  helper, ambient root, filesystem, archive, or XML dependency
+public_fixture_conformance: applicable; 119 inspector test nodes cover exact
+  PPTX/POTX output, deterministic redaction, bounded views, graph mutations,
+  reviewed OOXML vocabulary drift, and clean-directory module closure
+independent_review: passed; three findings covering unmodeled OOXML, unbounded
+  caller-view copying, and slide-size field loss were fixed and independently
+  rechecked with no remaining blocker
+notes: This slice accepts only an already parsed reviewed-fixture package view.
+  It is not secure PPTX/POTX ingestion, arbitrary-template support, or npm
+  clean-install evidence.
+```
+
 The XML namespace, relationship-type, and MIME strings are interoperability
 identifiers from the public format specification. They do not convey third-
 party presentation content. The fictional `Synthetic Sans` typeface name does

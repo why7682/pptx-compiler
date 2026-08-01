@@ -46,8 +46,8 @@ criterion is recorded in the repository.
 | M1-001 | DONE | Create a repository-owned synthetic PPTX/POTX fixture generator from reviewed text-only OOXML parts. | Generated decks are deterministic, contain no third-party branding/content, and pass an independent provenance review. |
 | M1-002 | DONE | Define versioned schemas for project config, template profile/index, capability registry/overlay, slide spec, build artifact, and QA report. | Valid and mutation-invalid fixtures pass/fail predictably on every supported Node version. |
 | M1-003 | DONE | Implement `ProjectContext` and remove ambient root-path assumptions. | Core APIs accept explicit paths/dependencies; scans find no project-root singleton or absolute path. |
-| M1-004 | NEXT | Implement a distributable template inspector without managed/private helpers. | A clean installation inspects the synthetic fixture and emits a deterministic, path-redacted index. |
-| M1-005 | PENDING | Implement secure ZIP/XML ingestion. | Tests cover traversal, symlinks, zip bombs, member/size limits, duplicates, case conflicts, malformed XML, external relationships, macros, ActiveX, and embedded objects. |
+| M1-004 | DONE | Implement a distributable template inspector without managed/private helpers. | A clean installation inspects the synthetic fixture and emits a deterministic, path-redacted index. |
+| M1-005 | NEXT | Implement secure ZIP/XML ingestion. | Tests cover traversal, symlinks, zip bombs, member/size limits, duplicates, case conflicts, malformed XML, external relationships, macros, ActiveX, and embedded objects. |
 
 ### M1-001 completion evidence — 2026-07-31
 
@@ -110,6 +110,37 @@ criterion is recorded in the repository.
 - Working-tree and staged forbidden-material, exact provenance, support-matrix,
   and versioned-contract gates passed. `supportClaimsEnabled` remains false;
   no file input, inspector, secure ingestion, capability, render, or QA support
+  is claimed.
+
+### M1-004 completion evidence — 2026-08-01
+
+- `packages/core/src/template-inspector.mjs` accepts an explicit frozen
+  `ProjectContext`, a bounded already-parsed `TemplatePackageView`, and an
+  injected exact `TemplateIndex 0.1.0` validator. It performs no filesystem,
+  archive, XML, cwd, environment, or Git discovery.
+- The reviewed public-fixture producer emits archive-bound package views and
+  fingerprints its normalized OOXML structure. Unmodeled attributes, children,
+  transitions, timing, extension lists, ambiguous shapes, and unsupported
+  relationships fail closed before an index is returned.
+- POTX output exactly matches the committed path/text-redacted execution golden;
+  PPTX differs only in format and exact archive SHA-256. Ordinal master, layout,
+  slide, and shape keys preserve source owner/z-order without using names or
+  fixture IDs.
+- `npm test`: 344/344 passed. The M1-004 suite contributes 119 test nodes and 94
+  focused rejection mutations, bringing the repository total to 289 focused
+  rejection mutations.
+- The identical 344-test suite passed on Node.js 22.23.1 and Node.js 24.14.0.
+  Cross-platform OS evidence remains M3-004.
+- The clean-install exit criterion is presently evidenced by a clean-directory
+  module-closure smoke from an unrelated cwd. Literal packed-tarball installation
+  remains M3-002/M3-003 because the private workspace is not publishable.
+- The bounded independent review found three blockers: unmodeled OOXML could be
+  omitted, caller views were copied before bounds, and slide-size extra fields
+  were lost. Structural fingerprinting, bounded normalization, and exact
+  `{cx, cy}` validation closed all three; re-review found no remaining blocker.
+- Working-tree and staged forbidden-material, exact provenance, support-matrix,
+  and versioned-contract gates passed. `supportClaimsEnabled` remains false;
+  no PPTX/POTX file input, secure ingestion, capability, render, or QA support
   is claimed.
 
 ## M2 — Generic rendering vertical slice

@@ -12,6 +12,8 @@
 ## Trust boundaries
 
 - untrusted PPTX/POTX ZIP/XML input;
+- caller-supplied parsed package views whose labels do not prove trustworthy
+  origin;
 - untrusted project/specification files;
 - local assets and optional external processes;
 - public pull-request workflows;
@@ -41,6 +43,9 @@
 
 - canonicalize and contain every path; create outputs in isolated staging;
 - parse package metadata before extraction and enforce conservative limits;
+- keep semantic inspection free of filesystem/archive/XML I/O; only a separately
+  proven secure ingestion boundary may convert untrusted bytes into its package
+  view;
 - disable network/entity resolution; reject high-risk OOXML in 0.x;
 - pass explicit minimal environments to external processes with time/output
   limits and no shell interpolation;

@@ -15,8 +15,10 @@ const admittedPaths = new Set([
   "docs/PRIVATE_FIXTURE_POLICY.md",
   "docs/RELEASE_GATES.md",
   "fixtures/source-parts/minimal/fixture.json",
+  "fixtures/inspection/expected-potx-template-index.json",
   "package.json",
   "packages/core/src/project-context.mjs",
+  "packages/core/src/template-inspector.mjs",
   "policy/support-matrix.json",
   "schemas/support-matrix.schema.json",
   "schemas/contracts/build-artifact.schema.json",
@@ -32,7 +34,8 @@ const admittedPaths = new Set([
   "tests/synthetic-fixture.test.mjs",
   "tests/contracts.test.mjs",
   "tests/project-context.test.mjs",
-  "tests/support-matrix.test.mjs"
+  "tests/support-matrix.test.mjs",
+  "tests/template-inspector.test.mjs"
 ]);
 
 function cloneMatrix() {
@@ -64,6 +67,16 @@ test("support matrix validates and produces byte-stable findings", () => {
   assert.equal(JSON.stringify(first), JSON.stringify(second));
   assert.equal(matrix.supportClaimsEnabled, false);
   assert.equal(matrix.dimensions.capabilities.some((item) => item.status === "supported"), false);
+  const packageInspection = matrix.dimensions.capabilities.find((item) => item.id === "package-inspection");
+  assert.equal(packageInspection.status, "unsupported");
+  assert.equal(packageInspection.disposition, "unavailable");
+  assert.equal(packageInspection.evidence.artifacts.some((artifact) => artifact.type === "executor"), false);
+  assert.deepEqual(
+    matrix.dimensions.inputs
+      .filter((item) => ["potx-template", "pptx-template"].includes(item.id))
+      .map((item) => item.status),
+    ["unsupported", "unsupported"]
+  );
   const headings = {
     inputs: "Inputs",
     ooxmlFeatures: "OOXML features",

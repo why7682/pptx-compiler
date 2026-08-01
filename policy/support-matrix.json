@@ -122,9 +122,9 @@
         "label": "User-owned POTX template",
         "status": "unsupported",
         "disposition": "unavailable",
-        "currentBasis": "The repository can generate its own ignored synthetic POTX, but no secure archive ingestion or template inspector exists.",
+        "currentBasis": "The reviewed fixture lane can generate POTX bytes and normalize its explicit parsed package view, but no secure archive/XML ingestion accepts user-owned POTX.",
         "limitations": ["Generated fixture output is test data; user-owned POTX input remains unavailable and committed POTX binaries are rejected."],
-        "roadmap": "M1-004 and M1-005",
+        "roadmap": "M1-005 and M3-001",
         "evidence": { "level": "none", "artifacts": [] }
       },
       {
@@ -132,9 +132,9 @@
         "label": "User-owned PPTX template",
         "status": "unsupported",
         "disposition": "unavailable",
-        "currentBasis": "The repository can generate its own ignored synthetic PPTX, but no secure archive ingestion or template inspector exists.",
+        "currentBasis": "The reviewed fixture lane can generate PPTX bytes and normalize its explicit parsed package view, but no secure archive/XML ingestion accepts user-owned PPTX.",
         "limitations": ["Generated fixture output is test data; user-owned PPTX input remains unavailable and committed PPTX binaries are rejected."],
-        "roadmap": "M1-004 and M1-005",
+        "roadmap": "M1-005 and M3-001",
         "evidence": { "level": "none", "artifacts": [] }
       },
       {
@@ -181,21 +181,36 @@
         "label": "Template profile and normalized index",
         "status": "unsupported",
         "disposition": "unavailable",
-        "currentBasis": "Version 0.1.0 TemplateProfile and TemplateIndex schemas have public mutation tests; the inspector is not implemented.",
-        "limitations": ["Schema-valid index data does not prove safe package ingestion or inspection."],
-        "roadmap": "M1-002 and M1-004",
+        "currentBasis": "Version 0.1.0 schemas and the pure semantic inspector emit a deterministic TemplateIndex from the reviewed fixture package view; no secure package input or profile resolver exists.",
+        "limitations": ["A schema-valid index or caller-supplied package view does not prove safe archive/XML ingestion."],
+        "roadmap": "M1-002, M1-004, M1-005, and M2-002",
         "evidence": {
           "level": "automated-public",
           "artifacts": [
             {
+              "type": "contract",
+              "path": "packages/core/src/template-inspector.mjs",
+              "note": "Pure package-view graph validation and deterministic TemplateIndex normalization; performs no file, ZIP, or XML input work."
+            },
+            {
+              "type": "conformance-fixture",
+              "path": "fixtures/inspection/expected-potx-template-index.json",
+              "note": "Execution-derived redacted golden for the repository-owned reviewed POTX fixture lane."
+            },
+            {
               "type": "input-schema",
               "path": "schemas/contracts/template-index.schema.json",
-              "note": "Normalized index shape only; no package reader or inspector is present."
+              "note": "Normative normalized index output shape; it is not a package-reader contract."
             },
             {
               "type": "input-schema",
               "path": "schemas/contracts/template-profile.schema.json",
               "note": "Profile-to-index binding contract only."
+            },
+            {
+              "type": "qa-assertions",
+              "path": "tests/template-inspector.test.mjs",
+              "note": "Public deterministic, graph, redaction, mutation, and clean-directory module-closure inspection evidence."
             }
           ]
         }
@@ -498,10 +513,29 @@
         "label": "PPTX/POTX package inspection and feature classification",
         "status": "unsupported",
         "disposition": "unavailable",
-        "currentBasis": "No distributable inspector or secure package layer exists.",
-        "limitations": ["Private or managed helpers are inadmissible."],
-        "roadmap": "M1-004 and M1-005",
-        "evidence": { "level": "none", "artifacts": [] }
+        "currentBasis": "A distributable pure semantic inspector normalizes the reviewed public fixture package view; no secure package/XML ingestion or dispatchable capability exists.",
+        "limitations": ["The caller-supplied view is not a security credential; private or managed helpers remain inadmissible."],
+        "roadmap": "M1-005 and M2-001",
+        "evidence": {
+          "level": "automated-public",
+          "artifacts": [
+            {
+              "type": "contract",
+              "path": "packages/core/src/template-inspector.mjs",
+              "note": "Side-effect-free graph inspector over an explicit reviewed-fixture package view, not an arbitrary PPTX/POTX reader."
+            },
+            {
+              "type": "conformance-fixture",
+              "path": "fixtures/inspection/expected-potx-template-index.json",
+              "note": "Deterministic output for the public synthetic lane only."
+            },
+            {
+              "type": "qa-assertions",
+              "path": "tests/template-inspector.test.mjs",
+              "note": "Rejects view, graph, relationship, feature, geometry, binding, and disclosure mutations."
+            }
+          ]
+        }
       },
       {
         "id": "source-slide-clone-fill",
@@ -528,16 +562,21 @@
         "label": "Hash-bound template profile and semantic binding",
         "status": "unsupported",
         "disposition": "unavailable",
-        "currentBasis": "Version 0.1.0 profile/index/overlay schemas reject ambiguous contract bindings; no inspector or runtime resolver exists.",
-        "limitations": ["Schema-conformance cannot prove an indexed shape came from safely inspected package bytes."],
+        "currentBasis": "The semantic inspector binds its index to the reviewed archive digest and explicit ProjectConfig IDs; no TemplateProfile/ProjectOverlay runtime resolver exists.",
+        "limitations": ["A caller-supplied package view and digest field cannot prove secure ingestion or semantic role correctness."],
         "roadmap": "M1-002, M1-004, and M2-002",
         "evidence": {
           "level": "automated-public",
           "artifacts": [
             {
+              "type": "contract",
+              "path": "packages/core/src/template-inspector.mjs",
+              "note": "Copies exact configured profile/index IDs and reviewed producer archive digest into a schema-validated index."
+            },
+            {
               "type": "input-schema",
               "path": "schemas/contracts/template-index.schema.json",
-              "note": "Normalized index shape without an inspector."
+              "note": "Normalized index shape consumed by later binding resolution."
             },
             {
               "type": "input-schema",

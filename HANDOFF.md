@@ -6,8 +6,9 @@ This is an independent, clean-history workspace created to extract a generic
 PPTX rendering and QA pipeline from a private predecessor project. It now has
 plans, versioned data contracts, dependency-free foundation policy gates,
 reviewed text-only OOXML fixture parts, generated TypeScript declarations, a
-pure explicit-root runtime context, and synthetic mutation tests. No PPTX
-product implementation, tracked binary fixture, design asset, dependency
+pure explicit-root runtime context, a pure semantic inspector for the reviewed
+fixture lane, and synthetic mutation tests. No arbitrary PPTX/POTX ingestion or
+rendering implementation, tracked binary fixture, design asset, dependency
 lockfile, prompt log, or predecessor Git history has been copied.
 
 The project uses the MIT License with Elliot Wu as the declared copyright
@@ -49,6 +50,17 @@ aliases, and source/write conflicts without filesystem I/O or ambient root
 discovery. The 225-test suite passes on Node.js 22.23.1 and 24.14.0. This is path
 modeling, not template inspection or symlink/TOCTOU-safe input opening.
 
+`M1-004` is complete: the dependency-free semantic inspector consumes an
+explicit `ProjectContext`, a bounded already-parsed reviewed-fixture package
+view, and an injected exact `TemplateIndex 0.1.0` validator. It emits the
+deterministic path/text-redacted public golden, preserves source owner/z-order,
+and rejects graph ambiguity, unsupported vocabulary, unbounded arrays,
+accessors, and unknown fields. The reviewed producer fingerprints its normalized
+OOXML structure so unmodeled attributes and children cannot disappear into an
+empty feature list. The 344-test suite passes on Node.js 22.23.1 and 24.14.0;
+the independent closing review reports no remaining blocker. This is not secure
+ZIP/XML ingestion, arbitrary-template support, or npm clean-install evidence.
+
 The repository has no remote. Keep it local until the public synthetic-fixture
 flow can run `init -> inspect -> validate -> render -> qa`. After that executable
 checkpoint and a fresh public-preflight scan, create a **public** repository;
@@ -57,10 +69,11 @@ unscoped package decision is also deferred until package metadata is designed.
 
 ## Immediate objective
 
-The next dependency is `M1-004`: implement a distributable template inspector
-that consumes the explicit `ProjectContext` and produces a deterministic,
-path-redacted index for the repository-owned synthetic fixture. Keep secure
-untrusted ZIP/XML ingestion in M1-005 and do not import managed/private helpers.
+The next dependency is `M1-005`: implement secure ZIP/XML ingestion that can
+produce trustworthy package views for the semantic inspector. Enforce canonical
+filesystem opening, archive/resource limits, XML/parser limits, relationship
+and high-risk part policy, and fail-closed unknown vocabulary. Do not broaden
+the current reviewed-fixture producer into an arbitrary-input claim.
 
 ## First commands after switching workspace
 
@@ -74,13 +87,14 @@ git remote -v
 ```
 
 The private root package has no dependencies, so no install step is required.
-Run `npm test` and `npm run check:public-tree` to revalidate the completed
-admission, support, fixture, data-contract, and runtime-context gates.
+Run `npm test`, `npm run inspect:synthetic`, and `npm run check:public-tree` to
+revalidate the completed admission, support, fixture, data-contract,
+runtime-context, and semantic-inspector gates.
 
 ## Next work session
 
-1. Confirm the M0-004 through M1-003 acceptance commands pass on the clean checkout.
-2. Read `docs/M1-003_HANDOFF.md` before consuming `ProjectContext` in M1-004.
+1. Confirm the M0-004 through M1-004 acceptance commands pass on the clean checkout.
+2. Read `docs/M1-004_HANDOFF.md` before designing the M1-005 secure producer.
 3. Keep predecessor code, presentation assets, and generated archives out of
    Git; use only repository-owned text/synthetic contract fixtures for tests.
 

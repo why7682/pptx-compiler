@@ -10,8 +10,9 @@ The project is `pre-alpha-contract-only`, and `supportClaimsEnabled` is `false`.
 There is no supported PPTX input, OOXML feature, renderer capability, or output
 flow yet. The executable code currently in this repository protects admission
 and validates this policy. It also validates the version `0.1.0` data-contract
-shapes and creates ignored, repository-owned synthetic PPTX/POTX test data; it
-does not inspect, accept, dispatch, or render user presentations.
+shapes, creates ignored repository-owned synthetic PPTX/POTX test data, and
+normalizes that reviewed lane's explicit parsed package view into a redacted
+TemplateIndex. It does not open, accept, dispatch, or render user presentations.
 
 | Dimension | Items | Supported | Experimental | Manual | Unsupported |
 | --- | ---: | ---: | ---: | ---: | ---: |
@@ -45,16 +46,18 @@ Roadmap entries describe intended work only. They do not change current status.
 
 ## Important boundaries
 
-- PPTX/POTX inputs remain unsupported until the public inspector and secure
-  ZIP/XML layer exist and pass their mutation suites. Producing the bounded
-  synthetic fixture does not make arbitrary packages accepted input.
+- PPTX/POTX inputs remain unsupported. The pure semantic inspector does not
+  open archives or parse XML; secure ZIP/XML ingestion and accepted CLI input
+  remain M1-005/M3 work. Producing and inspecting the bounded synthetic lane
+  does not make arbitrary packages accepted input.
 - ProjectConfig now has automated schema evidence and a pure in-memory
   `ProjectContext` consumer that resolves explicit paths lexically. It remains
   `unsupported`: there is no config file/CLI loader, filesystem-safe input
   opening, or accepted presentation flow.
-- Profile/index, registry/overlay, and deck/slide schemas have automated
-  contract evidence but no runtime resolver or dispatcher. Schema-only fixtures
-  are explicitly not capability conformance evidence.
+- Profile/index has automated schema evidence plus a reviewed-fixture semantic
+  inspector, but no secure input or profile/overlay resolver. Registry/overlay
+  and deck/slide schemas still have no runtime resolver or dispatcher.
+  Schema-only fixtures are explicitly not capability conformance evidence.
 - Macros, ActiveX, OLE, embedded packages, external relationships, embedded
   fonts, unknown vendor XML, and every unlisted OOXML feature have a target
   disposition of `reject`. That rejection is not executable PPTX evidence yet.

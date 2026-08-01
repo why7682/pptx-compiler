@@ -21,6 +21,7 @@ No item below is decided merely because a recommendation is recorded.
 | D-015 | ACCEPTED | 0.x contract compatibility | Breaking contract changes increment the minor version with migration notes; patches remain compatible within a minor except an immediate documented safety demotion; unknown versions/fields fail closed. | M0-005 compatibility policy and schema-version mutations. |
 | D-016 | ACCEPTED | First public data-contract set | Use contract version `0.1.0`, eight closed root documents, registered shared references, generated TypeScript declarations, and explicitly schema-only synthetic examples. | M1-002 manifest, shared validator, cross-document gate, and positive/negative fixtures. |
 | D-017 | ACCEPTED | ProjectContext boundary | Use a pure runtime context with an explicit absolute root and injected exact ProjectConfig validator; defer filesystem identity and time-of-use safety to actual consumers. | M1-003 context source, path/dependency mutations, ambient-root scan, and explicit M1-005/M2-005 security boundary. |
+| D-018 | ACCEPTED | Template inspection versus secure ingestion | Keep core inspection as a pure normalization of an explicit parsed package view; admit only the reviewed public fixture producer in M1-004 and defer untrusted file/ZIP/XML conversion to M1-005. | M1-004 source, public execution golden, graph/redaction mutations, clean-directory module-closure smoke, and unchanged false support switch. |
 
 Record a decision by changing its status to `ACCEPTED`, adding the date and
 rationale below the table, and updating every affected contract/TODO in the
@@ -83,6 +84,13 @@ same change.
   validator, and resolves only lexically contained locations. Constructor-time
   `realpath`/`lstat` checks would not prevent replacement before use; secure
   opening stays with M1-005 consumers and staging/publication stays M2-005.
+- **D-018 accepted:** `TemplatePackageView 0.1.0` is a runtime adapter contract,
+  not proof that bytes were opened or parsed safely. M1-004 core accepts the
+  reviewed-fixture producer class, validates its normalized content/relationship
+  graph, and emits a frozen schema-validated `TemplateIndex` without I/O.
+  M1-005 must implement and prove the separate untrusted filesystem, ZIP, XML,
+  relationship, high-risk-part, and resource-limit boundary before another
+  producer class or user-owned input can be admitted.
 
 ## MIT versus Apache-2.0 review
 

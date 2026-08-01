@@ -68,7 +68,7 @@
       "privateInformationReview": { "status": "passed", "notes": "Only approved public project identity is present." },
       "projectConstantCleanup": { "status": "passed", "notes": "Findings are generic and contain no predecessor identifiers." },
       "publicConformance": { "status": "not-applicable", "notes": "Handoff text only." },
-      "independentReview": { "status": "passed", "notes": "M1-003 closing state, evidence, claim boundary, and next dependency were checked against the reviewed implementation." },
+      "independentReview": { "status": "passed", "notes": "M1-004 closing state, evidence, claim boundary, and M1-005 dependency were checked against the reviewed implementation." },
       "notes": "Repository-owned project handoff."
     },
     {
@@ -96,7 +96,7 @@
       "privateInformationReview": { "status": "passed", "notes": "No private information present." },
       "projectConstantCleanup": { "status": "passed", "notes": "No predecessor constants admitted." },
       "publicConformance": { "status": "not-applicable", "notes": "Project overview only." },
-      "independentReview": { "status": "passed", "notes": "M1-003 status and unchanged presentation-support boundary were checked against the reviewed implementation." },
+      "independentReview": { "status": "passed", "notes": "M1-004 semantic-inspector status and unchanged arbitrary-input support boundary were checked against implementation." },
       "notes": "Repository-owned project overview."
     },
     {
@@ -110,7 +110,7 @@
       "privateInformationReview": { "status": "passed", "notes": "No private information present." },
       "projectConstantCleanup": { "status": "passed", "notes": "No predecessor constants admitted." },
       "publicConformance": { "status": "not-applicable", "notes": "Planning status only." },
-      "independentReview": { "status": "passed", "notes": "M1-003 completion evidence, dependency order, test counts, and residual scope were independently checked." },
+      "independentReview": { "status": "passed", "notes": "M1-004 completion evidence, dependency order, test counts, and residual secure-ingestion scope were independently checked." },
       "notes": "Repository-owned dependency-ordered plan."
     },
     {
@@ -123,8 +123,8 @@
       "thirdPartyDependencies": [],
       "privateInformationReview": { "status": "passed", "notes": "No private information present." },
       "projectConstantCleanup": { "status": "passed", "notes": "Architecture is stated generically." },
-      "publicConformance": { "status": "applicable", "notes": "Records the serialized-data and runtime-only contract boundaries without implying presentation support." },
-      "independentReview": { "status": "passed", "notes": "M1-003 architecture status and side-effect-free core boundary were checked against implementation and tests." },
+      "publicConformance": { "status": "applicable", "notes": "Records serialized-data, explicit runtime-context, and pure semantic-inspection boundaries without implying arbitrary presentation support." },
+      "independentReview": { "status": "passed", "notes": "M1-004 architecture split between reviewed package views and deferred secure ingestion was checked against implementation and tests." },
       "notes": "Repository-owned target architecture."
     },
     {
@@ -152,7 +152,7 @@
       "privateInformationReview": { "status": "passed", "notes": "Contains only approved public project identity." },
       "projectConstantCleanup": { "status": "passed", "notes": "No predecessor constants admitted." },
       "publicConformance": { "status": "not-applicable", "notes": "Decision record only." },
-      "independentReview": { "status": "passed", "notes": "M1-003 explicit-root, injected-validator, and consumer-time security decision was independently checked." },
+      "independentReview": { "status": "passed", "notes": "M1-004 reviewed-producer, injected-validator, normalized-index, and deferred secure-ingestion decision was independently checked." },
       "notes": "Repository-owned decision register."
     },
     {
@@ -226,6 +226,20 @@
       "notes": "Normative bounded runtime contract for M1-003; not a serialized schema or filesystem safety claim."
     },
     {
+      "path": "docs/M1-004_HANDOFF.md",
+      "kind": "new-clean-room",
+      "origin": "M1-004 clean-room semantic-inspector contract from repository requirements and TemplateIndex 0.1.0",
+      "copyrightHolderOrSourceAuthority": "Elliot Wu",
+      "license": { "spdxExpression": "MIT" },
+      "reviewedOn": "2026-08-01",
+      "thirdPartyDependencies": [],
+      "privateInformationReview": { "status": "passed", "notes": "Contains only public contract names and generic repository-relative paths." },
+      "projectConstantCleanup": { "status": "passed", "notes": "No predecessor implementation, private fixture, presentation binary, managed helper, or private path was admitted." },
+      "publicConformance": { "status": "applicable", "notes": "Defines the bounded package-view, deterministic-index, redaction, clean-directory, and deferred secure-ingestion contract." },
+      "independentReview": { "status": "passed", "notes": "The bounded M1-004 review's three findings were fixed and rechecked with no remaining blocker." },
+      "notes": "Normative bounded semantic-inspector contract; not an arbitrary PPTX/POTX input or npm installation claim."
+    },
+    {
       "path": "docs/NAME_AVAILABILITY.md",
       "kind": "new-clean-room",
       "origin": "user-directed clean-room project planning",
@@ -292,7 +306,7 @@
       "privateInformationReview": { "status": "passed", "notes": "No private information present." },
       "projectConstantCleanup": { "status": "passed", "notes": "No predecessor constants admitted." },
       "publicConformance": { "status": "not-applicable", "notes": "Human-readable policy summary only." },
-      "independentReview": { "status": "passed", "notes": "M1-003 admission set and its three exact new-file records were independently checked." },
+      "independentReview": { "status": "passed", "notes": "M1-004 admission set, generated golden, and exact new-file records were independently checked." },
       "notes": "Human policy companion to the machine-readable records."
     },
     {
@@ -305,8 +319,8 @@
       "thirdPartyDependencies": [],
       "privateInformationReview": { "status": "passed", "notes": "No private information present." },
       "projectConstantCleanup": { "status": "passed", "notes": "Release criteria are generic." },
-      "publicConformance": { "status": "applicable", "notes": "Records the executable context gate and its explicit exclusion from filesystem and presentation support." },
-      "independentReview": { "status": "passed", "notes": "M1-003 gate description was checked against implementation, mutations, and deferred consumer-time controls." },
+      "publicConformance": { "status": "applicable", "notes": "Records the executable context and semantic-inspection gates plus their explicit exclusion from secure filesystem/archive ingestion and arbitrary presentation support." },
+      "independentReview": { "status": "passed", "notes": "M1-004 gate description was checked against exact output, bounds, mutations, and deferred M1-005 controls." },
       "notes": "Repository-owned release gates."
     },
     {
@@ -320,7 +334,7 @@
       "privateInformationReview": { "status": "passed", "notes": "Contains generic public feature classes and aggregate counts only." },
       "projectConstantCleanup": { "status": "passed", "notes": "No predecessor feature identifier or evidence admitted." },
       "publicConformance": { "status": "applicable", "notes": "Summarizes the normative checked 60-row matrix without broadening it." },
-      "independentReview": { "status": "passed", "notes": "M1-003 lexical runtime evidence and unchanged unsupported presentation/input statuses were independently checked." },
+      "independentReview": { "status": "passed", "notes": "M1-004 semantic fixture evidence and unchanged unsupported PPTX/POTX input and capability statuses were independently checked." },
       "notes": "Human-readable support-matrix summary."
     },
     {
@@ -329,12 +343,12 @@
       "origin": "user-directed clean-room project planning",
       "copyrightHolderOrSourceAuthority": "Elliot Wu",
       "license": { "spdxExpression": "MIT" },
-      "reviewedOn": "2026-07-31",
+      "reviewedOn": "2026-08-01",
       "thirdPartyDependencies": [],
       "privateInformationReview": { "status": "passed", "notes": "No private information present." },
       "projectConstantCleanup": { "status": "passed", "notes": "Threats are stated generically." },
       "publicConformance": { "status": "not-applicable", "notes": "Threat-model text only." },
-      "independentReview": { "status": "not-applicable", "notes": "M0-005 overclaim control addition did not require independent review." },
+      "independentReview": { "status": "passed", "notes": "M1-004 package-view trust boundary and deferred untrusted-ingestion controls were independently checked." },
       "notes": "Repository-owned threat model."
     },
     {
@@ -462,6 +476,20 @@
       "publicConformance": { "status": "applicable", "notes": "Schema-valid TemplateProfile document used only for contract conformance and feature tests." },
       "independentReview": { "status": "passed", "notes": "Bounded M1-002 closing review findings were fixed and regression-tested." },
       "notes": "Synthetic schema fixture; it does not identify or profile a private deck."
+    },
+    {
+      "path": "fixtures/inspection/expected-potx-template-index.json",
+      "kind": "generated",
+      "origin": "deterministic M1-004 golden generated from the reviewed repository-owned text fixture and TemplateIndex 0.1.0 contract",
+      "copyrightHolderOrSourceAuthority": "Elliot Wu",
+      "license": { "spdxExpression": "MIT" },
+      "reviewedOn": "2026-08-01",
+      "thirdPartyDependencies": [],
+      "privateInformationReview": { "status": "passed", "notes": "Contains normalized public technical facts only; no names, text, local paths, or private identifiers." },
+      "projectConstantCleanup": { "status": "passed", "notes": "Derived only from the reviewed synthetic fixture and semantic ordinal-key rules." },
+      "publicConformance": { "status": "applicable", "notes": "Exact POTX inspection bytes are reproduced by the public harness and schema-validated in tests." },
+      "independentReview": { "status": "passed", "notes": "The M1-004 closing review reproduced the exact golden result after all findings were fixed." },
+      "notes": "Execution golden for the reviewed public fixture; not an arbitrary-template or private-fixture oracle."
     },
     {
       "path": "fixtures/source-parts/minimal/fixture.json",
@@ -648,15 +676,15 @@
     {
       "path": "package.json",
       "kind": "new-clean-room",
-      "origin": "M0-004 through M1-002 clean-room foundation implementation",
+      "origin": "M0-004 through M1-004 clean-room foundation implementation",
       "copyrightHolderOrSourceAuthority": "Elliot Wu",
       "license": { "spdxExpression": "MIT" },
-      "reviewedOn": "2026-07-31",
+      "reviewedOn": "2026-08-01",
       "thirdPartyDependencies": [],
       "privateInformationReview": { "status": "passed", "notes": "Private root metadata contains no personal or remote metadata." },
       "projectConstantCleanup": { "status": "passed", "notes": "No predecessor package metadata admitted." },
-      "publicConformance": { "status": "applicable", "notes": "Defines admission, support, fixture, versioned-contract, type-generation, and test commands." },
-      "independentReview": { "status": "passed", "notes": "M1-002 scripts and public/working gate composition were independently checked." },
+      "publicConformance": { "status": "applicable", "notes": "Defines admission, support, fixture, versioned-contract, type-generation, synthetic inspection, and test commands." },
+      "independentReview": { "status": "passed", "notes": "The M1-004 synthetic inspection command and unchanged private workspace status were independently checked." },
       "notes": "Dependency-free private workspace manifest; it is not publishable."
     },
     {
@@ -672,6 +700,20 @@
       "publicConformance": { "status": "applicable", "notes": "Explicit-root construction, validation dependency, immutable snapshots, lexical containment, and path-separation mutations execute publicly." },
       "independentReview": { "status": "passed", "notes": "The bounded review's input-document alias finding was fixed and all 10 role pairs were regression-tested." },
       "notes": "Dependency-free core runtime context using only the Node.js path built-in; no package metadata is introduced."
+    },
+    {
+      "path": "packages/core/src/template-inspector.mjs",
+      "kind": "new-clean-room",
+      "origin": "M1-004 clean-room implementation from TemplateIndex 0.1.0, ProjectContext 0.1.0, and the bounded semantic package-view contract",
+      "copyrightHolderOrSourceAuthority": "Elliot Wu",
+      "license": { "spdxExpression": "MIT" },
+      "reviewedOn": "2026-08-01",
+      "thirdPartyDependencies": [],
+      "privateInformationReview": { "status": "passed", "notes": "Outputs and errors contain only normalized technical facts, stable codes, and public JSON pointers." },
+      "projectConstantCleanup": { "status": "passed", "notes": "Core contains no fixture IDs, names, text, local paths, managed helpers, ambient root, archive parser, or XML parser." },
+      "publicConformance": { "status": "applicable", "notes": "Deterministic graph normalization, exact validation, redaction, bounds, immutability, and fail-closed mutations execute publicly." },
+      "independentReview": { "status": "passed", "notes": "Unbounded caller-view copying and non-exact slide-size validation findings were fixed and independently rechecked." },
+      "notes": "Pure semantic inspector for an already parsed reviewed-fixture package view; secure ingestion remains M1-005."
     },
     {
       "path": "policy/forbidden-materials.json",
@@ -697,14 +739,14 @@
       "thirdPartyDependencies": [],
       "privateInformationReview": { "status": "passed", "notes": "Uses generic feature classes, public roadmap IDs, and public contract paths only." },
       "projectConstantCleanup": { "status": "passed", "notes": "No predecessor implementation, asset, or identifier admitted." },
-      "publicConformance": { "status": "applicable", "notes": "Contains 60 checked rows, zero supported PPTX claims, and exact evidence paths through M1-003." },
-      "independentReview": { "status": "passed", "notes": "M1-003 runtime-context evidence and unchanged unsupported input/capability statuses were independently checked." },
+      "publicConformance": { "status": "applicable", "notes": "Contains 60 checked rows, zero supported PPTX claims, and exact semantic-inspection evidence paths through M1-004." },
+      "independentReview": { "status": "passed", "notes": "M1-004 evidence and unchanged unsupported PPTX/POTX input and capability statuses were independently checked." },
       "notes": "Normative versioned public support matrix."
     },
     {
       "path": "provenance/records.json",
       "kind": "new-clean-room",
-      "origin": "M0-004 provenance contract with exact clean-room records through M1-003",
+      "origin": "M0-004 provenance contract with exact clean-room records through M1-004",
       "copyrightHolderOrSourceAuthority": "Elliot Wu",
       "license": { "spdxExpression": "MIT" },
       "reviewedOn": "2026-08-01",
@@ -712,7 +754,7 @@
       "privateInformationReview": { "status": "passed", "notes": "Records contain only approved public and generic source-authority information." },
       "projectConstantCleanup": { "status": "passed", "notes": "Every admitted path is repository-relative and generic." },
       "publicConformance": { "status": "applicable", "notes": "Self-covered by the exact-path provenance gate." },
-      "independentReview": { "status": "passed", "notes": "M1-003 exact-path coverage, admission fields, and review closure were independently checked." },
+      "independentReview": { "status": "passed", "notes": "M1-004 exact-path coverage, admission fields, generated golden, and review closure were independently checked." },
       "notes": "Normative per-file provenance source, including its own record."
     },
     {
@@ -942,16 +984,30 @@
     {
       "path": "scripts/generate-synthetic-fixtures.mjs",
       "kind": "new-clean-room",
-      "origin": "M1-001 clean-room implementation from reviewed public standards and repository contract",
+      "origin": "M1-001 clean-room fixture generator extended in M1-004 from the reviewed text fixture and semantic package-view contract",
       "copyrightHolderOrSourceAuthority": "Elliot Wu",
       "license": { "spdxExpression": "MIT" },
-      "reviewedOn": "2026-07-31",
+      "reviewedOn": "2026-08-01",
       "thirdPartyDependencies": [],
       "privateInformationReview": { "status": "passed", "notes": "Reports only public fixture names, byte counts, and hashes; no input paths are emitted." },
       "projectConstantCleanup": { "status": "passed", "notes": "Dependency-free implementation uses only the reviewed manifest and generic package rules." },
-      "publicConformance": { "status": "applicable", "notes": "Builds deterministic PPTX/POTX archives and rejects unsafe source, graph, and publication mutations." },
-      "independentReview": { "status": "passed", "notes": "Bounded M1-001 provenance/security review closed with no blocking findings." },
-      "notes": "Dependency-free deterministic synthetic fixture generator."
+      "publicConformance": { "status": "applicable", "notes": "Builds deterministic PPTX/POTX archives and reviewed package views, and rejects unsafe source, graph, publication, and unmodeled OOXML mutations." },
+      "independentReview": { "status": "passed", "notes": "The M1-004 unmodeled-OOXML finding was fixed with a normalized structural fingerprint and independently rechecked." },
+      "notes": "Dependency-free deterministic synthetic fixture generator and reviewed-fixture package-view producer."
+    },
+    {
+      "path": "scripts/inspect-synthetic-fixture.mjs",
+      "kind": "new-clean-room",
+      "origin": "M1-004 clean-room public harness composed from ProjectContext, the reviewed fixture producer, TemplateIndex validation, and the semantic inspector",
+      "copyrightHolderOrSourceAuthority": "Elliot Wu",
+      "license": { "spdxExpression": "MIT" },
+      "reviewedOn": "2026-08-01",
+      "thirdPartyDependencies": [],
+      "privateInformationReview": { "status": "passed", "notes": "Success output is the path-redacted golden index; failures expose no source values." },
+      "projectConstantCleanup": { "status": "passed", "notes": "Uses only repository-owned public fixture/config sources and explicit runtime dependencies." },
+      "publicConformance": { "status": "applicable", "notes": "The harness emits byte-stable schema-valid POTX inspection output matching the committed golden." },
+      "independentReview": { "status": "passed", "notes": "The M1-004 closing review reproduced the harness output after all findings were fixed." },
+      "notes": "Public synthetic-fixture inspection harness; not a user-file CLI or secure ingestion adapter."
     },
     {
       "path": "scripts/lib/json-schema.mjs",
@@ -1012,15 +1068,15 @@
     {
       "path": "tests/support-matrix.test.mjs",
       "kind": "new-clean-room",
-      "origin": "M0-005 clean-room tests updated in M1-003 for exact runtime-context evidence paths",
+      "origin": "M0-005 clean-room tests updated in M1-004 for exact semantic-inspection evidence paths and overclaim assertions",
       "copyrightHolderOrSourceAuthority": "Elliot Wu",
       "license": { "spdxExpression": "MIT" },
       "reviewedOn": "2026-08-01",
       "thirdPartyDependencies": [],
       "privateInformationReview": { "status": "passed", "notes": "Uses repository-owned synthetic in-memory mutations only." },
       "projectConstantCleanup": { "status": "passed", "notes": "No predecessor identifier, asset, or path appears." },
-      "publicConformance": { "status": "applicable", "notes": "Covers one baseline, 13 rejection mutations, and exact admitted M1-003 evidence paths." },
-      "independentReview": { "status": "passed", "notes": "M1-003 evidence-path additions and unchanged overclaim assertions were independently checked." },
+      "publicConformance": { "status": "applicable", "notes": "Covers one baseline, 13 rejection mutations, exact admitted M1-004 evidence paths, and zero supported claims." },
+      "independentReview": { "status": "passed", "notes": "M1-004 evidence-path additions and unchanged fail-closed support assertions were independently checked." },
       "notes": "Dependency-free support-matrix overclaim and drift tests."
     },
     {
@@ -1036,6 +1092,20 @@
       "publicConformance": { "status": "applicable", "notes": "Checks deterministic ZIP bytes, minimal graph, content isolation, atomic publication, and rejection mutations." },
       "independentReview": { "status": "passed", "notes": "Bounded M1-001 provenance/security review closed with no blocking findings." },
       "notes": "Dependency-free public synthetic-fixture conformance and mutation tests."
+    },
+    {
+      "path": "tests/template-inspector.test.mjs",
+      "kind": "new-clean-room",
+      "origin": "M1-004 clean-room tests from the semantic package-view, deterministic-index, security-boundary, and support-claim requirements",
+      "copyrightHolderOrSourceAuthority": "Elliot Wu",
+      "license": { "spdxExpression": "MIT" },
+      "reviewedOn": "2026-08-01",
+      "thirdPartyDependencies": [],
+      "privateInformationReview": { "status": "passed", "notes": "Uses only repository-owned text fixtures, runtime-created synthetic roots, and isolated temporary directories." },
+      "projectConstantCleanup": { "status": "passed", "notes": "No predecessor implementation, private asset, private identifier, or committed absolute local path is present." },
+      "publicConformance": { "status": "applicable", "notes": "Covers 119 test nodes for exact PPTX/POTX output, determinism, redaction, bounds, graph mutations, vocabulary drift, and clean-directory closure." },
+      "independentReview": { "status": "passed", "notes": "Regression cases for all three M1-004 review findings were independently rechecked with no remaining blocker." },
+      "notes": "Dependency-free semantic inspector, reviewed producer, golden, and scope-boundary tests."
     },
     {
       "path": "types/contracts.d.ts",

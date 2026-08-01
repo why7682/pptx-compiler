@@ -41,7 +41,7 @@ labs, private fixtures, or a presentation project.
 The first versioned contracts are:
 
 - `ProjectConfig` and `ProjectContext`;
-- `TemplateProfile` and `TemplateIndex`;
+- `TemplateProfile`, `TemplatePackageView`, and `TemplateIndex`;
 - `CapabilityDefinition`, `CapabilityExecutor`, and `CapabilityRegistry`;
 - `ProjectOverlay` and `ShapeBinding`;
 - `DeckSpec` and `SlideSpec`;
@@ -63,6 +63,12 @@ TypeScript declarations are generated from it. M1-003 implements
 explicit absolute root, the normative `ProjectConfig`, and an injected schema
 validator. It resolves only lexical locations and creates no second serialized
 authority; its publishable package/type surface remains M3-002.
+M1-004 implements `TemplatePackageView` as a runtime-only, already-parsed
+semantic graph and a pure inspector that validates that graph and emits the
+normative `TemplateIndex`. Core performs no filesystem, archive, decompression,
+or XML I/O. The current producer class is restricted to the reviewed public
+fixture lane; secure conversion of untrusted PPTX/POTX bytes into an equivalent
+view remains M1-005. A view label is not a security credential.
 `CapabilityExecutor` and capability-specific schemas stay in M2-001. A registry
 string naming an executor is not dispatchability evidence.
 

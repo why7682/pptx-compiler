@@ -127,3 +127,13 @@ detached frozen path/config snapshots, rejects lexical escape and case-folded
 root/write-target aliases, and contains no cwd/environment/Git root discovery.
 These tests establish explicit wiring only: they do not satisfy G2 filesystem,
 symlink, TOCTOU, archive, or XML gates, which remain consumer-time work.
+
+M1-004 adds a side-effect-free semantic template inspector and the
+`npm run inspect:synthetic` evidence harness. The reviewed fixture producer
+builds archive bytes, digest, and an already-parsed package view in one bounded
+in-memory flow; core validates the view graph and emits a deterministic,
+path-redacted `TemplateIndex 0.1.0`. A clean-directory module-closure smoke
+copies only the core sources and runtime-generated public view to an empty
+directory and executes from an unrelated cwd. This is not npm tarball/install
+evidence and does not satisfy G2: arbitrary file opening, ZIP/XML safety, and a
+secure package-view producer remain M1-005.

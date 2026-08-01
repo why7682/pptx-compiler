@@ -1,0 +1,68 @@
+{
+  "schemaVersion": "0.1.0",
+  "contractType": "template-index",
+  "templateIndexId": "synthetic-template-index",
+  "templateProfileId": "synthetic-template-profile",
+  "templateFormat": "potx",
+  "templateSha256": "f9875cbaf15b890baaf1370ddd0796ba09d6dc08a6963ce64298a81ca51b99ab",
+  "presentationPart": "ppt/presentation.xml",
+  "slideSizeEmu": {
+    "cx": 12192000,
+    "cy": 6858000
+  },
+  "observedFeatureIds": [
+    "content-types-and-relationships",
+    "drawingml-shapes",
+    "masters-layouts-themes",
+    "package-container",
+    "slide-text"
+  ],
+  "masters": [
+    {
+      "masterKey": "master-1",
+      "sourceId": 2147483900,
+      "partPath": "ppt/slideMasters/slideMaster1.xml"
+    }
+  ],
+  "layouts": [
+    {
+      "layoutKey": "layout-1",
+      "sourceId": 2147483901,
+      "partPath": "ppt/slideLayouts/slideLayout1.xml",
+      "masterKey": "master-1",
+      "shapes": []
+    }
+  ],
+  "slides": [
+    {
+      "slideKey": "slide-1",
+      "sourceId": 300,
+      "partPath": "ppt/slides/slide1.xml",
+      "layoutKey": "layout-1",
+      "shapes": [
+        {
+          "shapeKey": "shape-1",
+          "sourceId": 2,
+          "kind": "text-box",
+          "geometry": {
+            "x": 914400,
+            "y": 1285875,
+            "cx": 10363200,
+            "cy": 1143000
+          }
+        },
+        {
+          "shapeKey": "shape-2",
+          "sourceId": 3,
+          "kind": "text-box",
+          "geometry": {
+            "x": 1371600,
+            "y": 2971800,
+            "cx": 9448800,
+            "cy": 914400
+          }
+        }
+      ]
+    }
+  ]
+}
