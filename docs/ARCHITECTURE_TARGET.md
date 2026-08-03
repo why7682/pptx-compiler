@@ -73,8 +73,21 @@ semantic API still treats every producer label as structural metadata rather
 than a security credential; only the high-level opened-handle-to-index chain is
 secure-ingestion evidence. The grammar remains limited to the repository-owned
 public minimal fixture class and fails closed on unknown vocabulary.
-`CapabilityExecutor` and capability-specific schemas stay in M2-001. A registry
-string naming an executor is not dispatchability evidence.
+M2-001 implements `CapabilityExecutor` and the dispatcher as runtime-only
+contract version `0.1.0` without changing the serialized data-contract set. A
+registry string naming an executor is not dispatchability evidence. Only an
+atomically admitted trusted registration with exact executor, input/output
+schema documents and validators, nonempty conformance fixtures, QA assertions,
+and support-policy binding enters the private executable map. The public
+contract probe is conformance-only and is not a product capability.
+
+Dispatch uses a frozen runtime facade, full-batch synchronous validation and
+preflight, an opaque module-authenticated one-shot plan, and ordered execution
+with post-output schema and QA checks. Executor IDs are never module paths;
+there is no dynamic import, ambient lookup, semver fallback, or incremental
+registration. M2-001 provides executors no filesystem or staging authority.
+Trusted product executors, overlay/index resolution, staged mutation, rollback,
+and publication enter only in later M2 slices.
 
 ## Capability resolution
 
@@ -83,6 +96,7 @@ SlideSpec
   -> schema validation
   -> project overlay resolution
   -> capability lookup
+  -> support-policy authorization
   -> executor preflight
   -> source/template binding validation
   -> staged mutation
@@ -93,6 +107,8 @@ SlideSpec
 
 There is no generic fallback to deck-specific code. If resolution is ambiguous
 or an executor is absent, the build fails before modifying an output package.
+All invocations in one batch must pass lookup, input validation, binding checks,
+support authorization, and preflight before the first executor runs.
 
 ## CLI surface
 

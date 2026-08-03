@@ -324,6 +324,61 @@ notes: No generated archive or mutation corpus binary is tracked. The fixed
   capability support.
 ```
 
+### M2-001 capability-runtime set
+
+```yaml
+paths:
+  - AGENTS.md
+  - HANDOFF.md
+  - README.md
+  - TODO.md
+  - docs/ARCHITECTURE_TARGET.md
+  - docs/COMPATIBILITY_POLICY.md
+  - docs/DECISIONS.md
+  - docs/M2-001_HANDOFF.md
+  - docs/OPEN_SOURCE_READINESS.md
+  - docs/PROVENANCE_LEDGER.md
+  - docs/RELEASE_GATES.md
+  - docs/SUPPORT_MATRIX.md
+  - docs/THREAT_MODEL.md
+  - fixtures/capabilities/dispatcher-contract-probe/cases.json
+  - fixtures/capabilities/dispatcher-contract-probe/input.schema.json
+  - fixtures/capabilities/dispatcher-contract-probe/output.schema.json
+  - fixtures/capabilities/dispatcher-contract-probe/registry.json
+  - fixtures/capabilities/dispatcher-contract-probe/runtime.mjs
+  - packages/core/src/capability-dispatcher.mjs
+  - policy/support-matrix.json
+  - provenance/records.json
+  - tests/capability-dispatcher.test.mjs
+  - tests/support-matrix.test.mjs
+kind: new-clean-room; existing planning/contracts updated in place
+origin: independently authored from the M2-001 TODO exit criterion, existing
+  public 0.1.0 registry/deck contracts, support policy, release gates, and
+  repository-owned synthetic data; no predecessor implementation, private
+  fixture, presentation asset, or presentation binary was inspected
+original_author_or_holder: Elliot Wu
+created_or_reviewed_on: 2026-08-02
+license_or_rights_basis: MIT
+third_party_dependencies: []
+private_information_review: passed; core errors expose only stable codes and
+  public pointers, while fixtures contain generic data-only probe identities
+project_constant_removal: passed; registry URNs are comparison keys and core
+  contains no private identifier, ambient loader, filesystem/network/process
+  authority, presentation asset, or product-capability implementation
+public_fixture_conformance: applicable; 85 dispatcher nodes exercise atomic
+  admission, exact artifact binding, support authorization, full-batch
+  validation/preflight, one-shot plans, immutable data, redaction, fixed
+  limits, output QA, clean-directory closure, and probe isolation
+independent_review: passed; the bounded closing review's caller-mutation race,
+  late aggregate-budget enforcement, rejected-Promise handling, and stale
+  record findings were fixed; code fixes were independently rechecked with no
+  remaining blocker or high finding
+notes: The dispatcher-contract probe is conformance-only and absent from the
+  60-row product support matrix. Complete runtime registration is necessary
+  for dispatchability but does not create a support claim; the global switch
+  remains false and every product row remains non-supported.
+```
+
 The XML namespace, relationship-type, and MIME strings are interoperability
 identifiers from the public format specification. They do not convey third-
 party presentation content. The fictional `Synthetic Sans` typeface name does

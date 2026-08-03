@@ -67,6 +67,15 @@ For maintenance or audit of the completed `M1-005` secure ingestion lane, read:
 6. `docs/SUPPORT_MATRIX.md`
 7. `docs/PROVENANCE_LEDGER.md`
 
+For maintenance or audit of the completed `M2-001` capability runtime, read:
+
+3. `docs/M2-001_HANDOFF.md`
+4. `packages/core/src/capability-dispatcher.mjs`
+5. `schemas/contracts/capability-registry.schema.json`
+6. `schemas/contracts/deck-spec.schema.json`
+7. `docs/SUPPORT_MATRIX.md`
+8. `docs/PROVENANCE_LEDGER.md`
+
 Read `docs/PROJECT_DEFINITION.md` and `docs/ARCHITECTURE_TARGET.md` only before
 changing product scope, public contracts, packages, or dependency direction.
 
@@ -145,6 +154,12 @@ changing product scope, public contracts, packages, or dependency direction.
   one-step high-level boundary. Unknown ZIP/XML/OPC/PresentationML constructs
   fail closed; do not broaden the grammar without new public positive and
   mutation evidence and a support-matrix review.
+- When maintaining `M2-001`, treat registry IDs as comparison keys, never code
+  locations. Admit only exact trusted registrations with executor, input and
+  output schemas, nonempty conformance fixtures, QA assertions, and a support
+  decision. Preserve full-batch validation/preflight, opaque one-shot plans,
+  fixed limits, and zero product-capability claims until later milestones add
+  their own executors and evidence.
 - Add tests with every executable capability.
 - Update the architecture, support matrix, provenance ledger, and release gates
   in the same change when their contract changes.

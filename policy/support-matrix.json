@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "matrixVersion": "0.1.0",
-  "updatedOn": "2026-08-01",
+  "updatedOn": "2026-08-02",
   "productStage": "pre-alpha-contract-only",
   "supportClaimsEnabled": false,
   "statusDefinitions": {
@@ -29,9 +29,9 @@
         "label": "Data-only capability overlay and semantic bindings",
         "status": "unsupported",
         "disposition": "unavailable",
-        "currentBasis": "Version 0.1.0 CapabilityRegistry and ProjectOverlay schemas have public mutation tests, but no resolver or executor exists.",
-        "limitations": ["Schema-conformance examples are not accepted runtime inputs or capability evidence."],
-        "roadmap": "M1-002 and M2-001",
+        "currentBasis": "Version 0.1.0 metadata and binding schemas plus a fail-closed runtime registration/dispatch foundation have public tests; no ProjectOverlay loader or TemplateIndex resolver exists.",
+        "limitations": ["Schema-conformance examples and the dispatcher contract probe are not accepted runtime project inputs or product capability evidence."],
+        "roadmap": "M1-002, M2-001, and M2-002",
         "evidence": {
           "level": "automated-public",
           "artifacts": [
@@ -44,6 +44,16 @@
               "type": "input-schema",
               "path": "schemas/contracts/project-overlay.schema.json",
               "note": "Closed overlay and semantic-binding contract without a runtime resolver."
+            },
+            {
+              "type": "contract",
+              "path": "packages/core/src/capability-dispatcher.mjs",
+              "note": "Atomic executable registration and resolved-invocation dispatch contract; it does not load ProjectOverlay files or resolve shapes."
+            },
+            {
+              "type": "qa-assertions",
+              "path": "tests/capability-dispatcher.test.mjs",
+              "note": "Rejects incomplete artifact registration, ambiguous resolved bindings, unavailable support states, partial-batch execution, and plan replay."
             }
           ]
         }
@@ -53,16 +63,31 @@
         "label": "Versioned deck and slide specification",
         "status": "unsupported",
         "disposition": "unavailable",
-        "currentBasis": "Version 0.1.0 DeckSpec and SlideSpec schemas have public mutation tests, but no dispatcher exists.",
-        "limitations": ["The open payload still requires capability-specific schema validation before dispatch."],
-        "roadmap": "M1-002 and M2-001",
+        "currentBasis": "Version 0.1.0 DeckSpec and SlideSpec schemas plus a runtime dispatcher that revalidates open payloads against exact capability schemas have public tests.",
+        "limitations": ["No product capability executor, DeckSpec loader, staging authority, or render flow exists; the only positive executor is conformance-only."],
+        "roadmap": "M1-002 through M2-003",
         "evidence": {
           "level": "automated-public",
           "artifacts": [
             {
               "type": "input-schema",
               "path": "schemas/contracts/deck-spec.schema.json",
-              "note": "Base deck/slide contract only; no payload dispatcher or renderer is present."
+              "note": "Base deck/slide contract; its open payload alone is never dispatchable."
+            },
+            {
+              "type": "contract",
+              "path": "packages/core/src/capability-dispatcher.mjs",
+              "note": "Validates frozen invocation payloads against the exact admitted input schema before full-batch preflight."
+            },
+            {
+              "type": "conformance-fixture",
+              "path": "fixtures/capabilities/dispatcher-contract-probe/cases.json",
+              "note": "Data-only dispatcher mechanics case explicitly excluded from product capability evidence."
+            },
+            {
+              "type": "qa-assertions",
+              "path": "tests/capability-dispatcher.test.mjs",
+              "note": "Exercises ordered dispatch, output validation, QA assertions, support authorization, redaction, and resource ceilings."
             }
           ]
         }
@@ -635,7 +660,7 @@
         "disposition": "unavailable",
         "currentBasis": "The pure semantic inspector and a bounded ProjectContext-bound ZIP/XML/OPC producer inspect the public minimal fixture class; no dispatchable capability or published CLI exists.",
         "limitations": ["The accepted grammar is deliberately narrow, and a caller-supplied view or producer label is not a security credential."],
-        "roadmap": "M2-001 and M3-001",
+        "roadmap": "M3-001",
         "evidence": {
           "level": "automated-public",
           "artifacts": [
@@ -844,8 +869,8 @@
         "label": "Automated public synthetic conformance evidence",
         "status": "experimental",
         "disposition": "accept-with-warning",
-        "currentBasis": "Foundation gates, deterministic repository-owned PPTX/POTX generation, and schema-only data-contract conformance have public automated tests.",
-        "limitations": ["Cannot support a PPTX capability until its complete conformance artifacts exist."],
+        "currentBasis": "Foundation gates, deterministic repository-owned PPTX/POTX generation, schema-only data-contract conformance, and dispatcher-mechanics conformance have public automated tests.",
+        "limitations": ["Cannot support a PPTX capability until its own complete product artifacts, mutation safety, platform evidence, enabled claim switch, and reviewed matrix promotion exist."],
         "roadmap": "M1-001 through M3-004",
         "evidence": {
           "level": "automated-public",
@@ -879,6 +904,41 @@
               "type": "qa-assertions",
               "path": "tests/contracts.test.mjs",
               "note": "Checks positive schemas, cross-document semantics, generated types, and fail-closed mutations."
+            },
+            {
+              "type": "contract",
+              "path": "docs/M2-001_HANDOFF.md",
+              "note": "Defines the runtime registration, full-batch preflight, one-shot plan, support, limit, and trusted-code boundaries."
+            },
+            {
+              "type": "metadata",
+              "path": "fixtures/capabilities/dispatcher-contract-probe/registry.json",
+              "note": "Independent dispatcher-conformance-only metadata; it is not part of the product CapabilityRegistry fixture."
+            },
+            {
+              "type": "input-schema",
+              "path": "fixtures/capabilities/dispatcher-contract-probe/input.schema.json",
+              "note": "Exact versioned input schema for the dispatcher contract probe only."
+            },
+            {
+              "type": "output-schema",
+              "path": "fixtures/capabilities/dispatcher-contract-probe/output.schema.json",
+              "note": "Exact versioned output schema for the dispatcher contract probe only."
+            },
+            {
+              "type": "conformance-fixture",
+              "path": "fixtures/capabilities/dispatcher-contract-probe/cases.json",
+              "note": "Repository-owned data-only invocation and expected output for dispatcher mechanics."
+            },
+            {
+              "type": "executor",
+              "path": "fixtures/capabilities/dispatcher-contract-probe/runtime.mjs",
+              "note": "No-I/O conformance probe executor and assertions; never a product capability executor."
+            },
+            {
+              "type": "qa-assertions",
+              "path": "tests/capability-dispatcher.test.mjs",
+              "note": "Checks atomic admission, batch preflight, one-shot execution, schemas, support decisions, QA, limits, and claim isolation."
             }
           ]
         }

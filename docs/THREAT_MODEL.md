@@ -15,6 +15,8 @@
 - caller-supplied parsed package views whose labels do not prove trustworthy
   origin;
 - untrusted project/specification files;
+- declarative capability registries, open slide payloads, binding selections,
+  and caller attempts to substitute executor/schema/QA identities;
 - local assets and optional external processes;
 - public pull-request workflows;
 - trusted release and optional PowerPoint hosts;
@@ -38,6 +40,8 @@
    mismatch between reviewed and published content;
 8. capability overclaim causing silent flattening, collateral mutation, or
    false editability/compatibility evidence.
+9. registry strings triggering dynamic code loading, schema substitution,
+   incomplete conformance registration, replayed execution, or QA spoofing.
 
 ## Default controls
 
@@ -56,6 +60,9 @@
 - bind release provenance to the reviewed commit and tarball digest.
 - validate support claims against a versioned positive matrix; unknown items and
   missing evidence remain explicit failures.
+- keep executable capability mappings closed and trusted; bind every executor,
+  schema, fixture, and QA identity exactly, validate frozen input/output, and
+  preflight the full batch before execution.
 
 ## M1-005 implemented input boundary
 
@@ -84,3 +91,31 @@ unusual Windows reparse points, and weak network-filesystem identity semantics
 remain residual threats. Strong hostile-directory isolation requires a native
 broker or a trusted already-open handle. This limitation prevents an
 arbitrary-hostile-directory claim but does not permit a support promotion.
+
+## M2-001 implemented dispatch boundary
+
+Declarative registry URNs never trigger filesystem search, dynamic import,
+`require`, `eval`, network access, or a child process. Runtime admission is
+atomic: only a complete exact artifact bundle whose nonempty conformance cases
+execute through input schema, preflight, output schema, and every QA assertion
+enters a module-private executable map. Metadata-only definitions remain known
+but unavailable.
+
+Invocation data is bounded descriptor-safe JSON, detached from the caller, and
+deeply frozen. Exact capability/version lookup, support policy, binding roles,
+input validators, and all executor preflights complete for the whole batch
+before an opaque plan is returned. The plan is authenticated by private module
+state and marked consumed before the first asynchronous execution step. Outputs
+are bounded and frozen again before exact output validation and QA. Aggregate
+node and UTF-8 budgets, including object keys, are enforced during traversal;
+registration conformance never rereads caller-owned records after an `await`.
+Rejected Promises returned from sync-only trusted callbacks are consumed before
+the mapped failure is raised. Stable errors expose only codes and structural
+pointers.
+
+The dispatcher is not a JavaScript sandbox. Executors, validators, QA
+assertions, and the support resolver are trusted in-process code from a future
+closed package catalog; malicious or non-terminating trusted code can still use
+its own ambient authority. The M2-001 probe has no I/O or mutation authority.
+Staging isolation, rollback, source immutability, collateral diff, and atomic
+publication remain M2-005 controls, so no product capability is promoted.

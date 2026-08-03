@@ -16,7 +16,11 @@ TemplateIndex. A separate internal lane now opens the `ProjectContext`-bound
 source and validates the public minimal fixture through fixed filesystem,
 ZIP/XML/OPC, relationship, and high-risk rejection controls. This is bounded
 security evidence, not a published input or arbitrary-template compatibility
-claim; the project still does not dispatch or render user presentations.
+claim. A separate runtime-only dispatcher now atomically binds complete trusted
+artifact registrations and executes a data-only conformance probe through
+batch preflight, input/output schemas, support policy, and QA assertions. The
+probe is not a product capability; the project still does not dispatch or
+render user presentations.
 
 | Dimension | Items | Supported | Experimental | Manual | Unsupported |
 | --- | ---: | ---: | ---: | ---: | ---: |
@@ -61,8 +65,9 @@ Roadmap entries describe intended work only. They do not change current status.
   opening, or accepted presentation flow.
 - Profile/index has automated schema evidence, a reviewed-fixture semantic
   inspector, and a bounded secure-ingestion producer, but no profile/overlay
-  resolver. Registry/overlay and deck/slide schemas still have no runtime
-  resolver or dispatcher.
+  resolver. Registry/overlay and deck/slide schemas now have a fail-closed
+  runtime registration/dispatch mechanism, but no loader, product executor,
+  template/index binding resolver, staging authority, or render flow.
   Schema-only fixtures are explicitly not capability conformance evidence.
 - Macros, ActiveX, OLE, embedded packages, and external relationships have
   executable rejection mutations in the bounded ingestion lane. Embedded
@@ -84,6 +89,7 @@ Run:
 ```sh
 npm run check:support-matrix
 npm run check:contracts
+node --test tests/capability-dispatcher.test.mjs
 ```
 
 The gate reads the staged matrix and schema by default, validates their
@@ -94,3 +100,7 @@ evidence paths against admitted files, and rejects overclaims. Use
 The contract gate separately validates the staged `0.1.0` schema manifest,
 positive examples, cross-document semantics, and generated TypeScript. Passing
 it does not alter any support status.
+
+The dispatcher test verifies runtime admission and execution mechanics using a
+separate conformance-only probe. Passing it does not add a matrix capability or
+authorize a product executor.

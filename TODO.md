@@ -175,11 +175,42 @@ criterion is recorded in the repository.
 
 | ID | Status | Task | Exit criterion |
 | --- | --- | --- | --- |
-| M2-001 | NEXT | Define the executable capability interface and dispatcher. | `supported` cannot be registered without executor, schemas, conformance fixture, and QA contract. |
-| M2-002 | PENDING | Implement data-driven source-slide clone/fill with semantic shape bindings. | No fixture-specific slide/shape identifiers exist in source; missing or ambiguous bindings fail closed. |
+| M2-001 | DONE | Define the executable capability interface and dispatcher. | `supported` cannot be registered without executor, schemas, conformance fixture, and QA contract. |
+| M2-002 | NEXT | Implement data-driven source-slide clone/fill with semantic shape bindings. | No fixture-specific slide/shape identifiers exist in source; missing or ambiguous bindings fail closed. |
 | M2-003 | PENDING | Implement a minimal native DrawingML component capability. | One data-only slide spec renders through the same dispatcher and remains editable. |
 | M2-004 | PENDING | Parameterize the optional Pandoc/OMML adapter and isolate it from core. | Pandoc is detected as an external optional dependency; formula transplant and failure behavior have conformance tests and attribution review. |
 | M2-005 | PENDING | Implement create-only assembly, normalization, semantic diff, and collateral-mutation checks. | The source is unchanged; output is atomically published; allowed and forbidden part changes are machine-verifiable. |
+
+### M2-001 completion evidence — 2026-08-02
+
+- `createCapabilityRuntime` atomically binds exact metadata, executor,
+  input/output schema documents and validators, nonempty conformance fixtures,
+  QA assertions, and support decisions. Metadata-only definitions stay known
+  but unavailable; registry URNs never load code.
+- `prepareCapabilityDispatch` validates and preflights the complete detached,
+  frozen, bounded batch before any executor runs. `executeCapabilityDispatch`
+  authenticates and consumes an opaque plan before its first `await`, preserves
+  order, and validates every bounded output and QA assertion.
+- The repository-owned `dispatcher-contract-probe` is data-only,
+  conformance-only, absent from product capability rows, and has no filesystem,
+  network, process, dynamic-loader, presentation, or mutation authority.
+- `npm test`: 507/507 passed. The dispatcher suite contributes 85 nodes; the
+  dispatcher plus support-matrix suites also pass 99/99 under
+  `--unhandled-rejections=strict`.
+- The identical 507-test suite passed on the checksum-verified official Node.js
+  22.23.1 and Node.js 24.14.0 releases. Cross-platform OS evidence remains
+  M3-004.
+- The bounded independent review found one blocker, two high findings, and one
+  provenance medium. Internal registration captures now close the async
+  mutation race; aggregate node/string/key budgets reject during traversal;
+  rejected Promises from sync-only callbacks are consumed before redacted
+  failure; and all modified provenance records were refreshed. Re-review found
+  no remaining blocker or high finding.
+- Working-tree and staged forbidden-material, exact-provenance, support-matrix,
+  and versioned-contract gates passed, as did `git diff --cached --check`.
+- `supportClaimsEnabled` remains false and all 60 support rows remain
+  non-supported. Complete registration is necessary for dispatchability, not a
+  renderer, staging/publication guarantee, product capability, or support claim.
 
 ## M3 — CLI, packaging, and public QA
 

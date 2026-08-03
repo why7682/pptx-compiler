@@ -1,0 +1,36 @@
+{
+  "schemaVersion": 1,
+  "fixturePurpose": "dispatcher-conformance-only",
+  "capabilityId": "dispatcher-contract-probe",
+  "capabilityVersion": "0.1.0",
+  "fixtures": [
+    {
+      "fixtureId": "dispatcher-contract-probe-basic",
+      "invocation": {
+        "invocationId": "probe-invocation-one",
+        "capabilitySelectionId": "probe-selection",
+        "capabilityId": "dispatcher-contract-probe",
+        "capabilityVersion": "0.1.0",
+        "experimentalOptIn": true,
+        "payload": {
+          "value": "public-synthetic-value"
+        },
+        "bindings": [
+          {
+            "role": "probe-target",
+            "shapeBindingId": "probe-binding",
+            "containerKind": "slide",
+            "containerKey": "slide-1",
+            "shapeKey": "shape-1",
+            "expectedKind": "text-box",
+            "cardinality": "exactly-one"
+          }
+        ]
+      },
+      "expectedOutput": {
+        "accepted": true,
+        "resultType": "dispatcher-conformance-probe"
+      }
+    }
+  ]
+}

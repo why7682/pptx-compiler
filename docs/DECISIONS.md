@@ -23,6 +23,7 @@ No item below is decided merely because a recommendation is recorded.
 | D-017 | ACCEPTED | ProjectContext boundary | Use a pure runtime context with an explicit absolute root and injected exact ProjectConfig validator; defer filesystem identity and time-of-use safety to actual consumers. | M1-003 context source, path/dependency mutations, ambient-root scan, and explicit M1-005/M2-005 security boundary. |
 | D-018 | ACCEPTED | Template inspection versus secure ingestion | Keep core inspection as a pure normalization of an explicit parsed package view; admit only the reviewed public fixture producer in M1-004 and defer untrusted file/ZIP/XML conversion to M1-005. | M1-004 source, public execution golden, graph/redaction mutations, clean-directory module-closure smoke, and unchanged false support switch. |
 | D-019 | ACCEPTED | Initial secure-ingestion profile | Use a non-relaxable narrow ZIP/XML/OPC profile and a one-step `ProjectContext` source-to-index API; document portable Node filesystem race limits instead of claiming hostile-directory atomic containment. | M1-005 stored/DEFLATE positives, filesystem/archive/XML/OOXML mutation suite, exact public golden, residual-risk review, and unchanged false support switch. |
+| D-020 | ACCEPTED | Capability runtime and dispatcher trust boundary | Keep serialized registry IDs declarative; atomically bind only trusted exact artifact registrations, preflight complete batches, and execute authenticated one-shot plans without dynamic loading or fallback. | M2-001 runtime, conformance-only schemas/fixture/executor, admission/dispatch mutation suite, support-policy tests, and unchanged false support switch. |
 
 Record a decision by changing its status to `ACCEPTED`, adding the date and
 rationale below the table, and updating every affected contract/TODO in the
@@ -106,6 +107,19 @@ same change.
   TOCTOU residual recorded in the threat model. `TemplatePackageView` remains
   version `0.1.0` because its exact data shape did not change; admitting a new
   producer class is additive and the label itself remains non-authoritative.
+
+## Decision record — 2026-08-02
+
+- **D-020 accepted:** `CapabilityRegistry 0.1.0` remains declarative metadata;
+  executor/schema/QA URNs are exact comparison keys and never module paths.
+  Runtime contract `0.1.0` atomically admits only complete trusted artifact
+  bundles, verifies their public conformance cases, and keeps the executable
+  map behind a frozen facade. Dispatch snapshots and validates the full batch,
+  checks support policy and preflight for every invocation, then consumes an
+  authenticated plan once before ordered execution, output validation, and QA.
+  The repository probe is data-only conformance infrastructure, not a product
+  capability. Trusted executors are not sandboxed; staging rollback, source
+  isolation, and atomic publication remain M2-005.
 
 ## MIT versus Apache-2.0 review
 

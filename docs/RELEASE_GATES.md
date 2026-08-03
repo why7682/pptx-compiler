@@ -35,8 +35,9 @@ evidence by itself.
 ## G3 — Capability correctness
 
 - the shipped support matrix passes its schema and semantic overclaim gate;
-- every supported capability has an executor, schemas, conformance fixture,
-  deterministic output, negative tests, and QA assertions;
+- every supported capability has exact bound metadata, an executor, input and
+  output schemas, conformance fixtures, deterministic output, negative tests,
+  and a concrete QA contract with assertions;
 - source template is unchanged and output publication is create-only;
 - OOXML relationships, content types, geometry/capacity, semantic diff, and
   collateral mutation checks pass;
@@ -150,3 +151,22 @@ external relationships, macros, ActiveX, OLE, and embedded objects. This
 satisfies the bounded public G2 baseline for the synthetic minimal profile; it
 does not establish arbitrary-template compatibility, package installation, a
 CLI, a renderer capability, or any supported matrix row.
+
+M2-001 adds the bounded G3 registration/dispatch foundation. Declarative
+registry strings never load code. Atomic runtime admission requires exact
+capability/version, executor, input/output schema, nonempty conformance fixture,
+QA assertion, and support-item binding. The entire bounded invocation batch is
+snapshotted, input-validated, support-authorized, binding-checked, and
+preflighted before any executor runs; an opaque one-shot plan then executes in
+order and validates every output and QA assertion. Public mutations cover
+missing/drifting artifacts, placeholder metadata, accessors and non-JSON data,
+immediate aggregate resource ceilings including object keys, async admission
+mutation races, rejected sync-callback Promises, lookup/version/binding
+ambiguity, support states, batch atomicity, plan replay, executor/output/QA
+failures, and redaction.
+
+The only positive executor is a no-I/O dispatcher conformance probe. It is not
+a renderer or support artifact for any product capability. M2-001 does not
+establish overlay/index resolution, source immutability, create-only staging,
+rollback, OOXML collateral diff, atomic publication, packaging, CLI behavior,
+or sandboxing of hostile third-party JavaScript; those remain later gates.

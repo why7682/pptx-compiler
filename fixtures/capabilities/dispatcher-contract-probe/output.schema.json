@@ -1,0 +1,12 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:pptx-pipeline:conformance:schema:dispatcher-contract-probe-output:0.1.0",
+  "title": "Dispatcher contract probe output",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["resultType", "accepted"],
+  "properties": {
+    "resultType": { "const": "dispatcher-conformance-probe" },
+    "accepted": { "const": true }
+  }
+}

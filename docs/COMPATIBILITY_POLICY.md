@@ -13,8 +13,8 @@ project makes no supported PPTX capability claim.
 
 ## Fail-closed resolution
 
-Before mutating an output, future consumers must resolve every requested input
-and feature to one matrix row:
+Before mutating an output, the capability dispatcher and later consumers must
+resolve every requested input and feature to one matrix row:
 
 1. unknown schema version or field: reject;
 2. unknown or unlisted input/OOXML/platform: select the explicit catch-all and
@@ -28,6 +28,30 @@ and feature to one matrix row:
 No status may silently select deck-specific code, strip an unknown feature,
 flatten an editable object to an image, modify the source template, or convert
 missing evidence into success.
+
+## Executable registration and dispatch
+
+Serialized capability metadata is not executable authority. An executor ID,
+schema ID, fixture ID, QA ID, or support item ID supplied by a registry is never
+loaded dynamically. The M2-001 runtime admits a capability only through a
+closed trusted registration whose capability/version and every artifact ID
+exactly match one registry definition. Input/output schema documents and
+validators, a nonempty exact conformance set, executor preflight/execute
+functions, and nonempty QA assertions must all be present and pass together.
+
+All invocations are detached, bounded, and frozen. The complete batch must pass
+exact lookup/version checks, support authorization, input validation, resolved
+binding-role checks, and executor preflight before any executor runs. Output is
+again detached, bounded, frozen, schema-validated, and checked by every QA
+assertion. Unknown, unavailable, manual, and non-opted-in experimental cases
+stop before execution; a `supported` decision is invalid while the global
+claim switch is false.
+
+Complete registration is necessary but not sufficient for public support.
+Source isolation, create-only staging, collateral-mutation checks, declared
+platform evidence, the global switch, and an explicit matrix promotion remain
+required. The dispatcher conformance probe is never product capability
+evidence.
 
 ## Promotion and demotion
 

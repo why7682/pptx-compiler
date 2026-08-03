@@ -12,12 +12,19 @@ const summary = await readFile(path.join(projectRoot, "docs", "SUPPORT_MATRIX.md
 const admittedPaths = new Set([
   "docs/M1-001_HANDOFF.md",
   "docs/M1-002_HANDOFF.md",
+  "docs/M2-001_HANDOFF.md",
   "docs/PRIVATE_FIXTURE_POLICY.md",
   "docs/RELEASE_GATES.md",
   "fixtures/source-parts/minimal/fixture.json",
   "fixtures/inspection/expected-potx-template-index.json",
+  "fixtures/capabilities/dispatcher-contract-probe/cases.json",
+  "fixtures/capabilities/dispatcher-contract-probe/input.schema.json",
+  "fixtures/capabilities/dispatcher-contract-probe/output.schema.json",
+  "fixtures/capabilities/dispatcher-contract-probe/registry.json",
+  "fixtures/capabilities/dispatcher-contract-probe/runtime.mjs",
   "package.json",
   "packages/core/src/project-context.mjs",
+  "packages/core/src/capability-dispatcher.mjs",
   "packages/core/src/ooxml-package-view.mjs",
   "packages/core/src/secure-template-ingestion.mjs",
   "packages/core/src/secure-zip.mjs",
@@ -37,6 +44,7 @@ const admittedPaths = new Set([
   "scripts/check-support-matrix.mjs",
   "tests/synthetic-fixture.test.mjs",
   "tests/contracts.test.mjs",
+  "tests/capability-dispatcher.test.mjs",
   "tests/project-context.test.mjs",
   "tests/secure-template-ingestion.test.mjs",
   "tests/support-matrix.test.mjs",
@@ -72,6 +80,10 @@ test("support matrix validates and produces byte-stable findings", () => {
   assert.equal(JSON.stringify(first), JSON.stringify(second));
   assert.equal(matrix.supportClaimsEnabled, false);
   assert.equal(matrix.dimensions.capabilities.some((item) => item.status === "supported"), false);
+  assert.equal(
+    matrix.dimensions.capabilities.some((item) => item.id === "dispatcher-contract-probe"),
+    false
+  );
   const packageInspection = matrix.dimensions.capabilities.find((item) => item.id === "package-inspection");
   assert.equal(packageInspection.status, "unsupported");
   assert.equal(packageInspection.disposition, "unavailable");

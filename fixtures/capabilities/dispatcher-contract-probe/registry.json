@@ -1,0 +1,19 @@
+{
+  "schemaVersion": "0.1.0",
+  "contractType": "capability-registry",
+  "capabilityRegistryId": "dispatcher-conformance-registry",
+  "registryVersion": "0.1.0",
+  "capabilities": [
+    {
+      "capabilityId": "dispatcher-contract-probe",
+      "capabilityVersion": "0.1.0",
+      "supportMatrixItemId": "dispatcher-contract-probe",
+      "executorId": "urn:pptx-pipeline:conformance:executor:dispatcher-contract-probe:0.1.0",
+      "inputSchemaId": "urn:pptx-pipeline:conformance:schema:dispatcher-contract-probe-input:0.1.0",
+      "outputSchemaId": "urn:pptx-pipeline:conformance:schema:dispatcher-contract-probe-output:0.1.0",
+      "qaContractId": "urn:pptx-pipeline:conformance:qa:dispatcher-contract-probe:0.1.0",
+      "requiredBindingRoles": ["probe-target"],
+      "conformanceFixtureIds": ["dispatcher-contract-probe-basic"]
+    }
+  ]
+}

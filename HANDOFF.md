@@ -7,10 +7,11 @@ PPTX rendering and QA pipeline from a private predecessor project. It now has
 plans, versioned data contracts, dependency-free foundation policy gates,
 reviewed text-only OOXML fixture parts, generated TypeScript declarations, a
 pure explicit-root runtime context, a pure semantic inspector, bounded secure
-ZIP/XML ingestion for the public minimal fixture class, and synthetic mutation
-tests. No arbitrary PPTX/POTX compatibility layer or rendering implementation,
-tracked binary fixture, design asset, dependency lockfile, prompt log, or
-predecessor Git history has been copied.
+ZIP/XML ingestion for the public minimal fixture class, a fail-closed capability
+runtime/dispatcher, and synthetic mutation tests. No arbitrary PPTX/POTX
+compatibility layer or rendering implementation, tracked binary fixture, design
+asset, dependency lockfile, prompt log, or predecessor Git history has been
+copied.
 
 The project uses the MIT License with Elliot Wu as the declared copyright
 holder. The working name, monorepo shape, and repository-local public Git author
@@ -72,6 +73,19 @@ macros, ActiveX, embedded objects, and unknown vocabulary fail closed. The
 reports no remaining blocker or high finding. The portable filesystem race
 residual is documented, and no input or capability support claim was promoted.
 
+`M2-001` is complete: declarative capability metadata becomes executable only
+through an atomically admitted trusted registration with exact executor,
+input/output schemas, nonempty conformance fixtures, QA assertions, and support
+binding. Dispatch snapshots and preflights the complete batch before execution,
+uses an authenticated one-shot plan, and validates bounded outputs plus QA. The
+85-node dispatcher suite and complete 507-test repository suite pass on Node.js
+22.23.1 and 24.14.0; dispatcher plus support-matrix tests pass 99/99 under
+`--unhandled-rejections=strict`. The bounded closing review's
+registration-race blocker and two resource/rejection-handling high findings
+were fixed and rechecked with no remaining blocker or high. The only executor
+is a data-only conformance probe; all 60 product support rows remain
+non-supported and the global switch is false.
+
 The repository has no remote. Keep it local until the public synthetic-fixture
 flow can run `init -> inspect -> validate -> render -> qa`. After that executable
 checkpoint and a fresh public-preflight scan, create a **public** repository;
@@ -80,10 +94,10 @@ unscoped package decision is also deferred until package metadata is designed.
 
 ## Immediate objective
 
-The next dependency is `M2-001`: define the executable capability interface and
-dispatcher. A capability must not become dispatchable or `supported` until its
-metadata, executor, input/output schemas, conformance fixture, and QA assertions
-all exist. Preserve the M1-005 fail-closed ingestion and zero-support boundary.
+The next dependency is `M2-002`: implement data-driven source-slide clone/fill
+through the M2-001 dispatcher using resolved semantic shape bindings. Missing,
+duplicate, or ambiguous overlay/index bindings must fail before execution; do
+not introduce fixture-specific slide/shape IDs or promote product support.
 
 ## First commands after switching workspace
 
@@ -99,12 +113,14 @@ git remote -v
 The private root package has no dependencies, so no install step is required.
 Run `npm test`, `npm run inspect:synthetic`, and `npm run check:public-tree` to
 revalidate the completed admission, support, fixture, data-contract,
-runtime-context, semantic-inspector, and secure-ingestion gates.
+runtime-context, semantic-inspector, secure-ingestion, and capability-dispatch
+gates.
 
 ## Next work session
 
-1. Confirm the M0-004 through M1-005 acceptance commands pass on the clean checkout.
-2. Read `docs/M1-005_HANDOFF.md` before designing the M2-001 dispatcher.
+1. Confirm the M0-004 through M2-001 acceptance commands pass on the clean checkout.
+2. Read `docs/M2-001_HANDOFF.md`, then the existing overlay, template-index,
+   registry, and deck-spec contracts before designing M2-002 binding resolution.
 3. Keep predecessor code, presentation assets, and generated archives out of
    Git; use only repository-owned text/synthetic contract fixtures for tests.
 
