@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "matrixVersion": "0.1.0",
-  "updatedOn": "2026-08-02",
+  "updatedOn": "2026-08-03",
   "productStage": "pre-alpha-contract-only",
   "supportClaimsEnabled": false,
   "statusDefinitions": {
@@ -29,9 +29,9 @@
         "label": "Data-only capability overlay and semantic bindings",
         "status": "unsupported",
         "disposition": "unavailable",
-        "currentBasis": "Version 0.1.0 metadata and binding schemas plus a fail-closed runtime registration/dispatch foundation have public tests; no ProjectOverlay loader or TemplateIndex resolver exists.",
-        "limitations": ["Schema-conformance examples and the dispatcher contract probe are not accepted runtime project inputs or product capability evidence."],
-        "roadmap": "M1-002, M2-001, and M2-002",
+        "currentBasis": "Version 0.1.0 metadata and binding schemas plus a bounded in-memory ProjectOverlay/TemplateIndex resolver have public tests.",
+        "limitations": ["The resolver consumes caller-supplied validated memory objects only; there is no ProjectOverlay loader, accepted project flow, staging authority, or support promotion."],
+        "roadmap": "M1-002 through M2-005",
         "evidence": {
           "level": "automated-public",
           "artifacts": [
@@ -43,17 +43,17 @@
             {
               "type": "input-schema",
               "path": "schemas/contracts/project-overlay.schema.json",
-              "note": "Closed overlay and semantic-binding contract without a runtime resolver."
+              "note": "Closed overlay and semantic-binding contract consumed by the bounded in-memory resolver; no loader or OOXML application is implied."
             },
             {
               "type": "contract",
-              "path": "packages/core/src/capability-dispatcher.mjs",
-              "note": "Atomic executable registration and resolved-invocation dispatch contract; it does not load ProjectOverlay files or resolve shapes."
+              "path": "packages/core/src/project-dispatch-resolver.mjs",
+              "note": "Snapshots and validates registry, overlay, index, and deck documents; resolves exact semantic targets and prepares an opaque dispatcher plan without I/O."
             },
             {
               "type": "qa-assertions",
-              "path": "tests/capability-dispatcher.test.mjs",
-              "note": "Rejects incomplete artifact registration, ambiguous resolved bindings, unavailable support states, partial-batch execution, and plan replay."
+              "path": "tests/source-slide-clone-fill.test.mjs",
+              "note": "Rejects identity drift, missing or duplicate selections and bindings, ambiguous targets, kind mismatch, resource abuse, and partial-batch preflight."
             }
           ]
         }
@@ -63,9 +63,9 @@
         "label": "Versioned deck and slide specification",
         "status": "unsupported",
         "disposition": "unavailable",
-        "currentBasis": "Version 0.1.0 DeckSpec and SlideSpec schemas plus a runtime dispatcher that revalidates open payloads against exact capability schemas have public tests.",
-        "limitations": ["No product capability executor, DeckSpec loader, staging authority, or render flow exists; the only positive executor is conformance-only."],
-        "roadmap": "M1-002 through M2-003",
+        "currentBasis": "Version 0.1.0 DeckSpec and SlideSpec schemas, a bounded in-memory resolver, and exact capability payload validation have public tests.",
+        "limitations": ["There is no DeckSpec loader, accepted project input flow, OOXML staging authority, or rendered presentation output."],
+        "roadmap": "M1-002 through M2-005",
         "evidence": {
           "level": "automated-public",
           "artifacts": [
@@ -76,18 +76,18 @@
             },
             {
               "type": "contract",
-              "path": "packages/core/src/capability-dispatcher.mjs",
-              "note": "Validates frozen invocation payloads against the exact admitted input schema before full-batch preflight."
+              "path": "packages/core/src/project-dispatch-resolver.mjs",
+              "note": "Preserves DeckSpec slide order, maps each slide to one exact selection, and keeps intermediate invocations private."
             },
             {
               "type": "conformance-fixture",
-              "path": "fixtures/capabilities/dispatcher-contract-probe/cases.json",
-              "note": "Data-only dispatcher mechanics case explicitly excluded from product capability evidence."
+              "path": "fixtures/capabilities/source-slide-clone-fill/deck-spec.json",
+              "note": "Repository-owned text-only two-slide data fixture; it is resolver evidence, not an accepted file or rendered PPTX."
             },
             {
               "type": "qa-assertions",
-              "path": "tests/capability-dispatcher.test.mjs",
-              "note": "Exercises ordered dispatch, output validation, QA assertions, support authorization, redaction, and resource ceilings."
+              "path": "tests/source-slide-clone-fill.test.mjs",
+              "note": "Exercises ordered slide mapping, selection reuse, exact payload schemas, full-batch failure, immutability, and redaction."
             }
           ]
         }
@@ -452,7 +452,7 @@
         "status": "unsupported",
         "disposition": "unavailable",
         "currentBasis": "The synthetic source set includes one repository-owned master, blank layout, and theme as test data only.",
-        "limitations": ["Template inspection and clone/fill are not implemented, so no preservation or binding guarantee exists."],
+        "limitations": ["Inspection and semantic clone/fill planning cover only repository-owned text fixtures; no OOXML preservation, mutation, editability, staging, or publication guarantee exists."],
         "roadmap": "M1-004 and M2-002",
         "evidence": { "level": "none", "artifacts": [] }
       },
@@ -547,8 +547,8 @@
         "label": "Native slide text",
         "status": "unsupported",
         "disposition": "unavailable",
-        "currentBasis": "No semantic binding or clone/fill executor exists.",
-        "limitations": ["No editability, overflow, or font claim exists."],
+        "currentBasis": "A semantic clone/fill planner exists, but it emits no native DrawingML or PPTX text mutation.",
+        "limitations": ["No OOXML application, editability, overflow, font, staging, or publication claim exists."],
         "roadmap": "M2-002 and M2-003",
         "evidence": { "level": "none", "artifacts": [] }
       },
@@ -694,13 +694,52 @@
       },
       {
         "id": "source-slide-clone-fill",
-        "label": "Data-driven source-slide clone and fill",
+        "label": "Data-driven source-slide clone/fill planning",
         "status": "unsupported",
         "disposition": "unavailable",
-        "currentBasis": "No generic executor or semantic binding implementation exists.",
-        "limitations": ["No fixture-specific fallback is allowed."],
-        "roadmap": "M2-002",
-        "evidence": { "level": "none", "artifacts": [] }
+        "currentBasis": "A pure data-only executor deterministically emits schema-validated clone/fill operation plans from already-resolved text-box bindings, and registration conformance executes under unavailable product policy.",
+        "limitations": ["No OOXML is cloned or mutated; there is no relationship/ID remap, source-isolation, editability, visual, collateral-diff, staging, or publication evidence, and normal product dispatch remains unavailable."],
+        "roadmap": "M2-005 for isolated OOXML plan application and publication evidence",
+        "evidence": {
+          "level": "automated-public",
+          "artifacts": [
+            {
+              "type": "metadata",
+              "path": "fixtures/capabilities/source-slide-clone-fill/registry.json",
+              "note": "Exact product capability metadata and artifact identities; metadata alone never authorizes dispatch."
+            },
+            {
+              "type": "executor",
+              "path": "plugins/clone-fill/src/source-slide-clone-fill.mjs",
+              "note": "No-I/O executor emits only a clone/fill semantic operation plan from frozen resolved bindings."
+            },
+            {
+              "type": "input-schema",
+              "path": "plugins/clone-fill/schemas/input.schema.json",
+              "note": "Closed body/title payload contract with paragraph, character, and length limits."
+            },
+            {
+              "type": "output-schema",
+              "path": "plugins/clone-fill/schemas/output.schema.json",
+              "note": "Closed data-only clone/fill plan contract; it is not a BuildArtifact or presentation output."
+            },
+            {
+              "type": "conformance-fixture",
+              "path": "fixtures/capabilities/source-slide-clone-fill/cases.json",
+              "note": "Two repository-owned text-only exact invocation/output cases with independently named semantic keys."
+            },
+            {
+              "type": "qa-assertions",
+              "path": "plugins/clone-fill/src/source-slide-clone-fill.mjs",
+              "note": "Four ordered cross-field assertions bind clone source, fill roles, semantic targets, and text preservation."
+            },
+            {
+              "type": "contract",
+              "path": "tests/source-slide-clone-fill.test.mjs",
+              "note": "Public positive, mutation, no-I/O, exact-registry, unsupported-policy, and clean-directory evidence."
+            }
+          ]
+        }
       },
       {
         "id": "staged-create-only-assembly",
@@ -717,8 +756,8 @@
         "label": "Hash-bound template profile and semantic binding",
         "status": "unsupported",
         "disposition": "unavailable",
-        "currentBasis": "The semantic inspector binds its index to the reviewed archive digest and explicit ProjectConfig IDs; no TemplateProfile/ProjectOverlay runtime resolver exists.",
-        "limitations": ["Only the one-step secure-ingestion API proves its archive digest chain; direct caller-supplied views still cannot prove origin or semantic role correctness."],
+        "currentBasis": "The semantic inspector binds its index to the reviewed archive digest and explicit ProjectConfig IDs, and M2-002 resolves a caller-supplied ProjectOverlay against that index.",
+        "limitations": ["Only the one-step secure-ingestion API proves its archive digest chain; there is no authenticated TemplateProfile-to-source loader or accepted project flow, and the semantic plan is not applied to OOXML."],
         "roadmap": "M1-002, M1-004, and M2-002",
         "evidence": {
           "level": "automated-public",
@@ -741,7 +780,7 @@
             {
               "type": "input-schema",
               "path": "schemas/contracts/project-overlay.schema.json",
-              "note": "Semantic binding shape without runtime resolution."
+              "note": "Semantic binding shape consumed by bounded in-memory runtime resolution; source authentication and OOXML application remain absent."
             },
             {
               "type": "qa-assertions",

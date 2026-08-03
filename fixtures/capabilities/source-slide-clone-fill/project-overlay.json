@@ -1,0 +1,41 @@
+{
+  "schemaVersion": "0.1.0",
+  "contractType": "project-overlay",
+  "projectOverlayId": "clone-fill-project-overlay",
+  "projectId": "clone-fill-project",
+  "templateProfileId": "synthetic-template-profile",
+  "templateIndexId": "synthetic-template-index",
+  "templateSha256": "f9875cbaf15b890baaf1370ddd0796ba09d6dc08a6963ce64298a81ca51b99ab",
+  "capabilityRegistryId": "source-slide-clone-fill-registry",
+  "registryVersion": "0.1.0",
+  "capabilitySelections": [
+    {
+      "capabilitySelectionId": "clone-fill-selection",
+      "capabilityId": "source-slide-clone-fill",
+      "capabilityVersion": "0.1.0",
+      "experimentalOptIn": true,
+      "bindings": [
+        { "role": "body", "shapeBindingId": "body-binding" },
+        { "role": "title", "shapeBindingId": "title-binding" }
+      ]
+    }
+  ],
+  "shapeBindings": [
+    {
+      "shapeBindingId": "body-binding",
+      "containerKind": "slide",
+      "containerKey": "slide-1",
+      "shapeKey": "shape-2",
+      "expectedKind": "text-box",
+      "cardinality": "exactly-one"
+    },
+    {
+      "shapeBindingId": "title-binding",
+      "containerKind": "slide",
+      "containerKey": "slide-1",
+      "shapeKey": "shape-1",
+      "expectedKind": "text-box",
+      "cardinality": "exactly-one"
+    }
+  ]
+}

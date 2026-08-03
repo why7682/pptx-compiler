@@ -379,6 +379,67 @@ notes: The dispatcher-contract probe is conformance-only and absent from the
   remains false and every product row remains non-supported.
 ```
 
+### M2-002 semantic-resolution and clone/fill planning set
+
+```yaml
+paths:
+  - AGENTS.md
+  - HANDOFF.md
+  - README.md
+  - TODO.md
+  - docs/ARCHITECTURE_TARGET.md
+  - docs/COMPATIBILITY_POLICY.md
+  - docs/DECISIONS.md
+  - docs/M2-002_HANDOFF.md
+  - docs/OPEN_SOURCE_READINESS.md
+  - docs/PROVENANCE_LEDGER.md
+  - docs/RELEASE_GATES.md
+  - docs/SUPPORT_MATRIX.md
+  - docs/THREAT_MODEL.md
+  - fixtures/capabilities/source-slide-clone-fill/cases.json
+  - fixtures/capabilities/source-slide-clone-fill/deck-spec.json
+  - fixtures/capabilities/source-slide-clone-fill/project-overlay.json
+  - fixtures/capabilities/source-slide-clone-fill/registry.json
+  - packages/core/src/capability-dispatcher.mjs
+  - packages/core/src/project-dispatch-resolver.mjs
+  - plugins/clone-fill/schemas/input.schema.json
+  - plugins/clone-fill/schemas/output.schema.json
+  - plugins/clone-fill/src/source-slide-clone-fill.mjs
+  - policy/support-matrix.json
+  - provenance/records.json
+  - tests/capability-dispatcher.test.mjs
+  - tests/source-slide-clone-fill.test.mjs
+  - tests/support-matrix.test.mjs
+kind: new-clean-room; existing planning, policy, and runtime files updated in place
+origin: independently authored from the M2-002 TODO exit criterion, existing
+  public 0.1.0 contracts and support policy, and the reviewed repository-owned
+  text TemplateIndex; no predecessor implementation, private fixture,
+  presentation asset, presentation binary, build output, or prompt/log material
+  was inspected or copied
+original_author_or_holder: Elliot Wu
+created_or_reviewed_on: 2026-08-03
+license_or_rights_basis: MIT
+third_party_dependencies: []
+private_information_review: passed; errors expose stable codes and structural
+  pointers, while public fixtures contain only generic semantic IDs and text
+project_constant_removal: passed; product source contains no fixture-specific
+  slide, shape, source, path, text, or geometry constant and has no ambient
+  filesystem, archive, XML, network, process, or dynamic-loader authority
+public_fixture_conformance: applicable; 56 clone/fill nodes and a 156-node
+  resolver/dispatcher/support focus cover exact registry authentication,
+  semantic graph closure, batch atomicity, schemas, four QA assertions, fixed
+  limits, safe Unicode, fixture neutrality, no-I/O closure, and unavailable
+  product policy; the complete repository suite has 564 nodes
+independent_review: passed; the bounded closing review's missing-provenance
+  blocker, pre-encoding allocation high finding, Unicode input/output contract
+  findings, stale support prose, and astral-scalar coverage suggestion were
+  fixed and rechecked with no remaining code blocker or high finding
+notes: The executor emits a schema-validated semantic operation plan only. It
+  neither mutates OOXML nor proves rendering, editability, source isolation,
+  collateral safety, staging, or publication. The global support switch remains
+  false and all 60 product rows remain non-supported.
+```
+
 The XML namespace, relationship-type, and MIME strings are interoperability
 identifiers from the public format specification. They do not convey third-
 party presentation content. The fictional `Synthetic Sans` typeface name does

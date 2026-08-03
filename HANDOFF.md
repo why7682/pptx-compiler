@@ -8,10 +8,11 @@ plans, versioned data contracts, dependency-free foundation policy gates,
 reviewed text-only OOXML fixture parts, generated TypeScript declarations, a
 pure explicit-root runtime context, a pure semantic inspector, bounded secure
 ZIP/XML ingestion for the public minimal fixture class, a fail-closed capability
-runtime/dispatcher, and synthetic mutation tests. No arbitrary PPTX/POTX
-compatibility layer or rendering implementation, tracked binary fixture, design
-asset, dependency lockfile, prompt log, or predecessor Git history has been
-copied.
+runtime/dispatcher, a bounded pure project-dispatch resolver, a no-I/O semantic
+clone/fill operation planner, and synthetic mutation tests. No arbitrary
+PPTX/POTX compatibility layer or OOXML rendering/mutation implementation,
+tracked binary fixture, design asset, dependency lockfile, prompt log, or
+predecessor Git history has been copied.
 
 The project uses the MIT License with Elliot Wu as the declared copyright
 holder. The working name, monorepo shape, and repository-local public Git author
@@ -86,6 +87,20 @@ were fixed and rechecked with no remaining blocker or high. The only executor
 is a data-only conformance probe; all 60 product support rows remain
 non-supported and the global switch is false.
 
+`M2-002` is complete: the runtime authenticates exact captured registry content,
+and the synchronous resolver snapshots and validates the complete
+registry/overlay/index/deck bundle before resolving every semantic binding and
+preparing any executor preflight. The statically registered clone/fill plugin
+accepts only two exact text-box roles from one source slide and returns a closed,
+schema-validated data-only operation plan guarded by four QA assertions. The
+56-node M2-002 suite, 156-node resolver/dispatcher/support focus, and complete
+564-test repository suite pass on Node.js 22.23.1 and 24.14.0. The closing
+review's provenance, pre-encoding resource, Unicode-contract, and stale-policy
+findings were fixed, with no remaining code blocker or high finding. The plan is
+not OOXML mutation, rendering, editability, staging, source-isolation,
+collateral-diff, or publication evidence. All 60 support rows remain
+non-supported and the global switch is false.
+
 The repository has no remote. Keep it local until the public synthetic-fixture
 flow can run `init -> inspect -> validate -> render -> qa`. After that executable
 checkpoint and a fresh public-preflight scan, create a **public** repository;
@@ -94,10 +109,10 @@ unscoped package decision is also deferred until package metadata is designed.
 
 ## Immediate objective
 
-The next dependency is `M2-002`: implement data-driven source-slide clone/fill
-through the M2-001 dispatcher using resolved semantic shape bindings. Missing,
-duplicate, or ambiguous overlay/index bindings must fail before execution; do
-not introduce fixture-specific slide/shape IDs or promote product support.
+The next dependency is `M2-003`: implement one minimal native DrawingML
+component through the same resolver/dispatcher path. Keep its input data-only,
+fail closed on unsupported vocabulary, preserve editability as an explicit exit
+criterion, and do not broaden the unavailable input or clone/fill claims.
 
 ## First commands after switching workspace
 
@@ -113,14 +128,14 @@ git remote -v
 The private root package has no dependencies, so no install step is required.
 Run `npm test`, `npm run inspect:synthetic`, and `npm run check:public-tree` to
 revalidate the completed admission, support, fixture, data-contract,
-runtime-context, semantic-inspector, secure-ingestion, and capability-dispatch
-gates.
+runtime-context, semantic-inspector, secure-ingestion, capability-dispatch, and
+semantic operation-planning gates.
 
 ## Next work session
 
-1. Confirm the M0-004 through M2-001 acceptance commands pass on the clean checkout.
-2. Read `docs/M2-001_HANDOFF.md`, then the existing overlay, template-index,
-   registry, and deck-spec contracts before designing M2-002 binding resolution.
+1. Confirm the M0-004 through M2-002 acceptance commands pass on the clean checkout.
+2. Read `docs/M2-002_HANDOFF.md`, the resolver, clone/fill schemas/plugin, and
+   existing DrawingML contract/index vocabulary before designing M2-003.
 3. Keep predecessor code, presentation assets, and generated archives out of
    Git; use only repository-owned text/synthetic contract fixtures for tests.
 

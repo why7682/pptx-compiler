@@ -19,8 +19,12 @@ security evidence, not a published input or arbitrary-template compatibility
 claim. A separate runtime-only dispatcher now atomically binds complete trusted
 artifact registrations and executes a data-only conformance probe through
 batch preflight, input/output schemas, support policy, and QA assertions. The
-probe is not a product capability; the project still does not dispatch or
-render user presentations.
+probe is not a product capability. M2-002 now resolves caller-supplied in-memory
+registry/overlay/index/deck documents into private dispatcher invocations and
+admits a real clone/fill product executor whose conformance output is a closed
+JSON operation plan. The normative row remains `unsupported/unavailable`, so
+normal product dispatch is blocked before preflight; no OOXML is cloned,
+mutated, staged, or published.
 
 | Dimension | Items | Supported | Experimental | Manual | Unsupported |
 | --- | ---: | ---: | ---: | ---: | ---: |
@@ -64,11 +68,12 @@ Roadmap entries describe intended work only. They do not change current status.
   `unsupported`: there is no config file/CLI loader, filesystem-safe input
   opening, or accepted presentation flow.
 - Profile/index has automated schema evidence, a reviewed-fixture semantic
-  inspector, and a bounded secure-ingestion producer, but no profile/overlay
-  resolver. Registry/overlay and deck/slide schemas now have a fail-closed
-  runtime registration/dispatch mechanism, but no loader, product executor,
-  template/index binding resolver, staging authority, or render flow.
-  Schema-only fixtures are explicitly not capability conformance evidence.
+  inspector, a bounded secure-ingestion producer, and a pure in-memory
+  overlay/index/deck resolver. Registry/overlay and deck/slide documents still
+  have no file/CLI loader or accepted project input flow. The clone/fill
+  executor produces only semantic operation plans and has no staging authority
+  or render flow. Schema-only fixtures remain explicitly excluded from product
+  capability conformance evidence.
 - Macros, ActiveX, OLE, embedded packages, and external relationships have
   executable rejection mutations in the bounded ingestion lane. Embedded
   fonts, unknown vendor XML, and every unlisted OOXML feature also retain a
@@ -90,6 +95,7 @@ Run:
 npm run check:support-matrix
 npm run check:contracts
 node --test tests/capability-dispatcher.test.mjs
+node --test tests/source-slide-clone-fill.test.mjs
 ```
 
 The gate reads the staged matrix and schema by default, validates their
@@ -102,5 +108,7 @@ positive examples, cross-document semantics, and generated TypeScript. Passing
 it does not alter any support status.
 
 The dispatcher test verifies runtime admission and execution mechanics using a
-separate conformance-only probe. Passing it does not add a matrix capability or
-authorize a product executor.
+separate conformance-only probe. The clone/fill test verifies exact semantic
+resolution and product artifact conformance, then separately proves that the
+normative unavailable decision blocks normal dispatch. Passing either test
+does not promote a matrix status or establish presentation output support.

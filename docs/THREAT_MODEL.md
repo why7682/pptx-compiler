@@ -42,6 +42,9 @@
    false editability/compatibility evidence.
 9. registry strings triggering dynamic code loading, schema substitution,
    incomplete conformance registration, replayed execution, or QA spoofing.
+10. same-ID registry substitution, duplicate or dangling semantic bindings,
+    caller mutation during resolution, fixture-specific target fallback, or a
+    data-only operation plan being mistaken for authorized OOXML mutation.
 
 ## Default controls
 
@@ -63,6 +66,10 @@
 - keep executable capability mappings closed and trusted; bind every executor,
   schema, fixture, and QA identity exactly, validate frozen input/output, and
   preflight the full batch before execution.
+- snapshot the complete project document set before callbacks, authenticate
+  exact registry content against private runtime state, resolve semantic keys
+  without content/geometry inference, and keep operation plans separate from
+  staging authority.
 
 ## M1-005 implemented input boundary
 
@@ -119,3 +126,34 @@ closed package catalog; malicious or non-terminating trusted code can still use
 its own ambient authority. The M2-001 probe has no I/O or mutation authority.
 Staging isolation, rollback, source immutability, collateral diff, and atomic
 publication remain M2-005 controls, so no product capability is promoted.
+
+## M2-002 implemented resolution and planning boundary
+
+`prepareResolvedDeckDispatch()` captures data properties once, bounds and
+freezes registry, overlay, index, and deck documents before calling any
+validator, then checks their complete runtime-relevant semantic graph. It
+rejects mismatched identity chains, duplicate or case-aliased package owners,
+dangling layout/slide relationships, duplicate shape/source identities,
+unknown capability versions, incomplete/unsorted roles, binding reuse or
+orphans, duplicate targets, missing containers/shapes, kind mismatch, and
+duplicate output slide IDs. An exact deep registry comparison through
+M2-001's private runtime state prevents a different registry from reusing the
+same public ID/version. Intermediate invocations stay private and the resolver
+calls dispatcher preparation only after every slide resolves.
+
+The clone/fill plugin has no file, archive, XML, network, process, dynamic-load,
+environment, or staging authority. It requires two distinct resolved text-box
+bindings on one semantic source slide and emits only a closed JSON plan naming
+one clone operation and ordered body/title fill operations. Input schemas,
+UTF-8 limits, output schemas, and QA preserve exact text and semantic identity;
+they do not prove that any source part, relationship, or identifier was copied
+or changed.
+
+Validators, the plugin, QA assertions, and support resolution are still trusted
+in-process code rather than a sandbox. The semantic operation-plan output can
+be retained or replayed by code outside the dispatcher, but it carries no writer
+or package credential and cannot mutate a presentation in this slice. M2-005
+must rebind the plan to an
+inspected digest and isolated create-only staging graph, remap identities and
+relationships, reject collateral changes, discard failed staging, and publish
+atomically. Until then, normal product dispatch remains unavailable.

@@ -1,0 +1,26 @@
+{
+  "schemaVersion": "0.1.0",
+  "contractType": "deck-spec",
+  "deckId": "clone-fill-deck",
+  "projectId": "clone-fill-project",
+  "templateProfileId": "synthetic-template-profile",
+  "projectOverlayId": "clone-fill-project-overlay",
+  "slides": [
+    {
+      "slideId": "clone-output-one",
+      "capabilitySelectionId": "clone-fill-selection",
+      "payload": {
+        "body": ["First public synthetic paragraph", "Second public synthetic paragraph"],
+        "title": "Public synthetic overview"
+      }
+    },
+    {
+      "slideId": "clone-output-two",
+      "capabilitySelectionId": "clone-fill-selection",
+      "payload": {
+        "body": ["Independent public synthetic content"],
+        "title": "Public synthetic conclusion"
+      }
+    }
+  ]
+}

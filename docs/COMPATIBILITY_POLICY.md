@@ -38,9 +38,18 @@ closed trusted registration whose capability/version and every artifact ID
 exactly match one registry definition. Input/output schema documents and
 validators, a nonempty exact conformance set, executor preflight/execute
 functions, and nonempty QA assertions must all be present and pass together.
+M2-002 additionally binds the entire caller-supplied registry to the exact
+registry captured behind an authentic runtime. Reusing an ID/version pair for
+different metadata is rejected; those identity fields are not a substitute for
+content equality at this runtime boundary.
 
-All invocations are detached, bounded, and frozen. The complete batch must pass
-exact lookup/version checks, support authorization, input validation, resolved
+The project resolver snapshots and validates the complete registry, overlay,
+index, and deck bundle before callbacks can mutate caller data. It rejects
+identity drift, dangling/duplicate/case-aliased references, unused or multiply
+assigned shape bindings, duplicate targets, and kind/cardinality mismatch, then
+privately maps slides to exact resolved invocations. All invocations are
+detached, bounded, and frozen. The complete batch must pass exact
+lookup/version checks, support authorization, input validation, resolved
 binding-role checks, and executor preflight before any executor runs. Output is
 again detached, bounded, frozen, schema-validated, and checked by every QA
 assertion. Unknown, unavailable, manual, and non-opted-in experimental cases
@@ -50,8 +59,10 @@ claim switch is false.
 Complete registration is necessary but not sufficient for public support.
 Source isolation, create-only staging, collateral-mutation checks, declared
 platform evidence, the global switch, and an explicit matrix promotion remain
-required. The dispatcher conformance probe is never product capability
-evidence.
+required. Dispatcher or product-executor conformance at admission does not
+override an unavailable matrix row. The clone/fill executor's data-only
+operation plan is not proof of OOXML mutation, source isolation, editability,
+visual fidelity, collateral safety, or publication.
 
 ## Promotion and demotion
 

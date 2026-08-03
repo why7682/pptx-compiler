@@ -1047,6 +1047,7 @@ test("payload and output resource ceilings apply before validators can accept ov
   sparse.length = 2;
   const cases = [
     ["string", { value: "a".repeat(256 * 1024 + 1) }],
+    ["object key", { ["k".repeat(257)]: true }],
     ["array", { value: Array.from({ length: 4097 }, () => 1) }],
     ["depth", deep],
     ["sparse", sparse],

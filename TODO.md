@@ -176,8 +176,8 @@ criterion is recorded in the repository.
 | ID | Status | Task | Exit criterion |
 | --- | --- | --- | --- |
 | M2-001 | DONE | Define the executable capability interface and dispatcher. | `supported` cannot be registered without executor, schemas, conformance fixture, and QA contract. |
-| M2-002 | NEXT | Implement data-driven source-slide clone/fill with semantic shape bindings. | No fixture-specific slide/shape identifiers exist in source; missing or ambiguous bindings fail closed. |
-| M2-003 | PENDING | Implement a minimal native DrawingML component capability. | One data-only slide spec renders through the same dispatcher and remains editable. |
+| M2-002 | DONE | Implement data-driven source-slide clone/fill with semantic shape bindings. | No fixture-specific slide/shape identifiers exist in source; missing or ambiguous bindings fail closed. |
+| M2-003 | NEXT | Implement a minimal native DrawingML component capability. | One data-only slide spec renders through the same dispatcher and remains editable. |
 | M2-004 | PENDING | Parameterize the optional Pandoc/OMML adapter and isolate it from core. | Pandoc is detected as an external optional dependency; formula transplant and failure behavior have conformance tests and attribution review. |
 | M2-005 | PENDING | Implement create-only assembly, normalization, semantic diff, and collateral-mutation checks. | The source is unchanged; output is atomically published; allowed and forbidden part changes are machine-verifiable. |
 
@@ -211,6 +211,39 @@ criterion is recorded in the repository.
 - `supportClaimsEnabled` remains false and all 60 support rows remain
   non-supported. Complete registration is necessary for dispatchability, not a
   renderer, staging/publication guarantee, product capability, or support claim.
+
+### M2-002 completion evidence — 2026-08-03
+
+- `assertCapabilityRuntimeRegistry` compares a bounded detached caller registry
+  with the exact registry privately captured by the authentic runtime, rejecting
+  same-ID/version content substitution.
+- `prepareResolvedDeckDispatch` snapshots and freezes all four documents before
+  any validator callback, resolves the complete overlay/index/deck graph with
+  exact identity, uniqueness, ordering, role, kind, cardinality, and target
+  checks, then returns only an opaque M2-001 plan. A bad later slide causes zero
+  product preflight or execution calls.
+- The repository-owned `source-slide-clone-fill` artifact set has exact metadata,
+  input/output schemas, two text-only conformance cases, a no-I/O executor, and
+  four ordered QA assertions. It produces only a deterministic clone/fill JSON
+  operation plan from semantic bindings; product dispatch remains unavailable.
+- Snapshotters apply O(1) code-unit ceilings before bounded UTF-8 encoding.
+  Input schema, preflight, and output schema consistently reject blank/control,
+  format-character, unpaired-surrogate, and Unicode-noncharacter text while
+  accepting valid astral scalars.
+- `npm test`: 564/564 passed. The M2-002 suite contributes 56 nodes; the
+  resolver/dispatcher/support focus passes 156/156.
+- The identical 564-test suite passed on checksum-verified official Node.js
+  22.23.1 and Node.js 24.14.0 releases. Cross-platform OS evidence remains
+  M3-004.
+- The bounded independent review found a missing-provenance blocker, one
+  pre-encoding resource high finding, and Unicode/schema plus stale-document
+  lower-severity findings. All were fixed and regression-tested; final re-review
+  found no remaining code blocker or high finding.
+- Working-tree and staged forbidden-material, exact-provenance, support-matrix,
+  and versioned-contract gates passed, as did `git diff --cached --check`.
+- `supportClaimsEnabled` remains false and all 60 support rows remain
+  non-supported. This is not OOXML mutation, rendering, editability,
+  source-isolation, collateral-diff, staging, or publication evidence.
 
 ## M3 — CLI, packaging, and public QA
 

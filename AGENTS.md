@@ -76,6 +76,16 @@ For maintenance or audit of the completed `M2-001` capability runtime, read:
 7. `docs/SUPPORT_MATRIX.md`
 8. `docs/PROVENANCE_LEDGER.md`
 
+For maintenance or audit of the completed `M2-002` semantic clone/fill planner,
+read:
+
+3. `docs/M2-002_HANDOFF.md`
+4. `packages/core/src/project-dispatch-resolver.mjs`
+5. `plugins/clone-fill/src/source-slide-clone-fill.mjs`
+6. `fixtures/capabilities/source-slide-clone-fill/registry.json`
+7. `docs/SUPPORT_MATRIX.md`
+8. `docs/PROVENANCE_LEDGER.md`
+
 Read `docs/PROJECT_DEFINITION.md` and `docs/ARCHITECTURE_TARGET.md` only before
 changing product scope, public contracts, packages, or dependency direction.
 
@@ -160,6 +170,11 @@ changing product scope, public contracts, packages, or dependency direction.
   decision. Preserve full-batch validation/preflight, opaque one-shot plans,
   fixed limits, and zero product-capability claims until later milestones add
   their own executors and evidence.
+- When maintaining `M2-002`, keep the resolver synchronous, descriptor-safe,
+  bounded, and free of I/O. Bind the complete registry exactly to the authentic
+  runtime, resolve roles only through overlay/index semantic keys, return only
+  an opaque dispatcher plan, and keep clone/fill output operation-plan-only
+  until M2-005 proves isolated OOXML application and publication.
 - Add tests with every executable capability.
 - Update the architecture, support matrix, provenance ledger, and release gates
   in the same change when their contract changes.

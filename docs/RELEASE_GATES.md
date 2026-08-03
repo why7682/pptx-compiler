@@ -38,6 +38,9 @@ evidence by itself.
 - every supported capability has exact bound metadata, an executor, input and
   output schemas, conformance fixtures, deterministic output, negative tests,
   and a concrete QA contract with assertions;
+- runtime project resolution binds the exact captured registry content and
+  rejects missing, duplicate, ambiguous, case-aliased, or kind-mismatched
+  overlay/index/deck references before executor preflight;
 - source template is unchanged and output publication is create-only;
 - OOXML relationships, content types, geometry/capacity, semantic diff, and
   collateral mutation checks pass;
@@ -165,8 +168,29 @@ mutation races, rejected sync-callback Promises, lookup/version/binding
 ambiguity, support states, batch atomicity, plan replay, executor/output/QA
 failures, and redaction.
 
-The only positive executor is a no-I/O dispatcher conformance probe. It is not
-a renderer or support artifact for any product capability. M2-001 does not
+M2-001's only positive executor is a no-I/O dispatcher conformance probe. It is
+not a renderer or support artifact for any product capability. M2-001 does not
 establish overlay/index resolution, source immutability, create-only staging,
 rollback, OOXML collateral diff, atomic publication, packaging, CLI behavior,
 or sandboxing of hostile third-party JavaScript; those remain later gates.
+
+M2-002 adds the bounded project-resolution and semantic operation-planning
+portion of G3. The synchronous resolver snapshots the complete registry,
+overlay, index, and deck set before validator callbacks; binds the full registry
+to authentic M2-001 private runtime state; closes owner, selection, binding,
+target, kind, ordering, and identity ambiguity; and immediately returns an
+opaque dispatcher plan. Public mutations cover same-ID registry substitution,
+missing/duplicate/case-aliased graph identities, cross-document drift,
+selection reuse, later-slide atomicity, validator races, descriptor/non-JSON
+inputs, fixed resource ceilings, redaction, fixture neutrality, and clean-
+directory closure.
+
+The statically registered clone/fill executor emits only a schema-validated
+clone-plus-two-fill JSON plan and runs four cross-field QA assertions. Its two
+public conformance cases execute during runtime admission even while the
+normative policy remains `unsupported/unavailable`; normal product dispatch is
+therefore blocked before capability preflight. This satisfies only semantic
+planning evidence. Actual source-slide bytes, relationships and identifiers are
+not cloned or remapped, and source immutability, create-only staging, rollback,
+editability, visual fidelity, collateral diff, and atomic publication remain
+unsatisfied M2-005 gates.

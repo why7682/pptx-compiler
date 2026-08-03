@@ -22,14 +22,22 @@ const admittedPaths = new Set([
   "fixtures/capabilities/dispatcher-contract-probe/output.schema.json",
   "fixtures/capabilities/dispatcher-contract-probe/registry.json",
   "fixtures/capabilities/dispatcher-contract-probe/runtime.mjs",
+  "fixtures/capabilities/source-slide-clone-fill/cases.json",
+  "fixtures/capabilities/source-slide-clone-fill/deck-spec.json",
+  "fixtures/capabilities/source-slide-clone-fill/project-overlay.json",
+  "fixtures/capabilities/source-slide-clone-fill/registry.json",
   "package.json",
   "packages/core/src/project-context.mjs",
   "packages/core/src/capability-dispatcher.mjs",
+  "packages/core/src/project-dispatch-resolver.mjs",
   "packages/core/src/ooxml-package-view.mjs",
   "packages/core/src/secure-template-ingestion.mjs",
   "packages/core/src/secure-zip.mjs",
   "packages/core/src/strict-xml.mjs",
   "packages/core/src/template-inspector.mjs",
+  "plugins/clone-fill/schemas/input.schema.json",
+  "plugins/clone-fill/schemas/output.schema.json",
+  "plugins/clone-fill/src/source-slide-clone-fill.mjs",
   "policy/support-matrix.json",
   "schemas/support-matrix.schema.json",
   "schemas/contracts/build-artifact.schema.json",
@@ -47,6 +55,7 @@ const admittedPaths = new Set([
   "tests/capability-dispatcher.test.mjs",
   "tests/project-context.test.mjs",
   "tests/secure-template-ingestion.test.mjs",
+  "tests/source-slide-clone-fill.test.mjs",
   "tests/support-matrix.test.mjs",
   "tests/template-inspector.test.mjs"
 ]);
@@ -83,6 +92,22 @@ test("support matrix validates and produces byte-stable findings", () => {
   assert.equal(
     matrix.dimensions.capabilities.some((item) => item.id === "dispatcher-contract-probe"),
     false
+  );
+  const cloneFill = matrix.dimensions.capabilities.find((item) =>
+    item.id === "source-slide-clone-fill");
+  assert.equal(cloneFill.status, "unsupported");
+  assert.equal(cloneFill.disposition, "unavailable");
+  assert.deepEqual(
+    new Set(cloneFill.evidence.artifacts.map((artifact) => artifact.type)),
+    new Set([
+      "metadata",
+      "executor",
+      "input-schema",
+      "output-schema",
+      "conformance-fixture",
+      "qa-assertions",
+      "contract"
+    ])
   );
   const packageInspection = matrix.dimensions.capabilities.find((item) => item.id === "package-inspection");
   assert.equal(packageInspection.status, "unsupported");

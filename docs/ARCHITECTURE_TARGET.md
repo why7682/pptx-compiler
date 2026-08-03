@@ -86,8 +86,21 @@ preflight, an opaque module-authenticated one-shot plan, and ordered execution
 with post-output schema and QA checks. Executor IDs are never module paths;
 there is no dynamic import, ambient lookup, semver fallback, or incremental
 registration. M2-001 provides executors no filesystem or staging authority.
-Trusted product executors, overlay/index resolution, staged mutation, rollback,
-and publication enter only in later M2 slices.
+M2-002 adds the pure synchronous `prepareResolvedDeckDispatch()` boundary. It
+snapshots and schema-validates registry, overlay, index, and deck documents,
+checks their complete semantic identity/reference graph, binds the full
+registry exactly to the authentic runtime's private capture, and immediately
+prepares an opaque dispatcher plan. Intermediate invocations are never exposed
+to callers. The resolver performs no file, archive, XML, network, process, or
+staging I/O.
+
+The first product executor, `source-slide-clone-fill`, consumes only frozen
+resolved text-box bindings and emits a closed data-only semantic operation
+plan. Core never imports the plugin and registry URNs still never load it; a
+trusted host supplies the static registration. The executor does not apply the
+plan to OOXML. Staged mutation, relationship/ID remapping, rollback, collateral
+diff, source isolation, and publication remain M2-005 work, so the product
+support row remains unavailable.
 
 ## Capability resolution
 
@@ -95,10 +108,11 @@ and publication enter only in later M2 slices.
 SlideSpec
   -> schema validation
   -> project overlay resolution
+  -> source/template binding validation
   -> capability lookup
   -> support-policy authorization
   -> executor preflight
-  -> source/template binding validation
+  -> semantic operation plan
   -> staged mutation
   -> package normalization
   -> QA and collateral diff

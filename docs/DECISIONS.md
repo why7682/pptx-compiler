@@ -24,6 +24,7 @@ No item below is decided merely because a recommendation is recorded.
 | D-018 | ACCEPTED | Template inspection versus secure ingestion | Keep core inspection as a pure normalization of an explicit parsed package view; admit only the reviewed public fixture producer in M1-004 and defer untrusted file/ZIP/XML conversion to M1-005. | M1-004 source, public execution golden, graph/redaction mutations, clean-directory module-closure smoke, and unchanged false support switch. |
 | D-019 | ACCEPTED | Initial secure-ingestion profile | Use a non-relaxable narrow ZIP/XML/OPC profile and a one-step `ProjectContext` source-to-index API; document portable Node filesystem race limits instead of claiming hostile-directory atomic containment. | M1-005 stored/DEFLATE positives, filesystem/archive/XML/OOXML mutation suite, exact public golden, residual-risk review, and unchanged false support switch. |
 | D-020 | ACCEPTED | Capability runtime and dispatcher trust boundary | Keep serialized registry IDs declarative; atomically bind only trusted exact artifact registrations, preflight complete batches, and execute authenticated one-shot plans without dynamic loading or fallback. | M2-001 runtime, conformance-only schemas/fixture/executor, admission/dispatch mutation suite, support-policy tests, and unchanged false support switch. |
+| D-021 | ACCEPTED | Semantic project resolution and clone/fill plan boundary | Resolve the complete in-memory registry/overlay/index/deck graph before dispatcher preflight, bind exact runtime registry content, and keep clone/fill output data-only until isolated OOXML application exists. | M2-002 resolver, product artifact set, public semantic mutation suite, exact unavailable policy, and unchanged false support switch. |
 
 Record a decision by changing its status to `ACCEPTED`, adding the date and
 rationale below the table, and updating every affected contract/TODO in the
@@ -120,6 +121,19 @@ same change.
   The repository probe is data-only conformance infrastructure, not a product
   capability. Trusted executors are not sandboxed; staging rollback, source
   isolation, and atomic publication remain M2-005.
+
+## Decision record — 2026-08-03
+
+- **D-021 accepted:** the project-level resolver is synchronous and pure. It
+  snapshots all four version `0.1.0` documents before invoking exact validators,
+  rejects the complete ambiguous/dangling semantic reference graph, authenticates
+  exact registry content against M2-001 private runtime state, and returns only
+  an opaque dispatcher plan. The statically registered clone/fill executor
+  derives source and target identities only from resolved invocation data and
+  emits a closed clone-plus-text-fill operation plan. It has no package or
+  staging authority. The product row remains `unsupported/unavailable`; only
+  M2-005 may establish actual OOXML application, source isolation, collateral
+  safety, and publication evidence.
 
 ## MIT versus Apache-2.0 review
 

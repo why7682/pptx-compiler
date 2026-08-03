@@ -5,10 +5,11 @@
 Publication is feasible, but the predecessor is a research-grade, project-bound
 system rather than a releasable general package. The correct strategy is a
 clean-room extraction into this empty-history repository, not a rename or bulk
-copy. The current readiness level is `foundation-dispatch / pre-alpha`:
+copy. The current readiness level is `semantic-planning / pre-alpha`:
 admission, support-claim, data-contract, explicit-context, semantic-inspection,
-bounded secure-ingestion, and capability-dispatch gates are executable, while
-PPTX product capabilities are not.
+bounded secure-ingestion, capability-dispatch, project-resolution, and
+clone/fill operation-planning gates are executable, while OOXML mutation and
+PPTX output capabilities are not.
 
 ## Reusable foundations observed in the predecessor
 
@@ -33,11 +34,12 @@ redistributable code and do not establish generic support.
    redistribution.
 3. **Self-containment:** parts of inspection and rendering depend on managed or
    private helpers, fixed project roots, and project-specific identifiers.
-4. **Capability truth:** M2-001 now requires an exact executor, input/output
-   schemas, nonempty conformance fixtures, QA assertions, and a support decision
-   before runtime admission. The sole positive executor is a non-product
-   conformance probe; no clone/fill, native DrawingML, assembly, or renderer
-   capability exists, and structural onboarding has not proved generic render.
+4. **Capability truth:** M2-001 requires complete exact artifact registration,
+   and M2-002 adds exact project binding resolution plus a product clone/fill
+   executor whose public conformance emits only semantic JSON operation plans.
+   No OOXML clone/fill application, native DrawingML component, assembly, or
+   renderer capability exists, and structural onboarding has not proved generic
+   render.
 5. **Untrusted input compatibility:** M1-005 provides fixed resource and
    high-risk rejection controls for the public minimal grammar, but it does not
    establish arbitrary external PPTX/POTX compatibility or fully atomic
@@ -72,10 +74,12 @@ Pandoc's upstream licensing and source are documented at
 1. **Bootstrap:** executable provenance/exclusion controls, compatibility
    policy, and the synthetic fixture are complete.
 2. **Foundation:** explicit context/schemas, semantic inspector, bounded secure
-   archive/XML ingestion, and the fail-closed capability dispatcher are
-   complete; publishable package metadata remains later work.
-3. **Vertical slice:** clone/fill, one native component, assembly, QA, and the
-   optional OMML adapter through the common dispatcher.
+   archive/XML ingestion, the fail-closed capability dispatcher, and semantic
+   clone/fill planning are complete; publishable package metadata remains later
+   work.
+3. **Vertical slice:** one native component, isolated application of clone/fill
+   plans, assembly, QA, and the optional OMML adapter through the common
+   dispatcher.
 4. **Product surface:** CLI/API, package split, docs, compatibility matrix,
    clean-install examples.
 5. **Release engineering:** cross-platform CI, leak gate, security checks, SBOM,

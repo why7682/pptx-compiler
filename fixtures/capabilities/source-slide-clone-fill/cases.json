@@ -1,0 +1,138 @@
+{
+  "schemaVersion": 1,
+  "fixturePurpose": "source-slide-clone-fill-public-conformance",
+  "capabilityId": "source-slide-clone-fill",
+  "capabilityVersion": "0.1.0",
+  "fixtures": [
+    {
+      "fixtureId": "source-slide-clone-fill-basic",
+      "invocation": {
+        "invocationId": "conformance-output-basic",
+        "capabilitySelectionId": "conformance-selection-basic",
+        "capabilityId": "source-slide-clone-fill",
+        "capabilityVersion": "0.1.0",
+        "experimentalOptIn": false,
+        "payload": {
+          "body": ["Generic body paragraph"],
+          "title": "Generic title"
+        },
+        "bindings": [
+          {
+            "role": "body",
+            "shapeBindingId": "conformance-body-binding",
+            "containerKind": "slide",
+            "containerKey": "source-slide-alpha",
+            "shapeKey": "body-shape-alpha",
+            "expectedKind": "text-box",
+            "cardinality": "exactly-one"
+          },
+          {
+            "role": "title",
+            "shapeBindingId": "conformance-title-binding",
+            "containerKind": "slide",
+            "containerKey": "source-slide-alpha",
+            "shapeKey": "title-shape-alpha",
+            "expectedKind": "text-box",
+            "cardinality": "exactly-one"
+          }
+        ]
+      },
+      "expectedOutput": {
+        "planVersion": "0.1.0",
+        "planType": "source-slide-clone-fill-plan",
+        "outputSlideId": "conformance-output-basic",
+        "clone": {
+          "operationId": "clone-source-slide",
+          "operationType": "clone-slide",
+          "sourceContainerKind": "slide",
+          "sourceSlideKey": "source-slide-alpha"
+        },
+        "fills": [
+          {
+            "operationId": "fill-body",
+            "operationType": "replace-cloned-shape-text",
+            "role": "body",
+            "shapeBindingId": "conformance-body-binding",
+            "sourceShapeKey": "body-shape-alpha",
+            "expectedKind": "text-box",
+            "paragraphs": ["Generic body paragraph"]
+          },
+          {
+            "operationId": "fill-title",
+            "operationType": "replace-cloned-shape-text",
+            "role": "title",
+            "shapeBindingId": "conformance-title-binding",
+            "sourceShapeKey": "title-shape-alpha",
+            "expectedKind": "text-box",
+            "paragraphs": ["Generic title"]
+          }
+        ]
+      }
+    },
+    {
+      "fixtureId": "source-slide-clone-fill-unicode",
+      "invocation": {
+        "invocationId": "conformance-output-unicode",
+        "capabilitySelectionId": "conformance-selection-unicode",
+        "capabilityId": "source-slide-clone-fill",
+        "capabilityVersion": "0.1.0",
+        "experimentalOptIn": false,
+        "payload": {
+          "body": ["公开合成段落", "Résumé synthétique"],
+          "title": "合成标题"
+        },
+        "bindings": [
+          {
+            "role": "body",
+            "shapeBindingId": "unicode-body-binding",
+            "containerKind": "slide",
+            "containerKey": "source-slide-beta",
+            "shapeKey": "body-shape-beta",
+            "expectedKind": "text-box",
+            "cardinality": "exactly-one"
+          },
+          {
+            "role": "title",
+            "shapeBindingId": "unicode-title-binding",
+            "containerKind": "slide",
+            "containerKey": "source-slide-beta",
+            "shapeKey": "title-shape-beta",
+            "expectedKind": "text-box",
+            "cardinality": "exactly-one"
+          }
+        ]
+      },
+      "expectedOutput": {
+        "planVersion": "0.1.0",
+        "planType": "source-slide-clone-fill-plan",
+        "outputSlideId": "conformance-output-unicode",
+        "clone": {
+          "operationId": "clone-source-slide",
+          "operationType": "clone-slide",
+          "sourceContainerKind": "slide",
+          "sourceSlideKey": "source-slide-beta"
+        },
+        "fills": [
+          {
+            "operationId": "fill-body",
+            "operationType": "replace-cloned-shape-text",
+            "role": "body",
+            "shapeBindingId": "unicode-body-binding",
+            "sourceShapeKey": "body-shape-beta",
+            "expectedKind": "text-box",
+            "paragraphs": ["公开合成段落", "Résumé synthétique"]
+          },
+          {
+            "operationId": "fill-title",
+            "operationType": "replace-cloned-shape-text",
+            "role": "title",
+            "shapeBindingId": "unicode-title-binding",
+            "sourceShapeKey": "title-shape-beta",
+            "expectedKind": "text-box",
+            "paragraphs": ["合成标题"]
+          }
+        ]
+      }
+    }
+  ]
+}

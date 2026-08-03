@@ -19,6 +19,7 @@ const MAX_JSON_OBJECT_PROPERTIES = 256;
 const MAX_JSON_NODES = 50_000;
 const MAX_BATCH_JSON_NODES = 200_000;
 const MAX_JSON_STRING_BYTES = 256 * 1024;
+const MAX_JSON_OBJECT_KEY_BYTES = 256;
 const MAX_BATCH_STRING_BYTES = 4 * 1024 * 1024;
 
 const SEMANTIC_ID = /^[a-z0-9]+(?:-[a-z0-9]+)*$/u;
@@ -49,6 +50,7 @@ const ERROR_CODES = Object.freeze({
   QA_FAILED: "CAPABILITY_RUNTIME_QA_FAILED",
   REGISTRATION_INVALID: "CAPABILITY_RUNTIME_REGISTRATION_INVALID",
   REGISTRY_INVALID: "CAPABILITY_RUNTIME_REGISTRY_INVALID",
+  REGISTRY_MISMATCH: "CAPABILITY_RUNTIME_REGISTRY_MISMATCH",
   REQUEST_INVALID: "CAPABILITY_RUNTIME_REQUEST_INVALID",
   SUPPORT_INVALID: "CAPABILITY_RUNTIME_SUPPORT_INVALID",
   UNKNOWN_CAPABILITY: "CAPABILITY_RUNTIME_UNKNOWN_CAPABILITY",
@@ -146,6 +148,7 @@ function cloneJsonValue(value, state, depth = 0) {
 
   if (value === null || typeof value === "boolean") return value;
   if (typeof value === "string") {
+    if (value.length > MAX_JSON_STRING_BYTES) throw new TypeError("json-string");
     const bytes = encoder.encode(value).byteLength;
     if (bytes > MAX_JSON_STRING_BYTES) throw new TypeError("json-string");
     state.stringBytes += bytes;
@@ -203,8 +206,9 @@ function cloneJsonValue(value, state, depth = 0) {
     }
     const clone = {};
     for (const key of [...keys].sort(compareText)) {
+      if (key.length > MAX_JSON_OBJECT_KEY_BYTES) throw new TypeError("json-object");
       const keyBytes = encoder.encode(key).byteLength;
-      if (keyBytes > 256) throw new TypeError("json-object");
+      if (keyBytes > MAX_JSON_OBJECT_KEY_BYTES) throw new TypeError("json-object");
       state.stringBytes += keyBytes;
       if (state.stringBytes > MAX_BATCH_STRING_BYTES) {
         throw new TypeError("json-string-total");
@@ -953,6 +957,32 @@ export async function createCapabilityRuntime(options) {
     support
   }));
   return facade;
+}
+
+/**
+ * Bind a caller-supplied registry snapshot to the exact registry captured by
+ * an authentic runtime. The registry contents are never returned or exposed
+ * through the runtime facade.
+ */
+export function assertCapabilityRuntimeRegistry(options) {
+  assertExactRecord(
+    options,
+    ["runtime", "capabilityRegistry"],
+    "",
+    ERROR_CODES.ARGUMENT_INVALID
+  );
+  const runtime = dataProperty(options, "runtime");
+  const state = RUNTIME_STATE.get(runtime);
+  if (!state) fail(ERROR_CODES.ARGUMENT_INVALID, "/runtime");
+  const registry = snapshotJson(
+    dataProperty(options, "capabilityRegistry"),
+    "/capabilityRegistry",
+    ERROR_CODES.REGISTRY_INVALID
+  ).value;
+  if (!isDeepStrictEqual(registry, state.registry)) {
+    fail(ERROR_CODES.REGISTRY_MISMATCH, "/capabilityRegistry");
+  }
+  return true;
 }
 
 /**

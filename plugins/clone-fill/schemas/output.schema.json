@@ -1,0 +1,111 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:pptx-pipeline:capability:schema:source-slide-clone-fill-output:0.1.0",
+  "title": "Source slide clone/fill semantic plan",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["planVersion", "planType", "outputSlideId", "clone", "fills"],
+  "properties": {
+    "planVersion": { "const": "0.1.0" },
+    "planType": { "const": "source-slide-clone-fill-plan" },
+    "outputSlideId": { "$ref": "#/$defs/semanticId" },
+    "clone": { "$ref": "#/$defs/cloneOperation" },
+    "fills": {
+      "type": "array",
+      "minItems": 2,
+      "maxItems": 2,
+      "uniqueItems": true,
+      "items": {
+        "oneOf": [
+          { "$ref": "#/$defs/bodyFill" },
+          { "$ref": "#/$defs/titleFill" }
+        ]
+      }
+    }
+  },
+  "$defs": {
+    "semanticId": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 96,
+      "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$"
+    },
+    "bodyParagraph": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 2048,
+      "pattern": "^(?=.*\\S)(?!.*\\p{Cf})(?!.*\\p{Noncharacter_Code_Point})(?!.*[\\uD800-\\uDFFF])[^\\u0000-\\u001F\\u007F-\\u009F\\u2028\\u2029]+$"
+    },
+    "titleText": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 256,
+      "pattern": "^(?=.*\\S)(?!.*\\p{Cf})(?!.*\\p{Noncharacter_Code_Point})(?!.*[\\uD800-\\uDFFF])[^\\u0000-\\u001F\\u007F-\\u009F\\u2028\\u2029]+$"
+    },
+    "cloneOperation": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["operationId", "operationType", "sourceContainerKind", "sourceSlideKey"],
+      "properties": {
+        "operationId": { "const": "clone-source-slide" },
+        "operationType": { "const": "clone-slide" },
+        "sourceContainerKind": { "const": "slide" },
+        "sourceSlideKey": { "$ref": "#/$defs/semanticId" }
+      }
+    },
+    "bodyFill": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "operationId",
+        "operationType",
+        "role",
+        "shapeBindingId",
+        "sourceShapeKey",
+        "expectedKind",
+        "paragraphs"
+      ],
+      "properties": {
+        "operationId": { "const": "fill-body" },
+        "operationType": { "const": "replace-cloned-shape-text" },
+        "role": { "const": "body" },
+        "shapeBindingId": { "$ref": "#/$defs/semanticId" },
+        "sourceShapeKey": { "$ref": "#/$defs/semanticId" },
+        "expectedKind": { "const": "text-box" },
+        "paragraphs": {
+          "type": "array",
+          "minItems": 1,
+          "maxItems": 16,
+          "items": { "$ref": "#/$defs/bodyParagraph" }
+        }
+      }
+    },
+    "titleFill": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "operationId",
+        "operationType",
+        "role",
+        "shapeBindingId",
+        "sourceShapeKey",
+        "expectedKind",
+        "paragraphs"
+      ],
+      "properties": {
+        "operationId": { "const": "fill-title" },
+        "operationType": { "const": "replace-cloned-shape-text" },
+        "role": { "const": "title" },
+        "shapeBindingId": { "$ref": "#/$defs/semanticId" },
+        "sourceShapeKey": { "$ref": "#/$defs/semanticId" },
+        "expectedKind": { "const": "text-box" },
+        "paragraphs": {
+          "type": "array",
+          "minItems": 1,
+          "maxItems": 1,
+          "items": { "$ref": "#/$defs/titleText" }
+        }
+      }
+    }
+  }
+}

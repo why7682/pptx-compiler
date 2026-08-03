@@ -16,10 +16,12 @@ narrow ZIP/XML/OPC profile before producing that view. Generated archives are
 ignored test data, and contract examples are schema-only fixtures. A
 runtime-only dispatcher now proves exact artifact registration, full-batch
 preflight, one-shot execution, output validation, and QA through a data-only
-conformance probe. There is still no published CLI, product executor,
-arbitrary-template compatibility promise, or renderer. It is not yet a
-releasable software package. Do not publish until the release gates in
-[TODO.md](TODO.md) pass.
+conformance probe. A pure in-memory resolver and a statically registered
+clone/fill product executor now produce deterministic semantic JSON operation
+plans from exact text-box bindings. Product dispatch remains unavailable and no
+OOXML is mutated. There is still no published CLI, arbitrary-template
+compatibility promise, or renderer. It is not yet a releasable software package.
+Do not publish until the release gates in [TODO.md](TODO.md) pass.
 
 ## Intended function
 
@@ -54,14 +56,16 @@ and OOXML feature matrix will be explicit and fail closed.
    [docs/M1-005_HANDOFF.md](docs/M1-005_HANDOFF.md).
 8. For the runtime capability dispatcher, read
    [docs/M2-001_HANDOFF.md](docs/M2-001_HANDOFF.md).
-9. Load broader project/architecture documents only when the handoff routes to
+9. For semantic project resolution and clone/fill planning, read
+   [docs/M2-002_HANDOFF.md](docs/M2-002_HANDOFF.md).
+10. Load broader project/architecture documents only when the handoff routes to
    them.
 
 The private root package has no dependencies; `npm test`,
 `npm run inspect:synthetic`, and `npm run check:public-tree` verify the current
-foundation. The next dependency is the data-driven
-source-slide clone/fill capability in `M2-002`, implemented fresh against the
-dispatcher contract rather than migrated from a predecessor.
+foundation. The next dependency is the minimal native DrawingML component in
+`M2-003`, implemented through the same resolver and dispatcher without
+widening the unavailable input or clone/fill claims.
 
 ## License
 
