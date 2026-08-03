@@ -24,20 +24,25 @@ registry/overlay/index/deck documents into private dispatcher invocations and
 admits a real clone/fill product executor whose conformance output is a closed
 JSON operation plan. The normative row remains `unsupported/unavailable`, so
 normal product dispatch is blocked before preflight; no OOXML is cloned,
-mutated, staged, or published.
+mutated, staged, or published. M2-003 adds one separately scoped experimental
+capability: `native-card-arrow` emits an explicitly unbound, non-insertable
+`p:grpSp` conformance exemplar containing native card and arrow shapes. This is
+not an assembled PPTX or PowerPoint editability result.
 
 | Dimension | Items | Supported | Experimental | Manual | Unsupported |
 | --- | ---: | ---: | ---: | ---: | ---: |
 | Inputs | 13 | 0 | 0 | 0 | 13 |
 | OOXML features | 22 | 0 | 0 | 0 | 22 |
-| Capabilities | 8 | 0 | 0 | 0 | 8 |
+| Capabilities | 8 | 0 | 1 | 0 | 7 |
 | Platforms | 10 | 0 | 6 | 1 | 3 |
 | Evidence levels | 7 | 0 | 1 | 2 | 4 |
-| **Total** | **60** | **0** | **7** | **3** | **50** |
+| **Total** | **60** | **0** | **8** | **3** | **49** |
 
 The six experimental platform rows are only the declared Node.js 22.x/24.x
-runtime envelope on Linux, macOS, and Windows. They remain experimental until
-public cross-platform CI exists, and they imply no PPTX feature support.
+runtime envelope on Linux, macOS, and Windows. A seventh non-capability row is
+the public-automated evidence level, and the sole experimental capability is
+the narrow `native-card-arrow` component. Platform rows remain experimental
+until public cross-platform CI exists and imply no PPTX feature support.
 
 ## Status vocabulary
 
@@ -46,8 +51,9 @@ public cross-platform CI exists, and they imply no PPTX feature support.
   metadata, executor, input/output schemas, conformance fixture, and QA
   assertions.
 - `experimental`: a bounded implementation path or contract exists, but its
-  stability or required evidence is incomplete. It must remain labeled at all
-  public boundaries.
+  stability or coverage is incomplete. It must remain labeled at all public
+  boundaries. Capability rows still require the same six executable artifact
+  classes as supported capabilities and explicit per-selection opt-in.
 - `manual`: an explicit trusted human or external-runtime gate is required.
   The result remains unresolved until recorded and never becomes an automatic
   pass.
@@ -74,6 +80,13 @@ Roadmap entries describe intended work only. They do not change current status.
   executor produces only semantic operation plans and has no staging authority
   or render flow. Schema-only fixtures remain explicitly excluded from product
   capability conformance evidence.
+- `native-card-arrow` accepts only closed geometry/text/style data and one exact
+  text-box anchor. Its canonical group XML is strict-parsed and allowlisted,
+  contains no raster or relationships, and is marked `insertable: false` with
+  component-local IDs. M2-005 must rebuild it with collision-free target IDs,
+  validate slide containment, and apply it in isolated staging. General
+  DrawingML, general slide text, complete PPTX rendering, and PowerPoint
+  editability therefore remain unavailable.
 - Macros, ActiveX, OLE, embedded packages, and external relationships have
   executable rejection mutations in the bounded ingestion lane. Embedded
   fonts, unknown vendor XML, and every unlisted OOXML feature also retain a
@@ -96,6 +109,7 @@ npm run check:support-matrix
 npm run check:contracts
 node --test tests/capability-dispatcher.test.mjs
 node --test tests/source-slide-clone-fill.test.mjs
+node --test tests/native-card-arrow.test.mjs
 ```
 
 The gate reads the staged matrix and schema by default, validates their
@@ -110,5 +124,7 @@ it does not alter any support status.
 The dispatcher test verifies runtime admission and execution mechanics using a
 separate conformance-only probe. The clone/fill test verifies exact semantic
 resolution and product artifact conformance, then separately proves that the
-normative unavailable decision blocks normal dispatch. Passing either test
-does not promote a matrix status or establish presentation output support.
+normative unavailable decision blocks normal dispatch. The native-component
+test verifies the exact experimental fragment boundary and explicit opt-in;
+passing it establishes neither target-package application nor a manually
+editable PowerPoint file.

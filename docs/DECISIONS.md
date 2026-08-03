@@ -25,6 +25,7 @@ No item below is decided merely because a recommendation is recorded.
 | D-019 | ACCEPTED | Initial secure-ingestion profile | Use a non-relaxable narrow ZIP/XML/OPC profile and a one-step `ProjectContext` source-to-index API; document portable Node filesystem race limits instead of claiming hostile-directory atomic containment. | M1-005 stored/DEFLATE positives, filesystem/archive/XML/OOXML mutation suite, exact public golden, residual-risk review, and unchanged false support switch. |
 | D-020 | ACCEPTED | Capability runtime and dispatcher trust boundary | Keep serialized registry IDs declarative; atomically bind only trusted exact artifact registrations, preflight complete batches, and execute authenticated one-shot plans without dynamic loading or fallback. | M2-001 runtime, conformance-only schemas/fixture/executor, admission/dispatch mutation suite, support-policy tests, and unchanged false support switch. |
 | D-021 | ACCEPTED | Semantic project resolution and clone/fill plan boundary | Resolve the complete in-memory registry/overlay/index/deck graph before dispatcher preflight, bind exact runtime registry content, and keep clone/fill output data-only until isolated OOXML application exists. | M2-002 resolver, product artifact set, public semantic mutation suite, exact unavailable policy, and unchanged false support switch. |
+| D-022 | ACCEPTED | Minimal native component and ID boundary | Emit one fixed native card-arrow group as an unbound, non-insertable conformance exemplar; keep component IDs local and require safe target-slide rebuild/remap in M2-005. | M2-003 metadata, schemas, executor, public conformance fixtures, strict XML/vocabulary QA, experimental opt-in policy, and unchanged false support switch. |
 
 Record a decision by changing its status to `ACCEPTED`, adding the date and
 rationale below the table, and updating every affected contract/TODO in the
@@ -134,6 +135,21 @@ same change.
   staging authority. The product row remains `unsupported/unavailable`; only
   M2-005 may establish actual OOXML application, source isolation, collateral
   safety, and publication evidence.
+- **D-022 accepted:** `native-card-arrow@0.1.0` is the sole initial native
+  component. A fixed typed tree canonically emits an allowlisted `p:grpSp` with
+  one text-bearing `roundRect` and one `rightArrow`; payload data cannot supply
+  XML vocabulary, relationships, or source identifiers. The fragment is an
+  unbound conformance exemplar with `insertable: false`, component-local
+  `1/2/3` IDs, and mandatory target-slide remapping. Its exact capability row is
+  experimental and opt-in with all executable artifacts, while broad
+  DrawingML, slide text, package output, and PowerPoint editability remain
+  unsupported. M2-005 must rebuild from typed data, allocate collision-free
+  IDs, validate containment, and apply only in isolated create-only staging.
+  The M2-003 TODO exit criterion is therefore clarified in the same change:
+  "native" and "non-raster" describe the structurally validated DrawingML
+  exemplar, while target insertion and editable-PowerPoint evidence are
+  explicit M2-005 obligations. This clarification prevents the milestone from
+  claiming an output artifact that its dispatcher result cannot produce.
 
 ## MIT versus Apache-2.0 review
 

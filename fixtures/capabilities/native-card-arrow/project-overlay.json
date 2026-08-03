@@ -1,0 +1,32 @@
+{
+  "schemaVersion": "0.1.0",
+  "contractType": "project-overlay",
+  "projectOverlayId": "native-card-arrow-project-overlay",
+  "projectId": "native-card-arrow-project",
+  "templateProfileId": "synthetic-template-profile",
+  "templateIndexId": "synthetic-template-index",
+  "templateSha256": "f9875cbaf15b890baaf1370ddd0796ba09d6dc08a6963ce64298a81ca51b99ab",
+  "capabilityRegistryId": "native-card-arrow-registry",
+  "registryVersion": "0.1.0",
+  "capabilitySelections": [
+    {
+      "capabilitySelectionId": "native-card-arrow-selection",
+      "capabilityId": "native-card-arrow",
+      "capabilityVersion": "0.1.0",
+      "experimentalOptIn": true,
+      "bindings": [
+        { "role": "anchor", "shapeBindingId": "card-arrow-anchor-binding" }
+      ]
+    }
+  ],
+  "shapeBindings": [
+    {
+      "shapeBindingId": "card-arrow-anchor-binding",
+      "containerKind": "slide",
+      "containerKey": "slide-1",
+      "shapeKey": "shape-2",
+      "expectedKind": "text-box",
+      "cardinality": "exactly-one"
+    }
+  ]
+}

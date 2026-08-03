@@ -440,6 +440,67 @@ notes: The executor emits a schema-validated semantic operation plan only. It
   false and all 60 product rows remain non-supported.
 ```
 
+### M2-003 native-card-arrow set
+
+```yaml
+paths:
+  - AGENTS.md
+  - HANDOFF.md
+  - README.md
+  - TODO.md
+  - docs/ARCHITECTURE_TARGET.md
+  - docs/COMPATIBILITY_POLICY.md
+  - docs/DECISIONS.md
+  - docs/M2-003_HANDOFF.md
+  - docs/OPEN_SOURCE_READINESS.md
+  - docs/PROVENANCE_LEDGER.md
+  - docs/RELEASE_GATES.md
+  - docs/SUPPORT_MATRIX.md
+  - docs/THREAT_MODEL.md
+  - fixtures/capabilities/native-card-arrow/cases.json
+  - fixtures/capabilities/native-card-arrow/deck-spec.json
+  - fixtures/capabilities/native-card-arrow/project-overlay.json
+  - fixtures/capabilities/native-card-arrow/registry.json
+  - plugins/native-card-arrow/schemas/input.schema.json
+  - plugins/native-card-arrow/schemas/output.schema.json
+  - plugins/native-card-arrow/src/native-card-arrow.mjs
+  - policy/support-matrix.json
+  - provenance/records.json
+  - scripts/check-support-matrix.mjs
+  - tests/native-card-arrow.test.mjs
+  - tests/support-matrix.test.mjs
+kind: new-clean-room; existing planning, policy, and gate files updated in place
+origin: independently authored from the M2-003 TODO exit criterion, existing
+  public runtime/data contracts, repository-owned text fixtures, support policy,
+  strict XML boundary, and public ECMA-376 PresentationML/DrawingML structure;
+  no predecessor implementation, private fixture, presentation asset, binary,
+  build output, prompt, log, or example implementation was inspected or copied
+original_author_or_holder: Elliot Wu
+created_or_reviewed_on: 2026-08-03
+license_or_rights_basis: MIT
+third_party_dependencies: []
+private_information_review: passed; fixtures contain only generic public
+  semantic IDs, synthetic labels, colors, geometry, and public format namespace
+  identifiers; output and errors expose no local source path or private content
+project_constant_removal: passed; product source contains no fixture slide,
+  shape, source, digest, path, text, or geometry constant and has no filesystem,
+  archive, network, process, environment, dynamic-loader, or staging authority
+public_fixture_conformance: applicable; 57 native-component nodes and a 215-node
+  resolver/dispatcher/clone-fill/support focus cover exact artifacts,
+  experimental opt-in, atomicity, schemas, strict native vocabulary, safe
+  Unicode/XML escaping, geometry/style bounds, local-ID policy, deterministic
+  output, drift, fixture neutrality, no-I/O, and clean-directory closure; the
+  complete repository suite has 623 nodes
+independent_review: passed; the bounded closing review found an overbroad old
+  editability exit criterion and an incorrect QA-count statement, both were
+  corrected, and final re-review reported no remaining blocker or high finding
+notes: The executor emits one unbound, non-insertable native group conformance
+  exemplar. It neither applies OOXML nor proves a complete PPTX, PowerPoint
+  editability, slide containment, final object IDs, source isolation,
+  collateral safety, staging, or publication. The global support switch remains
+  false; one narrow capability is experimental and no row is supported.
+```
+
 The XML namespace, relationship-type, and MIME strings are interoperability
 identifiers from the public format specification. They do not convey third-
 party presentation content. The fictional `Synthetic Sans` typeface name does

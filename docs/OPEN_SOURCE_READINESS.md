@@ -8,8 +8,9 @@ clean-room extraction into this empty-history repository, not a rename or bulk
 copy. The current readiness level is `semantic-planning / pre-alpha`:
 admission, support-claim, data-contract, explicit-context, semantic-inspection,
 bounded secure-ingestion, capability-dispatch, project-resolution, and
-clone/fill operation-planning gates are executable, while OOXML mutation and
-PPTX output capabilities are not.
+clone/fill operation planning plus one unbound native-component generation gate
+are executable, while target OOXML mutation and PPTX output capabilities are
+not.
 
 ## Reusable foundations observed in the predecessor
 
@@ -37,9 +38,10 @@ redistributable code and do not establish generic support.
 4. **Capability truth:** M2-001 requires complete exact artifact registration,
    and M2-002 adds exact project binding resolution plus a product clone/fill
    executor whose public conformance emits only semantic JSON operation plans.
-   No OOXML clone/fill application, native DrawingML component, assembly, or
-   renderer capability exists, and structural onboarding has not proved generic
-   render.
+   M2-003 adds one exact experimental card-arrow `p:grpSp` exemplar, but marks
+   it unbound and non-insertable. No OOXML clone/fill/component application,
+   assembly, or complete renderer exists, and structural onboarding has not
+   proved generic render or PowerPoint editability.
 5. **Untrusted input compatibility:** M1-005 provides fixed resource and
    high-risk rejection controls for the public minimal grammar, but it does not
    establish arbitrary external PPTX/POTX compatibility or fully atomic
@@ -75,9 +77,9 @@ Pandoc's upstream licensing and source are documented at
    policy, and the synthetic fixture are complete.
 2. **Foundation:** explicit context/schemas, semantic inspector, bounded secure
    archive/XML ingestion, the fail-closed capability dispatcher, and semantic
-   clone/fill planning are complete; publishable package metadata remains later
-   work.
-3. **Vertical slice:** one native component, isolated application of clone/fill
+   clone/fill planning plus one unbound native component are complete;
+   publishable package metadata remains later work.
+3. **Vertical slice:** isolated application of clone/fill and native-component
    plans, assembly, QA, and the optional OMML adapter through the common
    dispatcher.
 4. **Product surface:** CLI/API, package split, docs, compatibility matrix,

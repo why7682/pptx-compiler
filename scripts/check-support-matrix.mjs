@@ -214,6 +214,20 @@ export function validateSupportMatrix(document, schema, { admittedPaths } = {}) 
       if (item.status === "experimental" && item.disposition !== "accept-with-warning") {
         findings.push(finding("invalid-experimental-disposition", `${pointer}/disposition`));
       }
+      if (dimension === "capabilities" && item.status === "experimental") {
+        if (level !== "automated-public") {
+          findings.push(finding("invalid-experimental-capability-evidence", `${pointer}/evidence`));
+        }
+        const types = new Set(artifacts.map((artifact) => artifact?.type));
+        for (const requiredType of CAPABILITY_EVIDENCE) {
+          if (!types.has(requiredType)) {
+            findings.push(finding(
+              "missing-experimental-capability-evidence",
+              `${pointer}/evidence/artifacts`
+            ));
+          }
+        }
+      }
       if (item.status === "manual" &&
           (item.disposition !== "report-manual-gate" || !["manual-trusted", "private-compatibility"].includes(level))) {
         findings.push(finding("invalid-manual-evidence", pointer));

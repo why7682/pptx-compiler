@@ -194,3 +194,21 @@ planning evidence. Actual source-slide bytes, relationships and identifiers are
 not cloned or remapped, and source immutability, create-only staging, rollback,
 editability, visual fidelity, collateral diff, and atomic publication remain
 unsatisfied M2-005 gates.
+
+M2-003 adds the bounded native-component portion of G3. The statically
+registered `native-card-arrow` executor accepts only one exact text-box anchor
+and closed geometry/text/style data. It creates a fixed typed group, escapes
+values through a canonical serializer, strict-parses the result, and enforces
+an exact PresentationML/DrawingML allowlist with no raster, relationship,
+custom-geometry, extension, or external vocabulary. Public conformance covers
+deterministic output, Unicode/XML injection, geometry/style limits, native
+structure, support opt-in, later-slide atomicity, drift, fixture neutrality,
+and clean-directory closure.
+
+The output contract deliberately labels the XML exemplar unbound and
+`insertable: false`; IDs are component-local and require M2-005 parse/rebuild
+and collision-free target allocation. The matrix gate now requires all six
+executable artifact classes for experimental capability rows. Only the exact
+`native-drawingml` row is experimental; `supportClaimsEnabled` stays false,
+broad DrawingML/slide text and every input remain unsupported, and no assembled
+PPTX or PowerPoint editability gate is satisfied.

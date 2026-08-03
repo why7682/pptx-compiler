@@ -86,6 +86,16 @@ read:
 7. `docs/SUPPORT_MATRIX.md`
 8. `docs/PROVENANCE_LEDGER.md`
 
+For maintenance or audit of the completed `M2-003` native component, read:
+
+3. `docs/M2-003_HANDOFF.md`
+4. `plugins/native-card-arrow/src/native-card-arrow.mjs`
+5. `plugins/native-card-arrow/schemas/input.schema.json`
+6. `plugins/native-card-arrow/schemas/output.schema.json`
+7. `tests/native-card-arrow.test.mjs`
+8. `docs/SUPPORT_MATRIX.md`
+9. `docs/PROVENANCE_LEDGER.md`
+
 Read `docs/PROJECT_DEFINITION.md` and `docs/ARCHITECTURE_TARGET.md` only before
 changing product scope, public contracts, packages, or dependency direction.
 
@@ -175,6 +185,11 @@ changing product scope, public contracts, packages, or dependency direction.
   runtime, resolve roles only through overlay/index semantic keys, return only
   an opaque dispatcher plan, and keep clone/fill output operation-plan-only
   until M2-005 proves isolated OOXML application and publication.
+- When maintaining `M2-003`, accept only closed component data and a resolved
+  text-box anchor. Keep the native XML a strict-parsed, exact-allowlisted,
+  unbound conformance exemplar with `insertable: false` and component-local
+  IDs. M2-005 must rebuild and allocate target IDs; never concatenate the raw
+  fragment, infer broad DrawingML support, or claim a PowerPoint-editable PPTX.
 - Add tests with every executable capability.
 - Update the architecture, support matrix, provenance ledger, and release gates
   in the same change when their contract changes.

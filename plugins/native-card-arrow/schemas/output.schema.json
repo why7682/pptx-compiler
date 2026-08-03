@@ -1,0 +1,158 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:pptx-pipeline:capability:schema:native-card-arrow-output:0.1.0",
+  "title": "Native card-arrow semantic render plan",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["planVersion", "planType", "outputSlideId", "clone", "insert", "component"],
+  "properties": {
+    "planVersion": { "const": "0.1.0" },
+    "planType": { "const": "native-card-arrow-plan" },
+    "outputSlideId": { "$ref": "#/$defs/semanticId" },
+    "clone": { "$ref": "#/$defs/cloneOperation" },
+    "insert": { "$ref": "#/$defs/insertOperation" },
+    "component": { "$ref": "#/$defs/component" }
+  },
+  "$defs": {
+    "color": {
+      "type": "string",
+      "pattern": "^[0-9A-F]{6}$"
+    },
+    "component": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "componentType",
+        "representation",
+        "artifactKind",
+        "insertable",
+        "idScope",
+        "localShapeIds",
+        "geometry",
+        "label",
+        "style",
+        "unboundDrawingmlFragment"
+      ],
+      "properties": {
+        "componentType": { "const": "native-card-arrow" },
+        "representation": { "const": "native-drawingml-group-shape" },
+        "artifactKind": { "const": "unbound-drawingml-conformance-fragment" },
+        "insertable": { "const": false },
+        "idScope": { "const": "component-local" },
+        "localShapeIds": {
+          "type": "array",
+          "minItems": 3,
+          "maxItems": 3,
+          "uniqueItems": true,
+          "items": {
+            "type": "integer",
+            "minimum": 1,
+            "maximum": 3
+          }
+        },
+        "geometry": { "$ref": "#/$defs/geometry" },
+        "label": { "$ref": "#/$defs/safeText" },
+        "style": { "$ref": "#/$defs/style" },
+        "unboundDrawingmlFragment": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 8192,
+          "pattern": "^<p:grpSp[\\s\\S]*</p:grpSp>$"
+        }
+      }
+    },
+    "coordinate": {
+      "type": "integer",
+      "minimum": 0,
+      "maximum": 100000000
+    },
+    "extentX": {
+      "type": "integer",
+      "minimum": 914400,
+      "maximum": 100000000
+    },
+    "extentY": {
+      "type": "integer",
+      "minimum": 457200,
+      "maximum": 100000000
+    },
+    "geometry": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["x", "y", "cx", "cy"],
+      "properties": {
+        "x": { "$ref": "#/$defs/coordinate" },
+        "y": { "$ref": "#/$defs/coordinate" },
+        "cx": { "$ref": "#/$defs/extentX" },
+        "cy": { "$ref": "#/$defs/extentY" }
+      }
+    },
+    "semanticId": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 96,
+      "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$"
+    },
+    "safeText": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 256,
+      "pattern": "^(?=.*\\S)(?!.*\\p{Cf})(?!.*\\p{Noncharacter_Code_Point})(?!.*[\\uD800-\\uDFFF])[^\\u0000-\\u001F\\u007F-\\u009F\\u2028\\u2029]+$"
+    },
+    "style": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "arrowFill",
+        "cardFill",
+        "fontSizeHundredthPoints",
+        "lineColor",
+        "textColor"
+      ],
+      "properties": {
+        "arrowFill": { "$ref": "#/$defs/color" },
+        "cardFill": { "$ref": "#/$defs/color" },
+        "fontSizeHundredthPoints": {
+          "type": "integer",
+          "minimum": 800,
+          "maximum": 4400
+        },
+        "lineColor": { "$ref": "#/$defs/color" },
+        "textColor": { "$ref": "#/$defs/color" }
+      }
+    },
+    "cloneOperation": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["operationId", "operationType", "sourceContainerKind", "sourceSlideKey"],
+      "properties": {
+        "operationId": { "const": "clone-source-slide" },
+        "operationType": { "const": "clone-slide" },
+        "sourceContainerKind": { "const": "slide" },
+        "sourceSlideKey": { "$ref": "#/$defs/semanticId" }
+      }
+    },
+    "insertOperation": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "operationId",
+        "operationType",
+        "role",
+        "anchorBindingId",
+        "anchorShapeKey",
+        "expectedKind",
+        "idPolicy"
+      ],
+      "properties": {
+        "operationId": { "const": "insert-native-card-arrow" },
+        "operationType": { "const": "insert-drawingml-group-after-anchor" },
+        "role": { "const": "anchor" },
+        "anchorBindingId": { "$ref": "#/$defs/semanticId" },
+        "anchorShapeKey": { "$ref": "#/$defs/semanticId" },
+        "expectedKind": { "const": "text-box" },
+        "idPolicy": { "const": "local-remap-required" }
+      }
+    }
+  }
+}

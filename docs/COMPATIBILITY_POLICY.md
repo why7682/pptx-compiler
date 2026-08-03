@@ -62,7 +62,11 @@ platform evidence, the global switch, and an explicit matrix promotion remain
 required. Dispatcher or product-executor conformance at admission does not
 override an unavailable matrix row. The clone/fill executor's data-only
 operation plan is not proof of OOXML mutation, source isolation, editability,
-visual fidelity, collateral safety, or publication.
+visual fidelity, collateral safety, or publication. The M2-003 native-card-arrow
+executor's canonical `p:grpSp` is likewise an unbound, non-insertable
+conformance exemplar: component-local object IDs, fixed native vocabulary, and
+non-raster structure do not prove target-slide application or a PowerPoint
+edit/save/reopen result.
 
 ## Promotion and demotion
 
@@ -77,11 +81,13 @@ repository and pass on the declared runtime/platform matrix:
 - source-isolation and collateral-mutation evidence.
 
 `experimental` requires a bounded implemented path and explicit limitations;
-an idea or architecture document alone remains `unsupported`. `manual` requires
-a named manual gate and trusted execution policy. A regression, missing
-artifact, expired environment assumption, security finding, or incompatible
-dependency change demotes the affected row immediately; it does not wait for a
-release.
+an idea or architecture document alone remains `unsupported`. An experimental
+capability must still provide metadata, executor, input/output schemas,
+conformance fixtures, and QA assertions at the automated-public evidence level,
+and every selection requires explicit opt-in. `manual` requires a named manual
+gate and trusted execution policy. A regression, missing artifact, expired
+environment assumption, security finding, or incompatible dependency change
+demotes the affected row immediately; it does not wait for a release.
 
 ## Evidence hierarchy
 
@@ -139,6 +145,10 @@ Editability is capability-specific. Native OOXML structure plus the required QA
 evidence may establish the declared editability property; visual similarity
 alone cannot. Pixel-level or PowerPoint-runtime compatibility is manual unless
 a future public, reproducible evidence contract explicitly promotes it.
+An unbound native fragment proves only its fixed non-raster representation. It
+must not be described as an editable PPTX until target-package application,
+collision-free IDs, open-without-repair, edit, save, reopen, and retained native
+structure are separately evidenced.
 
 ## Security precedence
 

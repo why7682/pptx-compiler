@@ -18,10 +18,15 @@ runtime-only dispatcher now proves exact artifact registration, full-batch
 preflight, one-shot execution, output validation, and QA through a data-only
 conformance probe. A pure in-memory resolver and a statically registered
 clone/fill product executor now produce deterministic semantic JSON operation
-plans from exact text-box bindings. Product dispatch remains unavailable and no
-OOXML is mutated. There is still no published CLI, arbitrary-template
-compatibility promise, or renderer. It is not yet a releasable software package.
-Do not publish until the release gates in [TODO.md](TODO.md) pass.
+plans from exact text-box bindings. One opt-in experimental native-card-arrow
+executor now produces a strict, canonical, non-raster `p:grpSp` conformance
+fragment from data only. That fragment is explicitly unbound and non-insertable:
+no PPTX/POTX package is mutated, final object IDs are not allocated, and
+PowerPoint editability has not been proved. The global support switch remains
+false and no row is supported. There is still no published CLI,
+arbitrary-template compatibility promise, or renderer. It is not yet a
+releasable software package. Do not publish until the release gates in
+[TODO.md](TODO.md) pass.
 
 ## Intended function
 
@@ -58,14 +63,16 @@ and OOXML feature matrix will be explicit and fail closed.
    [docs/M2-001_HANDOFF.md](docs/M2-001_HANDOFF.md).
 9. For semantic project resolution and clone/fill planning, read
    [docs/M2-002_HANDOFF.md](docs/M2-002_HANDOFF.md).
-10. Load broader project/architecture documents only when the handoff routes to
+10. For the native card-arrow capability and its non-insertable ID boundary,
+    read [docs/M2-003_HANDOFF.md](docs/M2-003_HANDOFF.md).
+11. Load broader project/architecture documents only when the handoff routes to
    them.
 
 The private root package has no dependencies; `npm test`,
 `npm run inspect:synthetic`, and `npm run check:public-tree` verify the current
-foundation. The next dependency is the minimal native DrawingML component in
-`M2-003`, implemented through the same resolver and dispatcher without
-widening the unavailable input or clone/fill claims.
+foundation. The next dependency is the optional Pandoc/OMML adapter in `M2-004`,
+kept external to core and tested without widening native DrawingML, package,
+or PowerPoint claims.
 
 ## License
 

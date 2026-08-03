@@ -1,0 +1,73 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:pptx-pipeline:capability:schema:native-card-arrow-input:0.1.0",
+  "title": "Native card-arrow input",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["geometry", "label", "style"],
+  "properties": {
+    "geometry": { "$ref": "#/$defs/geometry" },
+    "label": { "$ref": "#/$defs/safeText" },
+    "style": { "$ref": "#/$defs/style" }
+  },
+  "$defs": {
+    "color": {
+      "type": "string",
+      "pattern": "^[0-9A-F]{6}$"
+    },
+    "coordinate": {
+      "type": "integer",
+      "minimum": 0,
+      "maximum": 100000000
+    },
+    "extentX": {
+      "type": "integer",
+      "minimum": 914400,
+      "maximum": 100000000
+    },
+    "extentY": {
+      "type": "integer",
+      "minimum": 457200,
+      "maximum": 100000000
+    },
+    "geometry": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["x", "y", "cx", "cy"],
+      "properties": {
+        "x": { "$ref": "#/$defs/coordinate" },
+        "y": { "$ref": "#/$defs/coordinate" },
+        "cx": { "$ref": "#/$defs/extentX" },
+        "cy": { "$ref": "#/$defs/extentY" }
+      }
+    },
+    "safeText": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 256,
+      "pattern": "^(?=.*\\S)(?!.*\\p{Cf})(?!.*\\p{Noncharacter_Code_Point})(?!.*[\\uD800-\\uDFFF])[^\\u0000-\\u001F\\u007F-\\u009F\\u2028\\u2029]+$"
+    },
+    "style": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "arrowFill",
+        "cardFill",
+        "fontSizeHundredthPoints",
+        "lineColor",
+        "textColor"
+      ],
+      "properties": {
+        "arrowFill": { "$ref": "#/$defs/color" },
+        "cardFill": { "$ref": "#/$defs/color" },
+        "fontSizeHundredthPoints": {
+          "type": "integer",
+          "minimum": 800,
+          "maximum": 4400
+        },
+        "lineColor": { "$ref": "#/$defs/color" },
+        "textColor": { "$ref": "#/$defs/color" }
+      }
+    }
+  }
+}

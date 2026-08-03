@@ -11,7 +11,7 @@
     },
     "experimental": {
       "meaning": "A bounded path or contract exists but stability, coverage, or required evidence is incomplete.",
-      "claimRule": "Must be labeled experimental at every API, CLI, and documentation boundary."
+      "claimRule": "Must be labeled experimental at every API, CLI, and documentation boundary; capability rows still require metadata, executor, input/output schemas, conformance fixture, and QA assertions."
     },
     "manual": {
       "meaning": "The result depends on an explicit trusted human or external-runtime gate.",
@@ -99,7 +99,7 @@
         "disposition": "unavailable",
         "currentBasis": "No asset policy, decoder boundary, or placement executor exists.",
         "limitations": ["Local files are not searched or implicitly admitted."],
-        "roadmap": "M1-002 and M2-003",
+        "roadmap": "Requires a future asset-input and placement milestone",
         "evidence": { "level": "none", "artifacts": [] }
       },
       {
@@ -153,7 +153,7 @@
         "disposition": "unavailable",
         "currentBasis": "No asset policy, decoder boundary, or placement executor exists.",
         "limitations": ["Local files are not searched or implicitly admitted."],
-        "roadmap": "M1-002 and M2-003",
+        "roadmap": "Requires a future asset-input and placement milestone",
         "evidence": { "level": "none", "artifacts": [] }
       },
       {
@@ -240,7 +240,7 @@
         "disposition": "unavailable",
         "currentBasis": "No SVG safety profile or placement executor exists.",
         "limitations": ["External references, scripts, and font behavior remain unspecified."],
-        "roadmap": "M1-002 and M2-003",
+        "roadmap": "Requires a future SVG safety and placement milestone",
         "evidence": { "level": "none", "artifacts": [] }
       },
       {
@@ -380,10 +380,24 @@
         "label": "Native DrawingML text and shapes",
         "status": "unsupported",
         "disposition": "unavailable",
-        "currentBasis": "A minimal native component is planned but not implemented.",
-        "limitations": ["No editability or rendering claim exists."],
-        "roadmap": "M2-003",
-        "evidence": { "level": "none", "artifacts": [] }
+        "currentBasis": "The experimental native-card-arrow executor emits one closed, unbound p:grpSp conformance fragment; that narrow component does not establish general DrawingML shape or package support.",
+        "limitations": ["No target-slide ID allocation, OOXML application, slide-size containment, text-fit, PowerPoint editability, staging, or publication claim exists."],
+        "roadmap": "M2-005 for safe application; broader shapes require separately registered capabilities",
+        "evidence": {
+          "level": "automated-public",
+          "artifacts": [
+            {
+              "type": "executor",
+              "path": "plugins/native-card-arrow/src/native-card-arrow.mjs",
+              "note": "Narrow fixed-vocabulary group-shape exemplar only; it is explicitly not directly insertable."
+            },
+            {
+              "type": "qa-assertions",
+              "path": "tests/native-card-arrow.test.mjs",
+              "note": "Proves the narrow native vocabulary and rejects raster, relationship, namespace, geometry, style, text, and ID drift without promoting the broad feature."
+            }
+          ]
+        }
       },
       {
         "id": "embedded-fonts",
@@ -539,7 +553,7 @@
         "disposition": "unavailable",
         "currentBasis": "Image-part validation and placement are not implemented.",
         "limitations": ["No metadata, size, decoder, or relationship policy exists."],
-        "roadmap": "M1-005 and M2-003",
+        "roadmap": "Requires a future image-part and asset-placement milestone",
         "evidence": { "level": "none", "artifacts": [] }
       },
       {
@@ -547,10 +561,24 @@
         "label": "Native slide text",
         "status": "unsupported",
         "disposition": "unavailable",
-        "currentBasis": "A semantic clone/fill planner exists, but it emits no native DrawingML or PPTX text mutation.",
-        "limitations": ["No OOXML application, editability, overflow, font, staging, or publication claim exists."],
-        "roadmap": "M2-002 and M2-003",
-        "evidence": { "level": "none", "artifacts": [] }
+        "currentBasis": "Clone/fill remains semantic-only; the experimental native-card-arrow executor emits one unbound native text-shape exemplar, but no slide or package applicator exists.",
+        "limitations": ["No OOXML application, target-slide ID allocation, PowerPoint editability, overflow, font, staging, or publication claim exists."],
+        "roadmap": "M2-005 for safe application and explicit text QA",
+        "evidence": {
+          "level": "automated-public",
+          "artifacts": [
+            {
+              "type": "executor",
+              "path": "plugins/native-card-arrow/src/native-card-arrow.mjs",
+              "note": "One fixed single-run a:t exemplar; this is not general slide-text mutation support."
+            },
+            {
+              "type": "qa-assertions",
+              "path": "tests/native-card-arrow.test.mjs",
+              "note": "Exercises exact Unicode preservation, XML escaping, safe-text limits, and text-drift rejection for the narrow exemplar."
+            }
+          ]
+        }
       },
       {
         "id": "svg-image-parts",
@@ -559,7 +587,7 @@
         "disposition": "unavailable",
         "currentBasis": "No SVG safety profile or DrawingML placement exists.",
         "limitations": ["Scripts, links, fonts, and renderer variance remain unspecified."],
-        "roadmap": "M1-005 and M2-003",
+        "roadmap": "Requires a future SVG safety and image-part milestone",
         "evidence": { "level": "none", "artifacts": [] }
       },
       {
@@ -601,7 +629,7 @@
         "disposition": "unavailable",
         "currentBasis": "No dispatchable asset executor exists.",
         "limitations": ["No accepted asset input policy exists."],
-        "roadmap": "M2-003",
+        "roadmap": "Requires a future asset-input and placement milestone",
         "evidence": { "level": "none", "artifacts": [] }
       },
       {
@@ -646,12 +674,51 @@
       {
         "id": "native-drawingml",
         "label": "Minimal native DrawingML component",
-        "status": "unsupported",
-        "disposition": "unavailable",
-        "currentBasis": "No capability definition or executor exists.",
-        "limitations": ["No editability or geometry QA claim exists."],
-        "roadmap": "M2-003",
-        "evidence": { "level": "none", "artifacts": [] }
+        "status": "experimental",
+        "disposition": "accept-with-warning",
+        "currentBasis": "The native-card-arrow 0.1.0 capability resolves a real text-box anchor and deterministically emits a strict-parsed, exact-allowlisted, unbound p:grpSp exemplar containing native roundRect and rightArrow p:sp objects.",
+        "limitations": ["The exemplar is explicitly insertable=false with component-local IDs; M2-005 must parse, rebuild, allocate collision-free target-slide IDs, validate containment, stage, and publish before any PPTX or PowerPoint editability claim."],
+        "roadmap": "M2-005 plus trusted PowerPoint editability evidence before support promotion",
+        "evidence": {
+          "level": "automated-public",
+          "artifacts": [
+            {
+              "type": "metadata",
+              "path": "fixtures/capabilities/native-card-arrow/registry.json",
+              "note": "Exact capability identity, anchor role, artifact references, and sorted conformance fixture IDs."
+            },
+            {
+              "type": "executor",
+              "path": "plugins/native-card-arrow/src/native-card-arrow.mjs",
+              "note": "Pure bounded executor with closed typed construction, canonical XML serialization, strict parsing, and exact native vocabulary QA."
+            },
+            {
+              "type": "input-schema",
+              "path": "plugins/native-card-arrow/schemas/input.schema.json",
+              "note": "Closed data-only geometry, safe-text, RGB, and font-size payload contract."
+            },
+            {
+              "type": "output-schema",
+              "path": "plugins/native-card-arrow/schemas/output.schema.json",
+              "note": "Closed clone/placement/component plan contract that marks the XML exemplar unbound and non-insertable."
+            },
+            {
+              "type": "conformance-fixture",
+              "path": "fixtures/capabilities/native-card-arrow/cases.json",
+              "note": "Two exact repository-owned text-only outputs covering baseline and escaped Unicode content."
+            },
+            {
+              "type": "qa-assertions",
+              "path": "tests/native-card-arrow.test.mjs",
+              "note": "Resolver/dispatcher integration, atomicity, native structure, escaping, limits, drift, no-I/O, and clean-closure evidence."
+            },
+            {
+              "type": "contract",
+              "path": "docs/M2-003_HANDOFF.md",
+              "note": "Defines the experimental claim boundary and deferred target-slide application obligations."
+            }
+          ]
+        }
       },
       {
         "id": "package-inspection",

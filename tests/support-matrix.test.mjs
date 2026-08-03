@@ -13,6 +13,7 @@ const admittedPaths = new Set([
   "docs/M1-001_HANDOFF.md",
   "docs/M1-002_HANDOFF.md",
   "docs/M2-001_HANDOFF.md",
+  "docs/M2-003_HANDOFF.md",
   "docs/PRIVATE_FIXTURE_POLICY.md",
   "docs/RELEASE_GATES.md",
   "fixtures/source-parts/minimal/fixture.json",
@@ -26,6 +27,10 @@ const admittedPaths = new Set([
   "fixtures/capabilities/source-slide-clone-fill/deck-spec.json",
   "fixtures/capabilities/source-slide-clone-fill/project-overlay.json",
   "fixtures/capabilities/source-slide-clone-fill/registry.json",
+  "fixtures/capabilities/native-card-arrow/cases.json",
+  "fixtures/capabilities/native-card-arrow/deck-spec.json",
+  "fixtures/capabilities/native-card-arrow/project-overlay.json",
+  "fixtures/capabilities/native-card-arrow/registry.json",
   "package.json",
   "packages/core/src/project-context.mjs",
   "packages/core/src/capability-dispatcher.mjs",
@@ -38,6 +43,9 @@ const admittedPaths = new Set([
   "plugins/clone-fill/schemas/input.schema.json",
   "plugins/clone-fill/schemas/output.schema.json",
   "plugins/clone-fill/src/source-slide-clone-fill.mjs",
+  "plugins/native-card-arrow/schemas/input.schema.json",
+  "plugins/native-card-arrow/schemas/output.schema.json",
+  "plugins/native-card-arrow/src/native-card-arrow.mjs",
   "policy/support-matrix.json",
   "schemas/support-matrix.schema.json",
   "schemas/contracts/build-artifact.schema.json",
@@ -56,6 +64,7 @@ const admittedPaths = new Set([
   "tests/project-context.test.mjs",
   "tests/secure-template-ingestion.test.mjs",
   "tests/source-slide-clone-fill.test.mjs",
+  "tests/native-card-arrow.test.mjs",
   "tests/support-matrix.test.mjs",
   "tests/template-inspector.test.mjs"
 ]);
@@ -109,6 +118,28 @@ test("support matrix validates and produces byte-stable findings", () => {
       "contract"
     ])
   );
+  const nativeDrawingml = matrix.dimensions.capabilities.find((item) =>
+    item.id === "native-drawingml");
+  assert.equal(nativeDrawingml.status, "experimental");
+  assert.equal(nativeDrawingml.disposition, "accept-with-warning");
+  assert.equal(nativeDrawingml.evidence.level, "automated-public");
+  assert.deepEqual(
+    new Set(nativeDrawingml.evidence.artifacts.map((artifact) => artifact.type)),
+    new Set([
+      "metadata",
+      "executor",
+      "input-schema",
+      "output-schema",
+      "conformance-fixture",
+      "qa-assertions",
+      "contract"
+    ])
+  );
+  for (const broadId of ["drawingml-shapes", "slide-text"]) {
+    const broadRow = matrix.dimensions.ooxmlFeatures.find((item) => item.id === broadId);
+    assert.equal(broadRow.status, "unsupported");
+    assert.equal(broadRow.disposition, "unavailable");
+  }
   const packageInspection = matrix.dimensions.capabilities.find((item) => item.id === "package-inspection");
   assert.equal(packageInspection.status, "unsupported");
   assert.equal(packageInspection.disposition, "unavailable");
@@ -181,6 +212,30 @@ test("mutation: supported capability missing contract evidence is rejected", () 
     artifacts: [{ type: "executor", path: "docs/RELEASE_GATES.md", note: "Mutation-only executor reference." }]
   };
   assertRule(mutated, "missing-supported-capability-evidence");
+});
+
+test("mutation: experimental capability requires automated public evidence", () => {
+  const mutated = cloneMatrix();
+  const capability = mutated.dimensions.capabilities[0];
+  capability.status = "experimental";
+  capability.disposition = "accept-with-warning";
+  capability.evidence = { level: "none", artifacts: [] };
+  assertRule(mutated, "invalid-experimental-capability-evidence");
+  assertRule(mutated, "missing-experimental-capability-evidence");
+});
+
+test("mutation: experimental capability requires every executable artifact type", () => {
+  const mutated = cloneMatrix();
+  const capability = mutated.dimensions.capabilities[0];
+  capability.status = "experimental";
+  capability.disposition = "accept-with-warning";
+  capability.evidence = {
+    level: "automated-public",
+    artifacts: [
+      { type: "executor", path: "docs/RELEASE_GATES.md", note: "Mutation-only executor." }
+    ]
+  };
+  assertRule(mutated, "missing-experimental-capability-evidence");
 });
 
 test("mutation: manual status without a manual gate is rejected", () => {

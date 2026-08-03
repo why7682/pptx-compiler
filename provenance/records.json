@@ -46,29 +46,43 @@
     {
       "path": "AGENTS.md",
       "kind": "new-clean-room",
-      "origin": "user-directed clean-room planning with maintenance routing through M2-002",
+      "origin": "user-directed clean-room planning with maintenance routing through M2-003",
       "copyrightHolderOrSourceAuthority": "Elliot Wu",
-      "license": { "spdxExpression": "MIT" },
+      "license": {
+        "spdxExpression": "MIT"
+      },
       "reviewedOn": "2026-08-03",
       "thirdPartyDependencies": [],
-      "privateInformationReview": { "status": "passed", "notes": "Policy text contains no private fixture identity." },
-      "projectConstantCleanup": { "status": "passed", "notes": "No predecessor constants admitted." },
-      "publicConformance": { "status": "not-applicable", "notes": "Contributor instruction text only." },
-      "independentReview": { "status": "passed", "notes": "The bounded M2-002 closing review checked the resolver/plugin maintenance route, exact registry binding, operation-plan-only boundary, and unavailable support policy." },
+      "privateInformationReview": {
+        "status": "passed",
+        "notes": "Policy text contains no private fixture identity."
+      },
+      "projectConstantCleanup": {
+        "status": "passed",
+        "notes": "No predecessor constants admitted."
+      },
+      "publicConformance": {
+        "status": "not-applicable",
+        "notes": "Contributor instructions route M2-003 maintenance to the exact handoff, plugin, schemas, tests, support policy, and provenance boundary."
+      },
+      "independentReview": {
+        "status": "passed",
+        "notes": "The bounded M2-003 closing review checked native structure, strict construction and QA, dispatcher and support boundaries, fixtures, and completion metadata; no blocker or high finding remains."
+      },
       "notes": "Repository-owned contributor instructions."
     },
     {
       "path": "HANDOFF.md",
       "kind": "new-clean-room",
-      "origin": "user-directed clean-room project planning updated through the M2-002 semantic operation-planning slice",
+      "origin": "user-directed clean-room project planning updated through the M2-003 native-card-arrow slice",
       "copyrightHolderOrSourceAuthority": "Elliot Wu",
       "license": { "spdxExpression": "MIT" },
       "reviewedOn": "2026-08-03",
       "thirdPartyDependencies": [],
       "privateInformationReview": { "status": "passed", "notes": "Only approved public project identity is present." },
       "projectConstantCleanup": { "status": "passed", "notes": "Findings are generic and contain no predecessor identifiers." },
-      "publicConformance": { "status": "not-applicable", "notes": "Handoff text only." },
-      "independentReview": { "status": "passed", "notes": "M2-002 state, exact resolution evidence, operation-plan claim boundary, residuals, and the M2-003 dependency were checked against implementation." },
+      "publicConformance": { "status": "applicable", "notes": "Summarizes the exact M2-003 artifact, 57/215/623 test evidence, experimental scope, non-insertable boundary, and M2-004 dependency." },
+      "independentReview": { "status": "passed", "notes": "The bounded M2-003 closing review checked native structure, strict construction and QA, dispatcher and support boundaries, fixtures, and completion metadata; no blocker or high finding remains." },
       "notes": "Repository-owned project handoff."
     },
     {
@@ -88,71 +102,113 @@
     {
       "path": "README.md",
       "kind": "new-clean-room",
-      "origin": "user-directed clean-room project planning updated through the M2-002 semantic operation-planning slice",
+      "origin": "user-directed clean-room project planning updated through the M2-003 native-card-arrow slice",
       "copyrightHolderOrSourceAuthority": "Elliot Wu",
       "license": { "spdxExpression": "MIT" },
       "reviewedOn": "2026-08-03",
       "thirdPartyDependencies": [],
       "privateInformationReview": { "status": "passed", "notes": "No private information present." },
       "projectConstantCleanup": { "status": "passed", "notes": "No predecessor constants admitted." },
-      "publicConformance": { "status": "not-applicable", "notes": "Project overview only." },
-      "independentReview": { "status": "passed", "notes": "M2-002 resolver, product artifact conformance, unavailable operation-plan boundary, and next M2-003 dependency were checked against implementation." },
+      "publicConformance": { "status": "applicable", "notes": "Describes the exact experimental native-card-arrow fragment, disabled support switch, non-insertable boundary, and next M2-004 dependency." },
+      "independentReview": { "status": "passed", "notes": "The bounded M2-003 closing review checked native structure, strict construction and QA, dispatcher and support boundaries, fixtures, and completion metadata; no blocker or high finding remains." },
       "notes": "Repository-owned project overview."
     },
     {
       "path": "TODO.md",
       "kind": "new-clean-room",
-      "origin": "user-directed clean-room dependency plan updated with M2-002 executable semantic-resolution evidence",
+      "origin": "user-directed clean-room dependency plan updated with the clarified M2-003 native-card-arrow exit criterion and executable evidence",
       "copyrightHolderOrSourceAuthority": "Elliot Wu",
       "license": { "spdxExpression": "MIT" },
       "reviewedOn": "2026-08-03",
       "thirdPartyDependencies": [],
       "privateInformationReview": { "status": "passed", "notes": "No private information present." },
       "projectConstantCleanup": { "status": "passed", "notes": "No predecessor constants admitted." },
-      "publicConformance": { "status": "not-applicable", "notes": "Planning status only." },
-      "independentReview": { "status": "passed", "notes": "M2-002 completion evidence, exact registry binding, closing review, Node matrix, unavailable support boundary, and M2-003 dependency order were independently checked." },
+      "publicConformance": { "status": "applicable", "notes": "Records the strict native non-raster exemplar boundary, exact M2-003 artifacts and test evidence, experimental scope, and deferred M2-005 editability proof." },
+      "independentReview": { "status": "passed", "notes": "The bounded M2-003 closing review checked native structure, strict construction and QA, dispatcher and support boundaries, fixtures, and completion metadata; no blocker or high finding remains." },
       "notes": "Repository-owned dependency-ordered plan."
     },
     {
       "path": "docs/ARCHITECTURE_TARGET.md",
       "kind": "new-clean-room",
-      "origin": "user-directed clean-room target architecture updated with the M2-002 exact semantic-resolution and operation-planning boundary",
+      "origin": "user-directed clean-room target architecture updated with the M2-003 unbound native-component and deferred application boundary",
       "copyrightHolderOrSourceAuthority": "Elliot Wu",
-      "license": { "spdxExpression": "MIT" },
+      "license": {
+        "spdxExpression": "MIT"
+      },
       "reviewedOn": "2026-08-03",
       "thirdPartyDependencies": [],
-      "privateInformationReview": { "status": "passed", "notes": "No private information present." },
-      "projectConstantCleanup": { "status": "passed", "notes": "Architecture is stated generically." },
-      "publicConformance": { "status": "applicable", "notes": "Records exact runtime-registry authentication, bounded cross-contract resolution before preflight, data-only operation planning, and deferred OOXML mutation/staging boundaries." },
-      "independentReview": { "status": "passed", "notes": "The M2-002 registry authority, resolver trust boundary, batch atomicity, and separation between operation planning and product support were checked against implementation and tests." },
+      "privateInformationReview": {
+        "status": "passed",
+        "notes": "No private information present."
+      },
+      "projectConstantCleanup": {
+        "status": "passed",
+        "notes": "Architecture is stated generically."
+      },
+      "publicConformance": {
+        "status": "applicable",
+        "notes": "Records the exact resolver/dispatcher plugin path, typed native group representation, experimental scope, and deferred target-slide ID/application obligations."
+      },
+      "independentReview": {
+        "status": "passed",
+        "notes": "The bounded M2-003 closing review checked native structure, strict construction and QA, dispatcher and support boundaries, fixtures, and completion metadata; no blocker or high finding remains."
+      },
       "notes": "Repository-owned target architecture."
     },
     {
       "path": "docs/COMPATIBILITY_POLICY.md",
       "kind": "new-clean-room",
-      "origin": "M0-005 clean-room support contract updated with M2-002 exact registry authentication and semantic-resolution rules",
+      "origin": "M0-005 clean-room support contract updated with M2-003 experimental artifact, opt-in, and non-insertable native-fragment rules",
       "copyrightHolderOrSourceAuthority": "Elliot Wu",
-      "license": { "spdxExpression": "MIT" },
+      "license": {
+        "spdxExpression": "MIT"
+      },
       "reviewedOn": "2026-08-03",
       "thirdPartyDependencies": [],
-      "privateInformationReview": { "status": "passed", "notes": "Contains generic public compatibility rules only." },
-      "projectConstantCleanup": { "status": "passed", "notes": "No predecessor behavior or identifier admitted." },
-      "publicConformance": { "status": "applicable", "notes": "Exact registry-content authentication, bounded resolver invariants, unavailable product dispatch, and the necessary-but-not-sufficient planning boundary are enforced by public tests." },
-      "independentReview": { "status": "passed", "notes": "M2-002 exact registry authority, cross-document binding, operation-plan scope, and unchanged support-promotion requirements were independently checked." },
+      "privateInformationReview": {
+        "status": "passed",
+        "notes": "Contains generic public compatibility rules only."
+      },
+      "projectConstantCleanup": {
+        "status": "passed",
+        "notes": "No predecessor behavior or identifier admitted."
+      },
+      "publicConformance": {
+        "status": "applicable",
+        "notes": "Public tests enforce complete experimental capability evidence, explicit opt-in, unbound local IDs, and no PowerPoint/PPTX editability overclaim."
+      },
+      "independentReview": {
+        "status": "passed",
+        "notes": "The bounded M2-003 closing review checked native structure, strict construction and QA, dispatcher and support boundaries, fixtures, and completion metadata; no blocker or high finding remains."
+      },
       "notes": "Human compatibility and contract-versioning policy."
     },
     {
       "path": "docs/DECISIONS.md",
       "kind": "new-clean-room",
-      "origin": "user-directed clean-room decision register updated with accepted M2-002 semantic-resolution and operation-planning authority D-021",
+      "origin": "user-directed clean-room decision register updated with accepted M2-003 native-component and ID-boundary decision D-022",
       "copyrightHolderOrSourceAuthority": "Elliot Wu",
-      "license": { "spdxExpression": "MIT" },
+      "license": {
+        "spdxExpression": "MIT"
+      },
       "reviewedOn": "2026-08-03",
       "thirdPartyDependencies": [],
-      "privateInformationReview": { "status": "passed", "notes": "Contains only approved public project identity." },
-      "projectConstantCleanup": { "status": "passed", "notes": "No predecessor constants admitted." },
-      "publicConformance": { "status": "not-applicable", "notes": "Decision record only." },
-      "independentReview": { "status": "passed", "notes": "D-021 exact runtime-registry authentication, pure bounded resolver, closed plugin registration, operation-plan-only scope, and unavailable support boundary were independently checked." },
+      "privateInformationReview": {
+        "status": "passed",
+        "notes": "Contains only approved public project identity."
+      },
+      "projectConstantCleanup": {
+        "status": "passed",
+        "notes": "No predecessor constants admitted."
+      },
+      "publicConformance": {
+        "status": "not-applicable",
+        "notes": "Decision record only; D-022 is checked against exact M2-003 artifacts, support policy, and deferred M2-005 application."
+      },
+      "independentReview": {
+        "status": "passed",
+        "notes": "The bounded M2-003 closing review checked native structure, strict construction and QA, dispatcher and support boundaries, fixtures, and completion metadata; no blocker or high finding remains."
+      },
       "notes": "Repository-owned decision register."
     },
     {
@@ -282,6 +338,34 @@
       "notes": "Normative bounded M2-002 handoff; semantic operation planning is not OOXML mutation, rendering, editability, or publication evidence."
     },
     {
+      "path": "docs/M2-003_HANDOFF.md",
+      "kind": "new-clean-room",
+      "origin": "M2-003 clean-room native-component contract from the repository exit criterion, existing public runtime contracts, support policy, and public ECMA-376 PresentationML structure",
+      "copyrightHolderOrSourceAuthority": "Elliot Wu",
+      "license": {
+        "spdxExpression": "MIT"
+      },
+      "reviewedOn": "2026-08-03",
+      "thirdPartyDependencies": [],
+      "privateInformationReview": {
+        "status": "passed",
+        "notes": "Contains only repository-owned generic synthetic data, public format identifiers, and redacted technical contract terms."
+      },
+      "projectConstantCleanup": {
+        "status": "passed",
+        "notes": "No predecessor code, private fixture, presentation asset, private identifier, local path, build output, prompt, or log was inspected or admitted."
+      },
+      "publicConformance": {
+        "status": "applicable",
+        "notes": "Defines the exact data-only capability, fixed native vocabulary, unbound fragment and local-ID boundary, support limitations, and deferred M2-005 obligations."
+      },
+      "independentReview": {
+        "status": "passed",
+        "notes": "The bounded M2-003 closing review checked native structure, strict construction and QA, dispatcher and support boundaries, fixtures, and completion metadata; no blocker or high finding remains."
+      },
+      "notes": "Normative bounded M2-003 handoff; no assembled presentation or PowerPoint editability claim."
+    },
+    {
       "path": "docs/NAME_AVAILABILITY.md",
       "kind": "new-clean-room",
       "origin": "user-directed clean-room project planning",
@@ -298,15 +382,29 @@
     {
       "path": "docs/OPEN_SOURCE_READINESS.md",
       "kind": "new-clean-room",
-      "origin": "user-directed clean-room readiness plan updated through the M2-002 semantic operation-planning slice",
+      "origin": "user-directed clean-room readiness plan updated through the M2-003 unbound native-component slice",
       "copyrightHolderOrSourceAuthority": "Elliot Wu",
-      "license": { "spdxExpression": "MIT" },
+      "license": {
+        "spdxExpression": "MIT"
+      },
       "reviewedOn": "2026-08-03",
       "thirdPartyDependencies": [],
-      "privateInformationReview": { "status": "passed", "notes": "No private information present." },
-      "projectConstantCleanup": { "status": "passed", "notes": "Readiness criteria are generic." },
-      "publicConformance": { "status": "not-applicable", "notes": "Readiness plan only." },
-      "independentReview": { "status": "passed", "notes": "M2-002 semantic-planning readiness and the unchanged absence of OOXML mutation, rendering, staging, publication, or supported product capabilities were independently checked." },
+      "privateInformationReview": {
+        "status": "passed",
+        "notes": "No private information present."
+      },
+      "projectConstantCleanup": {
+        "status": "passed",
+        "notes": "Readiness criteria are generic."
+      },
+      "publicConformance": {
+        "status": "not-applicable",
+        "notes": "Readiness plan distinguishes the executable native exemplar from target OOXML application, complete rendering, packaging, and PowerPoint compatibility."
+      },
+      "independentReview": {
+        "status": "passed",
+        "notes": "The bounded M2-003 closing review checked native structure, strict construction and QA, dispatcher and support boundaries, fixtures, and completion metadata; no blocker or high finding remains."
+      },
       "notes": "Repository-owned open-source readiness plan."
     },
     {
@@ -340,57 +438,113 @@
     {
       "path": "docs/PROVENANCE_LEDGER.md",
       "kind": "new-clean-room",
-      "origin": "user-directed clean-room provenance ledger updated with the exact M2-002 semantic-resolution and clone/fill planning set",
+      "origin": "user-directed clean-room provenance ledger updated with the exact M2-003 native-card-arrow set",
       "copyrightHolderOrSourceAuthority": "Elliot Wu",
-      "license": { "spdxExpression": "MIT" },
+      "license": {
+        "spdxExpression": "MIT"
+      },
       "reviewedOn": "2026-08-03",
       "thirdPartyDependencies": [],
-      "privateInformationReview": { "status": "passed", "notes": "No private information present." },
-      "projectConstantCleanup": { "status": "passed", "notes": "No predecessor constants admitted." },
-      "publicConformance": { "status": "not-applicable", "notes": "Human-readable policy summary only." },
-      "independentReview": { "status": "passed", "notes": "The M2-002 exact path set, clean-room origin, text-only fixtures, unavailable support boundary, and closing-review closure were independently checked." },
+      "privateInformationReview": {
+        "status": "passed",
+        "notes": "No private information present."
+      },
+      "projectConstantCleanup": {
+        "status": "passed",
+        "notes": "No predecessor constants admitted."
+      },
+      "publicConformance": {
+        "status": "not-applicable",
+        "notes": "Human ledger records the complete M2-003 path set, clean-room origin, text-only evidence, local-ID boundary, test counts, and pending closing review."
+      },
+      "independentReview": {
+        "status": "passed",
+        "notes": "The bounded M2-003 closing review checked native structure, strict construction and QA, dispatcher and support boundaries, fixtures, and completion metadata; no blocker or high finding remains."
+      },
       "notes": "Human policy companion to the machine-readable records."
     },
     {
       "path": "docs/RELEASE_GATES.md",
       "kind": "new-clean-room",
-      "origin": "user-directed clean-room release gates updated with the bounded M2-002 G3 semantic operation-planning evidence",
+      "origin": "user-directed clean-room release gates updated with the bounded M2-003 native-component G3 evidence and residual application gates",
       "copyrightHolderOrSourceAuthority": "Elliot Wu",
-      "license": { "spdxExpression": "MIT" },
+      "license": {
+        "spdxExpression": "MIT"
+      },
       "reviewedOn": "2026-08-03",
       "thirdPartyDependencies": [],
-      "privateInformationReview": { "status": "passed", "notes": "No private information present." },
-      "projectConstantCleanup": { "status": "passed", "notes": "Release criteria are generic." },
-      "publicConformance": { "status": "applicable", "notes": "Records exact registry authentication, bounded graph resolution, batch-atomic preflight preparation, operation-plan QA, adversarial mutations, and deferred OOXML/staging controls." },
-      "independentReview": { "status": "passed", "notes": "M2-002 gate language was checked against substitution, mutation race, graph ambiguity, resource limits, redaction, fixture neutrality, and support-boundary evidence." },
+      "privateInformationReview": {
+        "status": "passed",
+        "notes": "No private information present."
+      },
+      "projectConstantCleanup": {
+        "status": "passed",
+        "notes": "Release criteria are generic."
+      },
+      "publicConformance": {
+        "status": "applicable",
+        "notes": "Records closed typed construction, strict XML/vocabulary QA, experimental evidence requirements, and unsatisfied target-package and PowerPoint gates."
+      },
+      "independentReview": {
+        "status": "passed",
+        "notes": "The bounded M2-003 closing review checked native structure, strict construction and QA, dispatcher and support boundaries, fixtures, and completion metadata; no blocker or high finding remains."
+      },
       "notes": "Repository-owned release gates."
     },
     {
       "path": "docs/SUPPORT_MATRIX.md",
       "kind": "new-clean-room",
-      "origin": "M0-005 clean-room support contract updated with M2-002 clone/fill operation-planning evidence and explicit unavailability",
+      "origin": "M0-005 clean-room support summary updated with the exact M2-003 experimental native capability and unchanged broad unavailability",
       "copyrightHolderOrSourceAuthority": "Elliot Wu",
-      "license": { "spdxExpression": "MIT" },
+      "license": {
+        "spdxExpression": "MIT"
+      },
       "reviewedOn": "2026-08-03",
       "thirdPartyDependencies": [],
-      "privateInformationReview": { "status": "passed", "notes": "Contains generic public feature classes and aggregate counts only." },
-      "projectConstantCleanup": { "status": "passed", "notes": "No predecessor feature identifier or evidence admitted." },
-      "publicConformance": { "status": "applicable", "notes": "Summarizes the normative checked 60-row matrix without broadening it." },
-      "independentReview": { "status": "passed", "notes": "The reviewer confirmed 60 rows, a false claim switch, zero supported rows, complete clone/fill planning evidence, and no promotion of the unavailable product row." },
+      "privateInformationReview": {
+        "status": "passed",
+        "notes": "Contains generic public feature classes and aggregate counts only."
+      },
+      "projectConstantCleanup": {
+        "status": "passed",
+        "notes": "No predecessor feature identifier or evidence admitted."
+      },
+      "publicConformance": {
+        "status": "applicable",
+        "notes": "Summarizes 60 normative rows, one experimental capability, zero supported rows, explicit opt-in, and the unbound non-insertable fragment boundary."
+      },
+      "independentReview": {
+        "status": "passed",
+        "notes": "The bounded M2-003 closing review checked native structure, strict construction and QA, dispatcher and support boundaries, fixtures, and completion metadata; no blocker or high finding remains."
+      },
       "notes": "Human-readable support-matrix summary."
     },
     {
       "path": "docs/THREAT_MODEL.md",
       "kind": "new-clean-room",
-      "origin": "user-directed clean-room threat model updated with M2-002 registry substitution, semantic-resolution, operation-plan replay, budget, and authority boundaries",
+      "origin": "user-directed clean-room threat model updated with M2-003 XML injection, local-ID collision, direct-concatenation, and claim-boundary threats",
       "copyrightHolderOrSourceAuthority": "Elliot Wu",
-      "license": { "spdxExpression": "MIT" },
+      "license": {
+        "spdxExpression": "MIT"
+      },
       "reviewedOn": "2026-08-03",
       "thirdPartyDependencies": [],
-      "privateInformationReview": { "status": "passed", "notes": "No private information present." },
-      "projectConstantCleanup": { "status": "passed", "notes": "Threats are stated generically." },
-      "publicConformance": { "status": "not-applicable", "notes": "Threat-model text only." },
-      "independentReview": { "status": "passed", "notes": "The M2-002 closing review checked registry substitution, caller mutation, graph ambiguity, rejected-Promise redaction, aggregate bounds, replay limits, and deferred source/staging authority." },
+      "privateInformationReview": {
+        "status": "passed",
+        "notes": "No private information present."
+      },
+      "projectConstantCleanup": {
+        "status": "passed",
+        "notes": "Threats are stated generically."
+      },
+      "publicConformance": {
+        "status": "not-applicable",
+        "notes": "Threat controls require closed typed construction, canonical escaping, strict parsing, exact allowlisting, non-insertability, and deferred full-tree ID allocation."
+      },
+      "independentReview": {
+        "status": "passed",
+        "notes": "The bounded M2-003 closing review checked native structure, strict construction and QA, dispatcher and support boundaries, fixtures, and completion metadata; no blocker or high finding remains."
+      },
       "notes": "Repository-owned threat model."
     },
     {
@@ -462,6 +616,118 @@
       "publicConformance": { "status": "applicable", "notes": "Provides one no-I/O preflight, fixed executor, and two synchronous QA assertions for dispatcher admission." },
       "independentReview": { "status": "passed", "notes": "The bounded M2-001 review confirmed fixed data-only output, synchronous QA, and no I/O or presentation authority." },
       "notes": "Synthetic dispatcher-only executable probe; core does not import it and it cannot promote a product support claim."
+    },
+    {
+      "path": "fixtures/capabilities/native-card-arrow/cases.json",
+      "kind": "new-clean-room",
+      "origin": "M2-003 repository-owned UTF-8 native-card-arrow conformance corpus authored from the public capability schemas and fixed native vocabulary",
+      "copyrightHolderOrSourceAuthority": "Elliot Wu",
+      "license": {
+        "spdxExpression": "MIT"
+      },
+      "reviewedOn": "2026-08-03",
+      "thirdPartyDependencies": [],
+      "privateInformationReview": {
+        "status": "passed",
+        "notes": "Contains only repository-owned generic synthetic data, public format identifiers, and redacted technical contract terms."
+      },
+      "projectConstantCleanup": {
+        "status": "passed",
+        "notes": "No predecessor code, private fixture, presentation asset, private identifier, local path, build output, prompt, or log was inspected or admitted."
+      },
+      "publicConformance": {
+        "status": "applicable",
+        "notes": "Provides two exact independently named invocation/output cases covering baseline, escaped markup, spaces, and a valid astral scalar."
+      },
+      "independentReview": {
+        "status": "passed",
+        "notes": "The bounded M2-003 closing review checked native structure, strict construction and QA, dispatcher and support boundaries, fixtures, and completion metadata; no blocker or high finding remains."
+      },
+      "notes": "Text-only JSON with one unbound native XML exemplar per case; no archive, private XML, or presentation binary."
+    },
+    {
+      "path": "fixtures/capabilities/native-card-arrow/deck-spec.json",
+      "kind": "new-clean-room",
+      "origin": "M2-003 repository-owned text-only integration fixture authored from DeckSpec 0.1.0 and the native-card-arrow input contract",
+      "copyrightHolderOrSourceAuthority": "Elliot Wu",
+      "license": {
+        "spdxExpression": "MIT"
+      },
+      "reviewedOn": "2026-08-03",
+      "thirdPartyDependencies": [],
+      "privateInformationReview": {
+        "status": "passed",
+        "notes": "Contains only repository-owned generic synthetic data, public format identifiers, and redacted technical contract terms."
+      },
+      "projectConstantCleanup": {
+        "status": "passed",
+        "notes": "No predecessor code, private fixture, presentation asset, private identifier, local path, build output, prompt, or log was inspected or admitted."
+      },
+      "publicConformance": {
+        "status": "applicable",
+        "notes": "Exercises two ordered data-only slides reusing one experimental selection with independent geometry, text, and styles."
+      },
+      "independentReview": {
+        "status": "passed",
+        "notes": "The bounded M2-003 closing review checked native structure, strict construction and QA, dispatcher and support boundaries, fixtures, and completion metadata; no blocker or high finding remains."
+      },
+      "notes": "Pure integration data; not an accepted file input, BuildArtifact, or rendered PPTX."
+    },
+    {
+      "path": "fixtures/capabilities/native-card-arrow/project-overlay.json",
+      "kind": "new-clean-room",
+      "origin": "M2-003 repository-owned integration overlay authored from ProjectOverlay 0.1.0 and the reviewed public synthetic TemplateIndex",
+      "copyrightHolderOrSourceAuthority": "Elliot Wu",
+      "license": {
+        "spdxExpression": "MIT"
+      },
+      "reviewedOn": "2026-08-03",
+      "thirdPartyDependencies": [],
+      "privateInformationReview": {
+        "status": "passed",
+        "notes": "Contains only repository-owned generic synthetic data, public format identifiers, and redacted technical contract terms."
+      },
+      "projectConstantCleanup": {
+        "status": "passed",
+        "notes": "No predecessor code, private fixture, presentation asset, private identifier, local path, build output, prompt, or log was inspected or admitted."
+      },
+      "publicConformance": {
+        "status": "applicable",
+        "notes": "Binds the exact anchor role to one reviewed public slide text box and opts into only the narrow experimental capability."
+      },
+      "independentReview": {
+        "status": "passed",
+        "notes": "The bounded M2-003 closing review checked native structure, strict construction and QA, dispatcher and support boundaries, fixtures, and completion metadata; no blocker or high finding remains."
+      },
+      "notes": "Uses only an already admitted public synthetic index identity and semantic keys."
+    },
+    {
+      "path": "fixtures/capabilities/native-card-arrow/registry.json",
+      "kind": "new-clean-room",
+      "origin": "M2-003 repository-owned product capability metadata authored from CapabilityRegistry 0.1.0 and the closed native-card-arrow artifact contract",
+      "copyrightHolderOrSourceAuthority": "Elliot Wu",
+      "license": {
+        "spdxExpression": "MIT"
+      },
+      "reviewedOn": "2026-08-03",
+      "thirdPartyDependencies": [],
+      "privateInformationReview": {
+        "status": "passed",
+        "notes": "Contains only repository-owned generic synthetic data, public format identifiers, and redacted technical contract terms."
+      },
+      "projectConstantCleanup": {
+        "status": "passed",
+        "notes": "No predecessor code, private fixture, presentation asset, private identifier, local path, build output, prompt, or log was inspected or admitted."
+      },
+      "publicConformance": {
+        "status": "applicable",
+        "notes": "Names the exact executor, schemas, QA contract, anchor role, support item, and two sorted conformance fixture IDs."
+      },
+      "independentReview": {
+        "status": "passed",
+        "notes": "The bounded M2-003 closing review checked native structure, strict construction and QA, dispatcher and support boundaries, fixtures, and completion metadata; no blocker or high finding remains."
+      },
+      "notes": "Declarative metadata; runtime authority still requires static exact registration and support authorization."
     },
     {
       "path": "fixtures/capabilities/source-slide-clone-fill/cases.json",
@@ -1010,6 +1276,90 @@
       "notes": "Trusted static product plugin that emits JSON operations only; normal product dispatch remains unavailable and core never imports it."
     },
     {
+      "path": "plugins/native-card-arrow/schemas/input.schema.json",
+      "kind": "new-clean-room",
+      "origin": "M2-003 clean-room capability input contract authored from the data-only geometry, safe-text, RGB, and font-size requirements using JSON Schema Draft 2020-12",
+      "copyrightHolderOrSourceAuthority": "Elliot Wu",
+      "license": {
+        "spdxExpression": "MIT"
+      },
+      "reviewedOn": "2026-08-03",
+      "thirdPartyDependencies": [],
+      "privateInformationReview": {
+        "status": "passed",
+        "notes": "Contains only repository-owned generic synthetic data, public format identifiers, and redacted technical contract terms."
+      },
+      "projectConstantCleanup": {
+        "status": "passed",
+        "notes": "No predecessor code, private fixture, presentation asset, private identifier, local path, build output, prompt, or log was inspected or admitted."
+      },
+      "publicConformance": {
+        "status": "applicable",
+        "notes": "Closes payload fields and rejects unknown values, unsafe Unicode, invalid extents, colors, and font sizes before preflight limits."
+      },
+      "independentReview": {
+        "status": "passed",
+        "notes": "The bounded M2-003 closing review checked native structure, strict construction and QA, dispatcher and support boundaries, fixtures, and completion metadata; no blocker or high finding remains."
+      },
+      "notes": "Capability-specific runtime schema; no new root serialized contract version."
+    },
+    {
+      "path": "plugins/native-card-arrow/schemas/output.schema.json",
+      "kind": "new-clean-room",
+      "origin": "M2-003 clean-room capability output contract authored from the native component plan and unbound-fragment safety boundary using JSON Schema Draft 2020-12",
+      "copyrightHolderOrSourceAuthority": "Elliot Wu",
+      "license": {
+        "spdxExpression": "MIT"
+      },
+      "reviewedOn": "2026-08-03",
+      "thirdPartyDependencies": [],
+      "privateInformationReview": {
+        "status": "passed",
+        "notes": "Contains only repository-owned generic synthetic data, public format identifiers, and redacted technical contract terms."
+      },
+      "projectConstantCleanup": {
+        "status": "passed",
+        "notes": "No predecessor code, private fixture, presentation asset, private identifier, local path, build output, prompt, or log was inspected or admitted."
+      },
+      "publicConformance": {
+        "status": "applicable",
+        "notes": "Closes clone, planned placement, typed component data, non-insertable artifact kind, component-local IDs, and bounded group fragment."
+      },
+      "independentReview": {
+        "status": "passed",
+        "notes": "The bounded M2-003 closing review checked native structure, strict construction and QA, dispatcher and support boundaries, fixtures, and completion metadata; no blocker or high finding remains."
+      },
+      "notes": "The output is not a BuildArtifact, final shape-tree fragment, or publication contract."
+    },
+    {
+      "path": "plugins/native-card-arrow/src/native-card-arrow.mjs",
+      "kind": "new-clean-room",
+      "origin": "M2-003 independent clean-room implementation from the repository contracts, existing strict XML API, and public ECMA-376 PresentationML/DrawingML structure; no example implementation was copied",
+      "copyrightHolderOrSourceAuthority": "Elliot Wu",
+      "license": {
+        "spdxExpression": "MIT"
+      },
+      "reviewedOn": "2026-08-03",
+      "thirdPartyDependencies": [],
+      "privateInformationReview": {
+        "status": "passed",
+        "notes": "Contains only repository-owned generic synthetic data, public format identifiers, and redacted technical contract terms."
+      },
+      "projectConstantCleanup": {
+        "status": "passed",
+        "notes": "No predecessor code, private fixture, presentation asset, private identifier, local path, build output, prompt, or log was inspected or admitted."
+      },
+      "publicConformance": {
+        "status": "applicable",
+        "notes": "Exact fixtures and focused tests exercise fixed typed construction, canonical escaping, strict parsing, expanded-name allowlisting, deterministic output, safe limits, QA, and no-I/O closure."
+      },
+      "independentReview": {
+        "status": "passed",
+        "notes": "The bounded M2-003 closing review checked native structure, strict construction and QA, dispatcher and support boundaries, fixtures, and completion metadata; no blocker or high finding remains."
+      },
+      "notes": "Trusted static plugin emits an unbound non-insertable native group exemplar and has no package or staging authority."
+    },
+    {
       "path": "policy/forbidden-materials.json",
       "kind": "new-clean-room",
       "origin": "M0-004 clean-room implementation from repository contract",
@@ -1026,29 +1376,57 @@
     {
       "path": "policy/support-matrix.json",
       "kind": "new-clean-room",
-      "origin": "M0-005 clean-room support contract updated through M2-002 with exact semantic-planning evidence and unchanged unavailable product status",
+      "origin": "M0-005 clean-room support contract updated through M2-003 with one exact experimental native capability and zero supported claims",
       "copyrightHolderOrSourceAuthority": "Elliot Wu",
-      "license": { "spdxExpression": "MIT" },
+      "license": {
+        "spdxExpression": "MIT"
+      },
       "reviewedOn": "2026-08-03",
       "thirdPartyDependencies": [],
-      "privateInformationReview": { "status": "passed", "notes": "Uses generic feature classes, public roadmap IDs, and public contract paths only." },
-      "projectConstantCleanup": { "status": "passed", "notes": "No predecessor implementation, asset, or identifier admitted." },
-      "publicConformance": { "status": "applicable", "notes": "Contains 60 checked rows, zero supported claims, exact M2-002 resolver/plugin/schema/fixture/QA evidence paths, and explicit unavailable labeling." },
-      "independentReview": { "status": "passed", "notes": "The reviewer confirmed the false global switch, zero supported rows, complete clone/fill planning evidence, unchanged unavailable status, and dispatcher-probe isolation." },
+      "privateInformationReview": {
+        "status": "passed",
+        "notes": "Uses generic feature classes, public roadmap IDs, and public contract paths only."
+      },
+      "projectConstantCleanup": {
+        "status": "passed",
+        "notes": "No predecessor implementation, asset, or identifier admitted."
+      },
+      "publicConformance": {
+        "status": "applicable",
+        "notes": "Contains 60 checked rows, one narrow experimental native capability with all six executable evidence types, zero supported rows, and explicit broad DrawingML/slide-text unavailability."
+      },
+      "independentReview": {
+        "status": "passed",
+        "notes": "The bounded M2-003 closing review checked native structure, strict construction and QA, dispatcher and support boundaries, fixtures, and completion metadata; no blocker or high finding remains."
+      },
       "notes": "Normative versioned public support matrix."
     },
     {
       "path": "provenance/records.json",
       "kind": "new-clean-room",
-      "origin": "M0-004 provenance contract with exact clean-room records updated through M2-002",
+      "origin": "M0-004 provenance contract with exact clean-room records updated through M2-003",
       "copyrightHolderOrSourceAuthority": "Elliot Wu",
-      "license": { "spdxExpression": "MIT" },
+      "license": {
+        "spdxExpression": "MIT"
+      },
       "reviewedOn": "2026-08-03",
       "thirdPartyDependencies": [],
-      "privateInformationReview": { "status": "passed", "notes": "Records contain only approved public and generic source-authority information." },
-      "projectConstantCleanup": { "status": "passed", "notes": "Every admitted path is repository-relative and generic." },
-      "publicConformance": { "status": "applicable", "notes": "Self-covered by the exact-path provenance gate." },
-      "independentReview": { "status": "passed", "notes": "All M2-002 new and modified paths, clean-room fields, conformance evidence, unavailable support boundary, and closing-review status were refreshed to close the provenance finding." },
+      "privateInformationReview": {
+        "status": "passed",
+        "notes": "Records contain only approved public and generic source-authority information."
+      },
+      "projectConstantCleanup": {
+        "status": "passed",
+        "notes": "Every admitted path is repository-relative and generic."
+      },
+      "publicConformance": {
+        "status": "applicable",
+        "notes": "Self-covered exact-path provenance now contains 113 records including every M2-003 source, schema, fixture, test, policy, and handoff file."
+      },
+      "independentReview": {
+        "status": "passed",
+        "notes": "The bounded M2-003 closing review checked native structure, strict construction and QA, dispatcher and support boundaries, fixtures, and completion metadata; no blocker or high finding remains."
+      },
       "notes": "Normative per-file provenance source, including its own record."
     },
     {
@@ -1264,15 +1642,29 @@
     {
       "path": "scripts/check-support-matrix.mjs",
       "kind": "new-clean-room",
-      "origin": "M0-005 clean-room implementation from repository public contracts",
+      "origin": "M0-005 clean-room support gate updated for M2-003 experimental capability evidence completeness",
       "copyrightHolderOrSourceAuthority": "Elliot Wu",
-      "license": { "spdxExpression": "MIT" },
-      "reviewedOn": "2026-07-31",
+      "license": {
+        "spdxExpression": "MIT"
+      },
+      "reviewedOn": "2026-08-03",
       "thirdPartyDependencies": [],
-      "privateInformationReview": { "status": "passed", "notes": "Diagnostics contain paths, rule IDs, and JSON pointers without input content." },
-      "projectConstantCleanup": { "status": "passed", "notes": "No predecessor identifiers or project-specific feature dispatch exists." },
-      "publicConformance": { "status": "applicable", "notes": "Checks 60 rows and 13 support overclaim/drift mutations." },
-      "independentReview": { "status": "passed", "notes": "M1-002 shared-evaluator refactor and fixed support schema authority were independently checked." },
+      "privateInformationReview": {
+        "status": "passed",
+        "notes": "Diagnostics contain paths, rule IDs, and JSON pointers without input content."
+      },
+      "projectConstantCleanup": {
+        "status": "passed",
+        "notes": "No predecessor identifiers or project-specific feature dispatch exists."
+      },
+      "publicConformance": {
+        "status": "applicable",
+        "notes": "Checks 60 rows and requires every experimental capability to use automated-public metadata, executor, input/output schema, conformance-fixture, and QA evidence."
+      },
+      "independentReview": {
+        "status": "passed",
+        "notes": "The bounded M2-003 closing review checked native structure, strict construction and QA, dispatcher and support boundaries, fixtures, and completion metadata; no blocker or high finding remains."
+      },
       "notes": "Fail-closed staged and working-tree support-matrix gate."
     },
     {
@@ -1346,6 +1738,34 @@
       "notes": "Dependency-free schema, semantic-bundle, generated-type, and overclaim tests."
     },
     {
+      "path": "tests/native-card-arrow.test.mjs",
+      "kind": "new-clean-room",
+      "origin": "M2-003 clean-room public tests authored from exact resolver/dispatcher integration, native-vocabulary, resource, atomicity, and support-boundary requirements",
+      "copyrightHolderOrSourceAuthority": "Elliot Wu",
+      "license": {
+        "spdxExpression": "MIT"
+      },
+      "reviewedOn": "2026-08-03",
+      "thirdPartyDependencies": [],
+      "privateInformationReview": {
+        "status": "passed",
+        "notes": "Contains only repository-owned generic synthetic data, public format identifiers, and redacted technical contract terms."
+      },
+      "projectConstantCleanup": {
+        "status": "passed",
+        "notes": "No predecessor code, private fixture, presentation asset, private identifier, local path, build output, prompt, or log was inspected or admitted."
+      },
+      "publicConformance": {
+        "status": "applicable",
+        "notes": "Covers exact artifacts, experimental opt-in, identity and binding failures, later-slide atomicity, safe text/style/geometry, strict native structure, drift, determinism, fixture neutrality, and clean closure."
+      },
+      "independentReview": {
+        "status": "passed",
+        "notes": "The bounded M2-003 closing review checked native structure, strict construction and QA, dispatcher and support boundaries, fixtures, and completion metadata; no blocker or high finding remains."
+      },
+      "notes": "Dependency-free tests use only repository-owned UTF-8 fixtures and temporary clean directories."
+    },
+    {
       "path": "tests/policy-gates.test.mjs",
       "kind": "new-clean-room",
       "origin": "M0-004 clean-room tests with an M1-002 provenance-authority regression",
@@ -1404,15 +1824,29 @@
     {
       "path": "tests/support-matrix.test.mjs",
       "kind": "new-clean-room",
-      "origin": "M0-005 clean-room tests updated through M2-002 for exact resolver/plugin evidence paths, unavailable clone/fill status, and conformance-probe isolation",
+      "origin": "M0-005 clean-room support tests updated through M2-003 for exact experimental evidence, broad unavailability, and zero supported claims",
       "copyrightHolderOrSourceAuthority": "Elliot Wu",
-      "license": { "spdxExpression": "MIT" },
+      "license": {
+        "spdxExpression": "MIT"
+      },
       "reviewedOn": "2026-08-03",
       "thirdPartyDependencies": [],
-      "privateInformationReview": { "status": "passed", "notes": "Uses repository-owned synthetic in-memory mutations only." },
-      "projectConstantCleanup": { "status": "passed", "notes": "No predecessor identifier, asset, or path appears." },
-      "publicConformance": { "status": "applicable", "notes": "Covers one baseline, rejection mutations, exact admitted M2-002 resolver/plugin/schema/fixture/QA evidence paths, explicit clone/fill unavailability, zero supported claims, and probe isolation." },
-      "independentReview": { "status": "passed", "notes": "M2-002 evidence-path additions, 60-row count, false switch, zero-support assertions, unavailable clone/fill status, and probe isolation were included in the bounded closing review." },
+      "privateInformationReview": {
+        "status": "passed",
+        "notes": "Uses repository-owned synthetic in-memory mutations only."
+      },
+      "projectConstantCleanup": {
+        "status": "passed",
+        "notes": "No predecessor identifier, asset, or path appears."
+      },
+      "publicConformance": {
+        "status": "applicable",
+        "notes": "Sixteen nodes cover the baseline, exact M2-003 evidence paths and counts, plus experimental evidence-level and missing-artifact mutations."
+      },
+      "independentReview": {
+        "status": "passed",
+        "notes": "The bounded M2-003 closing review checked native structure, strict construction and QA, dispatcher and support boundaries, fixtures, and completion metadata; no blocker or high finding remains."
+      },
       "notes": "Dependency-free support-matrix overclaim and drift tests."
     },
     {

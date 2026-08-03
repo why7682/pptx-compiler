@@ -9,10 +9,11 @@ reviewed text-only OOXML fixture parts, generated TypeScript declarations, a
 pure explicit-root runtime context, a pure semantic inspector, bounded secure
 ZIP/XML ingestion for the public minimal fixture class, a fail-closed capability
 runtime/dispatcher, a bounded pure project-dispatch resolver, a no-I/O semantic
-clone/fill operation planner, and synthetic mutation tests. No arbitrary
-PPTX/POTX compatibility layer or OOXML rendering/mutation implementation,
-tracked binary fixture, design asset, dependency lockfile, prompt log, or
-predecessor Git history has been copied.
+clone/fill operation planner, an opt-in experimental native card-arrow planner
+with a strict unbound DrawingML conformance exemplar, and synthetic mutation
+tests. No arbitrary PPTX/POTX compatibility layer or package OOXML
+application/mutation implementation, tracked binary fixture, design asset,
+dependency lockfile, prompt log, or predecessor Git history has been copied.
 
 The project uses the MIT License with Elliot Wu as the declared copyright
 holder. The working name, monorepo shape, and repository-local public Git author
@@ -101,6 +102,19 @@ not OOXML mutation, rendering, editability, staging, source-isolation,
 collateral-diff, or publication evidence. All 60 support rows remain
 non-supported and the global switch is false.
 
+`M2-003` is complete: the data-only `native-card-arrow@0.1.0` capability follows
+the same resolver/dispatcher path and canonically emits one strictly allowlisted
+native `p:grpSp` containing a text-bearing `roundRect` and a `rightArrow`. Its
+typed construction, safe text/color/geometry limits, local-ID policy, exact
+schema validation, and native-vocabulary QA fail closed. The output is an
+unbound conformance fragment with `insertable: false`; M2-005 must rebuild it
+against a target slide, allocate collision-free IDs, apply it in create-only
+staging, and prove PowerPoint editability. The 57-node capability suite,
+215-node resolver/dispatcher/clone-fill/support focus, and complete 623-test
+suite pass on Node.js 22.23.1 and 24.14.0. One narrow capability row is
+experimental and opt-in, all broader DrawingML/input/package claims remain
+unsupported, no row is supported, and the global switch remains false.
+
 The repository has no remote. Keep it local until the public synthetic-fixture
 flow can run `init -> inspect -> validate -> render -> qa`. After that executable
 checkpoint and a fresh public-preflight scan, create a **public** repository;
@@ -109,10 +123,10 @@ unscoped package decision is also deferred until package metadata is designed.
 
 ## Immediate objective
 
-The next dependency is `M2-003`: implement one minimal native DrawingML
-component through the same resolver/dispatcher path. Keep its input data-only,
-fail closed on unsupported vocabulary, preserve editability as an explicit exit
-criterion, and do not broaden the unavailable input or clone/fill claims.
+The next dependency is `M2-004`: parameterize the optional Pandoc/OMML adapter
+and keep it isolated from core. Detect Pandoc as an external optional dependency,
+test formula transplant and fail-closed absence/error behavior, complete the
+attribution review, and do not widen the native-component or PowerPoint claims.
 
 ## First commands after switching workspace
 
@@ -133,9 +147,9 @@ semantic operation-planning gates.
 
 ## Next work session
 
-1. Confirm the M0-004 through M2-002 acceptance commands pass on the clean checkout.
-2. Read `docs/M2-002_HANDOFF.md`, the resolver, clone/fill schemas/plugin, and
-   existing DrawingML contract/index vocabulary before designing M2-003.
+1. Confirm the M0-004 through M2-003 acceptance commands pass on the clean checkout.
+2. Read `docs/M2-003_HANDOFF.md`, the optional-adapter decisions and compatibility
+   policy, and the existing formula contracts before designing M2-004.
 3. Keep predecessor code, presentation assets, and generated archives out of
    Git; use only repository-owned text/synthetic contract fixtures for tests.
 

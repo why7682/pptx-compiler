@@ -102,6 +102,18 @@ plan to OOXML. Staged mutation, relationship/ID remapping, rollback, collateral
 diff, source isolation, and publication remain M2-005 work, so the product
 support row remains unavailable.
 
+M2-003 adds `native-card-arrow` as a second statically registered product
+plugin without changing core or the serialized `0.1.0` contracts. It consumes
+one resolved text-box anchor plus closed geometry/text/style data, constructs a
+fixed typed native group, canonically serializes it, and reparses it through the
+strict XML boundary before exact vocabulary QA. The resulting `p:grpSp`
+contains one native text-bearing `roundRect` and one native `rightArrow`, never
+a raster fallback. Its XML is explicitly an unbound, non-insertable conformance
+exemplar with component-local IDs; final target-slide ID allocation,
+containment, application, and package publication remain M2-005. The exact
+capability row is experimental with opt-in, while broad DrawingML and slide
+text remain unavailable.
+
 ## Capability resolution
 
 ```text
@@ -112,7 +124,7 @@ SlideSpec
   -> capability lookup
   -> support-policy authorization
   -> executor preflight
-  -> semantic operation plan
+  -> semantic operation plan or unbound native component exemplar
   -> staged mutation
   -> package normalization
   -> QA and collateral diff

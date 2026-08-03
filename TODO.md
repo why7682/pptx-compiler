@@ -177,8 +177,8 @@ criterion is recorded in the repository.
 | --- | --- | --- | --- |
 | M2-001 | DONE | Define the executable capability interface and dispatcher. | `supported` cannot be registered without executor, schemas, conformance fixture, and QA contract. |
 | M2-002 | DONE | Implement data-driven source-slide clone/fill with semantic shape bindings. | No fixture-specific slide/shape identifiers exist in source; missing or ambiguous bindings fail closed. |
-| M2-003 | NEXT | Implement a minimal native DrawingML component capability. | One data-only slide spec renders through the same dispatcher and remains editable. |
-| M2-004 | PENDING | Parameterize the optional Pandoc/OMML adapter and isolate it from core. | Pandoc is detected as an external optional dependency; formula transplant and failure behavior have conformance tests and attribution review. |
+| M2-003 | DONE | Implement a minimal native DrawingML component capability. | One data-only slide spec emits a strict native non-raster group exemplar through the same dispatcher; the result is explicitly non-insertable until M2-005 proves target application and PowerPoint editability. |
+| M2-004 | NEXT | Parameterize the optional Pandoc/OMML adapter and isolate it from core. | Pandoc is detected as an external optional dependency; formula transplant and failure behavior have conformance tests and attribution review. |
 | M2-005 | PENDING | Implement create-only assembly, normalization, semantic diff, and collateral-mutation checks. | The source is unchanged; output is atomically published; allowed and forbidden part changes are machine-verifiable. |
 
 ### M2-001 completion evidence — 2026-08-02
@@ -244,6 +244,42 @@ criterion is recorded in the repository.
 - `supportClaimsEnabled` remains false and all 60 support rows remain
   non-supported. This is not OOXML mutation, rendering, editability,
   source-isolation, collateral-diff, staging, or publication evidence.
+
+### M2-003 completion evidence — 2026-08-03
+
+- `native-card-arrow@0.1.0` supplies exact metadata, closed input/output
+  schemas, two repository-owned text conformance cases, a no-I/O executor, and
+  four ordered QA assertions through the existing resolver and dispatcher.
+- The executor builds a closed typed tree and canonically serializes one
+  allowlisted native `p:grpSp` containing a text-bearing `roundRect` plus a
+  `rightArrow`. Strict parsing and exact vocabulary, namespace, structure,
+  count, transform, text, color, preset-geometry, and no-relationship/no-raster
+  assertions fail closed.
+- The result is explicitly an `unbound-drawingml-conformance-fragment` with
+  `insertable: false`, component-local IDs `1/2/3`, and
+  `local-remap-required`. M2-005 must rebuild from typed data, allocate safe
+  target-slide IDs, validate containment, apply in create-only staging, and
+  prove PowerPoint editability; raw fragment concatenation is forbidden.
+- The exact `native-drawingml` row is experimental and requires explicit
+  opt-in plus automated public evidence for all executable artifacts. The
+  global claim switch remains false, no row is supported, and broad DrawingML,
+  slide text, every input class, clone/fill, package output, staging,
+  publication, and PowerPoint editability remain unsupported.
+- `npm test`: 623/623 passed. The native-component suite contributes 57 nodes;
+  the resolver/dispatcher/clone-fill/support focus passes 215/215, including
+  native structure, safe Unicode/XML escaping, resource limits, batch
+  atomicity, semantic-key independence, fixture neutrality, no-I/O closure,
+  support overclaim, and QA/output drift cases.
+- The identical 623-test suite passed on checksum-verified official Node.js
+  22.23.1 and Node.js 24.14.0 releases. Cross-platform OS evidence remains
+  M3-004.
+- The bounded independent review found one contract-boundary mismatch: the old
+  exit criterion implied insertion-ready PowerPoint editability. D-022, this
+  criterion, the handoff, and support documents now consistently limit M2-003
+  to the strict native non-raster exemplar and assign application/editability
+  evidence to M2-005; no implementation blocker or high finding remained.
+- Working-tree and staged forbidden-material, exact-provenance, support-matrix,
+  and versioned-contract gates passed, as did `git diff --cached --check`.
 
 ## M3 — CLI, packaging, and public QA
 

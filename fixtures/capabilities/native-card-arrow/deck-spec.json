@@ -1,0 +1,40 @@
+{
+  "schemaVersion": "0.1.0",
+  "contractType": "deck-spec",
+  "deckId": "native-card-arrow-deck",
+  "projectId": "native-card-arrow-project",
+  "templateProfileId": "synthetic-template-profile",
+  "projectOverlayId": "native-card-arrow-project-overlay",
+  "slides": [
+    {
+      "slideId": "native-card-arrow-output-one",
+      "capabilitySelectionId": "native-card-arrow-selection",
+      "payload": {
+        "geometry": { "x": 914400, "y": 1371600, "cx": 8229600, "cy": 1828800 },
+        "label": "Public synthetic decision",
+        "style": {
+          "arrowFill": "2563EB",
+          "cardFill": "E0E7FF",
+          "fontSizeHundredthPoints": 1800,
+          "lineColor": "1E3A8A",
+          "textColor": "111827"
+        }
+      }
+    },
+    {
+      "slideId": "native-card-arrow-output-two",
+      "capabilitySelectionId": "native-card-arrow-selection",
+      "payload": {
+        "geometry": { "x": 1219200, "y": 3886200, "cx": 7924800, "cy": 1524000 },
+        "label": "Second public synthetic path",
+        "style": {
+          "arrowFill": "0F766E",
+          "cardFill": "CCFBF1",
+          "fontSizeHundredthPoints": 1600,
+          "lineColor": "115E59",
+          "textColor": "134E4A"
+        }
+      }
+    }
+  ]
+}

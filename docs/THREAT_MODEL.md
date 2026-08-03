@@ -45,6 +45,9 @@
 10. same-ID registry substitution, duplicate or dangling semantic bindings,
     caller mutation during resolution, fixture-specific target fallback, or a
     data-only operation plan being mistaken for authorized OOXML mutation.
+11. an unbound native XML exemplar being concatenated into a target slide,
+    component-local object IDs colliding with existing or nested shape IDs, or
+    user text/style data escaping the fixed native vocabulary.
 
 ## Default controls
 
@@ -70,6 +73,10 @@
   exact registry content against private runtime state, resolve semantic keys
   without content/geometry inference, and keep operation plans separate from
   staging authority.
+- construct native exemplars from closed typed data, escape through one
+  canonical serializer, strict-parse and exact-allowlist the output, mark it
+  non-insertable, and defer full-tree ID allocation and application to isolated
+  staging.
 
 ## M1-005 implemented input boundary
 
@@ -157,3 +164,32 @@ must rebind the plan to an
 inspected digest and isolated create-only staging graph, remap identities and
 relationships, reject collateral changes, discard failed staging, and publish
 atomically. Until then, normal product dispatch remains unavailable.
+
+## M2-003 implemented native-component boundary
+
+The native-card-arrow plugin has no filesystem, archive, network, process,
+environment, dynamic-loader, source-package, or staging authority. It accepts
+one resolved slide text-box anchor and closed scalar data only. Geometry,
+uppercase RGB colors, font size, and safe Unicode text have fixed schema and
+preflight limits; callers cannot supply XML names, nodes, attributes,
+relationships, presets, raw fragments, paths, or source IDs.
+
+The plugin builds one fixed internal group tree, canonically escapes and
+serializes it, then reparses the UTF-8 through the bounded strict XML parser.
+QA locks the exact namespaces, 54-element/40-attribute resource shape, one
+group, two ordered native shapes, local ID/name sequence, `roundRect` and
+`rightArrow` presets, geometry, colors, and decoded text. Canonical equality
+and the expanded-name allowlist exclude pictures/blips, graphic frames,
+connectors, custom geometry, theme/gradient/pattern colors, effects,
+extensions, hyperlinks, relationship attributes, and unsupported markup.
+
+The result remains a replayable data object outside dispatcher control and has
+no writer credential. Its XML is explicitly an unbound conformance exemplar,
+`insertable: false`, with component-local numeric IDs that may collide with
+the target slide. M2-005 must ignore those IDs as final authority, recursively
+validate the complete target shape tree, rebuild from typed component data,
+allocate unique positive UInt32 IDs, validate actual slide containment, and
+apply only to disposable create-only staging. Raw concatenation or string ID
+replacement is forbidden. PowerPoint open/edit/save/reopen, text fit, visual
+fidelity, source isolation, collateral diff, rollback, and publication remain
+unproved.
