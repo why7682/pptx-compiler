@@ -1,0 +1,17 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:pptx-pipeline:capability:schema:formula-transplant-input:0.1.0",
+  "title": "Pandoc OMML formula-transplant input",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["displayMode", "latex"],
+  "properties": {
+    "displayMode": { "const": "display" },
+    "latex": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 512,
+      "pattern": "^(?=\\S(?:[\\s\\S]*\\S)?$)(?!.*\\p{Cf})(?!.*\\p{Noncharacter_Code_Point})(?!.*[\\uD800-\\uDFFF])(?!.*[%$#`&])(?!.*\\\\(?:begin|catcode|csname|def|documentclass|edef|end|futurelet|gdef|href|immediate|include|includegraphics|input|let|newcommand|openin|openout|read|renewcommand|special|url|usepackage|write|xdef)(?![A-Za-z]))[^\\u0000-\\u001F\\u007F-\\u009F\\u2028\\u2029]+$"
+    }
+  }
+}

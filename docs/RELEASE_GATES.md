@@ -212,3 +212,30 @@ executable artifact classes for experimental capability rows. Only the exact
 `native-drawingml` row is experimental; `supportClaimsEnabled` stays false,
 broad DrawingML/slide text and every input remain unsupported, and no assembled
 PPTX or PowerPoint editability gate is satisfied.
+
+M2-004 adds the optional external-process and formula-conformance portion of
+G0/G2/G3. D-008 and `docs/PANDOC_ADAPTER_ATTRIBUTION.md` keep Pandoc external:
+no executable, library, template, reference document, source, generated DOCX,
+or upstream-derived fixture is bundled. A trusted absolute executable path is
+eligible only inside `>=2.15.0 <4.0.0` and only after fixed version, JSON-API,
+and exact canonical-OMML probes pass. Absence or drift omits the static executor
+registration and normal dispatch remains unavailable.
+
+The process runner uses no shell or ambient discovery, accepts only fixed
+bounded requests, passes an explicit small environment/cwd, streams stdout and
+stderr under separate ceilings, and enforces timeout plus fixed Pandoc sandbox,
+warning-failure, and RTS options. Formula data is validated and JSON-encoded in
+one Math AST on stdin; it cannot choose argv, paths, files, filters, defaults,
+resources, reference documents, or URLs. Converter stdout passes the existing
+secure ZIP limits, exact OPC/relationship checks, strict XML parsing, and a
+closed typed OMML vocabulary before canonical reconstruction.
+
+Public conformance uses a fake runner and repository-authored text-derived
+in-memory DOCX bytes. It covers deterministic detection/conversion, absence and
+process failures, injection/resource limits, ZIP/OPC/XML/OMML mutations,
+resolver/dispatcher atomicity, output/QA drift, no-I/O dependency direction,
+and clean-directory closure. The result is explicitly unbound and
+`insertable: false`. Consequently `formula-transplant`, `latex-formula`, and
+`native-omml` remain `unsupported/unavailable`, `supportClaimsEnabled` remains
+false, and the real-Pandoc matrix, target application, source/collateral safety,
+publication, and PowerPoint editability gates remain unsatisfied.

@@ -134,10 +134,25 @@ envelope. Each combination remains experimental until the public CI matrix
 passes. A result from the current off-matrix development runtime is not support
 evidence.
 
-Pandoc, if later integrated, remains a user-installed optional process with a
-versioned adapter contract. PowerPoint automation remains an optional trusted
-manual adapter and is never required by public PR CI. Absence of either adapter
-must produce an explicit unavailable/manual result, not a fallback claim.
+Pandoc is a user-installed optional process with adapter profile `0.1.0`; it is
+not bundled or an ambient core dependency. A trusted absolute executable path
+is required. Pandoc `>=2.15.0 <4.0.0` is only eligible: exact version parsing,
+a sandboxed JSON-API probe, and an exact canonical OMML probe must all pass.
+Missing, pre-floor, future-major, warning-producing, capability-drifting, or
+failed binaries yield an explicit unavailable/incompatible result and no
+executor registration. There is no fallback to text, raster, another executable,
+or ambient defaults. A new major window, changed invocation profile, or relaxed
+DOCX/OMML grammar requires a reviewed adapter-profile change and new public
+positive plus rejection evidence.
+
+The public M2-004 runner/conformance suite is contract evidence using a fake
+process runner and repository-authored text-derived DOCX bytes. It is not a real
+Pandoc release/platform compatibility matrix. The emitted `m:oMath` is unbound
+and non-insertable, so target application and editable PowerPoint behavior
+remain outside the claim until M2-005 and COMPAT-OMML-001 pass. PowerPoint
+automation remains an optional trusted manual adapter and is never required by
+public PR CI. Absence of either adapter must produce an explicit
+unavailable/manual result, not a fallback claim.
 
 ## Editability and visual compatibility
 

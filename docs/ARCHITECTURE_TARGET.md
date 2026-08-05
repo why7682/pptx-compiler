@@ -155,7 +155,25 @@ redaction, explicit input/output paths, and non-interactive CI operation.
 
 ## Adapter boundaries
 
-- Pandoc is invoked as a user-installed optional process. It is not bundled.
+- Pandoc is invoked as a user-installed optional process. It is not bundled,
+  linked, installed, or dynamically discovered. The trusted host supplies one
+  absolute executable path and a bounded environment to the adapter package;
+  core never imports `node:child_process` or depends on Pandoc.
+- M2-004 fixes this formula-adapter flow:
+
+  ```text
+  absolute executable configuration
+    -> bounded version/API/canonical-OMML probes
+    -> optional static executor registration
+    -> Math JSON AST on stdin
+    -> bounded DOCX stdout
+    -> secure ZIP + strict XML + typed OMML allowlist
+    -> canonical unbound m:oMath conformance fragment
+  ```
+
+  Missing or incompatible Pandoc omits the executor registration. The fragment
+  is `insertable: false`; only M2-005 may rebuild a target-specific
+  PresentationML wrapper and mutate isolated staging.
 - macOS PowerPoint automation is an optional compatibility adapter and is never
   required by public CI.
 - Font files are never bundled without explicit redistribution rights. Public

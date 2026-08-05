@@ -11,7 +11,7 @@ No item below is decided merely because a recommendation is recorded.
 | D-005 | ACCEPTED | Runtime support | Support Node.js 22.x and 24.x LTS on Linux, Windows, and macOS; the private root manifest enforces these release lines. | The official Node.js release table listed both lines as LTS on 2026-07-30; cross-platform CI evidence remains due in M3-004. |
 | D-006 | ACCEPTED | Schema source of truth | Use JSON Schema Draft 2020-12 as normative; generated or verified TypeScript types remain a later consumer. | M0-004 validates the bounded provenance contract from its checked-in schema and rejects structural, enum, rights, date, and version mutations. |
 | D-007 | OPEN | Public formula font | Select an OFL-compatible math font for SVG examples; do not redistribute proprietary fonts. | License file and rendered conformance proof. |
-| D-008 | OPEN | Pandoc integration | Optional external adapter, never bundled with core. | License/attribution review and absence behavior tests. |
+| D-008 | ACCEPTED | Pandoc integration | Invoke only a separately installed executable at a trusted absolute path through the optional adapter; never bundle, link, install, or dynamically discover Pandoc. Admit `>=2.15.0 <4.0.0` only after fixed version/API/OMML probes, and omit executor registration when unavailable. | M2-004 attribution record, fixed-process and absence/error tests, strict DOCX/OMML reconstruction, unsupported formula rows, and unchanged false global claim switch. |
 | D-009 | ACCEPTED | Unsupported high-risk OOXML | Reject macros, ActiveX, OLE, embedded packages, and unsafe external relationships in 0.x. | M1-005 bounded high-risk path/content-type/relationship/XML mutations and unchanged unsupported matrix rows. |
 | D-010 | OPEN | PowerPoint evidence adapter | Keep macOS automation optional, trusted/manual, and outside public PR CI. | Least-privilege workflow and redaction review. |
 | D-011 | ACCEPTED | Copyright holder | Elliot Wu. | User stated that no employer, university, collaborator, or other holder applies to the new clean-room project. Third-party dependencies and migrated candidates still require separate rights review. |
@@ -150,6 +150,26 @@ same change.
   exemplar, while target insertion and editable-PowerPoint evidence are
   explicit M2-005 obligations. This clarification prevents the milestone from
   claiming an output artifact that its dispatcher result cannot produce.
+
+## Decision record — 2026-08-05
+
+- **D-008 accepted:** Pandoc is a user-installed optional external program, not
+  repository or package content. Trusted host configuration supplies one
+  absolute executable path; capability data cannot choose a process, argv,
+  path, environment, defaults file, filter, resource path, reference document,
+  or network location. The adapter accepts only Pandoc `>=2.15.0 <4.0.0`, then
+  requires fixed sandboxed JSON-API and canonical OMML capability probes before
+  an executor can be registered. Missing, incompatible, warning-producing,
+  malformed, timed-out, output-limited, or capability-drifting processes remain
+  unavailable. Formula text is JSON-encoded into a Math AST on stdin, and DOCX
+  stdout is treated as untrusted ZIP/XML before one non-insertable `m:oMath`
+  conformance fragment is rebuilt. Pandoc is not bundled, linked, installed,
+  copied, or redistributed; its GPL-2.0-or-later identity and the generated-
+  output caveat are recorded in `docs/PANDOC_ADAPTER_ATTRIBUTION.md`. Public
+  evidence uses a fake runner and repository-authored text-derived DOCX, so
+  formula input/transplant/native-OMML rows remain unsupported, the global
+  claim switch remains false, and M2-005 plus COMPAT-OMML-001 retain application
+  and PowerPoint editability authority.
 
 ## MIT versus Apache-2.0 review
 

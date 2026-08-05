@@ -10,8 +10,10 @@ pure explicit-root runtime context, a pure semantic inspector, bounded secure
 ZIP/XML ingestion for the public minimal fixture class, a fail-closed capability
 runtime/dispatcher, a bounded pure project-dispatch resolver, a no-I/O semantic
 clone/fill operation planner, an opt-in experimental native card-arrow planner
-with a strict unbound DrawingML conformance exemplar, and synthetic mutation
-tests. No arbitrary PPTX/POTX compatibility layer or package OOXML
+with a strict unbound DrawingML conformance exemplar, an isolated optional
+Pandoc process adapter that emits only an unbound OMML conformance exemplar,
+and synthetic mutation tests. No arbitrary PPTX/POTX compatibility layer or
+package OOXML
 application/mutation implementation, tracked binary fixture, design asset,
 dependency lockfile, prompt log, or predecessor Git history has been copied.
 
@@ -115,6 +117,25 @@ suite pass on Node.js 22.23.1 and 24.14.0. One narrow capability row is
 experimental and opt-in, all broader DrawingML/input/package claims remain
 unsupported, no row is supported, and the global switch remains false.
 
+`M2-004` is complete: a core-isolated optional adapter accepts only a trusted
+absolute path to a separately installed Pandoc process, then requires bounded
+version, sandboxed JSON-API, and exact canonical-OMML probes before a formula
+executor can exist. One closed display-math payload and one semantic text-box
+target travel through the existing resolver/dispatcher; formula data appears
+only inside a JSON Math AST on stdin. Bounded DOCX stdout passes the secure ZIP,
+strict XML, content-type/relationship, exact Word wrapper, and typed OMML
+topology gates before canonical reconstruction. The result is an unbound
+`m:oMath` conformance fragment with `insertable: false`, not a PPTX insertion or
+PowerPoint editability result. Public tests use a fake runner and text-derived
+in-memory DOCX; all formula rows remain unsupported and the global switch is
+false. D-008 and the fixed 3.10.1 attribution audit keep Pandoc unbundled and
+record the GPL-2.0-or-later/generated-output boundary. The 115-node adapter
+suite, 330-node strict dispatcher/resolver/native/formula/support focus, and
+complete 738-test suite pass on Node.js 22.23.1 and 24.14.0. The bounded closing
+review's relationship-profile high and content-type medium were fixed with
+exact mappings and 10 regression subtests; re-review found no remaining blocker
+or high finding.
+
 The repository has no remote. Keep it local until the public synthetic-fixture
 flow can run `init -> inspect -> validate -> render -> qa`. After that executable
 checkpoint and a fresh public-preflight scan, create a **public** repository;
@@ -123,10 +144,10 @@ unscoped package decision is also deferred until package metadata is designed.
 
 ## Immediate objective
 
-The next dependency is `M2-004`: parameterize the optional Pandoc/OMML adapter
-and keep it isolated from core. Detect Pandoc as an external optional dependency,
-test formula transplant and fail-closed absence/error behavior, complete the
-attribution review, and do not widen the native-component or PowerPoint claims.
+The next dependency is `M2-005`: apply the existing clone/fill, native-component,
+and formula plans only inside create-only staging; rebuild typed target OOXML,
+normalize identities/relationships, verify source isolation and exact allowed
+versus collateral diffs, and publish atomically where the platform permits.
 
 ## First commands after switching workspace
 
@@ -142,16 +163,19 @@ git remote -v
 The private root package has no dependencies, so no install step is required.
 Run `npm test`, `npm run inspect:synthetic`, and `npm run check:public-tree` to
 revalidate the completed admission, support, fixture, data-contract,
-runtime-context, semantic-inspector, secure-ingestion, capability-dispatch, and
-semantic operation-planning gates.
+runtime-context, semantic-inspector, secure-ingestion, capability-dispatch,
+semantic operation-planning, native-component, and optional formula-adapter
+gates.
 
 ## Next work session
 
-1. Confirm the M0-004 through M2-003 acceptance commands pass on the clean checkout.
-2. Read `docs/M2-003_HANDOFF.md`, the optional-adapter decisions and compatibility
-   policy, and the existing formula contracts before designing M2-004.
-3. Keep predecessor code, presentation assets, and generated archives out of
-   Git; use only repository-owned text/synthetic contract fixtures for tests.
+1. Confirm the M0-004 through M2-004 acceptance commands pass on the clean checkout.
+2. Read `docs/M2-004_HANDOFF.md`, then the M2-005 application obligations in
+   `docs/THREAT_MODEL.md`, `docs/ARCHITECTURE_TARGET.md`, and the three existing
+   plan contracts before designing the package writer/staging boundary.
+3. Keep predecessor code, presentation assets, converter output, and generated
+   archives out of Git; use only repository-owned text/synthetic fixtures for
+   public tests.
 
 ## Known predecessor findings
 

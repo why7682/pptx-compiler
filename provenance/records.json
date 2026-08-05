@@ -46,44 +46,58 @@
     {
       "path": "AGENTS.md",
       "kind": "new-clean-room",
-      "origin": "user-directed clean-room planning with maintenance routing through M2-003",
+      "origin": "repository-owned clean-room planning, policy, support, and evidence file updated through the M2-004 optional Pandoc/OMML adapter boundary",
       "copyrightHolderOrSourceAuthority": "Elliot Wu",
       "license": {
         "spdxExpression": "MIT"
       },
-      "reviewedOn": "2026-08-03",
+      "reviewedOn": "2026-08-05",
       "thirdPartyDependencies": [],
       "privateInformationReview": {
         "status": "passed",
-        "notes": "Policy text contains no private fixture identity."
+        "notes": "Contains only repository-owned synthetic data, public technical identifiers, normalized version facts, and approved project metadata; no private fixture, path, stderr, or presentation content is admitted."
       },
       "projectConstantCleanup": {
         "status": "passed",
-        "notes": "No predecessor constants admitted."
+        "notes": "No predecessor constant, private asset identifier, ambient project root, converter output, or presentation-specific source identity is admitted."
       },
       "publicConformance": {
         "status": "not-applicable",
-        "notes": "Contributor instructions route M2-003 maintenance to the exact handoff, plugin, schemas, tests, support policy, and provenance boundary."
+        "notes": "Records the M2-004 external-process, strict DOCX/OMML, attribution, unsupported-claim, and deferred M2-005 application boundary."
       },
       "independentReview": {
         "status": "passed",
-        "notes": "The bounded M2-003 closing review checked native structure, strict construction and QA, dispatcher and support boundaries, fixtures, and completion metadata; no blocker or high finding remains."
+        "notes": "The bounded M2-004 closing review's relationship-profile high and content-type medium were fixed with exact mappings and 10 regression subtests; bounded re-review found no remaining blocker or high finding."
       },
-      "notes": "Repository-owned contributor instructions."
+      "notes": "Repository-owned M2-004 planning, contract, policy, provenance, or evidence update."
     },
     {
       "path": "HANDOFF.md",
       "kind": "new-clean-room",
-      "origin": "user-directed clean-room project planning updated through the M2-003 native-card-arrow slice",
+      "origin": "repository-owned clean-room planning, policy, support, and evidence file updated through the M2-004 optional Pandoc/OMML adapter boundary",
       "copyrightHolderOrSourceAuthority": "Elliot Wu",
-      "license": { "spdxExpression": "MIT" },
-      "reviewedOn": "2026-08-03",
+      "license": {
+        "spdxExpression": "MIT"
+      },
+      "reviewedOn": "2026-08-05",
       "thirdPartyDependencies": [],
-      "privateInformationReview": { "status": "passed", "notes": "Only approved public project identity is present." },
-      "projectConstantCleanup": { "status": "passed", "notes": "Findings are generic and contain no predecessor identifiers." },
-      "publicConformance": { "status": "applicable", "notes": "Summarizes the exact M2-003 artifact, 57/215/623 test evidence, experimental scope, non-insertable boundary, and M2-004 dependency." },
-      "independentReview": { "status": "passed", "notes": "The bounded M2-003 closing review checked native structure, strict construction and QA, dispatcher and support boundaries, fixtures, and completion metadata; no blocker or high finding remains." },
-      "notes": "Repository-owned project handoff."
+      "privateInformationReview": {
+        "status": "passed",
+        "notes": "Contains only repository-owned synthetic data, public technical identifiers, normalized version facts, and approved project metadata; no private fixture, path, stderr, or presentation content is admitted."
+      },
+      "projectConstantCleanup": {
+        "status": "passed",
+        "notes": "No predecessor constant, private asset identifier, ambient project root, converter output, or presentation-specific source identity is admitted."
+      },
+      "publicConformance": {
+        "status": "applicable",
+        "notes": "Records the M2-004 external-process, strict DOCX/OMML, attribution, unsupported-claim, and deferred M2-005 application boundary."
+      },
+      "independentReview": {
+        "status": "passed",
+        "notes": "The bounded M2-004 closing review's relationship-profile high and content-type medium were fixed with exact mappings and 10 regression subtests; bounded re-review found no remaining blocker or high finding."
+      },
+      "notes": "Repository-owned M2-004 planning, contract, policy, provenance, or evidence update."
     },
     {
       "path": "LICENSE",
@@ -102,114 +116,142 @@
     {
       "path": "README.md",
       "kind": "new-clean-room",
-      "origin": "user-directed clean-room project planning updated through the M2-003 native-card-arrow slice",
+      "origin": "repository-owned clean-room planning, policy, support, and evidence file updated through the M2-004 optional Pandoc/OMML adapter boundary",
       "copyrightHolderOrSourceAuthority": "Elliot Wu",
-      "license": { "spdxExpression": "MIT" },
-      "reviewedOn": "2026-08-03",
+      "license": {
+        "spdxExpression": "MIT"
+      },
+      "reviewedOn": "2026-08-05",
       "thirdPartyDependencies": [],
-      "privateInformationReview": { "status": "passed", "notes": "No private information present." },
-      "projectConstantCleanup": { "status": "passed", "notes": "No predecessor constants admitted." },
-      "publicConformance": { "status": "applicable", "notes": "Describes the exact experimental native-card-arrow fragment, disabled support switch, non-insertable boundary, and next M2-004 dependency." },
-      "independentReview": { "status": "passed", "notes": "The bounded M2-003 closing review checked native structure, strict construction and QA, dispatcher and support boundaries, fixtures, and completion metadata; no blocker or high finding remains." },
-      "notes": "Repository-owned project overview."
+      "privateInformationReview": {
+        "status": "passed",
+        "notes": "Contains only repository-owned synthetic data, public technical identifiers, normalized version facts, and approved project metadata; no private fixture, path, stderr, or presentation content is admitted."
+      },
+      "projectConstantCleanup": {
+        "status": "passed",
+        "notes": "No predecessor constant, private asset identifier, ambient project root, converter output, or presentation-specific source identity is admitted."
+      },
+      "publicConformance": {
+        "status": "applicable",
+        "notes": "Records the M2-004 external-process, strict DOCX/OMML, attribution, unsupported-claim, and deferred M2-005 application boundary."
+      },
+      "independentReview": {
+        "status": "passed",
+        "notes": "The bounded M2-004 closing review's relationship-profile high and content-type medium were fixed with exact mappings and 10 regression subtests; bounded re-review found no remaining blocker or high finding."
+      },
+      "notes": "Repository-owned M2-004 planning, contract, policy, provenance, or evidence update."
     },
     {
       "path": "TODO.md",
       "kind": "new-clean-room",
-      "origin": "user-directed clean-room dependency plan updated with the clarified M2-003 native-card-arrow exit criterion and executable evidence",
+      "origin": "repository-owned clean-room planning, policy, support, and evidence file updated through the M2-004 optional Pandoc/OMML adapter boundary",
       "copyrightHolderOrSourceAuthority": "Elliot Wu",
-      "license": { "spdxExpression": "MIT" },
-      "reviewedOn": "2026-08-03",
+      "license": {
+        "spdxExpression": "MIT"
+      },
+      "reviewedOn": "2026-08-05",
       "thirdPartyDependencies": [],
-      "privateInformationReview": { "status": "passed", "notes": "No private information present." },
-      "projectConstantCleanup": { "status": "passed", "notes": "No predecessor constants admitted." },
-      "publicConformance": { "status": "applicable", "notes": "Records the strict native non-raster exemplar boundary, exact M2-003 artifacts and test evidence, experimental scope, and deferred M2-005 editability proof." },
-      "independentReview": { "status": "passed", "notes": "The bounded M2-003 closing review checked native structure, strict construction and QA, dispatcher and support boundaries, fixtures, and completion metadata; no blocker or high finding remains." },
-      "notes": "Repository-owned dependency-ordered plan."
+      "privateInformationReview": {
+        "status": "passed",
+        "notes": "Contains only repository-owned synthetic data, public technical identifiers, normalized version facts, and approved project metadata; no private fixture, path, stderr, or presentation content is admitted."
+      },
+      "projectConstantCleanup": {
+        "status": "passed",
+        "notes": "No predecessor constant, private asset identifier, ambient project root, converter output, or presentation-specific source identity is admitted."
+      },
+      "publicConformance": {
+        "status": "applicable",
+        "notes": "Records the M2-004 external-process, strict DOCX/OMML, attribution, unsupported-claim, and deferred M2-005 application boundary."
+      },
+      "independentReview": {
+        "status": "passed",
+        "notes": "The bounded M2-004 closing review's relationship-profile high and content-type medium were fixed with exact mappings and 10 regression subtests; bounded re-review found no remaining blocker or high finding."
+      },
+      "notes": "Repository-owned M2-004 planning, contract, policy, provenance, or evidence update."
     },
     {
       "path": "docs/ARCHITECTURE_TARGET.md",
       "kind": "new-clean-room",
-      "origin": "user-directed clean-room target architecture updated with the M2-003 unbound native-component and deferred application boundary",
+      "origin": "repository-owned clean-room planning, policy, support, and evidence file updated through the M2-004 optional Pandoc/OMML adapter boundary",
       "copyrightHolderOrSourceAuthority": "Elliot Wu",
       "license": {
         "spdxExpression": "MIT"
       },
-      "reviewedOn": "2026-08-03",
+      "reviewedOn": "2026-08-05",
       "thirdPartyDependencies": [],
       "privateInformationReview": {
         "status": "passed",
-        "notes": "No private information present."
+        "notes": "Contains only repository-owned synthetic data, public technical identifiers, normalized version facts, and approved project metadata; no private fixture, path, stderr, or presentation content is admitted."
       },
       "projectConstantCleanup": {
         "status": "passed",
-        "notes": "Architecture is stated generically."
+        "notes": "No predecessor constant, private asset identifier, ambient project root, converter output, or presentation-specific source identity is admitted."
       },
       "publicConformance": {
-        "status": "applicable",
-        "notes": "Records the exact resolver/dispatcher plugin path, typed native group representation, experimental scope, and deferred target-slide ID/application obligations."
+        "status": "not-applicable",
+        "notes": "Records the M2-004 external-process, strict DOCX/OMML, attribution, unsupported-claim, and deferred M2-005 application boundary."
       },
       "independentReview": {
         "status": "passed",
-        "notes": "The bounded M2-003 closing review checked native structure, strict construction and QA, dispatcher and support boundaries, fixtures, and completion metadata; no blocker or high finding remains."
+        "notes": "The bounded M2-004 closing review's relationship-profile high and content-type medium were fixed with exact mappings and 10 regression subtests; bounded re-review found no remaining blocker or high finding."
       },
-      "notes": "Repository-owned target architecture."
+      "notes": "Repository-owned M2-004 planning, contract, policy, provenance, or evidence update."
     },
     {
       "path": "docs/COMPATIBILITY_POLICY.md",
       "kind": "new-clean-room",
-      "origin": "M0-005 clean-room support contract updated with M2-003 experimental artifact, opt-in, and non-insertable native-fragment rules",
+      "origin": "repository-owned clean-room planning, policy, support, and evidence file updated through the M2-004 optional Pandoc/OMML adapter boundary",
       "copyrightHolderOrSourceAuthority": "Elliot Wu",
       "license": {
         "spdxExpression": "MIT"
       },
-      "reviewedOn": "2026-08-03",
+      "reviewedOn": "2026-08-05",
       "thirdPartyDependencies": [],
       "privateInformationReview": {
         "status": "passed",
-        "notes": "Contains generic public compatibility rules only."
+        "notes": "Contains only repository-owned synthetic data, public technical identifiers, normalized version facts, and approved project metadata; no private fixture, path, stderr, or presentation content is admitted."
       },
       "projectConstantCleanup": {
         "status": "passed",
-        "notes": "No predecessor behavior or identifier admitted."
+        "notes": "No predecessor constant, private asset identifier, ambient project root, converter output, or presentation-specific source identity is admitted."
       },
       "publicConformance": {
-        "status": "applicable",
-        "notes": "Public tests enforce complete experimental capability evidence, explicit opt-in, unbound local IDs, and no PowerPoint/PPTX editability overclaim."
+        "status": "not-applicable",
+        "notes": "Records the M2-004 external-process, strict DOCX/OMML, attribution, unsupported-claim, and deferred M2-005 application boundary."
       },
       "independentReview": {
         "status": "passed",
-        "notes": "The bounded M2-003 closing review checked native structure, strict construction and QA, dispatcher and support boundaries, fixtures, and completion metadata; no blocker or high finding remains."
+        "notes": "The bounded M2-004 closing review's relationship-profile high and content-type medium were fixed with exact mappings and 10 regression subtests; bounded re-review found no remaining blocker or high finding."
       },
-      "notes": "Human compatibility and contract-versioning policy."
+      "notes": "Repository-owned M2-004 planning, contract, policy, provenance, or evidence update."
     },
     {
       "path": "docs/DECISIONS.md",
       "kind": "new-clean-room",
-      "origin": "user-directed clean-room decision register updated with accepted M2-003 native-component and ID-boundary decision D-022",
+      "origin": "repository-owned clean-room planning, policy, support, and evidence file updated through the M2-004 optional Pandoc/OMML adapter boundary",
       "copyrightHolderOrSourceAuthority": "Elliot Wu",
       "license": {
         "spdxExpression": "MIT"
       },
-      "reviewedOn": "2026-08-03",
+      "reviewedOn": "2026-08-05",
       "thirdPartyDependencies": [],
       "privateInformationReview": {
         "status": "passed",
-        "notes": "Contains only approved public project identity."
+        "notes": "Contains only repository-owned synthetic data, public technical identifiers, normalized version facts, and approved project metadata; no private fixture, path, stderr, or presentation content is admitted."
       },
       "projectConstantCleanup": {
         "status": "passed",
-        "notes": "No predecessor constants admitted."
+        "notes": "No predecessor constant, private asset identifier, ambient project root, converter output, or presentation-specific source identity is admitted."
       },
       "publicConformance": {
         "status": "not-applicable",
-        "notes": "Decision record only; D-022 is checked against exact M2-003 artifacts, support policy, and deferred M2-005 application."
+        "notes": "Records the M2-004 external-process, strict DOCX/OMML, attribution, unsupported-claim, and deferred M2-005 application boundary."
       },
       "independentReview": {
         "status": "passed",
-        "notes": "The bounded M2-003 closing review checked native structure, strict construction and QA, dispatcher and support boundaries, fixtures, and completion metadata; no blocker or high finding remains."
+        "notes": "The bounded M2-004 closing review's relationship-profile high and content-type medium were fixed with exact mappings and 10 regression subtests; bounded re-review found no remaining blocker or high finding."
       },
-      "notes": "Repository-owned decision register."
+      "notes": "Repository-owned M2-004 planning, contract, policy, provenance, or evidence update."
     },
     {
       "path": "docs/M0-004_HANDOFF.md",
@@ -366,6 +408,34 @@
       "notes": "Normative bounded M2-003 handoff; no assembled presentation or PowerPoint editability claim."
     },
     {
+      "path": "docs/M2-004_HANDOFF.md",
+      "kind": "new-clean-room",
+      "copyrightHolderOrSourceAuthority": "Elliot Wu",
+      "license": {
+        "spdxExpression": "MIT"
+      },
+      "thirdPartyDependencies": [],
+      "origin": "repository-owned clean-room planning, policy, support, and evidence file updated through the M2-004 optional Pandoc/OMML adapter boundary",
+      "reviewedOn": "2026-08-05",
+      "privateInformationReview": {
+        "status": "passed",
+        "notes": "Contains only repository-owned synthetic data, public technical identifiers, normalized version facts, and approved project metadata; no private fixture, path, stderr, or presentation content is admitted."
+      },
+      "projectConstantCleanup": {
+        "status": "passed",
+        "notes": "No predecessor constant, private asset identifier, ambient project root, converter output, or presentation-specific source identity is admitted."
+      },
+      "publicConformance": {
+        "status": "applicable",
+        "notes": "Records the M2-004 external-process, strict DOCX/OMML, attribution, unsupported-claim, and deferred M2-005 application boundary."
+      },
+      "independentReview": {
+        "status": "passed",
+        "notes": "The bounded M2-004 closing review's relationship-profile high and content-type medium were fixed with exact mappings and 10 regression subtests; bounded re-review found no remaining blocker or high finding."
+      },
+      "notes": "Repository-owned M2-004 planning, contract, policy, provenance, or evidence update."
+    },
+    {
       "path": "docs/NAME_AVAILABILITY.md",
       "kind": "new-clean-room",
       "origin": "user-directed clean-room project planning",
@@ -382,30 +452,58 @@
     {
       "path": "docs/OPEN_SOURCE_READINESS.md",
       "kind": "new-clean-room",
-      "origin": "user-directed clean-room readiness plan updated through the M2-003 unbound native-component slice",
+      "origin": "repository-owned clean-room planning, policy, support, and evidence file updated through the M2-004 optional Pandoc/OMML adapter boundary",
       "copyrightHolderOrSourceAuthority": "Elliot Wu",
       "license": {
         "spdxExpression": "MIT"
       },
-      "reviewedOn": "2026-08-03",
+      "reviewedOn": "2026-08-05",
       "thirdPartyDependencies": [],
       "privateInformationReview": {
         "status": "passed",
-        "notes": "No private information present."
+        "notes": "Contains only repository-owned synthetic data, public technical identifiers, normalized version facts, and approved project metadata; no private fixture, path, stderr, or presentation content is admitted."
       },
       "projectConstantCleanup": {
         "status": "passed",
-        "notes": "Readiness criteria are generic."
+        "notes": "No predecessor constant, private asset identifier, ambient project root, converter output, or presentation-specific source identity is admitted."
       },
       "publicConformance": {
         "status": "not-applicable",
-        "notes": "Readiness plan distinguishes the executable native exemplar from target OOXML application, complete rendering, packaging, and PowerPoint compatibility."
+        "notes": "Records the M2-004 external-process, strict DOCX/OMML, attribution, unsupported-claim, and deferred M2-005 application boundary."
       },
       "independentReview": {
         "status": "passed",
-        "notes": "The bounded M2-003 closing review checked native structure, strict construction and QA, dispatcher and support boundaries, fixtures, and completion metadata; no blocker or high finding remains."
+        "notes": "The bounded M2-004 closing review's relationship-profile high and content-type medium were fixed with exact mappings and 10 regression subtests; bounded re-review found no remaining blocker or high finding."
       },
-      "notes": "Repository-owned open-source readiness plan."
+      "notes": "Repository-owned M2-004 planning, contract, policy, provenance, or evidence update."
+    },
+    {
+      "path": "docs/PANDOC_ADAPTER_ATTRIBUTION.md",
+      "kind": "new-clean-room",
+      "copyrightHolderOrSourceAuthority": "Elliot Wu",
+      "license": {
+        "spdxExpression": "MIT"
+      },
+      "thirdPartyDependencies": [],
+      "origin": "independently authored M2-004 technical attribution from fixed official Pandoc 3.10.1 documentation, metadata, license notices, and writer source; no upstream implementation or output copied",
+      "reviewedOn": "2026-08-05",
+      "privateInformationReview": {
+        "status": "passed",
+        "notes": "Contains only repository-owned synthetic data, public technical identifiers, normalized version facts, and approved project metadata; no private fixture, path, stderr, or presentation content is admitted."
+      },
+      "projectConstantCleanup": {
+        "status": "passed",
+        "notes": "No predecessor constant, private asset identifier, ambient project root, converter output, or presentation-specific source identity is admitted."
+      },
+      "publicConformance": {
+        "status": "applicable",
+        "notes": "Fixed official 3.10.1 links and the external-only/generated-output boundary support D-008 without redistributing Pandoc or claiming real-binary compatibility."
+      },
+      "independentReview": {
+        "status": "passed",
+        "notes": "The bounded M2-004 closing review's relationship-profile high and content-type medium were fixed with exact mappings and 10 regression subtests; bounded re-review found no remaining blocker or high finding."
+      },
+      "notes": "Technical attribution and rights boundary, not legal advice or a blanket generated-output ownership claim."
     },
     {
       "path": "docs/PRIVATE_FIXTURE_POLICY.md",
@@ -438,114 +536,114 @@
     {
       "path": "docs/PROVENANCE_LEDGER.md",
       "kind": "new-clean-room",
-      "origin": "user-directed clean-room provenance ledger updated with the exact M2-003 native-card-arrow set",
+      "origin": "repository-owned clean-room planning, policy, support, and evidence file updated through the M2-004 optional Pandoc/OMML adapter boundary",
       "copyrightHolderOrSourceAuthority": "Elliot Wu",
       "license": {
         "spdxExpression": "MIT"
       },
-      "reviewedOn": "2026-08-03",
+      "reviewedOn": "2026-08-05",
       "thirdPartyDependencies": [],
       "privateInformationReview": {
         "status": "passed",
-        "notes": "No private information present."
+        "notes": "Contains only repository-owned synthetic data, public technical identifiers, normalized version facts, and approved project metadata; no private fixture, path, stderr, or presentation content is admitted."
       },
       "projectConstantCleanup": {
         "status": "passed",
-        "notes": "No predecessor constants admitted."
+        "notes": "No predecessor constant, private asset identifier, ambient project root, converter output, or presentation-specific source identity is admitted."
       },
       "publicConformance": {
         "status": "not-applicable",
-        "notes": "Human ledger records the complete M2-003 path set, clean-room origin, text-only evidence, local-ID boundary, test counts, and pending closing review."
+        "notes": "Records the M2-004 external-process, strict DOCX/OMML, attribution, unsupported-claim, and deferred M2-005 application boundary."
       },
       "independentReview": {
         "status": "passed",
-        "notes": "The bounded M2-003 closing review checked native structure, strict construction and QA, dispatcher and support boundaries, fixtures, and completion metadata; no blocker or high finding remains."
+        "notes": "The bounded M2-004 closing review's relationship-profile high and content-type medium were fixed with exact mappings and 10 regression subtests; bounded re-review found no remaining blocker or high finding."
       },
-      "notes": "Human policy companion to the machine-readable records."
+      "notes": "Repository-owned M2-004 planning, contract, policy, provenance, or evidence update."
     },
     {
       "path": "docs/RELEASE_GATES.md",
       "kind": "new-clean-room",
-      "origin": "user-directed clean-room release gates updated with the bounded M2-003 native-component G3 evidence and residual application gates",
+      "origin": "repository-owned clean-room planning, policy, support, and evidence file updated through the M2-004 optional Pandoc/OMML adapter boundary",
       "copyrightHolderOrSourceAuthority": "Elliot Wu",
       "license": {
         "spdxExpression": "MIT"
       },
-      "reviewedOn": "2026-08-03",
+      "reviewedOn": "2026-08-05",
       "thirdPartyDependencies": [],
       "privateInformationReview": {
         "status": "passed",
-        "notes": "No private information present."
+        "notes": "Contains only repository-owned synthetic data, public technical identifiers, normalized version facts, and approved project metadata; no private fixture, path, stderr, or presentation content is admitted."
       },
       "projectConstantCleanup": {
         "status": "passed",
-        "notes": "Release criteria are generic."
+        "notes": "No predecessor constant, private asset identifier, ambient project root, converter output, or presentation-specific source identity is admitted."
       },
       "publicConformance": {
-        "status": "applicable",
-        "notes": "Records closed typed construction, strict XML/vocabulary QA, experimental evidence requirements, and unsatisfied target-package and PowerPoint gates."
+        "status": "not-applicable",
+        "notes": "Records the M2-004 external-process, strict DOCX/OMML, attribution, unsupported-claim, and deferred M2-005 application boundary."
       },
       "independentReview": {
         "status": "passed",
-        "notes": "The bounded M2-003 closing review checked native structure, strict construction and QA, dispatcher and support boundaries, fixtures, and completion metadata; no blocker or high finding remains."
+        "notes": "The bounded M2-004 closing review's relationship-profile high and content-type medium were fixed with exact mappings and 10 regression subtests; bounded re-review found no remaining blocker or high finding."
       },
-      "notes": "Repository-owned release gates."
+      "notes": "Repository-owned M2-004 planning, contract, policy, provenance, or evidence update."
     },
     {
       "path": "docs/SUPPORT_MATRIX.md",
       "kind": "new-clean-room",
-      "origin": "M0-005 clean-room support summary updated with the exact M2-003 experimental native capability and unchanged broad unavailability",
+      "origin": "repository-owned clean-room planning, policy, support, and evidence file updated through the M2-004 optional Pandoc/OMML adapter boundary",
       "copyrightHolderOrSourceAuthority": "Elliot Wu",
       "license": {
         "spdxExpression": "MIT"
       },
-      "reviewedOn": "2026-08-03",
+      "reviewedOn": "2026-08-05",
       "thirdPartyDependencies": [],
       "privateInformationReview": {
         "status": "passed",
-        "notes": "Contains generic public feature classes and aggregate counts only."
+        "notes": "Contains only repository-owned synthetic data, public technical identifiers, normalized version facts, and approved project metadata; no private fixture, path, stderr, or presentation content is admitted."
       },
       "projectConstantCleanup": {
         "status": "passed",
-        "notes": "No predecessor feature identifier or evidence admitted."
+        "notes": "No predecessor constant, private asset identifier, ambient project root, converter output, or presentation-specific source identity is admitted."
       },
       "publicConformance": {
         "status": "applicable",
-        "notes": "Summarizes 60 normative rows, one experimental capability, zero supported rows, explicit opt-in, and the unbound non-insertable fragment boundary."
+        "notes": "The 60-row matrix gate keeps formula-transplant, latex-formula, and native-omml unsupported/unavailable and the global claim switch false."
       },
       "independentReview": {
         "status": "passed",
-        "notes": "The bounded M2-003 closing review checked native structure, strict construction and QA, dispatcher and support boundaries, fixtures, and completion metadata; no blocker or high finding remains."
+        "notes": "The bounded M2-004 closing review's relationship-profile high and content-type medium were fixed with exact mappings and 10 regression subtests; bounded re-review found no remaining blocker or high finding."
       },
-      "notes": "Human-readable support-matrix summary."
+      "notes": "Repository-owned M2-004 planning, contract, policy, provenance, or evidence update."
     },
     {
       "path": "docs/THREAT_MODEL.md",
       "kind": "new-clean-room",
-      "origin": "user-directed clean-room threat model updated with M2-003 XML injection, local-ID collision, direct-concatenation, and claim-boundary threats",
+      "origin": "repository-owned clean-room planning, policy, support, and evidence file updated through the M2-004 optional Pandoc/OMML adapter boundary",
       "copyrightHolderOrSourceAuthority": "Elliot Wu",
       "license": {
         "spdxExpression": "MIT"
       },
-      "reviewedOn": "2026-08-03",
+      "reviewedOn": "2026-08-05",
       "thirdPartyDependencies": [],
       "privateInformationReview": {
         "status": "passed",
-        "notes": "No private information present."
+        "notes": "Contains only repository-owned synthetic data, public technical identifiers, normalized version facts, and approved project metadata; no private fixture, path, stderr, or presentation content is admitted."
       },
       "projectConstantCleanup": {
         "status": "passed",
-        "notes": "Threats are stated generically."
+        "notes": "No predecessor constant, private asset identifier, ambient project root, converter output, or presentation-specific source identity is admitted."
       },
       "publicConformance": {
         "status": "not-applicable",
-        "notes": "Threat controls require closed typed construction, canonical escaping, strict parsing, exact allowlisting, non-insertability, and deferred full-tree ID allocation."
+        "notes": "Records the M2-004 external-process, strict DOCX/OMML, attribution, unsupported-claim, and deferred M2-005 application boundary."
       },
       "independentReview": {
         "status": "passed",
-        "notes": "The bounded M2-003 closing review checked native structure, strict construction and QA, dispatcher and support boundaries, fixtures, and completion metadata; no blocker or high finding remains."
+        "notes": "The bounded M2-004 closing review's relationship-profile high and content-type medium were fixed with exact mappings and 10 regression subtests; bounded re-review found no remaining blocker or high finding."
       },
-      "notes": "Repository-owned threat model."
+      "notes": "Repository-owned M2-004 planning, contract, policy, provenance, or evidence update."
     },
     {
       "path": "fixtures/capabilities/dispatcher-contract-probe/cases.json",
@@ -616,6 +714,118 @@
       "publicConformance": { "status": "applicable", "notes": "Provides one no-I/O preflight, fixed executor, and two synchronous QA assertions for dispatcher admission." },
       "independentReview": { "status": "passed", "notes": "The bounded M2-001 review confirmed fixed data-only output, synchronous QA, and no I/O or presentation authority." },
       "notes": "Synthetic dispatcher-only executable probe; core does not import it and it cannot promote a product support claim."
+    },
+    {
+      "path": "fixtures/capabilities/formula-transplant/cases.json",
+      "kind": "new-clean-room",
+      "copyrightHolderOrSourceAuthority": "Elliot Wu",
+      "license": {
+        "spdxExpression": "MIT"
+      },
+      "thirdPartyDependencies": [],
+      "origin": "independently authored text-only synthetic M2-004 conformance data from the repository 0.1.0 contracts; no presentation, Pandoc output, private fixture, or predecessor example copied",
+      "reviewedOn": "2026-08-05",
+      "privateInformationReview": {
+        "status": "passed",
+        "notes": "Contains only repository-owned synthetic data, public technical identifiers, normalized version facts, and approved project metadata; no private fixture, path, stderr, or presentation content is admitted."
+      },
+      "projectConstantCleanup": {
+        "status": "passed",
+        "notes": "No predecessor constant, private asset identifier, ambient project root, converter output, or presentation-specific source identity is admitted."
+      },
+      "publicConformance": {
+        "status": "applicable",
+        "notes": "Exact text-only fraction metadata, graph, payload, and canonical OMML plan validate through existing 0.1.0 contracts and runtime admission."
+      },
+      "independentReview": {
+        "status": "passed",
+        "notes": "The bounded M2-004 closing review's relationship-profile high and content-type medium were fixed with exact mappings and 10 regression subtests; bounded re-review found no remaining blocker or high finding."
+      },
+      "notes": "Repository-owned synthetic text fixture; the OMML string is independently authored and no DOCX binary is tracked."
+    },
+    {
+      "path": "fixtures/capabilities/formula-transplant/deck-spec.json",
+      "kind": "new-clean-room",
+      "copyrightHolderOrSourceAuthority": "Elliot Wu",
+      "license": {
+        "spdxExpression": "MIT"
+      },
+      "thirdPartyDependencies": [],
+      "origin": "independently authored text-only synthetic M2-004 conformance data from the repository 0.1.0 contracts; no presentation, Pandoc output, private fixture, or predecessor example copied",
+      "reviewedOn": "2026-08-05",
+      "privateInformationReview": {
+        "status": "passed",
+        "notes": "Contains only repository-owned synthetic data, public technical identifiers, normalized version facts, and approved project metadata; no private fixture, path, stderr, or presentation content is admitted."
+      },
+      "projectConstantCleanup": {
+        "status": "passed",
+        "notes": "No predecessor constant, private asset identifier, ambient project root, converter output, or presentation-specific source identity is admitted."
+      },
+      "publicConformance": {
+        "status": "applicable",
+        "notes": "Exact text-only fraction metadata, graph, payload, and canonical OMML plan validate through existing 0.1.0 contracts and runtime admission."
+      },
+      "independentReview": {
+        "status": "passed",
+        "notes": "The bounded M2-004 closing review's relationship-profile high and content-type medium were fixed with exact mappings and 10 regression subtests; bounded re-review found no remaining blocker or high finding."
+      },
+      "notes": "Repository-owned synthetic text fixture; the OMML string is independently authored and no DOCX binary is tracked."
+    },
+    {
+      "path": "fixtures/capabilities/formula-transplant/project-overlay.json",
+      "kind": "new-clean-room",
+      "copyrightHolderOrSourceAuthority": "Elliot Wu",
+      "license": {
+        "spdxExpression": "MIT"
+      },
+      "thirdPartyDependencies": [],
+      "origin": "independently authored text-only synthetic M2-004 conformance data from the repository 0.1.0 contracts; no presentation, Pandoc output, private fixture, or predecessor example copied",
+      "reviewedOn": "2026-08-05",
+      "privateInformationReview": {
+        "status": "passed",
+        "notes": "Contains only repository-owned synthetic data, public technical identifiers, normalized version facts, and approved project metadata; no private fixture, path, stderr, or presentation content is admitted."
+      },
+      "projectConstantCleanup": {
+        "status": "passed",
+        "notes": "No predecessor constant, private asset identifier, ambient project root, converter output, or presentation-specific source identity is admitted."
+      },
+      "publicConformance": {
+        "status": "applicable",
+        "notes": "Exact text-only fraction metadata, graph, payload, and canonical OMML plan validate through existing 0.1.0 contracts and runtime admission."
+      },
+      "independentReview": {
+        "status": "passed",
+        "notes": "The bounded M2-004 closing review's relationship-profile high and content-type medium were fixed with exact mappings and 10 regression subtests; bounded re-review found no remaining blocker or high finding."
+      },
+      "notes": "Repository-owned synthetic text fixture; the OMML string is independently authored and no DOCX binary is tracked."
+    },
+    {
+      "path": "fixtures/capabilities/formula-transplant/registry.json",
+      "kind": "new-clean-room",
+      "copyrightHolderOrSourceAuthority": "Elliot Wu",
+      "license": {
+        "spdxExpression": "MIT"
+      },
+      "thirdPartyDependencies": [],
+      "origin": "independently authored text-only synthetic M2-004 conformance data from the repository 0.1.0 contracts; no presentation, Pandoc output, private fixture, or predecessor example copied",
+      "reviewedOn": "2026-08-05",
+      "privateInformationReview": {
+        "status": "passed",
+        "notes": "Contains only repository-owned synthetic data, public technical identifiers, normalized version facts, and approved project metadata; no private fixture, path, stderr, or presentation content is admitted."
+      },
+      "projectConstantCleanup": {
+        "status": "passed",
+        "notes": "No predecessor constant, private asset identifier, ambient project root, converter output, or presentation-specific source identity is admitted."
+      },
+      "publicConformance": {
+        "status": "applicable",
+        "notes": "Exact text-only fraction metadata, graph, payload, and canonical OMML plan validate through existing 0.1.0 contracts and runtime admission."
+      },
+      "independentReview": {
+        "status": "passed",
+        "notes": "The bounded M2-004 closing review's relationship-profile high and content-type medium were fixed with exact mappings and 10 regression subtests; bounded re-review found no remaining blocker or high finding."
+      },
+      "notes": "Repository-owned synthetic text fixture; the OMML string is independently authored and no DOCX binary is tracked."
     },
     {
       "path": "fixtures/capabilities/native-card-arrow/cases.json",
@@ -1122,6 +1332,146 @@
       "notes": "Dependency-free private workspace manifest; it is not publishable."
     },
     {
+      "path": "packages/adapter-pandoc-omml/schemas/input.schema.json",
+      "kind": "new-clean-room",
+      "copyrightHolderOrSourceAuthority": "Elliot Wu",
+      "license": {
+        "spdxExpression": "MIT"
+      },
+      "thirdPartyDependencies": [],
+      "origin": "independently authored from the M2-004 repository contract, existing public dispatcher and secure ZIP/XML APIs, public ECMA-376 structures, documented Node.js process APIs, and official Pandoc behavior; no predecessor or upstream implementation copied",
+      "reviewedOn": "2026-08-05",
+      "privateInformationReview": {
+        "status": "passed",
+        "notes": "Contains only repository-owned synthetic data, public technical identifiers, normalized version facts, and approved project metadata; no private fixture, path, stderr, or presentation content is admitted."
+      },
+      "projectConstantCleanup": {
+        "status": "passed",
+        "notes": "No predecessor constant, private asset identifier, ambient project root, converter output, or presentation-specific source identity is admitted."
+      },
+      "publicConformance": {
+        "status": "applicable",
+        "notes": "Covered by the 115-node focused adapter suite, 330-node strict dispatcher/resolver/native/formula/support focus, and 738-node full dual-Node run; the emitted fragment remains unbound and non-insertable."
+      },
+      "independentReview": {
+        "status": "passed",
+        "notes": "The bounded M2-004 closing review's relationship-profile high and content-type medium were fixed with exact mappings and 10 regression subtests; bounded re-review found no remaining blocker or high finding."
+      },
+      "notes": "Repository-owned closed capability schema; JSON Schema remains normative."
+    },
+    {
+      "path": "packages/adapter-pandoc-omml/schemas/output.schema.json",
+      "kind": "new-clean-room",
+      "copyrightHolderOrSourceAuthority": "Elliot Wu",
+      "license": {
+        "spdxExpression": "MIT"
+      },
+      "thirdPartyDependencies": [],
+      "origin": "independently authored from the M2-004 repository contract, existing public dispatcher and secure ZIP/XML APIs, public ECMA-376 structures, documented Node.js process APIs, and official Pandoc behavior; no predecessor or upstream implementation copied",
+      "reviewedOn": "2026-08-05",
+      "privateInformationReview": {
+        "status": "passed",
+        "notes": "Contains only repository-owned synthetic data, public technical identifiers, normalized version facts, and approved project metadata; no private fixture, path, stderr, or presentation content is admitted."
+      },
+      "projectConstantCleanup": {
+        "status": "passed",
+        "notes": "No predecessor constant, private asset identifier, ambient project root, converter output, or presentation-specific source identity is admitted."
+      },
+      "publicConformance": {
+        "status": "applicable",
+        "notes": "Covered by the 115-node focused adapter suite, 330-node strict dispatcher/resolver/native/formula/support focus, and 738-node full dual-Node run; the emitted fragment remains unbound and non-insertable."
+      },
+      "independentReview": {
+        "status": "passed",
+        "notes": "The bounded M2-004 closing review's relationship-profile high and content-type medium were fixed with exact mappings and 10 regression subtests; bounded re-review found no remaining blocker or high finding."
+      },
+      "notes": "Repository-owned closed capability schema; JSON Schema remains normative."
+    },
+    {
+      "path": "packages/adapter-pandoc-omml/src/formula-transplant.mjs",
+      "kind": "new-clean-room",
+      "copyrightHolderOrSourceAuthority": "Elliot Wu",
+      "license": {
+        "spdxExpression": "MIT"
+      },
+      "thirdPartyDependencies": [],
+      "origin": "independently authored from the M2-004 repository contract, existing public dispatcher and secure ZIP/XML APIs, public ECMA-376 structures, documented Node.js process APIs, and official Pandoc behavior; no predecessor or upstream implementation copied",
+      "reviewedOn": "2026-08-05",
+      "privateInformationReview": {
+        "status": "passed",
+        "notes": "Contains only repository-owned synthetic data, public technical identifiers, normalized version facts, and approved project metadata; no private fixture, path, stderr, or presentation content is admitted."
+      },
+      "projectConstantCleanup": {
+        "status": "passed",
+        "notes": "No predecessor constant, private asset identifier, ambient project root, converter output, or presentation-specific source identity is admitted."
+      },
+      "publicConformance": {
+        "status": "applicable",
+        "notes": "Covered by the 115-node focused adapter suite, 330-node strict dispatcher/resolver/native/formula/support focus, and 738-node full dual-Node run; the emitted fragment remains unbound and non-insertable."
+      },
+      "independentReview": {
+        "status": "passed",
+        "notes": "The bounded M2-004 closing review's relationship-profile high and content-type medium were fixed with exact mappings and 10 regression subtests; bounded re-review found no remaining blocker or high finding."
+      },
+      "notes": "Repository-owned adapter source; no package manifest is added before M3-002 and no converter binary or output is tracked."
+    },
+    {
+      "path": "packages/adapter-pandoc-omml/src/node-process-runner.mjs",
+      "kind": "new-clean-room",
+      "copyrightHolderOrSourceAuthority": "Elliot Wu",
+      "license": {
+        "spdxExpression": "MIT"
+      },
+      "thirdPartyDependencies": [],
+      "origin": "independently authored from the M2-004 repository contract, existing public dispatcher and secure ZIP/XML APIs, public ECMA-376 structures, documented Node.js process APIs, and official Pandoc behavior; no predecessor or upstream implementation copied",
+      "reviewedOn": "2026-08-05",
+      "privateInformationReview": {
+        "status": "passed",
+        "notes": "Contains only repository-owned synthetic data, public technical identifiers, normalized version facts, and approved project metadata; no private fixture, path, stderr, or presentation content is admitted."
+      },
+      "projectConstantCleanup": {
+        "status": "passed",
+        "notes": "No predecessor constant, private asset identifier, ambient project root, converter output, or presentation-specific source identity is admitted."
+      },
+      "publicConformance": {
+        "status": "applicable",
+        "notes": "Covered by the 115-node focused adapter suite, 330-node strict dispatcher/resolver/native/formula/support focus, and 738-node full dual-Node run; the emitted fragment remains unbound and non-insertable."
+      },
+      "independentReview": {
+        "status": "passed",
+        "notes": "The bounded M2-004 closing review's relationship-profile high and content-type medium were fixed with exact mappings and 10 regression subtests; bounded re-review found no remaining blocker or high finding."
+      },
+      "notes": "Repository-owned adapter source; no package manifest is added before M3-002 and no converter binary or output is tracked."
+    },
+    {
+      "path": "packages/adapter-pandoc-omml/src/pandoc-omml-adapter.mjs",
+      "kind": "new-clean-room",
+      "copyrightHolderOrSourceAuthority": "Elliot Wu",
+      "license": {
+        "spdxExpression": "MIT"
+      },
+      "thirdPartyDependencies": [],
+      "origin": "independently authored from the M2-004 repository contract, existing public dispatcher and secure ZIP/XML APIs, public ECMA-376 structures, documented Node.js process APIs, and official Pandoc behavior; no predecessor or upstream implementation copied",
+      "reviewedOn": "2026-08-05",
+      "privateInformationReview": {
+        "status": "passed",
+        "notes": "Contains only repository-owned synthetic data, public technical identifiers, normalized version facts, and approved project metadata; no private fixture, path, stderr, or presentation content is admitted."
+      },
+      "projectConstantCleanup": {
+        "status": "passed",
+        "notes": "No predecessor constant, private asset identifier, ambient project root, converter output, or presentation-specific source identity is admitted."
+      },
+      "publicConformance": {
+        "status": "applicable",
+        "notes": "Covered by the 115-node focused adapter suite, 330-node strict dispatcher/resolver/native/formula/support focus, and 738-node full dual-Node run; the emitted fragment remains unbound and non-insertable."
+      },
+      "independentReview": {
+        "status": "passed",
+        "notes": "The bounded M2-004 closing review's relationship-profile high and content-type medium were fixed with exact mappings and 10 regression subtests; bounded re-review found no remaining blocker or high finding."
+      },
+      "notes": "Repository-owned adapter source; no package manifest is added before M3-002 and no converter binary or output is tracked."
+    },
+    {
       "path": "packages/core/src/capability-dispatcher.mjs",
       "kind": "new-clean-room",
       "origin": "M2-001 clean-room dispatcher updated in M2-002 from the repository runtime contract and public 0.1.0 registry schema to authenticate exact registry content",
@@ -1376,58 +1726,58 @@
     {
       "path": "policy/support-matrix.json",
       "kind": "new-clean-room",
-      "origin": "M0-005 clean-room support contract updated through M2-003 with one exact experimental native capability and zero supported claims",
+      "origin": "repository-owned clean-room planning, policy, support, and evidence file updated through the M2-004 optional Pandoc/OMML adapter boundary",
       "copyrightHolderOrSourceAuthority": "Elliot Wu",
       "license": {
         "spdxExpression": "MIT"
       },
-      "reviewedOn": "2026-08-03",
+      "reviewedOn": "2026-08-05",
       "thirdPartyDependencies": [],
       "privateInformationReview": {
         "status": "passed",
-        "notes": "Uses generic feature classes, public roadmap IDs, and public contract paths only."
+        "notes": "Contains only repository-owned synthetic data, public technical identifiers, normalized version facts, and approved project metadata; no private fixture, path, stderr, or presentation content is admitted."
       },
       "projectConstantCleanup": {
         "status": "passed",
-        "notes": "No predecessor implementation, asset, or identifier admitted."
+        "notes": "No predecessor constant, private asset identifier, ambient project root, converter output, or presentation-specific source identity is admitted."
       },
       "publicConformance": {
         "status": "applicable",
-        "notes": "Contains 60 checked rows, one narrow experimental native capability with all six executable evidence types, zero supported rows, and explicit broad DrawingML/slide-text unavailability."
+        "notes": "The 60-row matrix gate keeps formula-transplant, latex-formula, and native-omml unsupported/unavailable and the global claim switch false."
       },
       "independentReview": {
         "status": "passed",
-        "notes": "The bounded M2-003 closing review checked native structure, strict construction and QA, dispatcher and support boundaries, fixtures, and completion metadata; no blocker or high finding remains."
+        "notes": "The bounded M2-004 closing review's relationship-profile high and content-type medium were fixed with exact mappings and 10 regression subtests; bounded re-review found no remaining blocker or high finding."
       },
-      "notes": "Normative versioned public support matrix."
+      "notes": "Repository-owned M2-004 planning, contract, policy, provenance, or evidence update."
     },
     {
       "path": "provenance/records.json",
       "kind": "new-clean-room",
-      "origin": "M0-004 provenance contract with exact clean-room records updated through M2-003",
+      "origin": "M0-004 machine-readable provenance source refreshed for the complete M2-004 clean-room set",
       "copyrightHolderOrSourceAuthority": "Elliot Wu",
       "license": {
         "spdxExpression": "MIT"
       },
-      "reviewedOn": "2026-08-03",
+      "reviewedOn": "2026-08-05",
       "thirdPartyDependencies": [],
       "privateInformationReview": {
         "status": "passed",
-        "notes": "Records contain only approved public and generic source-authority information."
+        "notes": "Contains only repository-owned synthetic data, public technical identifiers, normalized version facts, and approved project metadata; no private fixture, path, stderr, or presentation content is admitted."
       },
       "projectConstantCleanup": {
         "status": "passed",
-        "notes": "Every admitted path is repository-relative and generic."
+        "notes": "No predecessor constant, private asset identifier, ambient project root, converter output, or presentation-specific source identity is admitted."
       },
       "publicConformance": {
         "status": "applicable",
-        "notes": "Self-covered exact-path provenance now contains 113 records including every M2-003 source, schema, fixture, test, policy, and handoff file."
+        "notes": "Covers all 125 current working-tree files exactly; all 27 M2-004-touched records carry the passed bounded closing-review result."
       },
       "independentReview": {
         "status": "passed",
-        "notes": "The bounded M2-003 closing review checked native structure, strict construction and QA, dispatcher and support boundaries, fixtures, and completion metadata; no blocker or high finding remains."
+        "notes": "The bounded M2-004 closing review's relationship-profile high and content-type medium were fixed with exact mappings and 10 regression subtests; bounded re-review found no remaining blocker or high finding."
       },
-      "notes": "Normative per-file provenance source, including its own record."
+      "notes": "Repository-owned M2-004 planning, contract, policy, provenance, or evidence update."
     },
     {
       "path": "schemas/contracts/build-artifact.schema.json",
@@ -1766,6 +2116,34 @@
       "notes": "Dependency-free tests use only repository-owned UTF-8 fixtures and temporary clean directories."
     },
     {
+      "path": "tests/pandoc-omml-adapter.test.mjs",
+      "kind": "new-clean-room",
+      "copyrightHolderOrSourceAuthority": "Elliot Wu",
+      "license": {
+        "spdxExpression": "MIT"
+      },
+      "thirdPartyDependencies": [],
+      "origin": "independently authored M2-004 public conformance and mutation suite using runtime-built text-derived DOCX bytes and fake process outcomes; no Pandoc output or predecessor tests copied",
+      "reviewedOn": "2026-08-05",
+      "privateInformationReview": {
+        "status": "passed",
+        "notes": "Contains only repository-owned synthetic data, public technical identifiers, normalized version facts, and approved project metadata; no private fixture, path, stderr, or presentation content is admitted."
+      },
+      "projectConstantCleanup": {
+        "status": "passed",
+        "notes": "No predecessor constant, private asset identifier, ambient project root, converter output, or presentation-specific source identity is admitted."
+      },
+      "publicConformance": {
+        "status": "applicable",
+        "notes": "The 115-node focused suite covers fixed process requests, detection/absence/error handling, input isolation, exact OPC relationship/content-type profiles, resolver/dispatcher behavior, ZIP/XML/typed-OMML mutations, deterministic output, and clean closure; the strict focus passes 330/330 and the full dual-Node suite passes 738/738."
+      },
+      "independentReview": {
+        "status": "passed",
+        "notes": "The bounded M2-004 closing review's relationship-profile high and content-type medium were fixed with exact mappings and 10 regression subtests; bounded re-review found no remaining blocker or high finding."
+      },
+      "notes": "Public tests use only fake runner outcomes, Node itself for runner mechanics, and runtime-built text-derived DOCX bytes."
+    },
+    {
       "path": "tests/policy-gates.test.mjs",
       "kind": "new-clean-room",
       "origin": "M0-004 clean-room tests with an M1-002 provenance-authority regression",
@@ -1824,30 +2202,30 @@
     {
       "path": "tests/support-matrix.test.mjs",
       "kind": "new-clean-room",
-      "origin": "M0-005 clean-room support tests updated through M2-003 for exact experimental evidence, broad unavailability, and zero supported claims",
+      "origin": "repository-owned clean-room planning, policy, support, and evidence file updated through the M2-004 optional Pandoc/OMML adapter boundary",
       "copyrightHolderOrSourceAuthority": "Elliot Wu",
       "license": {
         "spdxExpression": "MIT"
       },
-      "reviewedOn": "2026-08-03",
+      "reviewedOn": "2026-08-05",
       "thirdPartyDependencies": [],
       "privateInformationReview": {
         "status": "passed",
-        "notes": "Uses repository-owned synthetic in-memory mutations only."
+        "notes": "Contains only repository-owned synthetic data, public technical identifiers, normalized version facts, and approved project metadata; no private fixture, path, stderr, or presentation content is admitted."
       },
       "projectConstantCleanup": {
         "status": "passed",
-        "notes": "No predecessor identifier, asset, or path appears."
+        "notes": "No predecessor constant, private asset identifier, ambient project root, converter output, or presentation-specific source identity is admitted."
       },
       "publicConformance": {
         "status": "applicable",
-        "notes": "Sixteen nodes cover the baseline, exact M2-003 evidence paths and counts, plus experimental evidence-level and missing-artifact mutations."
+        "notes": "The 60-row matrix gate keeps formula-transplant, latex-formula, and native-omml unsupported/unavailable and the global claim switch false."
       },
       "independentReview": {
         "status": "passed",
-        "notes": "The bounded M2-003 closing review checked native structure, strict construction and QA, dispatcher and support boundaries, fixtures, and completion metadata; no blocker or high finding remains."
+        "notes": "The bounded M2-004 closing review's relationship-profile high and content-type medium were fixed with exact mappings and 10 regression subtests; bounded re-review found no remaining blocker or high finding."
       },
-      "notes": "Dependency-free support-matrix overclaim and drift tests."
+      "notes": "Repository-owned M2-004 planning, contract, policy, provenance, or evidence update."
     },
     {
       "path": "tests/synthetic-fixture.test.mjs",

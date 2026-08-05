@@ -22,8 +22,13 @@ plans from exact text-box bindings. One opt-in experimental native-card-arrow
 executor now produces a strict, canonical, non-raster `p:grpSp` conformance
 fragment from data only. That fragment is explicitly unbound and non-insertable:
 no PPTX/POTX package is mutated, final object IDs are not allocated, and
-PowerPoint editability has not been proved. The global support switch remains
-false and no row is supported. There is still no published CLI,
+PowerPoint editability has not been proved. An isolated optional adapter can
+also version/capability-probe an explicitly configured external Pandoc process,
+send one bounded display formula as a JSON AST on stdin, and rebuild its DOCX
+stdout as a strict canonical `m:oMath` conformance fragment. Public evidence
+uses a fake runner; the formula result is likewise unbound and non-insertable.
+The global support switch remains false and no row is supported. There is still
+no published CLI,
 arbitrary-template compatibility promise, or renderer. It is not yet a
 releasable software package. Do not publish until the release gates in
 [TODO.md](TODO.md) pass.
@@ -65,14 +70,15 @@ and OOXML feature matrix will be explicit and fail closed.
    [docs/M2-002_HANDOFF.md](docs/M2-002_HANDOFF.md).
 10. For the native card-arrow capability and its non-insertable ID boundary,
     read [docs/M2-003_HANDOFF.md](docs/M2-003_HANDOFF.md).
-11. Load broader project/architecture documents only when the handoff routes to
+11. For the optional Pandoc/OMML process, attribution, and non-insertable
+    formula boundary, read [docs/M2-004_HANDOFF.md](docs/M2-004_HANDOFF.md).
+12. Load broader project/architecture documents only when the handoff routes to
    them.
 
 The private root package has no dependencies; `npm test`,
 `npm run inspect:synthetic`, and `npm run check:public-tree` verify the current
-foundation. The next dependency is the optional Pandoc/OMML adapter in `M2-004`,
-kept external to core and tested without widening native DrawingML, package,
-or PowerPoint claims.
+foundation. The next dependency is isolated create-only OOXML application,
+normalization, semantic diff, collateral checks, and publication in `M2-005`.
 
 ## License
 

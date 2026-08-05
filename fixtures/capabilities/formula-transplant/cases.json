@@ -1,0 +1,63 @@
+{
+  "schemaVersion": "0.1.0",
+  "fixtureSetType": "capability-conformance",
+  "capabilityId": "formula-transplant",
+  "capabilityVersion": "0.1.0",
+  "fixtures": [
+    {
+      "fixtureId": "formula-transplant-fraction",
+      "invocation": {
+        "invocationId": "formula-output-one",
+        "capabilitySelectionId": "formula-transplant-selection",
+        "capabilityId": "formula-transplant",
+        "capabilityVersion": "0.1.0",
+        "experimentalOptIn": true,
+        "payload": {
+          "displayMode": "display",
+          "latex": "\\frac{a}{b}"
+        },
+        "bindings": [
+          {
+            "role": "formula-target",
+            "shapeBindingId": "formula-target-binding",
+            "containerKind": "slide",
+            "containerKey": "slide-1",
+            "shapeKey": "shape-2",
+            "expectedKind": "text-box",
+            "cardinality": "exactly-one"
+          }
+        ]
+      },
+      "expectedOutput": {
+        "planVersion": "0.1.0",
+        "planType": "formula-transplant-plan",
+        "outputSlideId": "formula-output-one",
+        "clone": {
+          "operationId": "clone-source-slide",
+          "operationType": "clone-slide",
+          "sourceContainerKind": "slide",
+          "sourceSlideKey": "slide-1"
+        },
+        "replace": {
+          "operationId": "replace-formula-target",
+          "operationType": "replace-text-box-content-with-native-omml",
+          "role": "formula-target",
+          "targetBindingId": "formula-target-binding",
+          "targetShapeKey": "shape-2",
+          "expectedKind": "text-box",
+          "applicationPolicy": "typed-rebuild-required"
+        },
+        "formula": {
+          "componentType": "native-omml-formula",
+          "representation": "native-office-math",
+          "artifactKind": "unbound-omml-conformance-fragment",
+          "insertable": false,
+          "sourceFormat": "latex-math",
+          "displayMode": "display",
+          "adapterProfileVersion": "0.1.0",
+          "unboundOmmlFragment": "<m:oMath xmlns:m=\"http://schemas.openxmlformats.org/officeDocument/2006/math\"><m:f><m:fPr><m:type m:val=\"bar\"/></m:fPr><m:num><m:r><m:t>a</m:t></m:r></m:num><m:den><m:r><m:t>b</m:t></m:r></m:den></m:f></m:oMath>"
+        }
+      }
+    }
+  ]
+}

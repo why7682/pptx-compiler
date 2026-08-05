@@ -1,0 +1,106 @@
+# Pandoc Adapter Attribution and Rights Boundary
+
+## Upstream identity
+
+Pandoc is an external document-conversion program authored by John MacFarlane
+and contributors. Upstream states that the main program is licensed under the
+GNU General Public License, version 2 or later (`GPL-2.0-or-later`), with
+component-specific notices recorded in its copyright file:
+
+- upstream repository and release source: <https://github.com/jgm/pandoc>
+- fixed 3.10.1 package metadata: <https://github.com/jgm/pandoc/blob/3.10.1/pandoc.cabal#L1-L6>
+- fixed 3.10.1 copyright notices: <https://github.com/jgm/pandoc/blob/3.10.1/COPYRIGHT>
+- fixed 3.10.1 GPL text: <https://github.com/jgm/pandoc/blob/3.10.1/COPYING.md>
+- upstream user guide: <https://pandoc.org/MANUAL.html>
+- audited release entry: <https://pandoc.org/releases.html#pandoc-3.10.1>
+
+The repository-owned adapter code remains MIT-licensed. This record is a
+technical rights boundary, not legal advice and not a general conclusion about
+every deployment or generated document.
+
+## Integration decision
+
+This project does not copy, link, vendor, download, install, package, or
+redistribute Pandoc, its Haskell libraries, executable, templates, default
+`reference.docx`, source tree, or generated DOCX files. Pandoc is not an npm
+dependency. A trusted host may explicitly configure an absolute path to a
+separately installed executable. The adapter invokes that executable as a
+bounded child process with `shell: false`; all command-line arguments are fixed
+by repository-owned code.
+
+Pandoc 2.15.x through 3.x is only eligible; availability requires exact version,
+JSON API, DOCX writer, and canonical OMML probes to pass. Version 2.15 is the
+floor because upstream
+[introduced `--sandbox` in that release](https://pandoc.org/releases.html#pandoc-2.15).
+Future major versions fail closed pending a new review. The adapter uses
+`--sandbox`, JSON AST input over
+stdin, DOCX output over stdout, a fixed heap/stack request, explicit cwd and
+environment, fixed time/output limits, and no filters, custom writers, input
+files, network locations, resource paths, defaults files, or reference files.
+
+Upstream documents that user data can override files such as
+`reference.docx`, and recommends `--sandbox` for untrusted input. The adapter's
+capability probe rejects a binary whose sandboxed embedded-data DOCX path does
+not produce the exact bounded profile; it never falls back to ambient user data.
+
+The admission window is not a verified compatibility statement. The official
+source audit on 2026-08-05 used the current 3.10.1 release, while public tests
+use a fake runner and no compatible real release. Every configured binary must
+still pass the active probes. The adapter's `-M128m -K16m` RTS request is a
+project-owned bounded profile, not an upstream sizing promise; upstream's
+[security guidance](https://pandoc.org/MANUAL.html#a-note-on-security)
+recommends a timeout and heap cap but gives a different example value.
+
+## Reviewed conversion behavior
+
+Pandoc documents OMML for DOCX and PowerPoint math output. In the fixed 3.10.1
+source, the DOCX writer passes Math through `convertMath writeOMML`; if TeX math
+conversion fails, `convertMath` warns and returns literal math text. Therefore
+every adapter call fixes `--fail-if-warnings`, treats any nonzero exit or stderr
+as failure, discards stdout on failure, and independently requires the exact
+single-OMML wrapper:
+
+- documented math output: <https://pandoc.org/MANUAL.html#math>
+- warning-failure option and exit codes:
+  <https://pandoc.org/MANUAL.html#option--fail-if-warnings> and
+  <https://pandoc.org/MANUAL.html#exit-codes>
+- fixed DOCX writer call:
+  <https://github.com/jgm/pandoc/blob/3.10.1/src/Text/Pandoc/Writers/Docx/OpenXML.hs#L882-L887>
+- fixed warning/text fallback:
+  <https://github.com/jgm/pandoc/blob/3.10.1/src/Text/Pandoc/Writers/Math.hs#L39-L53>
+- fixed fraction OMML writer shape:
+  <https://github.com/jgm/texmath/blob/0.13.1.1/src/Text/TeXMath/Writers/OMML.hs#L38-L72>
+
+Pandoc exposes DOCX, PPTX, JSON, and other document writers, not a standalone
+OMML CLI output. Its PPTX writer wraps converted math inside `a14:m` and
+`mc:AlternateContent`; a DOCX-extracted inner `m:oMath` is consequently not a
+complete PresentationML insertion unit. The exact upstream wrapper is visible
+at <https://github.com/jgm/pandoc/blob/3.10.1/src/Text/Pandoc/Writers/Powerpoint/Output.hs#L1237-L1275>.
+This is why the M2-004 artifact remains unbound and `insertable: false`.
+
+## Generated-output boundary
+
+Public tests use only repository-authored JSON/XML text and construct synthetic
+DOCX bytes in memory. They do not contain or redistribute Pandoc output. The
+canonical `m:oMath` conformance strings are independently authored against the
+public OOXML namespace/structure and contain only repository-owned synthetic
+formula data.
+
+This project makes no blanket ownership or licensing assertion about documents
+generated by Pandoc. A distributor remains responsible for the rights in its
+formula input, configured executable, deployment, and resulting presentation.
+If a future release bundles Pandoc, a reference document, upstream data, or
+code derived from Pandoc, D-008 must reopen and the release must add the full
+applicable license/source/notice obligations before publication.
+
+## Release treatment
+
+- Package manifests and SBOMs must not list Pandoc as bundled software unless
+  that fact changes and receives a new rights review.
+- User-facing diagnostics may report only normalized availability and version;
+  they must not expose the executable path, environment, stderr, or input.
+- Documentation must call Pandoc a user-installed optional external tool and
+  must not imply endorsement by its authors.
+- Absence, an unsupported version, probe drift, or conversion failure produces
+  an unavailable/failure result. It never selects a raster fallback or widens a
+  support claim.

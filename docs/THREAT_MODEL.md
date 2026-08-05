@@ -48,6 +48,12 @@
 11. an unbound native XML exemplar being concatenated into a target slide,
     component-local object IDs colliding with existing or nested shape IDs, or
     user text/style data escaping the fixed native vocabulary.
+12. formula data selecting or altering an executable, argv, path, environment,
+    defaults/filter/reference file, resource lookup, or network request; a
+    warning-producing TeX conversion silently degrading to text; a missing or
+    compromised process hanging, forking, or exhausting memory/output; or its
+    DOCX/OMML output exploiting archive, relationship, XML, namespace, or
+    version-drift ambiguity.
 
 ## Default controls
 
@@ -77,6 +83,15 @@
   canonical serializer, strict-parse and exact-allowlist the output, mark it
   non-insertable, and defer full-tree ID allocation and application to isolated
   staging.
+- keep optional Pandoc execution outside core; require a trusted absolute path,
+  no shell, fixed argv, an explicit minimal environment/cwd, bounded stdin,
+  separate streaming stdout/stderr ceilings, a timeout, fixed RTS limits,
+  `--sandbox`, and `--fail-if-warnings`; admit only a fixed version window after
+  API and exact output probes, and omit registration on any drift.
+- treat converter stdout as untrusted DOCX bytes, pass it through the fixed
+  secure ZIP and strict XML boundaries, validate exact OPC relationships and a
+  closed Word/OMML wrapper, rebuild the typed allowlisted tree canonically, and
+  mark the resulting fragment unbound and non-insertable.
 
 ## M1-005 implemented input boundary
 
@@ -193,3 +208,44 @@ apply only to disposable create-only staging. Raw concatenation or string ID
 replacement is forbidden. PowerPoint open/edit/save/reopen, text fit, visual
 fidelity, source isolation, collateral diff, rollback, and publication remain
 unproved.
+
+## M2-004 implemented optional-process and OMML boundary
+
+Only `packages/adapter-pandoc-omml/src/node-process-runner.mjs` imports
+`node:child_process`. Its trusted constructor requires an absolute executable
+and working directory plus an explicit small allowlisted environment; it never
+reads ambient cwd/environment and capability data cannot supply process
+configuration. Every request snapshots fixed arguments and bytes, uses
+`spawn(..., { shell: false })`, pipes only, streams separate output ceilings,
+and kills on timeout or overflow. Stable outcomes and adapter errors omit the
+executable path, environment, raw stderr, signal detail, and formula text.
+
+The adapter accepts only a canonical Pandoc version in `>=2.15.0 <4.0.0`, then
+requires a sandboxed JSON-API probe and an exact repository-owned fraction-to-
+DOCX/OMML probe. All calls fix `--sandbox`, `--fail-if-warnings`, stdout output,
+and RTS heap/stack requests. The executable receives no user argv, input file,
+filter, custom writer, defaults file, resource path, reference document, URL,
+or inherited user-data environment. Validated formula text is JSON-encoded only
+as the data value of one Pandoc `Math/DisplayMath` AST node on stdin. Nonzero,
+warning/stderr, missing, malformed, timed-out, output-limited, unsupported, or
+capability-drifting results cannot produce an executor registration or formula.
+
+DOCX stdout is never treated as XML or extracted to disk. It passes the existing
+1 MiB/32-member/256 KiB/100:1 non-extracting ZIP profile, an exact formula-DOCX
+part and internal-relationship set, strict namespace-aware XML parsing, a
+single Word display-math wrapper, and a 256-element/128-attribute/4 KiB-text
+OMML subset. The adapter reserializes namespace-expanded typed nodes with fixed
+prefixes and escaping; it never substring-captures or transplants raw converter
+XML. The result is an unbound conformance fragment with `insertable: false` and
+no writer/package authority.
+
+The public tests use a fake runner and repository-authored text-derived DOCX;
+they do not execute or redistribute Pandoc and prove no real release/platform
+compatibility. A configured executable is trusted host software: a compromised
+binary retains its operating-system authority. Portable Node process control
+does not provide a kernel memory/CPU sandbox or reliably terminate descendants;
+the RTS request, timeout, stream limits, sandbox mode, and omission of ambient
+configuration reduce but do not eliminate that risk. TexMath/Docx writer drift,
+fonts/layout, PresentationML wrapping, target application, source isolation,
+collateral diff, publication, and PowerPoint open/edit/save/reopen remain M2-005
+or COMPAT-OMML-001 obligations.

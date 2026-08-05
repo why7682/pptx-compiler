@@ -96,6 +96,18 @@ For maintenance or audit of the completed `M2-003` native component, read:
 8. `docs/SUPPORT_MATRIX.md`
 9. `docs/PROVENANCE_LEDGER.md`
 
+For maintenance or audit of the completed `M2-004` optional formula adapter,
+read:
+
+3. `docs/M2-004_HANDOFF.md`
+4. `packages/adapter-pandoc-omml/src/pandoc-omml-adapter.mjs`
+5. `packages/adapter-pandoc-omml/src/formula-transplant.mjs`
+6. `tests/pandoc-omml-adapter.test.mjs`
+7. `docs/PANDOC_ADAPTER_ATTRIBUTION.md`
+8. `docs/THREAT_MODEL.md`
+9. `docs/SUPPORT_MATRIX.md`
+10. `docs/PROVENANCE_LEDGER.md`
+
 Read `docs/PROJECT_DEFINITION.md` and `docs/ARCHITECTURE_TARGET.md` only before
 changing product scope, public contracts, packages, or dependency direction.
 
@@ -190,6 +202,13 @@ changing product scope, public contracts, packages, or dependency direction.
   unbound conformance exemplar with `insertable: false` and component-local
   IDs. M2-005 must rebuild and allocate target IDs; never concatenate the raw
   fragment, infer broad DrawingML support, or claim a PowerPoint-editable PPTX.
+- When maintaining `M2-004`, keep Pandoc a separately installed optional
+  process at a trusted absolute path and keep `node:child_process` outside core.
+  Preserve fixed version/API/OMML probing, no-shell JSON-AST stdin transport,
+  strict ZIP/XML/OPC/OMML reconstruction, unavailable-on-drift behavior, and the
+  unbound `insertable: false` result. Never vendor Pandoc/output, relax the
+  converter grammar from one diagnostic, or claim formula/native-OMML support
+  before real public conformance, M2-005 application, and the manual gate.
 - Add tests with every executable capability.
 - Update the architecture, support matrix, provenance ledger, and release gates
   in the same change when their contract changes.

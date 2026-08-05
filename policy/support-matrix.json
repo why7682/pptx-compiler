@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "matrixVersion": "0.1.0",
-  "updatedOn": "2026-08-03",
+  "updatedOn": "2026-08-05",
   "productStage": "pre-alpha-contract-only",
   "supportClaimsEnabled": false,
   "statusDefinitions": {
@@ -107,10 +107,24 @@
         "label": "LaTeX formula input",
         "status": "unsupported",
         "disposition": "unavailable",
-        "currentBasis": "The optional Pandoc/OMML adapter is not implemented.",
-        "limitations": ["Pandoc is not bundled and predecessor observations are not public evidence."],
-        "roadmap": "M2-004",
-        "evidence": { "level": "none", "artifacts": [] }
+        "currentBasis": "M2-004 defines one bounded in-memory display-math payload and validates its JSON-AST conversion boundary with a fake process runner.",
+        "limitations": ["There is no CLI or accepted formula file input, no broad LaTeX compatibility claim, and no reproducible public run against a compatible real Pandoc release."],
+        "roadmap": "Compatible real-Pandoc conformance plus the M2-005 application boundary",
+        "evidence": {
+          "level": "automated-public",
+          "artifacts": [
+            {
+              "type": "input-schema",
+              "path": "packages/adapter-pandoc-omml/schemas/input.schema.json",
+              "note": "Closed display-math string contract; executor preflight adds byte, scalar, brace-depth, and dangerous-command limits."
+            },
+            {
+              "type": "qa-assertions",
+              "path": "tests/pandoc-omml-adapter.test.mjs",
+              "note": "Public fake-runner mutations prove JSON-string isolation, stdin-only transport, and input rejection without claiming a real accepted input surface."
+            }
+          ]
+        }
       },
       {
         "id": "macro-enabled-presentation",
@@ -485,10 +499,24 @@
         "label": "Native OMML formula shape",
         "status": "unsupported",
         "disposition": "unavailable",
-        "currentBasis": "The optional transplantation adapter is not implemented in this repository.",
-        "limitations": ["Predecessor automation evidence is inadmissible; native editability also needs a manual gate."],
-        "roadmap": "M2-004 and COMPAT-OMML-001",
-        "evidence": { "level": "none", "artifacts": [] }
+        "currentBasis": "The isolated M2-004 adapter reconstructs one strictly parsed canonical m:oMath conformance fragment from bounded synthetic DOCX stdout.",
+        "limitations": ["The fragment is explicitly unbound and non-insertable; no PresentationML wrapper, target-shape application, real compatible-Pandoc public matrix, or PowerPoint editability evidence exists."],
+        "roadmap": "Real compatible-Pandoc evidence, M2-005 typed application, and COMPAT-OMML-001",
+        "evidence": {
+          "level": "automated-public",
+          "artifacts": [
+            {
+              "type": "executor",
+              "path": "packages/adapter-pandoc-omml/src/pandoc-omml-adapter.mjs",
+              "note": "Bounded ZIP/XML/OPC/OMML validation and canonical reconstruction of one non-insertable m:oMath fragment."
+            },
+            {
+              "type": "qa-assertions",
+              "path": "tests/pandoc-omml-adapter.test.mjs",
+              "note": "Rejects relationship, package, namespace, vocabulary, cardinality, insertion, and canonical-fragment drift without promoting native OMML support."
+            }
+          ]
+        }
       },
       {
         "id": "notes-comments",
@@ -666,10 +694,49 @@
         "label": "Optional native OMML formula transplantation",
         "status": "unsupported",
         "disposition": "unavailable",
-        "currentBasis": "No public adapter, schema, fixture, or QA contract exists.",
-        "limitations": ["Pandoc is external and manual editability evidence remains outstanding."],
-        "roadmap": "M2-004 and COMPAT-OMML-001",
-        "evidence": { "level": "none", "artifacts": [] }
+        "currentBasis": "A statically registered M2-004 executor can use an explicitly configured, successfully probed adapter to emit a schema-validated unbound OMML replacement plan through the existing resolver and dispatcher.",
+        "limitations": ["Pandoc remains an unbundled GPL-2.0-or-later external process; public conformance uses a fake runner and text-derived DOCX, normal dispatch remains unavailable, and M2-005 plus a manual PowerPoint gate are outstanding."],
+        "roadmap": "Reproducible conformance against declared compatible Pandoc releases, then M2-005 and COMPAT-OMML-001",
+        "evidence": {
+          "level": "automated-public",
+          "artifacts": [
+            {
+              "type": "metadata",
+              "path": "fixtures/capabilities/formula-transplant/registry.json",
+              "note": "Exact capability identity, formula-target role, artifact references, and one text-only conformance case."
+            },
+            {
+              "type": "executor",
+              "path": "packages/adapter-pandoc-omml/src/formula-transplant.mjs",
+              "note": "Adapter-injected executor emits only a clone/replace plan and a canonical unbound OMML fragment."
+            },
+            {
+              "type": "input-schema",
+              "path": "packages/adapter-pandoc-omml/schemas/input.schema.json",
+              "note": "Closed display-math payload with no executable, argv, path, environment, or raw document field."
+            },
+            {
+              "type": "output-schema",
+              "path": "packages/adapter-pandoc-omml/schemas/output.schema.json",
+              "note": "Closed clone/replace/formula plan that marks the canonical fragment unbound and insertable=false."
+            },
+            {
+              "type": "conformance-fixture",
+              "path": "fixtures/capabilities/formula-transplant/cases.json",
+              "note": "Repository-owned text-only fraction invocation and exact canonical OMML plan; no DOCX binary is tracked."
+            },
+            {
+              "type": "qa-assertions",
+              "path": "packages/adapter-pandoc-omml/src/formula-transplant.mjs",
+              "note": "Four ordered assertions bind the semantic target, non-insertable boundary, native OMML structure, and operation plan."
+            },
+            {
+              "type": "contract",
+              "path": "tests/pandoc-omml-adapter.test.mjs",
+              "note": "Public detection, process, DOCX/OMML, dispatcher, unavailable-policy, atomicity, drift, and clean-closure evidence with no real-Pandoc claim."
+            }
+          ]
+        }
       },
       {
         "id": "native-drawingml",

@@ -501,6 +501,72 @@ notes: The executor emits one unbound, non-insertable native group conformance
   false; one narrow capability is experimental and no row is supported.
 ```
 
+### M2-004 optional Pandoc/OMML adapter set
+
+```yaml
+paths:
+  - AGENTS.md
+  - HANDOFF.md
+  - README.md
+  - TODO.md
+  - docs/ARCHITECTURE_TARGET.md
+  - docs/COMPATIBILITY_POLICY.md
+  - docs/DECISIONS.md
+  - docs/M2-004_HANDOFF.md
+  - docs/OPEN_SOURCE_READINESS.md
+  - docs/PANDOC_ADAPTER_ATTRIBUTION.md
+  - docs/PROVENANCE_LEDGER.md
+  - docs/RELEASE_GATES.md
+  - docs/SUPPORT_MATRIX.md
+  - docs/THREAT_MODEL.md
+  - fixtures/capabilities/formula-transplant/cases.json
+  - fixtures/capabilities/formula-transplant/deck-spec.json
+  - fixtures/capabilities/formula-transplant/project-overlay.json
+  - fixtures/capabilities/formula-transplant/registry.json
+  - packages/adapter-pandoc-omml/schemas/input.schema.json
+  - packages/adapter-pandoc-omml/schemas/output.schema.json
+  - packages/adapter-pandoc-omml/src/formula-transplant.mjs
+  - packages/adapter-pandoc-omml/src/node-process-runner.mjs
+  - packages/adapter-pandoc-omml/src/pandoc-omml-adapter.mjs
+  - policy/support-matrix.json
+  - provenance/records.json
+  - tests/pandoc-omml-adapter.test.mjs
+  - tests/support-matrix.test.mjs
+kind: new-clean-room; existing planning, policy, and gate files updated in place
+origin: independently authored from the M2-004 TODO exit criterion, existing
+  public runtime/data contracts and repository-owned text fixtures, the fixed
+  secure ZIP/strict XML boundaries, public ECMA-376 structures, and official
+  Pandoc 3.10.1 documentation/source; no predecessor implementation, private
+  fixture, presentation asset/binary, converter output, build output, prompt,
+  log, or upstream source file was inspected as implementation material or copied
+original_author_or_holder: Elliot Wu
+created_or_reviewed_on: 2026-08-05
+license_or_rights_basis: MIT for repository-authored files; Pandoc remains a
+  separately installed GPL-2.0-or-later external tool and is not redistributed
+third_party_dependencies: []
+private_information_review: passed; fixtures contain only generic semantic IDs,
+  a synthetic fraction, and public format namespaces; errors/output exclude
+  executable paths, environment, raw stderr, formula source duplication, and
+  private presentation data
+project_constant_removal: passed; source contains no private fixture identifier,
+  presentation asset, ambient project root, dynamic loader, converter output,
+  or predecessor constant; executable selection is trusted absolute host config
+public_fixture_conformance: applicable; the focused adapter suite covers fixed
+  process requests, absence/error behavior, formula isolation, resolver and
+  dispatcher integration, secure DOCX/OPC/XML/typed-OMML reconstruction,
+  resource/structure mutations, deterministic output, no-I/O direction, and
+  clean-directory closure; 115/115 focused, 330/330 strict integration focus,
+  and 738/738 full tests pass on Node.js 22.23.1 and 24.14.0
+independent_review: passed; the bounded closing review's relationship-profile
+  high and content-type medium were fixed with exact mappings and 10 regression
+  subtests; bounded re-review found no remaining blocker or high finding
+notes: No Pandoc executable/library/template/reference file, generated DOCX,
+  presentation binary, or upstream-derived fixture is tracked. The formula
+  result is unbound and insertable=false; all formula rows and the global claim
+  switch remain unavailable/false pending real compatibility, M2-005, and the
+  manual PowerPoint gate.
+```
+
 The XML namespace, relationship-type, and MIME strings are interoperability
 identifiers from the public format specification. They do not convey third-
 party presentation content. The fictional `Synthetic Sans` typeface name does

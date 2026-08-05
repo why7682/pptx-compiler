@@ -8,9 +8,9 @@ clean-room extraction into this empty-history repository, not a rename or bulk
 copy. The current readiness level is `semantic-planning / pre-alpha`:
 admission, support-claim, data-contract, explicit-context, semantic-inspection,
 bounded secure-ingestion, capability-dispatch, project-resolution, and
-clone/fill operation planning plus one unbound native-component generation gate
-are executable, while target OOXML mutation and PPTX output capabilities are
-not.
+clone/fill operation planning plus unbound native-component and optional
+formula-to-OMML adapter gates are executable, while target OOXML mutation and
+PPTX output capabilities are not.
 
 ## Reusable foundations observed in the predecessor
 
@@ -39,9 +39,12 @@ redistributable code and do not establish generic support.
    and M2-002 adds exact project binding resolution plus a product clone/fill
    executor whose public conformance emits only semantic JSON operation plans.
    M2-003 adds one exact experimental card-arrow `p:grpSp` exemplar, but marks
-   it unbound and non-insertable. No OOXML clone/fill/component application,
-   assembly, or complete renderer exists, and structural onboarding has not
-   proved generic render or PowerPoint editability.
+   it unbound and non-insertable. M2-004 similarly reconstructs one strict
+   unbound `m:oMath` exemplar through an optional external-process contract,
+   while its public tests deliberately use a fake runner rather than claiming
+   a compatible Pandoc release. No OOXML clone/fill/component/formula
+   application, assembly, or complete renderer exists, and structural
+   onboarding has not proved generic render or PowerPoint editability.
 5. **Untrusted input compatibility:** M1-005 provides fixed resource and
    high-risk rejection controls for the public minimal grammar, but it does not
    establish arbitrary external PPTX/POTX compatibility or fully atomic
@@ -61,10 +64,13 @@ redistributable code and do not establish generic support.
 This assessment is technical, not legal advice. New clean-room project work is
 licensed under MIT. Before admitting or releasing any code, fixture, design,
 font, or example from another source, confirm its rights and record per-file
-provenance. Pandoc is GPL-licensed and should remain a user-installed optional
-process rather than bundled code; its integration and generated-output
-obligations require a documented rights review. Never ship a font file without
-explicit redistribution rights.
+provenance. D-008 keeps GPL-2.0-or-later Pandoc as a separately installed,
+explicitly configured optional process: this repository does not bundle, link,
+install, copy, or redistribute it. The technical attribution and deliberately
+limited generated-output statement are recorded in
+`docs/PANDOC_ADAPTER_ATTRIBUTION.md`; future bundling or upstream-derived
+material must reopen that review. Never ship a font file without explicit
+redistribution rights.
 
 OOXML behavior should be specified against the published ECMA-376 standard:
 <https://ecma-international.org/publications-and-standards/standards/ecma-376/>.
@@ -77,10 +83,11 @@ Pandoc's upstream licensing and source are documented at
    policy, and the synthetic fixture are complete.
 2. **Foundation:** explicit context/schemas, semantic inspector, bounded secure
    archive/XML ingestion, the fail-closed capability dispatcher, and semantic
-   clone/fill planning plus one unbound native component are complete;
+   clone/fill planning plus unbound native component and OMML adapter contracts
+   are complete;
    publishable package metadata remains later work.
-3. **Vertical slice:** isolated application of clone/fill and native-component
-   plans, assembly, QA, and the optional OMML adapter through the common
+3. **Vertical slice:** isolated application of clone/fill, native-component,
+   and formula plans, assembly, QA, and publication through the common
    dispatcher.
 4. **Product surface:** CLI/API, package split, docs, compatibility matrix,
    clean-install examples.

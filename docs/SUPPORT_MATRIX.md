@@ -27,7 +27,13 @@ normal product dispatch is blocked before preflight; no OOXML is cloned,
 mutated, staged, or published. M2-003 adds one separately scoped experimental
 capability: `native-card-arrow` emits an explicitly unbound, non-insertable
 `p:grpSp` conformance exemplar containing native card and arrow shapes. This is
-not an assembled PPTX or PowerPoint editability result.
+not an assembled PPTX or PowerPoint editability result. M2-004 adds an isolated
+optional Pandoc adapter contract: an explicitly configured process must fall
+inside the eligibility window and pass all active probes before it receives a
+bounded Math JSON AST on stdin and has its DOCX stdout rebuilt as one canonical
+unbound `m:oMath` exemplar. Public
+tests use a fake runner and text-derived in-memory DOCX, so formula input,
+formula transplantation, and native OMML all remain unsupported.
 
 | Dimension | Items | Supported | Experimental | Manual | Unsupported |
 | --- | ---: | ---: | ---: | ---: | ---: |
@@ -87,6 +93,15 @@ Roadmap entries describe intended work only. They do not change current status.
   validate slide containment, and apply it in isolated staging. General
   DrawingML, general slide text, complete PPTX rendering, and PowerPoint
   editability therefore remain unavailable.
+- The formula adapter accepts only one bounded in-memory display-math payload
+  and one exact text-box target binding. Pandoc remains a user-installed,
+  explicitly configured external process; missing, pre-2.15, future-major, or
+  capability-drifting binaries produce no executor registration. Formula data
+  is JSON-encoded inside a Pandoc Math AST and never enters argv or a path. The
+  resulting `m:oMath` is strict-parsed, allowlisted, canonically rebuilt, and
+  marked `insertable: false`. A compatible real-Pandoc public matrix, M2-005
+  target-shape application, and COMPAT-OMML-001 edit/save/reopen evidence are
+  all still required.
 - Macros, ActiveX, OLE, embedded packages, and external relationships have
   executable rejection mutations in the bounded ingestion lane. Embedded
   fonts, unknown vendor XML, and every unlisted OOXML feature also retain a
@@ -110,6 +125,7 @@ npm run check:contracts
 node --test tests/capability-dispatcher.test.mjs
 node --test tests/source-slide-clone-fill.test.mjs
 node --test tests/native-card-arrow.test.mjs
+node --test tests/pandoc-omml-adapter.test.mjs
 ```
 
 The gate reads the staged matrix and schema by default, validates their
@@ -127,4 +143,7 @@ resolution and product artifact conformance, then separately proves that the
 normative unavailable decision blocks normal dispatch. The native-component
 test verifies the exact experimental fragment boundary and explicit opt-in;
 passing it establishes neither target-package application nor a manually
-editable PowerPoint file.
+editable PowerPoint file. The formula-adapter test verifies detection,
+process/resource isolation, DOCX/OMML reconstruction, and dispatcher
+conformance with a fake runner; it is not compatible-Pandoc or PowerPoint
+support evidence.

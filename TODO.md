@@ -178,8 +178,8 @@ criterion is recorded in the repository.
 | M2-001 | DONE | Define the executable capability interface and dispatcher. | `supported` cannot be registered without executor, schemas, conformance fixture, and QA contract. |
 | M2-002 | DONE | Implement data-driven source-slide clone/fill with semantic shape bindings. | No fixture-specific slide/shape identifiers exist in source; missing or ambiguous bindings fail closed. |
 | M2-003 | DONE | Implement a minimal native DrawingML component capability. | One data-only slide spec emits a strict native non-raster group exemplar through the same dispatcher; the result is explicitly non-insertable until M2-005 proves target application and PowerPoint editability. |
-| M2-004 | NEXT | Parameterize the optional Pandoc/OMML adapter and isolate it from core. | Pandoc is detected as an external optional dependency; formula transplant and failure behavior have conformance tests and attribution review. |
-| M2-005 | PENDING | Implement create-only assembly, normalization, semantic diff, and collateral-mutation checks. | The source is unchanged; output is atomically published; allowed and forbidden part changes are machine-verifiable. |
+| M2-004 | DONE | Parameterize the optional Pandoc/OMML adapter and isolate it from core. | Pandoc is detected as an external optional dependency; formula transplant and failure behavior have conformance tests and attribution review. |
+| M2-005 | NEXT | Implement create-only assembly, normalization, semantic diff, and collateral-mutation checks. | The source is unchanged; output is atomically published; allowed and forbidden part changes are machine-verifiable. |
 
 ### M2-001 completion evidence — 2026-08-02
 
@@ -280,6 +280,45 @@ criterion is recorded in the repository.
   evidence to M2-005; no implementation blocker or high finding remained.
 - Working-tree and staged forbidden-material, exact-provenance, support-matrix,
   and versioned-contract gates passed, as did `git diff --cached --check`.
+
+### M2-004 completion evidence — 2026-08-05
+
+- `adapter-pandoc-omml@0.1.0` is core-isolated: only its Node runner imports
+  `node:child_process`, requires trusted absolute process/cwd configuration,
+  uses no shell or ambient discovery, and enforces fixed argv, an explicit
+  bounded environment, stdin/output limits, timeout, and stable redacted
+  outcomes.
+- Pandoc `>=2.15.0 <4.0.0` is only an eligibility window. Version, sandboxed
+  JSON-API, and exact fraction-to-DOCX/OMML probes must pass before the static
+  formula executor can be registered; missing, warning-producing, failed, or
+  drifting tools remain unavailable with no fallback.
+- `formula-transplant@0.1.0` has exact metadata, closed schemas, one text-only
+  conformance case, a real semantic text-box binding, an adapter-injected
+  executor, and four ordered QA assertions through the existing resolver and
+  dispatcher. It emits only an unbound canonical `m:oMath` plan with
+  `insertable: false` and `typed-rebuild-required`.
+- Public tests use a fake process runner and runtime-built text-derived DOCX.
+  The 115-node focused suite covers fixed JSON-AST transport, absence/error and
+  stream handling, formula bounds, batch atomicity, exact content-type and
+  source/type/target relationship profiles, secure ZIP/XML, typed OMML
+  topology, schemas/QA, determinism, no-I/O direction, and clean closure. The
+  strict dispatcher/resolver/native/formula/support focus passes 330/330.
+- The complete 738-test suite passed on checksum-verified official Node.js
+  22.23.1 and Node.js 24.14.0. Cross-platform OS and real compatible-Pandoc
+  evidence remain M3-004 or a later compatibility gate.
+- D-008 and `docs/PANDOC_ADAPTER_ATTRIBUTION.md` record fixed official Pandoc
+  3.10.1 behavior/license sources, external-only GPL-2.0-or-later separation,
+  warning-to-text fallback, non-insertable PPTX wrapper boundary, and no blanket
+  generated-output ownership claim. No Pandoc code, binary, template, output,
+  or upstream-derived fixture is tracked.
+- The bounded closing review found one high relationship-prefix bypass and one
+  medium content-type overbreadth. Exact mappings plus 10 regression subtests
+  closed both; the bounded re-review found no remaining blocker or high issue.
+- Working-tree and staged forbidden-material, exact-provenance, support-matrix,
+  and versioned-contract gates passed, as did `git diff --cached --check`.
+  `formula-transplant`, `latex-formula`, and `native-omml` remain
+  `unsupported/unavailable`; `supportClaimsEnabled` remains false and no row is
+  supported.
 
 ## M3 — CLI, packaging, and public QA
 

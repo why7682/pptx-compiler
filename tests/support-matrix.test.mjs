@@ -14,6 +14,7 @@ const admittedPaths = new Set([
   "docs/M1-002_HANDOFF.md",
   "docs/M2-001_HANDOFF.md",
   "docs/M2-003_HANDOFF.md",
+  "docs/M2-004_HANDOFF.md",
   "docs/PRIVATE_FIXTURE_POLICY.md",
   "docs/RELEASE_GATES.md",
   "fixtures/source-parts/minimal/fixture.json",
@@ -31,6 +32,8 @@ const admittedPaths = new Set([
   "fixtures/capabilities/native-card-arrow/deck-spec.json",
   "fixtures/capabilities/native-card-arrow/project-overlay.json",
   "fixtures/capabilities/native-card-arrow/registry.json",
+  "fixtures/capabilities/formula-transplant/cases.json",
+  "fixtures/capabilities/formula-transplant/registry.json",
   "package.json",
   "packages/core/src/project-context.mjs",
   "packages/core/src/capability-dispatcher.mjs",
@@ -40,6 +43,10 @@ const admittedPaths = new Set([
   "packages/core/src/secure-zip.mjs",
   "packages/core/src/strict-xml.mjs",
   "packages/core/src/template-inspector.mjs",
+  "packages/adapter-pandoc-omml/schemas/input.schema.json",
+  "packages/adapter-pandoc-omml/schemas/output.schema.json",
+  "packages/adapter-pandoc-omml/src/formula-transplant.mjs",
+  "packages/adapter-pandoc-omml/src/pandoc-omml-adapter.mjs",
   "plugins/clone-fill/schemas/input.schema.json",
   "plugins/clone-fill/schemas/output.schema.json",
   "plugins/clone-fill/src/source-slide-clone-fill.mjs",
@@ -65,6 +72,7 @@ const admittedPaths = new Set([
   "tests/secure-template-ingestion.test.mjs",
   "tests/source-slide-clone-fill.test.mjs",
   "tests/native-card-arrow.test.mjs",
+  "tests/pandoc-omml-adapter.test.mjs",
   "tests/support-matrix.test.mjs",
   "tests/template-inspector.test.mjs"
 ]);
@@ -144,6 +152,15 @@ test("support matrix validates and produces byte-stable findings", () => {
   assert.equal(packageInspection.status, "unsupported");
   assert.equal(packageInspection.disposition, "unavailable");
   assert.equal(packageInspection.evidence.artifacts.some((artifact) => artifact.type === "executor"), false);
+  for (const formulaId of ["formula-transplant", "latex-formula", "native-omml"]) {
+    const formulaRow = formulaId === "native-omml"
+      ? matrix.dimensions.ooxmlFeatures.find((item) => item.id === formulaId)
+      : matrix.dimensions.capabilities.find((item) => item.id === formulaId) ??
+        matrix.dimensions.inputs.find((item) => item.id === formulaId);
+    assert.equal(formulaRow.status, "unsupported");
+    assert.equal(formulaRow.disposition, "unavailable");
+    assert.equal(formulaRow.evidence.level, "automated-public");
+  }
   assert.deepEqual(
     matrix.dimensions.inputs
       .filter((item) => ["potx-template", "pptx-template"].includes(item.id))

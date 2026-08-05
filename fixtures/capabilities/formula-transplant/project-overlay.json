@@ -1,0 +1,32 @@
+{
+  "schemaVersion": "0.1.0",
+  "contractType": "project-overlay",
+  "projectOverlayId": "formula-transplant-project-overlay",
+  "projectId": "formula-transplant-project",
+  "templateProfileId": "synthetic-template-profile",
+  "templateIndexId": "synthetic-template-index",
+  "templateSha256": "f9875cbaf15b890baaf1370ddd0796ba09d6dc08a6963ce64298a81ca51b99ab",
+  "capabilityRegistryId": "formula-transplant-registry",
+  "registryVersion": "0.1.0",
+  "capabilitySelections": [
+    {
+      "capabilitySelectionId": "formula-transplant-selection",
+      "capabilityId": "formula-transplant",
+      "capabilityVersion": "0.1.0",
+      "experimentalOptIn": true,
+      "bindings": [
+        { "role": "formula-target", "shapeBindingId": "formula-target-binding" }
+      ]
+    }
+  ],
+  "shapeBindings": [
+    {
+      "shapeBindingId": "formula-target-binding",
+      "containerKind": "slide",
+      "containerKey": "slide-1",
+      "shapeKey": "shape-2",
+      "expectedKind": "text-box",
+      "cardinality": "exactly-one"
+    }
+  ]
+}

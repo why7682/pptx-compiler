@@ -1,0 +1,86 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:pptx-pipeline:capability:schema:formula-transplant-output:0.1.0",
+  "title": "Pandoc OMML formula-transplant plan",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["planVersion", "planType", "outputSlideId", "clone", "replace", "formula"],
+  "properties": {
+    "planVersion": { "const": "0.1.0" },
+    "planType": { "const": "formula-transplant-plan" },
+    "outputSlideId": { "$ref": "#/$defs/semanticId" },
+    "clone": { "$ref": "#/$defs/cloneOperation" },
+    "replace": { "$ref": "#/$defs/replaceOperation" },
+    "formula": { "$ref": "#/$defs/formula" }
+  },
+  "$defs": {
+    "semanticId": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 96,
+      "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$"
+    },
+    "cloneOperation": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["operationId", "operationType", "sourceContainerKind", "sourceSlideKey"],
+      "properties": {
+        "operationId": { "const": "clone-source-slide" },
+        "operationType": { "const": "clone-slide" },
+        "sourceContainerKind": { "const": "slide" },
+        "sourceSlideKey": { "$ref": "#/$defs/semanticId" }
+      }
+    },
+    "replaceOperation": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "operationId",
+        "operationType",
+        "role",
+        "targetBindingId",
+        "targetShapeKey",
+        "expectedKind",
+        "applicationPolicy"
+      ],
+      "properties": {
+        "operationId": { "const": "replace-formula-target" },
+        "operationType": { "const": "replace-text-box-content-with-native-omml" },
+        "role": { "const": "formula-target" },
+        "targetBindingId": { "$ref": "#/$defs/semanticId" },
+        "targetShapeKey": { "$ref": "#/$defs/semanticId" },
+        "expectedKind": { "const": "text-box" },
+        "applicationPolicy": { "const": "typed-rebuild-required" }
+      }
+    },
+    "formula": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "componentType",
+        "representation",
+        "artifactKind",
+        "insertable",
+        "sourceFormat",
+        "displayMode",
+        "adapterProfileVersion",
+        "unboundOmmlFragment"
+      ],
+      "properties": {
+        "componentType": { "const": "native-omml-formula" },
+        "representation": { "const": "native-office-math" },
+        "artifactKind": { "const": "unbound-omml-conformance-fragment" },
+        "insertable": { "const": false },
+        "sourceFormat": { "const": "latex-math" },
+        "displayMode": { "const": "display" },
+        "adapterProfileVersion": { "const": "0.1.0" },
+        "unboundOmmlFragment": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 16384,
+          "pattern": "^<m:oMath xmlns:m=\"http://schemas.openxmlformats.org/officeDocument/2006/math\">[\\s\\S]*</m:oMath>$"
+        }
+      }
+    }
+  }
+}
