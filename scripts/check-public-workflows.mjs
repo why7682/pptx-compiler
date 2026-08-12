@@ -6,6 +6,7 @@ import path from "node:path";
 import { fileURLToPath } from "node:url";
 
 import {
+  REQUIRED_RELEASE_ENTRY_PATHS,
   renderPublicWorkflows,
   validatePublicWorkflowSet
 } from "./lib/public-workflows.mjs";
@@ -74,13 +75,29 @@ async function readWorkflowFiles(root) {
   return files;
 }
 
+async function readReleaseEntryFiles(root) {
+  const files = new Map();
+  for (const relativePath of REQUIRED_RELEASE_ENTRY_PATHS) {
+    try {
+      files.set(
+        relativePath,
+        await readRegularText(path.join(root, ...relativePath.split("/")), 128 * 1024)
+      );
+    } catch {
+      files.set(relativePath, undefined);
+    }
+  }
+  return files;
+}
+
 export async function checkPublicWorkflows(root = repositoryRoot) {
   const canonicalRoot = await realpath(path.resolve(root));
-  const [files, packageDocument] = await Promise.all([
+  const [files, packageDocument, releaseEntries] = await Promise.all([
     readWorkflowFiles(canonicalRoot),
-    readRegularText(path.join(canonicalRoot, "package.json"), 1024 * 1024).then(JSON.parse)
+    readRegularText(path.join(canonicalRoot, "package.json"), 1024 * 1024).then(JSON.parse),
+    readReleaseEntryFiles(canonicalRoot)
   ]);
-  return validatePublicWorkflowSet(files, packageDocument.scripts);
+  return validatePublicWorkflowSet(files, packageDocument.scripts, releaseEntries);
 }
 
 async function invokedDirectly() {
@@ -108,7 +125,9 @@ if (await invokedDirectly()) {
       })}\n`);
       process.exitCode = 1;
     } else {
-      process.stdout.write("PASS public-workflows: 2 canonical workflow(s) checked\n");
+      process.stdout.write(
+        `PASS public-workflows: ${renderPublicWorkflows().size} canonical workflow(s) checked\n`
+      );
     }
   } catch {
     process.stdout.write(`${JSON.stringify({

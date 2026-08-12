@@ -31,10 +31,10 @@ import {
 } from "./package-plan.mjs";
 import {
   ALPHA_TARBALL_LIMITS,
-  alphaPackageManifestBytes,
   alphaTarballFilename,
   crossCheckNpmPackRecord,
   inspectAlphaTarball,
+  projectAlphaPackageFiles,
   parseNpmPackOutput
 } from "./package-tarball.mjs";
 
@@ -1033,14 +1033,6 @@ async function materializePackages({ root, work, plan }) {
   for (const item of plan.packages) {
     const packageRoot = path.join(work, "packages", item.packageId);
     await mkdir(packageRoot, { recursive: true, mode: 0o755 });
-    const expectedFiles = new Map();
-    const manifestBytes = alphaPackageManifestBytes(plan, item);
-    expectedFiles.set("package.json", Object.freeze({
-      bytes: manifestBytes,
-      mode: 0o644,
-      role: "manifest"
-    }));
-    await writeCreateOnly(path.join(packageRoot, "package.json"), manifestBytes, 0o644);
     for (const entry of flattenPackageFiles(item)) {
       let snapshot = sourceSnapshots.get(entry.source);
       if (snapshot === undefined) {
@@ -1051,14 +1043,21 @@ async function materializePackages({ root, work, plan }) {
         );
         sourceSnapshots.set(entry.source, snapshot);
       }
-      const bytes = snapshot.bytes;
-      const mode = entry.role === "bin" ? 0o755 : 0o644;
+    }
+    const expectedFiles = projectAlphaPackageFiles({
+      plan,
+      item,
+      sourceBytes: new Map(flattenPackageFiles(item).map((entry) => [
+        entry.source,
+        sourceSnapshots.get(entry.source).bytes
+      ]))
+    });
+    for (const [target, expected] of expectedFiles) {
       await writeCreateOnly(
-        path.join(packageRoot, ...entry.target.split("/")),
-        bytes,
-        mode
+        path.join(packageRoot, ...target.split("/")),
+        expected.bytes,
+        expected.mode
       );
-      expectedFiles.set(entry.target, Object.freeze({ bytes, mode, role: entry.role }));
     }
     packages.set(item.packageId, Object.freeze({ item, packageRoot, expectedFiles }));
   }

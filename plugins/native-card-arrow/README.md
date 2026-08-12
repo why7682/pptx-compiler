@@ -40,7 +40,9 @@ matrix change.
 
 ## License
 
-MIT. The manifest remains `private: true`, the package has not been published
-to npm, and it cannot enable the repository's
+MIT. Publication is permitted only through the exact public `alpha` channel
+with npm provenance. Publication status is owned by the official-registry byte
+record, the tracked release lock, and npm provenance; this README never asserts
+current lifecycle state. Distribution cannot enable the repository's
 `supportClaimsEnabled: false` switch. Report vulnerabilities through the
 [security policy](https://github.com/why7682/pptx-compiler/blob/main/SECURITY.md).

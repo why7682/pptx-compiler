@@ -173,6 +173,18 @@ For audit of the completed `M3-006` first-public-ref transition, then read:
 11. `docs/NAME_AVAILABILITY.md`
 12. `docs/PROVENANCE_LEDGER.md`
 
+For implementation, maintenance, or audit of the active `M4-001` alpha
+release contract, read:
+
+3. `docs/M4-001_HANDOFF.md`
+4. `packaging/alpha-release-plan.json`
+5. `packaging/alpha-package-plan.json`
+6. `scripts/lib/alpha-release.mjs`
+7. `docs/RELEASE_GATES.md`
+8. `docs/REPRODUCIBILITY.md`
+9. `docs/DECISIONS.md`
+10. `docs/PROVENANCE_LEDGER.md`
+
 Read `docs/PROJECT_DEFINITION.md` and `docs/ARCHITECTURE_TARGET.md` only before
 changing product scope, public contracts, packages, or dependency direction.
 
@@ -427,8 +439,10 @@ For code review, report:
   persistent rename-only quarantine, npm cache/config/tmp are ignored
   non-authoritative tool state, and neither a local reviewed tarball nor either
   persistent tree is publication or cross-platform evidence.
-- When maintaining `M3-004A`, keep exactly two canonical public workflows and
-  one plan-derived static-ESM SBOM projection. The one locked TypeScript dependency is dev-
+- When maintaining `M3-004A`, keep exactly two canonical ordinary public
+  verification workflows and one plan-derived static-ESM SBOM projection.
+  M4-001 adds one separately gated manual alpha-release workflow; it does not
+  turn ordinary CI or Security into a publication path. The one locked TypeScript dependency is dev-
   only and must not enter the four-package runtime closure. CI uses only
   repository-owned synthetic inputs and never reaches PowerPoint, Pandoc,
   private fixtures, signing material, publication credentials, or ignored local
@@ -473,6 +487,51 @@ For code review, report:
   `why7682/pptx-compiler`, with no pushurl, extra URL, credential, SSH form, or
   rewrite to another endpoint; after push, require the same GitHub repository
   ID and remote `main` equal to the scanned local object ID.
+- When maintaining `M4-001`, keep authorization, candidate admission,
+  publication, and release declaration as distinct facts. D-048 authorizes the
+  exact annotated `v0.1.0-alpha.1` tag, the four unscoped public npm packages
+  under dist-tag `alpha`, and GitHub Actions npm provenance; it does not prove
+  that any of those actions has happened. Admit only an exact clean,
+  full-history tag target with no replace/graft/alternate source, require
+  Node 22.23.2/npm 10.9.8 and Node 24.19.0/npm 11.17.0 to produce the same four
+  exact decompressed canonical tar payloads after member-by-member tracked-
+  source projection. Record each builder-local gzip identity separately and
+  allow only the fixed Node 24/npm 11 envelopes to become publication bytes;
+  freeze those facts in a create-only tracked release lock, and merge that
+  reviewed lock before creating the tag. In the manual
+  release workflow, checkout the immutable event commit with full history and
+  then prove the exact annotated tag still peels
+  to that `HEAD`; do not resolve a mutable tag name after queuing. Publish in
+  `core -> native-card-arrow -> public-synthetic ->
+  CLI` order. For each package, registry absence permits the exact reviewed
+  tarball to be published, exact present bytes permit continuation, and any
+  mismatch is a hard stop; never use unpublish as rollback. Require official-
+  registry byte reread, npm provenance, `alpha` dist-tag, and no `latest`
+  assignment before creating the GitHub Release last. Candidate admission must
+  prove the lock and every locked input are tracked in the tag target tree, not
+  merely clean or present in the working directory. The first publication
+  may use the environment-scoped token authorized by D-048; migrate to npm
+  Trusted Publisher after all four initial package identities exist. D-047/M3-008
+  branch protection remains deferred and is not a release prerequisite.
+  Keep GitHub source verification, npm publication, and final GitHub Release
+  declaration in separate credential boundaries: no process may receive both
+  npm and GitHub write credentials. The Release declaration runs only after a
+  fresh complete registry/provenance/signature reread; it may create an absent
+  exact non-draft prerelease or accept an exact-equal retry, and must never
+  overwrite, delete, or reconcile a mismatched Release.
+  Treat an npm provenance payload as untrusted until the same fetched v0.3
+  keyless bundle passes the fixed npm 11.17.0 Sigstore verifier with the exact
+  alpha-release workflow/tag certificate identity and GitHub Actions OIDC
+  issuer. Payload fields, registry signatures, and a later audit cannot
+  substitute for that certificate-bound cryptographic verification.
+  Exact GitHub-verified merge-object grants are tip-owned history exceptions,
+  not an identity wildcard. A GitHub merge cannot authorize its own OID; after
+  a reviewed merge, append one repository-local public-identity attestation
+  commit that records that exact merge OID, rerun the full history gate on the
+  new `main` tip, and tag the unchanged verified lock-containing merge commit.
+  The publisher must prove that current remote `main` is exactly the one later
+  attestation commit whose sole parent is the tagged merge; equality, a deeper
+  descendant, or an unrelated verified commit fails closed.
 - Keep `M2-005A` narrow until the public synthetic brief-to-layout matcher has
   been connected to one real render comparison. Do not use additional writer
   coverage as a substitute for content-layout evidence.

@@ -5,7 +5,7 @@ import path from "node:path";
 import { isDeepStrictEqual } from "node:util";
 import { fileURLToPath } from "node:url";
 
-export const ALPHA_PACKAGE_PLAN_VERSION = 2;
+export const ALPHA_PACKAGE_PLAN_VERSION = 3;
 export const ALPHA_PACKAGE_PLAN_PATH = "packaging/alpha-package-plan.json";
 export const ALPHA_REPOSITORY = Object.freeze({
   provider: "github",
@@ -15,8 +15,14 @@ export const ALPHA_REPOSITORY = Object.freeze({
   htmlUrl: "https://github.com/why7682/pptx-compiler"
 });
 export const ALPHA_RELEASE_GUARD = Object.freeze({
-  state: "blocked",
-  reason: "npm-publication-not-authorized"
+  state: "authorized",
+  decisionId: "D-048"
+});
+export const ALPHA_PUBLICATION = Object.freeze({
+  registry: "https://registry.npmjs.org/",
+  tag: "alpha",
+  access: "public",
+  provenance: true
 });
 
 const repositoryRoot = fileURLToPath(new URL("../..", import.meta.url));
@@ -33,6 +39,7 @@ const TOP_KEYS = Object.freeze([
   "namePolicy",
   "repository",
   "releaseGuard",
+  "publication",
   "packages"
 ]);
 const PACKAGE_KEYS = Object.freeze([
@@ -460,8 +467,14 @@ function canonicalPackagePlanValue(plan) {
     } : plan.repository,
     releaseGuard: isPlainRecord(plan.releaseGuard) ? {
       state: plan.releaseGuard.state,
-      reason: plan.releaseGuard.reason
+      decisionId: plan.releaseGuard.decisionId
     } : plan.releaseGuard,
+    publication: isPlainRecord(plan.publication) ? {
+      registry: plan.publication.registry,
+      tag: plan.publication.tag,
+      access: plan.publication.access,
+      provenance: plan.publication.provenance
+    } : plan.publication,
     packages: Array.isArray(plan.packages) ? plan.packages.map((item) => {
       if (!isPlainRecord(item)) return item;
       return {
@@ -565,9 +578,13 @@ export async function validateAlphaPackagePlan(plan, {
   ]) || !isDeepStrictEqual(plan.repository, ALPHA_REPOSITORY)) {
     add(findings, "package-repository-binding", "/repository");
   }
-  if (!exactRecord(plan.releaseGuard, ["state", "reason"]) ||
+  if (!exactRecord(plan.releaseGuard, ["state", "decisionId"]) ||
       !isDeepStrictEqual(plan.releaseGuard, ALPHA_RELEASE_GUARD)) {
     add(findings, "package-release-guard", "/releaseGuard");
+  }
+  if (!exactRecord(plan.publication, ["registry", "tag", "access", "provenance"]) ||
+      !isDeepStrictEqual(plan.publication, ALPHA_PUBLICATION)) {
+    add(findings, "package-publication", "/publication");
   }
   if (!Array.isArray(plan.packages) || plan.packages.length !== 4) {
     add(findings, "package-set", "/packages");

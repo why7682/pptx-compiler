@@ -1,5 +1,5 @@
 {
-  "schemaVersion": 2,
+  "schemaVersion": 3,
   "maxFileBytes": 1048576,
   "approvedExecutablePaths": [
     "packages/cli/pptx-compiler.mjs"
@@ -9,6 +9,10 @@
       "path": "packages/cli/bin/pptx-compiler.mjs",
       "objectId": "2fc26674414a51b4b10f365f3540f6d4a9810ece"
     }
+  ],
+  "approvedGitHubVerifiedMergeCommitObjects": [
+    "8cdf968b72f8dd5f41fee37a68e239e477dec44b",
+    "c4dee58a8920a8e71c20f53ab93c62a96d3cb89d"
   ],
   "approvedPublicIdentities": [
     "Elliot Wu"

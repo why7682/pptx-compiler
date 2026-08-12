@@ -8,7 +8,7 @@ import { spawnSync } from "node:child_process";
 import { fileURLToPath } from "node:url";
 
 const REPORT_SCHEMA_VERSION = 1;
-const POLICY_SCHEMA_VERSION = 2;
+const POLICY_SCHEMA_VERSION = 3;
 const DEFAULT_POLICY_PATH = "policy/forbidden-materials.json";
 const PUBLIC_HISTORY_REF = "refs/heads/main";
 export const GIT_NULL_DEVICE = "/dev/null";
@@ -128,6 +128,7 @@ export function compileForbiddenMaterialPolicy(policy) {
     "maxFileBytes",
     "approvedExecutablePaths",
     "approvedHistoricalExecutableObjects",
+    "approvedGitHubVerifiedMergeCommitObjects",
     "approvedPublicIdentities",
     "copyrightIdentityRule",
     "forbiddenExtensions",
@@ -170,6 +171,27 @@ export function compileForbiddenMaterialPolicy(policy) {
       throw new Error("policy.approvedHistoricalExecutableObjects must be sorted and unique");
     }
     previousHistoricalExecutableKey = key;
+  }
+  assertStringArray(
+    policy.approvedGitHubVerifiedMergeCommitObjects,
+    "policy.approvedGitHubVerifiedMergeCommitObjects",
+    { allowEmpty: true }
+  );
+  let previousGitHubMergeObject;
+  for (const [index, objectId] of
+    policy.approvedGitHubVerifiedMergeCommitObjects.entries()) {
+    if (!historyObjectId(objectId) || /^0+$/u.test(objectId)) {
+      throw new Error(
+        `policy.approvedGitHubVerifiedMergeCommitObjects[${index}] must be one object identifier`
+      );
+    }
+    if (previousGitHubMergeObject !== undefined &&
+        compareText(previousGitHubMergeObject, objectId) >= 0) {
+      throw new Error(
+        "policy.approvedGitHubVerifiedMergeCommitObjects must be sorted and unique"
+      );
+    }
+    previousGitHubMergeObject = objectId;
   }
   assertStringArray(policy.approvedPublicIdentities, "policy.approvedPublicIdentities");
 
@@ -510,6 +532,70 @@ function resolveHistoryPolicy(root, policyPath, tip, environment, treeCache) {
   return compileForbiddenMaterialPolicy(parsed);
 }
 
+function canonicalHistoryIdentityTimestamp(value) {
+  return typeof value === "string" &&
+    /^[1-9][0-9]{0,19} (?:[+-](?:0[0-9]|1[0-3])[0-5][0-9]|[+-]1400)$/u.test(value);
+}
+
+function canonicalGitHubNoreplyAuthor(value) {
+  if (typeof value !== "string") return undefined;
+  const match = /^([^<>\p{Cc}]{1,128}) <([1-9][0-9]{0,19}\+[A-Za-z0-9](?:[A-Za-z0-9-]{0,37}[A-Za-z0-9])?@users\.noreply\.github\.com)> (.+)$/u
+    .exec(value);
+  if (match === null || match[1] !== match[1].trim() ||
+      !canonicalHistoryIdentityTimestamp(match[3])) {
+    return undefined;
+  }
+  return { timestamp: match[3] };
+}
+
+function canonicalGitHubCommitter(value) {
+  if (typeof value !== "string") return undefined;
+  const match = /^GitHub <noreply@github\.com> (.+)$/u.exec(value);
+  if (match === null || !canonicalHistoryIdentityTimestamp(match[1])) return undefined;
+  return { timestamp: match[1] };
+}
+
+function canonicalGitHubPgpSignature(lines) {
+  if (lines.length < 6 ||
+      lines[0] !== "gpgsig -----BEGIN PGP SIGNATURE-----" ||
+      lines[1] !== " " ||
+      !/^ =[A-Za-z0-9+/]{4}$/u.test(lines.at(-3) ?? "") ||
+      lines.at(-2) !== " -----END PGP SIGNATURE-----" ||
+      lines.at(-1) !== " ") {
+    return false;
+  }
+  const body = lines.slice(2, -3);
+  return body.length > 0 && body.every((line) => {
+    if (!/^ [A-Za-z0-9+/]+={0,2}$/u.test(line)) return false;
+    const payload = line.slice(1);
+    return payload.length >= 4 && payload.length <= 76 && payload.length % 4 === 0;
+  });
+}
+
+function parseApprovedGitHubMergeHeaders(headerText, commit) {
+  const lines = headerText.split("\n");
+  const tree = /^tree ([0-9a-f]+)$/u.exec(lines[0] ?? "")?.[1];
+  const firstParent = /^parent ([0-9a-f]+)$/u.exec(lines[1] ?? "")?.[1];
+  const secondParent = /^parent ([0-9a-f]+)$/u.exec(lines[2] ?? "")?.[1];
+  const authorValue = /^author (.+)$/u.exec(lines[3] ?? "")?.[1];
+  const committerValue = /^committer (.+)$/u.exec(lines[4] ?? "")?.[1];
+  const author = canonicalGitHubNoreplyAuthor(authorValue);
+  const committer = canonicalGitHubCommitter(committerValue);
+  const objectIdLength = commit.length;
+  const identifiers = [tree, firstParent, secondParent];
+  const identifiersAreCanonical = identifiers.every((objectId) =>
+    historyObjectId(objectId) && objectId.length === objectIdLength && !/^0+$/u.test(objectId));
+  const parents = [firstParent, secondParent].filter(historyObjectId);
+  return {
+    tree: historyObjectId(tree) ? tree : undefined,
+    parents,
+    valid: identifiersAreCanonical && firstParent !== secondParent &&
+      author !== undefined && committer !== undefined &&
+      author.timestamp === committer.timestamp &&
+      canonicalGitHubPgpSignature(lines.slice(5))
+  };
+}
+
 function parseHistoryCommit(root, commit, identity, policy, environment) {
   const commitPath = `history/commits/${commit}.txt`;
   const raw = runGit(root, ["--no-replace-objects", "cat-file", "commit", commit], {
@@ -537,39 +623,57 @@ function parseHistoryCommit(root, commit, identity, policy, environment) {
       tree: undefined
     };
   }
-  const headers = new Map();
   const findings = [];
-  for (const line of headerText.split("\n")) {
-    const splitAt = line.indexOf(" ");
-    if (splitAt < 1 || line.startsWith(" ")) {
-      findings.push(finding(commitPath, "unsupported-history-commit-header"));
-      continue;
-    }
-    const key = line.slice(0, splitAt);
-    if (!["tree", "parent", "author", "committer"].includes(key)) {
-      findings.push(finding(commitPath, "unsupported-history-commit-header"));
-      continue;
-    }
-    const values = headers.get(key) ?? [];
-    values.push(line.slice(splitAt + 1));
-    headers.set(key, values);
-  }
-  if (headers.get("tree")?.length !== 1 ||
-      headers.get("author")?.length !== 1 || headers.get("committer")?.length !== 1 ||
-      (headers.get("parent") ?? []).some((value) => !historyObjectId(value)) ||
-      !historyObjectId(headers.get("tree")?.[0])) {
-    findings.push(finding(commitPath, "malformed-history-commit-header"));
-  }
+  const approvedGitHubMerge =
+    policy.approvedGitHubVerifiedMergeCommitObjects.includes(commit);
+  let parentValues;
+  let treeValue;
   let identityOccurrences = 0;
-  for (const kind of ["author", "committer"]) {
-    const value = headers.get(kind)?.[0];
-    const match = typeof value === "string"
-      ? /^(.*) <([^<>]+)> [0-9]+ [+-][0-9]{4}$/.exec(value)
-      : null;
-    identityOccurrences += 1;
-    if (match === null || match[1] !== identity.name || match[2] !== identity.email) {
-      findings.push(finding(commitPath, `unexpected-history-${kind}-identity`));
+  let githubMergeGrantConsumed = false;
+  if (approvedGitHubMerge) {
+    const parsed = parseApprovedGitHubMergeHeaders(headerText, commit);
+    parentValues = parsed.parents;
+    treeValue = parsed.tree;
+    identityOccurrences = 2;
+    githubMergeGrantConsumed = parsed.valid;
+    if (!parsed.valid) {
+      findings.push(finding(commitPath, "malformed-github-verified-merge-commit-object"));
     }
+  } else {
+    const headers = new Map();
+    for (const line of headerText.split("\n")) {
+      const splitAt = line.indexOf(" ");
+      if (splitAt < 1 || line.startsWith(" ")) {
+        findings.push(finding(commitPath, "unsupported-history-commit-header"));
+        continue;
+      }
+      const key = line.slice(0, splitAt);
+      if (!["tree", "parent", "author", "committer"].includes(key)) {
+        findings.push(finding(commitPath, "unsupported-history-commit-header"));
+        continue;
+      }
+      const values = headers.get(key) ?? [];
+      values.push(line.slice(splitAt + 1));
+      headers.set(key, values);
+    }
+    if (headers.get("tree")?.length !== 1 ||
+        headers.get("author")?.length !== 1 || headers.get("committer")?.length !== 1 ||
+        (headers.get("parent") ?? []).some((value) => !historyObjectId(value)) ||
+        !historyObjectId(headers.get("tree")?.[0])) {
+      findings.push(finding(commitPath, "malformed-history-commit-header"));
+    }
+    for (const kind of ["author", "committer"]) {
+      const value = headers.get(kind)?.[0];
+      const match = typeof value === "string"
+        ? /^(.*) <([^<>]+)> [0-9]+ [+-][0-9]{4}$/.exec(value)
+        : null;
+      identityOccurrences += 1;
+      if (match === null || match[1] !== identity.name || match[2] !== identity.email) {
+        findings.push(finding(commitPath, `unexpected-history-${kind}-identity`));
+      }
+    }
+    parentValues = headers.get("parent") ?? [];
+    treeValue = headers.get("tree")?.[0];
   }
   const message = raw.subarray(separator + 2);
   if (message.length > policy.maxFileBytes) {
@@ -581,10 +685,9 @@ function parseHistoryCommit(root, commit, identity, policy, environment) {
       policy
     ));
   }
-  const parentValues = headers.get("parent") ?? [];
-  const treeValue = headers.get("tree")?.[0];
   return {
     findings,
+    githubMergeGrantConsumed,
     identityOccurrences,
     parents: parentValues.filter(historyObjectId),
     tree: historyObjectId(treeValue) ? treeValue : undefined
@@ -730,11 +833,15 @@ async function scanForbiddenHistory(
 
   const scannedEntries = new Set();
   const scannedLeaves = new Set();
+  const consumedGitHubMergeGrants = new Set();
   let historyBytes = 0;
   let identityOccurrences = 0;
   let stoppedForLimit = false;
   for (const commit of commits) {
     findings.push(...commit.parsed.findings);
+    if (commit.parsed.githubMergeGrantConsumed) {
+      consumedGitHubMergeGrants.add(commit.oid);
+    }
     identityOccurrences += commit.parsed.identityOccurrences;
     if (commit.parsed.tree === undefined) continue;
     const pendingTrees = [{ oid: commit.parsed.tree, prefix: "" }];
@@ -787,6 +894,14 @@ async function scanForbiddenHistory(
     }
     if (stoppedForLimit) break;
   }
+  for (const objectId of policy.approvedGitHubVerifiedMergeCommitObjects) {
+    if (!consumedGitHubMergeGrants.has(objectId)) {
+      findings.push(finding(
+        "<history>",
+        "unconsumed-github-verified-merge-commit-grant"
+      ));
+    }
+  }
 
   runGit(root, strictFsckArguments(root, tip, environment), {
     environment,
@@ -820,7 +935,8 @@ async function scanForbiddenHistory(
     commitsScanned: commits.length,
     leafEntriesScanned: scannedLeaves.size,
     bytesScanned: historyBytes,
-    identityOccurrences
+    identityOccurrences,
+    githubVerifiedMergeGrantsConsumed: consumedGitHubMergeGrants.size
   });
 }
 

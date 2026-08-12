@@ -1,0 +1,54 @@
+{
+  "schemaVersion": 2,
+  "planId": "pptx-compiler-alpha-release-plan",
+  "releaseVersion": "0.1.0-alpha.1",
+  "packagePlanPath": "packaging/alpha-package-plan.json",
+  "publicationSource": "packaging/alpha-package-plan.json#/publication",
+  "authorizationSource": "packaging/alpha-package-plan.json#/releaseGuard",
+  "releaseLockPath": "packaging/releases/0.1.0-alpha.1.lock.json",
+  "sourceTag": {
+    "name": "v0.1.0-alpha.1",
+    "type": "annotated",
+    "targetPolicy": "exact-clean-verified-commit",
+    "message": "pptx-compiler 0.1.0-alpha.1"
+  },
+  "builders": {
+    "fixed": {
+      "nodeVersion": "24.19.0",
+      "npmVersion": "11.17.0"
+    },
+    "verification": {
+      "nodeVersion": "22.23.2",
+      "npmVersion": "10.9.8"
+    },
+    "digestEquality": "exact-tar-payload-bytes"
+  },
+  "lockedInputs": [
+    "CHANGELOG.md",
+    "docs/KNOWN_LIMITATIONS.md",
+    "docs/releases/0.1.0-alpha.1.md",
+    "packaging/alpha-package-plan.json",
+    "policy/support-matrix.json",
+    "sbom.alpha.cdx.json"
+  ],
+  "recovery": {
+    "absent": "publish-reviewed-tarball",
+    "exact": "continue",
+    "mismatch": "hard-stop",
+    "unpublish": false
+  },
+  "githubRelease": {
+    "order": "last",
+    "requiresCompleteRegistryVerification": true,
+    "name": "pptx-compiler 0.1.0-alpha.1",
+    "bodySource": "docs/releases/0.1.0-alpha.1.md",
+    "bodyProjection": "locked-note-plus-release-identity-v1",
+    "target": "source-tag-target",
+    "draft": false,
+    "prerelease": true,
+    "makeLatest": "false",
+    "generateReleaseNotes": false,
+    "assets": "none",
+    "idempotency": "create-or-exact"
+  }
+}

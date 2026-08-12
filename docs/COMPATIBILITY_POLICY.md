@@ -102,16 +102,25 @@ does not wait for a release.
 
 The declared public runner matrix is Linux, macOS, and Windows under Node.js
 22.x and 24.x. Every row remains `experimental/accept-with-warning` even though
-M3-004B now records automated public evidence:
+the latest accepted pre-M4 reader baseline records automated public evidence on
+pull-request head `093d527fc3fadf7cae577139b8d400719755dd52`, accepted main
+`8cdf968b72f8dd5f41fee37a68e239e477dec44b`, and their shared tree
+`1d6d148a8bc347dc3cbc13dde3fd4314d86c421a`:
 
-- [PR Public CI run 31600528716](https://github.com/why7682/pptx-compiler/actions/runs/31600528716)
+- [PR Public CI run 31608992503](https://github.com/why7682/pptx-compiler/actions/runs/31608992503)
   passed all six cells;
-- [accepted-main Public CI run 31600806512](https://github.com/why7682/pptx-compiler/actions/runs/31600806512)
-  passed all six cells for object `c4dee58`.
+- [PR Security run 31608992491](https://github.com/why7682/pptx-compiler/actions/runs/31608992491)
+  passed Dependency Review;
+- [accepted-main Public CI run 31609285181](https://github.com/why7682/pptx-compiler/actions/runs/31609285181)
+  passed all six cells;
+- [accepted-main Security run 31609285220](https://github.com/why7682/pptx-compiler/actions/runs/31609285220)
+  passed CodeQL.
 
-The corresponding Dependency Review and CodeQL evidence is recorded in
-[`docs/M3-004_HANDOFF.md`](M3-004_HANDOFF.md). Platform execution proves neither
-a capability closure nor PowerPoint behavior. An off-matrix development runtime
+The current projection is recorded in
+[`docs/RELEASE_GATES.md`](RELEASE_GATES.md); the earlier M3-004B implementation
+baseline remains in [`docs/M3-004_HANDOFF.md`](M3-004_HANDOFF.md). Platform
+execution proves neither a capability closure nor PowerPoint behavior, and it
+does not cover current uncommitted M4 bytes. An off-matrix development runtime
 is not compatibility evidence.
 
 Every admitted platform file-flushes owned payloads and preserves create-only,
@@ -191,11 +200,16 @@ must project the current matrix shipped in the same reviewed commit.
 The complete user-facing list is
 [`docs/KNOWN_LIMITATIONS.md`](KNOWN_LIMITATIONS.md). The decisive current facts
 are that arbitrary templates are unsupported, the candidate QA result is
-blocked, no BuildArtifact is created, and no npm package or release has been
-published.
+blocked, no BuildArtifact is created, and no npm package, release tag,
+provenance result, or GitHub Release exists. D-048 authorizes those exact alpha
+actions but does not prove that they occurred.
 
-M3-004B closed hosted platform/security evidence without changing support. The
-next compatibility-affecting action is not a blanket promotion: M4-001 must
-reproduce the exact release tag and reviewed tarballs first. Any later support
-promotion must then name one demonstrated user scope, update its exact matrix
-rows, and retain every unknown case as fail-closed.
+Release Gates is the sole current release-phase owner. M4-001A contract
+admission is complete without changing support. M4-001B is next and requires
+the dual-builder lock to be reviewed and accepted on main before a subsequent
+exact clean annotated tag binds that same tree; M4-001C remains pending until
+the registry state machine proves ordered publication and exact
+official-registry reread. None of those phases changes support by itself. Any
+later support promotion must name one demonstrated user scope, update its exact
+matrix rows, and retain every unknown case as fail-closed. D-047/M3-008 branch
+protection remains separately deferred.

@@ -23,9 +23,12 @@ M3-006 published the exact reviewed object
 `410642b668514ab7193212d617cc0f8acb837924` as the first public `main` ref for
 `why7682/pptx-compiler`. GitHub reports numeric repository ID `1330979133`;
 after the exact push, private vulnerability reporting was reverified as
-`enabled: true` and remote `main` was reverified equal to that object. This is
-source publication only: npm publication remains unauthorized. The npm
-availability observations above remain dated observations and reserve nothing.
+`enabled: true` and remote `main` was reverified equal to that object. This was
+source publication only at that checkpoint. D-048 later authorized one exact
+candidate-alpha publication transition for the four selected npm names; that
+authorization does not reserve a name or prove that a registry write occurred.
+The npm availability observations above remain dated observations and reserve
+nothing.
 
 ## Historical working-name check
 

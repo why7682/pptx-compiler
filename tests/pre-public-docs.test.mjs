@@ -35,7 +35,10 @@ const forbiddenPolicy = compileForbiddenMaterialPolicy(JSON.parse(await readFile
 const canonicalRuns = [...renderPublicWorkflows()
   .get(".github/workflows/ci.yml")
   .matchAll(/^\s*-?\s*run:\s*(\S.*)$/gmu)]
-  .map((match) => match[1]);
+  .map((match) => match[1])
+  .filter((command) =>
+    !command.startsWith("git config --local user.name ") &&
+    command !== "node scripts/check-forbidden-materials.mjs --mode history");
 
 function finding(code, path) {
   return Object.freeze({ code, path });

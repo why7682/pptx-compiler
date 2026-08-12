@@ -2,16 +2,21 @@
 
 ## Purpose and boundary
 
-This file records user-visible changes intended for the first public candidate
-alpha. It does not announce a release. Current support remains owned by
+This file freezes the user-visible contents associated with the first public
+candidate alpha. It deliberately does not announce or deny an external release:
+that mutable lifecycle fact is not owned by a lock-bound changelog.
+Current support remains owned by
 [`policy/support-matrix.json`](policy/support-matrix.json), release eligibility
 by [`docs/RELEASE_GATES.md`](docs/RELEASE_GATES.md), and negative boundaries by
 [`docs/KNOWN_LIMITATIONS.md`](docs/KNOWN_LIMITATIONS.md).
 
-## Unreleased
+## 0.1.0-alpha.1 candidate contents
 
-The planned package version is `0.1.0-alpha.1`. No release tag, npm package, or
-published release artifact currently exists.
+These are the exact reader-facing changes for version `0.1.0-alpha.1`. D-048
+authorizes its exact tag, four public npm packages under dist-tag `alpha`, and
+GitHub Actions plus npm provenance. Authorization is not publication evidence;
+actual release status is established only by joining the tracked release lock
+to official GitHub and npm records.
 
 ### Candidate workflow
 
@@ -57,7 +62,11 @@ published release artifact currently exists.
 - Published the reviewed source history at
   [`why7682/pptx-compiler`](https://github.com/why7682/pptx-compiler) and enabled
   GitHub private vulnerability reporting.
-- Kept all leaf manifests private and npm publication explicitly unauthorized.
+- Kept the historical M3 private-manifest tarballs as package-boundary evidence;
+  they cannot be relabeled as release artifacts. Package-plan schema 3 defines
+  the separately authorized public manifests, while the M4-001 lock requires
+  equal dual-builder canonical tar payloads and alone identifies the fixed
+  builder's gzip envelopes as candidate release bytes.
 
 ### Public evidence
 
@@ -78,22 +87,44 @@ These runs establish hosted evidence, not supported capabilities or a released
 artifact. The matrix remains 0 supported / 22 experimental / 3 manual / 35
 unsupported with `supportClaimsEnabled=false`.
 
+- Constructive-document PR #2 Public CI
+  [run 31608992503](https://github.com/why7682/pptx-compiler/actions/runs/31608992503)
+  and Security
+  [run 31608992491](https://github.com/why7682/pptx-compiler/actions/runs/31608992491)
+  passed for head `093d527fc3fadf7cae577139b8d400719755dd52`.
+- Accepted-main Public CI
+  [run 31609285181](https://github.com/why7682/pptx-compiler/actions/runs/31609285181)
+  and Security
+  [run 31609285220](https://github.com/why7682/pptx-compiler/actions/runs/31609285220)
+  passed for `8cdf968b72f8dd5f41fee37a68e239e477dec44b`.
+
+Those two commits share tree `1d6d148a8bc347dc3cbc13dde3fd4314d86c421a`.
+This is accepted reader-document evidence. Those named runs do not establish a
+clean-tag build, public tarball, registry equality, provenance, or GitHub
+Release result.
+
 ### Not included
 
 - No arbitrary PPTX/POTX compatibility, generic renderer, delivery-authorized
   QA, formula CLI, asset placement, charts, tables, media, or animation support.
-- No release tag, signing/provenance-enabled release, npm authorization, or
-  reviewed-to-published tarball equality.
+- No release or support conclusion may be inferred from this changelog.
+  Candidate identity comes from the tracked lock; distribution and provenance
+  come from the official registry and GitHub records.
 - No branch-protection claim; D-047 deliberately defers that repository setting.
 
 See [`docs/KNOWN_LIMITATIONS.md`](docs/KNOWN_LIMITATIONS.md) for the complete
 current boundary and
-[`docs/releases/0.1.0-alpha.1.md`](docs/releases/0.1.0-alpha.1.md) for the draft
-release-facing projection.
+[`docs/releases/0.1.0-alpha.1.md`](docs/releases/0.1.0-alpha.1.md) for the
+state-neutral release-facing projection.
 
-## Next authorized action
+## Release verification boundary
 
-M4-001 may cut `0.1.0-alpha.1` only after a reviewed tag passes the clean-tag
-gates, publication is explicitly authorized, and every published artifact is
-proved byte-identical to its reviewed tarball. Until then, this changelog stays
-under `Unreleased`.
+M4-001 may advance only through the earliest unsatisfied release gate. Freeze
+the inputs and two builder results; create, review, commit, and merge the lock
+as GitHub-verified commit `S`; append exactly one repository-local identity
+attestation `A` whose sole parent is `S` and whose tip policy grants `S`; pass
+the full history gate at `main=A`; then annotate `S` as
+`v0.1.0-alpha.1`. Tag-triggered Public CI and Security precede dependency-order
+npm publication. Official-registry bytes, provenance, and dist-tags must match
+the lock before the GitHub Release is created last. D-047 branch protection
+remains separately deferred and is never implied by this sequence.

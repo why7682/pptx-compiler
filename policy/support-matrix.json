@@ -199,7 +199,7 @@
         "label": "User-owned PPTX template",
         "status": "unsupported",
         "disposition": "unavailable",
-        "currentBasis": "A bounded internal source-to-index lane securely ingests the repository-owned minimal PPTX grammar, but no published package/CLI or arbitrary user-template compatibility class exists.",
+        "currentBasis": "A bounded source-to-index lane securely ingests only the repository-owned minimal PPTX grammar; package distribution cannot broaden that grammar into arbitrary user-template compatibility.",
         "limitations": ["The positive grammar is deliberately narrow; generated fixture output is test data and committed PPTX binaries remain rejected."],
         "roadmap": "M3-001 plus explicit future compatibility evidence",
         "evidence": {
@@ -1104,7 +1104,7 @@
         "label": "Linux with Node.js 22.x LTS",
         "status": "experimental",
         "disposition": "accept-with-warning",
-        "currentBasis": "The Linux/Node 22 cell passed on accepted-main object c4dee58 in Public CI run 31600806512 after the matching pull-request cell passed in run 31600528716.",
+        "currentBasis": "The Linux/Node 22 cell passed on accepted-main object 8cdf968b72f8dd5f41fee37a68e239e477dec44b in Public CI run 31609285181 after the matching pull-request head 093d527fc3fadf7cae577139b8d400719755dd52 cell passed in run 31608992503; both commits share tree 1d6d148a8bc347dc3cbc13dde3fd4314d86c421a.",
         "limitations": ["This platform row alone authorizes no PPTX capability; the exact capability closure, explicit opt-in, and all required evidence must also pass."],
         "roadmap": "Revalidate on every declared Node, runner, workflow, or release-tag change",
         "evidence": {
@@ -1112,8 +1112,8 @@
           "artifacts": [
             {
               "type": "cross-platform-ci",
-              "path": "docs/M3-004_HANDOFF.md",
-              "note": "Records the accepted-main Linux/Node 22 cell in Public CI run 31600806512 and its pull-request baseline in run 31600528716."
+              "path": "docs/RELEASE_GATES.md",
+              "note": "Records the accepted pre-M4 reader baseline: Linux/Node 22 passed in PR Public CI run 31608992503 and accepted-main Public CI run 31609285181; PR Security 31608992491 and accepted-main Security 31609285220 also passed."
             }
           ]
         }
@@ -1123,7 +1123,7 @@
         "label": "Linux with Node.js 24.x LTS",
         "status": "experimental",
         "disposition": "accept-with-warning",
-        "currentBasis": "The Linux/Node 24 cell passed on accepted-main object c4dee58 in Public CI run 31600806512 after the matching pull-request cell passed in run 31600528716.",
+        "currentBasis": "The Linux/Node 24 cell passed on accepted-main object 8cdf968b72f8dd5f41fee37a68e239e477dec44b in Public CI run 31609285181 after the matching pull-request head 093d527fc3fadf7cae577139b8d400719755dd52 cell passed in run 31608992503; both commits share tree 1d6d148a8bc347dc3cbc13dde3fd4314d86c421a.",
         "limitations": ["This platform row alone authorizes no PPTX capability; the exact capability closure, explicit opt-in, and all required evidence must also pass."],
         "roadmap": "Revalidate on every declared Node, runner, workflow, or release-tag change",
         "evidence": {
@@ -1131,8 +1131,8 @@
           "artifacts": [
             {
               "type": "cross-platform-ci",
-              "path": "docs/M3-004_HANDOFF.md",
-              "note": "Records the accepted-main Linux/Node 24 cell in Public CI run 31600806512 and its pull-request baseline in run 31600528716."
+              "path": "docs/RELEASE_GATES.md",
+              "note": "Records the accepted pre-M4 reader baseline: Linux/Node 24 passed in PR Public CI run 31608992503 and accepted-main Public CI run 31609285181; PR Security 31608992491 and accepted-main Security 31609285220 also passed."
             }
           ]
         }
@@ -1142,7 +1142,7 @@
         "label": "macOS with Node.js 22.x LTS",
         "status": "experimental",
         "disposition": "accept-with-warning",
-        "currentBasis": "The macOS/Node 22 cell passed on accepted-main object c4dee58 in Public CI run 31600806512 after the matching pull-request cell passed in run 31600528716.",
+        "currentBasis": "The macOS/Node 22 cell passed on accepted-main object 8cdf968b72f8dd5f41fee37a68e239e477dec44b in Public CI run 31609285181 after the matching pull-request head 093d527fc3fadf7cae577139b8d400719755dd52 cell passed in run 31608992503; both commits share tree 1d6d148a8bc347dc3cbc13dde3fd4314d86c421a.",
         "limitations": ["This platform row alone authorizes no PPTX capability; the exact capability closure, explicit opt-in, and all required evidence must also pass."],
         "roadmap": "Revalidate on every declared Node, runner, workflow, or release-tag change",
         "evidence": {
@@ -1150,8 +1150,8 @@
           "artifacts": [
             {
               "type": "cross-platform-ci",
-              "path": "docs/M3-004_HANDOFF.md",
-              "note": "Records the accepted-main macOS/Node 22 cell in Public CI run 31600806512 and its pull-request baseline in run 31600528716."
+              "path": "docs/RELEASE_GATES.md",
+              "note": "Records the accepted pre-M4 reader baseline: macOS/Node 22 passed in PR Public CI run 31608992503 and accepted-main Public CI run 31609285181; PR Security 31608992491 and accepted-main Security 31609285220 also passed."
             }
           ]
         }
@@ -1161,7 +1161,7 @@
         "label": "macOS with Node.js 24.x LTS",
         "status": "experimental",
         "disposition": "accept-with-warning",
-        "currentBasis": "The macOS/Node 24 cell passed on accepted-main object c4dee58 in Public CI run 31600806512 after the matching pull-request cell passed in run 31600528716.",
+        "currentBasis": "The macOS/Node 24 cell passed on accepted-main object 8cdf968b72f8dd5f41fee37a68e239e477dec44b in Public CI run 31609285181 after the matching pull-request head 093d527fc3fadf7cae577139b8d400719755dd52 cell passed in run 31608992503; both commits share tree 1d6d148a8bc347dc3cbc13dde3fd4314d86c421a.",
         "limitations": ["This platform row alone authorizes no PPTX capability; the exact capability closure, explicit opt-in, and all required evidence must also pass."],
         "roadmap": "Revalidate on every declared Node, runner, workflow, or release-tag change",
         "evidence": {
@@ -1169,8 +1169,8 @@
           "artifacts": [
             {
               "type": "cross-platform-ci",
-              "path": "docs/M3-004_HANDOFF.md",
-              "note": "Records the accepted-main macOS/Node 24 cell in Public CI run 31600806512 and its pull-request baseline in run 31600528716."
+              "path": "docs/RELEASE_GATES.md",
+              "note": "Records the accepted pre-M4 reader baseline: macOS/Node 24 passed in PR Public CI run 31608992503 and accepted-main Public CI run 31609285181; PR Security 31608992491 and accepted-main Security 31609285220 also passed."
             }
           ]
         }
@@ -1244,7 +1244,7 @@
         "label": "Windows with Node.js 22.x LTS",
         "status": "experimental",
         "disposition": "accept-with-warning",
-        "currentBasis": "The Windows/Node 22 cell passed on accepted-main object c4dee58 in Public CI run 31600806512 after the matching pull-request cell passed in run 31600528716.",
+        "currentBasis": "The Windows/Node 22 cell passed on accepted-main object 8cdf968b72f8dd5f41fee37a68e239e477dec44b in Public CI run 31609285181 after the matching pull-request head 093d527fc3fadf7cae577139b8d400719755dd52 cell passed in run 31608992503; both commits share tree 1d6d148a8bc347dc3cbc13dde3fd4314d86c421a.",
         "limitations": ["This platform row alone authorizes no PPTX capability; the exact capability closure, explicit opt-in, and all required evidence must also pass."],
         "roadmap": "Revalidate on every declared Node, runner, workflow, or release-tag change",
         "evidence": {
@@ -1252,8 +1252,8 @@
           "artifacts": [
             {
               "type": "cross-platform-ci",
-              "path": "docs/M3-004_HANDOFF.md",
-              "note": "Records the accepted-main Windows/Node 22 cell in Public CI run 31600806512 and its pull-request baseline in run 31600528716."
+              "path": "docs/RELEASE_GATES.md",
+              "note": "Records the accepted pre-M4 reader baseline: Windows/Node 22 passed in PR Public CI run 31608992503 and accepted-main Public CI run 31609285181; PR Security 31608992491 and accepted-main Security 31609285220 also passed."
             }
           ]
         }
@@ -1263,7 +1263,7 @@
         "label": "Windows with Node.js 24.x LTS",
         "status": "experimental",
         "disposition": "accept-with-warning",
-        "currentBasis": "The Windows/Node 24 cell passed on accepted-main object c4dee58 in Public CI run 31600806512 after the matching pull-request cell passed in run 31600528716.",
+        "currentBasis": "The Windows/Node 24 cell passed on accepted-main object 8cdf968b72f8dd5f41fee37a68e239e477dec44b in Public CI run 31609285181 after the matching pull-request head 093d527fc3fadf7cae577139b8d400719755dd52 cell passed in run 31608992503; both commits share tree 1d6d148a8bc347dc3cbc13dde3fd4314d86c421a.",
         "limitations": ["This platform row alone authorizes no PPTX capability; the exact capability closure, explicit opt-in, and all required evidence must also pass."],
         "roadmap": "Revalidate on every declared Node, runner, workflow, or release-tag change",
         "evidence": {
@@ -1271,8 +1271,8 @@
           "artifacts": [
             {
               "type": "cross-platform-ci",
-              "path": "docs/M3-004_HANDOFF.md",
-              "note": "Records the accepted-main Windows/Node 24 cell in Public CI run 31600806512 and its pull-request baseline in run 31600528716."
+              "path": "docs/RELEASE_GATES.md",
+              "note": "Records the accepted pre-M4 reader baseline: Windows/Node 24 passed in PR Public CI run 31608992503 and accepted-main Public CI run 31609285181; PR Security 31608992491 and accepted-main Security 31609285220 also passed."
             }
           ]
         }
@@ -1294,7 +1294,7 @@
         "label": "Automated public synthetic conformance evidence",
         "status": "experimental",
         "disposition": "accept-with-warning",
-        "currentBasis": "Repository-owned synthetic conformance, complete tests, guarded package builds, working-tree rechecks, and drift checks passed in all six accepted-main Linux/macOS/Windows and Node 22/24 cells for object c4dee58 in Public CI run 31600806512.",
+        "currentBasis": "Repository-owned synthetic conformance, complete tests, guarded package builds, working-tree rechecks, and drift checks passed in all six accepted-main Linux/macOS/Windows and Node 22/24 cells for object 8cdf968b72f8dd5f41fee37a68e239e477dec44b in Public CI run 31609285181 after pull-request head 093d527fc3fadf7cae577139b8d400719755dd52 passed run 31608992503; both commits share tree 1d6d148a8bc347dc3cbc13dde3fd4314d86c421a.",
         "limitations": ["Cannot support a PPTX capability until its own complete product artifacts, mutation safety, platform evidence, enabled claim switch, and reviewed matrix promotion exist."],
         "roadmap": "M4-001 clean-tag reproduction and reviewed-to-published artifact equality; support promotion remains separate",
         "evidence": {
@@ -1367,8 +1367,8 @@
             },
             {
               "type": "cross-platform-ci",
-              "path": "docs/M3-004_HANDOFF.md",
-              "note": "Records the six accepted-main OS/runtime cells in Public CI run 31600806512, their pull-request baseline in run 31600528716, passing Dependency Review, and accepted-main CodeQL."
+              "path": "docs/RELEASE_GATES.md",
+              "note": "Records the accepted pre-M4 reader baseline: six OS/runtime cells passed in PR Public CI run 31608992503 and accepted-main Public CI run 31609285181; PR Security 31608992491 and accepted-main Security 31609285220 also passed."
             }
           ]
         }

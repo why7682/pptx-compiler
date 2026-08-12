@@ -1,0 +1,152 @@
+name: Alpha npm Release
+
+on:
+  workflow_dispatch:
+    inputs:
+      tag:
+        description: Exact annotated tag to publish
+        required: true
+        type: choice
+        options:
+          - v0.1.0-alpha.1
+
+permissions:
+  contents: read
+
+concurrency:
+  group: alpha-release-v0.1.0-alpha.1
+  cancel-in-progress: false
+
+jobs:
+  admit:
+    name: Admit exact release tag
+    runs-on: ubuntu-24.04
+    timeout-minutes: 5
+    permissions:
+      contents: read
+    steps:
+      - name: Require the exact manual tag ref
+        env:
+          EXPECTED_TAG: v0.1.0-alpha.1
+          RELEASE_EVENT: ${{ github.event_name }}
+          RELEASE_REF_TYPE: ${{ github.ref_type }}
+          RELEASE_REF_NAME: ${{ github.ref_name }}
+          RELEASE_INPUT_TAG: ${{ inputs.tag }}
+        run: test "$RELEASE_EVENT" = "workflow_dispatch" && test "$RELEASE_REF_TYPE" = "tag" && test "$RELEASE_REF_NAME" = "$EXPECTED_TAG" && test "$RELEASE_INPUT_TAG" = "$EXPECTED_TAG"
+
+  publish:
+    name: Publish reviewed alpha tarballs
+    needs: admit
+    runs-on: ubuntu-24.04
+    timeout-minutes: 60
+    environment: npm-release
+    permissions:
+      actions: read
+      contents: read
+      id-token: write
+    steps:
+      - name: Checkout the dispatched tag commit without persistent credentials
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          ref: ${{ github.sha }}
+          fetch-depth: 0
+          persist-credentials: false
+      - name: Select the fixed release runtime and official registry
+        uses: actions/setup-node@820762786026740c76f36085b0efc47a31fe5020 # v7.0.0
+        with:
+          node-version: 24.19.0
+          registry-url: https://registry.npmjs.org/
+          package-manager-cache: false
+      - name: Reject release runtime or npm drift
+        run: test "$(node --version)" = "v24.19.0" && test "$(npm --version)" = "11.17.0"
+      - name: Require the release entry points to exist and parse
+        run: node --check scripts/check-alpha-release-preparation.mjs && node --check scripts/publish-alpha-release.mjs
+      - name: Admit workflow policy before dependency installation
+        run: node scripts/check-public-workflows.mjs
+      - name: Reject forbidden material before dependency installation
+        run: node scripts/check-forbidden-materials.mjs --mode working-tree
+      - name: Bind lock, license, declarations, and static-ESM SBOM before installation
+        run: node scripts/check-release-metadata.mjs
+      - name: Install the fixed development toolchain
+        run: npm ci --ignore-scripts --no-audit --no-fund
+      - name: Typecheck the published declarations
+        run: node node_modules/typescript/bin/tsc --project tsconfig.public.json
+      - name: Check source and package import policy
+        run: node scripts/check-source-policy.mjs
+      - name: Check package plan
+        run: node scripts/check-package-plan.mjs
+      - name: Run the complete test suite
+        run: node --test "tests/*.test.mjs"
+      - name: Build and smoke the reviewed alpha tarballs
+        run: node scripts/build-alpha-packages.mjs
+      - name: Recheck the admitted working tree
+        run: node scripts/check-forbidden-materials.mjs --mode working-tree && node scripts/check-provenance.mjs --mode working-tree && node scripts/check-support-matrix.mjs --mode working-tree && node scripts/check-contracts.mjs --mode working-tree
+      - name: Reject tracked-file drift
+        run: git diff --exit-code
+      - name: Bind the exact tag to the reviewed release candidate
+        run: node scripts/check-alpha-release-preparation.mjs --mode release-tag --tag v0.1.0-alpha.1 --stage-root .package-stage/reviewed
+      - name: Verify the exact public GitHub source commit
+        run: node scripts/publish-alpha-release.mjs --mode verify-source --tag v0.1.0-alpha.1 --stage-root .package-stage/reviewed
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+      - name: Publish exact reviewed tarballs to npm
+        run: node scripts/publish-alpha-release.mjs --mode publish --tag v0.1.0-alpha.1 --stage-root .package-stage/reviewed
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+          NPM_CONFIG_REGISTRY: https://registry.npmjs.org/
+          NPM_CONFIG_TAG: alpha
+          NPM_CONFIG_ACCESS: public
+          NPM_CONFIG_PROVENANCE: "true"
+
+  declare:
+    name: Declare the exact GitHub prerelease last
+    needs: publish
+    runs-on: ubuntu-24.04
+    timeout-minutes: 60
+    permissions:
+      actions: read
+      contents: write
+    steps:
+      - name: Checkout the dispatched tag commit without persistent credentials
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          ref: ${{ github.sha }}
+          fetch-depth: 0
+          persist-credentials: false
+      - name: Select the fixed release runtime without npm credentials
+        uses: actions/setup-node@820762786026740c76f36085b0efc47a31fe5020 # v7.0.0
+        with:
+          node-version: 24.19.0
+          package-manager-cache: false
+      - name: Reject release runtime or npm drift
+        run: test "$(node --version)" = "v24.19.0" && test "$(npm --version)" = "11.17.0"
+      - name: Require every release entry point to exist and parse
+        run: node --check scripts/check-alpha-release-preparation.mjs && node --check scripts/publish-alpha-release.mjs && node --check scripts/create-alpha-github-release.mjs
+      - name: Admit workflow policy before dependency installation
+        run: node scripts/check-public-workflows.mjs
+      - name: Reject forbidden material before dependency installation
+        run: node scripts/check-forbidden-materials.mjs --mode working-tree
+      - name: Bind lock, license, declarations, and static-ESM SBOM before installation
+        run: node scripts/check-release-metadata.mjs
+      - name: Install the fixed development toolchain without credentials
+        run: npm ci --ignore-scripts --no-audit --no-fund
+      - name: Typecheck the published declarations
+        run: node node_modules/typescript/bin/tsc --project tsconfig.public.json
+      - name: Check source and package import policy
+        run: node scripts/check-source-policy.mjs
+      - name: Check package plan
+        run: node scripts/check-package-plan.mjs
+      - name: Run the complete test suite
+        run: node --test "tests/*.test.mjs"
+      - name: Rebuild and smoke the exact reviewed alpha tarballs
+        run: node scripts/build-alpha-packages.mjs
+      - name: Recheck the admitted working tree
+        run: node scripts/check-forbidden-materials.mjs --mode working-tree && node scripts/check-provenance.mjs --mode working-tree && node scripts/check-support-matrix.mjs --mode working-tree && node scripts/check-contracts.mjs --mode working-tree
+      - name: Reject tracked-file drift
+        run: git diff --exit-code
+      - name: Bind the exact tag to the reviewed release candidate
+        run: node scripts/check-alpha-release-preparation.mjs --mode release-tag --tag v0.1.0-alpha.1 --stage-root .package-stage/reviewed
+      - name: Verify npm completion and declare the exact GitHub prerelease
+        run: node scripts/create-alpha-github-release.mjs --tag v0.1.0-alpha.1 --stage-root .package-stage/reviewed
+        env:
+          GITHUB_TOKEN: ${{ github.token }}

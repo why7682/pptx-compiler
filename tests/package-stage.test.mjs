@@ -329,10 +329,10 @@ test("completion evidence binds the complete canonical package plan", async (t) 
   }
 });
 
-test("repository-bound leaf manifests remain npm-private", async () => {
+test("repository-bound leaf manifests project the authorized public alpha channel", async () => {
   for (const item of plan.packages) {
     const manifest = createAlphaPackageManifest(plan, item);
-    assert.equal(manifest.private, true);
+    assert.equal(Object.hasOwn(manifest, "private"), false);
     if (item.packageId === "cli") {
       assert.deepEqual(manifest.bin, { "pptx-compiler": "pptx-compiler.mjs" });
     }
@@ -341,7 +341,12 @@ test("repository-bound leaf manifests remain npm-private", async () => {
       url: "git+https://github.com/why7682/pptx-compiler.git",
       directory: item.repositoryDirectory
     });
-    assert.equal(Object.hasOwn(manifest, "publishConfig"), false);
+    assert.deepEqual(manifest.publishConfig, {
+      registry: "https://registry.npmjs.org/",
+      tag: "alpha",
+      access: "public",
+      provenance: true
+    });
     assert.equal(Object.hasOwn(manifest, "scripts"), false);
     assert.equal(manifest.version, plan.packageVersion);
     for (const version of Object.values(manifest.dependencies)) {

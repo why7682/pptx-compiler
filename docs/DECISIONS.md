@@ -44,13 +44,14 @@ No item below is decided merely because a recommendation is recorded.
 | D-038 | ACCEPTED | Honest blocked QA for the exact candidate | Re-derive the current authenticated candidate and canonical record from readable project authorities, exact-compare both stable-read files, and emit the existing fixed blocked QaReport when external visual/compatibility evidence is unavailable; never create BuildArtifact or scan local evidence. | Full QaReport output, three pass/three unavailable checks, normative manual-gate rows, exact pair/replay checks, missing/tampered/stale/resource/symlink/validator mutations, create-only and deterministic output, 99 focused and 1085 complete tests, closing 0/0/0 review, unchanged support counts, and false global support switch. |
 | D-039 | ACCEPTED | Guarded candidate-alpha package graph | Publish only CLI, core, native-card-arrow, and public-synthetic in the first alpha graph; make resource ownership explicit and expose narrow facades. D-045 supersedes only D-039's former repository-pending guard. | Positive source-to-stage plan, exact exports/types/bin/import aliases/assets, dependency and forbidden-closure mutations, split-resource full-spine execution, executable-bin check, and no labs/PowerPoint/Pandoc/OMML/ordered/final-delivery content. |
 | D-040 | ACCEPTED | Fixed-stage and tgz byte acceptance boundary | Keep the readable plan and retained source/policy bytes authoritative; use one recoverable owned stage, treat npm as a constrained packer, independently admit only canonical exact tgz bytes, and keep final hashes as boundary fingerprints. | Private leaf manifests, strict gzip/ustar and forbidden-material mutations, control/source/tarball retained-byte checks, live/stale stage and completion recovery, offline four-package install, installed-bin full spine, blocked QA, and no BuildArtifact. |
-| D-041 | ACCEPTED | Local public-workflow and development-toolchain boundary | Keep exactly two canonical least-privilege workflows, derive declaration paths and the static-ESM SBOM projection from the alpha package plan, and separate local workflow definition from public runner evidence. | Full-SHA action pins, fixed three-OS/two-Node matrix, real TypeScript consumer, exact dev lock, source/release/workflow mutations, and local Node 22/24 verification. M3-004B closes on accepted PR runs `31600528716`/`31600528742` and accepted-main runs `31600806512`/`31600806350`, bound to one byte-identical tree. |
+| D-041 | ACCEPTED | Local public-workflow and development-toolchain boundary | Keep exactly two canonical ordinary verification workflows, derive declaration paths and the static-ESM SBOM projection from the alpha package plan, and separate local workflow definition from public runner evidence; D-048 may add only a separately admitted manual release workflow. | Full-SHA action pins, fixed three-OS/two-Node matrix, real TypeScript consumer, exact dev lock, source/release/workflow mutations, and local Node 22/24 verification. M3-004B closes on accepted PR runs `31600528716`/`31600528742` and accepted-main runs `31600806512`/`31600806350`, bound to one byte-identical tree. |
 | D-042 | ACCEPTED | Minimum public documents and first-ref private-reporting boundary | Give security, contribution, governance, and reproduction one readable owner each; use GitHub private vulnerability reporting without publishing a second personal contact, and require empty-public-repository creation, positive activation/status verification, repository-bound package regeneration, and a fresh package gate before any source branch/ref is pushed. | Exact document routing and workflow-command projection, fail-closed document mutations, zero text/copyright leakage exceptions, dual-runtime local verification, D-045 remote activation, and completed M3-006 repository-bound regeneration plus separately gated first ref. |
 | D-043 | ACCEPTED | Reachable-history and exact-first-ref boundary | Reuse the current forbidden-material policy to scan every commit/tree-entry/message reachable from local `refs/heads/main`, derive reachability from raw parent/tree OIDs, verify metadata against the repository-local public Git identity without echoing it, and push only the scanned exact object ID after remote/PVR/package reconciliation. | Bounded history mode, eight deletion/redirect/grammar/message/identity/type/resource regressions, final 14-commit/505-leaf/7,698,368-byte/28-identity zero-finding scan, canonical HTTPS push, and exact remote-main equality. |
 | D-044 | ACCEPTED | Final pre-public product and repository identity | Use `pptx-compiler` as the one public repository, CLI, package, import, and serialized-contract stem; keep only the existing ignored transaction namespace and dated history under the former working name. | User selected `why7682/pptx-compiler`; exact GitHub and four-name npm checks were clear on 2026-08-11, and the atomic rename must pass dual-runtime package and contract evidence before the first ref. |
-| D-045 | ACCEPTED | Empty public shell, repository binding, and separate npm guard | Bind GitHub repository ID `1330979133` plus its exact owner/name/URL into package-plan schema v2 after empty-public creation and positive PVR verification; derive manifest/SBOM repository data from that tuple while retaining `private: true` and a blocked npm release guard. | Public/empty repository facts, PVR PUT 204 plus GET `enabled: true`, exact repository/manifest/SBOM mutations, canonical-plan evidence fingerprint, and repository-bound dual-runtime package verification; M3-006 later supplied the final first-ref evidence. |
-| D-046 | ACCEPTED | Constructive final-document structure | Write final reader-facing documentation by constructing one coherent model from goals and boundaries through fact ownership, data/control flow, executable contracts, evidence, limitations, and next actions; keep chronological repair history in handoffs, decisions, and provenance rather than using it as the main exposition. | Explicit user requirement; M3-005B must review README, architecture, support, limitations, and release-facing text against this structure before freezing them. |
-| D-047 | DEFERRED | Main-branch protection | Do not configure or claim branch protection yet; revisit force-push/deletion restrictions and required status checks only after M3-005B is complete. | Explicit user instruction on 2026-08-12 to postpone this repository-setting change; M3-004B completion does not activate it. |
+| D-045 | ACCEPTED | Empty public shell, repository binding, and separate npm guard | Preserve package-plan schema v2 as the historical empty-shell/repository-binding checkpoint; D-048 separately owns schema 3 publication authorization and does not rewrite D-045 evidence. | Public/empty repository facts, PVR PUT 204 plus GET `enabled: true`, exact repository/manifest/SBOM mutations, canonical-plan evidence fingerprint, and repository-bound dual-runtime package verification; M3-006 later supplied the final first-ref evidence. |
+| D-046 | ACCEPTED | Constructive final-document structure | Write final reader-facing documentation by constructing one coherent model from goals and boundaries through fact ownership, data/control flow, executable contracts, evidence, limitations, and next actions; keep chronological repair history in handoffs, decisions, and provenance rather than using it as the main exposition. | Explicit user requirement; M3-005B reviewed the reader bundle before freezing it, and M4-001 keeps lock-bound release-facing documents lifecycle-state neutral. |
+| D-047 | DEFERRED | Main-branch protection | Do not configure or claim branch protection; resume force-push/deletion restrictions and required status checks only after a new explicit user authorization. | Explicit user instruction on 2026-08-12 to postpone this repository-setting change; completion of M3-004B, M3-005B, or M4 work does not activate it. |
+| D-048 | ACCEPTED | Exact candidate-alpha publication authority | Authorize the exact annotated `v0.1.0-alpha.1` tag and GitHub Release, the four unscoped public npm packages under dist-tag `alpha`, and GitHub Actions plus npm provenance; keep admission, publication, registry verification, and release declaration fail-closed and separately evidenced. | Explicit user authorization on 2026-08-12; package-plan schema 3 owns publication settings and graph-derived npm order, the release plan/lock owns exact candidate facts, Release Gates owns phase order, fixed dual-builder tar-payload equality plus fixed-builder release-envelope identity and absent/equal/mismatch recovery pass, and the GitHub Release is last. |
 
 Record a decision by changing its status to `ACCEPTED`, adding the date and
 rationale below the table, and updating every affected contract/TODO in the
@@ -564,9 +565,10 @@ same change.
   marker, canonical evidence, and four tgz files. Their
   SHA-256 values identify only the final reviewed tgz objects in ignored
   evidence; there is no member-hash graph or new planning/delivery root.
-  Current manifests remain npm-private while D-045 adds exact repository
-  metadata; QA remains blocked. D-045 later completed the required full package
-  rerun and final local digest binding. Foreign live-PID reuse and a dead Worker under a
+  At the D-040 checkpoint manifests remained npm-private while D-045 added exact
+  repository metadata; QA remained blocked. D-048 later changed publication
+  authorization without relabeling those historical tarballs. D-045 completed
+  the required full package rerun and final local digest binding. Foreign live-PID reuse and a dead Worker under a
   still-live host are accepted fail-closed availability residuals; no TTL may
   steal a real writer. Under an owner-verified stage only unknown directories
   proven empty may be removed to tolerate observed FileProvider conflict debris;
@@ -636,8 +638,22 @@ same change.
   modes recognize only the new path, while non-tip history may recognize the
   retired executable only by exact old path plus blob OID and still applies all
   content/type/history checks.
-  This does not
-  authorize a history rewrite or source ref. D-044/D-045 later confirmed the
+  Policy schema v3 applies the same single-authority model to the two accepted
+  GitHub merge commits that entered `main`: the tip-owned policy lists their
+  exact Git object OIDs only after the corresponding GitHub API commit records
+  were independently observed as `verification.verified=true` with reason
+  `valid`. An OID grant admits only a closed two-parent GitHub merge/OpenPGP
+  header grammar; message, tree, path, content, mode, size, and every other
+  history rule still run, and every listed grant must be reachable and
+  consumed. A GitHub-shaped identity or signature is never sufficient without
+  the exact OID. Because a merge commit cannot contain a grant for its own OID,
+  a later repository-local public-identity attestation commit must add that
+  exact grant before the history gate can admit a new hosted merge. A release
+  tag may remain on unchanged GitHub-verified lock-containing merge `S` only
+  when current remote `main=A`, `A` has `S` as its sole parent, its tip-owned
+  policy exact-grants `S`, and comparison reports `ahead_by=1`, `behind_by=0`.
+  The attestation does not retarget or rebuild the release candidate. This does
+  not authorize a history rewrite or source ref. D-044/D-045 later confirmed the
   exact owner/repository and existing public identity. M3-006 later scanned the
   final 14-commit history with 505 leaf versions, 7,698,368 regular-blob bytes,
   and 28 identity occurrences at zero finding, then used canonical HTTPS
@@ -670,16 +686,17 @@ same change.
   status read returned exact `enabled: true`. Package-plan schema v2 is the one
   readable repository authority. Leaf `repository` fields and the root SBOM VCS
   reference are pure projections; PVR state is not copied into either.
-  Authorization for a GitHub source ref is not npm authorization, so every leaf
-  stays `private: true`, `publishConfig` remains absent, and the plan retains
-  `blocked: npm-publication-not-authorized`. Package evidence and its completion
+  At the D-045 checkpoint, authorization for a GitHub source ref was not npm
+  authorization: every leaf stayed `private: true`, `publishConfig` remained
+  absent, and the plan retained `blocked: npm-publication-not-authorized`.
+  D-048 later authorized package-plan schema 3's exact public channel without
+  turning those D-045 tarballs into release bytes. Package evidence and its completion
   marker use schema v2 and bind the SHA-256 of the canonical readable plan, so
   a pre-binding tarball cannot be recovered as evidence for a changed plan with
   the same plan ID/version/file shape. The previously reviewed set must be
   authenticated under its own code and moved intact before the fixed stage is
   reused. The repository-bound dual-runtime rebuild passed, and M3-006 later
-  completed the final history scan and exact-object-ID push. npm publication
-  remains separately unauthorized.
+  completed the final history scan and exact-object-ID push.
 - **D-046 accepted on 2026-08-12:** final reader-facing documentation must be constructive,
   not an accumulation of TODO fragments or repair chronology. Its stable order
   is: purpose and explicit boundary; core concepts and one readable owner for
@@ -691,9 +708,47 @@ same change.
   final cross-document review and may not close on sentence-level cleanup alone.
 - **D-047 deferred on 2026-08-12:** the user explicitly postponed main-branch
   protection. No protection rule is configured or claimed by this decision.
-  M3-005B has since completed, but that fact does not automatically resume the
-  deferred work. Revisit force-push/deletion restrictions and required status
-  checks only after the user explicitly reauthorizes D-047/M3-008.
+  Neither completion of M3-005B nor any M4-001 phase resumes the deferred work.
+  Revisit force-push/deletion restrictions and required status checks only
+  after the user explicitly reauthorizes D-047/M3-008.
+- **D-048 accepted on 2026-08-12:** the user explicitly authorized three
+  external release effects for one exact candidate alpha: create annotated tag
+  `v0.1.0-alpha.1` and its GitHub Release; publish
+  `pptx-compiler-core`, `pptx-compiler-native-card-arrow`,
+  `pptx-compiler-public-synthetic`, and `pptx-compiler` publicly to the official
+  npm registry under dist-tag `alpha`; and use GitHub Actions with npm
+  provenance. Authorization changes the permissible transition, not its
+  evidence state, and never assigns a lifecycle label to the lock-bound
+  changelog, limitations, or release note. Mutable completion facts belong to
+  Release Gates/the M4 handoff and the official GitHub/npm records.
+  The package plan is the sole owner of publication settings and dependency
+  edges; the publisher derives core, native-card-arrow, public-synthetic, then
+  CLI from that graph. The release plan references those settings rather than
+  copying them and owns the exact tag, builders, locked inputs, recovery, and
+  completion rules. Release Gates owns phase order.
+  The fixed builders are Node 22.23.2/npm 10.9.8 and Node 24.19.0/npm 11.17.0,
+  and all four canonical tar payloads must match byte-for-byte before a lock
+  exists. The lock separately records both builders' gzip identities; only the
+  Node 24/npm 11 fixed-builder envelopes are release bytes and registry-
+  equality authority. That lock must then be reviewed, committed, and merged
+  as GitHub-verified commit `S`. Append exactly one repository-local
+  public-identity attestation commit `A`: `A` has `S` as its sole parent and its
+  tip-owned policy exact-grants OID `S`. The complete reachable-history gate
+  runs at current `main=A`; only afterward may annotated tag
+  `v0.1.0-alpha.1` target unchanged `S`. The publisher must require remote
+  `main=A`, tag target `S`, and comparison `ahead_by=1`, `behind_by=0`; equality,
+  a deeper descendant, or another parent fails closed. Tag-triggered Public CI
+  and Security must pass before npm publication begins. Registry absence permits
+  publishing the reviewed tarball; exact present bytes permit restart; a byte
+  mismatch stops permanently for that version and is never handled by
+  unpublishing. Each registry copy must match the lock, carry npm provenance,
+  and be reachable through `alpha` without assigning `latest`; only then may
+  the GitHub Release be created. The first publication may use the narrowly
+  exposed `npm-release` environment token; after all four initial package identities exist,
+  migrate the workflow to npm Trusted Publisher. D-048 neither promotes a
+  support row nor resumes D-047/M3-008. Observed completion is recorded only in
+  non-lock state owners; the lock-bound reader documents remain
+  lifecycle-state neutral.
 
 ## MIT versus Apache-2.0 review
 

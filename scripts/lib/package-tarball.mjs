@@ -8,6 +8,7 @@ import {
   inspectForbiddenMaterialPath
 } from "../check-forbidden-materials.mjs";
 import {
+  ALPHA_PUBLICATION,
   ALPHA_RELEASE_GUARD,
   ALPHA_REPOSITORY,
   flattenPackageFiles
@@ -84,6 +85,9 @@ export function createAlphaPackageManifest(plan, item) {
   if (!isDeepStrictEqual(plan.releaseGuard, ALPHA_RELEASE_GUARD)) {
     fail("manifest-release-guard");
   }
+  if (!isDeepStrictEqual(plan.publication, ALPHA_PUBLICATION)) {
+    fail("manifest-publication");
+  }
   const packagesById = new Map(plan.packages.map((candidate) => [
     candidate.packageId,
     candidate
@@ -105,7 +109,6 @@ export function createAlphaPackageManifest(plan, item) {
     name: item.name,
     version: plan.packageVersion,
     description: item.description,
-    private: true,
     license: plan.license,
     type: plan.moduleType,
     engines: structuredClone(plan.engines),
@@ -119,12 +122,43 @@ export function createAlphaPackageManifest(plan, item) {
     imports: structuredClone(item.imports),
     types: item.types,
     bin: structuredClone(item.bin),
+    publishConfig: structuredClone(plan.publication),
     dependencies
   });
 }
 
 export function alphaPackageManifestBytes(plan, item) {
   return Buffer.from(`${JSON.stringify(createAlphaPackageManifest(plan, item), null, 2)}\n`);
+}
+
+export function projectAlphaPackageFiles({ plan, item, sourceBytes }) {
+  if (!(sourceBytes instanceof Map)) fail("manifest-source-bytes");
+  const expectedSources = flattenPackageFiles(item);
+  const expectedSourcePaths = new Set(expectedSources.map((entry) => entry.source));
+  if (expectedSources.length !== expectedSourcePaths.size ||
+      [...expectedSourcePaths].some((source) => !sourceBytes.has(source))) {
+    fail("manifest-source-bytes");
+  }
+  const output = new Map([
+    ["package.json", Object.freeze({
+      bytes: alphaPackageManifestBytes(plan, item),
+      mode: 0o644,
+      role: "manifest"
+    })]
+  ]);
+  for (const entry of expectedSources) {
+    const bytes = sourceBytes.get(entry.source);
+    if (!Buffer.isBuffer(bytes) || bytes.length < 1 ||
+        bytes.length > ALPHA_TARBALL_LIMITS.fileBytes || output.has(entry.target)) {
+      fail("manifest-source-bytes");
+    }
+    output.set(entry.target, Object.freeze({
+      bytes: Buffer.from(bytes),
+      mode: entry.role === "bin" ? 0o755 : 0o644,
+      role: entry.role
+    }));
+  }
+  return output;
 }
 
 export function alphaTarballFilename(plan, item) {
@@ -300,11 +334,7 @@ function scanPackedEntry(entry, policy) {
   }
 }
 
-export function inspectAlphaTarball({
-  tarballBytes,
-  expectedFiles,
-  forbiddenPolicy
-}) {
+function strictAlphaTarPayload(tarballBytes) {
   if (!Buffer.isBuffer(tarballBytes) || tarballBytes.length < 1 ||
       tarballBytes.length > ALPHA_TARBALL_LIMITS.compressedBytes) {
     fail("tar-compressed-size");
@@ -319,8 +349,47 @@ export function inspectAlphaTarball({
   } catch {
     fail("tar-gzip");
   }
+  return Object.freeze({ tarBytes, parsed: parseStrictTar(tarBytes) });
+}
+
+// npm's fixed tar payload is stable across the admitted builders even when
+// their zlib versions encode that payload into different canonical gzip
+// streams. Release admission compares these returned bytes directly; the
+// fixed builder alone owns the publishable .tgz envelope.
+export function alphaTarPayloadBytes(tarballBytes) {
+  return Buffer.from(strictAlphaTarPayload(tarballBytes).tarBytes);
+}
+
+// Admit a tarball against an exact tracked-source projection while permitting
+// the caller to own the builder-specific gzip envelope. This is the release
+// lock boundary: both builders must contain the same reviewed package bytes,
+// but only the fixed builder later owns the publishable .tgz bytes.
+export function inspectAlphaTarPayload({
+  tarballBytes,
+  expectedFiles,
+  forbiddenPolicy
+}) {
+  const inspection = inspectAlphaTarball({
+    tarballBytes,
+    expectedFiles,
+    forbiddenPolicy,
+    requireCanonicalGzip: false
+  });
+  return Object.freeze({
+    ...inspection,
+    tarPayloadBytes: alphaTarPayloadBytes(tarballBytes)
+  });
+}
+
+export function inspectAlphaTarball({
+  tarballBytes,
+  expectedFiles,
+  forbiddenPolicy,
+  requireCanonicalGzip = true
+}) {
+  if (typeof requireCanonicalGzip !== "boolean") fail("tar-gzip-policy");
+  const { tarBytes, parsed } = strictAlphaTarPayload(tarballBytes);
   const expected = expectedEntryMap(expectedFiles);
-  const parsed = parseStrictTar(tarBytes);
   if (parsed.entries.length !== expected.size) fail("tar-allowlist");
   const actual = new Map(parsed.entries.map((entry) => [entry.path, entry]));
   if (actual.size !== parsed.entries.length ||
@@ -340,9 +409,11 @@ export function inspectAlphaTarball({
     }
     scanPackedEntry(entry, forbiddenPolicy);
   }
-  const canonicalGzip = gzipSync(tarBytes, { level: 9, mtime: 0 });
-  canonicalGzip[9] = 0xff;
-  if (!canonicalGzip.equals(tarballBytes)) fail("tar-gzip-canonical");
+  if (requireCanonicalGzip) {
+    const canonicalGzip = gzipSync(tarBytes, { level: 9, mtime: 0 });
+    canonicalGzip[9] = 0xff;
+    if (!canonicalGzip.equals(tarballBytes)) fail("tar-gzip-canonical");
+  }
   const files = [...actual.values()]
     .map((entry) => Object.freeze({ path: entry.path, size: entry.size, mode: entry.mode }))
     .sort((left, right) => left.path.localeCompare(right.path));

@@ -1,5 +1,6 @@
 import { createAlphaPackageManifest } from "./package-tarball.mjs";
 import {
+  ALPHA_PUBLICATION,
   ALPHA_RELEASE_GUARD,
   ALPHA_REPOSITORY,
   flattenPackageFiles
@@ -301,7 +302,8 @@ function packageRef(item, plan) {
 
 export function createAlphaCycloneDx(plan) {
   if (!sameJson(plan?.repository, ALPHA_REPOSITORY) ||
-      !sameJson(plan?.releaseGuard, ALPHA_RELEASE_GUARD)) {
+      !sameJson(plan?.releaseGuard, ALPHA_RELEASE_GUARD) ||
+      !sameJson(plan?.publication, ALPHA_PUBLICATION)) {
     throw new Error("alpha-sbom-repository-binding");
   }
   const rootRef = `urn:pptx-compiler:alpha-package-set:${plan.packageVersion}`;
