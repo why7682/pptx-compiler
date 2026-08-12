@@ -1,0 +1,147 @@
+{
+  "bomFormat": "CycloneDX",
+  "specVersion": "1.6",
+  "version": 1,
+  "metadata": {
+    "component": {
+      "type": "application",
+      "bom-ref": "urn:pptx-compiler:alpha-package-set:0.1.0-alpha.1",
+      "name": "pptx-compiler-alpha-package-set",
+      "version": "0.1.0-alpha.1",
+      "licenses": [
+        {
+          "license": {
+            "id": "MIT"
+          }
+        }
+      ],
+      "externalReferences": [
+        {
+          "type": "vcs",
+          "url": "https://github.com/why7682/pptx-compiler.git"
+        }
+      ],
+      "properties": [
+        {
+          "name": "pptx-compiler:repository-id",
+          "value": "1330979133"
+        }
+      ]
+    }
+  },
+  "components": [
+    {
+      "type": "library",
+      "bom-ref": "pkg:npm/pptx-compiler-core@0.1.0-alpha.1",
+      "name": "pptx-compiler-core",
+      "version": "0.1.0-alpha.1",
+      "licenses": [
+        {
+          "license": {
+            "id": "MIT"
+          }
+        }
+      ],
+      "purl": "pkg:npm/pptx-compiler-core@0.1.0-alpha.1",
+      "properties": [
+        {
+          "name": "pptx-compiler:package-id",
+          "value": "core"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "bom-ref": "pkg:npm/pptx-compiler-native-card-arrow@0.1.0-alpha.1",
+      "name": "pptx-compiler-native-card-arrow",
+      "version": "0.1.0-alpha.1",
+      "licenses": [
+        {
+          "license": {
+            "id": "MIT"
+          }
+        }
+      ],
+      "purl": "pkg:npm/pptx-compiler-native-card-arrow@0.1.0-alpha.1",
+      "properties": [
+        {
+          "name": "pptx-compiler:package-id",
+          "value": "native-card-arrow"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "bom-ref": "pkg:npm/pptx-compiler-public-synthetic@0.1.0-alpha.1",
+      "name": "pptx-compiler-public-synthetic",
+      "version": "0.1.0-alpha.1",
+      "licenses": [
+        {
+          "license": {
+            "id": "MIT"
+          }
+        }
+      ],
+      "purl": "pkg:npm/pptx-compiler-public-synthetic@0.1.0-alpha.1",
+      "properties": [
+        {
+          "name": "pptx-compiler:package-id",
+          "value": "public-synthetic"
+        }
+      ]
+    },
+    {
+      "type": "application",
+      "bom-ref": "pkg:npm/pptx-compiler@0.1.0-alpha.1",
+      "name": "pptx-compiler",
+      "version": "0.1.0-alpha.1",
+      "licenses": [
+        {
+          "license": {
+            "id": "MIT"
+          }
+        }
+      ],
+      "purl": "pkg:npm/pptx-compiler@0.1.0-alpha.1",
+      "properties": [
+        {
+          "name": "pptx-compiler:package-id",
+          "value": "cli"
+        }
+      ]
+    }
+  ],
+  "dependencies": [
+    {
+      "ref": "urn:pptx-compiler:alpha-package-set:0.1.0-alpha.1",
+      "dependsOn": [
+        "pkg:npm/pptx-compiler-core@0.1.0-alpha.1",
+        "pkg:npm/pptx-compiler-native-card-arrow@0.1.0-alpha.1",
+        "pkg:npm/pptx-compiler-public-synthetic@0.1.0-alpha.1",
+        "pkg:npm/pptx-compiler@0.1.0-alpha.1"
+      ]
+    },
+    {
+      "ref": "pkg:npm/pptx-compiler-core@0.1.0-alpha.1",
+      "dependsOn": []
+    },
+    {
+      "ref": "pkg:npm/pptx-compiler-native-card-arrow@0.1.0-alpha.1",
+      "dependsOn": [
+        "pkg:npm/pptx-compiler-core@0.1.0-alpha.1"
+      ]
+    },
+    {
+      "ref": "pkg:npm/pptx-compiler-public-synthetic@0.1.0-alpha.1",
+      "dependsOn": []
+    },
+    {
+      "ref": "pkg:npm/pptx-compiler@0.1.0-alpha.1",
+      "dependsOn": [
+        "pkg:npm/pptx-compiler-core@0.1.0-alpha.1",
+        "pkg:npm/pptx-compiler-native-card-arrow@0.1.0-alpha.1",
+        "pkg:npm/pptx-compiler-public-synthetic@0.1.0-alpha.1"
+      ]
+    }
+  ]
+}

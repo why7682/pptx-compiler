@@ -24,7 +24,7 @@ const MAX_BATCH_STRING_BYTES = 4 * 1024 * 1024;
 
 const SEMANTIC_ID = /^[a-z0-9]+(?:-[a-z0-9]+)*$/u;
 const SEMANTIC_VERSION = /^(?:0|[1-9][0-9]*)\.(?:0|[1-9][0-9]*)\.(?:0|[1-9][0-9]*)$/u;
-const CONTRACT_REFERENCE = /^urn:pptx-pipeline:[a-z0-9][a-z0-9:.-]*$/u;
+const CONTRACT_REFERENCE = /^urn:pptx-compiler:[a-z0-9][a-z0-9:.-]*$/u;
 const SHAPE_KINDS = new Set([
   "auto-shape",
   "graphic-frame",

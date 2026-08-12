@@ -6,193 +6,217 @@
   "typeOutput": "types/contracts.d.ts",
   "schemas": [
     {
-      "id": "urn:pptx-pipeline:schema:build-artifact:0.1.0",
+      "id": "urn:pptx-compiler:schema:build-artifact:0.1.0",
       "path": "schemas/contracts/build-artifact.schema.json"
     },
     {
-      "id": "urn:pptx-pipeline:schema:capability-registry:0.1.0",
+      "id": "urn:pptx-compiler:schema:candidate-build-record:0.1.0",
+      "path": "schemas/contracts/candidate-build-record.schema.json"
+    },
+    {
+      "id": "urn:pptx-compiler:schema:capability-registry:0.1.0",
       "path": "schemas/contracts/capability-registry.schema.json"
     },
     {
-      "id": "urn:pptx-pipeline:schema:deck-spec:0.1.0",
+      "id": "urn:pptx-compiler:schema:deck-spec:0.1.0",
       "path": "schemas/contracts/deck-spec.schema.json"
     },
     {
-      "id": "urn:pptx-pipeline:schema:project-config:0.1.0",
+      "id": "urn:pptx-compiler:schema:project-config:0.1.0",
       "path": "schemas/contracts/project-config.schema.json"
     },
     {
-      "id": "urn:pptx-pipeline:schema:project-overlay:0.1.0",
+      "id": "urn:pptx-compiler:schema:project-overlay:0.1.0",
       "path": "schemas/contracts/project-overlay.schema.json"
     },
     {
-      "id": "urn:pptx-pipeline:schema:qa-report:0.1.0",
+      "id": "urn:pptx-compiler:schema:qa-report:0.1.0",
       "path": "schemas/contracts/qa-report.schema.json"
     },
     {
-      "id": "urn:pptx-pipeline:schema:shared:0.1.0",
+      "id": "urn:pptx-compiler:schema:shared:0.1.0",
       "path": "schemas/contracts/shared.schema.json"
     },
     {
-      "id": "urn:pptx-pipeline:schema:template-index:0.1.0",
+      "id": "urn:pptx-compiler:schema:template-index:0.1.0",
       "path": "schemas/contracts/template-index.schema.json"
     },
     {
-      "id": "urn:pptx-pipeline:schema:template-profile:0.1.0",
+      "id": "urn:pptx-compiler:schema:template-profile:0.1.0",
       "path": "schemas/contracts/template-profile.schema.json"
     }
   ],
   "fixtures": [
     {
       "contractType": "build-artifact",
-      "schemaId": "urn:pptx-pipeline:schema:build-artifact:0.1.0",
+      "schemaId": "urn:pptx-compiler:schema:build-artifact:0.1.0",
       "path": "fixtures/contracts/valid/build-artifact.json"
     },
     {
+      "contractType": "candidate-build-record",
+      "schemaId": "urn:pptx-compiler:schema:candidate-build-record:0.1.0",
+      "path": "fixtures/contracts/valid/candidate-build-record.json"
+    },
+    {
       "contractType": "capability-registry",
-      "schemaId": "urn:pptx-pipeline:schema:capability-registry:0.1.0",
+      "schemaId": "urn:pptx-compiler:schema:capability-registry:0.1.0",
       "path": "fixtures/contracts/valid/capability-registry.json"
     },
     {
       "contractType": "deck-spec",
-      "schemaId": "urn:pptx-pipeline:schema:deck-spec:0.1.0",
+      "schemaId": "urn:pptx-compiler:schema:deck-spec:0.1.0",
       "path": "fixtures/contracts/valid/deck-spec.json"
     },
     {
       "contractType": "project-config",
-      "schemaId": "urn:pptx-pipeline:schema:project-config:0.1.0",
+      "schemaId": "urn:pptx-compiler:schema:project-config:0.1.0",
       "path": "fixtures/contracts/valid/project-config.json"
     },
     {
       "contractType": "project-overlay",
-      "schemaId": "urn:pptx-pipeline:schema:project-overlay:0.1.0",
+      "schemaId": "urn:pptx-compiler:schema:project-overlay:0.1.0",
       "path": "fixtures/contracts/valid/project-overlay.json"
     },
     {
       "contractType": "qa-report",
-      "schemaId": "urn:pptx-pipeline:schema:qa-report:0.1.0",
+      "schemaId": "urn:pptx-compiler:schema:qa-report:0.1.0",
       "path": "fixtures/contracts/valid/qa-report.json"
     },
     {
       "contractType": "template-index",
-      "schemaId": "urn:pptx-pipeline:schema:template-index:0.1.0",
+      "schemaId": "urn:pptx-compiler:schema:template-index:0.1.0",
       "path": "fixtures/contracts/valid/template-index.json"
     },
     {
       "contractType": "template-profile",
-      "schemaId": "urn:pptx-pipeline:schema:template-profile:0.1.0",
+      "schemaId": "urn:pptx-compiler:schema:template-profile:0.1.0",
       "path": "fixtures/contracts/valid/template-profile.json"
     }
   ],
   "typeExports": [
     {
       "name": "BindingAssignment",
-      "schemaId": "urn:pptx-pipeline:schema:project-overlay:0.1.0",
+      "schemaId": "urn:pptx-compiler:schema:project-overlay:0.1.0",
       "pointer": "#/$defs/bindingAssignment"
     },
     {
       "name": "BuildArtifact",
-      "schemaId": "urn:pptx-pipeline:schema:build-artifact:0.1.0",
+      "schemaId": "urn:pptx-compiler:schema:build-artifact:0.1.0",
       "pointer": "#"
     },
     {
+      "name": "CandidateBuildRecord",
+      "schemaId": "urn:pptx-compiler:schema:candidate-build-record:0.1.0",
+      "pointer": "#/$defs/candidateBuildRecord"
+    },
+    {
       "name": "CapabilityDefinition",
-      "schemaId": "urn:pptx-pipeline:schema:capability-registry:0.1.0",
+      "schemaId": "urn:pptx-compiler:schema:capability-registry:0.1.0",
       "pointer": "#/$defs/capabilityDefinition"
     },
     {
       "name": "CapabilityRegistry",
-      "schemaId": "urn:pptx-pipeline:schema:capability-registry:0.1.0",
+      "schemaId": "urn:pptx-compiler:schema:capability-registry:0.1.0",
       "pointer": "#"
     },
     {
       "name": "CapabilitySelection",
-      "schemaId": "urn:pptx-pipeline:schema:project-overlay:0.1.0",
+      "schemaId": "urn:pptx-compiler:schema:project-overlay:0.1.0",
       "pointer": "#/$defs/capabilitySelection"
     },
     {
+      "name": "ComposedSlidePlan",
+      "schemaId": "urn:pptx-compiler:schema:candidate-build-record:0.1.0",
+      "pointer": "#/$defs/composedSlidePlan"
+    },
+    {
       "name": "DeckSpec",
-      "schemaId": "urn:pptx-pipeline:schema:deck-spec:0.1.0",
+      "schemaId": "urn:pptx-compiler:schema:deck-spec:0.1.0",
       "pointer": "#"
     },
     {
       "name": "Diagnostic",
-      "schemaId": "urn:pptx-pipeline:schema:qa-report:0.1.0",
+      "schemaId": "urn:pptx-compiler:schema:qa-report:0.1.0",
       "pointer": "#/$defs/diagnostic"
     },
     {
       "name": "ManualGate",
-      "schemaId": "urn:pptx-pipeline:schema:qa-report:0.1.0",
+      "schemaId": "urn:pptx-compiler:schema:qa-report:0.1.0",
       "pointer": "#/$defs/manualGate"
     },
     {
       "name": "ProjectConfig",
-      "schemaId": "urn:pptx-pipeline:schema:project-config:0.1.0",
+      "schemaId": "urn:pptx-compiler:schema:project-config:0.1.0",
       "pointer": "#"
     },
     {
       "name": "ProjectOverlay",
-      "schemaId": "urn:pptx-pipeline:schema:project-overlay:0.1.0",
+      "schemaId": "urn:pptx-compiler:schema:project-overlay:0.1.0",
       "pointer": "#"
     },
     {
       "name": "PublishedOutput",
-      "schemaId": "urn:pptx-pipeline:schema:build-artifact:0.1.0",
+      "schemaId": "urn:pptx-compiler:schema:build-artifact:0.1.0",
       "pointer": "#/$defs/publishedOutput"
     },
     {
       "name": "QaCheck",
-      "schemaId": "urn:pptx-pipeline:schema:qa-report:0.1.0",
+      "schemaId": "urn:pptx-compiler:schema:qa-report:0.1.0",
       "pointer": "#/$defs/qaCheck"
     },
     {
       "name": "QaReport",
-      "schemaId": "urn:pptx-pipeline:schema:qa-report:0.1.0",
+      "schemaId": "urn:pptx-compiler:schema:qa-report:0.1.0",
       "pointer": "#"
     },
     {
       "name": "ShapeBinding",
-      "schemaId": "urn:pptx-pipeline:schema:project-overlay:0.1.0",
+      "schemaId": "urn:pptx-compiler:schema:project-overlay:0.1.0",
       "pointer": "#/$defs/shapeBinding"
     },
     {
+      "name": "SlideLayoutIR",
+      "schemaId": "urn:pptx-compiler:schema:candidate-build-record:0.1.0",
+      "pointer": "#/$defs/slideLayoutIr"
+    },
+    {
       "name": "SlideResult",
-      "schemaId": "urn:pptx-pipeline:schema:build-artifact:0.1.0",
+      "schemaId": "urn:pptx-compiler:schema:build-artifact:0.1.0",
       "pointer": "#/$defs/slideResult"
     },
     {
       "name": "SlideSpec",
-      "schemaId": "urn:pptx-pipeline:schema:deck-spec:0.1.0",
+      "schemaId": "urn:pptx-compiler:schema:deck-spec:0.1.0",
       "pointer": "#/$defs/slideSpec"
     },
     {
       "name": "TemplateIndex",
-      "schemaId": "urn:pptx-pipeline:schema:template-index:0.1.0",
+      "schemaId": "urn:pptx-compiler:schema:template-index:0.1.0",
       "pointer": "#"
     },
     {
       "name": "TemplateLayoutIndexEntry",
-      "schemaId": "urn:pptx-pipeline:schema:template-index:0.1.0",
+      "schemaId": "urn:pptx-compiler:schema:template-index:0.1.0",
       "pointer": "#/$defs/layoutEntry"
     },
     {
       "name": "TemplateMasterIndexEntry",
-      "schemaId": "urn:pptx-pipeline:schema:template-index:0.1.0",
+      "schemaId": "urn:pptx-compiler:schema:template-index:0.1.0",
       "pointer": "#/$defs/masterEntry"
     },
     {
       "name": "TemplateProfile",
-      "schemaId": "urn:pptx-pipeline:schema:template-profile:0.1.0",
+      "schemaId": "urn:pptx-compiler:schema:template-profile:0.1.0",
       "pointer": "#"
     },
     {
       "name": "TemplateShapeIndexEntry",
-      "schemaId": "urn:pptx-pipeline:schema:template-index:0.1.0",
+      "schemaId": "urn:pptx-compiler:schema:template-index:0.1.0",
       "pointer": "#/$defs/shapeEntry"
     },
     {
       "name": "TemplateSlideIndexEntry",
-      "schemaId": "urn:pptx-pipeline:schema:template-index:0.1.0",
+      "schemaId": "urn:pptx-compiler:schema:template-index:0.1.0",
       "pointer": "#/$defs/slideEntry"
     }
   ]

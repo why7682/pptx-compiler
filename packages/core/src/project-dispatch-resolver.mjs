@@ -8,8 +8,10 @@ export const PROJECT_DISPATCH_RESOLVER_VERSION = "0.1.0";
 const CONTRACT_TYPES = Object.freeze({
   capabilityRegistry: "capability-registry",
   deckSpec: "deck-spec",
+  projectConfig: "project-config",
   projectOverlay: "project-overlay",
-  templateIndex: "template-index"
+  templateIndex: "template-index",
+  templateProfile: "template-profile"
 });
 
 const MAX_CAPABILITIES = 1024;
@@ -18,6 +20,7 @@ const MAX_BINDINGS = 8192;
 const MAX_BINDING_ROLES = 64;
 const MAX_MASTERS = 256;
 const MAX_LAYOUTS = 2048;
+const MAX_LAYOUT_BINDINGS = 256;
 const MAX_SLIDES = 4096;
 const MAX_SHAPES = 8192;
 const MAX_JSON_DEPTH = 64;
@@ -31,7 +34,7 @@ const MAX_BATCH_STRING_BYTES = 4 * 1024 * 1024;
 
 const SEMANTIC_ID = /^[a-z0-9]+(?:-[a-z0-9]+)*$/u;
 const SEMANTIC_VERSION = /^(?:0|[1-9][0-9]*)\.(?:0|[1-9][0-9]*)\.(?:0|[1-9][0-9]*)$/u;
-const CONTRACT_REFERENCE = /^urn:pptx-pipeline:[a-z0-9][a-z0-9:.-]*$/u;
+const CONTRACT_REFERENCE = /^urn:pptx-compiler:[a-z0-9][a-z0-9:.-]*$/u;
 const PACKAGE_PART_PATH = /^(?!.*(?:^|\/)\.{1,2}(?:\/|$))[A-Za-z0-9._-]+(?:\/[A-Za-z0-9._-]+)*$/u;
 const SHA256 = /^[0-9a-f]{64}$/u;
 const SHAPE_KINDS = new Set([
@@ -292,6 +295,33 @@ function captureDependencies(value) {
     "validateDeckSpec",
     "validateProjectOverlay",
     "validateTemplateIndex"
+  ]) {
+    const callback = dataProperty(value, key);
+    if (typeof callback !== "function") {
+      fail(ERROR_CODES.DEPENDENCY_INVALID, `/dependencies/${key}`);
+    }
+    captured[key] = callback;
+  }
+  return Object.freeze(captured);
+}
+
+function captureProjectDependencies(value) {
+  assertExactRecord(value, [
+    "validateCapabilityRegistry",
+    "validateDeckSpec",
+    "validateProjectConfig",
+    "validateProjectOverlay",
+    "validateTemplateIndex",
+    "validateTemplateProfile"
+  ], "/dependencies", ERROR_CODES.DEPENDENCY_INVALID);
+  const captured = {};
+  for (const key of [
+    "validateCapabilityRegistry",
+    "validateDeckSpec",
+    "validateProjectConfig",
+    "validateProjectOverlay",
+    "validateTemplateIndex",
+    "validateTemplateProfile"
   ]) {
     const callback = dataProperty(value, key);
     if (typeof callback !== "function") {
@@ -719,7 +749,7 @@ function parseOverlay(overlay, registry, definitions, index, indexMaps) {
     { nonempty: true }
   );
   const selections = new Map();
-  const usedBindingIds = new Set();
+  const referencedBindingIds = new Set();
   let previousSelectionId;
   for (let indexPosition = 0; indexPosition < selectionCount; indexPosition += 1) {
     const pointer = `/projectOverlay/capabilitySelections/${indexPosition}`;
@@ -765,6 +795,7 @@ function parseOverlay(overlay, registry, definitions, index, indexMaps) {
       fail(ERROR_CODES.BINDING_INVALID, `${pointer}/bindings`);
     }
     const resolvedBindings = [];
+    const selectionBindingIds = new Set();
     let previousRole;
     for (let assignmentIndex = 0; assignmentIndex < assignmentCount; assignmentIndex += 1) {
       const assignmentPointer = `${pointer}/bindings/${assignmentIndex}`;
@@ -789,10 +820,11 @@ function parseOverlay(overlay, registry, definitions, index, indexMaps) {
       }
       const binding = bindings.get(assignment.shapeBindingId);
       if (!binding) fail(ERROR_CODES.BINDING_INVALID, `${assignmentPointer}/shapeBindingId`);
-      if (usedBindingIds.has(assignment.shapeBindingId)) {
+      if (selectionBindingIds.has(assignment.shapeBindingId)) {
         fail(ERROR_CODES.BINDING_INVALID, `${assignmentPointer}/shapeBindingId`);
       }
-      usedBindingIds.add(assignment.shapeBindingId);
+      selectionBindingIds.add(assignment.shapeBindingId);
+      referencedBindingIds.add(assignment.shapeBindingId);
       resolvedBindings.push(Object.freeze({
         role: assignment.role,
         shapeBindingId: binding.shapeBindingId,
@@ -814,9 +846,9 @@ function parseOverlay(overlay, registry, definitions, index, indexMaps) {
     previousSelectionId = selection.capabilitySelectionId;
   }
 
-  if (usedBindingIds.size !== bindings.size) {
+  if (referencedBindingIds.size !== bindings.size) {
     for (const bindingId of bindings.keys()) {
-      if (!usedBindingIds.has(bindingId)) {
+      if (!referencedBindingIds.has(bindingId)) {
         fail(ERROR_CODES.BINDING_INVALID, bindingPointers.get(bindingId));
       }
     }
@@ -924,4 +956,209 @@ export function prepareResolvedDeckDispatch(options) {
   const selections = parseOverlay(overlay, registry, definitions, index, indexMaps);
   const invocations = buildInvocations(deck, overlay, index, selections);
   return prepareCapabilityDispatch({ runtime, invocations });
+}
+
+/**
+ * Validate the complete readable project identity graph before delegating to
+ * the existing full-batch resolver. The returned plan is still opaque and
+ * one-shot; callers that only validate must discard it without execution.
+ */
+export function prepareResolvedProjectDispatch(options) {
+  assertExactRecord(options, [
+    "runtime",
+    "projectConfig",
+    "templateProfile",
+    "templateIndex",
+    "capabilityRegistry",
+    "projectOverlay",
+    "deckSpec",
+    "dependencies"
+  ], "", ERROR_CODES.ARGUMENT_INVALID);
+
+  const runtime = dataProperty(options, "runtime");
+  const dependencies = captureProjectDependencies(dataProperty(options, "dependencies"));
+  const totals = { nodes: 0, stringBytes: 0 };
+  const config = snapshotDocument(dataProperty(options, "projectConfig"), "/projectConfig", totals);
+  const profile = snapshotDocument(dataProperty(options, "templateProfile"), "/templateProfile", totals);
+  const index = snapshotDocument(dataProperty(options, "templateIndex"), "/templateIndex", totals);
+  const registry = snapshotDocument(
+    dataProperty(options, "capabilityRegistry"),
+    "/capabilityRegistry",
+    totals
+  );
+  const overlay = snapshotDocument(dataProperty(options, "projectOverlay"), "/projectOverlay", totals);
+  const deck = snapshotDocument(dataProperty(options, "deckSpec"), "/deckSpec", totals);
+
+  callExactTrue(dependencies.validateProjectConfig, config, "/projectConfig");
+  callExactTrue(dependencies.validateTemplateProfile, profile, "/templateProfile");
+  callExactTrue(dependencies.validateTemplateIndex, index, "/templateIndex");
+  callExactTrue(dependencies.validateCapabilityRegistry, registry, "/capabilityRegistry");
+  callExactTrue(dependencies.validateProjectOverlay, overlay, "/projectOverlay");
+  callExactTrue(dependencies.validateDeckSpec, deck, "/deckSpec");
+
+  assertExactRecord(config, [
+    "schemaVersion",
+    "contractType",
+    "projectId",
+    "template",
+    "capabilityRegistry",
+    "projectOverlay",
+    "paths",
+    "policies"
+  ], "/projectConfig", ERROR_CODES.DOCUMENT_INVALID);
+  assertContractIdentity(config, CONTRACT_TYPES.projectConfig, "/projectConfig");
+  assertSemanticId(config.projectId, "/projectConfig/projectId", ERROR_CODES.DOCUMENT_INVALID);
+  assertExactRecord(config.template, [
+    "sourcePath",
+    "profileId",
+    "profilePath",
+    "indexId",
+    "indexPath"
+  ], "/projectConfig/template", ERROR_CODES.DOCUMENT_INVALID);
+  assertSemanticId(
+    config.template.profileId,
+    "/projectConfig/template/profileId",
+    ERROR_CODES.DOCUMENT_INVALID
+  );
+  assertSemanticId(
+    config.template.indexId,
+    "/projectConfig/template/indexId",
+    ERROR_CODES.DOCUMENT_INVALID
+  );
+  assertExactRecord(config.capabilityRegistry, [
+    "registryId",
+    "registryVersion",
+    "path"
+  ], "/projectConfig/capabilityRegistry", ERROR_CODES.DOCUMENT_INVALID);
+  assertSemanticId(
+    config.capabilityRegistry.registryId,
+    "/projectConfig/capabilityRegistry/registryId",
+    ERROR_CODES.DOCUMENT_INVALID
+  );
+  assertSemanticVersion(
+    config.capabilityRegistry.registryVersion,
+    "/projectConfig/capabilityRegistry/registryVersion",
+    ERROR_CODES.DOCUMENT_INVALID
+  );
+  assertExactRecord(
+    config.projectOverlay,
+    ["overlayId", "path"],
+    "/projectConfig/projectOverlay",
+    ERROR_CODES.DOCUMENT_INVALID
+  );
+  assertSemanticId(
+    config.projectOverlay.overlayId,
+    "/projectConfig/projectOverlay/overlayId",
+    ERROR_CODES.DOCUMENT_INVALID
+  );
+
+  assertExactRecord(profile, [
+    "schemaVersion",
+    "contractType",
+    "templateProfileId",
+    "templateIndexId",
+    "templateFormat",
+    "templateSha256",
+    "slideSizeEmu",
+    "layoutBindings"
+  ], "/templateProfile", ERROR_CODES.DOCUMENT_INVALID);
+  assertContractIdentity(profile, CONTRACT_TYPES.templateProfile, "/templateProfile");
+  assertSemanticId(
+    profile.templateProfileId,
+    "/templateProfile/templateProfileId",
+    ERROR_CODES.DOCUMENT_INVALID
+  );
+  assertSemanticId(
+    profile.templateIndexId,
+    "/templateProfile/templateIndexId",
+    ERROR_CODES.DOCUMENT_INVALID
+  );
+  if (typeof profile.templateSha256 !== "string" || !SHA256.test(profile.templateSha256)) {
+    fail(ERROR_CODES.DOCUMENT_INVALID, "/templateProfile/templateSha256");
+  }
+  if (!["potx", "pptx"].includes(profile.templateFormat)) {
+    fail(ERROR_CODES.DOCUMENT_INVALID, "/templateProfile/templateFormat");
+  }
+  assertExactRecord(
+    profile.slideSizeEmu,
+    ["cx", "cy"],
+    "/templateProfile/slideSizeEmu",
+    ERROR_CODES.DOCUMENT_INVALID
+  );
+  for (const dimension of ["cx", "cy"]) {
+    const value = profile.slideSizeEmu[dimension];
+    if (!Number.isSafeInteger(value) || value < 1 || value > 2_147_483_647) {
+      fail(ERROR_CODES.DOCUMENT_INVALID, `/templateProfile/slideSizeEmu/${dimension}`);
+    }
+  }
+
+  const indexMaps = parseTemplateIndex(index);
+  const bindingCount = assertDenseArray(
+    profile.layoutBindings,
+    "/templateProfile/layoutBindings",
+    ERROR_CODES.DOCUMENT_INVALID,
+    MAX_LAYOUT_BINDINGS,
+    { nonempty: true }
+  );
+  const semanticRoles = new Set();
+  let previousLayoutKey;
+  for (let bindingIndex = 0; bindingIndex < bindingCount; bindingIndex += 1) {
+    const pointer = `/templateProfile/layoutBindings/${bindingIndex}`;
+    const binding = profile.layoutBindings[bindingIndex];
+    assertExactRecord(
+      binding,
+      ["layoutKey", "semanticRole"],
+      pointer,
+      ERROR_CODES.DOCUMENT_INVALID
+    );
+    assertSemanticId(binding.layoutKey, `${pointer}/layoutKey`, ERROR_CODES.DOCUMENT_INVALID);
+    assertSemanticId(binding.semanticRole, `${pointer}/semanticRole`, ERROR_CODES.DOCUMENT_INVALID);
+    if (previousLayoutKey !== undefined && compareText(previousLayoutKey, binding.layoutKey) >= 0) {
+      fail(ERROR_CODES.DOCUMENT_INVALID, `${pointer}/layoutKey`);
+    }
+    if (semanticRoles.has(binding.semanticRole)) {
+      fail(ERROR_CODES.DOCUMENT_INVALID, `${pointer}/semanticRole`);
+    }
+    if (!indexMaps.layouts.has(binding.layoutKey)) {
+      fail(ERROR_CODES.IDENTITY_MISMATCH, `${pointer}/layoutKey`);
+    }
+    semanticRoles.add(binding.semanticRole);
+    previousLayoutKey = binding.layoutKey;
+  }
+
+  assertSame(profile.templateProfileId, config.template.profileId, "/templateProfile/templateProfileId");
+  assertSame(profile.templateIndexId, config.template.indexId, "/templateProfile/templateIndexId");
+  assertSame(index.templateProfileId, profile.templateProfileId, "/templateIndex/templateProfileId");
+  assertSame(index.templateIndexId, profile.templateIndexId, "/templateIndex/templateIndexId");
+  assertSame(index.templateFormat, profile.templateFormat, "/templateIndex/templateFormat");
+  assertSame(index.templateSha256, profile.templateSha256, "/templateIndex/templateSha256");
+  assertSame(index.slideSizeEmu.cx, profile.slideSizeEmu.cx, "/templateIndex/slideSizeEmu/cx");
+  assertSame(index.slideSizeEmu.cy, profile.slideSizeEmu.cy, "/templateIndex/slideSizeEmu/cy");
+  assertSame(
+    registry.capabilityRegistryId,
+    config.capabilityRegistry.registryId,
+    "/capabilityRegistry/capabilityRegistryId"
+  );
+  assertSame(
+    registry.registryVersion,
+    config.capabilityRegistry.registryVersion,
+    "/capabilityRegistry/registryVersion"
+  );
+  assertSame(overlay.projectOverlayId, config.projectOverlay.overlayId, "/projectOverlay/projectOverlayId");
+  assertSame(overlay.projectId, config.projectId, "/projectOverlay/projectId");
+  assertSame(deck.projectId, config.projectId, "/deckSpec/projectId");
+
+  return prepareResolvedDeckDispatch({
+    runtime,
+    capabilityRegistry: registry,
+    projectOverlay: overlay,
+    templateIndex: index,
+    deckSpec: deck,
+    dependencies: {
+      validateCapabilityRegistry: dependencies.validateCapabilityRegistry,
+      validateDeckSpec: dependencies.validateDeckSpec,
+      validateProjectOverlay: dependencies.validateProjectOverlay,
+      validateTemplateIndex: dependencies.validateTemplateIndex
+    }
+  });
 }

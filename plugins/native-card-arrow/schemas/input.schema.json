@@ -1,6 +1,6 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "urn:pptx-pipeline:capability:schema:native-card-arrow-input:0.1.0",
+  "$id": "urn:pptx-compiler:capability:schema:native-card-arrow-input:0.1.0",
   "title": "Native card-arrow input",
   "type": "object",
   "additionalProperties": false,

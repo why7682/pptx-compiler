@@ -1,0 +1,52 @@
+name: Public CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  portable:
+    name: ${{ matrix.os }} / Node ${{ matrix.node }}
+    runs-on: ${{ matrix.os }}
+    timeout-minutes: 45
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-24.04, windows-2025, macos-15]
+        node: [22, 24]
+    steps:
+      - name: Checkout without persistent credentials
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+      - name: Select supported Node runtime
+        uses: actions/setup-node@820762786026740c76f36085b0efc47a31fe5020 # v7.0.0
+        with:
+          node-version: ${{ matrix.node }}
+          package-manager-cache: false
+      - name: Admit workflow policy before dependency installation
+        run: node scripts/check-public-workflows.mjs
+      - name: Reject forbidden material before dependency installation
+        run: node scripts/check-forbidden-materials.mjs --mode working-tree
+      - name: Bind lock, license, declarations, and static-ESM SBOM before installation
+        run: node scripts/check-release-metadata.mjs
+      - name: Install the fixed development toolchain
+        run: npm ci --ignore-scripts --no-audit --no-fund
+      - name: Typecheck the published declarations
+        run: node node_modules/typescript/bin/tsc --project tsconfig.public.json
+      - name: Check source and package import policy
+        run: node scripts/check-source-policy.mjs
+      - name: Check package plan
+        run: node scripts/check-package-plan.mjs
+      - name: Run the complete test suite
+        run: node --test "tests/*.test.mjs"
+      - name: Build and smoke the guarded alpha tarballs
+        run: node scripts/build-alpha-packages.mjs
+      - name: Recheck the admitted working tree
+        run: node scripts/check-forbidden-materials.mjs --mode working-tree && node scripts/check-provenance.mjs --mode working-tree && node scripts/check-support-matrix.mjs --mode working-tree && node scripts/check-contracts.mjs --mode working-tree
+      - name: Reject tracked-file drift
+        run: git diff --exit-code

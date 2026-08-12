@@ -215,7 +215,7 @@ capability ID. Core does not import it; only the public test suite does.
   under `--unhandled-rejections=strict`.
 - The identical 507-test suite passes on checksum-verified official Node.js
   22.23.1 and Node.js 24.14.0 releases. Cross-platform OS evidence remains
-  M3-004.
+  M3-004B after M3-006.
 - The bounded closing review found one admission-race blocker, two high
   findings covering late aggregate enforcement and unhandled rejected
   Promises, and one stale-provenance medium. All were fixed; the same reviewer

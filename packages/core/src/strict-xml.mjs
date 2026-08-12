@@ -117,6 +117,7 @@ function makeParser(text) {
   let cursor = parseDeclaration(text);
   let elementCount = 0;
   let attributeCount = 0;
+  let namespaceDeclarationCount = 0;
   let decodedTextBytes = 0;
   const namespaceUris = new Set([XML_NAMESPACE]);
   const stack = [];
@@ -228,16 +229,17 @@ function makeParser(text) {
       ? new Map([["xml", XML_NAMESPACE]])
       : stack.at(-1).namespaces;
     const namespaces = new Map(parentNamespaces);
-    let declarationCount = 0;
     for (const [name, value] of rawAttributes) {
       if (name !== "xmlns" && !name.startsWith("xmlns:")) continue;
-      declarationCount += 1;
-      if (stack.length !== 0 || declarationCount > STRICT_XML_LIMITS.maxNamespaceDeclarations ||
+      namespaceDeclarationCount += 1;
+      if (namespaceDeclarationCount > STRICT_XML_LIMITS.maxNamespaceDeclarations ||
           value.length === 0) {
         fail("XML_NAMESPACE_INVALID", `${nodePointer}/namespaces`);
       }
       const prefix = name === "xmlns" ? "" : name.slice(6);
       splitQName(prefix === "" ? "default" : prefix, `${nodePointer}/namespaces`);
+      // Admit new lexically-scoped prefixes, but reject both rebinding and
+      // redundant redeclaration of a prefix already visible from an ancestor.
       if (prefix === "xml" || prefix === "xmlns" || namespaces.has(prefix) ||
           value === XML_NAMESPACE || value === XMLNS_NAMESPACE) {
         fail("XML_NAMESPACE_INVALID", `${nodePointer}/namespaces`);

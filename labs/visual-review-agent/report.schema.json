@@ -1,0 +1,223 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:pptx-compiler:labs:visual-review-report:0.1.0",
+  "title": "Rendered presentation visual review report",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schemaVersion",
+    "contractType",
+    "reviewId",
+    "reviewContextSha256",
+    "reviewRun",
+    "reviewMode",
+    "inputQuality",
+    "goalAssessment",
+    "slides",
+    "deckFindings",
+    "unassessedProperties"
+  ],
+  "properties": {
+    "schemaVersion": { "const": "0.1.0" },
+    "contractType": { "const": "visual-review-report" },
+    "reviewId": { "$ref": "#/$defs/semanticId" },
+    "reviewContextSha256": { "$ref": "#/$defs/sha256" },
+    "reviewRun": { "type": "integer", "minimum": 1, "maximum": 3 },
+    "reviewMode": { "enum": ["absolute", "compare-to-reference"] },
+    "inputQuality": { "$ref": "#/$defs/inputQuality" },
+    "goalAssessment": { "$ref": "#/$defs/goalAssessment" },
+    "slides": {
+      "type": "array",
+      "minItems": 1,
+      "maxItems": 256,
+      "items": { "$ref": "#/$defs/slideReview" }
+    },
+    "deckFindings": {
+      "type": "array",
+      "maxItems": 64,
+      "items": { "$ref": "#/$defs/finding" }
+    },
+    "unassessedProperties": {
+      "type": "array",
+      "uniqueItems": true,
+      "maxItems": 6,
+      "items": {
+        "enum": [
+          "accessibility-metadata",
+          "animation",
+          "font-embedding",
+          "native-editability",
+          "ooxml-correctness",
+          "speaker-notes"
+        ]
+      }
+    }
+  },
+  "$defs": {
+    "semanticId": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 96,
+      "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$"
+    },
+    "safeText": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 2048,
+      "pattern": "^(?=.*\\S)(?!.*\\p{Cf})(?!.*\\p{Noncharacter_Code_Point})(?!.*[\\uD800-\\uDFFF])[^\\u0000-\\u001F\\u007F-\\u009F\\u2028\\u2029]+$"
+    },
+    "sha256": {
+      "type": "string",
+      "pattern": "^[a-f0-9]{64}$"
+    },
+    "inputQuality": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["status", "notes"],
+      "properties": {
+        "status": { "enum": ["ok", "degraded", "unusable"] },
+        "notes": {
+          "type": "array",
+          "maxItems": 16,
+          "items": { "$ref": "#/$defs/safeText" }
+        }
+      }
+    },
+    "goalAssessment": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["status", "evidence"],
+      "properties": {
+        "status": {
+          "enum": ["met", "partially-met", "not-met", "unable-to-judge"]
+        },
+        "evidence": {
+          "type": "array",
+          "maxItems": 16,
+          "items": { "$ref": "#/$defs/safeText" }
+        }
+      }
+    },
+    "region": {
+      "oneOf": [
+        { "type": "null" },
+        {
+          "type": "array",
+          "minItems": 4,
+          "maxItems": 4,
+          "items": { "type": "number", "minimum": 0, "maximum": 1 }
+        }
+      ]
+    },
+    "finding": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "findingId",
+        "criterion",
+        "rootCause",
+        "severity",
+        "region",
+        "evidenceSource",
+        "evidence",
+        "impact",
+        "recommendation",
+        "confidence"
+      ],
+      "properties": {
+        "findingId": { "$ref": "#/$defs/semanticId" },
+        "criterion": {
+          "enum": [
+            "composition",
+            "contrast",
+            "cross-slide-consistency",
+            "data-viz-integrity",
+            "closing-payoff",
+            "decorative-semantic-fit",
+            "density",
+            "density-rhythm",
+            "delivery-fitness",
+            "goal-alignment",
+            "image-quality",
+            "narrative-clarity",
+            "motif-coherence",
+            "opening-payoff",
+            "opening-closing-payoff",
+            "other",
+            "overflow-clipping",
+            "overlap-occlusion",
+            "reference-fidelity",
+            "silhouette-rhythm",
+            "signature-coherence",
+            "subject-conditionality",
+            "typography",
+            "visual-hierarchy"
+          ]
+        },
+        "rootCause": {
+          "enum": [
+            "alignment-grid-break",
+            "accidental-silhouette-repetition",
+            "clipped-content",
+            "competing-emphasis",
+            "cross-slide-role-drift",
+            "distorted-or-low-resolution-image",
+            "excessive-density",
+            "decorative-semantic-mismatch",
+            "decoration-without-semantic-function",
+            "delivery-density-mismatch",
+            "delivery-mode-mismatch",
+            "flat-density-rhythm",
+            "generic-visual-language",
+            "incoherent-density-rhythm",
+            "incomplete-evidence",
+            "interchangeable-visual-language",
+            "inconsistent-spacing",
+            "insufficient-whitespace",
+            "misleading-or-unclear-data-encoding",
+            "missing-evidence",
+            "missing-closing-payoff",
+            "missing-opening-job",
+            "occluded-content",
+            "other-visible-cause",
+            "reference-design-drift",
+            "random-silhouette-variation",
+            "repeated-layout-silhouette",
+            "signature-disconnected-from-subject",
+            "motif-role-drift",
+            "subject-motif-drift",
+            "text-too-small",
+            "unclear-primary-message",
+            "weak-contrast",
+            "weak-opening-closing-payoff"
+          ]
+        },
+        "severity": { "enum": ["blocker", "major", "minor"] },
+        "region": { "$ref": "#/$defs/region" },
+        "evidenceSource": {
+          "enum": ["crop", "full-slide", "metadata", "reference-diff"]
+        },
+        "evidence": { "$ref": "#/$defs/safeText" },
+        "impact": { "$ref": "#/$defs/safeText" },
+        "recommendation": { "$ref": "#/$defs/safeText" },
+        "confidence": { "type": "number", "minimum": 0, "maximum": 1 }
+      }
+    },
+    "slideReview": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["slideId", "slideNumber", "assessmentStatus", "visibleSummary", "findings"],
+      "properties": {
+        "slideId": { "$ref": "#/$defs/semanticId" },
+        "slideNumber": { "type": "integer", "minimum": 1, "maximum": 256 },
+        "assessmentStatus": { "enum": ["assessable", "unable-to-judge"] },
+        "visibleSummary": { "$ref": "#/$defs/safeText" },
+        "findings": {
+          "type": "array",
+          "maxItems": 32,
+          "items": { "$ref": "#/$defs/finding" }
+        }
+      }
+    }
+  }
+}

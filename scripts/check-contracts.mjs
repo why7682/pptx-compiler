@@ -6,6 +6,7 @@ import path from "node:path";
 import process from "node:process";
 import { spawnSync } from "node:child_process";
 import { fileURLToPath } from "node:url";
+import { resolveSlideLayoutIr } from "../packages/core/src/slide-layout-ir.mjs";
 import {
   EXPECTED_META_SCHEMA,
   assertSupportedSchema,
@@ -24,6 +25,7 @@ const TYPE_OUTPUT_PATH = "types/contracts.d.ts";
 const MAX_CONTROL_FILE_BYTES = 2 * 1024 * 1024;
 const REQUIRED_CONTRACT_TYPES = [
   "build-artifact",
+  "candidate-build-record",
   "capability-registry",
   "deck-spec",
   "project-config",
@@ -33,22 +35,25 @@ const REQUIRED_CONTRACT_TYPES = [
   "template-profile"
 ];
 const REQUIRED_SCHEMA_IDS = [
-  "urn:pptx-pipeline:schema:build-artifact:0.1.0",
-  "urn:pptx-pipeline:schema:capability-registry:0.1.0",
-  "urn:pptx-pipeline:schema:deck-spec:0.1.0",
-  "urn:pptx-pipeline:schema:project-config:0.1.0",
-  "urn:pptx-pipeline:schema:project-overlay:0.1.0",
-  "urn:pptx-pipeline:schema:qa-report:0.1.0",
-  "urn:pptx-pipeline:schema:shared:0.1.0",
-  "urn:pptx-pipeline:schema:template-index:0.1.0",
-  "urn:pptx-pipeline:schema:template-profile:0.1.0"
+  "urn:pptx-compiler:schema:build-artifact:0.1.0",
+  "urn:pptx-compiler:schema:candidate-build-record:0.1.0",
+  "urn:pptx-compiler:schema:capability-registry:0.1.0",
+  "urn:pptx-compiler:schema:deck-spec:0.1.0",
+  "urn:pptx-compiler:schema:project-config:0.1.0",
+  "urn:pptx-compiler:schema:project-overlay:0.1.0",
+  "urn:pptx-compiler:schema:qa-report:0.1.0",
+  "urn:pptx-compiler:schema:shared:0.1.0",
+  "urn:pptx-compiler:schema:template-index:0.1.0",
+  "urn:pptx-compiler:schema:template-profile:0.1.0"
 ];
 const REQUIRED_TYPE_EXPORTS = [
   ["BindingAssignment", "project-overlay", "#/$defs/bindingAssignment"],
   ["BuildArtifact", "build-artifact", "#"],
+  ["CandidateBuildRecord", "candidate-build-record", "#/$defs/candidateBuildRecord"],
   ["CapabilityDefinition", "capability-registry", "#/$defs/capabilityDefinition"],
   ["CapabilityRegistry", "capability-registry", "#"],
   ["CapabilitySelection", "project-overlay", "#/$defs/capabilitySelection"],
+  ["ComposedSlidePlan", "candidate-build-record", "#/$defs/composedSlidePlan"],
   ["DeckSpec", "deck-spec", "#"],
   ["Diagnostic", "qa-report", "#/$defs/diagnostic"],
   ["ManualGate", "qa-report", "#/$defs/manualGate"],
@@ -58,6 +63,7 @@ const REQUIRED_TYPE_EXPORTS = [
   ["QaCheck", "qa-report", "#/$defs/qaCheck"],
   ["QaReport", "qa-report", "#"],
   ["ShapeBinding", "project-overlay", "#/$defs/shapeBinding"],
+  ["SlideLayoutIR", "candidate-build-record", "#/$defs/slideLayoutIr"],
   ["SlideResult", "build-artifact", "#/$defs/slideResult"],
   ["SlideSpec", "deck-spec", "#/$defs/slideSpec"],
   ["TemplateIndex", "template-index", "#"],
@@ -68,7 +74,7 @@ const REQUIRED_TYPE_EXPORTS = [
   ["TemplateSlideIndexEntry", "template-index", "#/$defs/slideEntry"]
 ].map(([name, schemaName, pointer]) => [
   name,
-  `urn:pptx-pipeline:schema:${schemaName}:${CONTRACT_VERSION}`,
+  `urn:pptx-compiler:schema:${schemaName}:${CONTRACT_VERSION}`,
   pointer
 ]);
 const decoder = new TextDecoder("utf-8", { fatal: true });
@@ -414,13 +420,58 @@ function validateSemantics(bundle, fixturePaths, findings) {
   const overlay = bundle.fixtures["project-overlay"];
   const deck = bundle.fixtures["deck-spec"];
   const artifact = bundle.fixtures["build-artifact"];
+  const candidate = bundle.fixtures["candidate-build-record"];
   const qa = bundle.fixtures["qa-report"];
-  if (![config, profile, index, registry, overlay, deck, artifact, qa].every(isPlainObject)) return;
+  if (![config, profile, index, registry, overlay, deck, artifact, candidate, qa]
+    .every(isPlainObject)) return;
 
   const pathFor = (type) => fixturePaths.get(type) ?? MANIFEST_PATH;
   const same = (actual, expected, type, pointer) => {
     if (!equalJson(actual, expected)) addMismatch(findings, pathFor(type), pointer);
   };
+
+  try {
+    const replayed = resolveSlideLayoutIr(candidate.slide.layoutIr);
+    if (!equalJson(replayed, candidate.slide.composedSlidePlan) ||
+        candidate.slide.slideId !== replayed.slideId) {
+      findings.push(finding(
+        pathFor("candidate-build-record"),
+        "candidate-build-record-replay-mismatch",
+        "/slide/composedSlidePlan"
+      ));
+    }
+  } catch {
+    findings.push(finding(
+      pathFor("candidate-build-record"),
+      "candidate-build-record-replay-mismatch",
+      "/slide/layoutIr"
+    ));
+  }
+  const candidateProfiles = {
+    "native-card-arrow-assembled-pptx": [
+      "target-specific-native-card-arrow-output",
+      "native-card-arrow",
+      "native-card-arrow-insertion"
+    ],
+    "native-omml-formula-assembled-pptx": [
+      "target-specific-native-omml-formula-output",
+      "native-omml-formula",
+      "native-omml-formula-replacement"
+    ]
+  };
+  const expectedCandidateProfile = candidateProfiles[candidate.sourceArtifactType];
+  if (expectedCandidateProfile === undefined ||
+      candidate.sourceVerificationProfile !== expectedCandidateProfile[0] ||
+      candidate.slide.capabilityEvidence.evidenceType !== expectedCandidateProfile[1] ||
+      candidate.slide.diff.allowedChanges[0].reason !== expectedCandidateProfile[2] ||
+      candidate.slide.diff.allowedChanges[0].partPath !== candidate.slide.slidePart ||
+      candidate.slide.diff.modifiedParts[0] !== candidate.slide.slidePart) {
+    findings.push(finding(
+      pathFor("candidate-build-record"),
+      "candidate-build-record-source-mismatch",
+      "/sourceArtifactType"
+    ));
+  }
 
   same(config.template.profileId, profile.templateProfileId, "project-config", "/template/profileId");
   same(config.template.indexId, index.templateIndexId, "project-config", "/template/indexId");
@@ -553,7 +604,7 @@ function validateSemantics(bundle, fixturePaths, findings) {
     "/shapeBindings", findings);
   const bindings = new Map((overlay.shapeBindings ?? []).map((item) => [item.shapeBindingId, item]));
   const selections = new Map((overlay.capabilitySelections ?? []).map((item) => [item.capabilitySelectionId, item]));
-  const usedBindings = new Set();
+  const referencedBindings = new Set();
   for (let selectionIndex = 0; selectionIndex < (overlay.capabilitySelections ?? []).length; selectionIndex += 1) {
     const selection = overlay.capabilitySelections[selectionIndex];
     const capability = capabilities.get(selection.capabilityId);
@@ -568,23 +619,25 @@ function validateSemantics(bundle, fixturePaths, findings) {
       findings.push(finding(pathFor("project-overlay"), "capability-binding-role-mismatch",
         `/capabilitySelections/${selectionIndex}/bindings`));
     }
+    const selectionBindings = new Set();
     for (let assignmentIndex = 0; assignmentIndex < selection.bindings.length; assignmentIndex += 1) {
       const bindingId = selection.bindings[assignmentIndex].shapeBindingId;
       if (!bindings.has(bindingId)) {
         addMismatch(findings, pathFor("project-overlay"),
           `/capabilitySelections/${selectionIndex}/bindings/${assignmentIndex}/shapeBindingId`);
       }
-      if (usedBindings.has(bindingId)) {
+      if (selectionBindings.has(bindingId)) {
         findings.push(finding(pathFor("project-overlay"), "ambiguous-shape-binding",
           `/capabilitySelections/${selectionIndex}/bindings/${assignmentIndex}/shapeBindingId`));
       }
-      usedBindings.add(bindingId);
+      selectionBindings.add(bindingId);
+      referencedBindings.add(bindingId);
     }
   }
   const bindingTargets = new Set();
   for (let bindingIndex = 0; bindingIndex < (overlay.shapeBindings ?? []).length; bindingIndex += 1) {
     const binding = overlay.shapeBindings[bindingIndex];
-    if (!usedBindings.has(binding.shapeBindingId)) {
+    if (!referencedBindings.has(binding.shapeBindingId)) {
       findings.push(finding(pathFor("project-overlay"), "unused-shape-binding", `/shapeBindings/${bindingIndex}`));
     }
     const container = binding.containerKind === "layout"
@@ -850,7 +903,7 @@ export function validateContractSet(bundle) {
         findings.push(finding(entry.path, "unsupported-contract-schema"));
         schemaConfigurationValid = false;
       }
-      if (entry.id !== "urn:pptx-pipeline:schema:shared:0.1.0" &&
+      if (entry.id !== "urn:pptx-compiler:schema:shared:0.1.0" &&
           (schema.additionalProperties !== false || schema.properties?.schemaVersion?.$ref === undefined ||
            schema.properties?.contractType?.const === undefined)) {
         findings.push(finding(entry.path, "unclosed-contract-root"));

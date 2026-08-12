@@ -1,0 +1,1074 @@
+{
+  "schemaVersion": "0.2.0",
+  "fixtureSetType": "visual-review-v2-calibration",
+  "examples": [
+    {
+      "label": "blind-outcome-reconstruction",
+      "report": {
+        "schemaVersion": "0.2.0",
+        "contractType": "blind-outcome-report",
+        "lane": "blind-outcome",
+        "disclosurePhase": "blind",
+        "evidenceScope": "simulated-review-only",
+        "reviewId": "blind-calibration",
+        "reviewRun": 1,
+        "reviewContextSha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+        "renderSetSha256": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+        "deliveryProfileSha256": "cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc",
+        "inputQuality": {
+          "status": "ok",
+          "notes": []
+        },
+        "orderedSlides": [
+          {
+            "slideId": "slide-a",
+            "slideNumber": 1,
+            "assessmentStatus": "assessable",
+            "visibleSummary": "A readiness claim is paired with a compact independent-check result."
+          },
+          {
+            "slideId": "slide-b",
+            "slideNumber": 2,
+            "assessmentStatus": "assessable",
+            "visibleSummary": "A progress measure is shown beside one clearly named remaining condition."
+          },
+          {
+            "slideId": "slide-c",
+            "slideNumber": 3,
+            "assessmentStatus": "assessable",
+            "visibleSummary": "A bounded authorization request closes the sequence."
+          }
+        ],
+        "reconstruction": {
+          "takeaway": {
+            "status": "identified",
+            "text": "The proposal is ready for one controlled cohort, not a broad launch.",
+            "observations": [
+              {
+                "slideId": "slide-a",
+                "region": [0.08, 0.08, 0.84, 0.24],
+                "evidenceSource": "full-slide",
+                "evidence": "The dominant statement names readiness while the supporting result limits the scope."
+              }
+            ]
+          },
+          "requestedAction": {
+            "status": "identified",
+            "text": "Authorize a short controlled cohort.",
+            "observations": [
+              {
+                "slideId": "slide-c",
+                "region": [0.08, 0.1, 0.84, 0.28],
+                "evidenceSource": "full-slide",
+                "evidence": "The closing slide gives one explicit bounded authorization request."
+              }
+            ]
+          },
+          "uncertaintyBoundary": {
+            "status": "identified",
+            "text": "Expansion waits for the named completion condition.",
+            "observations": [
+              {
+                "slideId": "slide-b",
+                "region": [0.1, 0.5, 0.8, 0.26],
+                "evidenceSource": "full-slide",
+                "evidence": "The evidence slide visibly separates current progress from the remaining condition."
+              }
+            ]
+          },
+          "argumentEvidenceChain": [
+            "The opening establishes a bounded readiness claim with an independent check.",
+            "The middle slide shows current progress and the condition that remains.",
+            "The close converts that bounded evidence into a controlled authorization request."
+          ],
+          "argumentEvidenceObservations": [
+            {
+              "slideId": "slide-b",
+              "region": [0.1, 0.18, 0.8, 0.64],
+              "evidenceSource": "full-slide",
+              "evidence": "The middle slide visibly joins current progress to the condition that remains."
+            }
+          ]
+        },
+        "unassessedProperties": [
+          "accessibility-metadata",
+          "animation",
+          "native-editability",
+          "ooxml-correctness"
+        ]
+      }
+    },
+    {
+      "label": "instance-required-items-matched",
+      "report": {
+        "schemaVersion": "0.2.0",
+        "contractType": "instance-review-report",
+        "lane": "instance",
+        "disclosurePhase": "revealed",
+        "evidenceScope": "simulated-review-only",
+        "reviewId": "instance-calibration",
+        "reviewRun": 1,
+        "reviewContextSha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+        "deliveryProfileSha256": "cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc",
+        "instanceContextSha256": "dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd",
+        "blindBatchSha256": "eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee",
+        "hiddenOutcomeKeySha256": "ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff",
+        "atomicOutcomeManifestSha256": "0000000000000000000000000000000000000000000000000000000000000000",
+        "itemAssessments": [
+          {
+            "itemId": "sample-readiness-claim",
+            "itemKind": "takeaway",
+            "status": "matched",
+            "blindEvidenceRefs": [
+              "run-1:takeaway"
+            ],
+            "visibleEvidence": [
+              "The opening slide makes the bounded readiness claim visually dominant."
+            ],
+            "diagnosis": "The blind reconstruction preserves the approved claim and its bounded scope.",
+            "recommendation": "Preserve the dominant claim and its supporting scope cue.",
+            "confidence": 0.96
+          },
+          {
+            "itemId": "sample-authorization-action",
+            "itemKind": "requested-action",
+            "status": "matched",
+            "blindEvidenceRefs": [
+              "run-1:requested-action"
+            ],
+            "visibleEvidence": [
+              "The closing slide states one explicit authorization request."
+            ],
+            "diagnosis": "The requested action matches the approved bounded action.",
+            "recommendation": "Keep the action explicit and visually dominant at the close.",
+            "confidence": 0.97
+          },
+          {
+            "itemId": "sample-expansion-boundary",
+            "itemKind": "uncertainty-boundary",
+            "status": "matched",
+            "blindEvidenceRefs": [
+              "run-1:uncertainty-boundary"
+            ],
+            "visibleEvidence": [
+              "The evidence slide separates completed work from the remaining condition."
+            ],
+            "diagnosis": "The blind reconstruction retains the approved expansion boundary.",
+            "recommendation": "Preserve the explicit separation between the cohort and later expansion.",
+            "confidence": 0.94
+          },
+          {
+            "itemId": "sample-independent-check",
+            "itemKind": "evidence",
+            "status": "matched",
+            "blindEvidenceRefs": [
+              "run-1:argument-evidence-chain"
+            ],
+            "visibleEvidence": [
+              "A compact result adjacent to the opening claim visibly supplies independent support."
+            ],
+            "diagnosis": "The required evidence is present and connected to the readiness claim.",
+            "recommendation": "Keep the independent result adjacent to the claim it supports.",
+            "confidence": 0.95
+          }
+        ],
+        "unassessedProperties": [
+          "accessibility-metadata",
+          "animation",
+          "native-editability",
+          "ooxml-correctness"
+        ]
+      }
+    },
+    {
+      "label": "strong-restrained",
+      "report": {
+        "schemaVersion": "0.2.0",
+        "contractType": "whole-deck-review-report",
+        "lane": "whole-deck",
+        "disclosurePhase": "label-blind",
+        "evidenceScope": "simulated-review-only",
+        "labelBlind": true,
+        "reviewId": "restrained-calibration",
+        "reviewRun": 1,
+        "reviewContextSha256": "dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd",
+        "deliveryProfileSha256": "eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee",
+        "contactSheetSha256": "ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff",
+        "inputQuality": {
+          "status": "ok",
+          "notes": []
+        },
+        "orderedSlides": [
+          { "slideId": "slide-a", "slideNumber": 1 },
+          { "slideId": "slide-b", "slideNumber": 2 },
+          { "slideId": "slide-c", "slideNumber": 3 }
+        ],
+        "contactSheetSummary": "A restrained three-slide sequence uses clear hierarchy, evidence-led variation, and a bounded decision close.",
+        "dimensionAssessments": [
+          {
+            "dimension": "subject-conditionality",
+            "status": "fit",
+            "evidence": "The evidence structures and wording are specific to the decision even though the template remains conservative.",
+            "confidence": 0.91
+          },
+          {
+            "dimension": "decorative-semantic-fit",
+            "status": "fit",
+            "evidence": "The contact sheet contains no conspicuous decoration without an information role.",
+            "confidence": 0.94
+          },
+          {
+            "dimension": "signature-coherence",
+            "status": "fit",
+            "evidence": "A restrained evidence marker recurs only where an independent result is presented.",
+            "confidence": 0.89
+          },
+          {
+            "dimension": "motif-coherence",
+            "status": "fit",
+            "evidence": "Repeated rules and emphasis consistently distinguish claims from supporting conditions.",
+            "confidence": 0.9
+          },
+          {
+            "dimension": "silhouette-rhythm",
+            "status": "fit",
+            "evidence": "The opening, evidence peak, and close have visibly different but related silhouettes.",
+            "confidence": 0.92
+          },
+          {
+            "dimension": "density-rhythm",
+            "status": "fit",
+            "evidence": "The sequence moves from an anchor to a denser evidence slide and back to a concise action close.",
+            "confidence": 0.93
+          },
+          {
+            "dimension": "opening-payoff",
+            "status": "fit",
+            "evidence": "The opening establishes the decision tension rather than acting as a generic title page.",
+            "confidence": 0.9
+          },
+          {
+            "dimension": "closing-payoff",
+            "status": "fit",
+            "evidence": "The close resolves the sequence with one bounded action linked to the preceding evidence.",
+            "confidence": 0.94
+          },
+          {
+            "dimension": "delivery-fitness",
+            "status": "fit",
+            "evidence": "The message hierarchy and density changes are compatible with the supplied live-room profile.",
+            "confidence": 0.92
+          }
+        ],
+        "findings": [],
+        "unassessedProperties": [
+          "accessibility-metadata",
+          "animation",
+          "native-editability",
+          "ooxml-correctness"
+        ]
+      }
+    },
+    {
+      "label": "weak-topic-decoration",
+      "report": {
+        "schemaVersion": "0.2.0",
+        "contractType": "whole-deck-review-report",
+        "lane": "whole-deck",
+        "disclosurePhase": "label-blind",
+        "evidenceScope": "simulated-review-only",
+        "labelBlind": true,
+        "reviewId": "decoration-calibration",
+        "reviewRun": 1,
+        "reviewContextSha256": "1111111111111111111111111111111111111111111111111111111111111111",
+        "deliveryProfileSha256": "2222222222222222222222222222222222222222222222222222222222222222",
+        "contactSheetSha256": "3333333333333333333333333333333333333333333333333333333333333333",
+        "inputQuality": {
+          "status": "ok",
+          "notes": []
+        },
+        "orderedSlides": [
+          { "slideId": "slide-a", "slideNumber": 1 },
+          { "slideId": "slide-b", "slideNumber": 2 },
+          { "slideId": "slide-c", "slideNumber": 3 }
+        ],
+        "contactSheetSummary": "Every slide repeats conspicuous topic icons and colored traces while the evidence remains generic text.",
+        "dimensionAssessments": [
+          {
+            "dimension": "subject-conditionality",
+            "status": "concern",
+            "evidence": "Replacing the topic icons would leave the same card-and-caption composition and argument intact.",
+            "confidence": 0.95
+          },
+          {
+            "dimension": "decorative-semantic-fit",
+            "status": "concern",
+            "evidence": "Large colored traces and icons occupy focal space but do not encode a measure, process, or relationship.",
+            "confidence": 0.97
+          },
+          {
+            "dimension": "signature-coherence",
+            "status": "fit",
+            "evidence": "The repeated trace treatment is visually consistent even though its semantic role is weak.",
+            "confidence": 0.83
+          },
+          {
+            "dimension": "motif-coherence",
+            "status": "fit",
+            "evidence": "The same decorative motif is applied consistently across the sequence.",
+            "confidence": 0.86
+          },
+          {
+            "dimension": "silhouette-rhythm",
+            "status": "fit",
+            "evidence": "The contact sheet varies the scale of its repeated components across the three slides.",
+            "confidence": 0.79
+          },
+          {
+            "dimension": "density-rhythm",
+            "status": "fit",
+            "evidence": "The evidence slide is visibly denser than the opening and close.",
+            "confidence": 0.82
+          },
+          {
+            "dimension": "opening-payoff",
+            "status": "fit",
+            "evidence": "The opening establishes a visible problem statement before the evidence sequence.",
+            "confidence": 0.81
+          },
+          {
+            "dimension": "closing-payoff",
+            "status": "fit",
+            "evidence": "The close presents a distinct action rather than merely repeating the title.",
+            "confidence": 0.84
+          },
+          {
+            "dimension": "delivery-fitness",
+            "status": "fit",
+            "evidence": "The text remains scannable at the supplied live-room density despite the decorative excess.",
+            "confidence": 0.8
+          }
+        ],
+        "findings": [
+          {
+            "dimension": "subject-conditionality",
+            "affectedSlideIds": ["slide-a", "slide-b", "slide-c"],
+            "region": null,
+            "rootCause": "interchangeable-visual-language",
+            "severity": "major",
+            "evidence": "All three slides use the same generic card grammar, with topic identity supplied only by replaceable icons.",
+            "impact": "The presentation appears topical without making the subject easier to understand or the decision easier to evaluate.",
+            "recommendation": "Base the prominent visual structure on the actual evidence or process, or remove the subject-specific claim.",
+            "confidence": 0.95
+          },
+          {
+            "dimension": "decorative-semantic-fit",
+            "affectedSlideIds": ["slide-a", "slide-b", "slide-c"],
+            "region": [0.02, 0.08, 0.2, 0.82],
+            "rootCause": "decoration-without-semantic-function",
+            "severity": "major",
+            "evidence": "The dominant traces and icons repeat in the same rail but carry no values, stages, dependencies, or evidence states.",
+            "impact": "Attention is pulled toward decoration that does not advance the argument.",
+            "recommendation": "Remove the rail or convert it into a truthful evidence-bearing sequence tied to the slide claims.",
+            "confidence": 0.97
+          }
+        ],
+        "unassessedProperties": [
+          "accessibility-metadata",
+          "animation",
+          "native-editability",
+          "ooxml-correctness"
+        ]
+      }
+    },
+    {
+      "label": "strong-subject-encoding",
+      "report": {
+        "schemaVersion": "0.2.0",
+        "contractType": "whole-deck-review-report",
+        "lane": "whole-deck",
+        "disclosurePhase": "label-blind",
+        "evidenceScope": "simulated-review-only",
+        "labelBlind": true,
+        "reviewId": "subject-encoding-calibration",
+        "reviewRun": 1,
+        "reviewContextSha256": "4444444444444444444444444444444444444444444444444444444444444444",
+        "deliveryProfileSha256": "5555555555555555555555555555555555555555555555555555555555555555",
+        "contactSheetSha256": "6666666666666666666666666666666666666666666666666666666666666666",
+        "inputQuality": {
+          "status": "ok",
+          "notes": []
+        },
+        "orderedSlides": [
+          { "slideId": "slide-a", "slideNumber": 1 },
+          { "slideId": "slide-b", "slideNumber": 2 },
+          { "slideId": "slide-c", "slideNumber": 3 }
+        ],
+        "contactSheetSummary": "The sequence turns observed control states into a consistent evidence path that culminates in a bounded action.",
+        "dimensionAssessments": [
+          {
+            "dimension": "subject-conditionality",
+            "status": "fit",
+            "evidence": "The principal visual path is built from the actual control states and would lose meaning after a topic swap.",
+            "confidence": 0.97
+          },
+          {
+            "dimension": "decorative-semantic-fit",
+            "status": "fit",
+            "evidence": "Color and line changes correspond to observed, remaining, and bounded states rather than decoration alone.",
+            "confidence": 0.96
+          },
+          {
+            "dimension": "signature-coherence",
+            "status": "fit",
+            "evidence": "A control-state marker recurs only when the same evidence role returns.",
+            "confidence": 0.95
+          },
+          {
+            "dimension": "motif-coherence",
+            "status": "fit",
+            "evidence": "The evidence path preserves one visual meaning across all three slides while changing scale with the narrative role.",
+            "confidence": 0.94
+          },
+          {
+            "dimension": "silhouette-rhythm",
+            "status": "fit",
+            "evidence": "A broad opening state narrows into detailed evidence and resolves into one action target.",
+            "confidence": 0.93
+          },
+          {
+            "dimension": "density-rhythm",
+            "status": "fit",
+            "evidence": "The central evidence slide carries the detail while the opening and close remain anchors.",
+            "confidence": 0.95
+          },
+          {
+            "dimension": "opening-payoff",
+            "status": "fit",
+            "evidence": "The opening immediately establishes the bounded state change that the evidence must justify.",
+            "confidence": 0.94
+          },
+          {
+            "dimension": "closing-payoff",
+            "status": "fit",
+            "evidence": "The closing action visually completes the evidence path rather than repeating an earlier composition.",
+            "confidence": 0.96
+          },
+          {
+            "dimension": "delivery-fitness",
+            "status": "fit",
+            "evidence": "The anchor-evidence-anchor sequence fits the supplied live-room scan behavior.",
+            "confidence": 0.93
+          }
+        ],
+        "findings": [],
+        "unassessedProperties": [
+          "accessibility-metadata",
+          "animation",
+          "native-editability",
+          "ooxml-correctness"
+        ]
+      }
+    },
+    {
+      "label": "delivery-inappropriate",
+      "report": {
+        "schemaVersion": "0.2.0",
+        "contractType": "whole-deck-review-report",
+        "lane": "whole-deck",
+        "disclosurePhase": "label-blind",
+        "evidenceScope": "simulated-review-only",
+        "labelBlind": true,
+        "reviewId": "delivery-calibration",
+        "reviewRun": 1,
+        "reviewContextSha256": "7777777777777777777777777777777777777777777777777777777777777777",
+        "deliveryProfileSha256": "8888888888888888888888888888888888888888888888888888888888888888",
+        "contactSheetSha256": "9999999999999999999999999999999999999999999999999999999999999999",
+        "inputQuality": {
+          "status": "ok",
+          "notes": []
+        },
+        "orderedSlides": [
+          { "slideId": "slide-a", "slideNumber": 1 },
+          { "slideId": "slide-b", "slideNumber": 2 },
+          { "slideId": "slide-c", "slideNumber": 3 }
+        ],
+        "contactSheetSummary": "A distinctive small-multiple treatment is applied to every slide with reader-level detail and little change in density.",
+        "dimensionAssessments": [
+          {
+            "dimension": "subject-conditionality",
+            "status": "fit",
+            "evidence": "The small multiples encode actual state changes specific to the subject.",
+            "confidence": 0.9
+          },
+          {
+            "dimension": "decorative-semantic-fit",
+            "status": "fit",
+            "evidence": "The visible marks consistently encode values and states rather than acting as ornament.",
+            "confidence": 0.92
+          },
+          {
+            "dimension": "signature-coherence",
+            "status": "fit",
+            "evidence": "The small-multiple signature remains visually and semantically consistent.",
+            "confidence": 0.91
+          },
+          {
+            "dimension": "motif-coherence",
+            "status": "fit",
+            "evidence": "Repeated state markers retain the same meaning across the sequence.",
+            "confidence": 0.91
+          },
+          {
+            "dimension": "silhouette-rhythm",
+            "status": "fit",
+            "evidence": "Scale and focal position vary enough to distinguish the opening, evidence, and close.",
+            "confidence": 0.8
+          },
+          {
+            "dimension": "density-rhythm",
+            "status": "concern",
+            "evidence": "All three slides carry similar reader-level annotation density, so the action close has no release in cognitive load.",
+            "confidence": 0.95
+          },
+          {
+            "dimension": "opening-payoff",
+            "status": "fit",
+            "evidence": "The opening establishes the observed state through a distinctive subject-specific overview.",
+            "confidence": 0.85
+          },
+          {
+            "dimension": "closing-payoff",
+            "status": "fit",
+            "evidence": "The close presents a distinct action even though it remains overly detailed.",
+            "confidence": 0.8
+          },
+          {
+            "dimension": "delivery-fitness",
+            "status": "concern",
+            "evidence": "The supplied live-room profile requires a single-scan message layer, but each slide depends on close reading of many annotations.",
+            "confidence": 0.97
+          }
+        ],
+        "findings": [
+          {
+            "dimension": "density-rhythm",
+            "affectedSlideIds": ["slide-a", "slide-b", "slide-c"],
+            "region": null,
+            "rootCause": "flat-density-rhythm",
+            "severity": "major",
+            "evidence": "Every contact-sheet thumbnail contains a similar number of annotated small multiples with no anchor-to-detail transition.",
+            "impact": "The audience receives no clear change in pace and must sustain reader-level attention through the close.",
+            "recommendation": "Reserve the complete small-multiple detail for the evidence slide and reduce the opening and close to message anchors.",
+            "confidence": 0.95
+          },
+          {
+            "dimension": "delivery-fitness",
+            "affectedSlideIds": ["slide-a", "slide-b", "slide-c"],
+            "region": null,
+            "rootCause": "delivery-density-mismatch",
+            "severity": "major",
+            "evidence": "Essential labels remain small and numerous on all three slides under a room-distance single-scan profile.",
+            "impact": "A live audience cannot recover the primary message without pausing for close reading.",
+            "recommendation": "Create a live message layer with one dominant claim per slide and move detailed annotations to a leave-behind version.",
+            "confidence": 0.97
+          }
+        ],
+        "unassessedProperties": [
+          "accessibility-metadata",
+          "animation",
+          "native-editability",
+          "ooxml-correctness"
+        ]
+      }
+    },
+    {
+      "label": "broken-sequence-rhythm",
+      "report": {
+        "schemaVersion": "0.2.0",
+        "contractType": "whole-deck-review-report",
+        "lane": "whole-deck",
+        "disclosurePhase": "label-blind",
+        "evidenceScope": "simulated-review-only",
+        "labelBlind": true,
+        "reviewId": "broken-sequence-calibration",
+        "reviewRun": 1,
+        "reviewContextSha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+        "deliveryProfileSha256": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+        "contactSheetSha256": "cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc",
+        "inputQuality": {
+          "status": "ok",
+          "notes": []
+        },
+        "orderedSlides": [
+          { "slideId": "slide-a", "slideNumber": 1 },
+          { "slideId": "slide-b", "slideNumber": 2 },
+          { "slideId": "slide-c", "slideNumber": 3 }
+        ],
+        "contactSheetSummary": "The opening, evidence, and close repeat one card silhouette while visual markers change meaning and neither endpoint performs a distinct narrative job.",
+        "dimensionAssessments": [
+          {
+            "dimension": "subject-conditionality",
+            "status": "fit",
+            "evidence": "The cards contain subject-specific states and measures that would not survive a topic substitution.",
+            "confidence": 0.86
+          },
+          {
+            "dimension": "decorative-semantic-fit",
+            "status": "fit",
+            "evidence": "Every prominent mark carries a visible state, measure, or relationship.",
+            "confidence": 0.88
+          },
+          {
+            "dimension": "signature-coherence",
+            "status": "concern",
+            "evidence": "The largest recurring marker is visually dominant but is not tied to a stable subject role.",
+            "confidence": 0.94
+          },
+          {
+            "dimension": "motif-coherence",
+            "status": "concern",
+            "evidence": "The same ring alternately means completion, risk, and requested action without a visible rule.",
+            "confidence": 0.96
+          },
+          {
+            "dimension": "silhouette-rhythm",
+            "status": "concern",
+            "evidence": "All three thumbnails repeat the same three-card silhouette despite different narrative roles.",
+            "confidence": 0.97
+          },
+          {
+            "dimension": "density-rhythm",
+            "status": "fit",
+            "evidence": "The middle slide carries visibly more evidence detail than the endpoints.",
+            "confidence": 0.82
+          },
+          {
+            "dimension": "opening-payoff",
+            "status": "concern",
+            "evidence": "The first slide behaves like a generic section divider and establishes no decision tension.",
+            "confidence": 0.95
+          },
+          {
+            "dimension": "closing-payoff",
+            "status": "concern",
+            "evidence": "The final slide repeats the three-card inventory without synthesizing it into one action.",
+            "confidence": 0.96
+          },
+          {
+            "dimension": "delivery-fitness",
+            "status": "fit",
+            "evidence": "The supplied room-distance profile remains legible despite the sequence-level failures.",
+            "confidence": 0.84
+          }
+        ],
+        "findings": [
+          {
+            "dimension": "signature-coherence",
+            "affectedSlideIds": ["slide-a", "slide-b", "slide-c"],
+            "region": null,
+            "rootCause": "signature-disconnected-from-subject",
+            "severity": "major",
+            "evidence": "The dominant marker recurs at the same scale but has no stable connection to a subject-specific state or transition.",
+            "impact": "The deck appears branded but the signature does not help the audience interpret the subject.",
+            "recommendation": "Bind the signature to one recurring evidence role or remove its dominant treatment.",
+            "confidence": 0.94
+          },
+          {
+            "dimension": "motif-coherence",
+            "affectedSlideIds": ["slide-a", "slide-b", "slide-c"],
+            "region": null,
+            "rootCause": "motif-role-drift",
+            "severity": "major",
+            "evidence": "The same ring means completion on the opening, risk in the evidence slide, and action on the close.",
+            "impact": "A repeated visual cue teaches three conflicting interpretations.",
+            "recommendation": "Assign the ring one semantic role and use distinct encodings for the other states.",
+            "confidence": 0.96
+          },
+          {
+            "dimension": "silhouette-rhythm",
+            "affectedSlideIds": ["slide-a", "slide-b", "slide-c"],
+            "region": null,
+            "rootCause": "accidental-silhouette-repetition",
+            "severity": "major",
+            "evidence": "Each contact-sheet thumbnail uses the same three equal cards in the same position and scale.",
+            "impact": "Narrative changes are not perceptually marked, so the deck reads as an inventory rather than an argument.",
+            "recommendation": "Give the opening, evidence peak, and action close distinct silhouettes tied to their jobs.",
+            "confidence": 0.97
+          },
+          {
+            "dimension": "opening-payoff",
+            "affectedSlideIds": ["slide-a"],
+            "region": null,
+            "rootCause": "missing-opening-job",
+            "severity": "major",
+            "evidence": "The opening shows a topic label and three unlabeled cards but no visible claim, tension, or decision frame.",
+            "impact": "The audience cannot tell what question the following evidence is meant to resolve.",
+            "recommendation": "Replace the inventory opening with one explicit decision tension supported by the minimum orienting evidence.",
+            "confidence": 0.95
+          },
+          {
+            "dimension": "closing-payoff",
+            "affectedSlideIds": ["slide-c"],
+            "region": null,
+            "rootCause": "missing-closing-payoff",
+            "severity": "major",
+            "evidence": "The close repeats the earlier card list and contains no visually dominant synthesis or action.",
+            "impact": "The sequence ends without converting evidence into a recoverable decision.",
+            "recommendation": "Synthesize the evidence into one bounded action and make it the closing focal point.",
+            "confidence": 0.96
+          }
+        ],
+        "unassessedProperties": [
+          "accessibility-metadata",
+          "animation",
+          "native-editability",
+          "ooxml-correctness"
+        ]
+      }
+    },
+    {
+      "label": "same-visual-leave-behind",
+      "report": {
+        "schemaVersion": "0.2.0",
+        "contractType": "whole-deck-review-report",
+        "lane": "whole-deck",
+        "disclosurePhase": "label-blind",
+        "evidenceScope": "simulated-review-only",
+        "labelBlind": true,
+        "reviewId": "reader-density-calibration",
+        "reviewRun": 1,
+        "reviewContextSha256": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+        "deliveryProfileSha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+        "contactSheetSha256": "9999999999999999999999999999999999999999999999999999999999999999",
+        "inputQuality": {
+          "status": "ok",
+          "notes": []
+        },
+        "orderedSlides": [
+          { "slideId": "slide-a", "slideNumber": 1 },
+          { "slideId": "slide-b", "slideNumber": 2 },
+          { "slideId": "slide-c", "slideNumber": 3 }
+        ],
+        "contactSheetSummary": "A distinctive small-multiple treatment is applied to every slide with reader-level detail and little change in density.",
+        "dimensionAssessments": [
+          {
+            "dimension": "subject-conditionality",
+            "status": "fit",
+            "evidence": "The small multiples encode actual state changes specific to the subject.",
+            "confidence": 0.9
+          },
+          {
+            "dimension": "decorative-semantic-fit",
+            "status": "fit",
+            "evidence": "The visible marks consistently encode values and states rather than acting as ornament.",
+            "confidence": 0.92
+          },
+          {
+            "dimension": "signature-coherence",
+            "status": "fit",
+            "evidence": "The small-multiple signature remains visually and semantically consistent.",
+            "confidence": 0.91
+          },
+          {
+            "dimension": "motif-coherence",
+            "status": "fit",
+            "evidence": "Repeated state markers retain the same meaning across the sequence.",
+            "confidence": 0.91
+          },
+          {
+            "dimension": "silhouette-rhythm",
+            "status": "fit",
+            "evidence": "Section labels and focal shifts make the stable reader-oriented layout navigable.",
+            "confidence": 0.84
+          },
+          {
+            "dimension": "density-rhythm",
+            "status": "fit",
+            "evidence": "Consistent reader-level density supports self-guided comparison instead of a timed live reveal.",
+            "confidence": 0.9
+          },
+          {
+            "dimension": "opening-payoff",
+            "status": "fit",
+            "evidence": "The opening provides a subject-specific overview that orients self-guided reading.",
+            "confidence": 0.87
+          },
+          {
+            "dimension": "closing-payoff",
+            "status": "fit",
+            "evidence": "The close preserves the detailed evidence trail while presenting a distinct action.",
+            "confidence": 0.86
+          },
+          {
+            "dimension": "delivery-fitness",
+            "status": "fit",
+            "evidence": "Under a personal-distance leave-behind profile, the annotations support deliberate self-guided comparison.",
+            "confidence": 0.96
+          }
+        ],
+        "findings": [],
+        "unassessedProperties": [
+          "accessibility-metadata",
+          "animation",
+          "native-editability",
+          "ooxml-correctness"
+        ]
+      }
+    },
+    {
+      "label": "blind-input-unusable",
+      "report": {
+        "schemaVersion": "0.2.0",
+        "contractType": "blind-outcome-report",
+        "lane": "blind-outcome",
+        "disclosurePhase": "blind",
+        "evidenceScope": "simulated-review-only",
+        "reviewId": "unusable-input-calibration",
+        "reviewRun": 1,
+        "reviewContextSha256": "1212121212121212121212121212121212121212121212121212121212121212",
+        "renderSetSha256": "2323232323232323232323232323232323232323232323232323232323232323",
+        "deliveryProfileSha256": "3434343434343434343434343434343434343434343434343434343434343434",
+        "inputQuality": {
+          "status": "unusable",
+          "notes": [
+            "The supplied views do not expose enough legible information to reconstruct an outcome."
+          ]
+        },
+        "orderedSlides": [
+          {
+            "slideId": "slide-a",
+            "slideNumber": 1,
+            "assessmentStatus": "unable-to-judge",
+            "visibleSummary": "The first supplied view is present but its message cannot be recovered."
+          },
+          {
+            "slideId": "slide-b",
+            "slideNumber": 2,
+            "assessmentStatus": "unable-to-judge",
+            "visibleSummary": "The second supplied view is present but its evidence cannot be recovered."
+          },
+          {
+            "slideId": "slide-c",
+            "slideNumber": 3,
+            "assessmentStatus": "unable-to-judge",
+            "visibleSummary": "The third supplied view is present but its action cannot be recovered."
+          }
+        ],
+        "reconstruction": {
+          "takeaway": {
+            "status": "not-visible",
+            "text": null,
+            "observations": []
+          },
+          "requestedAction": {
+            "status": "not-visible",
+            "text": null,
+            "observations": []
+          },
+          "uncertaintyBoundary": {
+            "status": "not-visible",
+            "text": null,
+            "observations": []
+          },
+          "argumentEvidenceChain": [],
+          "argumentEvidenceObservations": []
+        },
+        "unassessedProperties": [
+          "accessibility-metadata",
+          "animation",
+          "native-editability",
+          "ooxml-correctness"
+        ]
+      }
+    },
+    {
+      "label": "instance-required-items-not-matched",
+      "report": {
+        "schemaVersion": "0.2.0",
+        "contractType": "instance-review-report",
+        "lane": "instance",
+        "disclosurePhase": "revealed",
+        "evidenceScope": "simulated-review-only",
+        "reviewId": "nonmatched-item-calibration",
+        "reviewRun": 1,
+        "reviewContextSha256": "4545454545454545454545454545454545454545454545454545454545454545",
+        "deliveryProfileSha256": "5656565656565656565656565656565656565656565656565656565656565656",
+        "instanceContextSha256": "6767676767676767676767676767676767676767676767676767676767676767",
+        "blindBatchSha256": "7878787878787878787878787878787878787878787878787878787878787878",
+        "hiddenOutcomeKeySha256": "8989898989898989898989898989898989898989898989898989898989898989",
+        "atomicOutcomeManifestSha256": "9090909090909090909090909090909090909090909090909090909090909090",
+        "itemAssessments": [
+          {
+            "itemId": "sample-item-a",
+            "itemKind": "takeaway",
+            "status": "missing",
+            "blindEvidenceRefs": [],
+            "visibleEvidence": [
+              "No recoverable primary claim appears in the frozen blind reconstruction."
+            ],
+            "diagnosis": "The required takeaway is absent rather than merely weakly phrased.",
+            "recommendation": "Make the primary claim visible before repeating the blind review.",
+            "confidence": 0.93
+          },
+          {
+            "itemId": "sample-item-b",
+            "itemKind": "requested-action",
+            "status": "incomplete",
+            "blindEvidenceRefs": [],
+            "visibleEvidence": [
+              "A general next step is visible, but its required bounded scope is absent."
+            ],
+            "diagnosis": "The action is partially present without the qualification that makes it acceptable.",
+            "recommendation": "State both the action and its bounded scope in the visible close.",
+            "confidence": 0.9
+          },
+          {
+            "itemId": "sample-item-c",
+            "itemKind": "uncertainty-boundary",
+            "status": "incorrect",
+            "blindEvidenceRefs": [],
+            "visibleEvidence": [
+              "The frozen reconstruction implies broad readiness while the required item limits readiness."
+            ],
+            "diagnosis": "The visible meaning conflicts with the required uncertainty boundary.",
+            "recommendation": "Replace the conflicting scope claim before another review.",
+            "confidence": 0.95
+          },
+          {
+            "itemId": "sample-item-d",
+            "itemKind": "evidence",
+            "status": "uncertain",
+            "blindEvidenceRefs": [],
+            "visibleEvidence": [
+              "A supporting mark is present, but the supplied view cannot establish what it proves."
+            ],
+            "diagnosis": "The bounded evidence is insufficient to decide whether the required support is present.",
+            "recommendation": "Supply an assessable source view and preserve its claim linkage.",
+            "confidence": 0.51
+          }
+        ],
+        "unassessedProperties": [
+          "accessibility-metadata",
+          "animation",
+          "native-editability",
+          "ooxml-correctness"
+        ]
+      }
+    },
+    {
+      "label": "whole-blocker-unable-random-silhouette",
+      "report": {
+        "schemaVersion": "0.2.0",
+        "contractType": "whole-deck-review-report",
+        "lane": "whole-deck",
+        "disclosurePhase": "label-blind",
+        "evidenceScope": "simulated-review-only",
+        "labelBlind": true,
+        "reviewId": "boundary-whole-calibration",
+        "reviewRun": 1,
+        "reviewContextSha256": "abababababababababababababababababababababababababababababababab",
+        "deliveryProfileSha256": "bcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbc",
+        "contactSheetSha256": "cdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcd",
+        "inputQuality": {
+          "status": "degraded",
+          "notes": [
+            "The contact sheet is assessable overall, but one subject-specific signature is too small to judge."
+          ]
+        },
+        "orderedSlides": [
+          { "slideId": "slide-a", "slideNumber": 1 },
+          { "slideId": "slide-b", "slideNumber": 2 },
+          { "slideId": "slide-c", "slideNumber": 3 }
+        ],
+        "contactSheetSummary": "The sequence varies its silhouettes without a stable reason, while the final action is visibly cut off.",
+        "dimensionAssessments": [
+          {
+            "dimension": "subject-conditionality",
+            "status": "fit",
+            "evidence": "The visible evidence structures remain tied to the subject rather than generic topic decoration.",
+            "confidence": 0.84
+          },
+          {
+            "dimension": "decorative-semantic-fit",
+            "status": "fit",
+            "evidence": "The visible marks have identifiable information roles.",
+            "confidence": 0.86
+          },
+          {
+            "dimension": "signature-coherence",
+            "status": "unable-to-judge",
+            "evidence": "The signature detail is too small in the supplied contact sheet for a reliable judgment.",
+            "confidence": 0.48
+          },
+          {
+            "dimension": "motif-coherence",
+            "status": "fit",
+            "evidence": "The assessable motifs retain stable semantic roles across the sequence.",
+            "confidence": 0.82
+          },
+          {
+            "dimension": "silhouette-rhythm",
+            "status": "concern",
+            "evidence": "Each slide changes composition without a visible narrative or subject-driven reason.",
+            "confidence": 0.93
+          },
+          {
+            "dimension": "density-rhythm",
+            "status": "fit",
+            "evidence": "Information density still rises at the middle evidence beat and falls at the close.",
+            "confidence": 0.81
+          },
+          {
+            "dimension": "opening-payoff",
+            "status": "fit",
+            "evidence": "The opening establishes a recoverable decision tension.",
+            "confidence": 0.85
+          },
+          {
+            "dimension": "closing-payoff",
+            "status": "fit",
+            "evidence": "The close attempts to resolve the sequence with a bounded action.",
+            "confidence": 0.79
+          },
+          {
+            "dimension": "delivery-fitness",
+            "status": "concern",
+            "evidence": "The essential action is visibly clipped in the supplied live-room view.",
+            "confidence": 0.98
+          }
+        ],
+        "findings": [
+          {
+            "dimension": "silhouette-rhythm",
+            "affectedSlideIds": ["slide-a", "slide-b", "slide-c"],
+            "region": null,
+            "rootCause": "random-silhouette-variation",
+            "severity": "major",
+            "evidence": "Each slide changes composition without a visible narrative or subject-driven reason.",
+            "impact": "The audience must relearn the visual grammar without gaining a clearer argument.",
+            "recommendation": "Replan silhouette changes so each one marks a specific narrative job.",
+            "confidence": 0.93
+          },
+          {
+            "dimension": "delivery-fitness",
+            "affectedSlideIds": ["slide-c"],
+            "region": [0.08, 0.12, 0.84, 0.76],
+            "rootCause": "delivery-density-mismatch",
+            "severity": "blocker",
+            "evidence": "The essential action is visibly clipped in the supplied live-room view.",
+            "impact": "The audience cannot recover the requested action at presentation distance.",
+            "recommendation": "Confirm the fixed crop and rebuild the close before showing the deck.",
+            "confidence": 0.98
+          }
+        ],
+        "unassessedProperties": [
+          "accessibility-metadata",
+          "animation",
+          "native-editability",
+          "ooxml-correctness"
+        ]
+      }
+    }
+  ]
+}

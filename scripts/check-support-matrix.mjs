@@ -9,7 +9,7 @@ import { fileURLToPath } from "node:url";
 import { assertSupportedSchema, validateJson } from "./lib/json-schema.mjs";
 
 const REPORT_SCHEMA_VERSION = 1;
-const EXPECTED_SCHEMA_ID = "urn:pptx-pipeline:schema:support-matrix:1";
+const EXPECTED_SCHEMA_ID = "urn:pptx-compiler:schema:support-matrix:1";
 const MATRIX_PATH = "policy/support-matrix.json";
 const SCHEMA_PATH = "schemas/support-matrix.schema.json";
 const MAX_CONTROL_FILE_BYTES = 1024 * 1024;

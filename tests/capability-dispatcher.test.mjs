@@ -34,7 +34,7 @@ const contractSchemaRegistry = createSchemaRegistry(contractSchemas);
 for (const schema of contractSchemas) assertSupportedSchema(schema, { registry: contractSchemaRegistry });
 
 const capabilityRegistrySchema = contractSchemaRegistry.get(
-  "urn:pptx-pipeline:schema:capability-registry:0.1.0"
+  "urn:pptx-compiler:schema:capability-registry:0.1.0"
 );
 const probeRegistry = await readJson("fixtures/capabilities/dispatcher-contract-probe/registry.json");
 const placeholderRegistry = await readJson("fixtures/contracts/valid/capability-registry.json");
@@ -240,7 +240,7 @@ test("conformance-only runtime atomically admits a complete artifact registratio
   assert.equal(supportCalls, 1);
   assert.ok(Object.isFrozen(runtime));
 
-  registryInput.capabilities[0].executorId = "urn:pptx-pipeline:changed:executor:0.1.0";
+  registryInput.capabilities[0].executorId = "urn:pptx-compiler:changed:executor:0.1.0";
   registration.executor.execute = () => ({ accepted: false });
   const plan = prepareCapabilityDispatch({ runtime, invocations: [makeInvocation()] });
   const result = await executeCapabilityDispatch({ plan });
@@ -251,10 +251,10 @@ test("async conformance never rereads caller-owned registration entries", async 
   const makeDefinition = (prefix) => ({
     ...clone(PROBE),
     capabilityId: `${prefix}-dispatcher-probe`,
-    executorId: `urn:pptx-pipeline:executor:${prefix}-dispatcher-probe:0.1.0`,
-    inputSchemaId: `urn:pptx-pipeline:schema:${prefix}-dispatcher-input:0.1.0`,
-    outputSchemaId: `urn:pptx-pipeline:schema:${prefix}-dispatcher-output:0.1.0`,
-    qaContractId: `urn:pptx-pipeline:qa:${prefix}-dispatcher-probe:0.1.0`,
+    executorId: `urn:pptx-compiler:executor:${prefix}-dispatcher-probe:0.1.0`,
+    inputSchemaId: `urn:pptx-compiler:schema:${prefix}-dispatcher-input:0.1.0`,
+    outputSchemaId: `urn:pptx-compiler:schema:${prefix}-dispatcher-output:0.1.0`,
+    qaContractId: `urn:pptx-compiler:qa:${prefix}-dispatcher-probe:0.1.0`,
     conformanceFixtureIds: [`${prefix}-dispatcher-fixture`]
   });
   const makeNamedRegistration = (definition, execute) => {

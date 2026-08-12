@@ -105,4 +105,4 @@ The M1-003 suite contributes 79 test nodes with 60 focused rejection mutations.
 The complete 225-test repository suite passed on Node.js 22.23.1 and 24.14.0.
 Working-tree and staged public-tree gates passed after the independent review
 finding was fixed and regression-tested; the closing review reported no
-remaining blocker. Cross-platform OS evidence remains M3-004.
+remaining blocker. Cross-platform OS evidence remains M3-004B after M3-006.

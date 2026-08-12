@@ -17,6 +17,15 @@ function git(root, ...args) {
   return execFileSync("git", args, { cwd: root, encoding: "utf8", stdio: ["ignore", "pipe", "pipe"] }).trim();
 }
 
+function gitWithInput(root, args, input, { encoding = "utf8" } = {}) {
+  return execFileSync("git", args, {
+    cwd: root,
+    encoding,
+    input,
+    stdio: ["pipe", "pipe", "pipe"]
+  });
+}
+
 async function temporaryRepository(t) {
   const root = await mkdtemp(path.join(os.tmpdir(), "pptx-policy-gates-"));
   t.after(async () => rm(root, { recursive: true, force: true }));
@@ -32,10 +41,11 @@ async function writeRelative(root, relativePath, content, options) {
   await writeFile(destination, content, options);
 }
 
-function runGate(script, root, mode = "index") {
+function runGate(script, root, mode = "index", { environment = process.env } = {}) {
   const result = spawnSync(process.execPath, [script, "--root", root, "--mode", mode, "--json"], {
     cwd: root,
     encoding: "utf8",
+    env: environment,
     stdio: ["ignore", "pipe", "pipe"]
   });
   assert.equal(result.signal, null);
@@ -56,6 +66,48 @@ async function initializeForbiddenRepository(t) {
   await writeRelative(root, "safe.txt", "repository-owned synthetic text\n");
   git(root, "add", "-A");
   return root;
+}
+
+async function initializeHistoryRepository(t) {
+  const root = await initializeForbiddenRepository(t);
+  git(root, "symbolic-ref", "HEAD", "refs/heads/main");
+  git(root, "commit", "-qm", "synthetic baseline");
+  return root;
+}
+
+function appendRawTreeCommit(root, { mode, name, oid }) {
+  const base = git(root, "rev-parse", "HEAD");
+  const baseTree = git(root, "rev-parse", `${base}^{tree}`);
+  const baseTreeBytes = gitWithInput(root, ["cat-file", "tree", baseTree], undefined, {
+    encoding: null
+  });
+  const objectId = oid ?? gitWithInput(
+    root,
+    ["hash-object", "-t", "blob", "--stdin", "-w"],
+    "repository-owned synthetic text\n"
+  ).trim();
+  const extraEntry = Buffer.concat([
+    Buffer.isBuffer(mode) ? Buffer.concat([mode, Buffer.from(" ")]) : Buffer.from(`${mode} `),
+    Buffer.from(name),
+    Buffer.from([0]),
+    Buffer.from(objectId, "hex")
+  ]);
+  const tree = gitWithInput(
+    root,
+    ["hash-object", "-t", "tree", "--stdin", "-w", "--literally"],
+    Buffer.concat([baseTreeBytes, extraEntry])
+  ).trim();
+  const baseCommit = gitWithInput(root, ["cat-file", "commit", base], undefined).split("\n");
+  const author = baseCommit.find((line) => line.startsWith("author "));
+  const committer = baseCommit.find((line) => line.startsWith("committer "));
+  assert.ok(author);
+  assert.ok(committer);
+  const commit = gitWithInput(
+    root,
+    ["hash-object", "-t", "commit", "--stdin", "-w"],
+    `tree ${tree}\nparent ${base}\n${author}\n${committer}\n\nsynthetic raw tree\n`
+  ).trim();
+  git(root, "update-ref", "refs/heads/main", commit, base);
 }
 
 function provenanceRecord(relativePath) {
@@ -223,6 +275,13 @@ test("mutation: arbitrary local environment file is rejected", async (t) => {
   assertRejected(runGate(forbiddenScript, root), "local-environment-path");
 });
 
+test("mutation: npm shrinkwrap cannot override the reviewed lock", async (t) => {
+  const root = await initializeForbiddenRepository(t);
+  await writeRelative(root, "npm-shrinkwrap.json", "{}\n");
+  git(root, "add", "-A");
+  assertRejected(runGate(forbiddenScript, root), "unreviewed-package-manager-control");
+});
+
 test("mutation: disguised executable magic is rejected", async (t) => {
   const root = await initializeForbiddenRepository(t);
   const content = Buffer.concat([Buffer.from([0x7f, 0x45, 0x4c, 0x46]), Buffer.from("synthetic")]);
@@ -238,6 +297,27 @@ test("mutation: unapproved executable bit is rejected", async (t) => {
   git(root, "add", "-A");
   git(root, "update-index", "--chmod=+x", "tool.mjs");
   assertRejected(runGate(forbiddenScript, root), "unapproved-executable-bit");
+});
+
+test("the one declared CLI bin may carry the executable bit", async (t) => {
+  const root = await initializeForbiddenRepository(t);
+  const approvedPath = "packages/cli/bin/pptx-compiler.mjs";
+  await writeRelative(root, approvedPath, "#!/usr/bin/env node\n");
+  await chmod(path.join(root, ...approvedPath.split("/")), 0o755);
+  git(root, "add", "-A");
+  git(root, "update-index", "--chmod=+x", approvedPath);
+  const result = runGate(forbiddenScript, root);
+  assert.equal(result.status, 0);
+  assert.equal(result.report.ok, true);
+});
+
+test("mutation: the declared CLI bin must retain its Git executable bit", async (t) => {
+  const root = await initializeForbiddenRepository(t);
+  const approvedPath = "packages/cli/bin/pptx-compiler.mjs";
+  await writeRelative(root, approvedPath, "#!/usr/bin/env node\n");
+  git(root, "add", "-A");
+  git(root, "update-index", "--chmod=-x", approvedPath);
+  assertRejected(runGate(forbiddenScript, root), "approved-executable-bit-missing");
 });
 
 test("mutation: untracked working-tree executable bit is rejected", async (t) => {
@@ -267,6 +347,48 @@ test("mutation: unapproved copyright identity is rejected", async (t) => {
   assertRejected(runGate(forbiddenScript, root), "unapproved-copyright-identity");
 });
 
+test("content rules cannot claim path exceptions", async (t) => {
+  await t.test("an email rule cannot exempt SECURITY.md", async (t) => {
+    const root = await initializeForbiddenRepository(t);
+    const mutated = structuredClone(policy);
+    mutated.textRules.find((rule) => rule.id === "unapproved-email-address").exceptPaths =
+      ["SECURITY.md"];
+    await writeRelative(
+      root,
+      "policy/forbidden-materials.json",
+      `${JSON.stringify(mutated, null, 2)}\n`
+    );
+    git(root, "add", "-A");
+    assertRejected(runGate(forbiddenScript, root), "policy-configuration-error");
+  });
+
+  await t.test("another text rule cannot declare even an empty exception field", async (t) => {
+    const root = await initializeForbiddenRepository(t);
+    const mutated = structuredClone(policy);
+    mutated.textRules.find((rule) => rule.id === "private-key-marker").exceptPaths = [];
+    await writeRelative(
+      root,
+      "policy/forbidden-materials.json",
+      `${JSON.stringify(mutated, null, 2)}\n`
+    );
+    git(root, "add", "-A");
+    assertRejected(runGate(forbiddenScript, root), "policy-configuration-error");
+  });
+
+  await t.test("the copyright identity rule cannot claim a path exception", async (t) => {
+    const root = await initializeForbiddenRepository(t);
+    const mutated = structuredClone(policy);
+    mutated.copyrightIdentityRule.exceptPaths = ["SECURITY.md"];
+    await writeRelative(
+      root,
+      "policy/forbidden-materials.json",
+      `${JSON.stringify(mutated, null, 2)}\n`
+    );
+    git(root, "add", "-A");
+    assertRejected(runGate(forbiddenScript, root), "policy-configuration-error");
+  });
+});
+
 test("mutation: working-tree mode scans an untracked forbidden file", async (t) => {
   const root = await initializeForbiddenRepository(t);
   await writeRelative(root, "untracked.pdf", "synthetic text\n");
@@ -281,6 +403,234 @@ test("mutation: malformed policy fails closed", async (t) => {
   assertRejected(runGate(forbiddenScript, root), "policy-configuration-error");
 });
 
+test("public-history gate passes and emits byte-stable JSON", async (t) => {
+  const root = await initializeHistoryRepository(t);
+  const scannerSource = await readFile(forbiddenScript, "utf8");
+  assert.equal(scannerSource.includes('"rev-list"'), false);
+  assert.equal(scannerSource.includes('"cat-file", "commit"'), true);
+  const first = runGate(forbiddenScript, root, "history");
+  const second = runGate(forbiddenScript, root, "history");
+  assert.equal(first.status, 0);
+  assert.equal(first.report.ok, true);
+  assert.equal(first.report.history.ref, "refs/heads/main");
+  assert.equal(first.report.history.commitsScanned, 1);
+  assert.equal(first.report.history.identityOccurrences, 2);
+  assert.equal(first.report.history.leafEntriesScanned, first.report.filesScanned);
+  assert.equal(first.stdout, second.stdout);
+});
+
+test("mutation: deleted forbidden history remains rejected by the tip policy", async (t) => {
+  const root = await initializeHistoryRepository(t);
+  await writeRelative(root, "removed-before-push.pptx", "synthetic text only\n");
+  git(root, "add", "-A");
+  git(root, "commit", "-qm", "synthetic forbidden history");
+  await rm(path.join(root, "removed-before-push.pptx"));
+  git(root, "add", "-A");
+  git(root, "commit", "-qm", "remove synthetic history input");
+
+  const weakened = structuredClone(policy);
+  for (const rule of weakened.forbiddenExtensions) {
+    rule.extensions = rule.extensions.filter((extension) => extension !== ".pptx");
+  }
+  await writeRelative(
+    root,
+    "policy/forbidden-materials.json",
+    `${JSON.stringify(weakened, null, 2)}\n`
+  );
+  git(root, "add", "policy/forbidden-materials.json");
+  const current = runGate(forbiddenScript, root);
+  assert.equal(current.status, 0);
+  assert.equal(current.report.ok, true);
+  assertRejected(runGate(forbiddenScript, root, "history"), "forbidden-presentation-extension");
+});
+
+test("mutation: history repository selection cannot be redirected", async (t) => {
+  const root = await initializeHistoryRepository(t);
+  await writeRelative(root, "forbidden-in-real-main.pptx", "synthetic text only\n");
+  git(root, "add", "-A");
+  git(root, "commit", "-qm", "synthetic real-main mutation");
+  assertRejected(runGate(forbiddenScript, root, "history"), "forbidden-presentation-extension");
+
+  const rogueWork = await mkdtemp(path.join(os.tmpdir(), "pptx-policy-rogue-work-"));
+  t.after(async () => rm(rogueWork, { recursive: true, force: true }));
+  const rogueGit = path.join(root, ".git", "rogue");
+  execFileSync("git", ["init", "-q", "--separate-git-dir", rogueGit, rogueWork]);
+  git(rogueWork, "config", "user.name", "Synthetic Test");
+  git(rogueWork, "config", "user.email", ["synthetic", "@", "example.invalid"].join(""));
+  git(rogueWork, "symbolic-ref", "HEAD", "refs/heads/main");
+  await writeRelative(rogueWork, "policy/forbidden-materials.json", policySource);
+  await writeRelative(rogueWork, "safe.txt", "repository-owned synthetic text\n");
+  git(rogueWork, "add", "-A");
+  git(rogueWork, "commit", "-qm", "synthetic rogue baseline");
+  const redirected = runGate(forbiddenScript, root, "history", {
+    environment: {
+      ...process.env,
+      GIT_DIR: rogueGit,
+      GIT_WORK_TREE: root
+    }
+  });
+  assertRejected(redirected, "history-git-environment-override");
+  const caseVariant = runGate(forbiddenScript, root, "history", {
+    environment: {
+      ...process.env,
+      git_dir: rogueGit,
+      Git_Work_Tree: root
+    }
+  });
+  assertRejected(caseVariant, "history-git-environment-override");
+
+  const directRoot = await initializeHistoryRepository(t);
+  await writeRelative(directRoot, ".git/commondir", ".\n");
+  assertRejected(
+    runGate(forbiddenScript, directRoot, "history"),
+    "history-repository-indirection"
+  );
+});
+
+test("mutation: history tree grammar is closed and non-disclosing", async (t) => {
+  const controlRoot = await initializeHistoryRepository(t);
+  const privateLeaf = ["z-sensitive", "\n", "leaf.pptx"].join("");
+  appendRawTreeCommit(controlRoot, { mode: "100644", name: privateLeaf });
+  const controlResult = runGate(forbiddenScript, controlRoot, "history");
+  assertRejected(controlResult, "non-canonical-repository-path");
+  assert.equal(controlResult.stdout.includes("z-sensitive"), false);
+
+  const bomRoot = await initializeHistoryRepository(t);
+  appendRawTreeCommit(bomRoot, { mode: "100644", name: "\uFEFFz-bom.txt" });
+  assertRejected(runGate(forbiddenScript, bomRoot, "history"), "non-canonical-repository-path");
+
+  const oddModeRoot = await initializeHistoryRepository(t);
+  appendRawTreeCommit(oddModeRoot, { mode: "100664", name: "z-odd-mode.txt" });
+  assertRejected(runGate(forbiddenScript, oddModeRoot, "history"), "policy-configuration-error");
+
+  const highBitModeRoot = await initializeHistoryRepository(t);
+  appendRawTreeCommit(highBitModeRoot, {
+    mode: Buffer.from([0xb1, 0x30, 0x30, 0x36, 0x34, 0x34]),
+    name: "z-high-bit-mode.txt"
+  });
+  assertRejected(runGate(forbiddenScript, highBitModeRoot, "history"), "policy-configuration-error");
+
+  const paddedModeRoot = await initializeHistoryRepository(t);
+  appendRawTreeCommit(paddedModeRoot, { mode: "0100644", name: "z-padded-mode.txt" });
+  assertRejected(runGate(forbiddenScript, paddedModeRoot, "history"), "policy-configuration-error");
+
+  const localConfigRoot = await initializeHistoryRepository(t);
+  appendRawTreeCommit(localConfigRoot, { mode: "100644", name: "a-unsorted-local.txt" });
+  git(localConfigRoot, "config", "fsck.treeNotSorted", "ignore");
+  assertRejected(
+    runGate(forbiddenScript, localConfigRoot, "history"),
+    "policy-configuration-error"
+  );
+
+  const dotGitRoot = await initializeHistoryRepository(t);
+  const dotGitBlob = gitWithInput(
+    dotGitRoot,
+    ["hash-object", "-t", "blob", "--stdin", "-w"],
+    "synthetic\n"
+  ).trim();
+  const dotGitChild = gitWithInput(
+    dotGitRoot,
+    ["mktree"],
+    `100644 blob ${dotGitBlob}\tx.txt\n`
+  ).trim();
+  const dotGitTree = gitWithInput(
+    dotGitRoot,
+    ["mktree"],
+    `040000 tree ${dotGitChild}\t.git\n`
+  ).trim();
+  appendRawTreeCommit(dotGitRoot, {
+    mode: "40000",
+    name: "z-container",
+    oid: dotGitTree
+  });
+  git(dotGitRoot, "config", "fsck.hasDotgit", "ignore");
+  assertRejected(runGate(forbiddenScript, dotGitRoot, "history"), "policy-configuration-error");
+
+  const fsckOnlyRoot = await initializeHistoryRepository(t);
+  const fsckBase = git(fsckOnlyRoot, "rev-parse", "HEAD");
+  const fsckCommit = gitWithInput(fsckOnlyRoot, ["cat-file", "commit", fsckBase], undefined)
+    .split("\n");
+  const fsckTree = fsckCommit.find((line) => line.startsWith("tree "));
+  const fsckAuthor = fsckCommit.find((line) => line.startsWith("author "));
+  const fsckCommitter = fsckCommit.find((line) => line.startsWith("committer "));
+  assert.ok(fsckTree);
+  assert.ok(fsckAuthor);
+  assert.ok(fsckCommitter);
+  const paddedAuthor = fsckAuthor.replace(/ ([1-9][0-9]*) ([+-][0-9]{4})$/, " 0$1 $2");
+  assert.notEqual(paddedAuthor, fsckAuthor);
+  const paddedCommit = gitWithInput(
+    fsckOnlyRoot,
+    ["hash-object", "-t", "commit", "--stdin", "-w", "--literally"],
+    `${fsckTree}\nparent ${fsckBase}\n${paddedAuthor}\n${fsckCommitter}\n\n` +
+      "synthetic zero-padded date\n"
+  ).trim();
+  git(fsckOnlyRoot, "update-ref", "refs/heads/main", paddedCommit, fsckBase);
+  git(fsckOnlyRoot, "config", "fsck.zeroPaddedDate", "ignore");
+  assertRejected(
+    runGate(forbiddenScript, fsckOnlyRoot, "history"),
+    "policy-configuration-error"
+  );
+
+  const globalConfigRoot = await initializeHistoryRepository(t);
+  appendRawTreeCommit(globalConfigRoot, { mode: "100644", name: "a-unsorted-global.txt" });
+  const syntheticHome = await mkdtemp(path.join(os.tmpdir(), "pptx-policy-git-home-"));
+  t.after(async () => rm(syntheticHome, { recursive: true, force: true }));
+  await writeFile(
+    path.join(syntheticHome, ".gitconfig"),
+    "[fsck]\n\ttreeNotSorted = ignore\n"
+  );
+  assertRejected(
+    runGate(forbiddenScript, globalConfigRoot, "history", {
+      environment: { ...process.env, HOME: syntheticHome, XDG_CONFIG_HOME: syntheticHome }
+    }),
+    "policy-configuration-error"
+  );
+});
+
+test("mutation: forbidden commit message is rejected without disclosure", async (t) => {
+  const root = await initializeHistoryRepository(t);
+  const privatePath = ["/", "Users", "/", "synthetic-history", "/", "secret.txt"].join("");
+  git(root, "commit", "--allow-empty", "-qm", privatePath);
+  const result = runGate(forbiddenScript, root, "history");
+  assertRejected(result, "absolute-local-user-path");
+  assert.equal(result.stdout.includes(privatePath), false);
+});
+
+test("mutation: historical Git identity must match the repository-local identity", async (t) => {
+  const root = await initializeHistoryRepository(t);
+  git(root, "config", "user.name", "Alternate Synthetic Test");
+  git(root, "commit", "--allow-empty", "-qm", "synthetic identity mutation");
+  git(root, "config", "user.name", "Synthetic Test");
+  const result = runGate(forbiddenScript, root, "history");
+  assertRejected(result, "unexpected-history-author-identity");
+  assertRejected(result, "unexpected-history-committer-identity");
+  assert.equal(result.stdout.includes("Alternate Synthetic Test"), false);
+  assert.equal(result.stdout.includes(["synthetic", "@", "example.invalid"].join("")), false);
+});
+
+test("mutation: deleted historical symlink remains rejected", async (t) => {
+  const root = await initializeHistoryRepository(t);
+  await writeRelative(root, "synthetic-link-target.txt", "safe-target\n");
+  const blob = git(root, "hash-object", "-w", "synthetic-link-target.txt");
+  await rm(path.join(root, "synthetic-link-target.txt"));
+  git(root, "update-index", "--add", "--cacheinfo", `120000,${blob},historical-link`);
+  git(root, "commit", "-qm", "synthetic historical symlink");
+  git(root, "rm", "--cached", "-q", "historical-link");
+  git(root, "commit", "-qm", "remove synthetic historical symlink");
+  assertRejected(runGate(forbiddenScript, root, "history"), "forbidden-symlink");
+});
+
+test("mutation: deleted oversized historical blob remains rejected", async (t) => {
+  const root = await initializeHistoryRepository(t);
+  await writeRelative(root, "oversized-history.txt", Buffer.alloc(policy.maxFileBytes + 1, 0x61));
+  git(root, "add", "oversized-history.txt");
+  git(root, "commit", "-qm", "synthetic oversized history");
+  await rm(path.join(root, "oversized-history.txt"));
+  git(root, "add", "-A");
+  git(root, "commit", "-qm", "remove synthetic oversized history");
+  assertRejected(runGate(forbiddenScript, root, "history"), "oversized-file");
+});
+
 test("provenance gate passes and emits byte-stable JSON", async (t) => {
   const { root } = await initializeProvenanceRepository(t);
   const first = runGate(provenanceScript, root);
@@ -293,7 +643,7 @@ test("provenance gate passes and emits byte-stable JSON", async (t) => {
 test("mutation: provenance schema authority identifier is fixed", async (t) => {
   const { root } = await initializeProvenanceRepository(t);
   const mutatedSchema = JSON.parse(schemaSource);
-  mutatedSchema.$id = "urn:pptx-pipeline:schema:synthetic-other:1";
+  mutatedSchema.$id = "urn:pptx-compiler:schema:synthetic-other:1";
   await writeRelative(root, "schemas/provenance-record.schema.json", `${JSON.stringify(mutatedSchema, null, 2)}\n`);
   git(root, "add", "-A");
   assertRejected(runGate(provenanceScript, root), "provenance-configuration-error");

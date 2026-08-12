@@ -1,0 +1,34 @@
+{
+  "acceptanceVersion": "0.1.0",
+  "acceptanceType": "deck-hypothesis-selection",
+  "rawInputSha256": "5f5e93f00196a0afd856e8a6974c7c7c171b2910ae506c2e6389951dcd5ee381",
+  "candidateSetSha256": "f82f0f66920ddfaa7703964f9cfcf341d980747ec398816d91a937a261987036",
+  "reviewerClass": "repository-maintainer",
+  "decisions": [
+    {
+      "candidateId": "proof-led-decision",
+      "candidateSha256": "e2f29f5d8696b3188982d644805c62e35c9e37575015047d25243c8721e52905",
+      "status": "accepted",
+      "reasonCodes": [
+        "strongest-causal-order",
+        "preserves-boundary"
+      ]
+    },
+    {
+      "candidateId": "constraint-led-decision",
+      "candidateSha256": "8cf4b7f35c2ed93622c686a7d3ab0060de341a180de630e9cf9d660d3d6bfb40",
+      "status": "rejected",
+      "reasonCodes": [
+        "delays-positive-proof"
+      ]
+    },
+    {
+      "candidateId": "readiness-led-decision",
+      "candidateSha256": "fdd30bad0036ff924fcf793fee0923e2fed00df8c408a9d042c99ae3ea765bee",
+      "status": "rejected",
+      "reasonCodes": [
+        "weakens-opening-causal-proof"
+      ]
+    }
+  ]
+}

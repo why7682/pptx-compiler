@@ -1,11 +1,19 @@
 # Open-Source Readiness Assessment
 
+> Historical extraction record — initiated 2026-07-30 and updated through the
+> M2-004 boundary on 2026-08-05. It records the predecessor assessment that
+> justified the clean-room repository, not the current implementation or
+> release status. See [README.md](../README.md), [HANDOFF.md](../HANDOFF.md),
+> [TODO.md](../TODO.md), and [docs/SUPPORT_MATRIX.md](SUPPORT_MATRIX.md) for
+> current facts.
+
 ## Verdict
 
-Publication is feasible, but the predecessor is a research-grade, project-bound
-system rather than a releasable general package. The correct strategy is a
-clean-room extraction into this empty-history repository, not a rename or bulk
-copy. The current readiness level is `semantic-planning / pre-alpha`:
+Publication was assessed as feasible, but the predecessor was a research-grade,
+project-bound system rather than a releasable general package. The correct
+strategy was a clean-room extraction into this empty-history repository, not a
+rename or bulk copy. At the time of this assessment, the readiness level was
+`semantic-planning / pre-alpha`:
 admission, support-claim, data-contract, explicit-context, semantic-inspection,
 bounded secure-ingestion, capability-dispatch, project-resolution, and
 clone/fill operation planning plus unbound native-component and optional

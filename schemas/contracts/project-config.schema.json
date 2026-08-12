@@ -1,7 +1,7 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "urn:pptx-pipeline:schema:project-config:0.1.0",
-  "title": "PPTX Pipeline ProjectConfig",
+  "$id": "urn:pptx-compiler:schema:project-config:0.1.0",
+  "title": "PPTX Compiler ProjectConfig",
   "type": "object",
   "additionalProperties": false,
   "required": [
@@ -15,9 +15,9 @@
     "policies"
   ],
   "properties": {
-    "schemaVersion": { "$ref": "urn:pptx-pipeline:schema:shared:0.1.0#/$defs/schemaVersion" },
+    "schemaVersion": { "$ref": "urn:pptx-compiler:schema:shared:0.1.0#/$defs/schemaVersion" },
     "contractType": { "const": "project-config" },
-    "projectId": { "$ref": "urn:pptx-pipeline:schema:shared:0.1.0#/$defs/semanticId" },
+    "projectId": { "$ref": "urn:pptx-compiler:schema:shared:0.1.0#/$defs/semanticId" },
     "template": { "$ref": "#/$defs/templateReference" },
     "capabilityRegistry": { "$ref": "#/$defs/registryReference" },
     "projectOverlay": { "$ref": "#/$defs/overlayReference" },
@@ -36,10 +36,10 @@
           "maxLength": 512,
           "pattern": "^(?!.*(?:^|/)\\.{1,2}(?:/|$))[A-Za-z0-9._-]+(?:/[A-Za-z0-9._-]+)*\\.(?:pptx|potx)$"
         },
-        "profileId": { "$ref": "urn:pptx-pipeline:schema:shared:0.1.0#/$defs/semanticId" },
-        "profilePath": { "$ref": "urn:pptx-pipeline:schema:shared:0.1.0#/$defs/relativePath" },
-        "indexId": { "$ref": "urn:pptx-pipeline:schema:shared:0.1.0#/$defs/semanticId" },
-        "indexPath": { "$ref": "urn:pptx-pipeline:schema:shared:0.1.0#/$defs/relativePath" }
+        "profileId": { "$ref": "urn:pptx-compiler:schema:shared:0.1.0#/$defs/semanticId" },
+        "profilePath": { "$ref": "urn:pptx-compiler:schema:shared:0.1.0#/$defs/relativePath" },
+        "indexId": { "$ref": "urn:pptx-compiler:schema:shared:0.1.0#/$defs/semanticId" },
+        "indexPath": { "$ref": "urn:pptx-compiler:schema:shared:0.1.0#/$defs/relativePath" }
       }
     },
     "registryReference": {
@@ -47,9 +47,9 @@
       "additionalProperties": false,
       "required": ["registryId", "registryVersion", "path"],
       "properties": {
-        "registryId": { "$ref": "urn:pptx-pipeline:schema:shared:0.1.0#/$defs/semanticId" },
-        "registryVersion": { "$ref": "urn:pptx-pipeline:schema:shared:0.1.0#/$defs/semanticVersion" },
-        "path": { "$ref": "urn:pptx-pipeline:schema:shared:0.1.0#/$defs/relativePath" }
+        "registryId": { "$ref": "urn:pptx-compiler:schema:shared:0.1.0#/$defs/semanticId" },
+        "registryVersion": { "$ref": "urn:pptx-compiler:schema:shared:0.1.0#/$defs/semanticVersion" },
+        "path": { "$ref": "urn:pptx-compiler:schema:shared:0.1.0#/$defs/relativePath" }
       }
     },
     "overlayReference": {
@@ -57,8 +57,8 @@
       "additionalProperties": false,
       "required": ["overlayId", "path"],
       "properties": {
-        "overlayId": { "$ref": "urn:pptx-pipeline:schema:shared:0.1.0#/$defs/semanticId" },
-        "path": { "$ref": "urn:pptx-pipeline:schema:shared:0.1.0#/$defs/relativePath" }
+        "overlayId": { "$ref": "urn:pptx-compiler:schema:shared:0.1.0#/$defs/semanticId" },
+        "path": { "$ref": "urn:pptx-compiler:schema:shared:0.1.0#/$defs/relativePath" }
       }
     },
     "projectPaths": {
@@ -66,9 +66,9 @@
       "additionalProperties": false,
       "required": ["assetRoot", "stagingRoot", "outputRoot"],
       "properties": {
-        "assetRoot": { "$ref": "urn:pptx-pipeline:schema:shared:0.1.0#/$defs/relativePath" },
-        "stagingRoot": { "$ref": "urn:pptx-pipeline:schema:shared:0.1.0#/$defs/relativePath" },
-        "outputRoot": { "$ref": "urn:pptx-pipeline:schema:shared:0.1.0#/$defs/relativePath" }
+        "assetRoot": { "$ref": "urn:pptx-compiler:schema:shared:0.1.0#/$defs/relativePath" },
+        "stagingRoot": { "$ref": "urn:pptx-compiler:schema:shared:0.1.0#/$defs/relativePath" },
+        "outputRoot": { "$ref": "urn:pptx-compiler:schema:shared:0.1.0#/$defs/relativePath" }
       }
     },
     "projectPolicies": {

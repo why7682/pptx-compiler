@@ -102,13 +102,13 @@ and execute calls.
 The product capability metadata binds these exact artifacts:
 
 - executor:
-  `urn:pptx-pipeline:capability:executor:source-slide-clone-fill:0.1.0`;
+  `urn:pptx-compiler:capability:executor:source-slide-clone-fill:0.1.0`;
 - input schema:
-  `urn:pptx-pipeline:capability:schema:source-slide-clone-fill-input:0.1.0`;
+  `urn:pptx-compiler:capability:schema:source-slide-clone-fill-input:0.1.0`;
 - output schema:
-  `urn:pptx-pipeline:capability:schema:source-slide-clone-fill-output:0.1.0`;
+  `urn:pptx-compiler:capability:schema:source-slide-clone-fill-output:0.1.0`;
 - QA contract:
-  `urn:pptx-pipeline:capability:qa:source-slide-clone-fill:0.1.0`.
+  `urn:pptx-compiler:capability:qa:source-slide-clone-fill:0.1.0`.
 
 Required roles are exactly `body` then `title`. The capability preflight
 requires two distinct text-box bindings from one source slide, both with

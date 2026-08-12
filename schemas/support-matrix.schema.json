@@ -1,7 +1,7 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "urn:pptx-pipeline:schema:support-matrix:1",
-  "title": "PPTX Pipeline public support matrix",
+  "$id": "urn:pptx-compiler:schema:support-matrix:1",
+  "title": "PPTX Compiler public support matrix",
   "type": "object",
   "additionalProperties": false,
   "required": [

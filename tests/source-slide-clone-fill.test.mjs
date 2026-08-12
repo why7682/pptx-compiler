@@ -70,16 +70,16 @@ assertSupportedSchema(outputSchema);
 const definition = registry.capabilities[0];
 const schemasByType = new Map([
   ["capability-registry", contractSchemaRegistry.get(
-    "urn:pptx-pipeline:schema:capability-registry:0.1.0"
+    "urn:pptx-compiler:schema:capability-registry:0.1.0"
   )],
   ["project-overlay", contractSchemaRegistry.get(
-    "urn:pptx-pipeline:schema:project-overlay:0.1.0"
+    "urn:pptx-compiler:schema:project-overlay:0.1.0"
   )],
   ["template-index", contractSchemaRegistry.get(
-    "urn:pptx-pipeline:schema:template-index:0.1.0"
+    "urn:pptx-compiler:schema:template-index:0.1.0"
   )],
   ["deck-spec", contractSchemaRegistry.get(
-    "urn:pptx-pipeline:schema:deck-spec:0.1.0"
+    "urn:pptx-compiler:schema:deck-spec:0.1.0"
   )]
 ]);
 
@@ -361,7 +361,7 @@ test("runtime registry binding compares exact captured content, not only ID and 
 
   const drifted = clone(registry);
   drifted.capabilities[0].executorId =
-    "urn:pptx-pipeline:capability:executor:source-slide-clone-fill-drift:0.1.0";
+    "urn:pptx-compiler:capability:executor:source-slide-clone-fill-drift:0.1.0";
   assert.throws(
     () => prepare(runtime, bundle({ capabilityRegistry: drifted })),
     (error) => assertRuntimeError(
@@ -461,6 +461,29 @@ test("project-level selections may be unused while one selection is reused by mu
   assert.deepEqual(
     result.results.map((entry) => entry.output.outputSlideId),
     deckSpec.slides.map((slide) => slide.slideId)
+  );
+});
+
+test("separate selections may reuse one semantic binding without sharing one invocation role", async () => {
+  const runtime = await makeRuntime("experimental");
+  const documents = bundle();
+  const secondSelection = clone(documents.projectOverlay.capabilitySelections[0]);
+  secondSelection.capabilitySelectionId = "clone-fill-selection-two";
+  documents.projectOverlay.capabilitySelections.push(secondSelection);
+  documents.deckSpec.slides[1].capabilitySelectionId = secondSelection.capabilitySelectionId;
+
+  const result = await executeCapabilityDispatch({ plan: prepare(runtime, documents) });
+  assert.equal(result.results.length, 2);
+  assert.deepEqual(
+    result.results.map((entry) => entry.output.outputSlideId),
+    documents.deckSpec.slides.map((slide) => slide.slideId)
+  );
+  assert.deepEqual(
+    result.results.map((entry) => entry.output.fills.map((fill) => fill.sourceShapeKey)),
+    [
+      ["shape-2", "shape-1"],
+      ["shape-2", "shape-1"]
+    ]
   );
 });
 

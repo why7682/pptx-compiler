@@ -1,0 +1,428 @@
+{
+  "schemaVersion": 2,
+  "planId": "pptx-pipeline-alpha-package-plan",
+  "packageVersion": "0.1.0-alpha.1",
+  "license": "MIT",
+  "moduleType": "module",
+  "engines": {
+    "node": "^22.0.0 || ^24.0.0"
+  },
+  "stagingRoot": ".package-stage",
+  "namePolicy": {
+    "style": "unscoped",
+    "registry": "https://registry.npmjs.org",
+    "checkedOn": "2026-08-11",
+    "result": "all-names-e404-not-reserved",
+    "names": [
+      "pptx-compiler",
+      "pptx-compiler-core",
+      "pptx-compiler-native-card-arrow",
+      "pptx-compiler-public-synthetic"
+    ]
+  },
+  "repository": {
+    "provider": "github",
+    "repositoryId": "1330979133",
+    "owner": "why7682",
+    "name": "pptx-compiler",
+    "htmlUrl": "https://github.com/why7682/pptx-compiler"
+  },
+  "releaseGuard": {
+    "state": "blocked",
+    "reason": "npm-publication-not-authorized"
+  },
+  "packages": [
+    {
+      "packageId": "cli",
+      "name": "pptx-compiler",
+      "description": "Candidate-alpha CLI for deterministic template-grounded PPTX assembly and honest blocked QA.",
+      "repositoryDirectory": "packages/cli",
+      "dependencies": [
+        {
+          "packageId": "core",
+          "version": "0.1.0-alpha.1"
+        },
+        {
+          "packageId": "native-card-arrow",
+          "version": "0.1.0-alpha.1"
+        },
+        {
+          "packageId": "public-synthetic",
+          "version": "0.1.0-alpha.1"
+        }
+      ],
+      "exports": {
+        ".": {
+          "types": "./types/index.d.ts",
+          "import": "./src/index.mjs"
+        }
+      },
+      "imports": {
+        "#pptx-compiler/core": "pptx-compiler-core",
+        "#pptx-compiler/core-assets": "pptx-compiler-core/package-assets",
+        "#pptx-compiler/extension-api": "pptx-compiler-core/extension-api",
+        "#pptx-compiler/native-card-arrow": "pptx-compiler-native-card-arrow",
+        "#pptx-compiler/native-card-arrow-assets": "pptx-compiler-native-card-arrow/package-assets",
+        "#pptx-compiler/public-synthetic": "pptx-compiler-public-synthetic",
+        "#pptx-compiler/public-synthetic-assets": "pptx-compiler-public-synthetic/package-assets"
+      },
+      "types": "./types/index.d.ts",
+      "bin": {
+        "pptx-compiler": "./bin/pptx-compiler.mjs"
+      },
+      "files": [
+        {
+          "sourceRoot": ".",
+          "targetRoot": ".",
+          "role": "notice",
+          "paths": [
+            "LICENSE"
+          ]
+        },
+        {
+          "sourceRoot": ".",
+          "targetRoot": ".",
+          "role": "documentation",
+          "paths": [
+            "README.md"
+          ]
+        },
+        {
+          "sourceRoot": "packages/cli",
+          "targetRoot": ".",
+          "role": "runtime",
+          "paths": [
+            "src/cli.mjs",
+            "src/contract-runtime.mjs",
+            "src/index.mjs",
+            "src/installed.mjs",
+            "src/project-io.mjs",
+            "src/static-host.mjs"
+          ]
+        },
+        {
+          "sourceRoot": "packages/cli",
+          "targetRoot": ".",
+          "role": "types",
+          "paths": [
+            "types/index.d.ts"
+          ]
+        },
+        {
+          "sourceRoot": "packages/cli",
+          "targetRoot": ".",
+          "role": "bin",
+          "paths": [
+            "bin/pptx-compiler.mjs"
+          ]
+        }
+      ]
+    },
+    {
+      "packageId": "core",
+      "name": "pptx-compiler-core",
+      "description": "Dependency-free candidate-alpha runtime, contracts, support policy, and secure PPTX primitives.",
+      "repositoryDirectory": "packages/core",
+      "dependencies": [],
+      "exports": {
+        ".": {
+          "types": "./types/candidate-alpha.d.ts",
+          "import": "./src/candidate-alpha.mjs"
+        },
+        "./extension-api": {
+          "types": "./types/extension-api.d.ts",
+          "import": "./src/extension-api.mjs"
+        },
+        "./package-assets": {
+          "types": "./types/package-assets.d.ts",
+          "import": "./src/package-assets.mjs"
+        }
+      },
+      "imports": {},
+      "types": "./types/candidate-alpha.d.ts",
+      "bin": {},
+      "files": [
+        {
+          "sourceRoot": ".",
+          "targetRoot": ".",
+          "role": "notice",
+          "paths": [
+            "LICENSE"
+          ]
+        },
+        {
+          "sourceRoot": ".",
+          "targetRoot": ".",
+          "role": "documentation",
+          "paths": [
+            "README.md"
+          ]
+        },
+        {
+          "sourceRoot": "packages/core",
+          "targetRoot": ".",
+          "role": "runtime",
+          "paths": [
+            "src/candidate-alpha.mjs",
+            "src/candidate-build-record.mjs",
+            "src/candidate-pair-publication.mjs",
+            "src/capability-dispatcher.mjs",
+            "src/create-only-assembly.mjs",
+            "src/deterministic-zip.mjs",
+            "src/extension-api.mjs",
+            "src/json-schema.mjs",
+            "src/native-card-arrow-assembly.mjs",
+            "src/native-card-arrow-placement.mjs",
+            "src/native-card-candidate-publication.mjs",
+            "src/native-card-candidate-qa.mjs",
+            "src/ooxml-package-view.mjs",
+            "src/package-assets.mjs",
+            "src/project-context.mjs",
+            "src/project-dispatch-resolver.mjs",
+            "src/secure-template-ingestion.mjs",
+            "src/secure-zip.mjs",
+            "src/slide-layout-ir.mjs",
+            "src/strict-xml.mjs",
+            "src/template-inspector.mjs"
+          ]
+        },
+        {
+          "sourceRoot": "packages/core",
+          "targetRoot": ".",
+          "role": "types",
+          "paths": [
+            "types/candidate-alpha.d.ts",
+            "types/extension-api.d.ts",
+            "types/package-assets.d.ts"
+          ]
+        },
+        {
+          "sourceRoot": ".",
+          "targetRoot": ".",
+          "role": "types",
+          "paths": [
+            "types/contracts.d.ts"
+          ]
+        },
+        {
+          "sourceRoot": "schemas/contracts",
+          "targetRoot": "assets/schemas/contracts",
+          "role": "schema",
+          "paths": [
+            "build-artifact.schema.json",
+            "candidate-build-record.schema.json",
+            "capability-registry.schema.json",
+            "deck-spec.schema.json",
+            "manifest.json",
+            "project-config.schema.json",
+            "project-overlay.schema.json",
+            "qa-report.schema.json",
+            "shared.schema.json",
+            "template-index.schema.json",
+            "template-profile.schema.json"
+          ]
+        },
+        {
+          "sourceRoot": "fixtures/contracts/valid",
+          "targetRoot": "assets/fixtures/contracts/valid",
+          "role": "fixture",
+          "paths": [
+            "build-artifact.json",
+            "candidate-build-record.json",
+            "capability-registry.json",
+            "deck-spec.json",
+            "project-config.json",
+            "project-overlay.json",
+            "qa-report.json",
+            "template-index.json",
+            "template-profile.json"
+          ]
+        },
+        {
+          "sourceRoot": "policy",
+          "targetRoot": "assets/policy",
+          "role": "policy",
+          "paths": [
+            "support-matrix.json"
+          ]
+        },
+        {
+          "sourceRoot": "schemas",
+          "targetRoot": "assets/schemas",
+          "role": "schema",
+          "paths": [
+            "support-matrix.schema.json"
+          ]
+        }
+      ]
+    },
+    {
+      "packageId": "native-card-arrow",
+      "name": "pptx-compiler-native-card-arrow",
+      "description": "Exact native DrawingML card-arrow capability for PPTX Compiler candidate alpha.",
+      "repositoryDirectory": "plugins/native-card-arrow",
+      "dependencies": [
+        {
+          "packageId": "core",
+          "version": "0.1.0-alpha.1"
+        }
+      ],
+      "exports": {
+        ".": {
+          "types": "./types/index.d.ts",
+          "import": "./src/index.mjs"
+        },
+        "./package-assets": {
+          "types": "./types/package-assets.d.ts",
+          "import": "./src/package-assets.mjs"
+        }
+      },
+      "imports": {
+        "#pptx-compiler/extension-api": "pptx-compiler-core/extension-api"
+      },
+      "types": "./types/index.d.ts",
+      "bin": {},
+      "files": [
+        {
+          "sourceRoot": ".",
+          "targetRoot": ".",
+          "role": "notice",
+          "paths": [
+            "LICENSE"
+          ]
+        },
+        {
+          "sourceRoot": ".",
+          "targetRoot": ".",
+          "role": "documentation",
+          "paths": [
+            "README.md"
+          ]
+        },
+        {
+          "sourceRoot": "plugins/native-card-arrow",
+          "targetRoot": ".",
+          "role": "runtime",
+          "paths": [
+            "src/index.mjs",
+            "src/native-card-arrow.mjs",
+            "src/package-assets.mjs",
+            "src/registration.mjs"
+          ]
+        },
+        {
+          "sourceRoot": "plugins/native-card-arrow",
+          "targetRoot": ".",
+          "role": "types",
+          "paths": [
+            "types/index.d.ts",
+            "types/package-assets.d.ts"
+          ]
+        },
+        {
+          "sourceRoot": "plugins/native-card-arrow/schemas",
+          "targetRoot": "assets/schemas",
+          "role": "schema",
+          "paths": [
+            "input.schema.json",
+            "output.schema.json"
+          ]
+        },
+        {
+          "sourceRoot": "fixtures/capabilities/native-card-arrow",
+          "targetRoot": "assets/fixtures",
+          "role": "fixture",
+          "paths": [
+            "cases.json"
+          ]
+        }
+      ]
+    },
+    {
+      "packageId": "public-synthetic",
+      "name": "pptx-compiler-public-synthetic",
+      "description": "Repository-owned synthetic template and project preset for public PPTX Compiler conformance.",
+      "repositoryDirectory": "packages/public-synthetic",
+      "dependencies": [],
+      "exports": {
+        ".": {
+          "types": "./types/index.d.ts",
+          "import": "./src/index.mjs"
+        },
+        "./package-assets": {
+          "types": "./types/package-assets.d.ts",
+          "import": "./src/package-assets.mjs"
+        }
+      },
+      "imports": {},
+      "types": "./types/index.d.ts",
+      "bin": {},
+      "files": [
+        {
+          "sourceRoot": ".",
+          "targetRoot": ".",
+          "role": "notice",
+          "paths": [
+            "LICENSE"
+          ]
+        },
+        {
+          "sourceRoot": ".",
+          "targetRoot": ".",
+          "role": "documentation",
+          "paths": [
+            "README.md"
+          ]
+        },
+        {
+          "sourceRoot": "packages/public-synthetic",
+          "targetRoot": ".",
+          "role": "runtime",
+          "paths": [
+            "src/fixtures.mjs",
+            "src/index.mjs",
+            "src/package-assets.mjs",
+            "src/project.mjs"
+          ]
+        },
+        {
+          "sourceRoot": "packages/public-synthetic",
+          "targetRoot": ".",
+          "role": "types",
+          "paths": [
+            "types/index.d.ts",
+            "types/package-assets.d.ts"
+          ]
+        },
+        {
+          "sourceRoot": "fixtures/source-parts/minimal",
+          "targetRoot": "assets/fixtures/source-parts/minimal",
+          "role": "fixture",
+          "paths": [
+            "fixture.json",
+            "parts/[Content_Types].xml",
+            "parts/_rels/.rels",
+            "parts/ppt/_rels/presentation.xml.rels",
+            "parts/ppt/presProps.xml",
+            "parts/ppt/presentation.xml",
+            "parts/ppt/slideLayouts/_rels/slideLayout1.xml.rels",
+            "parts/ppt/slideLayouts/slideLayout1.xml",
+            "parts/ppt/slideMasters/_rels/slideMaster1.xml.rels",
+            "parts/ppt/slideMasters/slideMaster1.xml",
+            "parts/ppt/slides/_rels/slide1.xml.rels",
+            "parts/ppt/slides/slide1.xml",
+            "parts/ppt/theme/theme1.xml"
+          ]
+        },
+        {
+          "sourceRoot": "fixtures/inspection",
+          "targetRoot": "assets/fixtures/inspection",
+          "role": "fixture",
+          "paths": [
+            "expected-potx-template-index.json"
+          ]
+        }
+      ]
+    }
+  ]
+}

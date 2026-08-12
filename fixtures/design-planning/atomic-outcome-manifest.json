@@ -1,0 +1,39 @@
+{
+  "manifestVersion": "0.1.0",
+  "manifestType": "atomic-outcome-manifest",
+  "rawInputSha256": "5f5e93f00196a0afd856e8a6974c7c7c171b2910ae506c2e6389951dcd5ee381",
+  "planningReceiptSha256": "8352d12164d61d140ece0e3fb595ffd4dc5ca1837a79bcfa0690d2361bcb4a13",
+  "assemblyReceiptSha256": "a6462f8e7f9e5f05989864f634bb6efd67aeb5226bb79f2d8a178f8fbfd946e4",
+  "items": [
+    {
+      "itemId": "bounded-readiness-claim",
+      "itemKind": "takeaway",
+      "expectedMeaning": "The defense pilot is ready for bounded approval"
+    },
+    {
+      "itemId": "limited-pilot-action",
+      "itemKind": "requested-action",
+      "expectedMeaning": "Approve a limited pilot with two completion checks"
+    },
+    {
+      "itemId": "wider-rollout-boundary",
+      "itemKind": "uncertainty-boundary",
+      "expectedMeaning": "Wider rollout still requires edit/save and accessibility checks"
+    },
+    {
+      "itemId": "control-readiness",
+      "itemKind": "evidence",
+      "expectedMeaning": "87% of controls are ready while two named checks remain"
+    },
+    {
+      "itemId": "independent-review-alignment",
+      "itemKind": "evidence",
+      "expectedMeaning": "Three independent reviews agree on scope, hierarchy, and readability"
+    },
+    {
+      "itemId": "remaining-completion-checks",
+      "itemKind": "evidence",
+      "expectedMeaning": "Two edit/save and accessibility checks remain before wider rollout"
+    }
+  ]
+}

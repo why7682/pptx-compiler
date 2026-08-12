@@ -1,0 +1,140 @@
+{
+  "schemaVersion": "0.1.0",
+  "fixtureSetType": "visual-review-calibration",
+  "examples": [
+    {
+      "label": "clean-pass",
+      "report": {
+        "schemaVersion": "0.1.0",
+        "contractType": "visual-review-report",
+        "reviewId": "calibration-clean-pass",
+        "reviewContextSha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+        "reviewRun": 1,
+        "reviewMode": "absolute",
+        "inputQuality": { "status": "ok", "notes": [] },
+        "goalAssessment": {
+          "status": "met",
+          "evidence": ["The headline and supporting diagram communicate one decision within a single scan."]
+        },
+        "slides": [
+          {
+            "slideId": "slide-one",
+            "slideNumber": 1,
+            "assessmentStatus": "assessable",
+            "visibleSummary": "One assertion headline is supported by a centered three-step diagram.",
+            "findings": []
+          }
+        ],
+        "deckFindings": [],
+        "unassessedProperties": ["animation", "native-editability", "ooxml-correctness"]
+      }
+    },
+    {
+      "label": "minor-polish",
+      "report": {
+        "schemaVersion": "0.1.0",
+        "contractType": "visual-review-report",
+        "reviewId": "calibration-minor-polish",
+        "reviewContextSha256": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+        "reviewRun": 1,
+        "reviewMode": "absolute",
+        "inputQuality": { "status": "ok", "notes": [] },
+        "goalAssessment": {
+          "status": "met",
+          "evidence": ["The recommendation remains immediately legible despite a small spacing inconsistency."]
+        },
+        "slides": [
+          {
+            "slideId": "slide-one",
+            "slideNumber": 1,
+            "assessmentStatus": "assessable",
+            "visibleSummary": "A recommendation headline sits above two aligned evidence cards.",
+            "findings": [
+              {
+                "findingId": "card-gap-inconsistent",
+                "criterion": "composition",
+                "rootCause": "inconsistent-spacing",
+                "severity": "minor",
+                "region": [0.12, 0.42, 0.76, 0.28],
+                "evidenceSource": "full-slide",
+                "evidence": "The gap between the two cards is visibly narrower than both outer margins.",
+                "impact": "The asymmetry slightly reduces the finish of an otherwise clear slide.",
+                "recommendation": "Center the two-card group and make its internal gap equal to the specified grid unit.",
+                "confidence": 0.94
+              }
+            ]
+          }
+        ],
+        "deckFindings": [],
+        "unassessedProperties": ["native-editability", "ooxml-correctness"]
+      }
+    },
+    {
+      "label": "major-revision",
+      "report": {
+        "schemaVersion": "0.1.0",
+        "contractType": "visual-review-report",
+        "reviewId": "calibration-major-revision",
+        "reviewContextSha256": "cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc",
+        "reviewRun": 1,
+        "reviewMode": "compare-to-reference",
+        "inputQuality": { "status": "ok", "notes": [] },
+        "goalAssessment": {
+          "status": "partially-met",
+          "evidence": ["The topic is visible, but the candidate does not preserve the reference hierarchy."]
+        },
+        "slides": [
+          {
+            "slideId": "slide-one",
+            "slideNumber": 1,
+            "assessmentStatus": "assessable",
+            "visibleSummary": "A long paragraph competes with four equally weighted metric cards.",
+            "findings": [
+              {
+                "findingId": "message-hierarchy-flat",
+                "criterion": "visual-hierarchy",
+                "rootCause": "competing-emphasis",
+                "severity": "major",
+                "region": null,
+                "evidenceSource": "reference-diff",
+                "evidence": "The reference has one dominant claim, while the candidate gives the paragraph and all four metrics similar size and weight.",
+                "impact": "A viewer cannot identify the intended takeaway within five seconds.",
+                "recommendation": "Promote the decision claim to the dominant headline and reduce the paragraph to one supporting sentence.",
+                "confidence": 0.91
+              }
+            ]
+          }
+        ],
+        "deckFindings": [],
+        "unassessedProperties": ["animation", "font-embedding", "native-editability", "ooxml-correctness"]
+      }
+    },
+    {
+      "label": "unable-to-judge",
+      "report": {
+        "schemaVersion": "0.1.0",
+        "contractType": "visual-review-report",
+        "reviewId": "calibration-unable",
+        "reviewContextSha256": "dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd",
+        "reviewRun": 1,
+        "reviewMode": "absolute",
+        "inputQuality": {
+          "status": "unusable",
+          "notes": ["The supplied image is a 160-pixel thumbnail, so body text and overlaps cannot be inspected."]
+        },
+        "goalAssessment": { "status": "unable-to-judge", "evidence": [] },
+        "slides": [
+          {
+            "slideId": "slide-one",
+            "slideNumber": 1,
+            "assessmentStatus": "unable-to-judge",
+            "visibleSummary": "Only the broad color blocks are distinguishable at the supplied resolution.",
+            "findings": []
+          }
+        ],
+        "deckFindings": [],
+        "unassessedProperties": ["accessibility-metadata", "animation", "font-embedding", "native-editability", "ooxml-correctness", "speaker-notes"]
+      }
+    }
+  ]
+}

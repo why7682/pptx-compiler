@@ -1,7 +1,7 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "urn:pptx-pipeline:schema:template-profile:0.1.0",
-  "title": "PPTX Pipeline TemplateProfile",
+  "$id": "urn:pptx-compiler:schema:template-profile:0.1.0",
+  "title": "PPTX Compiler TemplateProfile",
   "type": "object",
   "additionalProperties": false,
   "required": [
@@ -15,12 +15,12 @@
     "layoutBindings"
   ],
   "properties": {
-    "schemaVersion": { "$ref": "urn:pptx-pipeline:schema:shared:0.1.0#/$defs/schemaVersion" },
+    "schemaVersion": { "$ref": "urn:pptx-compiler:schema:shared:0.1.0#/$defs/schemaVersion" },
     "contractType": { "const": "template-profile" },
-    "templateProfileId": { "$ref": "urn:pptx-pipeline:schema:shared:0.1.0#/$defs/semanticId" },
-    "templateIndexId": { "$ref": "urn:pptx-pipeline:schema:shared:0.1.0#/$defs/semanticId" },
+    "templateProfileId": { "$ref": "urn:pptx-compiler:schema:shared:0.1.0#/$defs/semanticId" },
+    "templateIndexId": { "$ref": "urn:pptx-compiler:schema:shared:0.1.0#/$defs/semanticId" },
     "templateFormat": { "enum": ["potx", "pptx"] },
-    "templateSha256": { "$ref": "urn:pptx-pipeline:schema:shared:0.1.0#/$defs/sha256" },
+    "templateSha256": { "$ref": "urn:pptx-compiler:schema:shared:0.1.0#/$defs/sha256" },
     "slideSizeEmu": { "$ref": "#/$defs/slideSize" },
     "layoutBindings": {
       "type": "array",
@@ -35,8 +35,8 @@
       "additionalProperties": false,
       "required": ["cx", "cy"],
       "properties": {
-        "cx": { "$ref": "urn:pptx-pipeline:schema:shared:0.1.0#/$defs/emuExtent" },
-        "cy": { "$ref": "urn:pptx-pipeline:schema:shared:0.1.0#/$defs/emuExtent" }
+        "cx": { "$ref": "urn:pptx-compiler:schema:shared:0.1.0#/$defs/emuExtent" },
+        "cy": { "$ref": "urn:pptx-compiler:schema:shared:0.1.0#/$defs/emuExtent" }
       }
     },
     "layoutBinding": {
@@ -44,8 +44,8 @@
       "additionalProperties": false,
       "required": ["layoutKey", "semanticRole"],
       "properties": {
-        "layoutKey": { "$ref": "urn:pptx-pipeline:schema:shared:0.1.0#/$defs/semanticId" },
-        "semanticRole": { "$ref": "urn:pptx-pipeline:schema:shared:0.1.0#/$defs/semanticId" }
+        "layoutKey": { "$ref": "urn:pptx-compiler:schema:shared:0.1.0#/$defs/semanticId" },
+        "semanticRole": { "$ref": "urn:pptx-compiler:schema:shared:0.1.0#/$defs/semanticId" }
       }
     }
   }

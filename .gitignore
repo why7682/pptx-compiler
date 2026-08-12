@@ -2,6 +2,7 @@
 Thumbs.db
 
 node_modules/
+.package-stage/
 dist/
 build/
 coverage/

@@ -41,7 +41,7 @@ test("versioned contract set validates with byte-stable output and no support pr
     .find((item) => item.id === capability.supportMatrixItemId);
   assert.equal(matrixRow.status, "unsupported");
   assert.deepEqual(capability.conformanceFixtureIds, []);
-  assert.match(capability.executorId, /^urn:pptx-pipeline:fixture-placeholder:/);
+  assert.match(capability.executorId, /^urn:pptx-compiler:fixture-placeholder:/);
 
   const reorderedObjectKeys = cloneBundle();
   const size = reorderedObjectKeys.fixtures["template-index"].slideSizeEmu;
@@ -49,11 +49,11 @@ test("versioned contract set validates with byte-stable output and no support pr
   assert.deepEqual(findings(reorderedObjectKeys), []);
 
   const externalLocalReference = cloneBundle();
-  externalLocalReference.schemas["urn:pptx-pipeline:schema:shared:0.1.0"]
+  externalLocalReference.schemas["urn:pptx-compiler:schema:shared:0.1.0"]
     .$defs.semanticIdAlias = { "$ref": "#/$defs/semanticId" };
-  externalLocalReference.schemas["urn:pptx-pipeline:schema:project-config:0.1.0"]
+  externalLocalReference.schemas["urn:pptx-compiler:schema:project-config:0.1.0"]
     .properties.projectId.$ref =
-      "urn:pptx-pipeline:schema:shared:0.1.0#/$defs/semanticIdAlias";
+      "urn:pptx-compiler:schema:shared:0.1.0#/$defs/semanticIdAlias";
   assert.deepEqual(findings(externalLocalReference), []);
 
   const orderedSlides = cloneBundle();
@@ -143,6 +143,46 @@ test("mutation: reserved OPC root metadata cannot masquerade as a template part"
 test("mutation: negative geometry is rejected", () => {
   const bundle = cloneBundle();
   bundle.fixtures["template-index"].slides[0].shapes[0].geometry.x = -1;
+  assertRule(bundle, "contract-schema-validation");
+});
+
+test("mutation: candidate build record cannot drift from replayed layout constraints", () => {
+  const bundle = cloneBundle();
+  bundle.fixtures["candidate-build-record"].slide.composedSlidePlan.nodes[1].box.x += 1;
+  assertRule(bundle, "candidate-build-record-replay-mismatch");
+});
+
+test("mutation: candidate source artifact and verification profile remain one schema tuple", () => {
+  const bundle = cloneBundle();
+  bundle.fixtures["candidate-build-record"].sourceArtifactType =
+    "native-omml-formula-assembled-pptx";
+  assertRule(bundle, "contract-schema-validation");
+});
+
+test("mutation: candidate source and capability evidence remain one schema tuple", () => {
+  const bundle = cloneBundle();
+  bundle.fixtures["candidate-build-record"].slide.capabilityEvidence = {
+    evidenceType: "native-omml-formula",
+    formulaDigest: "b".repeat(64),
+    formulaTarget: {
+      targetShapeKey: "formula-target",
+      sourceId: 2,
+      geometry: { x: 1, y: 1, cx: 1, cy: 1 },
+      structureProfile: "powerpoint-office-2010-text-math",
+      fontSizeHundredthPoints: 4800,
+      typeface: "Cambria Math",
+      capacity: { maxElements: 64, maxRuns: 16, maxTextBytes: 256 },
+      observed: { elements: 1, runs: 1, textBytes: 1 },
+      status: "pass"
+    }
+  };
+  assertRule(bundle, "contract-schema-validation");
+});
+
+test("mutation: candidate source and diff reason remain one schema tuple", () => {
+  const bundle = cloneBundle();
+  bundle.fixtures["candidate-build-record"].slide.diff.allowedChanges[0].reason =
+    "native-omml-formula-replacement";
   assertRule(bundle, "contract-schema-validation");
 });
 
@@ -265,6 +305,24 @@ test("mutation: one shape binding cannot satisfy two roles", () => {
   const selection = bundle.fixtures["project-overlay"].capabilitySelections[0];
   selection.bindings[1].shapeBindingId = selection.bindings[0].shapeBindingId;
   assertRule(bundle, "ambiguous-shape-binding");
+});
+
+test("separate capability selections may reuse the same semantic bindings", () => {
+  const bundle = cloneBundle();
+  const overlay = bundle.fixtures["project-overlay"];
+  const deck = bundle.fixtures["deck-spec"];
+  const artifact = bundle.fixtures["build-artifact"];
+  const selection = structuredClone(overlay.capabilitySelections[0]);
+  selection.capabilitySelectionId = "clone-reuse";
+  overlay.capabilitySelections.push(selection);
+  const slide = structuredClone(deck.slides[0]);
+  slide.slideId = "slide-reuse";
+  slide.capabilitySelectionId = selection.capabilitySelectionId;
+  deck.slides.push(slide);
+  const result = structuredClone(artifact.slides[0]);
+  result.slideId = slide.slideId;
+  artifact.slides.push(result);
+  assert.deepEqual(findings(bundle), []);
 });
 
 test("mutation: dangling bound shape is rejected", () => {
@@ -421,7 +479,7 @@ test("mutation: QA cannot substitute an unselected capability contract", () => {
   const selectedCapability = registry.capabilities[0];
   const originalQaContractId = selectedCapability.qaContractId;
   selectedCapability.qaContractId =
-    "urn:pptx-pipeline:fixture-placeholder:qa:selected-capability-revised:0.1.0";
+    "urn:pptx-compiler:fixture-placeholder:qa:selected-capability-revised:0.1.0";
 
   const unusedCapability = structuredClone(selectedCapability);
   unusedCapability.capabilityId = "unused-capability";
@@ -481,7 +539,7 @@ test("mutation: unresolved manual gate cannot carry pass evidence", () => {
     scopeKind: "build",
     scopeId: "synthetic-build",
     status: "unresolved",
-    evidenceRecordId: "urn:pptx-pipeline:evidence:manual-gate-1"
+    evidenceRecordId: "urn:pptx-compiler:evidence:manual-gate-1"
   }];
   assertRule(bundle, "contract-schema-validation");
 });
@@ -496,27 +554,27 @@ test("mutation: manual gate cannot convert an unsupported matrix item into pass 
     scopeKind: "build",
     scopeId: "synthetic-build",
     status: "passed",
-    evidenceRecordId: "urn:pptx-pipeline:evidence:manual-gate-1"
+    evidenceRecordId: "urn:pptx-compiler:evidence:manual-gate-1"
   }];
   assertRule(bundle, "invalid-manual-gate-support-reference");
 });
 
 test("mutation: unknown schema keyword fails closed", () => {
   const bundle = cloneBundle();
-  bundle.schemas["urn:pptx-pipeline:schema:project-config:0.1.0"].unevaluatedProperties = false;
+  bundle.schemas["urn:pptx-compiler:schema:project-config:0.1.0"].unevaluatedProperties = false;
   assertRule(bundle, "unsupported-contract-schema");
 });
 
 test("mutation: unregistered external schema reference fails closed", () => {
   const bundle = cloneBundle();
-  bundle.schemas["urn:pptx-pipeline:schema:project-config:0.1.0"]
-    .properties.projectId.$ref = "urn:pptx-pipeline:schema:missing:0.1.0#/$defs/id";
+  bundle.schemas["urn:pptx-compiler:schema:project-config:0.1.0"]
+    .properties.projectId.$ref = "urn:pptx-compiler:schema:missing:0.1.0#/$defs/id";
   assertRule(bundle, "unsupported-contract-schema");
 });
 
 test("mutation: reference cannot target a schema-shaped instance value", () => {
   const bundle = cloneBundle();
-  const shared = bundle.schemas["urn:pptx-pipeline:schema:shared:0.1.0"];
+  const shared = bundle.schemas["urn:pptx-compiler:schema:shared:0.1.0"];
   shared.$defs.instanceCarrier = {
     const: {
       type: "string",
@@ -524,23 +582,23 @@ test("mutation: reference cannot target a schema-shaped instance value", () => {
       not: { const: "synthetic-project" }
     }
   };
-  bundle.schemas["urn:pptx-pipeline:schema:project-config:0.1.0"]
+  bundle.schemas["urn:pptx-compiler:schema:project-config:0.1.0"]
     .properties.projectId.$ref =
-      "urn:pptx-pipeline:schema:shared:0.1.0#/$defs/instanceCarrier/const";
+      "urn:pptx-compiler:schema:shared:0.1.0#/$defs/instanceCarrier/const";
   assertRule(bundle, "unsupported-contract-schema");
 });
 
 test("mutation: reference cannot target a schema container map", () => {
   const bundle = cloneBundle();
-  bundle.schemas["urn:pptx-pipeline:schema:project-config:0.1.0"]
+  bundle.schemas["urn:pptx-compiler:schema:project-config:0.1.0"]
     .properties.projectId.$ref =
-      "urn:pptx-pipeline:schema:shared:0.1.0#/$defs";
+      "urn:pptx-compiler:schema:shared:0.1.0#/$defs";
   assertRule(bundle, "unsupported-contract-schema");
 });
 
 test("mutation: type export cannot target a schema-shaped instance value", () => {
   const bundle = cloneBundle();
-  const sharedId = "urn:pptx-pipeline:schema:shared:0.1.0";
+  const sharedId = "urn:pptx-compiler:schema:shared:0.1.0";
   bundle.schemas[sharedId].$defs.instanceCarrier = { const: { type: "string" } };
   bundle.manifest.typeExports[0].schemaId = sharedId;
   bundle.manifest.typeExports[0].pointer = "#/$defs/instanceCarrier/const";
@@ -551,14 +609,14 @@ test("mutation: type export cannot target a schema-shaped instance value", () =>
 
 test("mutation: cyclic schema reference fails closed", () => {
   const bundle = cloneBundle();
-  bundle.schemas["urn:pptx-pipeline:schema:project-config:0.1.0"]
-    .properties.projectId.$ref = "urn:pptx-pipeline:schema:project-config:0.1.0#";
+  bundle.schemas["urn:pptx-compiler:schema:project-config:0.1.0"]
+    .properties.projectId.$ref = "urn:pptx-compiler:schema:project-config:0.1.0#";
   assertRule(bundle, "unsupported-contract-schema");
 });
 
 test("mutation: malformed supported keyword fails closed", () => {
   const bundle = cloneBundle();
-  bundle.schemas["urn:pptx-pipeline:schema:template-index:0.1.0"]
+  bundle.schemas["urn:pptx-compiler:schema:template-index:0.1.0"]
     .properties.observedFeatureIds.uniqueItems = "yes";
   assertRule(bundle, "unsupported-contract-schema");
 });

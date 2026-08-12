@@ -23,7 +23,7 @@ const schemas = await Promise.all(manifest.schemas.map(async ({ path: schemaPath
   JSON.parse(await readFile(new URL(`../${schemaPath}`, import.meta.url), "utf8"))));
 const registry = createSchemaRegistry(schemas);
 for (const schema of schemas) assertSupportedSchema(schema, { registry });
-const projectConfigSchema = registry.get("urn:pptx-pipeline:schema:project-config:0.1.0");
+const projectConfigSchema = registry.get("urn:pptx-compiler:schema:project-config:0.1.0");
 const validProjectConfig = JSON.parse(await readFile(
   new URL("../fixtures/contracts/valid/project-config.json", import.meta.url),
   "utf8"

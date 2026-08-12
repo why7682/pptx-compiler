@@ -1,0 +1,47 @@
+{
+  "compilerOptions": {
+    "target": "ES2022",
+    "module": "ESNext",
+    "moduleResolution": "Bundler",
+    "strict": true,
+    "noEmit": true,
+    "skipLibCheck": false,
+    "exactOptionalPropertyTypes": true,
+    "noUncheckedIndexedAccess": true,
+    "verbatimModuleSyntax": true,
+    "forceConsistentCasingInFileNames": true,
+    "rootDirs": [
+      "packages/core/types",
+      "types"
+    ],
+    "paths": {
+      "pptx-compiler": [
+        "./packages/cli/types/index.d.ts"
+      ],
+      "pptx-compiler-core": [
+        "./packages/core/types/candidate-alpha.d.ts"
+      ],
+      "pptx-compiler-core/extension-api": [
+        "./packages/core/types/extension-api.d.ts"
+      ],
+      "pptx-compiler-core/package-assets": [
+        "./packages/core/types/package-assets.d.ts"
+      ],
+      "pptx-compiler-native-card-arrow": [
+        "./plugins/native-card-arrow/types/index.d.ts"
+      ],
+      "pptx-compiler-native-card-arrow/package-assets": [
+        "./plugins/native-card-arrow/types/package-assets.d.ts"
+      ],
+      "pptx-compiler-public-synthetic": [
+        "./packages/public-synthetic/types/index.d.ts"
+      ],
+      "pptx-compiler-public-synthetic/package-assets": [
+        "./packages/public-synthetic/types/package-assets.d.ts"
+      ]
+    }
+  },
+  "include": [
+    "tests/types/alpha-public-api.ts"
+  ]
+}

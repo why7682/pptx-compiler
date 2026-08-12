@@ -328,26 +328,36 @@ function mapBoundaryError(error) {
 }
 
 /**
- * Read the configured source through a bounded stable handle, validate a narrow
- * ZIP/XML/OPC profile, and return the semantic inspector's frozen TemplateIndex.
- * Callers cannot supply a path, package view, parser, network resolver, or
- * relaxed resource limits.
+ * Read the configured source once through a bounded stable handle, validate a
+ * narrow ZIP/XML/OPC profile, and return both the detached source bytes and the
+ * semantic inspector's frozen TemplateIndex from that same snapshot. Callers
+ * cannot supply a path, package view, parser, network resolver, or relaxed
+ * resource limits.
  */
-export async function inspectTemplateSource(options) {
+export async function inspectTemplateSourceSnapshot(options) {
   let validated;
   try {
     validated = validateOptions(options);
-    const archiveBytes = await readStableArchive(validated);
+    const sourceArchiveBytes = await readStableArchive(validated);
     const packageView = buildSecureTemplatePackageView({
       sourceLocation: validated.sourceLocation,
-      archiveBytes
+      archiveBytes: sourceArchiveBytes
     });
-    return inspectTemplate({
+    const templateIndex = inspectTemplate({
       context: validated.context,
       packageView,
       dependencies: validated.dependencies
     });
+    return Object.freeze({ sourceArchiveBytes, templateIndex });
   } catch (error) {
     mapBoundaryError(error);
   }
+}
+
+/**
+ * Compatibility projection retained for existing callers that only need the
+ * semantic index. The validation and stable-read boundary remains identical.
+ */
+export async function inspectTemplateSource(options) {
+  return (await inspectTemplateSourceSnapshot(options)).templateIndex;
 }

@@ -147,11 +147,13 @@ positive plus rejection evidence.
 
 The public M2-004 runner/conformance suite is contract evidence using a fake
 process runner and repository-authored text-derived DOCX bytes. It is not a real
-Pandoc release/platform compatibility matrix. The emitted `m:oMath` is unbound
-and non-insertable, so target application and editable PowerPoint behavior
-remain outside the claim until M2-005 and COMPAT-OMML-001 pass. PowerPoint
-automation remains an optional trusted manual adapter and is never required by
-public PR CI. Absence of either adapter must produce an explicit
+Pandoc release/platform compatibility matrix. The adapter's emitted `m:oMath`
+remains unbound and non-insertable. M2-005 contains separately scoped target
+application and local compatibility observations, but neither promotes adapter
+output to supported formula input. A public real-Pandoc matrix, purpose-bound
+direct-candidate compatibility receipt, and support review remain absent.
+PowerPoint automation remains an optional trusted manual adapter and is never
+required by public PR CI. Absence of either adapter must produce an explicit
 unavailable/manual result, not a fallback claim.
 
 ## Editability and visual compatibility

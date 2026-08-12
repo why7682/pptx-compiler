@@ -1,0 +1,36 @@
+{
+  "briefVersion": "0.1.0",
+  "briefType": "synthetic-defense-brief",
+  "briefId": "bounded-pilot-defense",
+  "audience": {
+    "role": "pilot review committee",
+    "startingState": "The committee needs evidence, limits, and a precise decision"
+  },
+  "desiredOutcome": "Approve a bounded pilot without implying wider rollout readiness",
+  "delivery": {
+    "mode": "live-room",
+    "durationMinutes": 6,
+    "viewingDistance": "room"
+  },
+  "requiredItems": [
+    {
+      "itemId": "bounded-readiness-claim",
+      "itemType": "claim",
+      "statement": "The defense pilot is ready for bounded approval"
+    },
+    {
+      "itemId": "limited-pilot-action",
+      "itemType": "action",
+      "statement": "Approve a limited pilot with two completion checks"
+    },
+    {
+      "itemId": "wider-rollout-boundary",
+      "itemType": "constraint",
+      "statement": "Wider rollout still requires edit/save and accessibility checks"
+    }
+  ],
+  "nonGoals": [
+    "Do not claim full production readiness",
+    "Do not hide the remaining completion checks"
+  ]
+}

@@ -38,13 +38,13 @@ The registry binds:
 - capability: `native-card-arrow@0.1.0`;
 - support item: `native-drawingml`;
 - executor:
-  `urn:pptx-pipeline:capability:executor:native-card-arrow:0.1.0`;
+  `urn:pptx-compiler:capability:executor:native-card-arrow:0.1.0`;
 - input schema:
-  `urn:pptx-pipeline:capability:schema:native-card-arrow-input:0.1.0`;
+  `urn:pptx-compiler:capability:schema:native-card-arrow-input:0.1.0`;
 - output schema:
-  `urn:pptx-pipeline:capability:schema:native-card-arrow-output:0.1.0`;
+  `urn:pptx-compiler:capability:schema:native-card-arrow-output:0.1.0`;
 - QA contract:
-  `urn:pptx-pipeline:capability:qa:native-card-arrow:0.1.0`;
+  `urn:pptx-compiler:capability:qa:native-card-arrow:0.1.0`;
 - required binding role: exactly `anchor`;
 - conformance fixtures: `native-card-arrow-basic` and
   `native-card-arrow-escaping`, in lexical order.

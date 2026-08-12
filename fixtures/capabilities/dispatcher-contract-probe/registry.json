@@ -8,10 +8,10 @@
       "capabilityId": "dispatcher-contract-probe",
       "capabilityVersion": "0.1.0",
       "supportMatrixItemId": "dispatcher-contract-probe",
-      "executorId": "urn:pptx-pipeline:conformance:executor:dispatcher-contract-probe:0.1.0",
-      "inputSchemaId": "urn:pptx-pipeline:conformance:schema:dispatcher-contract-probe-input:0.1.0",
-      "outputSchemaId": "urn:pptx-pipeline:conformance:schema:dispatcher-contract-probe-output:0.1.0",
-      "qaContractId": "urn:pptx-pipeline:conformance:qa:dispatcher-contract-probe:0.1.0",
+      "executorId": "urn:pptx-compiler:conformance:executor:dispatcher-contract-probe:0.1.0",
+      "inputSchemaId": "urn:pptx-compiler:conformance:schema:dispatcher-contract-probe-input:0.1.0",
+      "outputSchemaId": "urn:pptx-compiler:conformance:schema:dispatcher-contract-probe-output:0.1.0",
+      "qaContractId": "urn:pptx-compiler:conformance:qa:dispatcher-contract-probe:0.1.0",
       "requiredBindingRoles": ["probe-target"],
       "conformanceFixtureIds": ["dispatcher-contract-probe-basic"]
     }

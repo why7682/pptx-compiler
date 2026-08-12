@@ -1,6 +1,6 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "urn:pptx-pipeline:capability:schema:native-card-arrow-output:0.1.0",
+  "$id": "urn:pptx-compiler:capability:schema:native-card-arrow-output:0.1.0",
   "title": "Native card-arrow semantic render plan",
   "type": "object",
   "additionalProperties": false,

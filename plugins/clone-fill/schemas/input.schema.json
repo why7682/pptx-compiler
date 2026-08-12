@@ -1,6 +1,6 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "urn:pptx-pipeline:capability:schema:source-slide-clone-fill-input:0.1.0",
+  "$id": "urn:pptx-compiler:capability:schema:source-slide-clone-fill-input:0.1.0",
   "title": "Source slide clone/fill input",
   "type": "object",
   "additionalProperties": false,

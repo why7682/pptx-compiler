@@ -1,0 +1,7 @@
+{
+  "approvalVersion": "0.1.0",
+  "approvalType": "reviewed-planning-acceptance",
+  "approvalId": "design-planning-selection-review",
+  "authorityClass": "repository-reviewed-fixture",
+  "acceptanceSha256": "75699543dae6cb7bce025d5139845287ecc11cd926dde2b5fb9718537e1aed25"
+}

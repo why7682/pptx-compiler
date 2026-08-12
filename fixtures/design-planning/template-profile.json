@@ -1,0 +1,39 @@
+{
+  "profileVersion": "0.1.0",
+  "templateProfileId": "synthetic-defense-review-template",
+  "mode": "template-locked",
+  "allowedMotifIds": [
+    "evidence-chain",
+    "completion-gate",
+    "readiness-pulse"
+  ],
+  "fixedAttributes": [
+    "density",
+    "emphasis",
+    "geometry",
+    "hierarchy",
+    "palette",
+    "typography"
+  ],
+  "flexibleAttributes": [],
+  "layoutBinding": {
+    "layoutAcceptanceSha256": "d192eca86a357b81cf4b3440ae3b06db9c36db8dbfadbf0ffc2915d2b5ace913",
+    "proposalSetSha256": "b151f468880c0cb5061d2040a66296720a33ead4c9a5f6b9e8ae6387dfcbd607"
+  },
+  "capacityContracts": [
+    {
+      "function": "status",
+      "takeawayKind": "metric",
+      "takeawayMaxChars": 45,
+      "evidenceKind": "text",
+      "evidenceMaxChars": 72
+    },
+    {
+      "function": "decision",
+      "takeawayKind": "text",
+      "takeawayMaxChars": 60,
+      "evidenceKind": "metric",
+      "evidenceMaxChars": 77
+    }
+  ]
+}

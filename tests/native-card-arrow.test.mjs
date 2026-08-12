@@ -1,5 +1,5 @@
 import assert from "node:assert/strict";
-import { copyFile, mkdir, mkdtemp, readFile, rm } from "node:fs/promises";
+import { copyFile, mkdir, mkdtemp, readFile, rm, writeFile } from "node:fs/promises";
 import os from "node:os";
 import path from "node:path";
 import test from "node:test";
@@ -83,16 +83,16 @@ const capabilityRow = supportMatrix.dimensions.capabilities.find(
 );
 const schemasByType = new Map([
   ["capability-registry", contractSchemaRegistry.get(
-    "urn:pptx-pipeline:schema:capability-registry:0.1.0"
+    "urn:pptx-compiler:schema:capability-registry:0.1.0"
   )],
   ["project-overlay", contractSchemaRegistry.get(
-    "urn:pptx-pipeline:schema:project-overlay:0.1.0"
+    "urn:pptx-compiler:schema:project-overlay:0.1.0"
   )],
   ["template-index", contractSchemaRegistry.get(
-    "urn:pptx-pipeline:schema:template-index:0.1.0"
+    "urn:pptx-compiler:schema:template-index:0.1.0"
   )],
   ["deck-spec", contractSchemaRegistry.get(
-    "urn:pptx-pipeline:schema:deck-spec:0.1.0"
+    "urn:pptx-compiler:schema:deck-spec:0.1.0"
   )]
 ]);
 
@@ -462,7 +462,7 @@ test("runtime registry binding compares exact captured content without invoking 
 
   const drifted = clone(registry);
   drifted.capabilities[0].executorId =
-    "urn:pptx-pipeline:capability:executor:native-card-arrow-drift:0.1.0";
+    "urn:pptx-compiler:capability:executor:native-card-arrow-drift:0.1.0";
   assert.throws(
     () => prepare(runtime, bundle({ capabilityRegistry: drifted })),
     (error) => assertRuntimeError(
@@ -873,9 +873,23 @@ test("resolver and native executor are fixture-neutral, no-I/O modules with clea
     await mkdir(coreDirectory, { recursive: true });
     await mkdir(pluginDirectory, { recursive: true });
     await Promise.all([
+      writeFile(path.join(temporaryRoot, "package.json"), `${JSON.stringify({
+        type: "module",
+        imports: {
+          "#pptx-compiler/extension-api": "./packages/core/src/extension-api.mjs"
+        }
+      })}\n`),
       copyFile(
         new URL("../packages/core/src/capability-dispatcher.mjs", import.meta.url),
         path.join(coreDirectory, "capability-dispatcher.mjs")
+      ),
+      copyFile(
+        new URL("../packages/core/src/extension-api.mjs", import.meta.url),
+        path.join(coreDirectory, "extension-api.mjs")
+      ),
+      copyFile(
+        new URL("../packages/core/src/json-schema.mjs", import.meta.url),
+        path.join(coreDirectory, "json-schema.mjs")
       ),
       copyFile(
         new URL("../packages/core/src/project-dispatch-resolver.mjs", import.meta.url),

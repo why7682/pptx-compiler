@@ -56,6 +56,8 @@ The initial profile is intentionally small and cannot be relaxed by a caller:
 | Total declared expanded bytes | 1 MiB |
 | Compression ratio | 100:1 |
 | Member path | 512 UTF-8 bytes |
+| Local extra field per member | 4 KiB |
+| Total local extra fields | 32 KiB |
 | XML bytes per part | 256 KiB |
 | XML depth | 64 |
 | Elements per part | 10,000 |
@@ -67,8 +69,13 @@ The initial profile is intentionally small and cannot be relaxed by a caller:
 | Relationships per package | 128 |
 | Modeled shapes per slide | 128 |
 
-Only stored and raw-DEFLATE members are admitted. ZIP64, encryption, data
-descriptors, extra fields, comments, multiple disks, prefixes, trailing data,
+Only stored and raw-DEFLATE members are admitted. Central-directory extra fields
+are rejected. A local header may contain only one complete, bounded Open
+Packaging Growth Hint (`0xA220`) with the expected `0xA028` signature, exact
+lengths, and zero-filled padding; the repository's deliberately narrow profile
+also requires the recorded initial padding length to equal the current padding.
+ZIP64, encryption, data descriptors, every other extra field, comments,
+multiple disks, prefixes, trailing data,
 directory/symlink/special entries, nested archives, duplicate names, ASCII
 case aliases, non-contiguous or overlapping local records, local/central drift,
 CRC drift, output-size drift, compression-ratio excess, and DEFLATE trailing

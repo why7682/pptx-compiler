@@ -119,5 +119,5 @@ The contract working-tree gate also produced a byte-stable zero-finding report,
 and generated TypeScript exactly matched the normative schemas.
 
 This satisfies the two declared Node runtime lines. Linux/Windows and broader
-cross-platform OS coverage remains assigned to M3-004 and does not expand this
+cross-platform OS coverage remains assigned to M3-004B after M3-006 and does not expand this
 local macOS runtime evidence.

@@ -1,4 +1,4 @@
-import { parseStrictXml } from "../../../packages/core/src/strict-xml.mjs";
+import { parseStrictXml } from "#pptx-compiler/extension-api";
 
 const DRAWINGML_NAMESPACE = "http://schemas.openxmlformats.org/drawingml/2006/main";
 const PRESENTATIONML_NAMESPACE =

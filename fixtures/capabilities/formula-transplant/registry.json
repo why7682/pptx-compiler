@@ -8,10 +8,10 @@
       "capabilityId": "formula-transplant",
       "capabilityVersion": "0.1.0",
       "supportMatrixItemId": "formula-transplant",
-      "executorId": "urn:pptx-pipeline:capability:executor:formula-transplant:0.1.0",
-      "inputSchemaId": "urn:pptx-pipeline:capability:schema:formula-transplant-input:0.1.0",
-      "outputSchemaId": "urn:pptx-pipeline:capability:schema:formula-transplant-output:0.1.0",
-      "qaContractId": "urn:pptx-pipeline:capability:qa:formula-transplant:0.1.0",
+      "executorId": "urn:pptx-compiler:capability:executor:formula-transplant:0.1.0",
+      "inputSchemaId": "urn:pptx-compiler:capability:schema:formula-transplant-input:0.1.0",
+      "outputSchemaId": "urn:pptx-compiler:capability:schema:formula-transplant-output:0.1.0",
+      "qaContractId": "urn:pptx-compiler:capability:qa:formula-transplant:0.1.0",
       "requiredBindingRoles": ["formula-target"],
       "conformanceFixtureIds": ["formula-transplant-fraction"]
     }

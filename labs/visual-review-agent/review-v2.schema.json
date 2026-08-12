@@ -1,0 +1,513 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:pptx-compiler:labs:visual-review-report:0.2.0",
+  "title": "Staged rendered-presentation review reports",
+  "oneOf": [
+    { "$ref": "#/$defs/blindOutcomeReport" },
+    { "$ref": "#/$defs/instanceReviewReport" },
+    { "$ref": "#/$defs/wholeDeckReviewReport" }
+  ],
+  "$defs": {
+    "semanticId": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 96,
+      "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$"
+    },
+    "safeText": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 2048,
+      "pattern": "^(?=\\S)(?=.*\\S$)(?!.*\\p{Cf})(?!.*\\p{Noncharacter_Code_Point})(?!.*[\\uD800-\\uDFFF])[^\\u0000-\\u001F\\u007F-\\u009F\\u2028\\u2029]+$"
+    },
+    "sha256": {
+      "type": "string",
+      "pattern": "^[a-f0-9]{64}$"
+    },
+    "blindEvidenceRef": {
+      "type": "string",
+      "pattern": "^run-[123]:(?:takeaway|requested-action|uncertainty-boundary|argument-evidence-chain)$"
+    },
+    "inputQuality": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["notes", "status"],
+      "properties": {
+        "notes": {
+          "type": "array",
+          "maxItems": 16,
+          "items": { "$ref": "#/$defs/safeText" }
+        },
+        "status": { "enum": ["ok", "degraded", "unusable"] }
+      }
+    },
+    "unassessedProperties": {
+      "type": "array",
+      "uniqueItems": true,
+      "maxItems": 6,
+      "items": {
+        "enum": [
+          "accessibility-metadata",
+          "animation",
+          "font-embedding",
+          "native-editability",
+          "ooxml-correctness",
+          "speaker-notes"
+        ]
+      }
+    },
+    "region": {
+      "oneOf": [
+        { "type": "null" },
+        {
+          "type": "array",
+          "minItems": 4,
+          "maxItems": 4,
+          "items": { "type": "number", "minimum": 0, "maximum": 1 }
+        }
+      ]
+    },
+    "slideIdentity": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["slideId", "slideNumber"],
+      "properties": {
+        "slideId": { "$ref": "#/$defs/semanticId" },
+        "slideNumber": { "type": "integer", "minimum": 1, "maximum": 256 }
+      }
+    },
+    "slideSummary": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["assessmentStatus", "slideId", "slideNumber", "visibleSummary"],
+      "properties": {
+        "assessmentStatus": { "enum": ["assessable", "unable-to-judge"] },
+        "slideId": { "$ref": "#/$defs/semanticId" },
+        "slideNumber": { "type": "integer", "minimum": 1, "maximum": 256 },
+        "visibleSummary": { "$ref": "#/$defs/safeText" }
+      }
+    },
+    "observation": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["evidence", "evidenceSource", "region", "slideId"],
+      "properties": {
+        "evidence": { "$ref": "#/$defs/safeText" },
+        "evidenceSource": { "enum": ["crop", "full-slide"] },
+        "region": { "$ref": "#/$defs/region" },
+        "slideId": { "$ref": "#/$defs/semanticId" }
+      }
+    },
+    "outcomeSlot": {
+      "oneOf": [
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["observations", "status", "text"],
+          "properties": {
+            "observations": {
+              "type": "array",
+              "minItems": 1,
+              "maxItems": 16,
+              "items": { "$ref": "#/$defs/observation" }
+            },
+            "status": { "const": "identified" },
+            "text": { "$ref": "#/$defs/safeText" }
+          }
+        },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["observations", "status", "text"],
+          "properties": {
+            "observations": {
+              "type": "array",
+              "maxItems": 16,
+              "items": { "$ref": "#/$defs/observation" }
+            },
+            "status": { "enum": ["unclear", "not-visible"] },
+            "text": { "type": "null" }
+          }
+        }
+      ]
+    },
+    "blindOutcomeReport": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "contractType",
+        "deliveryProfileSha256",
+        "disclosurePhase",
+        "evidenceScope",
+        "inputQuality",
+        "lane",
+        "orderedSlides",
+        "reconstruction",
+        "renderSetSha256",
+        "reviewContextSha256",
+        "reviewId",
+        "reviewRun",
+        "schemaVersion",
+        "unassessedProperties"
+      ],
+      "properties": {
+        "contractType": { "const": "blind-outcome-report" },
+        "deliveryProfileSha256": { "$ref": "#/$defs/sha256" },
+        "disclosurePhase": { "const": "blind" },
+        "evidenceScope": { "const": "simulated-review-only" },
+        "inputQuality": { "$ref": "#/$defs/inputQuality" },
+        "lane": { "const": "blind-outcome" },
+        "orderedSlides": {
+          "type": "array",
+          "minItems": 1,
+          "maxItems": 256,
+          "items": { "$ref": "#/$defs/slideSummary" }
+        },
+        "reconstruction": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "argumentEvidenceChain",
+            "argumentEvidenceObservations",
+            "requestedAction",
+            "takeaway",
+            "uncertaintyBoundary"
+          ],
+          "properties": {
+            "argumentEvidenceChain": {
+              "type": "array",
+              "maxItems": 16,
+              "items": { "$ref": "#/$defs/safeText" }
+            },
+            "argumentEvidenceObservations": {
+              "type": "array",
+              "maxItems": 16,
+              "items": { "$ref": "#/$defs/observation" }
+            },
+            "requestedAction": { "$ref": "#/$defs/outcomeSlot" },
+            "takeaway": { "$ref": "#/$defs/outcomeSlot" },
+            "uncertaintyBoundary": { "$ref": "#/$defs/outcomeSlot" }
+          }
+        },
+        "renderSetSha256": { "$ref": "#/$defs/sha256" },
+        "reviewContextSha256": { "$ref": "#/$defs/sha256" },
+        "reviewId": { "$ref": "#/$defs/semanticId" },
+        "reviewRun": { "type": "integer", "minimum": 1, "maximum": 3 },
+        "schemaVersion": { "const": "0.2.0" },
+        "unassessedProperties": { "$ref": "#/$defs/unassessedProperties" }
+      }
+    },
+    "itemAssessmentBase": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "blindEvidenceRefs",
+        "confidence",
+        "diagnosis",
+        "itemId",
+        "itemKind",
+        "recommendation",
+        "status",
+        "visibleEvidence"
+      ],
+      "properties": {
+        "blindEvidenceRefs": {
+          "type": "array",
+          "maxItems": 16,
+          "items": { "$ref": "#/$defs/blindEvidenceRef" }
+        },
+        "confidence": { "type": "number", "minimum": 0, "maximum": 1 },
+        "diagnosis": { "$ref": "#/$defs/safeText" },
+        "itemId": { "$ref": "#/$defs/semanticId" },
+        "itemKind": {
+          "enum": ["takeaway", "requested-action", "uncertainty-boundary", "evidence"]
+        },
+        "recommendation": { "$ref": "#/$defs/safeText" },
+        "status": {
+          "enum": ["matched", "missing", "incomplete", "incorrect", "uncertain"]
+        },
+        "visibleEvidence": {
+          "type": "array",
+          "minItems": 1,
+          "maxItems": 16,
+          "items": { "$ref": "#/$defs/safeText" }
+        }
+      }
+    },
+    "itemAssessment": {
+      "oneOf": [
+        {
+          "$ref": "#/$defs/itemAssessmentBase",
+          "properties": {
+            "blindEvidenceRefs": {
+              "type": "array",
+              "minItems": 1,
+              "maxItems": 16,
+              "items": { "$ref": "#/$defs/blindEvidenceRef" }
+            },
+            "status": { "const": "matched" }
+          }
+        },
+        {
+          "$ref": "#/$defs/itemAssessmentBase",
+          "properties": {
+            "status": {
+              "enum": ["missing", "incomplete", "incorrect", "uncertain"]
+            }
+          }
+        }
+      ]
+    },
+    "instanceReviewReport": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "atomicOutcomeManifestSha256",
+        "blindBatchSha256",
+        "contractType",
+        "deliveryProfileSha256",
+        "disclosurePhase",
+        "evidenceScope",
+        "hiddenOutcomeKeySha256",
+        "instanceContextSha256",
+        "itemAssessments",
+        "lane",
+        "reviewContextSha256",
+        "reviewId",
+        "reviewRun",
+        "schemaVersion",
+        "unassessedProperties"
+      ],
+      "properties": {
+        "atomicOutcomeManifestSha256": { "$ref": "#/$defs/sha256" },
+        "blindBatchSha256": { "$ref": "#/$defs/sha256" },
+        "contractType": { "const": "instance-review-report" },
+        "deliveryProfileSha256": { "$ref": "#/$defs/sha256" },
+        "disclosurePhase": { "const": "revealed" },
+        "evidenceScope": { "const": "simulated-review-only" },
+        "hiddenOutcomeKeySha256": { "$ref": "#/$defs/sha256" },
+        "instanceContextSha256": { "$ref": "#/$defs/sha256" },
+        "itemAssessments": {
+          "type": "array",
+          "minItems": 1,
+          "maxItems": 64,
+          "items": { "$ref": "#/$defs/itemAssessment" }
+        },
+        "lane": { "const": "instance" },
+        "reviewContextSha256": { "$ref": "#/$defs/sha256" },
+        "reviewId": { "$ref": "#/$defs/semanticId" },
+        "reviewRun": { "type": "integer", "minimum": 1, "maximum": 3 },
+        "schemaVersion": { "const": "0.2.0" },
+        "unassessedProperties": { "$ref": "#/$defs/unassessedProperties" }
+      }
+    },
+    "dimensionAssessment": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["confidence", "dimension", "evidence", "status"],
+      "properties": {
+        "confidence": { "type": "number", "minimum": 0, "maximum": 1 },
+        "dimension": {
+          "enum": [
+            "subject-conditionality",
+            "decorative-semantic-fit",
+            "signature-coherence",
+            "motif-coherence",
+            "silhouette-rhythm",
+            "density-rhythm",
+            "opening-payoff",
+            "closing-payoff",
+            "delivery-fitness"
+          ]
+        },
+        "evidence": { "$ref": "#/$defs/safeText" },
+        "status": { "enum": ["fit", "concern", "unable-to-judge"] }
+      }
+    },
+    "wholeDeckFindingBase": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "affectedSlideIds",
+        "confidence",
+        "dimension",
+        "evidence",
+        "impact",
+        "recommendation",
+        "region",
+        "rootCause",
+        "severity"
+      ],
+      "properties": {
+        "affectedSlideIds": {
+          "type": "array",
+          "minItems": 1,
+          "maxItems": 256,
+          "uniqueItems": true,
+          "items": { "$ref": "#/$defs/semanticId" }
+        },
+        "confidence": { "type": "number", "minimum": 0, "maximum": 1 },
+        "dimension": {
+          "enum": [
+            "subject-conditionality",
+            "decorative-semantic-fit",
+            "signature-coherence",
+            "motif-coherence",
+            "silhouette-rhythm",
+            "density-rhythm",
+            "opening-payoff",
+            "closing-payoff",
+            "delivery-fitness"
+          ]
+        },
+        "evidence": { "$ref": "#/$defs/safeText" },
+        "impact": { "$ref": "#/$defs/safeText" },
+        "recommendation": { "$ref": "#/$defs/safeText" },
+        "region": { "$ref": "#/$defs/region" },
+        "rootCause": {
+          "enum": [
+            "interchangeable-visual-language",
+            "decoration-without-semantic-function",
+            "signature-disconnected-from-subject",
+            "motif-role-drift",
+            "accidental-silhouette-repetition",
+            "random-silhouette-variation",
+            "flat-density-rhythm",
+            "missing-opening-job",
+            "missing-closing-payoff",
+            "delivery-density-mismatch"
+          ]
+        },
+        "severity": { "enum": ["blocker", "major", "minor"] }
+      }
+    },
+    "wholeDeckFinding": {
+      "oneOf": [
+        {
+          "$ref": "#/$defs/wholeDeckFindingBase",
+          "properties": {
+            "dimension": { "const": "subject-conditionality" },
+            "rootCause": { "const": "interchangeable-visual-language" }
+          }
+        },
+        {
+          "$ref": "#/$defs/wholeDeckFindingBase",
+          "properties": {
+            "dimension": { "const": "decorative-semantic-fit" },
+            "rootCause": { "const": "decoration-without-semantic-function" }
+          }
+        },
+        {
+          "$ref": "#/$defs/wholeDeckFindingBase",
+          "properties": {
+            "dimension": { "const": "signature-coherence" },
+            "rootCause": { "const": "signature-disconnected-from-subject" }
+          }
+        },
+        {
+          "$ref": "#/$defs/wholeDeckFindingBase",
+          "properties": {
+            "dimension": { "const": "motif-coherence" },
+            "rootCause": { "const": "motif-role-drift" }
+          }
+        },
+        {
+          "$ref": "#/$defs/wholeDeckFindingBase",
+          "properties": {
+            "dimension": { "const": "silhouette-rhythm" },
+            "rootCause": {
+              "enum": [
+                "accidental-silhouette-repetition",
+                "random-silhouette-variation"
+              ]
+            }
+          }
+        },
+        {
+          "$ref": "#/$defs/wholeDeckFindingBase",
+          "properties": {
+            "dimension": { "const": "density-rhythm" },
+            "rootCause": { "const": "flat-density-rhythm" }
+          }
+        },
+        {
+          "$ref": "#/$defs/wholeDeckFindingBase",
+          "properties": {
+            "dimension": { "const": "opening-payoff" },
+            "rootCause": { "const": "missing-opening-job" }
+          }
+        },
+        {
+          "$ref": "#/$defs/wholeDeckFindingBase",
+          "properties": {
+            "dimension": { "const": "closing-payoff" },
+            "rootCause": { "const": "missing-closing-payoff" }
+          }
+        },
+        {
+          "$ref": "#/$defs/wholeDeckFindingBase",
+          "properties": {
+            "dimension": { "const": "delivery-fitness" },
+            "rootCause": { "const": "delivery-density-mismatch" }
+          }
+        }
+      ]
+    },
+    "wholeDeckReviewReport": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "contactSheetSha256",
+        "contactSheetSummary",
+        "contractType",
+        "deliveryProfileSha256",
+        "dimensionAssessments",
+        "disclosurePhase",
+        "evidenceScope",
+        "findings",
+        "inputQuality",
+        "labelBlind",
+        "lane",
+        "orderedSlides",
+        "reviewContextSha256",
+        "reviewId",
+        "reviewRun",
+        "schemaVersion",
+        "unassessedProperties"
+      ],
+      "properties": {
+        "contactSheetSha256": { "$ref": "#/$defs/sha256" },
+        "contactSheetSummary": { "$ref": "#/$defs/safeText" },
+        "contractType": { "const": "whole-deck-review-report" },
+        "deliveryProfileSha256": { "$ref": "#/$defs/sha256" },
+        "dimensionAssessments": {
+          "type": "array",
+          "minItems": 9,
+          "maxItems": 9,
+          "items": { "$ref": "#/$defs/dimensionAssessment" }
+        },
+        "disclosurePhase": { "const": "label-blind" },
+        "evidenceScope": { "const": "simulated-review-only" },
+        "findings": {
+          "type": "array",
+          "maxItems": 64,
+          "items": { "$ref": "#/$defs/wholeDeckFinding" }
+        },
+        "inputQuality": { "$ref": "#/$defs/inputQuality" },
+        "labelBlind": { "const": true },
+        "lane": { "const": "whole-deck" },
+        "orderedSlides": {
+          "type": "array",
+          "minItems": 1,
+          "maxItems": 256,
+          "items": { "$ref": "#/$defs/slideIdentity" }
+        },
+        "reviewContextSha256": { "$ref": "#/$defs/sha256" },
+        "reviewId": { "$ref": "#/$defs/semanticId" },
+        "reviewRun": { "type": "integer", "minimum": 1, "maximum": 3 },
+        "schemaVersion": { "const": "0.2.0" },
+        "unassessedProperties": { "$ref": "#/$defs/unassessedProperties" }
+      }
+    }
+  }
+}

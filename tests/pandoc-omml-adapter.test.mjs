@@ -132,16 +132,16 @@ const capabilityRow = supportMatrix.dimensions.capabilities.find(
 );
 const schemasByType = new Map([
   ["capability-registry", contractSchemaRegistry.get(
-    "urn:pptx-pipeline:schema:capability-registry:0.1.0"
+    "urn:pptx-compiler:schema:capability-registry:0.1.0"
   )],
   ["project-overlay", contractSchemaRegistry.get(
-    "urn:pptx-pipeline:schema:project-overlay:0.1.0"
+    "urn:pptx-compiler:schema:project-overlay:0.1.0"
   )],
   ["template-index", contractSchemaRegistry.get(
-    "urn:pptx-pipeline:schema:template-index:0.1.0"
+    "urn:pptx-compiler:schema:template-index:0.1.0"
   )],
   ["deck-spec", contractSchemaRegistry.get(
-    "urn:pptx-pipeline:schema:deck-spec:0.1.0"
+    "urn:pptx-compiler:schema:deck-spec:0.1.0"
   )]
 ]);
 

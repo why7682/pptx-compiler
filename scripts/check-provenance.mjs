@@ -10,7 +10,7 @@ import { assertSupportedSchema, validateJson } from "./lib/json-schema.mjs";
 
 const REPORT_SCHEMA_VERSION = 1;
 const RECORD_SCHEMA_VERSION = 1;
-const EXPECTED_SCHEMA_ID = "urn:pptx-pipeline:schema:provenance-record:1";
+const EXPECTED_SCHEMA_ID = "urn:pptx-compiler:schema:provenance-record:1";
 const DEFAULT_SCHEMA_PATH = "schemas/provenance-record.schema.json";
 const DEFAULT_RECORDS_PATH = "provenance/records.json";
 const MAX_CONTROL_FILE_BYTES = 1024 * 1024;

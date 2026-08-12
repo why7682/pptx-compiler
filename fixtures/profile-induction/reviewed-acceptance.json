@@ -1,0 +1,107 @@
+{
+  "acceptanceVersion": "0.1.0",
+  "proposalSetSha256": "b151f468880c0cb5061d2040a66296720a33ead4c9a5f6b9e8ae6387dfcbd607",
+  "decisions": [
+    {
+      "exemplarId": "decision-focus",
+      "proposalSha256": "019357596169975a1fa6cca292a6bd3d02069f4c0e4acd19b3430b2adad08037",
+      "status": "accepted",
+      "reasonCode": null,
+      "profile": {
+        "layoutId": "decision-focus-layout",
+        "sourceSlideKey": "slide-1",
+        "functions": [
+          "decision"
+        ],
+        "slots": [
+          {
+            "slotId": "decision-focus-primary",
+            "candidateId": "decision-focus-candidate-1",
+            "sourceShapeKey": "shape-1",
+            "visualRole": "primary",
+            "cloneFillRole": "title",
+            "acceptsRoles": [
+              "takeaway"
+            ],
+            "kind": "text",
+            "minUnits": 1,
+            "maxUnits": 1,
+            "capacity": {
+              "maxChars": 60
+            }
+          },
+          {
+            "slotId": "decision-focus-supporting",
+            "candidateId": "decision-focus-candidate-2",
+            "sourceShapeKey": "shape-2",
+            "visualRole": "supporting",
+            "cloneFillRole": "body",
+            "acceptsRoles": [
+              "evidence"
+            ],
+            "kind": "metric",
+            "minUnits": 1,
+            "maxUnits": 1,
+            "capacity": {
+              "maxChars": 80
+            }
+          }
+        ]
+      }
+    },
+    {
+      "exemplarId": "status-focus",
+      "proposalSha256": "023aea174863b846540b0d05e38bc1cff25f52965688f30ce735b059df672f5b",
+      "status": "accepted",
+      "reasonCode": null,
+      "profile": {
+        "layoutId": "status-focus-layout",
+        "sourceSlideKey": "slide-1",
+        "functions": [
+          "status"
+        ],
+        "slots": [
+          {
+            "slotId": "status-focus-primary",
+            "candidateId": "status-focus-candidate-2",
+            "sourceShapeKey": "shape-2",
+            "visualRole": "primary",
+            "cloneFillRole": "title",
+            "acceptsRoles": [
+              "takeaway"
+            ],
+            "kind": "metric",
+            "minUnits": 1,
+            "maxUnits": 1,
+            "capacity": {
+              "maxChars": 48
+            }
+          },
+          {
+            "slotId": "status-focus-supporting",
+            "candidateId": "status-focus-candidate-1",
+            "sourceShapeKey": "shape-1",
+            "visualRole": "supporting",
+            "cloneFillRole": "body",
+            "acceptsRoles": [
+              "evidence"
+            ],
+            "kind": "text",
+            "minUnits": 1,
+            "maxUnits": 1,
+            "capacity": {
+              "maxChars": 72
+            }
+          }
+        ]
+      }
+    },
+    {
+      "exemplarId": "ambiguous-balance",
+      "proposalSha256": "9e3fe2b9fbfb48de25a384359638088f221718413fc61b2ca361cb32f99b5b3e",
+      "status": "rejected",
+      "reasonCode": "ambiguous-visual-hierarchy",
+      "profile": null
+    }
+  ]
+}

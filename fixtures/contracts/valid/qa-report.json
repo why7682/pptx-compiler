@@ -15,7 +15,7 @@
   "checks": [
     {
       "checkId": "archive-integrity",
-      "qaContractId": "urn:pptx-pipeline:fixture-placeholder:qa:source-slide-clone-fill:0.1.0",
+      "qaContractId": "urn:pptx-compiler:fixture-placeholder:qa:source-slide-clone-fill:0.1.0",
       "scopeKind": "build",
       "scopeId": "synthetic-build",
       "outcome": "pass",
@@ -24,7 +24,7 @@
     },
     {
       "checkId": "source-isolation",
-      "qaContractId": "urn:pptx-pipeline:fixture-placeholder:qa:source-slide-clone-fill:0.1.0",
+      "qaContractId": "urn:pptx-compiler:fixture-placeholder:qa:source-slide-clone-fill:0.1.0",
       "scopeKind": "build",
       "scopeId": "synthetic-build",
       "outcome": "pass",

@@ -1,7 +1,7 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "urn:pptx-pipeline:schema:template-index:0.1.0",
-  "title": "PPTX Pipeline TemplateIndex",
+  "$id": "urn:pptx-compiler:schema:template-index:0.1.0",
+  "title": "PPTX Compiler TemplateIndex",
   "type": "object",
   "additionalProperties": false,
   "required": [
@@ -19,20 +19,20 @@
     "slides"
   ],
   "properties": {
-    "schemaVersion": { "$ref": "urn:pptx-pipeline:schema:shared:0.1.0#/$defs/schemaVersion" },
+    "schemaVersion": { "$ref": "urn:pptx-compiler:schema:shared:0.1.0#/$defs/schemaVersion" },
     "contractType": { "const": "template-index" },
-    "templateIndexId": { "$ref": "urn:pptx-pipeline:schema:shared:0.1.0#/$defs/semanticId" },
-    "templateProfileId": { "$ref": "urn:pptx-pipeline:schema:shared:0.1.0#/$defs/semanticId" },
+    "templateIndexId": { "$ref": "urn:pptx-compiler:schema:shared:0.1.0#/$defs/semanticId" },
+    "templateProfileId": { "$ref": "urn:pptx-compiler:schema:shared:0.1.0#/$defs/semanticId" },
     "templateFormat": { "enum": ["potx", "pptx"] },
-    "templateSha256": { "$ref": "urn:pptx-pipeline:schema:shared:0.1.0#/$defs/sha256" },
-    "presentationPart": { "$ref": "urn:pptx-pipeline:schema:shared:0.1.0#/$defs/packagePartPath" },
+    "templateSha256": { "$ref": "urn:pptx-compiler:schema:shared:0.1.0#/$defs/sha256" },
+    "presentationPart": { "$ref": "urn:pptx-compiler:schema:shared:0.1.0#/$defs/packagePartPath" },
     "slideSizeEmu": { "$ref": "#/$defs/slideSize" },
     "observedFeatureIds": {
       "type": "array",
       "minItems": 1,
       "maxItems": 256,
       "uniqueItems": true,
-      "items": { "$ref": "urn:pptx-pipeline:schema:shared:0.1.0#/$defs/semanticId" }
+      "items": { "$ref": "urn:pptx-compiler:schema:shared:0.1.0#/$defs/semanticId" }
     },
     "masters": {
       "type": "array",
@@ -59,8 +59,8 @@
       "additionalProperties": false,
       "required": ["cx", "cy"],
       "properties": {
-        "cx": { "$ref": "urn:pptx-pipeline:schema:shared:0.1.0#/$defs/emuExtent" },
-        "cy": { "$ref": "urn:pptx-pipeline:schema:shared:0.1.0#/$defs/emuExtent" }
+        "cx": { "$ref": "urn:pptx-compiler:schema:shared:0.1.0#/$defs/emuExtent" },
+        "cy": { "$ref": "urn:pptx-compiler:schema:shared:0.1.0#/$defs/emuExtent" }
       }
     },
     "geometry": {
@@ -68,10 +68,10 @@
       "additionalProperties": false,
       "required": ["x", "y", "cx", "cy"],
       "properties": {
-        "x": { "$ref": "urn:pptx-pipeline:schema:shared:0.1.0#/$defs/emuCoordinate" },
-        "y": { "$ref": "urn:pptx-pipeline:schema:shared:0.1.0#/$defs/emuCoordinate" },
-        "cx": { "$ref": "urn:pptx-pipeline:schema:shared:0.1.0#/$defs/emuExtent" },
-        "cy": { "$ref": "urn:pptx-pipeline:schema:shared:0.1.0#/$defs/emuExtent" }
+        "x": { "$ref": "urn:pptx-compiler:schema:shared:0.1.0#/$defs/emuCoordinate" },
+        "y": { "$ref": "urn:pptx-compiler:schema:shared:0.1.0#/$defs/emuCoordinate" },
+        "cx": { "$ref": "urn:pptx-compiler:schema:shared:0.1.0#/$defs/emuExtent" },
+        "cy": { "$ref": "urn:pptx-compiler:schema:shared:0.1.0#/$defs/emuExtent" }
       }
     },
     "placeholder": {
@@ -79,7 +79,7 @@
       "additionalProperties": false,
       "required": ["type", "index"],
       "properties": {
-        "type": { "$ref": "urn:pptx-pipeline:schema:shared:0.1.0#/$defs/semanticId" },
+        "type": { "$ref": "urn:pptx-compiler:schema:shared:0.1.0#/$defs/semanticId" },
         "index": {
           "type": "integer",
           "minimum": 0,
@@ -92,8 +92,8 @@
       "additionalProperties": false,
       "required": ["shapeKey", "sourceId", "kind", "geometry"],
       "properties": {
-        "shapeKey": { "$ref": "urn:pptx-pipeline:schema:shared:0.1.0#/$defs/semanticId" },
-        "sourceId": { "$ref": "urn:pptx-pipeline:schema:shared:0.1.0#/$defs/ooxmlId" },
+        "shapeKey": { "$ref": "urn:pptx-compiler:schema:shared:0.1.0#/$defs/semanticId" },
+        "sourceId": { "$ref": "urn:pptx-compiler:schema:shared:0.1.0#/$defs/ooxmlId" },
         "kind": {
           "enum": ["auto-shape", "graphic-frame", "group", "picture", "placeholder", "text-box"]
         },
@@ -106,9 +106,9 @@
       "additionalProperties": false,
       "required": ["masterKey", "sourceId", "partPath"],
       "properties": {
-        "masterKey": { "$ref": "urn:pptx-pipeline:schema:shared:0.1.0#/$defs/semanticId" },
-        "sourceId": { "$ref": "urn:pptx-pipeline:schema:shared:0.1.0#/$defs/ooxmlId" },
-        "partPath": { "$ref": "urn:pptx-pipeline:schema:shared:0.1.0#/$defs/packagePartPath" }
+        "masterKey": { "$ref": "urn:pptx-compiler:schema:shared:0.1.0#/$defs/semanticId" },
+        "sourceId": { "$ref": "urn:pptx-compiler:schema:shared:0.1.0#/$defs/ooxmlId" },
+        "partPath": { "$ref": "urn:pptx-compiler:schema:shared:0.1.0#/$defs/packagePartPath" }
       }
     },
     "layoutEntry": {
@@ -116,10 +116,10 @@
       "additionalProperties": false,
       "required": ["layoutKey", "sourceId", "partPath", "masterKey", "shapes"],
       "properties": {
-        "layoutKey": { "$ref": "urn:pptx-pipeline:schema:shared:0.1.0#/$defs/semanticId" },
-        "sourceId": { "$ref": "urn:pptx-pipeline:schema:shared:0.1.0#/$defs/ooxmlId" },
-        "partPath": { "$ref": "urn:pptx-pipeline:schema:shared:0.1.0#/$defs/packagePartPath" },
-        "masterKey": { "$ref": "urn:pptx-pipeline:schema:shared:0.1.0#/$defs/semanticId" },
+        "layoutKey": { "$ref": "urn:pptx-compiler:schema:shared:0.1.0#/$defs/semanticId" },
+        "sourceId": { "$ref": "urn:pptx-compiler:schema:shared:0.1.0#/$defs/ooxmlId" },
+        "partPath": { "$ref": "urn:pptx-compiler:schema:shared:0.1.0#/$defs/packagePartPath" },
+        "masterKey": { "$ref": "urn:pptx-compiler:schema:shared:0.1.0#/$defs/semanticId" },
         "shapes": {
           "type": "array",
           "maxItems": 8192,
@@ -132,10 +132,10 @@
       "additionalProperties": false,
       "required": ["slideKey", "sourceId", "partPath", "layoutKey", "shapes"],
       "properties": {
-        "slideKey": { "$ref": "urn:pptx-pipeline:schema:shared:0.1.0#/$defs/semanticId" },
-        "sourceId": { "$ref": "urn:pptx-pipeline:schema:shared:0.1.0#/$defs/ooxmlId" },
-        "partPath": { "$ref": "urn:pptx-pipeline:schema:shared:0.1.0#/$defs/packagePartPath" },
-        "layoutKey": { "$ref": "urn:pptx-pipeline:schema:shared:0.1.0#/$defs/semanticId" },
+        "slideKey": { "$ref": "urn:pptx-compiler:schema:shared:0.1.0#/$defs/semanticId" },
+        "sourceId": { "$ref": "urn:pptx-compiler:schema:shared:0.1.0#/$defs/ooxmlId" },
+        "partPath": { "$ref": "urn:pptx-compiler:schema:shared:0.1.0#/$defs/packagePartPath" },
+        "layoutKey": { "$ref": "urn:pptx-compiler:schema:shared:0.1.0#/$defs/semanticId" },
         "shapes": {
           "type": "array",
           "maxItems": 8192,

@@ -30,6 +30,14 @@ remain `unsupported/unavailable`. Public tests use a fake process runner and
 repository-authored in-memory DOCX text. No compatible real-Pandoc public
 matrix exists, `supportClaimsEnabled` remains `false`, and no row is promoted.
 
+Downstream status on 2026-08-09: M2-005 now consumes this unbound result through
+an exact dispatcher identity, strict-parses it again, and independently rebuilds
+one target-specific `a14:m -> m:oMath` tree inside an authenticated synthetic
+text box. That does not change this adapter's contract: its output remains
+unbound and non-insertable, core imports no adapter module, public conformance
+still uses a fake runner, and `COMPAT-OMML-001` still requires a human formula-
+content edit in PowerPoint.
+
 ## Exact implementation artifacts
 
 - `packages/adapter-pandoc-omml/src/node-process-runner.mjs`
@@ -127,8 +135,10 @@ non-extracting secure ZIP profile:
 - at most 32 members;
 - at most 256 KiB compressed/uncompressed per member;
 - at most 100:1 compression ratio;
-- no traversal, aliases, encryption, data descriptors, extra fields, ZIP64,
-  nested ZIPs, or ambiguous records.
+- no traversal, aliases, encryption, data descriptors, central extra fields,
+  unknown local extra fields, ZIP64, nested ZIPs, or ambiguous records; the
+  only local exception is the bounded canonical Open Packaging Growth Hint
+  admitted by the shared secure-ZIP profile.
 
 The adapter then requires `[Content_Types].xml`, `_rels/.rels`, and
 `word/document.xml`; classifies every part against the fixed formula-DOCX set;
@@ -194,6 +204,8 @@ The Node runner can request and police timeout/streams but cannot provide a
 portable kernel memory or descendant-process sandbox; the fixed Pandoc RTS
 limit and `--sandbox` reduce rather than eliminate that residual.
 
-M2-005 is the next dependency. It must consume typed/validated operation data,
-not concatenate this conformance string, and must retain fail-closed behavior if
-the target shape cannot accept the exact native formula representation.
+M2-005 has now met that narrow downstream typed-application obligation for one
+synthetic target without concatenating this conformance string. Rollback,
+normative serialized build-record integration, final delivery authority, real-
+Pandoc compatibility, and the manual formula-content edit remain outside
+M2-004 and incomplete.

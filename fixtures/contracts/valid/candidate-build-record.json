@@ -1,0 +1,227 @@
+{
+  "artifactType": "candidate-pptx",
+  "baseArtifactSha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+  "candidateVersion": "0.1.0",
+  "contractType": "candidate-build-record",
+  "deliveryEligible": false,
+  "output": {
+    "byteLength": 1,
+    "fileName": "candidate.pptx",
+    "sha256": "2d711642b726b04401627ca9fbac32f5c8530fb1903cc4db02258717921a4881"
+  },
+  "schemaVersion": "0.1.0",
+  "slide": {
+    "capabilityEvidence": {
+      "allocatedShapeIds": [4, 5, 6],
+      "evidenceType": "native-card-arrow"
+    },
+    "composedSlidePlan": {
+      "canvas": {
+        "cx": 12192000,
+        "cy": 6858000,
+        "x": 0,
+        "y": 0
+      },
+      "constraintReceipt": {
+        "checkedConstraintIds": [
+          "slide-content-containment",
+          "semantic-slot-containment",
+          "slide-content-non-overlap"
+        ],
+        "containmentChecks": [
+          { "nodeId": "title-shape", "status": "pass" },
+          { "nodeId": "candidate-component", "status": "pass" }
+        ],
+        "occupancyChecks": [
+          {
+            "leftNodeId": "title-shape",
+            "rightNodeId": "candidate-component",
+            "status": "clear"
+          }
+        ],
+        "receiptVersion": "0.1.0",
+        "slotChecks": [
+          {
+            "nodeId": "candidate-component",
+            "slotId": "content-tail",
+            "status": "pass"
+          }
+        ],
+        "status": "pass"
+      },
+      "layoutIrDigest": "f0fc1cd4c2bedf2ca98f4edfcd347ceaccbcd907b28ebe48ea6492751c482e7e",
+      "nodes": [
+        {
+          "box": { "cx": 10363200, "cy": 914400, "x": 914400, "y": 457200 },
+          "collisionPolicy": "forbid",
+          "nodeId": "title-shape",
+          "paintBounds": { "cx": 10363200, "cy": 914400, "x": 914400, "y": 457200 },
+          "parentNodeId": "slide-canvas",
+          "placementIntent": "template-fixed",
+          "positionMode": "absolute",
+          "role": "content",
+          "semanticSlotId": "title-region",
+          "sourceKind": "template-shape",
+          "sourceRef": "title-shape",
+          "zOrder": 0
+        },
+        {
+          "box": { "cx": 7315200, "cy": 1828800, "x": 2438400, "y": 2743200 },
+          "collisionPolicy": "forbid",
+          "nodeId": "candidate-component",
+          "paintBounds": { "cx": 7327900, "cy": 1841500, "x": 2432050, "y": 2736850 },
+          "parentNodeId": "content-tail",
+          "placementIntent": "slot-aligned-fixed",
+          "positionMode": "flow",
+          "role": "content",
+          "semanticSlotId": "content-tail",
+          "sourceKind": "native-component",
+          "sourceRef": "native-card-arrow",
+          "zOrder": 1
+        }
+      ],
+      "planDigest": "9594b7f98cec5b7662154897670e03d32eb90186a4a33b12580fe2af8030d749",
+      "planType": "composed-slide-plan",
+      "planVersion": "0.1.0",
+      "slideId": "candidate-slide",
+      "slots": [
+        {
+          "alignX": "center",
+          "alignY": "center",
+          "allowedSourceKind": "native-component",
+          "allowedSourceRef": "native-card-arrow",
+          "capacity": { "maxChildren": 1, "minChildren": 1 },
+          "contentBox": { "cx": 10180320, "cy": 2560320, "x": 1005840, "y": 2377440 },
+          "outerBox": { "cx": 10363200, "cy": 2743200, "x": 914400, "y": 2286000 },
+          "overflowPolicy": "reject",
+          "padding": { "bottom": 91440, "left": 91440, "right": 91440, "top": 91440 },
+          "parentNodeId": "slide-canvas",
+          "slotId": "content-tail"
+        }
+      ]
+    },
+    "diff": {
+      "addedParts": [],
+      "allowedChanges": [
+        {
+          "partPath": "ppt/slides/slide1.xml",
+          "reason": "native-card-arrow-insertion"
+        }
+      ],
+      "collateralChanges": [],
+      "modifiedParts": ["ppt/slides/slide1.xml"],
+      "removedParts": []
+    },
+    "layoutIr": {
+      "canvas": {
+        "cx": 12192000,
+        "cy": 6858000,
+        "x": 0,
+        "y": 0
+      },
+      "constraints": [
+        {
+          "constraintId": "slide-content-containment",
+          "constraintType": "containment",
+          "containerNodeId": "slide-canvas",
+          "subjectNodeIds": ["title-shape", "candidate-component"]
+        },
+        {
+          "constraintId": "semantic-slot-containment",
+          "constraintType": "slot-containment",
+          "containerNodeId": "content-tail",
+          "subjectNodeIds": ["candidate-component"]
+        },
+        {
+          "constraintId": "slide-content-non-overlap",
+          "constraintType": "pairwise-non-overlap",
+          "containerNodeId": "slide-canvas",
+          "subjectNodeIds": ["title-shape", "candidate-component"]
+        }
+      ],
+      "inputProfile": "bounded-slot-placement",
+      "layoutIrType": "slide-layout-ir",
+      "layoutIrVersion": "0.1.0",
+      "nodes": [
+        {
+          "collisionPolicy": "forbid",
+          "nodeId": "title-shape",
+          "paintOutset": { "bottom": 0, "left": 0, "right": 0, "top": 0 },
+          "parentNodeId": "slide-canvas",
+          "placementIntent": "template-fixed",
+          "positionMode": "absolute",
+          "requestedBox": { "cx": 10363200, "cy": 914400, "x": 914400, "y": 457200 },
+          "role": "content",
+          "semanticSlotId": "title-region",
+          "sizing": {
+            "horizontal": "fixed",
+            "maxCx": 10363200,
+            "maxCy": 914400,
+            "minCx": 10363200,
+            "minCy": 914400,
+            "vertical": "fixed"
+          },
+          "sourceKind": "template-shape",
+          "sourceRef": "title-shape",
+          "zOrder": 0
+        },
+        {
+          "collisionPolicy": "forbid",
+          "nodeId": "candidate-component",
+          "paintOutset": { "bottom": 6350, "left": 6350, "right": 6350, "top": 6350 },
+          "parentNodeId": "content-tail",
+          "placementIntent": "slot-aligned-fixed",
+          "positionMode": "flow",
+          "requestedBox": { "cx": 7315200, "cy": 1828800, "x": 2438400, "y": 2743200 },
+          "role": "content",
+          "semanticSlotId": "content-tail",
+          "sizing": {
+            "horizontal": "fixed",
+            "maxCx": 7315200,
+            "maxCy": 1828800,
+            "minCx": 7315200,
+            "minCy": 1828800,
+            "vertical": "fixed"
+          },
+          "sourceKind": "native-component",
+          "sourceRef": "native-card-arrow",
+          "zOrder": 1
+        }
+      ],
+      "placementRequests": [
+        {
+          "nodeId": "candidate-component",
+          "paintOutsetEmu": 6350,
+          "placementIntent": "slot-aligned-fixed",
+          "role": "content",
+          "size": { "cx": 7315200, "cy": 1828800 },
+          "slotRef": "content-tail",
+          "sourceKind": "native-component",
+          "sourceRef": "native-card-arrow",
+          "zOrder": 1
+        }
+      ],
+      "slideId": "candidate-slide",
+      "slots": [
+        {
+          "alignX": "center",
+          "alignY": "center",
+          "allowedSourceKind": "native-component",
+          "allowedSourceRef": "native-card-arrow",
+          "capacity": { "maxChildren": 1, "minChildren": 1 },
+          "contentBox": { "cx": 10180320, "cy": 2560320, "x": 1005840, "y": 2377440 },
+          "outerBox": { "cx": 10363200, "cy": 2743200, "x": 914400, "y": 2286000 },
+          "overflowPolicy": "reject",
+          "padding": { "bottom": 91440, "left": 91440, "right": 91440, "top": 91440 },
+          "parentNodeId": "slide-canvas",
+          "slotId": "content-tail"
+        }
+      ]
+    },
+    "slideId": "candidate-slide",
+    "slidePart": "ppt/slides/slide1.xml"
+  },
+  "sourceArtifactType": "native-card-arrow-assembled-pptx",
+  "sourceVerificationProfile": "target-specific-native-card-arrow-output",
+  "verificationProfile": "authenticated-native-candidate-artifact"
+}

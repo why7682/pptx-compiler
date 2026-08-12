@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "matrixVersion": "0.1.0",
-  "updatedOn": "2026-08-05",
+  "updatedOn": "2026-08-11",
   "productStage": "pre-alpha-contract-only",
   "supportClaimsEnabled": false,
   "statusDefinitions": {
@@ -27,10 +27,10 @@
       {
         "id": "capability-overlay",
         "label": "Data-only capability overlay and semantic bindings",
-        "status": "unsupported",
-        "disposition": "unavailable",
-        "currentBasis": "Version 0.1.0 metadata and binding schemas plus a bounded in-memory ProjectOverlay/TemplateIndex resolver have public tests.",
-        "limitations": ["The resolver consumes caller-supplied validated memory objects only; there is no ProjectOverlay loader, accepted project flow, staging authority, or support promotion."],
+        "status": "experimental",
+        "disposition": "accept-with-warning",
+        "currentBasis": "The installed public-synthetic candidate profile loads and validates its fixed capability overlay, then exact-binds the one native-card selection and anchor before a one-shot dispatch plan can execute.",
+        "limitations": ["Experimental acceptance is limited to the installed public-synthetic-native-card-candidate profile; arbitrary overlays, selections, and capabilities remain outside this claim."],
         "roadmap": "M1-002 through M2-005",
         "evidence": {
           "level": "automated-public",
@@ -61,10 +61,10 @@
       {
         "id": "deck-slide-spec",
         "label": "Versioned deck and slide specification",
-        "status": "unsupported",
-        "disposition": "unavailable",
-        "currentBasis": "Version 0.1.0 DeckSpec and SlideSpec schemas, a bounded in-memory resolver, and exact capability payload validation have public tests.",
-        "limitations": ["There is no DeckSpec loader, accepted project input flow, OOXML staging authority, or rendered presentation output."],
+        "status": "experimental",
+        "disposition": "accept-with-warning",
+        "currentBasis": "The installed public-synthetic candidate profile loads one schema-valid DeckSpec and exact-compares its requested geometry with the semantic-slot calculation before native assembly.",
+        "limitations": ["Experimental acceptance covers exactly one native-card slide in the fixed profile; multi-slide, other payloads, and delivery authority remain unavailable."],
         "roadmap": "M1-002 through M2-005",
         "evidence": {
           "level": "automated-public",
@@ -108,8 +108,8 @@
         "status": "unsupported",
         "disposition": "unavailable",
         "currentBasis": "M2-004 defines one bounded in-memory display-math payload and validates its JSON-AST conversion boundary with a fake process runner.",
-        "limitations": ["There is no CLI or accepted formula file input, no broad LaTeX compatibility claim, and no reproducible public run against a compatible real Pandoc release."],
-        "roadmap": "Compatible real-Pandoc conformance plus the M2-005 application boundary",
+        "limitations": ["There is no formula CLI or accepted formula file input, no broad LaTeX compatibility claim, and no reproducible public run against a compatible real Pandoc release."],
+        "roadmap": "Requires compatible public real-Pandoc conformance, a purpose-bound direct-candidate compatibility receipt, and support review",
         "evidence": {
           "level": "automated-public",
           "artifacts": [
@@ -173,10 +173,10 @@
       {
         "id": "potx-template",
         "label": "User-owned POTX template",
-        "status": "unsupported",
-        "disposition": "unavailable",
-        "currentBasis": "A bounded internal source-to-index lane securely ingests the repository-owned minimal POTX grammar, but no published package/CLI or arbitrary user-template compatibility class exists.",
-        "limitations": ["The positive grammar is deliberately narrow; generated fixture output is test data and committed POTX binaries remain rejected."],
+        "status": "experimental",
+        "disposition": "accept-with-warning",
+        "currentBasis": "The installed CLI securely ingests the generated repository-owned public-synthetic POTX and binds one stable byte snapshot to its fresh TemplateIndex before candidate assembly.",
+        "limitations": ["The positive grammar is deliberately limited to the generated public-synthetic preset; arbitrary user POTX compatibility and committed binary fixtures are not claimed."],
         "roadmap": "M3-001 plus explicit future compatibility evidence",
         "evidence": {
           "level": "automated-public",
@@ -221,10 +221,10 @@
       {
         "id": "project-config",
         "label": "Versioned project configuration",
-        "status": "unsupported",
-        "disposition": "unavailable",
-        "currentBasis": "The version 0.1.0 schema and a pure ProjectContext consumer validate an in-memory config and resolve its explicit paths lexically.",
-        "limitations": ["No config file or CLI loader, filesystem-safe input opening, template inspector, or accepted presentation flow exists."],
+        "status": "experimental",
+        "disposition": "accept-with-warning",
+        "currentBasis": "The installed CLI reads the version 0.1.0 project config through a contained stable JSON boundary, validates it, and resolves the fixed public-synthetic project paths before inspection and render.",
+        "limitations": ["Experimental acceptance is limited to the generated public-synthetic-native-card project and does not enable global support claims."],
         "roadmap": "M1-002, M1-003, and M3-001",
         "evidence": {
           "level": "automated-public",
@@ -260,10 +260,10 @@
       {
         "id": "template-profile-index",
         "label": "Template profile and normalized index",
-        "status": "unsupported",
-        "disposition": "unavailable",
-        "currentBasis": "Version 0.1.0 schemas, the pure semantic inspector, and the bounded source-to-index lane emit a deterministic TemplateIndex for the public minimal profile; no TemplateProfile resolver exists.",
-        "limitations": ["Only the one-step secure-ingestion API proves its own archive/XML chain; a schema-valid index or direct caller-supplied view does not."],
+        "status": "experimental",
+        "disposition": "accept-with-warning",
+        "currentBasis": "The installed public-synthetic flow loads the fixed TemplateProfile and stored TemplateIndex, re-inspects the same stable POTX snapshot, exact-compares the fresh index, and binds the result into dispatch and assembly.",
+        "limitations": ["Only the exact generated profile/index/source identity is accepted; a schema-valid caller-supplied index alone grants no authority."],
         "roadmap": "M1-002, M1-004, M1-005, and M2-002",
         "evidence": {
           "level": "automated-public",
@@ -358,10 +358,10 @@
       {
         "id": "content-types-and-relationships",
         "label": "Content types and internal relationships",
-        "status": "unsupported",
-        "disposition": "unavailable",
-        "currentBasis": "The bounded ingestion lane parses exact content types and internal relationships, requires complete coverage, and emits only a fully consumed normalized graph.",
-        "limitations": ["The admitted grammar is the public minimal profile, not arbitrary-package compatibility or mutation support."],
+        "status": "experimental",
+        "disposition": "accept-with-warning",
+        "currentBasis": "The fixed public-synthetic candidate flow parses the complete admitted relationship graph, preserves it through source-owned reconstruction, rewrites only the POTX main content type, and verifies the exact package diff.",
+        "limitations": ["Experimental acceptance covers only the fixed public-synthetic graph and card-arrow insertion; arbitrary relationships and package mutations fail closed."],
         "roadmap": "M2-005 for assembly and collateral validation",
         "evidence": {
           "level": "automated-public",
@@ -392,10 +392,10 @@
       {
         "id": "drawingml-shapes",
         "label": "Native DrawingML text and shapes",
-        "status": "unsupported",
-        "disposition": "unavailable",
-        "currentBasis": "The experimental native-card-arrow executor emits one closed, unbound p:grpSp conformance fragment; that narrow component does not establish general DrawingML shape or package support.",
-        "limitations": ["No target-slide ID allocation, OOXML application, slide-size containment, text-fit, PowerPoint editability, staging, or publication claim exists."],
+        "status": "experimental",
+        "disposition": "accept-with-warning",
+        "currentBasis": "The fixed candidate flow rebuilds one typed native card-arrow p:grpSp, allocates collision-free target IDs, places it through a bounded semantic slot, and verifies containment, occupancy, and exact slide/package diffs.",
+        "limitations": ["Only the registered native-card-arrow grammar is experimental; arbitrary DrawingML, free-form mutation, and global editability claims remain unavailable."],
         "roadmap": "M2-005 for safe application; broader shapes require separately registered capabilities",
         "evidence": {
           "level": "automated-public",
@@ -477,12 +477,26 @@
       {
         "id": "masters-layouts-themes",
         "label": "Slide masters, layouts, and themes",
-        "status": "unsupported",
-        "disposition": "unavailable",
-        "currentBasis": "The synthetic source set includes one repository-owned master, blank layout, and theme as test data only.",
-        "limitations": ["Inspection and semantic clone/fill planning cover only repository-owned text fixtures; no OOXML preservation, mutation, editability, staging, or publication guarantee exists."],
+        "status": "experimental",
+        "disposition": "accept-with-warning",
+        "currentBasis": "The public-synthetic source-owned reconstruction retains the one admitted master, layout, theme, and their internal relationship chain byte-for-byte while the target slide receives one native object.",
+        "limitations": ["Experimental preservation covers exactly the generated public-synthetic package; master, layout, or theme editing and arbitrary template compatibility remain unavailable."],
         "roadmap": "M1-004 and M2-002",
-        "evidence": { "level": "none", "artifacts": [] }
+        "evidence": {
+          "level": "automated-public",
+          "artifacts": [
+            {
+              "type": "executor",
+              "path": "packages/core/src/create-only-assembly.mjs",
+              "note": "Source-owned reconstruction preserves the admitted master/layout/theme relationship closure while converting the main package type."
+            },
+            {
+              "type": "qa-assertions",
+              "path": "tests/create-only-assembly.test.mjs",
+              "note": "Exact package and relationship assertions prove preservation for the repository-owned public-synthetic source."
+            }
+          ]
+        }
       },
       {
         "id": "media-audio-video",
@@ -499,9 +513,9 @@
         "label": "Native OMML formula shape",
         "status": "unsupported",
         "disposition": "unavailable",
-        "currentBasis": "The isolated M2-004 adapter reconstructs one strictly parsed canonical m:oMath conformance fragment from bounded synthetic DOCX stdout.",
-        "limitations": ["The fragment is explicitly unbound and non-insertable; no PresentationML wrapper, target-shape application, real compatible-Pandoc public matrix, or PowerPoint editability evidence exists."],
-        "roadmap": "Real compatible-Pandoc evidence, M2-005 typed application, and COMPAT-OMML-001",
+        "currentBasis": "The isolated M2-004 adapter reconstructs one canonical m:oMath conformance fragment, the bounded M2-005 target applicator independently strict-parses and typed-rebuilds it as one direct a14:m formula inside a repository-owned synthetic text box, and one fixed mixed-candidate feature record observes a human 3/3-to-2/3 edit/save/close/reopen without repair while remaining editable.",
+        "limitations": ["The adapter fragment remains unbound and non-insertable; target application is limited to one synthetic profile, the candidate is non-deliverable, public tests use a fake Pandoc runner, and the feature-level mixed-candidate observation is non-authorizing and cannot replace an exact direct-candidate receipt."],
+        "roadmap": "Real compatible-Pandoc evidence, an exact direct-candidate formula-content receipt, broader template evidence, and support-promotion review",
         "evidence": {
           "level": "automated-public",
           "artifacts": [
@@ -514,6 +528,16 @@
               "type": "qa-assertions",
               "path": "tests/pandoc-omml-adapter.test.mjs",
               "note": "Rejects relationship, package, namespace, vocabulary, cardinality, insertion, and canonical-fragment drift without promoting native OMML support."
+            },
+            {
+              "type": "executor",
+              "path": "packages/core/src/native-omml-formula-assembly.mjs",
+              "note": "Target-specific strict parse and typed rebuild through one semantic slot, frozen plan, exact one-slide diff, and non-deliverable private artifact authority."
+            },
+            {
+              "type": "qa-assertions",
+              "path": "tests/native-omml-formula-assembly.test.mjs",
+              "note": "Covers target capacity, typed structure, IR replay, exact diff, authority, shared-memory snapshotting, reserved-root containment, candidate admission, and continued generic rejection."
             }
           ]
         }
@@ -548,10 +572,10 @@
       {
         "id": "package-container",
         "label": "OPC ZIP package container",
-        "status": "unsupported",
-        "disposition": "unavailable",
-        "currentBasis": "A non-extracting bounded ZIP/XML profile enforces fixed size/count/ratio limits, canonical paths, exact local/central layout, CRC, and fail-closed XML parsing.",
-        "limitations": ["Only stored and DEFLATE archives within the public narrow profile are admitted; ZIP64, extras, data descriptors, encryption, and arbitrary OOXML remain unsupported."],
+        "status": "experimental",
+        "disposition": "accept-with-warning",
+        "currentBasis": "The public-synthetic candidate flow securely reads one bounded POTX ZIP/XML/OPC snapshot, reconstructs a deterministic PPTX container, and authenticates the resulting exact package diff before create-only publication.",
+        "limitations": ["Only stored and DEFLATE archives within the fixed narrow profile are admitted; ZIP64, data descriptors, encryption, unknown extras, arbitrary OOXML, and producer authentication remain unsupported."],
         "roadmap": "Maintain the bounded security profile; expand only with explicit evidence",
         "evidence": {
           "level": "automated-public",
@@ -587,10 +611,10 @@
       {
         "id": "slide-text",
         "label": "Native slide text",
-        "status": "unsupported",
-        "disposition": "unavailable",
-        "currentBasis": "Clone/fill remains semantic-only; the experimental native-card-arrow executor emits one unbound native text-shape exemplar, but no slide or package applicator exists.",
-        "limitations": ["No OOXML application, target-slide ID allocation, PowerPoint editability, overflow, font, staging, or publication claim exists."],
+        "status": "experimental",
+        "disposition": "accept-with-warning",
+        "currentBasis": "The fixed candidate flow safely preserves source text and inserts the validated native-card label as one bounded DrawingML text run, with Unicode/XML and exact-diff assertions.",
+        "limitations": ["Only the fixed public-synthetic source text and native-card label path are experimental; general text editing, overflow, font substitution, and delivery claims remain unavailable."],
         "roadmap": "M2-005 for safe application and explicit text QA",
         "evidence": {
           "level": "automated-public",
@@ -663,28 +687,48 @@
       {
         "id": "collateral-mutation-qa",
         "label": "Source isolation and collateral mutation QA",
-        "status": "unsupported",
-        "disposition": "unavailable",
-        "currentBasis": "Version 0.1.0 BuildArtifact/QaReport schemas and aggregate mutations exist; executable isolation and collateral checks do not.",
-        "limitations": ["A schema-valid QA record cannot self-prove source isolation, atomic publication, or collateral safety."],
-        "roadmap": "M1-002 and M2-005",
+        "status": "experimental",
+        "disposition": "accept-with-warning",
+        "currentBasis": "The fixed candidate flow preserves the source POTX bytes, authenticates the source-owned base, rebuilds typed native XML, verifies slot occupancy and exact changed parts, records replayable diff evidence, and re-derives the current candidate/record pair before emitting a schema-valid blocked QaReport.",
+        "limitations": ["The claim is limited to structural and constraint evidence for the exact public-synthetic native-card candidate; rendered-pixel review, PowerPoint compatibility, and render-completeness evidence remain unavailable, so the QaReport is blocked and grants no delivery authority."],
+        "roadmap": "Independent installed visual and compatibility evidence, then later receipt-bound delivery",
         "evidence": {
           "level": "automated-public",
           "artifacts": [
             {
-              "type": "output-schema",
-              "path": "schemas/contracts/build-artifact.schema.json",
-              "note": "Published-artifact data shape only; no assembly or publication executor exists."
+              "type": "metadata",
+              "path": "packages/public-synthetic/src/project.mjs",
+              "note": "The frozen candidate profile owns the exact support closure and one repository-owned project preset."
+            },
+            {
+              "type": "executor",
+              "path": "packages/core/src/native-card-candidate-qa.mjs",
+              "note": "The pure evaluator authenticates and exactly re-derives candidate and record bytes, then emits the fixed honest blocked QaReport."
+            },
+            {
+              "type": "input-schema",
+              "path": "schemas/contracts/candidate-build-record.schema.json",
+              "note": "The canonical candidate record carries the replayable layout, composed plan, native evidence, and exact diff input to QA."
             },
             {
               "type": "output-schema",
               "path": "schemas/contracts/qa-report.schema.json",
-              "note": "QA/manual aggregation data shape only; checks are not executed by this artifact."
+              "note": "The assessment result uses the existing closed QaReport contract and an explicit blocked decision."
+            },
+            {
+              "type": "conformance-fixture",
+              "path": "fixtures/contracts/valid/candidate-build-record.json",
+              "note": "Repository-owned readable example of the structural candidate evidence contract."
             },
             {
               "type": "qa-assertions",
-              "path": "tests/contracts.test.mjs",
-              "note": "Rejects invalid QA aggregation, publication, scope, and manual-gate combinations at the contract layer."
+              "path": "tests/cli.test.mjs",
+              "note": "Public CLI tests cover exact blocked output, deterministic replay, ignored evidence, missing/tampered pairs, stale intent, resource limits, create-only publication, and the absence of BuildArtifact."
+            },
+            {
+              "type": "contract",
+              "path": "packages/core/src/native-card-candidate-publication.mjs",
+              "note": "Render and QA share one authenticated canonical candidate/record projection instead of duplicating publication semantics."
             }
           ]
         }
@@ -694,9 +738,9 @@
         "label": "Optional native OMML formula transplantation",
         "status": "unsupported",
         "disposition": "unavailable",
-        "currentBasis": "A statically registered M2-004 executor can use an explicitly configured, successfully probed adapter to emit a schema-validated unbound OMML replacement plan through the existing resolver and dispatcher.",
-        "limitations": ["Pandoc remains an unbundled GPL-2.0-or-later external process; public conformance uses a fake runner and text-derived DOCX, normal dispatch remains unavailable, and M2-005 plus a manual PowerPoint gate are outstanding."],
-        "roadmap": "Reproducible conformance against declared compatible Pandoc releases, then M2-005 and COMPAT-OMML-001",
+      "currentBasis": "A statically registered M2-004 executor can emit a schema-validated unbound OMML replacement plan. Bounded M2-005 paths typed-rebuild one repository-owned synthetic target as a direct or ordered candidate with a replay-validated CandidateBuildRecord, and a direct final preparer regenerates the complete candidate from the exact source template plus readable DeckSpec LaTeX before accepting purpose-bound receipts.",
+        "limitations": ["Pandoc remains an unbundled GPL-2.0-or-later external process; public conformance uses a fake runner and text-derived DOCX, normal dispatch remains unavailable, target coverage is singular, and the passing mixed-candidate feature observation is not the exact direct-candidate formula-content receipt required to activate final delivery."],
+      "roadmap": "Reproducible conformance against declared compatible Pandoc releases, an exact direct-candidate formula-content receipt, broader template evidence, and support-promotion review",
         "evidence": {
           "level": "automated-public",
           "artifacts": [
@@ -734,6 +778,31 @@
               "type": "contract",
               "path": "tests/pandoc-omml-adapter.test.mjs",
               "note": "Public detection, process, DOCX/OMML, dispatcher, unavailable-policy, atomicity, drift, and clean-closure evidence with no real-Pandoc claim."
+            },
+            {
+              "type": "contract",
+              "path": "tests/native-omml-formula-assembly.test.mjs",
+            "note": "Bounded direct and ordered target application, durable constraints, exact slide-copy/diff, atomic candidate bundles, replay/tamper, candidate authority, and fail-closed regression evidence without support promotion."
+            },
+            {
+              "type": "contract",
+              "path": "schemas/contracts/candidate-build-record.schema.json",
+            "note": "Closed public CandidateBuildRecord schema preserves direct and ordered semantic-slot IR, resolved plan, formula-target evidence, exact diff, and candidate byte binding."
+            },
+            {
+              "type": "executor",
+              "path": "packages/core/src/candidate-build-record.mjs",
+            "note": "Canonical serializer and replay validator bind direct and ordered sidecars to exact PPTX bytes while granting no delivery authority."
+            },
+            {
+              "type": "executor",
+              "path": "packages/core/src/receipt-bound-final-delivery.mjs",
+              "note": "Direct OMML preparation re-resolves DeckSpec LaTeX, regenerates from the admitted source, exact-compares the full candidate relation, and requires a formula-content-edit-save-reopen receipt before BuildArtifact-last publication."
+            },
+            {
+              "type": "contract",
+              "path": "tests/receipt-bound-omml-final-delivery.test.mjs",
+              "note": "Public synthetic success, LaTeX and undeclared inherited-content drift, equivalent-path convergence, and confused-purpose compatibility receipt rejection without claiming real compatibility."
             }
           ]
         }
@@ -743,9 +812,9 @@
         "label": "Minimal native DrawingML component",
         "status": "experimental",
         "disposition": "accept-with-warning",
-        "currentBasis": "The native-card-arrow 0.1.0 capability resolves a real text-box anchor and deterministically emits a strict-parsed, exact-allowlisted, unbound p:grpSp exemplar containing native roundRect and rightArrow p:sp objects.",
-        "limitations": ["The exemplar is explicitly insertable=false with component-local IDs; M2-005 must parse, rebuild, allocate collision-free target-slide IDs, validate containment, stage, and publish before any PPTX or PowerPoint editability claim."],
-        "roadmap": "M2-005 plus trusted PowerPoint editability evidence before support promotion",
+          "currentBasis": "The native-card-arrow 0.1.0 capability emits a strict unbound p:grpSp exemplar, and the bounded M2-005 product path independently rebuilds it with collision-free target IDs, semantic-slot placement, occupancy checks, an exact one-slide diff, readable replayable CandidateBuildRecord sidecars, narrow local PowerPoint edit/save/reopen evidence, and one direct single-slide receipt-bound final publisher shared by the separately regenerated OMML preparation path.",
+        "limitations": ["The executor exemplar remains insertable=false with component-local IDs; target application and executable final preparation cover repository-owned synthetic direct profiles only, the raw-coordinate entry point is a low-level compatibility primitive, target-specific native/OMML ordered final delivery is rejected, the OMML path still lacks its exact direct-candidate receipt despite a passing non-authorizing feature observation, and no arbitrary-template claim exists."],
+          "roadmap": "Target-specific native/OMML ordered delivery coverage, an exact direct-OMML candidate receipt, broader template compatibility, and support-promotion review",
         "evidence": {
           "level": "automated-public",
           "artifacts": [
@@ -783,6 +852,31 @@
               "type": "contract",
               "path": "docs/M2-003_HANDOFF.md",
               "note": "Defines the experimental claim boundary and deferred target-slide application obligations."
+            },
+            {
+              "type": "contract",
+              "path": "tests/native-card-arrow-assembly.test.mjs",
+              "note": "Target application, semantic-slot replay, exact diff, create-only candidate bundle, tamper rejection, compatibility API, and closed-authority evidence."
+            },
+            {
+              "type": "contract",
+              "path": "schemas/contracts/candidate-build-record.schema.json",
+              "note": "Closed public CandidateBuildRecord schema preserves the semantic-slot IR, resolved plan, native object-ID evidence, exact diff, and candidate byte binding."
+            },
+            {
+              "type": "executor",
+              "path": "packages/core/src/candidate-build-record.mjs",
+              "note": "Canonical serializer and replay validator bind the sidecar to exact PPTX bytes while granting no delivery authority."
+            },
+            {
+              "type": "executor",
+              "path": "packages/core/src/receipt-bound-final-delivery.mjs",
+              "note": "Direct single-slide final orchestration first re-derives source index/overlay facts, uses generation's shared pure layout calculation to exact-compare the complete IR/plan, and deterministically reconstructs the exact source + DeckSpec + composed-plan archive; it then authenticates calculation/render/pixel/compatibility receipts, reuses QaReport and BuildArtifact, and publishes BuildArtifact last."
+            },
+            {
+              "type": "contract",
+              "path": "tests/receipt-bound-final-delivery.test.mjs",
+              "note": "Public synthetic success plus DeckSpec/index/binding drift, a replay-valid false source-constraint record, non-native relabeling, collateral mutation, resource ceilings, evidence failure, ordered rejection, create-only/one-shot, rollback, post-marker uncertainty, and shared-memory evidence."
             }
           ]
         }
@@ -790,50 +884,55 @@
       {
         "id": "package-inspection",
         "label": "PPTX/POTX package inspection and feature classification",
-        "status": "unsupported",
-        "disposition": "unavailable",
-        "currentBasis": "The pure semantic inspector and a bounded ProjectContext-bound ZIP/XML/OPC producer inspect the public minimal fixture class; no dispatchable capability or published CLI exists.",
-        "limitations": ["The accepted grammar is deliberately narrow, and a caller-supplied view or producer label is not a security credential."],
-        "roadmap": "M3-001",
+        "status": "experimental",
+        "disposition": "accept-with-warning",
+        "currentBasis": "The installed CLI performs one stable contained read of the generated public-synthetic POTX, validates its bounded ZIP/XML/OPC graph, and returns source bytes plus a schema-valid frozen TemplateIndex from that same snapshot.",
+        "limitations": ["The accepted grammar is exactly the generated public-synthetic POTX; caller-supplied views, labels, arbitrary Office packages, and relaxed limits are rejected."],
+        "roadmap": "Broaden only through separately evidenced package profiles",
         "evidence": {
           "level": "automated-public",
           "artifacts": [
             {
-              "type": "contract",
-              "path": "packages/core/src/secure-template-ingestion.mjs",
-              "note": "One-step stable-file-to-index boundary; callers cannot inject paths, parsers, views, resolvers, or relaxed limits."
+              "type": "metadata",
+              "path": "packages/public-synthetic/src/project.mjs",
+              "note": "The frozen profile identifies the only admitted candidate package and support closure."
             },
             {
-              "type": "contract",
-              "path": "packages/core/src/template-inspector.mjs",
-              "note": "Side-effect-free graph inspector over an explicit reviewed-fixture package view, not an arbitrary PPTX/POTX reader."
+              "type": "executor",
+              "path": "packages/core/src/secure-template-ingestion.mjs",
+              "note": "One-step stable-file-to-snapshot boundary; callers cannot inject paths, parsers, views, resolvers, or relaxed limits."
+            },
+            {
+              "type": "input-schema",
+              "path": "schemas/contracts/project-config.schema.json",
+              "note": "The closed source-path and profile/index identity contract used by secure ingestion."
+            },
+            {
+              "type": "output-schema",
+              "path": "schemas/contracts/template-index.schema.json",
+              "note": "The normalized semantic graph emitted from the stable source snapshot."
             },
             {
               "type": "conformance-fixture",
               "path": "fixtures/inspection/expected-potx-template-index.json",
-              "note": "Deterministic output for the public synthetic lane only."
+              "note": "Deterministic normalized output for the exact public-synthetic POTX lane."
             },
             {
               "type": "qa-assertions",
               "path": "tests/secure-template-ingestion.test.mjs",
-              "note": "Exact stored/DEFLATE public results plus filesystem, archive, XML, relationship, vocabulary, and high-risk mutations."
-            },
-            {
-              "type": "qa-assertions",
-              "path": "tests/template-inspector.test.mjs",
-              "note": "Rejects view, graph, relationship, feature, geometry, binding, and disclosure mutations."
+              "note": "Exact stable-snapshot results plus filesystem, archive, XML, relationship, vocabulary, high-risk, and disclosure mutations."
             }
           ]
         }
       },
       {
         "id": "source-slide-clone-fill",
-        "label": "Data-driven source-slide clone/fill planning",
+        "label": "Data-driven source-slide clone/fill planning and bounded assembly",
         "status": "unsupported",
         "disposition": "unavailable",
-        "currentBasis": "A pure data-only executor deterministically emits schema-validated clone/fill operation plans from already-resolved text-box bindings, and registration conformance executes under unavailable product policy.",
-        "limitations": ["No OOXML is cloned or mutated; there is no relationship/ID remap, source-isolation, editability, visual, collateral-diff, staging, or publication evidence, and normal product dispatch remains unavailable."],
-        "roadmap": "M2-005 for isolated OOXML plan application and publication evidence",
+        "currentBasis": "A pure data-only executor emits schema-validated clone/fill plans; the bounded public-synthetic path now applies one plan to one source slide, assembles 2–11 same-template results in order, and can prepare an exact receipt-bound clone/fill ordered delivery by regenerating the complete DeckSpec batch before BuildArtifact-last publication.",
+        "limitations": ["The executable path is limited to the repository-owned one-master/one-layout/one-slide grammar, two exact text targets with one paragraph each, one shared clone/fill selection, and 2–11 slides from the same admitted template. Eleven is the last package size admitted by the unchanged 32-entry secure-ZIP profile; 12 slides fail before dispatch or artifact inspection. One trusted local PowerPoint 16.111.3 open/save/reopen receipt covers only one exact two-slide public-synthetic candidate. Native/OMML ordered members, arbitrary templates, broader compatibility evidence, a public CLI/output flow, and normal product dispatch remain unavailable."],
+        "roadmap": "Broaden template/content coverage and compatibility evidence only after the bounded receipt-bound ordered path remains reproducible without weakening fail-closed dispatch or support claims.",
         "evidence": {
           "level": "automated-public",
           "artifacts": [
@@ -871,6 +970,26 @@
               "type": "contract",
               "path": "tests/source-slide-clone-fill.test.mjs",
               "note": "Public positive, mutation, no-I/O, exact-registry, unsupported-policy, and clean-directory evidence."
+            },
+            {
+              "type": "contract",
+              "path": "packages/core/src/create-only-assembly.mjs",
+              "note": "Bounded source-preserving one-slide OOXML application, deterministic PPTX conversion, exact collateral diff, and create-only staging primitive."
+            },
+            {
+              "type": "contract",
+              "path": "packages/core/src/ordered-slide-assembly.mjs",
+              "note": "Deterministic 2–11 slide graph rebuild with exact source order, relationship closure, allocation, deck diff, and pre-inspection rejection above the secure-ZIP-derived boundary."
+            },
+            {
+              "type": "contract",
+              "path": "packages/core/src/receipt-bound-final-delivery.mjs",
+              "note": "Clone/fill-only ordered preparation regenerates the complete captured DeckSpec batch and reuses the BuildArtifact-last publisher."
+            },
+            {
+              "type": "contract",
+              "path": "tests/receipt-bound-ordered-final-delivery.test.mjs",
+              "note": "Public success and adversarial evidence for full-batch regeneration, order/content drift, native-source rejection, complete-slide receipts, purpose binding, and pre-await snapshots."
             }
           ]
         }
@@ -878,48 +997,92 @@
       {
         "id": "staged-create-only-assembly",
         "label": "Create-only staged assembly and atomic publication",
-        "status": "unsupported",
-        "disposition": "unavailable",
-        "currentBasis": "No assembly implementation exists.",
-        "limitations": ["No source immutability or atomicity evidence exists."],
-        "roadmap": "M2-005",
-        "evidence": { "level": "none", "artifacts": [] }
-      },
-      {
-        "id": "template-profile-binding",
-        "label": "Hash-bound template profile and semantic binding",
-        "status": "unsupported",
-        "disposition": "unavailable",
-        "currentBasis": "The semantic inspector binds its index to the reviewed archive digest and explicit ProjectConfig IDs, and M2-002 resolves a caller-supplied ProjectOverlay against that index.",
-        "limitations": ["Only the one-step secure-ingestion API proves its archive digest chain; there is no authenticated TemplateProfile-to-source loader or accepted project flow, and the semantic plan is not applied to OOXML."],
-        "roadmap": "M1-002, M1-004, and M2-002",
+        "status": "experimental",
+        "disposition": "accept-with-warning",
+        "currentBasis": "The installed fixed candidate flow deterministically assembles one source-preserving native-card PPTX, file-flushes both owned payloads, and publishes its readable CandidateBuildRecord first and PPTX logical commit marker last without overwriting either destination.",
+        "limitations": ["Experimental authority stops at the exact public-synthetic candidate pair; it creates no QaReport or BuildArtifact, grants no delivery eligibility, and makes no arbitrary-template or compatibility claim.", "POSIX additionally requests parent-directory fsync barriers. Node exposes no equivalent Windows directory barrier, so Windows has no sudden-power-loss directory-entry persistence claim."],
+        "roadmap": "Complete visual and compatibility receipts, packaging gates, and a later explicit support review",
         "evidence": {
           "level": "automated-public",
           "artifacts": [
             {
+              "type": "metadata",
+              "path": "packages/public-synthetic/src/project.mjs",
+              "note": "The frozen profile defines the only admitted candidate composition and output policy."
+            },
+            {
+              "type": "executor",
+              "path": "packages/core/src/native-card-candidate-publication.mjs",
+              "note": "The exact installed flow authenticates only native-card output and builds its canonical readable record without loading OMML or ordered-deck authorities."
+            },
+            {
               "type": "contract",
-              "path": "packages/core/src/template-inspector.mjs",
-              "note": "Copies exact configured profile/index IDs and reviewed producer archive digest into a schema-validated index."
+              "path": "packages/core/src/candidate-pair-publication.mjs",
+              "note": "The format-independent create-only state machine stages and file-flushes both members, links the readable record first, and exposes the PPTX logical commit marker last."
             },
             {
               "type": "input-schema",
-              "path": "schemas/contracts/template-index.schema.json",
-              "note": "Normalized index shape consumed by later binding resolution."
+              "path": "schemas/contracts/deck-spec.schema.json",
+              "note": "The closed one-slide candidate request consumed by the installed project flow."
             },
             {
-              "type": "input-schema",
-              "path": "schemas/contracts/template-profile.schema.json",
-              "note": "Hash-bound profile shape without digest execution."
+              "type": "output-schema",
+              "path": "schemas/contracts/candidate-build-record.schema.json",
+              "note": "The readable replayable sidecar published with the candidate PPTX."
+            },
+            {
+              "type": "conformance-fixture",
+              "path": "fixtures/contracts/valid/candidate-build-record.json",
+              "note": "Repository-owned structural example of the candidate record."
+            },
+            {
+              "type": "qa-assertions",
+              "path": "tests/native-card-arrow-assembly.test.mjs",
+              "note": "Determinism, create-only conflicts, record-first/marker-last publication fault states, rollback, replay, and tamper assertions."
+            }
+          ]
+        }
+      },
+      {
+        "id": "template-profile-binding",
+        "label": "Hash-bound template profile and semantic binding",
+        "status": "experimental",
+        "disposition": "accept-with-warning",
+        "currentBasis": "The installed CLI exact-compares the configured TemplateProfile, stored and fresh TemplateIndex identities, registry, overlay, and DeckSpec before preparing a fresh one-shot native-card dispatch plan applied to the same stable source snapshot.",
+        "limitations": ["Only the generated public-synthetic profile, one semantic anchor, and one native-card selection are accepted; arbitrary profiles and bindings remain unavailable."],
+        "roadmap": "Add separately registered exact profiles only with complete conformance and QA evidence",
+        "evidence": {
+          "level": "automated-public",
+          "artifacts": [
+            {
+              "type": "metadata",
+              "path": "packages/public-synthetic/src/project.mjs",
+              "note": "The frozen project preset owns the exact profile, source, index, overlay, registry, and DeckSpec identities."
+            },
+            {
+              "type": "executor",
+              "path": "packages/core/src/project-dispatch-resolver.mjs",
+              "note": "Snapshots and exact-binds all readable project authorities before creating an opaque one-shot dispatch plan."
             },
             {
               "type": "input-schema",
               "path": "schemas/contracts/project-overlay.schema.json",
-              "note": "Semantic binding shape consumed by bounded in-memory runtime resolution; source authentication and OOXML application remain absent."
+              "note": "Closed semantic selection and anchor-binding data consumed by the fixed profile."
+            },
+            {
+              "type": "output-schema",
+              "path": "plugins/native-card-arrow/schemas/output.schema.json",
+              "note": "The exact typed operation plan produced after profile binding and capability dispatch."
+            },
+            {
+              "type": "conformance-fixture",
+              "path": "fixtures/capabilities/native-card-arrow/cases.json",
+              "note": "Exact repository-owned invocation/output cases for the only bound capability."
             },
             {
               "type": "qa-assertions",
-              "path": "tests/contracts.test.mjs",
-              "note": "Rejects duplicate, dangling, colliding, and role-incomplete synthetic bindings."
+              "path": "tests/source-slide-clone-fill.test.mjs",
+              "note": "The shared resolver tests identity drift, ambiguous or missing bindings, partial batches, immutability, and redaction."
             }
           ]
         }
@@ -942,8 +1105,8 @@
         "status": "experimental",
         "disposition": "accept-with-warning",
         "currentBasis": "The runtime line is declared, but public cross-platform CI is not present.",
-        "limitations": ["No PPTX product capability exists; this is only the runtime envelope."],
-        "roadmap": "M3-004",
+        "limitations": ["This platform row alone authorizes no PPTX capability; the exact capability closure, explicit opt-in, and all required evidence must also pass."],
+        "roadmap": "M3-004B after M3-006",
         "evidence": { "level": "none", "artifacts": [] }
       },
       {
@@ -952,8 +1115,8 @@
         "status": "experimental",
         "disposition": "accept-with-warning",
         "currentBasis": "The runtime line is declared, but public cross-platform CI is not present.",
-        "limitations": ["No PPTX product capability exists; this is only the runtime envelope."],
-        "roadmap": "M3-004",
+        "limitations": ["This platform row alone authorizes no PPTX capability; the exact capability closure, explicit opt-in, and all required evidence must also pass."],
+        "roadmap": "M3-004B after M3-006",
         "evidence": { "level": "none", "artifacts": [] }
       },
       {
@@ -962,8 +1125,8 @@
         "status": "experimental",
         "disposition": "accept-with-warning",
         "currentBasis": "The runtime line is declared, but public cross-platform CI is not present.",
-        "limitations": ["No PPTX product capability exists; this is only the runtime envelope."],
-        "roadmap": "M3-004",
+        "limitations": ["This platform row alone authorizes no PPTX capability; the exact capability closure, explicit opt-in, and all required evidence must also pass."],
+        "roadmap": "M3-004B after M3-006",
         "evidence": { "level": "none", "artifacts": [] }
       },
       {
@@ -972,8 +1135,8 @@
         "status": "experimental",
         "disposition": "accept-with-warning",
         "currentBasis": "The runtime line is declared, but public cross-platform CI is not present.",
-        "limitations": ["No PPTX product capability exists; this is only the runtime envelope."],
-        "roadmap": "M3-004",
+        "limitations": ["This platform row alone authorizes no PPTX capability; the exact capability closure, explicit opt-in, and all required evidence must also pass."],
+        "roadmap": "M3-004B after M3-006",
         "evidence": { "level": "none", "artifacts": [] }
       },
       {
@@ -981,9 +1144,9 @@
         "label": "Trusted macOS PowerPoint automation",
         "status": "manual",
         "disposition": "report-manual-gate",
-        "currentBasis": "The architecture permits an optional trusted/manual adapter outside public PR CI.",
-        "limitations": ["No adapter exists and no private artifact may enter Git or public CI."],
-        "roadmap": "D-010 and COMPAT-OMML-001",
+        "currentBasis": "Optional trusted/manual adapters cover one fixed repository-owned two-slide ordered candidate and one exact fixed mixed-candidate 3/3-to-2/3 formula edit. PowerPoint 16.111.3 preserved readable order/text and, for the formula observation, save/close/reopen without repair plus continued editability outside public PR CI.",
+        "limitations": ["The adapters require explicit local trust, refuse CI and pre-open user presentations, and keep raw PPTX, PDF, transcript, pixel, and human-attestation evidence in one ignored stable local root. The passing formula record is feature-level with authority none; neither observation proves arbitrary-template compatibility, an exact direct-candidate formula receipt, target-specific native/OMML ordered delivery, or platform support."],
+        "roadmap": "Exact direct-candidate OMML compatibility evidence and broader ordered compatibility evidence",
         "evidence": {
           "level": "manual-trusted",
           "artifacts": [
@@ -991,6 +1154,41 @@
               "type": "contract",
               "path": "docs/PRIVATE_FIXTURE_POLICY.md",
               "note": "Defines the trusted local evidence boundary."
+            },
+            {
+              "type": "contract",
+              "path": "packages/powerpoint-macos/src/ordered-compatibility-receipt.mjs",
+              "note": "Parses the bounded PowerPoint transcript and grants only the exact ordered-deck-open-save-reopen receipt when readable slide order and text converge."
+            },
+            {
+              "type": "executor",
+              "path": "scripts/run-ordered-powerpoint-compatibility.mjs",
+              "note": "Builds the fixed public-synthetic candidate, enforces explicit trust and CI exclusion, preserves the source, and writes ignored local evidence only after every output validates."
+            },
+            {
+              "type": "manual-gate",
+              "path": "scripts/validate-ordered-powerpoint.applescript",
+              "note": "Uses only PowerPoint's static object model with absolute files to open, export, save, close, reopen, and inventory the exact ordered candidate."
+            },
+            {
+              "type": "qa-assertions",
+              "path": "tests/ordered-powerpoint-compatibility.test.mjs",
+              "note": "Covers deterministic candidate construction, exact readable transcript acceptance, semantic drift and slide-loss rejection, static least-privilege checks, explicit trust, and CI refusal."
+            },
+            {
+              "type": "contract",
+              "path": "packages/powerpoint-macos/src/formula-content-edit-evidence.mjs",
+              "note": "Pure byte inspector reports only the fixed readable fraction transition and narrow observed topology, with no human fact, gate verdict, receipt, delivery, or support authority."
+            },
+            {
+              "type": "manual-gate",
+              "path": "scripts/record-omml-formula-content-edit.mjs",
+              "note": "Trusted-local CI-refusing recorder pins the exact candidate, CandidateBuildRecord, derivative, source, and slide relation and stores explicit operator attestation separately in ignored feature-level evidence."
+            },
+            {
+              "type": "qa-assertions",
+              "path": "tests/formula-content-edit-evidence.test.mjs",
+              "note": "Rejects alternate candidates, collateral or unknown-part changes, unknown OMML nodes, record drift, unsafe byte containers, missing explicit trust/attestation, and authority confusion."
             }
           ]
         }
@@ -1011,8 +1209,8 @@
         "status": "experimental",
         "disposition": "accept-with-warning",
         "currentBasis": "The runtime line is declared, but public cross-platform CI is not present.",
-        "limitations": ["No PPTX product capability exists; this is only the runtime envelope."],
-        "roadmap": "M3-004",
+        "limitations": ["This platform row alone authorizes no PPTX capability; the exact capability closure, explicit opt-in, and all required evidence must also pass."],
+        "roadmap": "M3-004B after M3-006",
         "evidence": { "level": "none", "artifacts": [] }
       },
       {
@@ -1021,8 +1219,8 @@
         "status": "experimental",
         "disposition": "accept-with-warning",
         "currentBasis": "The runtime line is declared, but public cross-platform CI is not present.",
-        "limitations": ["No PPTX product capability exists; this is only the runtime envelope."],
-        "roadmap": "M3-004",
+        "limitations": ["This platform row alone authorizes no PPTX capability; the exact capability closure, explicit opt-in, and all required evidence must also pass."],
+        "roadmap": "M3-004B after M3-006",
         "evidence": { "level": "none", "artifacts": [] }
       },
       {
@@ -1044,7 +1242,7 @@
         "disposition": "accept-with-warning",
         "currentBasis": "Foundation gates, deterministic repository-owned PPTX/POTX generation, schema-only data-contract conformance, and dispatcher-mechanics conformance have public automated tests.",
         "limitations": ["Cannot support a PPTX capability until its own complete product artifacts, mutation safety, platform evidence, enabled claim switch, and reviewed matrix promotion exist."],
-        "roadmap": "M1-001 through M3-004",
+        "roadmap": "M1-001 through local M3-004A; hosted evidence remains M3-004B after M3-006",
         "evidence": {
           "level": "automated-public",
           "artifacts": [

@@ -1,0 +1,60 @@
+{
+  "manifestVersion": "0.1.0",
+  "manifestType": "reviewed-visual-evidence-manifest",
+  "approvalStatus": "approved",
+  "authorityClass": "repository-reviewed-synthetic-evidence",
+  "evidenceScope": "simulated-review-only",
+  "rawInputSha256": "5f5e93f00196a0afd856e8a6974c7c7c171b2910ae506c2e6389951dcd5ee381",
+  "assemblyReceiptSha256": "a6462f8e7f9e5f05989864f634bb6efd67aeb5226bb79f2d8a178f8fbfd946e4",
+  "reviewContextSha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+  "renderSetSha256": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+  "contactSheetSha256": "cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc",
+  "deliveryProfileSha256": "9931c5760bd83e41493f772501edde34e70303d6608822076f890650762e8f0c",
+  "requiredItemSources": [
+    {
+      "itemId": "bounded-readiness-claim",
+      "slideId": "slide-a",
+      "sourceRenderSha256": "a9369d799e551bcfcc3dda09b1766cd4cf54dc99d55494c089c4933fafb43f8e",
+      "cropSha256": "6f09deb8fdbe81a71c155da11b437da47ed6da796909c9680e8a8177b828b2ff"
+    },
+    {
+      "itemId": "limited-pilot-action",
+      "slideId": "slide-c",
+      "sourceRenderSha256": "2f92e42fb516bcab5bf5a79f9f1820a0171d0929b3f94e032401ddd5b16bf59b",
+      "cropSha256": "742f3c6e260c0c36dd0a3f3e0ee76747ead05c191260bb45f43d81596d5d8d25"
+    },
+    {
+      "itemId": "wider-rollout-boundary",
+      "slideId": "slide-c",
+      "sourceRenderSha256": "ed6f2ed1a0e672f598ea6414a8d417cfaf58a9286cd765b381bc7fd549683eb4",
+      "cropSha256": "745300ac0df1c4baebd7dd6114029012f111da4c9539b836d69118f5d94e084f"
+    },
+    {
+      "itemId": "control-readiness",
+      "slideId": "slide-b",
+      "sourceRenderSha256": "fb95caf838013b4cba18b576436e403739cef10125fee473f83a5d009755009e",
+      "cropSha256": "4104ed910c3580f99e9030b323488fb5583b3d954653731e67af80da105b6a11"
+    },
+    {
+      "itemId": "independent-review-alignment",
+      "slideId": "slide-a",
+      "sourceRenderSha256": "4f825fd5a1decaad28a39fc393a261884a70da07d723f2977af36d1ea5b8aa8b",
+      "cropSha256": "7060099d14d7f6151e151f63a30ce68261434f8a35133b2b0dc6134c83209903"
+    },
+    {
+      "itemId": "remaining-completion-checks",
+      "slideId": "slide-c",
+      "sourceRenderSha256": "aa24987b3244b5a4d150010e57618a81c8796e3a6c75665131ed80b86976407c",
+      "cropSha256": "6f8edb8abc85dfa0b14609b6e909f5b42a500f692423e8655d46fdd09c4cb541"
+    }
+  ],
+  "wholeDeckCropSources": [
+    {
+      "cropEvidenceId": "slide-c-room-action",
+      "slideId": "slide-c",
+      "region": [0.08, 0.12, 0.84, 0.76],
+      "sourceRenderSha256": "2f92e42fb516bcab5bf5a79f9f1820a0171d0929b3f94e032401ddd5b16bf59b",
+      "cropSha256": "dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd"
+    }
+  ]
+}

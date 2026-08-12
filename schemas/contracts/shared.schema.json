@@ -1,7 +1,7 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "urn:pptx-pipeline:schema:shared:0.1.0",
-  "title": "PPTX Pipeline shared contract definitions",
+  "$id": "urn:pptx-compiler:schema:shared:0.1.0",
+  "title": "PPTX Compiler shared contract definitions",
   "$defs": {
     "schemaVersion": {
       "const": "0.1.0"
@@ -21,7 +21,7 @@
       "type": "string",
       "minLength": 1,
       "maxLength": 256,
-      "pattern": "^urn:pptx-pipeline:[a-z0-9][a-z0-9:.-]*$"
+      "pattern": "^urn:pptx-compiler:[a-z0-9][a-z0-9:.-]*$"
     },
     "relativePath": {
       "type": "string",

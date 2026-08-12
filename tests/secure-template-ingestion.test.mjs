@@ -9,6 +9,7 @@ import { deflateRawSync } from "node:zlib";
 import { createProjectContext } from "../packages/core/src/project-context.mjs";
 import {
   inspectTemplateSource,
+  inspectTemplateSourceSnapshot,
   TemplateIngestionError
 } from "../packages/core/src/secure-template-ingestion.mjs";
 import { parseSecureZip } from "../packages/core/src/secure-zip.mjs";
@@ -27,8 +28,8 @@ const schemas = await Promise.all(contractManifest.schemas.map(async ({ path: sc
   JSON.parse(await readFile(new URL(`../${schemaPath}`, import.meta.url), "utf8"))));
 const registry = createSchemaRegistry(schemas);
 for (const schema of schemas) assertSupportedSchema(schema, { registry });
-const projectConfigSchema = registry.get("urn:pptx-pipeline:schema:project-config:0.1.0");
-const templateIndexSchema = registry.get("urn:pptx-pipeline:schema:template-index:0.1.0");
+const projectConfigSchema = registry.get("urn:pptx-compiler:schema:project-config:0.1.0");
+const templateIndexSchema = registry.get("urn:pptx-compiler:schema:template-index:0.1.0");
 const baseProjectConfig = JSON.parse(await readFile(
   new URL("../fixtures/contracts/valid/project-config.json", import.meta.url),
   "utf8"
@@ -125,6 +126,16 @@ function zipDateFields() {
     dosDate: ((year - 1980) << 9) | (1 << 5) | 1,
     dosTime: 0
   };
+}
+
+function openPackagingGrowthHintExtra(paddingLength) {
+  assert.ok(Number.isSafeInteger(paddingLength) && paddingLength >= 0 && paddingLength <= 4088);
+  const extra = Buffer.alloc(8 + paddingLength);
+  extra.writeUInt16LE(0xa220, 0);
+  extra.writeUInt16LE(4 + paddingLength, 2);
+  extra.writeUInt16LE(0xa028, 4);
+  extra.writeUInt16LE(paddingLength, 6);
+  return extra;
 }
 
 function createZip(entries, options = {}) {
@@ -245,11 +256,58 @@ test("secure file ingestion exactly inspects the stored public POTX and PPTX", a
   }
 });
 
+test("stable snapshot binds returned source bytes and TemplateIndex to one read", async () => {
+  const archive = archives.get("potx");
+  const root = await temporaryRoot();
+  const sourcePath = "workspace/template.potx";
+  const source = path.join(root, ...sourcePath.split("/"));
+  await mkdir(path.dirname(source), { recursive: true });
+  await writeFile(source, archive.bytes);
+  const context = makeContext(root, "potx", sourcePath);
+  try {
+    const snapshot = await inspectTemplateSourceSnapshot({
+      context,
+      dependencies: { validateTemplateIndex }
+    });
+    assert.ok(Object.isFrozen(snapshot));
+    assert.ok(Buffer.isBuffer(snapshot.sourceArchiveBytes));
+    assert.notEqual(snapshot.sourceArchiveBytes, archive.bytes);
+    assert.deepEqual(snapshot.sourceArchiveBytes, archive.bytes);
+    assert.deepEqual(snapshot.templateIndex, expectedFor("potx", snapshot.sourceArchiveBytes));
+    assert.ok(Object.isFrozen(snapshot.templateIndex));
+  } finally {
+    await rm(root, { recursive: true, force: true });
+  }
+});
+
 test("Deflate, central-directory order, and namespace-prefix variations preserve semantics", async (t) => {
   const baseParts = clonedParts();
   const variants = [];
   variants.push(["deflate", zipFromParts(baseParts, { method: 8 })]);
   variants.push(["central order", zipFromParts(baseParts, { reverseCentral: true })]);
+  variants.push(["Open Packaging local growth hints", createZip(
+    [...baseParts].map(([partPath, bytes], index) => ({
+      path: partPath,
+      bytes,
+      localExtra: index === 0
+        ? openPackagingGrowthHintExtra(512)
+        : index === 4 ? openPackagingGrowthHintExtra(256) : undefined
+    }))
+  )]);
+  variants.push(["Open Packaging zero-length growth hint", createZip(
+    [...baseParts].map(([partPath, bytes], index) => ({
+      path: partPath,
+      bytes,
+      localExtra: index === 0 ? openPackagingGrowthHintExtra(0) : undefined
+    }))
+  )]);
+  variants.push(["Open Packaging maximum admitted growth hint", createZip(
+    [...baseParts].map(([partPath, bytes], index) => ({
+      path: partPath,
+      bytes,
+      localExtra: index === 0 ? openPackagingGrowthHintExtra(4088) : undefined
+    }))
+  )]);
   const prefixParts = clonedParts();
   mutatePart(prefixParts, "ppt/slides/slide1.xml", (text) => text
     .replaceAll("<p:", "<q:")
@@ -373,7 +431,43 @@ test("archive limits and canonical layout reject traversal, aliases, bombs, and 
     ["encrypted flag", createZip(baseEntries, { flags: 0x0801 }), "TEMPLATE_INGESTION_ARCHIVE_REJECTED"],
     ["data descriptor flag", createZip(baseEntries, { flags: 0x0808 }), "TEMPLATE_INGESTION_ARCHIVE_REJECTED"],
     ["unsupported method", createZip(baseEntries.map((entry, index) => ({ ...entry, method: index === 0 ? 99 : 0 }))), "TEMPLATE_INGESTION_ARCHIVE_REJECTED"],
-    ["extra field", createZip(baseEntries.map((entry, index) => ({ ...entry, centralExtra: index === 0 ? Buffer.from([1, 0]) : undefined }))), "TEMPLATE_INGESTION_ARCHIVE_REJECTED"],
+    ["central extra field", createZip(baseEntries.map((entry, index) => ({ ...entry, centralExtra: index === 0 ? Buffer.from([1, 0]) : undefined }))), "TEMPLATE_INGESTION_ARCHIVE_REJECTED"],
+    ["unknown local extra field", createZip(baseEntries.map((entry, index) => ({ ...entry, localExtra: index === 0 ? Buffer.from([1, 0, 0, 0]) : undefined }))), "TEMPLATE_INGESTION_ARCHIVE_REJECTED"],
+    ["wrong Open Packaging growth-hint signature", createZip(baseEntries.map((entry, index) => {
+      if (index !== 0) return entry;
+      const localExtra = openPackagingGrowthHintExtra(4);
+      localExtra.writeUInt16LE(0xa029, 4);
+      return { ...entry, localExtra };
+    })), "TEMPLATE_INGESTION_ARCHIVE_REJECTED"],
+    ["Open Packaging growth-hint size mismatch", createZip(baseEntries.map((entry, index) => {
+      if (index !== 0) return entry;
+      const localExtra = openPackagingGrowthHintExtra(4);
+      localExtra.writeUInt16LE(7, 2);
+      return { ...entry, localExtra };
+    })), "TEMPLATE_INGESTION_ARCHIVE_REJECTED"],
+    ["Open Packaging growth-hint initial-length mismatch", createZip(baseEntries.map((entry, index) => {
+      if (index !== 0) return entry;
+      const localExtra = openPackagingGrowthHintExtra(4);
+      localExtra.writeUInt16LE(3, 6);
+      return { ...entry, localExtra };
+    })), "TEMPLATE_INGESTION_ARCHIVE_REJECTED"],
+    ["second Open Packaging local-extra field", createZip(baseEntries.map((entry, index) => ({
+      ...entry,
+      localExtra: index === 0
+        ? Buffer.concat([openPackagingGrowthHintExtra(0), Buffer.from([1, 0, 0, 0])])
+        : undefined
+    }))), "TEMPLATE_INGESTION_ARCHIVE_REJECTED"],
+    ["nonzero Open Packaging growth-hint padding", createZip(baseEntries.map((entry, index) => {
+      if (index !== 0) return entry;
+      const localExtra = openPackagingGrowthHintExtra(1);
+      localExtra[8] = 1;
+      return { ...entry, localExtra };
+    })), "TEMPLATE_INGESTION_ARCHIVE_REJECTED"],
+    ["Open Packaging growth-hint size", createZip(baseEntries.map((entry, index) => ({ ...entry, localExtra: index === 0 ? Buffer.alloc(4097) : undefined }))), "TEMPLATE_INGESTION_RESOURCE_LIMIT"],
+    ["Open Packaging growth-hint aggregate size", createZip(baseEntries.map((entry, index) => ({
+      ...entry,
+      localExtra: index < 9 ? openPackagingGrowthHintExtra(4088) : undefined
+    }))), "TEMPLATE_INGESTION_RESOURCE_LIMIT"],
     ["CRC mismatch", corruptCrc, "TEMPLATE_INGESTION_ARCHIVE_REJECTED"],
     ["trailing data", Buffer.concat([archives.get("potx").bytes, Buffer.from([0])]), "TEMPLATE_INGESTION_ARCHIVE_REJECTED"],
     ["nested archive", createZip([{ path: "nested.xml", bytes: Buffer.from([0x50, 0x4b, 0x03, 0x04]) }]), "TEMPLATE_INGESTION_ARCHIVE_REJECTED"],

@@ -1,0 +1,20 @@
+{
+  "keyVersion": "0.1.0",
+  "keyType": "blind-outcome-key",
+  "rawInputSha256": "5f5e93f00196a0afd856e8a6974c7c7c171b2910ae506c2e6389951dcd5ee381",
+  "expectedOutcome": {
+    "takeawayItemId": "bounded-readiness-claim",
+    "requestedActionItemId": "limited-pilot-action",
+    "boundaryItemId": "wider-rollout-boundary",
+    "requiredEvidenceIds": [
+      "control-readiness",
+      "independent-review-alignment",
+      "remaining-completion-checks"
+    ]
+  },
+  "approval": {
+    "approvalStatus": "approved",
+    "reviewerClass": "independent-synthetic-fixture-review",
+    "approvalId": "design-planning-outcome-key-review"
+  }
+}

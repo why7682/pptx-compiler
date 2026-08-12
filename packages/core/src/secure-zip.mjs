@@ -1,6 +1,6 @@
 import { inflateRawSync } from "node:zlib";
 
-export const SECURE_ZIP_PROFILE_VERSION = "0.1.0";
+export const SECURE_ZIP_PROFILE_VERSION = "0.2.0";
 
 export const SECURE_ZIP_LIMITS = Object.freeze({
   maxArchiveBytes: 1024 * 1024,
@@ -10,7 +10,9 @@ export const SECURE_ZIP_LIMITS = Object.freeze({
   maxUncompressedEntryBytes: 256 * 1024,
   maxTotalUncompressedBytes: 1024 * 1024,
   maxCompressionRatio: 100,
-  maxPartPathBytes: 512
+  maxPartPathBytes: 512,
+  maxLocalExtraBytes: 4 * 1024,
+  maxTotalLocalExtraBytes: 32 * 1024
 });
 
 const SIGNATURES = Object.freeze({
@@ -19,6 +21,8 @@ const SIGNATURES = Object.freeze({
   endOfCentralDirectory: 0x06054b50
 });
 const ALLOWED_GENERAL_PURPOSE_FLAGS = 0x0806;
+const OPEN_PACKAGING_GROWTH_HINT_FIELD_ID = 0xa220;
+const OPEN_PACKAGING_GROWTH_HINT_SIGNATURE = 0xa028;
 const UTF8_DECODER = new TextDecoder("utf-8", { fatal: true });
 const SAFE_PART_PATH = /^[A-Za-z0-9._-]+(?:\/[A-Za-z0-9._-]+)*$/u;
 
@@ -96,6 +100,35 @@ function validateUnixMode(versionMadeBy, externalAttributes, pointer) {
   const fileType = mode & 0o170000;
   if (fileType !== 0 && fileType !== 0o100000) {
     fail("ZIP_UNSUPPORTED_FEATURE", pointer);
+  }
+}
+
+function validateOpenPackagingGrowthHint(extraBytes, pointer) {
+  if (extraBytes.length === 0) return;
+  if (extraBytes.length > SECURE_ZIP_LIMITS.maxLocalExtraBytes) {
+    fail("ZIP_RESOURCE_LIMIT", `${pointer}/extra`);
+  }
+  if (extraBytes.length < 8 ||
+      readUInt16(extraBytes, 0, `${pointer}/extra/id`) !==
+        OPEN_PACKAGING_GROWTH_HINT_FIELD_ID) {
+    fail("ZIP_UNSUPPORTED_FEATURE", `${pointer}/extra`);
+  }
+  const dataLength = readUInt16(extraBytes, 2, `${pointer}/extra/length`);
+  if (dataLength !== extraBytes.length - 4 ||
+      readUInt16(extraBytes, 4, `${pointer}/extra/signature`) !==
+        OPEN_PACKAGING_GROWTH_HINT_SIGNATURE) {
+    fail("ZIP_ARCHIVE_INVALID", `${pointer}/extra`);
+  }
+  // The standard field stores an initial padding length. This deliberately
+  // narrower profile accepts only the canonical current form: one field that
+  // occupies the complete local-extra area and whose initial length equals the
+  // remaining zero-filled padding. No hidden or stale extra bytes are admitted.
+  const initialLength = readUInt16(extraBytes, 6, `${pointer}/extra/initialLength`);
+  if (initialLength !== dataLength - 4) {
+    fail("ZIP_ARCHIVE_INVALID", `${pointer}/extra`);
+  }
+  for (const byte of extraBytes.subarray(8)) {
+    if (byte !== 0) fail("ZIP_ARCHIVE_INVALID", `${pointer}/extra/padding`);
   }
 }
 
@@ -231,6 +264,7 @@ function readCentralDirectory(bytes, eocd) {
 function readLocalRecords(bytes, entries, centralOffset) {
   const ordered = [...entries].sort((left, right) => left.localOffset - right.localOffset);
   let expectedOffset = 0;
+  let totalLocalExtraBytes = 0;
   for (const entry of ordered) {
     const pointer = `${entry.pointer}/localHeader`;
     if (entry.localOffset !== expectedOffset) fail("ZIP_ARCHIVE_INVALID", pointer);
@@ -251,7 +285,7 @@ function readLocalRecords(bytes, entries, centralOffset) {
     if (versionNeeded !== entry.versionNeeded || flags !== entry.flags || method !== entry.method ||
         modifiedTime !== entry.modifiedTime || modifiedDate !== entry.modifiedDate ||
         checksum !== entry.checksum || compressedSize !== entry.compressedSize ||
-        uncompressedSize !== entry.uncompressedSize || extraLength !== 0 ||
+        uncompressedSize !== entry.uncompressedSize ||
         nameLength !== entry.nameBytes.length) {
       fail("ZIP_ARCHIVE_INVALID", pointer);
     }
@@ -259,7 +293,13 @@ function readLocalRecords(bytes, entries, centralOffset) {
     ensureRange(bytes, nameStart, nameLength + extraLength + compressedSize, pointer);
     const localName = bytes.subarray(nameStart, nameStart + nameLength);
     if (!localName.equals(entry.nameBytes)) fail("ZIP_ARCHIVE_INVALID", `${pointer}/name`);
-    const dataStart = nameStart + nameLength + extraLength;
+    totalLocalExtraBytes += extraLength;
+    if (totalLocalExtraBytes > SECURE_ZIP_LIMITS.maxTotalLocalExtraBytes) {
+      fail("ZIP_RESOURCE_LIMIT", "/archive/localExtra");
+    }
+    const extraStart = nameStart + nameLength;
+    const dataStart = extraStart + extraLength;
+    validateOpenPackagingGrowthHint(bytes.subarray(extraStart, dataStart), pointer);
     const dataEnd = dataStart + compressedSize;
     if (dataEnd > centralOffset) fail("ZIP_ARCHIVE_INVALID", pointer);
     entry.compressedBytes = bytes.subarray(dataStart, dataEnd);

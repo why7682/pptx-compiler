@@ -1,0 +1,40 @@
+[
+  {
+    "evidenceId": "independent-review-alignment",
+    "evidenceType": "metric",
+    "planningRole": "proof",
+    "required": true,
+    "label": "Independent reviews agree",
+    "value": "3/3",
+    "statement": "Three independent reviews agree on scope, hierarchy, and readability",
+    "supportsRequiredItemIds": [
+      "bounded-readiness-claim",
+      "limited-pilot-action"
+    ]
+  },
+  {
+    "evidenceId": "control-readiness",
+    "evidenceType": "metric",
+    "planningRole": "readiness",
+    "required": true,
+    "label": "Controls ready",
+    "value": "87%",
+    "statement": "Most controls are ready; two named checks remain",
+    "supportsRequiredItemIds": [
+      "bounded-readiness-claim"
+    ]
+  },
+  {
+    "evidenceId": "remaining-completion-checks",
+    "evidenceType": "metric",
+    "planningRole": "constraint",
+    "required": true,
+    "label": "Completion checks remain",
+    "value": "2",
+    "statement": "Edit/save and accessibility checks remain before wider rollout",
+    "supportsRequiredItemIds": [
+      "limited-pilot-action",
+      "wider-rollout-boundary"
+    ]
+  }
+]

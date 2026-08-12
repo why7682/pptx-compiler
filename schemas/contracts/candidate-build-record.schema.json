@@ -1,0 +1,1186 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:pptx-compiler:schema:candidate-build-record:0.1.0",
+  "title": "PPTX Compiler CandidateBuildRecord",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schemaVersion",
+    "contractType",
+    "candidateVersion",
+    "artifactType",
+    "verificationProfile",
+    "deliveryEligible",
+    "sourceArtifactType",
+    "baseArtifactSha256",
+    "output"
+  ],
+  "properties": {
+    "schemaVersion": { "$ref": "urn:pptx-compiler:schema:shared:0.1.0#/$defs/schemaVersion" },
+    "contractType": { "const": "candidate-build-record" },
+    "candidateVersion": { "const": "0.1.0" },
+    "artifactType": { "const": "candidate-pptx" },
+    "verificationProfile": {
+      "enum": [
+        "authenticated-native-candidate-artifact",
+        "authenticated-ordered-candidate-artifact"
+      ]
+    },
+    "deliveryEligible": { "const": false },
+    "sourceArtifactType": {
+      "enum": [
+        "native-card-arrow-assembled-pptx",
+        "native-omml-formula-assembled-pptx",
+        "ordered-assembled-pptx"
+      ]
+    },
+    "sourceVerificationProfile": {
+      "enum": [
+        "target-specific-native-card-arrow-output",
+        "target-specific-native-omml-formula-output"
+      ]
+    },
+    "baseArtifactSha256": { "$ref": "urn:pptx-compiler:schema:shared:0.1.0#/$defs/sha256" },
+    "output": { "$ref": "#/$defs/candidateOutput" },
+    "slide": { "$ref": "#/$defs/candidateSlide" },
+    "deck": { "$ref": "#/$defs/orderedDeck" }
+  },
+  "oneOf": [
+    { "$ref": "#/$defs/nativeCardArrowRecord" },
+    { "$ref": "#/$defs/nativeOmmlFormulaRecord" },
+    { "$ref": "#/$defs/orderedRecord" }
+  ],
+  "$defs": {
+    "align": {
+      "enum": ["start", "center", "end"]
+    },
+    "candidateBuildRecord": {
+      "oneOf": [
+        { "$ref": "#/$defs/nativeCardArrowRecord" },
+        { "$ref": "#/$defs/nativeOmmlFormulaRecord" },
+        { "$ref": "#/$defs/orderedRecord" }
+      ]
+    },
+    "allowedChange": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["partPath", "reason"],
+      "properties": {
+        "partPath": { "$ref": "urn:pptx-compiler:schema:shared:0.1.0#/$defs/packagePartPath" },
+        "reason": {
+          "enum": [
+            "native-card-arrow-insertion",
+            "native-omml-formula-replacement"
+          ]
+        }
+      }
+    },
+    "box": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["x", "y", "cx", "cy"],
+      "properties": {
+        "x": { "type": "integer", "minimum": 0, "maximum": 100000000 },
+        "y": { "type": "integer", "minimum": 0, "maximum": 100000000 },
+        "cx": { "type": "integer", "minimum": 1, "maximum": 100000000 },
+        "cy": { "type": "integer", "minimum": 1, "maximum": 100000000 }
+      }
+    },
+    "candidateOutput": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["fileName", "sha256", "byteLength"],
+      "properties": {
+        "fileName": {
+          "type": "string",
+          "minLength": 6,
+          "maxLength": 245,
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._-]{0,239}\\.[Pp][Pp][Tt][Xx]$"
+        },
+        "sha256": { "$ref": "urn:pptx-compiler:schema:shared:0.1.0#/$defs/sha256" },
+        "byteLength": { "$ref": "urn:pptx-compiler:schema:shared:0.1.0#/$defs/byteLength" }
+      }
+    },
+    "candidateSlide": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "slideId",
+        "slidePart",
+        "layoutIr",
+        "composedSlidePlan",
+        "diff",
+        "capabilityEvidence"
+      ],
+      "properties": {
+        "slideId": { "$ref": "urn:pptx-compiler:schema:shared:0.1.0#/$defs/semanticId" },
+        "slidePart": {
+          "type": "string",
+          "maxLength": 64,
+          "pattern": "^ppt/slides/slide[1-9][0-9]*\\.xml$"
+        },
+        "layoutIr": { "$ref": "#/$defs/slideLayoutIr" },
+        "composedSlidePlan": { "$ref": "#/$defs/composedSlidePlan" },
+        "diff": { "$ref": "#/$defs/packageDiff" },
+        "capabilityEvidence": {
+          "oneOf": [
+            { "$ref": "#/$defs/nativeCardArrowEvidence" },
+            { "$ref": "#/$defs/nativeOmmlFormulaEvidence" }
+          ]
+        }
+      }
+    },
+    "canvas": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["x", "y", "cx", "cy"],
+      "properties": {
+        "x": { "const": 0 },
+        "y": { "const": 0 },
+        "cx": { "type": "integer", "minimum": 1, "maximum": 100000000 },
+        "cy": { "type": "integer", "minimum": 1, "maximum": 100000000 }
+      }
+    },
+    "composedSlidePlan": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "planVersion",
+        "planType",
+        "layoutIrDigest",
+        "slideId",
+        "canvas",
+        "slots",
+        "nodes",
+        "constraintReceipt",
+        "planDigest"
+      ],
+      "properties": {
+        "planVersion": { "const": "0.1.0" },
+        "planType": { "const": "composed-slide-plan" },
+        "layoutIrDigest": { "$ref": "urn:pptx-compiler:schema:shared:0.1.0#/$defs/sha256" },
+        "slideId": { "$ref": "urn:pptx-compiler:schema:shared:0.1.0#/$defs/semanticId" },
+        "canvas": { "$ref": "#/$defs/canvas" },
+        "slots": {
+          "type": "array",
+          "minItems": 1,
+          "maxItems": 1,
+          "items": { "$ref": "#/$defs/slot" }
+        },
+        "nodes": {
+          "type": "array",
+          "minItems": 2,
+          "maxItems": 256,
+          "items": { "$ref": "#/$defs/resolvedNode" }
+        },
+        "constraintReceipt": { "$ref": "#/$defs/constraintReceipt" },
+        "planDigest": { "$ref": "urn:pptx-compiler:schema:shared:0.1.0#/$defs/sha256" }
+      }
+    },
+    "constraint": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["constraintId", "constraintType", "containerNodeId", "subjectNodeIds"],
+      "properties": {
+        "constraintId": { "$ref": "urn:pptx-compiler:schema:shared:0.1.0#/$defs/semanticId" },
+        "constraintType": {
+          "enum": ["containment", "slot-containment", "pairwise-non-overlap"]
+        },
+        "containerNodeId": { "$ref": "urn:pptx-compiler:schema:shared:0.1.0#/$defs/semanticId" },
+        "subjectNodeIds": {
+          "type": "array",
+          "maxItems": 256,
+          "uniqueItems": true,
+          "items": { "$ref": "urn:pptx-compiler:schema:shared:0.1.0#/$defs/semanticId" }
+        }
+      }
+    },
+    "constraintReceipt": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "receiptVersion",
+        "status",
+        "checkedConstraintIds",
+        "containmentChecks",
+        "slotChecks",
+        "occupancyChecks"
+      ],
+      "properties": {
+        "receiptVersion": { "const": "0.1.0" },
+        "status": { "const": "pass" },
+        "checkedConstraintIds": {
+          "type": "array",
+          "minItems": 3,
+          "maxItems": 3,
+          "uniqueItems": true,
+          "items": { "$ref": "urn:pptx-compiler:schema:shared:0.1.0#/$defs/semanticId" }
+        },
+        "containmentChecks": {
+          "type": "array",
+          "minItems": 1,
+          "maxItems": 256,
+          "items": { "$ref": "#/$defs/containmentCheck" }
+        },
+        "slotChecks": {
+          "type": "array",
+          "minItems": 1,
+          "maxItems": 1,
+          "items": { "$ref": "#/$defs/slotCheck" }
+        },
+        "occupancyChecks": {
+          "type": "array",
+          "maxItems": 32640,
+          "items": { "$ref": "#/$defs/occupancyCheck" }
+        }
+      }
+    },
+    "containmentCheck": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["nodeId", "status"],
+      "properties": {
+        "nodeId": { "$ref": "urn:pptx-compiler:schema:shared:0.1.0#/$defs/semanticId" },
+        "status": { "const": "pass" }
+      }
+    },
+    "layoutNode": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "nodeId",
+        "sourceKind",
+        "sourceRef",
+        "parentNodeId",
+        "semanticSlotId",
+        "role",
+        "positionMode",
+        "placementIntent",
+        "sizing",
+        "requestedBox",
+        "paintOutset",
+        "zOrder",
+        "collisionPolicy"
+      ],
+      "properties": {
+        "nodeId": { "$ref": "urn:pptx-compiler:schema:shared:0.1.0#/$defs/semanticId" },
+        "sourceKind": { "$ref": "#/$defs/sourceKind" },
+        "sourceRef": { "$ref": "urn:pptx-compiler:schema:shared:0.1.0#/$defs/semanticId" },
+        "parentNodeId": { "$ref": "urn:pptx-compiler:schema:shared:0.1.0#/$defs/semanticId" },
+        "semanticSlotId": { "$ref": "urn:pptx-compiler:schema:shared:0.1.0#/$defs/semanticId" },
+        "role": { "$ref": "#/$defs/role" },
+        "positionMode": { "enum": ["absolute", "flow"] },
+        "placementIntent": { "$ref": "#/$defs/placementIntent" },
+        "sizing": { "$ref": "#/$defs/sizing" },
+        "requestedBox": { "$ref": "#/$defs/box" },
+        "paintOutset": { "$ref": "#/$defs/padding" },
+        "zOrder": { "type": "integer", "minimum": 0, "maximum": 255 },
+        "collisionPolicy": { "enum": ["allow", "forbid"] }
+      }
+    },
+    "nativeCardArrowEvidence": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["evidenceType", "allocatedShapeIds"],
+      "properties": {
+        "evidenceType": { "const": "native-card-arrow" },
+        "allocatedShapeIds": {
+          "type": "array",
+          "minItems": 3,
+          "maxItems": 3,
+          "uniqueItems": true,
+          "items": { "$ref": "urn:pptx-compiler:schema:shared:0.1.0#/$defs/ooxmlId" }
+        }
+      }
+    },
+    "nativeCardArrowComposedSlidePlan": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["planVersion", "planType", "layoutIrDigest", "slideId", "canvas", "slots", "nodes", "constraintReceipt", "planDigest"],
+      "properties": {
+        "planVersion": { "const": "0.1.0" },
+        "planType": { "const": "composed-slide-plan" },
+        "layoutIrDigest": { "$ref": "urn:pptx-compiler:schema:shared:0.1.0#/$defs/sha256" },
+        "slideId": { "$ref": "urn:pptx-compiler:schema:shared:0.1.0#/$defs/semanticId" },
+        "canvas": { "$ref": "#/$defs/canvas" },
+        "slots": { "type": "array", "minItems": 1, "maxItems": 1, "items": { "$ref": "#/$defs/nativeCardArrowSlot" } },
+        "nodes": { "type": "array", "minItems": 2, "maxItems": 256, "items": { "$ref": "#/$defs/nativeCardArrowResolvedNode" } },
+        "constraintReceipt": { "$ref": "#/$defs/constraintReceipt" },
+        "planDigest": { "$ref": "urn:pptx-compiler:schema:shared:0.1.0#/$defs/sha256" }
+      }
+    },
+    "nativeCardArrowLayoutIr": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "layoutIrVersion",
+        "layoutIrType",
+        "inputProfile",
+        "slideId",
+        "canvas",
+        "slots",
+        "placementRequests",
+        "nodes",
+        "constraints"
+      ],
+      "properties": {
+        "layoutIrVersion": { "const": "0.1.0" },
+        "layoutIrType": { "const": "slide-layout-ir" },
+        "inputProfile": { "const": "bounded-slot-placement" },
+        "slideId": { "$ref": "urn:pptx-compiler:schema:shared:0.1.0#/$defs/semanticId" },
+        "canvas": { "$ref": "#/$defs/canvas" },
+        "slots": {
+          "type": "array",
+          "minItems": 1,
+          "maxItems": 1,
+          "items": { "$ref": "#/$defs/nativeCardArrowSlot" }
+        },
+        "placementRequests": {
+          "type": "array",
+          "minItems": 1,
+          "maxItems": 1,
+          "items": { "$ref": "#/$defs/nativeCardArrowPlacement" }
+        },
+        "nodes": {
+          "type": "array",
+          "minItems": 2,
+          "maxItems": 256,
+          "items": { "$ref": "#/$defs/nativeCardArrowLayoutNode" }
+        },
+        "constraints": {
+          "type": "array",
+          "minItems": 3,
+          "maxItems": 3,
+          "items": { "$ref": "#/$defs/constraint" }
+        }
+      }
+    },
+    "nativeCardArrowLayoutNode": {
+      "oneOf": [
+        { "$ref": "#/$defs/templateLayoutNode" },
+        { "$ref": "#/$defs/nativeCardArrowComponentLayoutNode" }
+      ]
+    },
+    "nativeCardArrowComponentLayoutNode": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["nodeId", "sourceKind", "sourceRef", "parentNodeId", "semanticSlotId", "role", "positionMode", "placementIntent", "sizing", "requestedBox", "paintOutset", "zOrder", "collisionPolicy"],
+      "properties": {
+        "nodeId": { "$ref": "urn:pptx-compiler:schema:shared:0.1.0#/$defs/semanticId" },
+        "sourceKind": { "const": "native-component" },
+        "sourceRef": { "const": "native-card-arrow" },
+        "parentNodeId": { "$ref": "urn:pptx-compiler:schema:shared:0.1.0#/$defs/semanticId" },
+        "semanticSlotId": { "$ref": "urn:pptx-compiler:schema:shared:0.1.0#/$defs/semanticId" },
+        "role": { "$ref": "#/$defs/role" },
+        "positionMode": { "enum": ["absolute", "flow"] },
+        "placementIntent": { "$ref": "#/$defs/placementIntent" },
+        "sizing": { "$ref": "#/$defs/sizing" },
+        "requestedBox": { "$ref": "#/$defs/box" },
+        "paintOutset": { "$ref": "#/$defs/padding" },
+        "zOrder": { "type": "integer", "minimum": 0, "maximum": 255 },
+        "collisionPolicy": { "enum": ["allow", "forbid"] }
+      }
+    },
+    "nativeCardArrowPackageDiff": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["addedParts", "removedParts", "modifiedParts", "allowedChanges", "collateralChanges"],
+      "properties": {
+        "addedParts": { "type": "array", "maxItems": 0, "items": { "$ref": "urn:pptx-compiler:schema:shared:0.1.0#/$defs/packagePartPath" } },
+        "removedParts": { "type": "array", "maxItems": 0, "items": { "$ref": "urn:pptx-compiler:schema:shared:0.1.0#/$defs/packagePartPath" } },
+        "modifiedParts": { "type": "array", "minItems": 1, "maxItems": 1, "items": { "$ref": "urn:pptx-compiler:schema:shared:0.1.0#/$defs/packagePartPath" } },
+        "allowedChanges": {
+          "type": "array",
+          "minItems": 1,
+          "maxItems": 1,
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": ["partPath", "reason"],
+            "properties": {
+              "partPath": { "$ref": "urn:pptx-compiler:schema:shared:0.1.0#/$defs/packagePartPath" },
+              "reason": { "const": "native-card-arrow-insertion" }
+            }
+          }
+        },
+        "collateralChanges": { "type": "array", "maxItems": 0, "items": { "$ref": "urn:pptx-compiler:schema:shared:0.1.0#/$defs/packagePartPath" } }
+      }
+    },
+    "nativeCardArrowPlacement": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["nodeId", "sourceKind", "sourceRef", "role", "slotRef", "size", "paintOutsetEmu", "zOrder", "placementIntent"],
+      "properties": {
+        "nodeId": { "$ref": "urn:pptx-compiler:schema:shared:0.1.0#/$defs/semanticId" },
+        "sourceKind": { "const": "native-component" },
+        "sourceRef": { "const": "native-card-arrow" },
+        "role": { "const": "content" },
+        "slotRef": { "$ref": "urn:pptx-compiler:schema:shared:0.1.0#/$defs/semanticId" },
+        "size": { "$ref": "#/$defs/size" },
+        "paintOutsetEmu": { "type": "integer", "minimum": 0, "maximum": 914400 },
+        "zOrder": { "type": "integer", "minimum": 0, "maximum": 255 },
+        "placementIntent": { "const": "slot-aligned-fixed" }
+      }
+    },
+    "nativeCardArrowRecord": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["schemaVersion", "contractType", "candidateVersion", "artifactType", "verificationProfile", "deliveryEligible", "sourceArtifactType", "sourceVerificationProfile", "baseArtifactSha256", "output", "slide"],
+      "properties": {
+        "schemaVersion": { "$ref": "urn:pptx-compiler:schema:shared:0.1.0#/$defs/schemaVersion" },
+        "contractType": { "const": "candidate-build-record" },
+        "candidateVersion": { "const": "0.1.0" },
+        "artifactType": { "const": "candidate-pptx" },
+        "verificationProfile": { "const": "authenticated-native-candidate-artifact" },
+        "deliveryEligible": { "const": false },
+        "sourceArtifactType": { "const": "native-card-arrow-assembled-pptx" },
+        "sourceVerificationProfile": { "const": "target-specific-native-card-arrow-output" },
+        "baseArtifactSha256": { "$ref": "urn:pptx-compiler:schema:shared:0.1.0#/$defs/sha256" },
+        "output": { "$ref": "#/$defs/candidateOutput" },
+        "slide": { "$ref": "#/$defs/nativeCardArrowSlide" }
+      }
+    },
+    "nativeCardArrowResolvedNode": {
+      "oneOf": [
+        { "$ref": "#/$defs/templateResolvedNode" },
+        { "$ref": "#/$defs/nativeCardArrowComponentResolvedNode" }
+      ]
+    },
+    "nativeCardArrowComponentResolvedNode": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["nodeId", "sourceKind", "sourceRef", "parentNodeId", "semanticSlotId", "role", "positionMode", "placementIntent", "box", "paintBounds", "zOrder", "collisionPolicy"],
+      "properties": {
+        "nodeId": { "$ref": "urn:pptx-compiler:schema:shared:0.1.0#/$defs/semanticId" },
+        "sourceKind": { "const": "native-component" },
+        "sourceRef": { "const": "native-card-arrow" },
+        "parentNodeId": { "$ref": "urn:pptx-compiler:schema:shared:0.1.0#/$defs/semanticId" },
+        "semanticSlotId": { "$ref": "urn:pptx-compiler:schema:shared:0.1.0#/$defs/semanticId" },
+        "role": { "$ref": "#/$defs/role" },
+        "positionMode": { "enum": ["absolute", "flow"] },
+        "placementIntent": { "$ref": "#/$defs/placementIntent" },
+        "box": { "$ref": "#/$defs/box" },
+        "paintBounds": { "$ref": "#/$defs/resolvedBox" },
+        "zOrder": { "type": "integer", "minimum": 0, "maximum": 255 },
+        "collisionPolicy": { "enum": ["allow", "forbid"] }
+      }
+    },
+    "nativeCardArrowSlide": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["slideId", "slidePart", "layoutIr", "composedSlidePlan", "diff", "capabilityEvidence"],
+      "properties": {
+        "slideId": { "$ref": "urn:pptx-compiler:schema:shared:0.1.0#/$defs/semanticId" },
+        "slidePart": { "type": "string", "maxLength": 64, "pattern": "^ppt/slides/slide[1-9][0-9]*\\.xml$" },
+        "layoutIr": { "$ref": "#/$defs/nativeCardArrowLayoutIr" },
+        "composedSlidePlan": { "$ref": "#/$defs/nativeCardArrowComposedSlidePlan" },
+        "diff": { "$ref": "#/$defs/nativeCardArrowPackageDiff" },
+        "capabilityEvidence": { "$ref": "#/$defs/nativeCardArrowEvidence" }
+      }
+    },
+    "nativeCardArrowSlot": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["slotId", "parentNodeId", "outerBox", "padding", "contentBox", "alignX", "alignY", "allowedSourceKind", "allowedSourceRef", "overflowPolicy", "capacity"],
+      "properties": {
+        "slotId": { "$ref": "urn:pptx-compiler:schema:shared:0.1.0#/$defs/semanticId" },
+        "parentNodeId": { "const": "slide-canvas" },
+        "outerBox": { "$ref": "#/$defs/box" },
+        "padding": { "$ref": "#/$defs/padding" },
+        "contentBox": { "$ref": "#/$defs/box" },
+        "alignX": { "$ref": "#/$defs/align" },
+        "alignY": { "$ref": "#/$defs/align" },
+        "allowedSourceKind": { "const": "native-component" },
+        "allowedSourceRef": { "const": "native-card-arrow" },
+        "overflowPolicy": { "const": "reject" },
+        "capacity": { "$ref": "#/$defs/slotCapacity" }
+      }
+    },
+    "nativeOmmlFormulaEvidence": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["evidenceType", "formulaDigest", "formulaTarget"],
+      "properties": {
+        "evidenceType": { "const": "native-omml-formula" },
+        "formulaDigest": { "$ref": "urn:pptx-compiler:schema:shared:0.1.0#/$defs/sha256" },
+        "formulaTarget": { "$ref": "#/$defs/ommlFormulaTarget" }
+      }
+    },
+    "nativeOmmlFormulaComposedSlidePlan": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["planVersion", "planType", "layoutIrDigest", "slideId", "canvas", "slots", "nodes", "constraintReceipt", "planDigest"],
+      "properties": {
+        "planVersion": { "const": "0.1.0" },
+        "planType": { "const": "composed-slide-plan" },
+        "layoutIrDigest": { "$ref": "urn:pptx-compiler:schema:shared:0.1.0#/$defs/sha256" },
+        "slideId": { "$ref": "urn:pptx-compiler:schema:shared:0.1.0#/$defs/semanticId" },
+        "canvas": { "$ref": "#/$defs/canvas" },
+        "slots": { "type": "array", "minItems": 1, "maxItems": 1, "items": { "$ref": "#/$defs/nativeOmmlFormulaSlot" } },
+        "nodes": { "type": "array", "minItems": 2, "maxItems": 256, "items": { "$ref": "#/$defs/nativeOmmlFormulaResolvedNode" } },
+        "constraintReceipt": { "$ref": "#/$defs/constraintReceipt" },
+        "planDigest": { "$ref": "urn:pptx-compiler:schema:shared:0.1.0#/$defs/sha256" }
+      }
+    },
+    "nativeOmmlFormulaLayoutIr": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["layoutIrVersion", "layoutIrType", "inputProfile", "slideId", "canvas", "slots", "placementRequests", "nodes", "constraints"],
+      "properties": {
+        "layoutIrVersion": { "const": "0.1.0" },
+        "layoutIrType": { "const": "slide-layout-ir" },
+        "inputProfile": { "const": "bounded-slot-placement" },
+        "slideId": { "$ref": "urn:pptx-compiler:schema:shared:0.1.0#/$defs/semanticId" },
+        "canvas": { "$ref": "#/$defs/canvas" },
+        "slots": { "type": "array", "minItems": 1, "maxItems": 1, "items": { "$ref": "#/$defs/nativeOmmlFormulaSlot" } },
+        "placementRequests": { "type": "array", "minItems": 1, "maxItems": 1, "items": { "$ref": "#/$defs/nativeOmmlFormulaPlacement" } },
+        "nodes": { "type": "array", "minItems": 2, "maxItems": 256, "items": { "$ref": "#/$defs/nativeOmmlFormulaLayoutNode" } },
+        "constraints": { "type": "array", "minItems": 3, "maxItems": 3, "items": { "$ref": "#/$defs/constraint" } }
+      }
+    },
+    "nativeOmmlFormulaLayoutNode": {
+      "oneOf": [
+        { "$ref": "#/$defs/templateLayoutNode" },
+        { "$ref": "#/$defs/nativeOmmlFormulaComponentLayoutNode" }
+      ]
+    },
+    "nativeOmmlFormulaComponentLayoutNode": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["nodeId", "sourceKind", "sourceRef", "parentNodeId", "semanticSlotId", "role", "positionMode", "placementIntent", "sizing", "requestedBox", "paintOutset", "zOrder", "collisionPolicy"],
+      "properties": {
+        "nodeId": { "$ref": "urn:pptx-compiler:schema:shared:0.1.0#/$defs/semanticId" },
+        "sourceKind": { "const": "native-component" },
+        "sourceRef": { "const": "native-omml-formula" },
+        "parentNodeId": { "$ref": "urn:pptx-compiler:schema:shared:0.1.0#/$defs/semanticId" },
+        "semanticSlotId": { "$ref": "urn:pptx-compiler:schema:shared:0.1.0#/$defs/semanticId" },
+        "role": { "$ref": "#/$defs/role" },
+        "positionMode": { "enum": ["absolute", "flow"] },
+        "placementIntent": { "$ref": "#/$defs/placementIntent" },
+        "sizing": { "$ref": "#/$defs/sizing" },
+        "requestedBox": { "$ref": "#/$defs/box" },
+        "paintOutset": { "$ref": "#/$defs/padding" },
+        "zOrder": { "type": "integer", "minimum": 0, "maximum": 255 },
+        "collisionPolicy": { "enum": ["allow", "forbid"] }
+      }
+    },
+    "nativeOmmlFormulaPackageDiff": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["addedParts", "removedParts", "modifiedParts", "allowedChanges", "collateralChanges"],
+      "properties": {
+        "addedParts": { "type": "array", "maxItems": 0, "items": { "$ref": "urn:pptx-compiler:schema:shared:0.1.0#/$defs/packagePartPath" } },
+        "removedParts": { "type": "array", "maxItems": 0, "items": { "$ref": "urn:pptx-compiler:schema:shared:0.1.0#/$defs/packagePartPath" } },
+        "modifiedParts": { "type": "array", "minItems": 1, "maxItems": 1, "items": { "$ref": "urn:pptx-compiler:schema:shared:0.1.0#/$defs/packagePartPath" } },
+        "allowedChanges": {
+          "type": "array",
+          "minItems": 1,
+          "maxItems": 1,
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": ["partPath", "reason"],
+            "properties": {
+              "partPath": { "$ref": "urn:pptx-compiler:schema:shared:0.1.0#/$defs/packagePartPath" },
+              "reason": { "const": "native-omml-formula-replacement" }
+            }
+          }
+        },
+        "collateralChanges": { "type": "array", "maxItems": 0, "items": { "$ref": "urn:pptx-compiler:schema:shared:0.1.0#/$defs/packagePartPath" } }
+      }
+    },
+    "nativeOmmlFormulaPlacement": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["nodeId", "sourceKind", "sourceRef", "role", "slotRef", "size", "paintOutsetEmu", "zOrder", "placementIntent"],
+      "properties": {
+        "nodeId": { "$ref": "urn:pptx-compiler:schema:shared:0.1.0#/$defs/semanticId" },
+        "sourceKind": { "const": "native-component" },
+        "sourceRef": { "const": "native-omml-formula" },
+        "role": { "const": "content" },
+        "slotRef": { "$ref": "urn:pptx-compiler:schema:shared:0.1.0#/$defs/semanticId" },
+        "size": { "$ref": "#/$defs/size" },
+        "paintOutsetEmu": { "type": "integer", "minimum": 0, "maximum": 914400 },
+        "zOrder": { "type": "integer", "minimum": 0, "maximum": 255 },
+        "placementIntent": { "const": "slot-aligned-fixed" }
+      }
+    },
+    "nativeOmmlFormulaRecord": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["schemaVersion", "contractType", "candidateVersion", "artifactType", "verificationProfile", "deliveryEligible", "sourceArtifactType", "sourceVerificationProfile", "baseArtifactSha256", "output", "slide"],
+      "properties": {
+        "schemaVersion": { "$ref": "urn:pptx-compiler:schema:shared:0.1.0#/$defs/schemaVersion" },
+        "contractType": { "const": "candidate-build-record" },
+        "candidateVersion": { "const": "0.1.0" },
+        "artifactType": { "const": "candidate-pptx" },
+        "verificationProfile": { "const": "authenticated-native-candidate-artifact" },
+        "deliveryEligible": { "const": false },
+        "sourceArtifactType": { "const": "native-omml-formula-assembled-pptx" },
+        "sourceVerificationProfile": { "const": "target-specific-native-omml-formula-output" },
+        "baseArtifactSha256": { "$ref": "urn:pptx-compiler:schema:shared:0.1.0#/$defs/sha256" },
+        "output": { "$ref": "#/$defs/candidateOutput" },
+        "slide": { "$ref": "#/$defs/nativeOmmlFormulaSlide" }
+      }
+    },
+    "nativeOmmlFormulaResolvedNode": {
+      "oneOf": [
+        { "$ref": "#/$defs/templateResolvedNode" },
+        { "$ref": "#/$defs/nativeOmmlFormulaComponentResolvedNode" }
+      ]
+    },
+    "nativeOmmlFormulaComponentResolvedNode": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["nodeId", "sourceKind", "sourceRef", "parentNodeId", "semanticSlotId", "role", "positionMode", "placementIntent", "box", "paintBounds", "zOrder", "collisionPolicy"],
+      "properties": {
+        "nodeId": { "$ref": "urn:pptx-compiler:schema:shared:0.1.0#/$defs/semanticId" },
+        "sourceKind": { "const": "native-component" },
+        "sourceRef": { "const": "native-omml-formula" },
+        "parentNodeId": { "$ref": "urn:pptx-compiler:schema:shared:0.1.0#/$defs/semanticId" },
+        "semanticSlotId": { "$ref": "urn:pptx-compiler:schema:shared:0.1.0#/$defs/semanticId" },
+        "role": { "$ref": "#/$defs/role" },
+        "positionMode": { "enum": ["absolute", "flow"] },
+        "placementIntent": { "$ref": "#/$defs/placementIntent" },
+        "box": { "$ref": "#/$defs/box" },
+        "paintBounds": { "$ref": "#/$defs/resolvedBox" },
+        "zOrder": { "type": "integer", "minimum": 0, "maximum": 255 },
+        "collisionPolicy": { "enum": ["allow", "forbid"] }
+      }
+    },
+    "nativeOmmlFormulaSlide": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["slideId", "slidePart", "layoutIr", "composedSlidePlan", "diff", "capabilityEvidence"],
+      "properties": {
+        "slideId": { "$ref": "urn:pptx-compiler:schema:shared:0.1.0#/$defs/semanticId" },
+        "slidePart": { "type": "string", "maxLength": 64, "pattern": "^ppt/slides/slide[1-9][0-9]*\\.xml$" },
+        "layoutIr": { "$ref": "#/$defs/nativeOmmlFormulaLayoutIr" },
+        "composedSlidePlan": { "$ref": "#/$defs/nativeOmmlFormulaComposedSlidePlan" },
+        "diff": { "$ref": "#/$defs/nativeOmmlFormulaPackageDiff" },
+        "capabilityEvidence": { "$ref": "#/$defs/nativeOmmlFormulaEvidence" }
+      }
+    },
+    "nativeOmmlFormulaSlot": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["slotId", "parentNodeId", "outerBox", "padding", "contentBox", "alignX", "alignY", "allowedSourceKind", "allowedSourceRef", "overflowPolicy", "capacity"],
+      "properties": {
+        "slotId": { "$ref": "urn:pptx-compiler:schema:shared:0.1.0#/$defs/semanticId" },
+        "parentNodeId": { "const": "slide-canvas" },
+        "outerBox": { "$ref": "#/$defs/box" },
+        "padding": { "$ref": "#/$defs/padding" },
+        "contentBox": { "$ref": "#/$defs/box" },
+        "alignX": { "$ref": "#/$defs/align" },
+        "alignY": { "$ref": "#/$defs/align" },
+        "allowedSourceKind": { "const": "native-component" },
+        "allowedSourceRef": { "const": "native-omml-formula" },
+        "overflowPolicy": { "const": "reject" },
+        "capacity": { "$ref": "#/$defs/slotCapacity" }
+      }
+    },
+    "orderedAllowedChange": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["partPath", "reason"],
+      "properties": {
+        "partPath": { "$ref": "#/$defs/orderedPartPath" },
+        "reason": {
+          "enum": [
+            "ordered-slide-content-types",
+            "ordered-slide-owner-list",
+            "ordered-slide-relationships",
+            "normalized-slide-layout-relationship",
+            "cloned-slide-content"
+          ]
+        }
+      }
+    },
+    "orderedCloneFillSource": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["buildType", "artifactType"],
+      "properties": {
+        "buildType": { "const": "clone-fill-source" },
+        "artifactType": { "const": "assembled-pptx" }
+      }
+    },
+    "orderedCloneFillSlide": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["slideId", "order", "slidePart", "relationshipsPartPath", "presentationSlideId", "relationshipId", "sourceArtifactSha256", "sourceBuild"],
+      "properties": {
+        "slideId": { "$ref": "urn:pptx-compiler:schema:shared:0.1.0#/$defs/semanticId" },
+        "order": { "type": "integer", "minimum": 1, "maximum": 16 },
+        "slidePart": { "type": "string", "maxLength": 64, "pattern": "^ppt/slides/slide[1-9][0-9]*\\.xml$" },
+        "relationshipsPartPath": { "type": "string", "maxLength": 80, "pattern": "^ppt/slides/_rels/slide[1-9][0-9]*\\.xml\\.rels$" },
+        "presentationSlideId": { "type": "integer", "minimum": 256, "maximum": 271 },
+        "relationshipId": { "type": "string", "maxLength": 16, "pattern": "^rId[1-9][0-9]*$" },
+        "sourceArtifactSha256": { "$ref": "urn:pptx-compiler:schema:shared:0.1.0#/$defs/sha256" },
+        "sourceBuild": { "$ref": "#/$defs/orderedCloneFillSource" }
+      }
+    },
+    "orderedDeck": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["assemblyVersion", "slides", "diff"],
+      "properties": {
+        "assemblyVersion": { "const": "0.1.0" },
+        "slides": {
+          "type": "array",
+          "minItems": 2,
+          "maxItems": 16,
+          "items": {
+            "oneOf": [
+              { "$ref": "#/$defs/orderedCloneFillSlide" },
+              { "$ref": "#/$defs/orderedNativeCardArrowSlide" },
+              { "$ref": "#/$defs/orderedNativeOmmlFormulaSlide" }
+            ]
+          }
+        },
+        "diff": { "$ref": "#/$defs/orderedPackageDiff" }
+      }
+    },
+    "orderedNativeCardArrowSource": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["buildType", "artifactType", "verificationProfile", "baseArtifactSha256", "sourceSlidePart", "layoutIr", "composedSlidePlan", "diff", "capabilityEvidence"],
+      "properties": {
+        "buildType": { "const": "native-card-arrow-source" },
+        "artifactType": { "const": "native-card-arrow-assembled-pptx" },
+        "verificationProfile": { "const": "target-specific-native-card-arrow-output" },
+        "baseArtifactSha256": { "$ref": "urn:pptx-compiler:schema:shared:0.1.0#/$defs/sha256" },
+        "sourceSlidePart": { "type": "string", "maxLength": 64, "pattern": "^ppt/slides/slide[1-9][0-9]*\\.xml$" },
+        "layoutIr": { "$ref": "#/$defs/nativeCardArrowLayoutIr" },
+        "composedSlidePlan": { "$ref": "#/$defs/nativeCardArrowComposedSlidePlan" },
+        "diff": { "$ref": "#/$defs/nativeCardArrowPackageDiff" },
+        "capabilityEvidence": { "$ref": "#/$defs/nativeCardArrowEvidence" }
+      }
+    },
+    "orderedNativeCardArrowSlide": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["slideId", "order", "slidePart", "relationshipsPartPath", "presentationSlideId", "relationshipId", "sourceArtifactSha256", "sourceBuild"],
+      "properties": {
+        "slideId": { "$ref": "urn:pptx-compiler:schema:shared:0.1.0#/$defs/semanticId" },
+        "order": { "type": "integer", "minimum": 1, "maximum": 16 },
+        "slidePart": { "type": "string", "maxLength": 64, "pattern": "^ppt/slides/slide[1-9][0-9]*\\.xml$" },
+        "relationshipsPartPath": { "type": "string", "maxLength": 80, "pattern": "^ppt/slides/_rels/slide[1-9][0-9]*\\.xml\\.rels$" },
+        "presentationSlideId": { "type": "integer", "minimum": 256, "maximum": 271 },
+        "relationshipId": { "type": "string", "maxLength": 16, "pattern": "^rId[1-9][0-9]*$" },
+        "sourceArtifactSha256": { "$ref": "urn:pptx-compiler:schema:shared:0.1.0#/$defs/sha256" },
+        "sourceBuild": { "$ref": "#/$defs/orderedNativeCardArrowSource" }
+      }
+    },
+    "orderedNativeOmmlFormulaSource": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["buildType", "artifactType", "verificationProfile", "baseArtifactSha256", "sourceSlidePart", "layoutIr", "composedSlidePlan", "diff", "capabilityEvidence"],
+      "properties": {
+        "buildType": { "const": "native-omml-formula-source" },
+        "artifactType": { "const": "native-omml-formula-assembled-pptx" },
+        "verificationProfile": { "const": "target-specific-native-omml-formula-output" },
+        "baseArtifactSha256": { "$ref": "urn:pptx-compiler:schema:shared:0.1.0#/$defs/sha256" },
+        "sourceSlidePart": { "type": "string", "maxLength": 64, "pattern": "^ppt/slides/slide[1-9][0-9]*\\.xml$" },
+        "layoutIr": { "$ref": "#/$defs/nativeOmmlFormulaLayoutIr" },
+        "composedSlidePlan": { "$ref": "#/$defs/nativeOmmlFormulaComposedSlidePlan" },
+        "diff": { "$ref": "#/$defs/nativeOmmlFormulaPackageDiff" },
+        "capabilityEvidence": { "$ref": "#/$defs/nativeOmmlFormulaEvidence" }
+      }
+    },
+    "orderedNativeOmmlFormulaSlide": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["slideId", "order", "slidePart", "relationshipsPartPath", "presentationSlideId", "relationshipId", "sourceArtifactSha256", "sourceBuild"],
+      "properties": {
+        "slideId": { "$ref": "urn:pptx-compiler:schema:shared:0.1.0#/$defs/semanticId" },
+        "order": { "type": "integer", "minimum": 1, "maximum": 16 },
+        "slidePart": { "type": "string", "maxLength": 64, "pattern": "^ppt/slides/slide[1-9][0-9]*\\.xml$" },
+        "relationshipsPartPath": { "type": "string", "maxLength": 80, "pattern": "^ppt/slides/_rels/slide[1-9][0-9]*\\.xml\\.rels$" },
+        "presentationSlideId": { "type": "integer", "minimum": 256, "maximum": 271 },
+        "relationshipId": { "type": "string", "maxLength": 16, "pattern": "^rId[1-9][0-9]*$" },
+        "sourceArtifactSha256": { "$ref": "urn:pptx-compiler:schema:shared:0.1.0#/$defs/sha256" },
+        "sourceBuild": { "$ref": "#/$defs/orderedNativeOmmlFormulaSource" }
+      }
+    },
+    "orderedRecord": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["schemaVersion", "contractType", "candidateVersion", "artifactType", "verificationProfile", "deliveryEligible", "sourceArtifactType", "baseArtifactSha256", "output", "deck"],
+      "properties": {
+        "schemaVersion": { "$ref": "urn:pptx-compiler:schema:shared:0.1.0#/$defs/schemaVersion" },
+        "contractType": { "const": "candidate-build-record" },
+        "candidateVersion": { "const": "0.1.0" },
+        "artifactType": { "const": "candidate-pptx" },
+        "verificationProfile": { "const": "authenticated-ordered-candidate-artifact" },
+        "deliveryEligible": { "const": false },
+        "sourceArtifactType": { "const": "ordered-assembled-pptx" },
+        "baseArtifactSha256": { "$ref": "urn:pptx-compiler:schema:shared:0.1.0#/$defs/sha256" },
+        "output": { "$ref": "#/$defs/candidateOutput" },
+        "deck": { "$ref": "#/$defs/orderedDeck" }
+      }
+    },
+    "orderedPackageDiff": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["addedParts", "removedParts", "modifiedParts", "allowedChanges", "collateralChanges"],
+      "properties": {
+        "addedParts": {
+          "type": "array",
+          "minItems": 2,
+          "maxItems": 30,
+          "items": { "$ref": "#/$defs/orderedPartPath" }
+        },
+        "removedParts": { "type": "array", "maxItems": 0, "items": { "$ref": "#/$defs/orderedPartPath" } },
+        "modifiedParts": {
+          "type": "array",
+          "minItems": 3,
+          "maxItems": 4,
+          "items": { "$ref": "#/$defs/orderedPartPath" }
+        },
+        "allowedChanges": {
+          "type": "array",
+          "minItems": 5,
+          "maxItems": 34,
+          "items": { "$ref": "#/$defs/orderedAllowedChange" }
+        },
+        "collateralChanges": { "type": "array", "maxItems": 0, "items": { "$ref": "#/$defs/orderedPartPath" } }
+      }
+    },
+    "orderedPartPath": {
+      "oneOf": [
+        { "const": "[Content_Types].xml" },
+        { "$ref": "urn:pptx-compiler:schema:shared:0.1.0#/$defs/packagePartPath" }
+      ]
+    },
+    "occupancyCheck": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["leftNodeId", "rightNodeId", "status"],
+      "properties": {
+        "leftNodeId": { "$ref": "urn:pptx-compiler:schema:shared:0.1.0#/$defs/semanticId" },
+        "rightNodeId": { "$ref": "urn:pptx-compiler:schema:shared:0.1.0#/$defs/semanticId" },
+        "status": { "const": "clear" }
+      }
+    },
+    "ommlFormulaTarget": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "targetShapeKey",
+        "sourceId",
+        "geometry",
+        "structureProfile",
+        "fontSizeHundredthPoints",
+        "typeface",
+        "capacity",
+        "observed",
+        "status"
+      ],
+      "properties": {
+        "targetShapeKey": { "$ref": "urn:pptx-compiler:schema:shared:0.1.0#/$defs/semanticId" },
+        "sourceId": { "$ref": "urn:pptx-compiler:schema:shared:0.1.0#/$defs/ooxmlId" },
+        "geometry": { "$ref": "#/$defs/box" },
+        "structureProfile": { "const": "powerpoint-office-2010-text-math" },
+        "fontSizeHundredthPoints": { "const": 4800 },
+        "typeface": { "const": "Cambria Math" },
+        "capacity": { "$ref": "#/$defs/ommlCapacity" },
+        "observed": { "$ref": "#/$defs/ommlObserved" },
+        "status": { "const": "pass" }
+      }
+    },
+    "ommlCapacity": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["maxElements", "maxRuns", "maxTextBytes"],
+      "properties": {
+        "maxElements": { "const": 64 },
+        "maxRuns": { "const": 16 },
+        "maxTextBytes": { "const": 256 }
+      }
+    },
+    "ommlObserved": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["elements", "runs", "textBytes"],
+      "properties": {
+        "elements": { "type": "integer", "minimum": 1, "maximum": 64 },
+        "runs": { "type": "integer", "minimum": 1, "maximum": 16 },
+        "textBytes": { "type": "integer", "minimum": 1, "maximum": 256 }
+      }
+    },
+    "packageDiff": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "addedParts",
+        "removedParts",
+        "modifiedParts",
+        "allowedChanges",
+        "collateralChanges"
+      ],
+      "properties": {
+        "addedParts": { "type": "array", "maxItems": 0, "items": { "$ref": "urn:pptx-compiler:schema:shared:0.1.0#/$defs/packagePartPath" } },
+        "removedParts": { "type": "array", "maxItems": 0, "items": { "$ref": "urn:pptx-compiler:schema:shared:0.1.0#/$defs/packagePartPath" } },
+        "modifiedParts": {
+          "type": "array",
+          "minItems": 1,
+          "maxItems": 1,
+          "items": { "$ref": "urn:pptx-compiler:schema:shared:0.1.0#/$defs/packagePartPath" }
+        },
+        "allowedChanges": {
+          "type": "array",
+          "minItems": 1,
+          "maxItems": 1,
+          "items": { "$ref": "#/$defs/allowedChange" }
+        },
+        "collateralChanges": { "type": "array", "maxItems": 0, "items": { "$ref": "urn:pptx-compiler:schema:shared:0.1.0#/$defs/packagePartPath" } }
+      }
+    },
+    "padding": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["top", "right", "bottom", "left"],
+      "properties": {
+        "top": { "type": "integer", "minimum": 0, "maximum": 100000000 },
+        "right": { "type": "integer", "minimum": 0, "maximum": 100000000 },
+        "bottom": { "type": "integer", "minimum": 0, "maximum": 100000000 },
+        "left": { "type": "integer", "minimum": 0, "maximum": 100000000 }
+      }
+    },
+    "placementIntent": {
+      "enum": ["legacy-absolute-fixed", "slot-aligned-fixed", "template-fixed"]
+    },
+    "placementRequest": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "nodeId",
+        "sourceKind",
+        "sourceRef",
+        "role",
+        "slotRef",
+        "size",
+        "paintOutsetEmu",
+        "zOrder",
+        "placementIntent"
+      ],
+      "properties": {
+        "nodeId": { "$ref": "urn:pptx-compiler:schema:shared:0.1.0#/$defs/semanticId" },
+        "sourceKind": { "$ref": "#/$defs/sourceKind" },
+        "sourceRef": { "$ref": "urn:pptx-compiler:schema:shared:0.1.0#/$defs/semanticId" },
+        "role": { "const": "content" },
+        "slotRef": { "$ref": "urn:pptx-compiler:schema:shared:0.1.0#/$defs/semanticId" },
+        "size": { "$ref": "#/$defs/size" },
+        "paintOutsetEmu": { "type": "integer", "minimum": 0, "maximum": 914400 },
+        "zOrder": { "type": "integer", "minimum": 0, "maximum": 255 },
+        "placementIntent": { "const": "slot-aligned-fixed" }
+      }
+    },
+    "resolvedNode": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "nodeId",
+        "sourceKind",
+        "sourceRef",
+        "parentNodeId",
+        "semanticSlotId",
+        "role",
+        "positionMode",
+        "placementIntent",
+        "box",
+        "paintBounds",
+        "zOrder",
+        "collisionPolicy"
+      ],
+      "properties": {
+        "nodeId": { "$ref": "urn:pptx-compiler:schema:shared:0.1.0#/$defs/semanticId" },
+        "sourceKind": { "$ref": "#/$defs/sourceKind" },
+        "sourceRef": { "$ref": "urn:pptx-compiler:schema:shared:0.1.0#/$defs/semanticId" },
+        "parentNodeId": { "$ref": "urn:pptx-compiler:schema:shared:0.1.0#/$defs/semanticId" },
+        "semanticSlotId": { "$ref": "urn:pptx-compiler:schema:shared:0.1.0#/$defs/semanticId" },
+        "role": { "$ref": "#/$defs/role" },
+        "positionMode": { "enum": ["absolute", "flow"] },
+        "placementIntent": { "$ref": "#/$defs/placementIntent" },
+        "box": { "$ref": "#/$defs/box" },
+        "paintBounds": { "$ref": "#/$defs/resolvedBox" },
+        "zOrder": { "type": "integer", "minimum": 0, "maximum": 255 },
+        "collisionPolicy": { "enum": ["allow", "forbid"] }
+      }
+    },
+    "resolvedBox": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["x", "y", "cx", "cy"],
+      "properties": {
+        "x": { "type": "integer", "minimum": -914400, "maximum": 100000000 },
+        "y": { "type": "integer", "minimum": -914400, "maximum": 100000000 },
+        "cx": { "type": "integer", "minimum": 1, "maximum": 101828800 },
+        "cy": { "type": "integer", "minimum": 1, "maximum": 101828800 }
+      }
+    },
+    "role": {
+      "enum": ["background", "content", "decoration"]
+    },
+    "size": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["cx", "cy"],
+      "properties": {
+        "cx": { "type": "integer", "minimum": 1, "maximum": 100000000 },
+        "cy": { "type": "integer", "minimum": 1, "maximum": 100000000 }
+      }
+    },
+    "sizing": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["horizontal", "vertical", "minCx", "maxCx", "minCy", "maxCy"],
+      "properties": {
+        "horizontal": { "const": "fixed" },
+        "vertical": { "const": "fixed" },
+        "minCx": { "type": "integer", "minimum": 1, "maximum": 100000000 },
+        "maxCx": { "type": "integer", "minimum": 1, "maximum": 100000000 },
+        "minCy": { "type": "integer", "minimum": 1, "maximum": 100000000 },
+        "maxCy": { "type": "integer", "minimum": 1, "maximum": 100000000 }
+      }
+    },
+    "slideLayoutIr": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "layoutIrVersion",
+        "layoutIrType",
+        "inputProfile",
+        "slideId",
+        "canvas",
+        "slots",
+        "placementRequests",
+        "nodes",
+        "constraints"
+      ],
+      "properties": {
+        "layoutIrVersion": { "const": "0.1.0" },
+        "layoutIrType": { "const": "slide-layout-ir" },
+        "inputProfile": { "const": "bounded-slot-placement" },
+        "slideId": { "$ref": "urn:pptx-compiler:schema:shared:0.1.0#/$defs/semanticId" },
+        "canvas": { "$ref": "#/$defs/canvas" },
+        "slots": {
+          "type": "array",
+          "minItems": 1,
+          "maxItems": 1,
+          "items": { "$ref": "#/$defs/slot" }
+        },
+        "placementRequests": {
+          "type": "array",
+          "minItems": 1,
+          "maxItems": 1,
+          "items": { "$ref": "#/$defs/placementRequest" }
+        },
+        "nodes": {
+          "type": "array",
+          "minItems": 2,
+          "maxItems": 256,
+          "items": { "$ref": "#/$defs/layoutNode" }
+        },
+        "constraints": {
+          "type": "array",
+          "minItems": 3,
+          "maxItems": 3,
+          "items": { "$ref": "#/$defs/constraint" }
+        }
+      }
+    },
+    "slot": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "slotId",
+        "parentNodeId",
+        "outerBox",
+        "padding",
+        "contentBox",
+        "alignX",
+        "alignY",
+        "allowedSourceKind",
+        "allowedSourceRef",
+        "overflowPolicy",
+        "capacity"
+      ],
+      "properties": {
+        "slotId": { "$ref": "urn:pptx-compiler:schema:shared:0.1.0#/$defs/semanticId" },
+        "parentNodeId": { "const": "slide-canvas" },
+        "outerBox": { "$ref": "#/$defs/box" },
+        "padding": { "$ref": "#/$defs/padding" },
+        "contentBox": { "$ref": "#/$defs/box" },
+        "alignX": { "$ref": "#/$defs/align" },
+        "alignY": { "$ref": "#/$defs/align" },
+        "allowedSourceKind": { "$ref": "#/$defs/sourceKind" },
+        "allowedSourceRef": { "$ref": "urn:pptx-compiler:schema:shared:0.1.0#/$defs/semanticId" },
+        "overflowPolicy": { "const": "reject" },
+        "capacity": { "$ref": "#/$defs/slotCapacity" }
+      }
+    },
+    "slotCapacity": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["minChildren", "maxChildren"],
+      "properties": {
+        "minChildren": { "const": 1 },
+        "maxChildren": { "const": 1 }
+      }
+    },
+    "slotCheck": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["nodeId", "slotId", "status"],
+      "properties": {
+        "nodeId": { "$ref": "urn:pptx-compiler:schema:shared:0.1.0#/$defs/semanticId" },
+        "slotId": { "$ref": "urn:pptx-compiler:schema:shared:0.1.0#/$defs/semanticId" },
+        "status": { "const": "pass" }
+      }
+    },
+    "sourceKind": {
+      "enum": ["template-shape", "native-component"]
+    },
+    "templateLayoutNode": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["nodeId", "sourceKind", "sourceRef", "parentNodeId", "semanticSlotId", "role", "positionMode", "placementIntent", "sizing", "requestedBox", "paintOutset", "zOrder", "collisionPolicy"],
+      "properties": {
+        "nodeId": { "$ref": "urn:pptx-compiler:schema:shared:0.1.0#/$defs/semanticId" },
+        "sourceKind": { "const": "template-shape" },
+        "sourceRef": { "$ref": "urn:pptx-compiler:schema:shared:0.1.0#/$defs/semanticId" },
+        "parentNodeId": { "$ref": "urn:pptx-compiler:schema:shared:0.1.0#/$defs/semanticId" },
+        "semanticSlotId": { "$ref": "urn:pptx-compiler:schema:shared:0.1.0#/$defs/semanticId" },
+        "role": { "$ref": "#/$defs/role" },
+        "positionMode": { "enum": ["absolute", "flow"] },
+        "placementIntent": { "$ref": "#/$defs/placementIntent" },
+        "sizing": { "$ref": "#/$defs/sizing" },
+        "requestedBox": { "$ref": "#/$defs/box" },
+        "paintOutset": { "$ref": "#/$defs/padding" },
+        "zOrder": { "type": "integer", "minimum": 0, "maximum": 255 },
+        "collisionPolicy": { "enum": ["allow", "forbid"] }
+      }
+    },
+    "templateResolvedNode": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["nodeId", "sourceKind", "sourceRef", "parentNodeId", "semanticSlotId", "role", "positionMode", "placementIntent", "box", "paintBounds", "zOrder", "collisionPolicy"],
+      "properties": {
+        "nodeId": { "$ref": "urn:pptx-compiler:schema:shared:0.1.0#/$defs/semanticId" },
+        "sourceKind": { "const": "template-shape" },
+        "sourceRef": { "$ref": "urn:pptx-compiler:schema:shared:0.1.0#/$defs/semanticId" },
+        "parentNodeId": { "$ref": "urn:pptx-compiler:schema:shared:0.1.0#/$defs/semanticId" },
+        "semanticSlotId": { "$ref": "urn:pptx-compiler:schema:shared:0.1.0#/$defs/semanticId" },
+        "role": { "$ref": "#/$defs/role" },
+        "positionMode": { "enum": ["absolute", "flow"] },
+        "placementIntent": { "$ref": "#/$defs/placementIntent" },
+        "box": { "$ref": "#/$defs/box" },
+        "paintBounds": { "$ref": "#/$defs/resolvedBox" },
+        "zOrder": { "type": "integer", "minimum": 0, "maximum": 255 },
+        "collisionPolicy": { "enum": ["allow", "forbid"] }
+      }
+    }
+  }
+}

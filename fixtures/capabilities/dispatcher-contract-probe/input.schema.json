@@ -1,6 +1,6 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "urn:pptx-pipeline:conformance:schema:dispatcher-contract-probe-input:0.1.0",
+  "$id": "urn:pptx-compiler:conformance:schema:dispatcher-contract-probe-input:0.1.0",
   "title": "Dispatcher contract probe input",
   "type": "object",
   "additionalProperties": false,

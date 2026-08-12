@@ -1,36 +1,33 @@
-# PPTX Pipeline
+# PPTX Compiler
 
-Working name for a deterministic, contract-driven, template-first PPTX
-compiler and quality-assurance toolkit.
+A template-first, contract-driven compiler for editable PPTX with
+rendered-outcome verification.
 
 ## Status
 
-This repository is a foundation pre-alpha licensed under the MIT License. It
-contains executable clean-room admission, support-matrix, and versioned-contract
-gates, a pure explicit-root `ProjectContext`, and a repository-owned
-text-to-PPTX/POTX synthetic fixture generator. A pure semantic inspector now
-normalizes the reviewed fixture lane's explicit parsed package view into a
-deterministic redacted `TemplateIndex`. A separate bounded secure-ingestion
-lane opens the configured source through a stable file handle and validates a
-narrow ZIP/XML/OPC profile before producing that view. Generated archives are
-ignored test data, and contract examples are schema-only fixtures. A
-runtime-only dispatcher now proves exact artifact registration, full-batch
-preflight, one-shot execution, output validation, and QA through a data-only
-conformance probe. A pure in-memory resolver and a statically registered
-clone/fill product executor now produce deterministic semantic JSON operation
-plans from exact text-box bindings. One opt-in experimental native-card-arrow
-executor now produces a strict, canonical, non-raster `p:grpSp` conformance
-fragment from data only. That fragment is explicitly unbound and non-insertable:
-no PPTX/POTX package is mutated, final object IDs are not allocated, and
-PowerPoint editability has not been proved. An isolated optional adapter can
-also version/capability-probe an explicitly configured external Pandoc process,
-send one bounded display formula as a JSON AST on stdin, and rebuild its DOCX
-stdout as a strict canonical `m:oMath` conformance fragment. Public evidence
-uses a fake runner; the formula result is likewise unbound and non-insertable.
-The global support switch remains false and no row is supported. There is still
-no published CLI,
-arbitrary-template compatibility promise, or renderer. It is not yet a
-releasable software package. Do not publish until the release gates in
+This repository implements one narrow candidate-alpha spine under the MIT
+License. The CLI can create the repository-owned public-synthetic project,
+inspect its bounded POTX profile, validate the complete project graph, render
+one explicitly opted-in native-card candidate, and emit an honest
+`decision: "blocked"` QA report while required visual and compatibility
+evidence is unavailable. It never creates a `BuildArtifact` for that result.
+
+The publishable boundary is now designed as four guarded packages: CLI, core,
+native-card-arrow, and public-synthetic. A machine-validated positive staging
+plan owns their exact files, exports, types, bin, dependencies, assets, license,
+runtime range, and currently unscoped alpha names. The final repository URL is
+now bound to the verified empty public GitHub repository through package-plan
+schema v2; npm publication remains separately blocked. M3-003 materializes
+npm-private leaf manifests, creates and independently checks all four guarded
+tarballs, installs them together offline in one empty directory, and runs the
+complete installed-bin spine. The repository-bound snapshot passes 1217/1217
+tests under both admitted Node lines, the 24-node package-stage suite, and real
+npm 10/11 four-tarball builds with offline installed-bin smoke. This is local
+pre-first-ref evidence, not publication or final release evidence.
+
+This is not arbitrary-template compatibility, a general renderer, passed
+delivery QA, or a published package. `supportClaimsEnabled` remains false and
+no support row is `supported`. Do not publish until the release gates in
 [TODO.md](TODO.md) pass.
 
 ## Intended function
@@ -72,13 +69,37 @@ and OOXML feature matrix will be explicit and fail closed.
     read [docs/M2-003_HANDOFF.md](docs/M2-003_HANDOFF.md).
 11. For the optional Pandoc/OMML process, attribution, and non-insertable
     formula boundary, read [docs/M2-004_HANDOFF.md](docs/M2-004_HANDOFF.md).
-12. Load broader project/architecture documents only when the handoff routes to
-   them.
+12. For the candidate-alpha CLI and blocked-QA boundary, read
+    [docs/M3-001_HANDOFF.md](docs/M3-001_HANDOFF.md).
+13. For the guarded four-package staging boundary, read
+    [docs/M3-002_HANDOFF.md](docs/M3-002_HANDOFF.md).
+14. For fixed-stage tarball inspection and clean-install evidence, read
+    [docs/M3-003_HANDOFF.md](docs/M3-003_HANDOFF.md).
+15. For the local public CI/security and development-toolchain contract, read
+    [docs/M3-004_HANDOFF.md](docs/M3-004_HANDOFF.md).
+16. For the completed minimum public-document boundary, read
+    [docs/M3-005_HANDOFF.md](docs/M3-005_HANDOFF.md).
+17. To reproduce the local public-safe boundary, follow
+    [docs/REPRODUCIBILITY.md](docs/REPRODUCIBILITY.md).
+18. Report suspected vulnerabilities through [SECURITY.md](SECURITY.md), and
+    never through a public issue, discussion, or pull request.
+19. Before proposing a change, read [CONTRIBUTING.md](CONTRIBUTING.md) and
+    [GOVERNANCE.md](GOVERNANCE.md).
+20. Load broader project/architecture documents only when the handoff routes to
+    them.
 
-The private root package has no dependencies; `npm test`,
-`npm run inspect:synthetic`, and `npm run check:public-tree` verify the current
-foundation. The next dependency is isolated create-only OOXML application,
-normalization, semantic diff, collateral checks, and publication in `M2-005`.
+Select an admitted Node 22 or 24 runtime first and follow the exact sequence in
+[docs/REPRODUCIBILITY.md](docs/REPRODUCIBILITY.md). The guarded package build
+regenerates one ignored `.package-stage/`, checks four npm-private tarballs,
+installs them together offline, and runs the installed candidate-alpha spine.
+GitHub now owns an empty public `why7682/pptx-compiler` shell and reports private
+vulnerability reporting as enabled; no source ref exists. The canonical
+repository ID/owner/name/URL are bound in package-plan schema v2 and projected
+into each leaf manifest plus the root SBOM component, while `private: true`
+continues to enforce the separate npm-publication guard. The repository-bound
+dual-runtime package/preflight evidence now passes; M3-006 must finish the local
+commit, final history scan, and exact-object-ID first push before M3-004B can
+collect hosted results.
 
 ## License
 

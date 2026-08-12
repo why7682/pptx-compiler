@@ -1,7 +1,7 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "urn:pptx-pipeline:schema:build-artifact:0.1.0",
-  "title": "PPTX Pipeline BuildArtifact",
+  "$id": "urn:pptx-compiler:schema:build-artifact:0.1.0",
+  "title": "PPTX Compiler BuildArtifact",
   "type": "object",
   "additionalProperties": false,
   "required": [
@@ -22,17 +22,17 @@
     "output"
   ],
   "properties": {
-    "schemaVersion": { "$ref": "urn:pptx-pipeline:schema:shared:0.1.0#/$defs/schemaVersion" },
+    "schemaVersion": { "$ref": "urn:pptx-compiler:schema:shared:0.1.0#/$defs/schemaVersion" },
     "contractType": { "const": "build-artifact" },
-    "buildId": { "$ref": "urn:pptx-pipeline:schema:shared:0.1.0#/$defs/semanticId" },
-    "projectId": { "$ref": "urn:pptx-pipeline:schema:shared:0.1.0#/$defs/semanticId" },
-    "deckId": { "$ref": "urn:pptx-pipeline:schema:shared:0.1.0#/$defs/semanticId" },
-    "templateProfileId": { "$ref": "urn:pptx-pipeline:schema:shared:0.1.0#/$defs/semanticId" },
-    "templateIndexId": { "$ref": "urn:pptx-pipeline:schema:shared:0.1.0#/$defs/semanticId" },
-    "capabilityRegistryId": { "$ref": "urn:pptx-pipeline:schema:shared:0.1.0#/$defs/semanticId" },
-    "registryVersion": { "$ref": "urn:pptx-pipeline:schema:shared:0.1.0#/$defs/semanticVersion" },
-    "projectOverlayId": { "$ref": "urn:pptx-pipeline:schema:shared:0.1.0#/$defs/semanticId" },
-    "templateSha256": { "$ref": "urn:pptx-pipeline:schema:shared:0.1.0#/$defs/sha256" },
+    "buildId": { "$ref": "urn:pptx-compiler:schema:shared:0.1.0#/$defs/semanticId" },
+    "projectId": { "$ref": "urn:pptx-compiler:schema:shared:0.1.0#/$defs/semanticId" },
+    "deckId": { "$ref": "urn:pptx-compiler:schema:shared:0.1.0#/$defs/semanticId" },
+    "templateProfileId": { "$ref": "urn:pptx-compiler:schema:shared:0.1.0#/$defs/semanticId" },
+    "templateIndexId": { "$ref": "urn:pptx-compiler:schema:shared:0.1.0#/$defs/semanticId" },
+    "capabilityRegistryId": { "$ref": "urn:pptx-compiler:schema:shared:0.1.0#/$defs/semanticId" },
+    "registryVersion": { "$ref": "urn:pptx-compiler:schema:shared:0.1.0#/$defs/semanticVersion" },
+    "projectOverlayId": { "$ref": "urn:pptx-compiler:schema:shared:0.1.0#/$defs/semanticId" },
+    "templateSha256": { "$ref": "urn:pptx-compiler:schema:shared:0.1.0#/$defs/sha256" },
     "slides": {
       "type": "array",
       "minItems": 1,
@@ -46,14 +46,14 @@
       "uniqueItems": true,
       "items": { "$ref": "#/$defs/changedPartPath" }
     },
-    "qaReportId": { "$ref": "urn:pptx-pipeline:schema:shared:0.1.0#/$defs/semanticId" },
+    "qaReportId": { "$ref": "urn:pptx-compiler:schema:shared:0.1.0#/$defs/semanticId" },
     "output": { "$ref": "#/$defs/publishedOutput" }
   },
   "$defs": {
     "changedPartPath": {
       "oneOf": [
         { "const": "[Content_Types].xml" },
-        { "$ref": "urn:pptx-pipeline:schema:shared:0.1.0#/$defs/packagePartPath" }
+        { "$ref": "urn:pptx-compiler:schema:shared:0.1.0#/$defs/packagePartPath" }
       ]
     },
     "slideResult": {
@@ -61,9 +61,9 @@
       "additionalProperties": false,
       "required": ["slideId", "capabilityId", "capabilityVersion"],
       "properties": {
-        "slideId": { "$ref": "urn:pptx-pipeline:schema:shared:0.1.0#/$defs/semanticId" },
-        "capabilityId": { "$ref": "urn:pptx-pipeline:schema:shared:0.1.0#/$defs/semanticId" },
-        "capabilityVersion": { "$ref": "urn:pptx-pipeline:schema:shared:0.1.0#/$defs/semanticVersion" }
+        "slideId": { "$ref": "urn:pptx-compiler:schema:shared:0.1.0#/$defs/semanticId" },
+        "capabilityId": { "$ref": "urn:pptx-compiler:schema:shared:0.1.0#/$defs/semanticId" },
+        "capabilityVersion": { "$ref": "urn:pptx-compiler:schema:shared:0.1.0#/$defs/semanticVersion" }
       }
     },
     "publishedOutput": {
@@ -78,8 +78,8 @@
           "maxLength": 512,
           "pattern": "^(?!.*(?:^|/)\\.{1,2}(?:/|$))[A-Za-z0-9._-]+(?:/[A-Za-z0-9._-]+)*\\.pptx$"
         },
-        "sha256": { "$ref": "urn:pptx-pipeline:schema:shared:0.1.0#/$defs/sha256" },
-        "byteLength": { "$ref": "urn:pptx-pipeline:schema:shared:0.1.0#/$defs/byteLength" }
+        "sha256": { "$ref": "urn:pptx-compiler:schema:shared:0.1.0#/$defs/sha256" },
+        "byteLength": { "$ref": "urn:pptx-compiler:schema:shared:0.1.0#/$defs/byteLength" }
       }
     }
   }
