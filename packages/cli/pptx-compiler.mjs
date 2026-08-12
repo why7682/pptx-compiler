@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 
-import { executeCli } from "../src/index.mjs";
+import { executeCli } from "./src/index.mjs";
 
 const result = await executeCli({ argv: process.argv.slice(2) });
 

@@ -821,15 +821,20 @@ criterion is recorded in the repository.
 - The failures exposed four portability boundaries: a POSIX-only test path,
   CRLF handling in the Git capability parser, noncanonical npm `bin` target
   spelling, and returning from forced process termination before child `close`.
-- The exact current local candidate passes the 231/231 focused set and the
-  1217/1217 complete suite under each admitted runtime. Node 22/npm 10.9.8 and
-  Node 24/npm 11.17.0 each pass the explicit guarded four-tarball build,
-  offline joint install, and installed-bin smoke; the CLI tar entry remains
-  mode 0755, QA remains blocked, and no BuildArtifact is created. This closes
-  local frozen candidate/source/package evidence only. Hosted Windows,
-  ordinary-PR Dependency Review, and accepted-main CI/CodeQL results remain
-  required. Bounded code and final state/provenance reviews each report
-  0 blocker, 0 high, and 0 medium.
+- Pull-request run `31582316951` again passed Ubuntu/macOS 22/24 but exposed two
+  remaining Windows facts: Git for Windows requires Git's `/dev/null` spelling,
+  and npm does not promote a nested bin target to tar mode 0755 on Windows.
+  The second correction uses one package-root bin and a policy-v2 exact
+  historical path/blob grant without admitting that retired path in the current
+  tree; bounded code review reports 0 blocker, 0 high, and 0 medium.
+- In the fixed non-FileProvider copy, Node 22.23.2 and Node 24.19.0 each pass
+  the 216-node affected focus, 24-node package-stage suite, and 1228-node
+  complete suite. npm 10.9.8 and npm 11.17.0 each build and admit four private
+  tarballs, install them together offline, smoke the installed CLI spine, and
+  retain the package-root CLI at tar mode 0755.
+- Corrected hosted Windows evidence remains pending. Pull-request Dependency Review run `31582316939`
+  failed because the private repository lacks the required GitHub Advanced
+  Security capability; this external gate is unresolved, not a code pass.
 
 ### D-044 pre-public identity migration — 2026-08-11
 

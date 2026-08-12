@@ -623,7 +623,11 @@ same change.
   commit metadata, forbidden historical modes/content, resource overflow,
   identity drift, and a moving tip fail closed. The D-043 preflight's 13 commits, 286
   leaf-entry versions, 3,677,606 regular-blob bytes, and 26 identity occurrences
-  passed the preflight with zero finding; eight regressions bring the policy focus to 49/49.
+  passed the preflight with zero finding. After the public CLI entry moved to
+  the package root, policy schema v2 retained one tip-owned authority: current
+  modes recognize only the new path, while non-tip history may recognize the
+  retired executable only by exact old path plus blob OID and still applies all
+  content/type/history checks.
   This does not
   authorize a history rewrite or source ref. D-044/D-045 later confirmed the
   exact owner/repository and existing public identity. M3-006 later scanned the

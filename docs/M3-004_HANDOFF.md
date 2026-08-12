@@ -154,20 +154,30 @@ for the six public runner cells.
 - Passed: Ubuntu 22/24, macOS 22/24, and CodeQL.
 - Missing or failed: Windows 22/24 and ordinary-PR Dependency Review.
 
-The Windows failures exposed four real portability defects: platform-invalid
-test output naming, CRLF-sensitive Git capability parsing, npm `bin` spelling
-that did not receive executable mode on Windows, and a killed Pandoc child whose
-runner resolved before `close`. The exact current local candidate passes
-231/231 focused tests and 1217/1217 complete tests under both admitted
-runtimes. Node 22/npm 10.9.8 and Node 24/npm 11.17.0 each pass the explicit
-guarded four-tarball build, offline joint install, and installed-bin smoke; the
-CLI tar entry remains mode 0755, QA remains blocked, and no BuildArtifact is
-created. This closes local frozen candidate/source/package evidence only. It
-does not prove corrected Windows behavior.
+The first correction covered a platform-invalid test path, strict LF/CRLF Git
+text parsing, canonical bin spelling, and waiting for a killed child to close.
+Pull-request run `31582316951` again passed Ubuntu/macOS 22/24 but showed that
+Git for Windows needs Git's `/dev/null` pathname rather than Node's Win32 null-
+device spelling, and that npm leaves a nested bin target at tar mode 0644. The
+second correction uses one Git-native null path and moves the package entry to
+the package root, where both admitted npm lines produce mode 0755. Policy v2
+keeps only that new path in current executable admission and binds the retired
+public-history object by exact old path plus blob OID. This local correction
+passes the 216-node affected focus, 24-node package-stage suite, and 1228-node
+complete suite under both Node 22.23.2 and Node 24.19.0. npm 10.9.8 and npm
+11.17.0 each rebuild, admit, install offline, and smoke all four packages, with
+the package-root CLI member at mode 0755. Corrected hosted evidence remains
+required.
+
+Pull-request security run `31582316939` failed Dependency Review because this
+private repository does not have the required GitHub Advanced Security
+capability. That is an unresolved external gate, not a product-code failure or
+pass.
 
 ## Next dependency
 
-Open an ordinary pull request for the six-cell and Dependency Review jobs.
-After the accepted change reaches `main`, retain the final-main CI and CodeQL
-results for those exact bytes. M3-005B remains blocked until that hosted
-evidence is complete.
+Finish PR #1's corrected six-cell CI. Do not merge or promote M3-004B until the
+Windows cells are green and the private-repository Dependency Review capability
+has an explicit resolution. After an accepted change reaches `main`, retain the
+final-main CI and CodeQL results for those exact bytes. M3-005B remains blocked
+until that hosted evidence is complete.

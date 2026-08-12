@@ -96,8 +96,8 @@ const PACKAGE_PROFILES = Object.freeze({
         "pptx-compiler-public-synthetic/package-assets"
     }),
     types: "./types/index.d.ts",
-    bin: Object.freeze({ "pptx-compiler": "bin/pptx-compiler.mjs" }),
-    requiredTargets: Object.freeze(["bin/pptx-compiler.mjs"])
+    bin: Object.freeze({ "pptx-compiler": "pptx-compiler.mjs" }),
+    requiredTargets: Object.freeze(["pptx-compiler.mjs"])
   }),
   core: Object.freeze({
     name: "pptx-compiler-core",

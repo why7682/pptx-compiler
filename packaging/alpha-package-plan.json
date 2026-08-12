@@ -68,7 +68,7 @@
       },
       "types": "./types/index.d.ts",
       "bin": {
-        "pptx-compiler": "bin/pptx-compiler.mjs"
+        "pptx-compiler": "pptx-compiler.mjs"
       },
       "files": [
         {
@@ -113,7 +113,7 @@
           "targetRoot": ".",
           "role": "bin",
           "paths": [
-            "bin/pptx-compiler.mjs"
+            "pptx-compiler.mjs"
           ]
         }
       ]

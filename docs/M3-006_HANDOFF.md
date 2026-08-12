@@ -36,6 +36,14 @@ directories, shallow history, replace refs, grafts, alternates, unsupported
 commit or tree grammar, symlinks, submodules, oversized blobs, identity drift,
 or a moving `main` ref fail closed.
 
+After the first public ref, policy schema v2 separates current executable paths
+from one retired executable object without creating a second manifest. Index,
+working-tree, package, and tip-history admission recognize only the current
+path. Older reachable commits may recognize the retired entry only when both
+its repository path and Git blob OID match the exact pair in the same tip-owned
+policy. That narrow executable-bit grant does not bypass path, content, magic,
+size, symlink, submodule, identity, or history-grammar checks.
+
 The gate intentionally ignores dangling objects, reflogs, and unrelated local
 refs because the launch uses one exact object-ID-to-`refs/heads/main` refspec.
 They are not reachable from, and are not transferred by, that push.
@@ -82,13 +90,13 @@ the installed `init -> inspect -> validate project -> render -> qa` spine from
 an unrelated working directory, return blocked QA, and create no BuildArtifact.
 The first-ref retained reviewed set recorded Node 24/npm 11 evidence and exact
 boundary fingerprints in the ignored fixed stage; those hashes are not copied
-into planning documents. The later Windows portability correction changed
-packed inputs, so it did not reuse that evidence. Its exact current local
-candidate has since passed 1217/1217 complete tests under both admitted
-runtimes, and the Node 22/npm 10.9.8 and Node 24/npm 11.17.0 pairs each passed
-the explicit guarded four-tarball build, offline joint install, and installed-
-bin smoke. This later local evidence does not change the published first-ref
-object or complete M3-004B.
+into planning documents. The later Windows portability corrections changed
+packed inputs, so they do not reuse that evidence. The current fixed-copy
+correction passes 216/216 affected tests, 24/24 package-stage tests, and
+1228/1228 complete tests under both admitted Node lines; npm 10.9.8 and npm
+11.17.0 each rebuild, install offline, and smoke the four-package graph with
+the package-root CLI member at mode 0755. Hosted evidence remains pending; this does not change
+the published first-ref object or complete M3-004B.
 
 ## Completed fail-closed launch state machine
 

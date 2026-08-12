@@ -114,11 +114,11 @@ D-045 public target and PVR state, retained the npm-private guard and verified
 repository projection, completed the repository-bound package gate, and later
 published the exact first source ref. The first public run is only partial
 three-platform evidence: Ubuntu and macOS pass under both Node lines, while
-both Windows cells fail. The exact current local candidate now passes
-1217/1217 complete tests under both admitted runtimes, and both the Node 22/
-npm 10.9.8 and Node 24/npm 11.17.0 pairs pass the explicit guarded four-
-tarball build, offline joint install, and installed-bin smoke. That closes the
-fresh local G4 package evidence only. Final published-ref SBOM validation,
+both Windows cells fail. Later Windows corrections changed package inputs and
+history policy. The fixed-copy correction now passes the 216-node affected
+focus, 24-node package-stage suite, and 1228-node complete suite under both
+admitted Node lines; npm 10/11 each pass the guarded offline package spine. A
+corrected hosted run remains pending. Final published-ref SBOM validation,
 signing, registry
 provenance, and reviewed-to-published equality remain G5/G6 work. Source-tree
 facade tests or successful `npm pack --dry-run` alone never satisfy this gate.
@@ -140,7 +140,11 @@ toolchain, real declaration typecheck, source/import policy, MIT/provenance
 relations, and the static-ESM SBOM projection. M3-004B remains unsatisfied. Run
 `31559642053` passed Ubuntu 22/24 and macOS 22/24 but failed Windows 22/24;
 security run `31559642035` passed CodeQL while Dependency Review was skipped on
-the push event and still requires an ordinary pull request.
+the push event. Pull-request run `31582316951` again passed Ubuntu/macOS but
+failed Windows on two remaining portability boundaries. Pull-request security
+run `31582316939` then confirmed that Dependency Review is unavailable while
+this repository remains private without the required GitHub Advanced Security
+capability. M3-004B remains open; this external failure is not a code pass.
 M3-005A closes the local vulnerability-reporting, contribution, governance,
 and reproduction document contract. D-045 now records the empty public shell,
 HTTP 204 activation, and subsequent exact `enabled: true` status. M3-006 then
@@ -214,7 +218,16 @@ dependencies:
   history that an exact first-ref push would expose; it is a pre-push gate, not
   a hosted-PR workflow step;
 - `npm test` proves deterministic reports and fail-closed behavior with
-  repository-owned temporary text fixtures and 31 rejection mutations.
+  repository-owned temporary text fixtures and closed history/executable
+  mutations.
+
+Policy schema v2 keeps current executable paths separate from exact retired
+history objects. Index, working-tree, package, and tip-history checks recognize
+only current paths. A non-tip historical executable is admitted only when both
+its path and Git blob OID match the one pair in the same tip-owned policy; all
+path, content, magic, size, type, identity, and history-grammar checks still
+apply. This is a bounded historical identity exception, not a second policy or
+a current-path compatibility alias.
 
 Both CLIs emit deterministic human output by default and accept `--json` for a
 versioned machine report. A configuration error is itself a gate failure.

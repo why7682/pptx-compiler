@@ -2803,20 +2803,26 @@ paths:
   - docs/PROVENANCE_LEDGER.md
   - docs/RELEASE_GATES.md
   - packages/adapter-pandoc-omml/src/node-process-runner.mjs
+  - packages/cli/bin/pptx-compiler.mjs
+  - packages/cli/pptx-compiler.mjs
   - packaging/alpha-package-plan.json
+  - policy/forbidden-materials.json
   - provenance/records.json
   - scripts/check-forbidden-materials.mjs
   - scripts/lib/package-plan.mjs
+  - scripts/lib/package-stage.mjs
   - tests/create-only-assembly.test.mjs
   - tests/package-plan.test.mjs
+  - tests/package-stage.test.mjs
   - tests/policy-gates.test.mjs
 kind: exact-first-ref execution evidence and first-hosted Windows portability
   correction
 origin: independently derived from the completed D-043/D-045 first-ref
-  authority, GitHub run 31559642053, security run 31559642035, and the exact
-  repository-owned sources and tests. No hosted log, raw API response, external
-  implementation, package, asset, presentation, generated binary, or private
-  fixture entered Git
+  authority, first-ref GitHub run 31559642053, first-ref security run
+  31559642035, pull-request GitHub run 31582316951, pull-request security run
+  31582316939, and the exact repository-owned sources and tests. No hosted log,
+  raw API response, external implementation, package, asset, presentation,
+  generated binary, or private fixture entered Git
 original_author_or_holder: Elliot Wu
 created_or_reviewed_on: 2026-08-12
 license_or_rights_basis: MIT
@@ -2826,28 +2832,32 @@ private_information_review: passed; only the approved public repository/OID,
   synthetic regressions are recorded. No token, credential, private path,
   private/local hostname, raw log, source presentation, private fixture, or
   ignored package output is recorded
-project_constant_removal: passed; platform absolute-path construction, CRLF
-  normalization at one Git text-protocol boundary, canonical package-local bin
-  spelling, and child-close ownership replace four host-dependent special
-  cases. No Windows-only product branch or second package authority is added
-public_fixture_conformance: applicable; the exact current local candidate
-  passes 231/231 focused tests and 1217/1217 complete tests under both Node
-  22.23.2 and Node 24.19.0. The Node 22/npm 10.9.8 and Node 24/npm 11.17.0
-  pairs each pass the explicit guarded four-tarball build, offline joint
-  install, and installed-bin smoke; the CLI tar entry remains mode 0755, QA
-  remains blocked, and no BuildArtifact is created. This closes local frozen
-  candidate/source/package evidence only. Hosted Windows, ordinary-PR
-  Dependency Review, and accepted-final-main CI/CodeQL evidence remain required
-independent_review: the bounded current-byte review of the four executable
-  corrections and the final state/provenance review each report 0 blocker,
-  0 high, and 0 medium. The latter confirms this exact 21-path relation and
-  separates historical checkpoints from current state
+project_constant_removal: passed; platform absolute-path construction, strict
+  LF/CRLF parsing plus Git's own `/dev/null` pathname, one package-root bin,
+  child-close ownership, and one exact retired path/blob pair replace the
+  observed host-dependent special cases. No Windows-only product branch, post-
+  pack archive rewrite, current-path alias, or second package/policy authority
+  is added
+public_fixture_conformance: applicable; Node 22.23.2 and Node 24.19.0 each pass
+  the 216-node affected focus, 24-node package-stage suite, and 1228-node
+  complete suite in the fixed non-FileProvider copy. npm 10.9.8 and npm 11.17.0
+  each rebuild, admit, install offline, and smoke all four packages; the
+  package-root CLI member is mode 0755. Hosted Windows and accepted-final-main
+  CI/CodeQL evidence remain
+  required. Pull-request Dependency Review is externally blocked while this
+  private repository lacks the required GitHub Advanced Security capability
+independent_review: passed; two bounded current-byte reviews report 0 blocker,
+  0 high, and 0 medium after exact historical-object, current-tip replay,
+  content-rule, Git-null-device, package-root bin, tar-mode, and installed-path
+  boundaries were checked
 notes: M3-006 is complete at public main object
   410642b668514ab7193212d617cc0f8acb837924. The final launch scan covered 14
   commits, 505 leaf versions, 7,698,368 regular-blob bytes, and 28 identity
   occurrences with zero finding; repository ID/PVR/remote-main equality were
-  reverified. M3-004B remains partial: four hosted OS/runtime cells and CodeQL
-  passed, both Windows cells failed, and Dependency Review was skipped on push
+  reverified. M3-004B remains partial: the first PR run again passed the four
+  Ubuntu/macOS cells, but both Windows cells failed on Git null-device and
+  nested-bin mode handling. Dependency Review also failed because this private
+  repository does not have the required GitHub Advanced Security capability
 ```
 
 The XML namespace, relationship-type, and MIME strings are interoperability

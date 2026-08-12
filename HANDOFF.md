@@ -610,20 +610,24 @@ finding. Repository ID `1330979133`, PVR `enabled: true`, and exact remote-main
 equality were reverified after the push. This completes M3-006; it is source
 publication, not an npm package or release.
 
-The first hosted run is partial M3-004B evidence. Ubuntu and macOS passed under
-Node 22 and 24; Windows failed under both lines. CodeQL passed, while Dependency
-Review was skipped because it runs only for ordinary pull requests. Four
-portability corrections are present in the current branch and the Node 22/24
-focused sets each pass 231/231. The exact current local candidate also passes
-1217/1217 complete tests under each runtime. Node 22/npm 10.9.8 and Node 24/
-npm 11.17.0 each pass the explicit guarded four-tarball build, offline joint
-install, and installed-bin smoke; the CLI entry remains mode 0755, QA remains
-blocked, and no BuildArtifact is created. This closes local frozen candidate,
-source, and package evidence only. Hosted Windows, ordinary-PR Dependency
-Review, and accepted-main CI/CodeQL evidence are still required. Final state/
-provenance review reports 0 blocker, 0 high, and 0 medium. The four
-npm-name checks remain time-bounded and reserve nothing, and npm publication is
-separately blocked.
+M3-004B remains partial. The first hosted run passed Ubuntu and macOS under
+Node 22/24 and passed CodeQL, but failed both Windows cells. Pull-request run
+`31582316951` again passed the four Ubuntu/macOS cells while exposing two
+remaining Windows boundaries: Git for Windows needs Git's `/dev/null` pathname
+instead of Node's Win32 null-device spelling, and npm did not raise the tar mode
+for a nested bin target. The current correction uses one Git-native null path,
+one package-root CLI entry, and a tip-owned schema-v2 policy that binds the
+retired executable only by exact historical path plus blob OID; current/index/
+working-tree admission remains limited to the new path. Independent code review
+reports 0 blocker, 0 high, and 0 medium. In the fixed non-FileProvider copy,
+Node 22.23.2 and Node 24.19.0 each pass the 216-node affected focus, the
+24-node package-stage suite, and the 1228-node complete suite. npm 10.9.8 and
+npm 11.17.0 each build, admit, install offline, and smoke all four packages;
+the package-root CLI member is mode 0755. A corrected hosted run remains
+pending. Pull-request Dependency
+Review is externally blocked because this private repository lacks the required
+GitHub Advanced Security capability. The four npm-name checks remain time-
+bounded and reserve nothing, and npm publication is separately blocked.
 
 ## Persistent presentation-skill boundary
 
@@ -932,11 +936,10 @@ remain the machine command authority.
 
 ## Next work session
 
-1. Read `docs/M3-004_HANDOFF.md`. Use an ordinary pull request to collect six-
-   cell CI plus Dependency Review
-   evidence. After the accepted main update, retain final main-run CI and CodeQL
-   evidence. Do not promote M3-004B while either Windows cell or Dependency
-   Review is absent.
+1. Read `docs/M3-004_HANDOFF.md`. Finish PR #1's corrected six-cell CI. Do not
+   merge or promote M3-004B while Windows evidence is red or while private-repo
+   Dependency Review remains an unresolved external capability decision. After
+   an accepted main update, retain final main-run CI and CodeQL evidence.
 2. Keep final release/platform wording in M3-005B until M3-004B closes.
 3. Keep predecessor code, presentation assets, converter output, and generated
    archives out of Git; use only repository-owned text/synthetic fixtures for

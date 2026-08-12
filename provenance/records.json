@@ -252,7 +252,7 @@
       },
       "publicConformance": {
         "status": "applicable",
-        "notes": "The exact current local candidate passes 231/231 focused tests and 1217/1217 complete tests under Node 22.23.2 and Node 24.19.0. The Node 22/npm 10.9.8 and Node 24/npm 11.17.0 pairs each pass the explicit guarded four-tarball build, offline joint install, and installed-bin smoke. This closes local frozen candidate/source/package evidence only; hosted Windows, ordinary-PR Dependency Review, and accepted-main CI/CodeQL remain open."
+        "notes": "M3-006 is complete. For the latest Windows correction, two bounded reviews report 0 blocker/high/medium; dual-runtime local tests and guarded-package evidence pass, while corrected hosted Windows, private-repository Dependency Review, and accepted-main evidence remain open."
       },
       "independentReview": {
         "status": "passed",
@@ -308,7 +308,7 @@
       },
       "publicConformance": {
         "status": "not-applicable",
-        "notes": "Public overview only. The exact first-ref package evidence remains historical and was not reused after the package-plan change. The unchanged README bytes are mapped inputs in the new exact local guarded-package builds; current local evidence is owned by the handoff and provenance ledger."
+        "notes": "Public overview only. The exact first-ref package evidence remains historical and was not reused after the package-plan change. The unchanged README bytes were mapped inputs in the first correction's guarded-package builds; final evidence for the latest package-root bin correction remains pending and is owned by the handoff and provenance ledger."
       },
       "independentReview": {
         "status": "passed",
@@ -364,7 +364,7 @@
       },
       "publicConformance": {
         "status": "applicable",
-        "notes": "The exact current local candidate passes 231/231 focused tests and 1217/1217 complete tests under both admitted runtimes. The Node 22/npm 10.9.8 and Node 24/npm 11.17.0 pairs each pass the explicit guarded four-tarball build, offline joint install, and installed-bin smoke. Hosted Windows, ordinary-PR Dependency Review, and accepted-main CI/CodeQL remain required."
+        "notes": "M3-004B remains partial after two hosted attempts. Current dual-runtime local/package evidence passes; corrected Windows evidence remains pending, private-repository Dependency Review is externally blocked, and accepted-main evidence remains required."
       },
       "independentReview": {
         "status": "passed",
@@ -980,13 +980,13 @@
       },
       "publicConformance": {
         "status": "applicable",
-        "notes": "The exact first-ref package evidence is historical. The exact current correction passes 231/231 focused tests and 1217/1217 complete tests under both runtimes; both admitted Node/npm pairs pass the explicit guarded four-tarball build, offline joint install, and installed-bin smoke. Hosted and accepted-main evidence remains required."
+        "notes": "The exact first-ref package evidence is historical. The latest CLI source/target correction has fresh 24/24 package-stage and npm 10/11 guarded-build evidence; hosted Windows, private-repository Dependency Review, and accepted-main evidence remain required."
       },
       "independentReview": {
         "status": "passed",
         "notes": "Bounded current-byte review of the executable Windows portability correction reports 0 blocker, 0 high, and 0 medium; hosted Windows and accepted-main evidence remain separate."
       },
-      "notes": "M3-006 source publication is complete. The current plan/bin correction did not reuse the first-ref reviewed tarballs and now has fresh guarded-build evidence; npm publication remains blocked."
+      "notes": "M3-006 source publication is complete. The current plan/bin correction did not reuse the first-ref reviewed tarballs and now has fresh dual-runtime guarded-build evidence; npm publication remains blocked."
     },
     {
       "path": "docs/M3-004_HANDOFF.md",
@@ -1014,7 +1014,7 @@
       },
       "publicConformance": {
         "status": "applicable",
-        "notes": "The exact current local candidate passes 231/231 focused tests and 1217/1217 complete tests under both runtimes. Both admitted Node/npm pairs pass the explicit guarded four-tarball build, offline joint install, and installed-bin smoke. Windows, ordinary-PR Dependency Review, and final-main evidence remain open."
+        "notes": "Two bounded reviews accept the latest Windows correction. Dual-runtime 216/24/1228 local evidence and npm 10/11 guarded builds pass; corrected Windows, private-repository Dependency Review, and final-main evidence remain open."
       },
       "independentReview": {
         "status": "passed",
@@ -1277,7 +1277,7 @@
     {
       "path": "docs/PROVENANCE_LEDGER.md",
       "kind": "new-clean-room",
-      "origin": "repository-owned clean-room provenance ledger updated with the completed M3-006 first ref and the exact 21-path first-hosted Windows portability follow-up",
+      "origin": "repository-owned clean-room provenance ledger updated with the completed M3-006 first ref and the exact 26-path first-hosted Windows portability follow-up",
       "copyrightHolderOrSourceAuthority": "Elliot Wu",
       "license": {
         "spdxExpression": "MIT"
@@ -1294,13 +1294,13 @@
       },
       "publicConformance": {
         "status": "not-applicable",
-        "notes": "The human ledger entry lists the exact 21-path relation, completed M3-006 facts, partial hosted results, and the completed current local focused/full/guarded-package evidence without promoting hosted or release claims."
+        "notes": "The human ledger entry lists the exact 26-path relation, completed M3-006 facts, two partial hosted runs, the exact historical executable-object boundary, and current 216/24/1228 dual-runtime plus npm 10/11 local evidence without promoting hosted or release claims."
       },
       "independentReview": {
         "status": "passed",
-        "notes": "Bounded final state/provenance review reports 0 blocker, 0 high, and 0 medium and confirms the exact 21-path relation."
+        "notes": "Two bounded current-byte reviews report 0 blocker, 0 high, and 0 medium after the 26-path relation and exact historical executable-object boundary were checked."
       },
-      "notes": "Human provenance through completed M3-006 and partial M3-004B; local frozen candidate/source/package evidence is complete while Windows, Dependency Review, and final-main evidence remain open."
+      "notes": "Human provenance through completed M3-006 and partial M3-004B; current local evidence passes while hosted Windows, private-repository Dependency Review, and final-main evidence remain open."
     },
     {
       "path": "docs/RELEASE_GATES.md",
@@ -3428,7 +3428,7 @@
       },
       "publicConformance": {
         "status": "applicable",
-        "notes": "The exact current local candidate passes 231/231 focused tests and 1217/1217 complete tests under both Node 22.23.2 and Node 24.19.0; hosted Windows remains required."
+        "notes": "First-ref evidence is retained as historical. The latest correction passes current dual-runtime local/package evidence; corrected hosted Windows evidence remains required."
       },
       "independentReview": {
         "status": "passed",
@@ -3465,14 +3465,14 @@
       "notes": "Repository-owned adapter source; no package manifest is added before M3-002 and no converter binary or output is tracked."
     },
     {
-      "path": "packages/cli/bin/pptx-compiler.mjs",
+      "path": "packages/cli/pptx-compiler.mjs",
       "kind": "new-clean-room",
-      "origin": "independently authored from D-039 as the minimal installed candidate-alpha process entry; D-044 applies the user-selected pre-public identity migration from the same repository-owned authority",
+      "origin": "independently authored from D-039 as the minimal installed candidate-alpha process entry, moved to the package root after the hosted Windows npm tar-mode failure exposed pacote's nested-bin mode mismatch",
       "copyrightHolderOrSourceAuthority": "Elliot Wu",
       "license": {
         "spdxExpression": "MIT"
       },
-      "reviewedOn": "2026-08-11",
+      "reviewedOn": "2026-08-12",
       "thirdPartyDependencies": [],
       "privateInformationReview": {
         "status": "passed",
@@ -3480,17 +3480,17 @@
       },
       "projectConstantCleanup": {
         "status": "passed",
-        "notes": "No repository root, private fixture, PowerPoint, lab, OMML, ordered, or final-delivery authority is present. D-044 changes only active public identity to the single pptx-compiler stem; neutral protocol facts remain owned here."
+        "notes": "No repository root, private fixture, PowerPoint, lab, OMML, ordered, or final-delivery authority is present. One package-root executable avoids a second wrapper or post-pack archive rewrite."
       },
       "publicConformance": {
         "status": "applicable",
-        "notes": "The package gate locks the exact bin path and executable mode; CLI spine tests cover its delegated behavior."
+        "notes": "The package gate locks the exact package-root bin path and 0755 tar mode; CLI spine tests cover its delegated behavior under both admitted Node/npm pairs."
       },
       "independentReview": {
         "status": "passed",
-        "notes": "Two bounded D-044 current-byte closing reviews reported 0 blocker, 0 high, and 0 medium; they confirmed the single active public identity, exact package and contract projections, provenance-set closure, and stable recovery identifiers."
+        "notes": "Two bounded current-byte reviews report 0 blocker, 0 high, and 0 medium for the package-root CLI entry and strict 0755 tar boundary."
       },
-      "notes": "Executable ESM bin for the guarded CLI package. D-044 is an identity-only pre-public migration; no external source or compatibility alias was added."
+      "notes": "Executable ESM bin for the guarded CLI package; the source and staged package now share one relative layout."
     },
     {
       "path": "packages/cli/src/cli.mjs",
@@ -4744,11 +4744,11 @@
       },
       "publicConformance": {
         "status": "applicable",
-        "notes": "The exact current local candidate passes 231/231 focused tests and 1217/1217 complete tests under both runtimes. Both admitted Node/npm pairs pass the explicit guarded four-tarball build, offline joint install, and installed-bin smoke; hosted Windows remains required."
+        "notes": "The latest package-root bin mapping has bounded 0/0/0 review and dual-runtime package evidence; corrected hosted Windows evidence remains required."
       },
       "independentReview": {
         "status": "passed",
-        "notes": "Bounded current-byte review reports 0 blocker, 0 high, and 0 medium and confirms `bin/pptx-compiler.mjs` is the single canonical package-local target without weakening tar mode."
+        "notes": "Two bounded current-byte reviews report 0 blocker, 0 high, and 0 medium for the package-root bin projection and unchanged repository/npm guard."
       },
       "notes": "Normative schema-v2 authority retains the exact repository tuple and blocked npm guard; only the CLI bin target spelling changes."
     },
@@ -5063,12 +5063,12 @@
     {
       "path": "policy/forbidden-materials.json",
       "kind": "new-clean-room",
-      "origin": "M0-004 clean-room policy extended through D-041's preinstall shrinkwrap and Git-index executable-authority controls; D-044 applies the user-selected pre-public identity migration from the same repository-owned authority",
+      "origin": "M0-004 clean-room policy extended through D-041's preinstall controls and D-043 history admission; schema v2 keeps the new current CLI path separate from one exact retired path/blob object after the hosted Windows bin migration",
       "copyrightHolderOrSourceAuthority": "Elliot Wu",
       "license": {
         "spdxExpression": "MIT"
       },
-      "reviewedOn": "2026-08-11",
+      "reviewedOn": "2026-08-12",
       "thirdPartyDependencies": [],
       "privateInformationReview": {
         "status": "passed",
@@ -5076,17 +5076,17 @@
       },
       "projectConstantCleanup": {
         "status": "passed",
-        "notes": "No predecessor-specific identifiers or conditions are present. D-044 changes only active public identity to the single pptx-compiler stem; neutral protocol facts remain owned here."
+        "notes": "Current executable admission contains only the package-root CLI path. The retired nested path is bound to one already-public blob OID for non-tip history only; it is not a current compatibility alias."
       },
       "publicConformance": {
         "status": "applicable",
-        "notes": "Exercised by 41 current policy-gate nodes, including install/executable authority and compile-time rejection of every text/copyright path-exception representation."
+        "notes": "Executable tests cover current index/working admission plus exact non-tip historical path/OID matching, tip replay, path/OID drift, content-rule preservation, schema rejection, and Git-native null-device handling."
       },
       "independentReview": {
         "status": "passed",
-        "notes": "Two bounded D-044 current-byte closing reviews reported 0 blocker, 0 high, and 0 medium; they confirmed the single active public identity, exact package and contract projections, provenance-set closure, and stable recovery identifiers."
+        "notes": "Two bounded current-byte reviews report 0 blocker, 0 high, and 0 medium for the schema-v2 executable split and Windows portability correction."
       },
-      "notes": "Normative versioned forbidden-material policy. D-044 is an identity-only pre-public migration; no external source or compatibility alias was added."
+      "notes": "Normative versioned forbidden-material policy with one current executable path and one exact retired historical object; no external source or live compatibility alias is added."
     },
     {
       "path": "policy/support-matrix.json",
@@ -5119,7 +5119,7 @@
     {
       "path": "provenance/records.json",
       "kind": "new-clean-room",
-      "origin": "M0-004 machine-readable provenance source refreshed for all 267 admitted files and the exact 21-path M3-006/M3-004B Windows portability follow-up",
+      "origin": "M0-004 machine-readable provenance source refreshed for all 267 admitted files and the exact 26-path M3-006/M3-004B Windows portability follow-up",
       "copyrightHolderOrSourceAuthority": "Elliot Wu",
       "license": {
         "spdxExpression": "MIT"
@@ -5136,13 +5136,13 @@
       },
       "publicConformance": {
         "status": "applicable",
-        "notes": "Machine provenance covers all 267 admitted files and the exact 21-path current slice. Both runtimes pass 231/231 focus and 1217/1217 complete tests, and both admitted Node/npm pairs pass the explicit guarded four-tarball build, offline joint install, and installed-bin smoke. Hosted Windows, ordinary-PR Dependency Review, and final-main evidence remain open."
+        "notes": "Machine provenance covers all 267 admitted files and the exact 26-path current slice. Current dual-runtime local/package evidence passes; corrected hosted Windows evidence remains pending and private-repository Dependency Review is externally blocked."
       },
       "independentReview": {
         "status": "passed",
-        "notes": "Bounded executable-code and final state/provenance reviews each report 0 blocker, 0 high, and 0 medium and confirm the exact 21-path relation."
+        "notes": "Two bounded code reviews report 0 blocker, 0 high, and 0 medium for the second Windows correction; final execution evidence remains separately pending."
       },
-      "notes": "Machine-readable provenance through completed M3-006 and partial M3-004B; npm publication, Windows/Dependency Review closure, and release remain open."
+      "notes": "Machine-readable provenance through completed M3-006 and partial M3-004B; local execution passes while hosted Windows, private-repository Dependency Review, npm publication, and release remain open."
     },
     {
       "path": "sbom.alpha.cdx.json",
@@ -5595,7 +5595,7 @@
     {
       "path": "scripts/check-forbidden-materials.mjs",
       "kind": "new-clean-room",
-      "origin": "M0-004/D-043 clean-room scanner updated from the hosted Git-for-Windows CRLF output of `git help --config` while retaining one strict history policy",
+      "origin": "M0-004/D-043 clean-room scanner updated from hosted Git-for-Windows failures to accept strict LF/CRLF text, use Git's `/dev/null` pathname, and keep current versus exact historical executable admission in one tip-owned schema-v2 policy",
       "copyrightHolderOrSourceAuthority": "Elliot Wu",
       "license": {
         "spdxExpression": "MIT"
@@ -5612,13 +5612,13 @@
       },
       "publicConformance": {
         "status": "applicable",
-        "notes": "Forty-nine policy nodes now also exact-compare LF and CRLF Git capability output while rejecting stray CR; the test participates in both 231/231 dual-runtime focused passes."
+        "notes": "Tests exact-compare LF/CRLF capability output, reject stray CR, bind Git's `/dev/null`, and exercise current, tip, and exact non-tip historical executable admission without weakening content checks."
       },
       "independentReview": {
         "status": "passed",
-        "notes": "Bounded current-byte review reports 0 blocker, 0 high, and 0 medium; only the one Git text-protocol boundary normalizes CRLF and no OS branch is added."
+        "notes": "Two bounded current-byte reviews report 0 blocker, 0 high, and 0 medium; Git environment/history/redaction boundaries remain fail closed."
       },
-      "notes": "Fail-closed index/working-tree/history gate; parsed fsck keys remain strict, sorted, unique, and exclude fsck.skipList."
+      "notes": "Fail-closed index/working-tree/history gate; parsed fsck keys remain strict, sorted, unique, and exclude fsck.skipList, while historical executable grants require exact non-tip path/OID identity."
     },
     {
       "path": "scripts/check-package-plan.mjs",
@@ -5899,18 +5899,18 @@
       },
       "publicConformance": {
         "status": "applicable",
-        "notes": "The exact current local candidate passes 231/231 focused tests and 1217/1217 complete tests under both runtimes; both admitted Node/npm pairs pass the explicit guarded four-tarball build, offline joint install, and installed-bin smoke. Hosted Windows remains required."
+        "notes": "The package-root mapping has bounded 0/0/0 review and dual-runtime package evidence; corrected hosted Windows evidence remains required."
       },
       "independentReview": {
         "status": "passed",
-        "notes": "Bounded current-byte review reports 0 blocker, 0 high, and 0 medium; exports/types retain their existing semantics while bin uses one canonical package target."
+        "notes": "Two bounded current-byte reviews report 0 blocker, 0 high, and 0 medium for the package-root mapping and unchanged release/repository guards."
       },
-      "notes": "Dependency-free package authority with canonical `bin/pptx-compiler.mjs`; repository binding and npm-private guard are unchanged."
+      "notes": "Dependency-free package authority with canonical package-root `pptx-compiler.mjs`; repository binding and npm-private guard are unchanged."
     },
     {
       "path": "scripts/lib/package-stage.mjs",
       "kind": "new-clean-room",
-      "origin": "independently authored from D-040's exact package stage, D-041 portability controls, and D-045 repository binding; the final correction derives from an observed Node 24 live-claim classification race",
+      "origin": "independently authored from D-040's exact package stage, D-041 portability controls, and D-045 repository binding; current bytes also project the package-root CLI entry required by the hosted Windows npm tar-mode correction",
       "copyrightHolderOrSourceAuthority": "Elliot Wu",
       "license": {
         "spdxExpression": "MIT"
@@ -5929,11 +5929,11 @@
       },
       "publicConformance": {
         "status": "applicable",
-        "notes": "The fixed-copy 24-node suite passes under Node 22/24 and covers plan fingerprints, repository-bound private manifests, four real tgz files, offline installed smoke, recovery/deletion authority, live foreign candidates, and release ownership transfer."
+        "notes": "The fixed-copy suite passes 24/24 under both runtimes and covers plan fingerprints, repository-bound private manifests, four real tgz files, package-root installed-bin smoke, recovery/deletion authority, live foreign candidates, and release ownership transfer."
       },
       "independentReview": {
         "status": "passed",
-        "notes": "Two bounded claim-race closing reviews report 0 blocker, 0 high, and 0 medium; foreign-live, exact-own, dead cleanup, disappearing marker, release transfer, and test deletion boundaries were checked."
+        "notes": "Two bounded current-byte reviews report 0 blocker, 0 high, and 0 medium for the package-root install path and retained stage safety boundaries."
       },
       "notes": "Local ignored transaction with schema-v2 plan binding and fail-closed live-claim classification; unlinking the authenticated active marker is the release point."
     },
@@ -6421,7 +6421,7 @@
       },
       "publicConformance": {
         "status": "applicable",
-        "notes": "The platform-absolute pre-copy limit regression participates in the exact current 231/231 focused and 1217/1217 complete passes under both admitted runtimes."
+        "notes": "The platform-absolute pre-copy limit regression and the current 1228-node complete suite pass under both admitted Node lines."
       },
       "independentReview": {
         "status": "passed",
@@ -6757,18 +6757,18 @@
       },
       "publicConformance": {
         "status": "applicable",
-        "notes": "The 33-node file locks exact `bin/pptx-compiler.mjs` spelling and participates in the exact current 231/231 focused and 1217/1217 complete passes; both admitted Node/npm package builds retain tar mode 0755."
+        "notes": "The file locks exact package-root `pptx-compiler.mjs` spelling, source/target mapping, and runtime dependency closure; guarded package builds must retain tar mode 0755."
       },
       "independentReview": {
         "status": "passed",
-        "notes": "Bounded current-byte review reports 0 blocker, 0 high, and 0 medium; this regression does not itself claim a hosted Windows tarball pass."
+        "notes": "Two bounded current-byte reviews report 0 blocker, 0 high, and 0 medium for the package-root mapping and strict final tar-mode authority."
       },
       "notes": "Canonical-bin regression preserves repository binding, npm-private guard, and strict final tar-mode authority."
     },
     {
       "path": "tests/package-stage.test.mjs",
       "kind": "new-clean-room",
-      "origin": "independently authored D-040 fixed-stage conformance, updated by D-045 for repository binding and the observed Node 24 live-claim classification regression",
+      "origin": "independently authored D-040 fixed-stage conformance, updated by D-045 for repository binding, live-claim classification, and the hosted Windows package-root bin/install regression",
       "copyrightHolderOrSourceAuthority": "Elliot Wu",
       "license": {
         "spdxExpression": "MIT"
@@ -6785,11 +6785,11 @@
       },
       "publicConformance": {
         "status": "applicable",
-        "notes": "The fixed-copy 24-node file passes under Node 22/24 and covers repository-bound tarballs, completion drift, exact active contention, a zero-byte foreign live candidate that remains preserved, and precise test-owned quarantine cleanup."
+        "notes": "The fixed-copy file passes 24/24 under both runtimes and covers repository-bound tarballs, completion drift, exact active contention, a zero-byte foreign live candidate, precise test-owned cleanup, and exact package-root manifest/install mapping."
       },
       "independentReview": {
         "status": "passed",
-        "notes": "Two bounded claim-race closing reviews report 0 blocker, 0 high, and 0 medium and confirm that the regression stays strict while cleanup deletes only exact test-owned bytes."
+        "notes": "Two bounded current-byte reviews report 0 blocker, 0 high, and 0 medium for the root-bin assertion and unchanged stage safety boundaries."
       },
       "notes": "D-045 fixed-stage conformance covering repository-bound private tarballs, plan-fingerprint recovery, and deterministic live-claim classification."
     },
@@ -6824,7 +6824,7 @@
     {
       "path": "tests/policy-gates.test.mjs",
       "kind": "new-clean-room",
-      "origin": "M0-004/D-043 clean-room gate tests updated with the Git-for-Windows LF/CRLF capability-output protocol regression",
+      "origin": "M0-004/D-043 clean-room gate tests updated with strict LF/CRLF parsing, Git's `/dev/null`, and schema-v2 exact historical executable-object regressions from hosted Windows failures",
       "copyrightHolderOrSourceAuthority": "Elliot Wu",
       "license": {
         "spdxExpression": "MIT"
@@ -6841,11 +6841,11 @@
       },
       "publicConformance": {
         "status": "applicable",
-        "notes": "Forty-nine current nodes retain all prior gates and lock LF/CRLF equivalence, sorting, deduplication, fsck.skipList exclusion, and stray-CR rejection; both focused runtimes pass."
+        "notes": "Current nodes retain all prior gates and additionally lock LF/CRLF equivalence, Git's `/dev/null`, current/index/working/tip rejection, exact non-tip path/OID admission, content-rule preservation, and malformed-policy rejection."
       },
       "independentReview": {
         "status": "passed",
-        "notes": "Bounded current-byte review reports 0 blocker, 0 high, and 0 medium; no Git environment, history, identity, or redaction boundary was weakened."
+        "notes": "Two bounded current-byte reviews report 0 blocker, 0 high, and 0 medium; the temporary regressions are self-contained and preserve history/redaction boundaries."
       },
       "notes": "Dependency-free temporary-repository mutations; no remote, package-stage, publication, external implementation, or private input is used."
     },

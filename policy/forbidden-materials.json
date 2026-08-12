@@ -1,8 +1,14 @@
 {
-  "schemaVersion": 1,
+  "schemaVersion": 2,
   "maxFileBytes": 1048576,
   "approvedExecutablePaths": [
-    "packages/cli/bin/pptx-compiler.mjs"
+    "packages/cli/pptx-compiler.mjs"
+  ],
+  "approvedHistoricalExecutableObjects": [
+    {
+      "path": "packages/cli/bin/pptx-compiler.mjs",
+      "objectId": "2fc26674414a51b4b10f365f3540f6d4a9810ece"
+    }
   ],
   "approvedPublicIdentities": [
     "Elliot Wu"

@@ -333,6 +333,9 @@ test("repository-bound leaf manifests remain npm-private", async () => {
   for (const item of plan.packages) {
     const manifest = createAlphaPackageManifest(plan, item);
     assert.equal(manifest.private, true);
+    if (item.packageId === "cli") {
+      assert.deepEqual(manifest.bin, { "pptx-compiler": "pptx-compiler.mjs" });
+    }
     assert.deepEqual(manifest.repository, {
       type: "git",
       url: "git+https://github.com/why7682/pptx-compiler.git",
