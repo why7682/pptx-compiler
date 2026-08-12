@@ -44,11 +44,13 @@ No item below is decided merely because a recommendation is recorded.
 | D-038 | ACCEPTED | Honest blocked QA for the exact candidate | Re-derive the current authenticated candidate and canonical record from readable project authorities, exact-compare both stable-read files, and emit the existing fixed blocked QaReport when external visual/compatibility evidence is unavailable; never create BuildArtifact or scan local evidence. | Full QaReport output, three pass/three unavailable checks, normative manual-gate rows, exact pair/replay checks, missing/tampered/stale/resource/symlink/validator mutations, create-only and deterministic output, 99 focused and 1085 complete tests, closing 0/0/0 review, unchanged support counts, and false global support switch. |
 | D-039 | ACCEPTED | Guarded candidate-alpha package graph | Publish only CLI, core, native-card-arrow, and public-synthetic in the first alpha graph; make resource ownership explicit and expose narrow facades. D-045 supersedes only D-039's former repository-pending guard. | Positive source-to-stage plan, exact exports/types/bin/import aliases/assets, dependency and forbidden-closure mutations, split-resource full-spine execution, executable-bin check, and no labs/PowerPoint/Pandoc/OMML/ordered/final-delivery content. |
 | D-040 | ACCEPTED | Fixed-stage and tgz byte acceptance boundary | Keep the readable plan and retained source/policy bytes authoritative; use one recoverable owned stage, treat npm as a constrained packer, independently admit only canonical exact tgz bytes, and keep final hashes as boundary fingerprints. | Private leaf manifests, strict gzip/ustar and forbidden-material mutations, control/source/tarball retained-byte checks, live/stale stage and completion recovery, offline four-package install, installed-bin full spine, blocked QA, and no BuildArtifact. |
-| D-041 | ACCEPTED | Local public-workflow and development-toolchain boundary | Keep exactly two canonical least-privilege workflows, derive declaration paths and the static-ESM SBOM projection from the alpha package plan, and separate local workflow definition from public runner evidence. | Full-SHA action pins, fixed three-OS/two-Node matrix, real TypeScript consumer, exact dev lock, source/release/workflow mutations, and local Node 22/24 verification. M3-006 is complete; corrected pull-request run `31591756372` passes all six cells, while private-repository Dependency Review and accepted-main evidence remain absent. |
+| D-041 | ACCEPTED | Local public-workflow and development-toolchain boundary | Keep exactly two canonical least-privilege workflows, derive declaration paths and the static-ESM SBOM projection from the alpha package plan, and separate local workflow definition from public runner evidence. | Full-SHA action pins, fixed three-OS/two-Node matrix, real TypeScript consumer, exact dev lock, source/release/workflow mutations, and local Node 22/24 verification. M3-006 is complete; pull-request run `31594128100` passes all six cells for historical branch object `94b5c1c` and security run `31594128139` passes Dependency Review. The next committed PR head and accepted main still need their own hosted evidence. |
 | D-042 | ACCEPTED | Minimum public documents and first-ref private-reporting boundary | Give security, contribution, governance, and reproduction one readable owner each; use GitHub private vulnerability reporting without publishing a second personal contact, and require empty-public-repository creation, positive activation/status verification, repository-bound package regeneration, and a fresh package gate before any source branch/ref is pushed. | Exact document routing and workflow-command projection, fail-closed document mutations, zero text/copyright leakage exceptions, dual-runtime local verification, D-045 remote activation, and completed M3-006 repository-bound regeneration plus separately gated first ref. |
 | D-043 | ACCEPTED | Reachable-history and exact-first-ref boundary | Reuse the current forbidden-material policy to scan every commit/tree-entry/message reachable from local `refs/heads/main`, derive reachability from raw parent/tree OIDs, verify metadata against the repository-local public Git identity without echoing it, and push only the scanned exact object ID after remote/PVR/package reconciliation. | Bounded history mode, eight deletion/redirect/grammar/message/identity/type/resource regressions, final 14-commit/505-leaf/7,698,368-byte/28-identity zero-finding scan, canonical HTTPS push, and exact remote-main equality. |
 | D-044 | ACCEPTED | Final pre-public product and repository identity | Use `pptx-compiler` as the one public repository, CLI, package, import, and serialized-contract stem; keep only the existing ignored transaction namespace and dated history under the former working name. | User selected `why7682/pptx-compiler`; exact GitHub and four-name npm checks were clear on 2026-08-11, and the atomic rename must pass dual-runtime package and contract evidence before the first ref. |
 | D-045 | ACCEPTED | Empty public shell, repository binding, and separate npm guard | Bind GitHub repository ID `1330979133` plus its exact owner/name/URL into package-plan schema v2 after empty-public creation and positive PVR verification; derive manifest/SBOM repository data from that tuple while retaining `private: true` and a blocked npm release guard. | Public/empty repository facts, PVR PUT 204 plus GET `enabled: true`, exact repository/manifest/SBOM mutations, canonical-plan evidence fingerprint, and repository-bound dual-runtime package verification; M3-006 later supplied the final first-ref evidence. |
+| D-046 | ACCEPTED | Constructive final-document structure | Write final reader-facing documentation by constructing one coherent model from goals and boundaries through fact ownership, data/control flow, executable contracts, evidence, limitations, and next actions; keep chronological repair history in handoffs, decisions, and provenance rather than using it as the main exposition. | Explicit user requirement; M3-005B must review README, architecture, support, limitations, and release-facing text against this structure before freezing them. |
+| D-047 | DEFERRED | Main-branch protection | Do not configure or claim branch protection yet; revisit force-push/deletion restrictions and required status checks only after the current M3-004B/M3-005B work is complete. | Explicit user instruction on 2026-08-12 to postpone this repository-setting change. |
 
 Record a decision by changing its status to `ACCEPTED`, adding the date and
 rationale below the table, and updating every affected contract/TODO in the
@@ -586,10 +588,11 @@ same change.
   M3-004B remains the public six-cell plus CodeQL/Dependency Review evidence.
   M3-006 has published the reviewed first source ref; the first hosted run
   passed four OS/runtime cells and CodeQL but failed both Windows cells. The
-  corrected pull-request run `31591756372` later passed all six cells.
-  Dependency Review remains unavailable for the private repository without
-  GitHub Advanced Security, and accepted-main CI/CodeQL remain pending, so
-  M3-004B is not closed. All platforms flush
+  pull-request run `31594128100` later passed all six cells for branch object
+  `94b5c1c`. After
+  public visibility and the dependency graph were enabled, security run
+  `31594128139` passed Dependency Review. Accepted-main CI/CodeQL remain
+  pending, so M3-004B is not closed. All platforms flush
   owned regular files before logical commit markers; POSIX additionally
   requests parent-directory fsync barriers, while Windows makes no sudden-
   power-loss directory-entry persistence claim. A managed FileProvider created
@@ -674,6 +677,19 @@ same change.
   reused. The repository-bound dual-runtime rebuild passed, and M3-006 later
   completed the final history scan and exact-object-ID push. npm publication
   remains separately unauthorized.
+- **D-046 accepted on 2026-08-12:** final reader-facing documentation must be constructive,
+  not an accumulation of TODO fragments or repair chronology. Its stable order
+  is: purpose and explicit boundary; core concepts and one readable owner for
+  each fact; data and control flow; executable contracts and commands; public
+  evidence; limitations; then the next authorized action. Historical failures,
+  superseded decisions, run-by-run diagnostics, and provenance relations stay
+  available in handoffs, this decision register, and the provenance ledger,
+  but they do not lead or fragment the final explanation. M3-005B owns the
+  final cross-document review and may not close on sentence-level cleanup alone.
+- **D-047 deferred on 2026-08-12:** the user explicitly postponed main-branch
+  protection. No protection rule is configured or claimed by this decision.
+  Revisit force-push/deletion restrictions and required status checks only
+  after the current M3-004B/M3-005B sequence is complete.
 
 ## MIT versus Apache-2.0 review
 

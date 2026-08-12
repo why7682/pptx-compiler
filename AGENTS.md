@@ -438,6 +438,12 @@ For code review, report:
   release, or npm-publication evidence. Do not write final release claims, changelog
   results, platform support, or CI conclusions before their public evidence
   exists.
+- When writing or freezing final reader-facing documentation under D-046,
+  construct one coherent model in this order: purpose and boundary; fact
+  ownership; data/control flow; executable contracts; evidence; limitations;
+  next authorized action. Keep repair chronology, superseded states, and
+  run-by-run diagnostics in handoffs, decisions, and provenance. Do not turn
+  TODO fragments into the main exposition.
 - When maintaining `M3-006`, scan the complete reachable `refs/heads/main`
   history with the tip-owned forbidden policy after the final local commit and
   before its exact refspec is pushed. Do not scan only the current tree, hide

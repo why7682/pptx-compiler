@@ -188,7 +188,10 @@ the exact first-ref snapshot. The later Windows portability correction changed
 the CLI source/target mapping and did not reuse those first-ref tarballs. Its
 fresh fixed-copy evidence passes 24/24 package-stage tests under both runtimes;
 npm 10.9.8 and npm 11.17.0 each rebuild, install offline, and smoke all four
-packages with the package-root CLI at mode 0755. Pull-request Public CI run
-`31591756372` passes the full six-cell platform/runtime matrix. Private-repository
-Dependency Review, accepted-main, npm-publication, and release evidence remain
-separate.
+packages with the package-root CLI at mode 0755. For branch object `94b5c1c`,
+pull-request Public CI run `31594128100` passes the full six-cell
+platform/runtime matrix, and security run
+`31594128139` passes Dependency Review after public visibility plus the
+dependency graph were enabled. Those hosted runs are historical evidence bound
+to branch object `94b5c1c`; the next committed PR head needs fresh checks.
+Accepted-main CI/CodeQL, npm-publication, and release evidence remain separate.

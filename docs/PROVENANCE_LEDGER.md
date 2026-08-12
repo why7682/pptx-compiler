@@ -2430,8 +2430,10 @@ notes: D-041 closes M3-004A's local definition and verification only. It does
   loader/codegen checks are reviewed-source hardening. M3-006 later completed
   the repository-bound package and exact first-ref transitions. M3-004B has
   begun: its first run passed Ubuntu/macOS plus CodeQL and failed Windows; the
-  corrected pull-request run `31591756372` later passed all six cells. Ordinary-
-  PR Dependency Review and accepted-main CI/CodeQL remain absent
+  pull-request run `31594128100` later passed all six cells for branch object
+  `94b5c1c`. After
+  public visibility and the dependency graph were enabled, security run
+  `31594128139` passed Dependency Review. Accepted-main CI/CodeQL remain absent
 ```
 
 ### M3-005A minimum public-document boundary
@@ -2795,6 +2797,7 @@ paths:
   - README.md
   - TODO.md
   - docs/ARCHITECTURE_TARGET.md
+  - docs/COMPATIBILITY_POLICY.md
   - docs/DECISIONS.md
   - docs/M3-003_HANDOFF.md
   - docs/M3-004_HANDOFF.md
@@ -2803,11 +2806,13 @@ paths:
   - docs/NAME_AVAILABILITY.md
   - docs/PROVENANCE_LEDGER.md
   - docs/RELEASE_GATES.md
+  - docs/SUPPORT_MATRIX.md
   - packages/adapter-pandoc-omml/src/node-process-runner.mjs
   - packages/cli/bin/pptx-compiler.mjs
   - packages/cli/pptx-compiler.mjs
   - packaging/alpha-package-plan.json
   - policy/forbidden-materials.json
+  - policy/support-matrix.json
   - provenance/records.json
   - scripts/check-forbidden-materials.mjs
   - scripts/lib/package-plan.mjs
@@ -2816,14 +2821,17 @@ paths:
   - tests/package-plan.test.mjs
   - tests/package-stage.test.mjs
   - tests/policy-gates.test.mjs
-kind: exact-first-ref execution evidence and first-hosted Windows portability
-  correction
+kind: exact-first-ref execution evidence, first-hosted Windows portability
+  correction, public-evidence synchronization, and D-046 constructive final-
+  document authority plus D-047 branch-protection deferral
 origin: independently derived from the completed D-043/D-045 first-ref
   authority, first-ref GitHub run 31559642053, first-ref security run
-  31559642035, pull-request GitHub runs 31582316951 and 31591756372, pull-request
-  security runs 31582316939 and 31591756442, and the exact repository-owned sources and tests. No hosted log,
-  raw API response, external implementation, package, asset, presentation,
-  generated binary, or private fixture entered Git
+  31559642035, pull-request GitHub runs 31582316951, 31591756372, and
+  31594128100, pull-request security runs 31582316939, 31591756442, and
+  31594128139, the user's D-046 constructive-final-document requirement and
+  D-047 instruction to defer branch protection, and the exact repository-owned
+  sources and tests. No hosted log, raw API response, external implementation,
+  package, asset, presentation, generated binary, or private fixture entered Git
 original_author_or_holder: Elliot Wu
 created_or_reviewed_on: 2026-08-12
 license_or_rights_basis: MIT
@@ -2843,10 +2851,13 @@ public_fixture_conformance: applicable; Node 22.23.2 and Node 24.19.0 each pass
   the 216-node affected focus, 24-node package-stage suite, and 1228-node
   complete suite in the fixed non-FileProvider copy. npm 10.9.8 and npm 11.17.0
   each rebuild, admit, install offline, and smoke all four packages; the
-  package-root CLI member is mode 0755. Pull-request Public CI run
-  `31591756372` passes all six platform/runtime cells. Accepted-final-main
-  CI/CodeQL remain required. Pull-request Dependency Review is externally blocked while this
-  private repository lacks the required GitHub Advanced Security capability
+  package-root CLI member is mode 0755. For branch object `94b5c1c`, pull-
+  request Public CI run `31594128100` passes all six platform/runtime cells.
+  After public visibility
+  plus the dependency graph were enabled, security run `31594128139` passes
+  Dependency Review. These hosted results are historical evidence bound to
+  branch object `94b5c1c`; the next committed PR head requires fresh six-cell
+  CI and Dependency Review. Accepted-final-main CI/CodeQL remain required
 independent_review: passed; two bounded current-byte reviews report 0 blocker,
   0 high, and 0 medium after exact historical-object, current-tip replay,
   content-rule, Git-null-device, package-root bin, tar-mode, and installed-path
@@ -2855,10 +2866,18 @@ notes: M3-006 is complete at public main object
   410642b668514ab7193212d617cc0f8acb837924. The final launch scan covered 14
   commits, 505 leaf versions, 7,698,368 regular-blob bytes, and 28 identity
   occurrences with zero finding; repository ID/PVR/remote-main equality were
-  reverified. M3-004B remains partial: corrected pull-request Public CI run
-  `31591756372` passes all six Ubuntu/macOS/Windows × Node 22/24 cells after the
-  Git-null-device and package-root-bin corrections. Dependency Review failed because this private
-  repository does not have the required GitHub Advanced Security capability
+  reverified. M3-004B remains partial: pull-request Public CI run
+  `31594128100` passes all six Ubuntu/macOS/Windows × Node 22/24 cells for
+  branch object `94b5c1c` after the
+  Git-null-device and package-root-bin corrections, and security run
+  `31594128139` passes Dependency Review. Those runs remain bound to historical
+  branch object `94b5c1c`; the next committed PR head requires fresh hosted
+  checks, and accepted-main CI/CodeQL remain pending.
+  D-046 additionally requires M3-005B's final reader-facing documents to build
+  one coherent model from purpose and fact ownership through flow, contracts,
+  evidence, limitations, and next action; chronology remains in audit records.
+  D-047 separately defers branch protection until the current M3-004B/M3-005B
+  sequence is complete; no protection rule is configured or claimed here
 ```
 
 The XML namespace, relationship-type, and MIME strings are interoperability

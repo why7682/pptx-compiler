@@ -1104,7 +1104,7 @@
         "label": "Linux with Node.js 22.x LTS",
         "status": "experimental",
         "disposition": "accept-with-warning",
-        "currentBasis": "The runtime line is declared, but public cross-platform CI is not present.",
+        "currentBasis": "The pull-request cell passed for historical branch object 94b5c1c; the next committed PR head needs fresh CI and accepted-main M3-004B CI/CodeQL remain pending.",
         "limitations": ["This platform row alone authorizes no PPTX capability; the exact capability closure, explicit opt-in, and all required evidence must also pass."],
         "roadmap": "M3-004B after M3-006",
         "evidence": { "level": "none", "artifacts": [] }
@@ -1114,7 +1114,7 @@
         "label": "Linux with Node.js 24.x LTS",
         "status": "experimental",
         "disposition": "accept-with-warning",
-        "currentBasis": "The runtime line is declared, but public cross-platform CI is not present.",
+        "currentBasis": "The pull-request cell passed for historical branch object 94b5c1c; the next committed PR head needs fresh CI and accepted-main M3-004B CI/CodeQL remain pending.",
         "limitations": ["This platform row alone authorizes no PPTX capability; the exact capability closure, explicit opt-in, and all required evidence must also pass."],
         "roadmap": "M3-004B after M3-006",
         "evidence": { "level": "none", "artifacts": [] }
@@ -1124,7 +1124,7 @@
         "label": "macOS with Node.js 22.x LTS",
         "status": "experimental",
         "disposition": "accept-with-warning",
-        "currentBasis": "The runtime line is declared, but public cross-platform CI is not present.",
+        "currentBasis": "The pull-request cell passed for historical branch object 94b5c1c; the next committed PR head needs fresh CI and accepted-main M3-004B CI/CodeQL remain pending.",
         "limitations": ["This platform row alone authorizes no PPTX capability; the exact capability closure, explicit opt-in, and all required evidence must also pass."],
         "roadmap": "M3-004B after M3-006",
         "evidence": { "level": "none", "artifacts": [] }
@@ -1134,7 +1134,7 @@
         "label": "macOS with Node.js 24.x LTS",
         "status": "experimental",
         "disposition": "accept-with-warning",
-        "currentBasis": "The runtime line is declared, but public cross-platform CI is not present.",
+        "currentBasis": "The pull-request cell passed for historical branch object 94b5c1c; the next committed PR head needs fresh CI and accepted-main M3-004B CI/CodeQL remain pending.",
         "limitations": ["This platform row alone authorizes no PPTX capability; the exact capability closure, explicit opt-in, and all required evidence must also pass."],
         "roadmap": "M3-004B after M3-006",
         "evidence": { "level": "none", "artifacts": [] }
@@ -1208,7 +1208,7 @@
         "label": "Windows with Node.js 22.x LTS",
         "status": "experimental",
         "disposition": "accept-with-warning",
-        "currentBasis": "The runtime line is declared, but public cross-platform CI is not present.",
+        "currentBasis": "The pull-request cell passed for historical branch object 94b5c1c; the next committed PR head needs fresh CI and accepted-main M3-004B CI/CodeQL remain pending.",
         "limitations": ["This platform row alone authorizes no PPTX capability; the exact capability closure, explicit opt-in, and all required evidence must also pass."],
         "roadmap": "M3-004B after M3-006",
         "evidence": { "level": "none", "artifacts": [] }
@@ -1218,7 +1218,7 @@
         "label": "Windows with Node.js 24.x LTS",
         "status": "experimental",
         "disposition": "accept-with-warning",
-        "currentBasis": "The runtime line is declared, but public cross-platform CI is not present.",
+        "currentBasis": "The pull-request cell passed for historical branch object 94b5c1c; the next committed PR head needs fresh CI and accepted-main M3-004B CI/CodeQL remain pending.",
         "limitations": ["This platform row alone authorizes no PPTX capability; the exact capability closure, explicit opt-in, and all required evidence must also pass."],
         "roadmap": "M3-004B after M3-006",
         "evidence": { "level": "none", "artifacts": [] }

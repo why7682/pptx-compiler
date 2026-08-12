@@ -118,10 +118,12 @@ both Windows cells fail. Later Windows corrections changed package inputs and
 history policy. The fixed-copy correction now passes the 216-node affected
 focus, 24-node package-stage suite, and 1228-node complete suite under both
 admitted Node lines; npm 10/11 each pass the guarded offline package spine. A
-corrected pull-request run, `31591756372`, passes all six platform/runtime cells.
-Pull-request security run `31591756442` skips CodeQL by event design and fails
-Dependency Review because the private repository lacks GitHub Advanced
-Security. Accepted-main CI/CodeQL also remain open.
+pull-request run `31594128100` passes all six platform/runtime cells for branch
+object `94b5c1c`. After public visibility and the dependency graph were enabled,
+pull-request security run `31594128139` passes Dependency Review while CodeQL
+remains skipped by event design. Those runs are historical evidence bound to
+branch object `94b5c1c`; the next committed PR head needs fresh checks, and
+accepted-main CI/CodeQL remain open.
 Final published-ref SBOM validation,
 signing, registry
 provenance, and reviewed-to-published equality remain G5/G6 work. Source-tree
@@ -146,9 +148,12 @@ relations, and the static-ESM SBOM projection. M3-004B remains unsatisfied. Run
 security run `31559642035` passed CodeQL while Dependency Review was skipped on
 the push event. Pull-request run `31582316951` again passed Ubuntu/macOS but
 failed Windows on two remaining portability boundaries. Pull-request security
-run `31582316939` then confirmed that Dependency Review is unavailable while
-this repository remains private without the required GitHub Advanced Security
-capability. M3-004B remains open; this external failure is not a code pass.
+run `31582316939` then recorded the former private-repository Dependency Review
+failure. After public visibility and the dependency graph were enabled, run
+`31594128139` passed Dependency Review for branch object `94b5c1c`. These
+pull-request runs are historical object-bound evidence; the next committed PR
+head needs fresh CI and Dependency Review, and M3-004B also remains open for
+accepted-main CI/CodeQL evidence.
 M3-005A closes the local vulnerability-reporting, contribution, governance,
 and reproduction document contract. D-045 now records the empty public shell,
 HTTP 204 activation, and subsequent exact `enabled: true` status. M3-006 then
@@ -702,8 +707,10 @@ create-only. This closes M3-001's product spine, not the package/release gate:
 M3-002 package boundaries, M3-003 tarball/leakage, and M3-004A local workflow
 contracts and M3-005A's minimum public documents are complete. D-045 later
 closed the empty-shell, PVR, repository binding, and repository-bound package
-gate. M3-006 later completed the first ref. M3-004B remains partial, and
-M3-005B remains blocked on its complete hosted evidence.
+gate. M3-006 later completed the first ref. Pull-request six-cell CI and
+Dependency Review passed for historical branch object `94b5c1c`; the next
+committed PR head still needs fresh checks, and M3-004B also remains partial for
+accepted-main CI/CodeQL. M3-005B remains blocked on that hosted evidence.
 
 The D-029 authority rule applies to that work: the source template owns
 unchanged inherited content/structure; readable authored semantic sources,

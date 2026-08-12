@@ -95,11 +95,14 @@ packed inputs, so they do not reuse that evidence. The current fixed-copy
 correction passes 216/216 affected tests, 24/24 package-stage tests, and
 1228/1228 complete tests under both admitted Node lines; npm 10.9.8 and npm
 11.17.0 each rebuild, install offline, and smoke the four-package graph with
-the package-root CLI member at mode 0755. Pull-request Public CI run
-`31591756372` passes the six-cell platform/runtime matrix. Pull-request security
-run `31591756442` skips CodeQL by design and fails Dependency Review because the
-private repository lacks GitHub Advanced Security; accepted-main CI/CodeQL also
-remain pending. This does not change
+the package-root CLI member at mode 0755. For branch object `94b5c1c`,
+pull-request Public CI run `31594128100` passes the six-cell
+platform/runtime matrix. After public
+visibility and the dependency graph were enabled, pull-request security run
+`31594128139` passes Dependency Review while CodeQL remains skipped by design;
+those runs are historical evidence bound to branch object `94b5c1c`, and the
+next committed PR head needs fresh checks. Accepted-main CI/CodeQL remain
+pending. This does not change
 the published first-ref object or complete M3-004B.
 
 ## Completed fail-closed launch state machine

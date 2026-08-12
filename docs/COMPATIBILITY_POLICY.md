@@ -130,9 +130,12 @@ must match the matrix shipped in the same reviewed commit.
 ## Platform and adapter compatibility
 
 Node.js 22.x and 24.x LTS on Linux, macOS, and Windows are the declared runtime
-envelope. Each combination remains experimental until the public CI matrix
-passes. A result from the current off-matrix development runtime is not support
-evidence.
+envelope. Pull-request CI passed all six combinations for historical branch
+object `94b5c1c`; the next committed PR head still needs fresh CI and Dependency
+Review, and accepted-main CI/CodeQL remain pending. Every combination remains
+experimental because platform evidence alone does not
+authorize a capability or enable the global support switch. A result from an
+off-matrix development runtime is not support evidence.
 
 Pandoc is a user-installed optional process with adapter profile `0.1.0`; it is
 not bundled or an ambient core dependency. A trusted absolute executable path

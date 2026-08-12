@@ -624,12 +624,15 @@ Node 22.23.2 and Node 24.19.0 each pass the 216-node affected focus, the
 24-node package-stage suite, and the 1228-node complete suite. npm 10.9.8 and
 npm 11.17.0 each build, admit, install offline, and smoke all four packages;
 the package-root CLI member is mode 0755. Pull-request Public CI run
-`31591756372` then passed all six Ubuntu/macOS/Windows × Node 22/24 cells,
+for branch object `94b5c1c` then passed all six Ubuntu/macOS/Windows × Node 22/24 cells,
 including complete tests, guarded packages, working-tree recheck, and drift
-check. Pull-request Dependency
-Review is externally blocked because this private repository lacks the required
-GitHub Advanced Security capability. The four npm-name checks remain time-
-bounded and reserve nothing, and npm publication is separately blocked.
+check. After public visibility and the dependency graph were enabled,
+pull-request security run `31594128139` passed Dependency Review. Those hosted
+results are historical evidence bound to branch object `94b5c1c`; the next
+committed evidence/document snapshot requires fresh pull-request CI and
+Dependency Review before merge. Accepted-main CI/CodeQL remain required after
+merge. The four npm-name checks remain time-bounded and reserve nothing, and
+npm publication is separately blocked.
 
 ## Persistent presentation-skill boundary
 
@@ -938,11 +941,14 @@ remain the machine command authority.
 
 ## Next work session
 
-1. Read `docs/M3-004_HANDOFF.md`. PR #1's corrected six-cell CI passes. Do not
-   merge or promote M3-004B while private-repo Dependency Review remains an
-   unresolved external capability decision. After
-   an accepted main update, retain final main-run CI and CodeQL evidence.
+1. Read `docs/M3-004_HANDOFF.md`. PR #1's six-cell CI and Dependency Review
+   passed for historical branch object `94b5c1c`. Retain fresh checks for the
+   next committed PR head before merge, then retain final main-run CI and
+   CodeQL evidence before promoting M3-004B.
 2. Keep final release/platform wording in M3-005B until M3-004B closes.
+   Apply D-046: final reader-facing documents must construct the system from
+   purpose and fact ownership through flow, contracts, evidence, limitations,
+   and next action; chronology stays in handoffs/decisions/provenance.
 3. Keep predecessor code, presentation assets, converter output, and generated
    archives out of Git; use only repository-owned text/synthetic fixtures for
    public tests.

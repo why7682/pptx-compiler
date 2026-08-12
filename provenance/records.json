@@ -80,7 +80,7 @@
       },
       "publicConformance": {
         "status": "applicable",
-        "notes": "Exact-byte workflow checks and mutation tests cover pins, least privilege, runner matrix, command order, checkout credentials, absent cache/artifact upload, and the ban on private or publication paths. No public runner execution is claimed."
+        "notes": "Exact-byte workflow checks and mutation tests cover pins, least privilege, runner matrix, command order, checkout credentials, absent cache/artifact upload, and the ban on private or publication paths. Pull-request run 31594128100 passes all six public runner cells for branch object 94b5c1c; accepted-main CI remains separate."
       },
       "independentReview": {
         "status": "passed",
@@ -112,7 +112,7 @@
       },
       "publicConformance": {
         "status": "applicable",
-        "notes": "Exact-byte workflow checks and mutation tests cover trigger separation, minimal permissions, build-mode none, complete action pins, and absence of repository-code execution in CodeQL. No CodeQL or Dependency Review run is claimed."
+        "notes": "Exact-byte workflow checks and mutation tests cover trigger separation, minimal permissions, build-mode none, complete action pins, and absence of repository-code execution in CodeQL. First-ref CodeQL passes, and pull-request security run 31594128139 passes Dependency Review for historical branch object 94b5c1c after public visibility plus the dependency graph were enabled; the next PR head and accepted-main CodeQL remain separate."
       },
       "independentReview": {
         "status": "passed",
@@ -151,7 +151,7 @@
     {
       "path": "AGENTS.md",
       "kind": "new-clean-room",
-      "origin": "repository-owned clean-room instructions updated from the completed M3-006 exact first ref and the first M3-004B hosted run while preserving presentation-skill, fixed-stage, and hosted-evidence responsibilities",
+      "origin": "repository-owned clean-room instructions updated from the completed M3-006 exact first ref, branch-object-bound M3-004B hosted evidence, and user-required D-046 constructive-document discipline while preserving presentation-skill, fixed-stage, and hosted-evidence responsibilities",
       "copyrightHolderOrSourceAuthority": "Elliot Wu",
       "license": {
         "spdxExpression": "MIT"
@@ -174,7 +174,7 @@
         "status": "passed",
         "notes": "Bounded current-byte review of the executable Windows portability correction reports 0 blocker, 0 high, and 0 medium; final state/provenance review remains separately bounded."
       },
-      "notes": "M3-006 is complete. Corrected pull-request Public CI run 31591756372 passes all six OS/runtime cells; first-ref CodeQL passes, while private-repository Dependency Review and accepted-main evidence remain absent. npm publication remains blocked."
+      "notes": "M3-006 is complete. Pull-request Public CI run 31594128100 passed all six OS/runtime cells for historical branch object 94b5c1c, security run 31594128139 passed Dependency Review, and first-ref CodeQL passed; the next PR head and accepted-main CI/CodeQL remain absent. npm publication remains blocked."
     },
     {
       "path": "CONTRIBUTING.md",
@@ -235,7 +235,7 @@
     {
       "path": "HANDOFF.md",
       "kind": "new-clean-room",
-      "origin": "repository-owned handoff updated from the completed M3-006 exact first ref, public CI runs 31559642053/31591756372, security runs 31559642035/31591756442, and the repository-owned Windows portability correction",
+      "origin": "repository-owned handoff updated from the completed M3-006 exact first ref, public CI runs 31559642053/31591756372/31594128100, security runs 31559642035/31591756442/31594128139, the public visibility/dependency-graph transition, user-required D-046 constructive-document discipline, and the repository-owned Windows portability correction",
       "copyrightHolderOrSourceAuthority": "Elliot Wu",
       "license": {
         "spdxExpression": "MIT"
@@ -252,13 +252,13 @@
       },
       "publicConformance": {
         "status": "applicable",
-        "notes": "M3-006 is complete. For the latest Windows correction, two bounded reviews report 0 blocker/high/medium, dual-runtime local tests and guarded-package evidence pass, and corrected pull-request Public CI passes all six cells; private-repository Dependency Review and accepted-main evidence remain open."
+        "notes": "M3-006 is complete. For the latest Windows correction, two bounded reviews report 0 blocker/high/medium and final frozen-byte dual-runtime local tests plus guarded-package evidence pass. Six-cell pull-request CI and Dependency Review passed for historical branch object 94b5c1c; the next committed PR head and accepted main require fresh hosted evidence."
       },
       "independentReview": {
         "status": "passed",
         "notes": "Bounded executable-code and final state/provenance reviews each report 0 blocker, 0 high, and 0 medium."
       },
-      "notes": "M3-006 is complete at object 410642b668514ab7193212d617cc0f8acb837924. M3-004B remains partial: six-cell pull-request CI passes, but private-repository Dependency Review and accepted-main evidence are unresolved; npm publication remains blocked."
+      "notes": "M3-006 is complete at object 410642b668514ab7193212d617cc0f8acb837924. M3-004B remains partial: six-cell pull-request CI and Dependency Review passed for historical branch object 94b5c1c, while the next committed PR head and accepted-main CI/CodeQL remain unresolved; npm publication remains blocked."
     },
     {
       "path": "LICENSE",
@@ -291,7 +291,7 @@
     {
       "path": "README.md",
       "kind": "new-clean-room",
-      "origin": "repository-owned public overview updated from completed M3-006 and corrected pull-request CI/security runs 31591756372/31591756442",
+      "origin": "repository-owned public overview updated from completed M3-006, branch-object-bound pull-request CI/security runs 31594128100/31594128139, and the verified public visibility/dependency-graph transition",
       "copyrightHolderOrSourceAuthority": "Elliot Wu",
       "license": {
         "spdxExpression": "MIT"
@@ -308,7 +308,7 @@
       },
       "publicConformance": {
         "status": "not-applicable",
-        "notes": "Public overview only. The exact first-ref package evidence remains historical and was not reused after package-plan changes. Corrected pull-request run 31591756372 passes all six cells; the final mapped README bytes are included in refreshed dual-runtime 1228/24-node and npm 10/11 guarded-package evidence."
+        "notes": "Public overview only. The exact first-ref package evidence remains historical and was not reused after package-plan changes. Pull-request run 31594128100 passes all six cells for branch object 94b5c1c and security run 31594128139 passes Dependency Review. The final mapped README bytes are included in refreshed Node 22/24 full and package-stage evidence plus npm 10/11 guarded build, offline-install, and smoke evidence; a new pull-request head still requires hosted verification before merge."
       },
       "independentReview": {
         "status": "passed",
@@ -347,7 +347,7 @@
     {
       "path": "TODO.md",
       "kind": "new-clean-room",
-      "origin": "repository-owned milestone ledger updated from completed M3-006, corrected pull-request CI/security runs 31591756372/31591756442, and the current Windows portability correction",
+      "origin": "repository-owned milestone ledger updated from completed M3-006, branch-object-bound pull-request CI/security runs 31594128100/31594128139, the public visibility/dependency-graph transition, user-required D-046 constructive-document discipline, the D-047 branch-protection deferral, and the current Windows portability correction",
       "copyrightHolderOrSourceAuthority": "Elliot Wu",
       "license": {
         "spdxExpression": "MIT"
@@ -364,13 +364,13 @@
       },
       "publicConformance": {
         "status": "applicable",
-        "notes": "M3-004B remains partial after the corrected pull-request run passes all six cells. Current dual-runtime local/package evidence also passes; private-repository Dependency Review is externally blocked and accepted-main evidence remains required."
+        "notes": "M3-004B remains partial. Final frozen-byte dual-runtime local/package evidence passes; six-cell pull-request CI and Dependency Review passed for historical branch object 94b5c1c, while the next committed PR head and accepted-main CI/CodeQL still require hosted evidence."
       },
       "independentReview": {
         "status": "passed",
         "notes": "Bounded executable-code and final state/provenance reviews each report 0 blocker, 0 high, and 0 medium."
       },
-      "notes": "M3-006 is DONE, M3-004B is NEXT and partial, and M3-005B remains BLOCKED; npm publication, support promotion, and release remain unclaimed."
+      "notes": "M3-006 is DONE, M3-004B is NEXT and partial, M3-005B remains BLOCKED, and D-047/M3-008 defer branch protection; npm publication, support promotion, and release remain unclaimed."
     },
     {
       "path": "docs/ARCHITECTURE_TARGET.md",
@@ -403,12 +403,12 @@
     {
       "path": "docs/COMPATIBILITY_POLICY.md",
       "kind": "new-clean-room",
-      "origin": "repository-owned compatibility policy maintained in M3-005A to distinguish the unbound adapter result from later narrow target application and local observations",
+      "origin": "repository-owned compatibility policy maintained through M3-005A and branch-object-bound M3-004B pull-request evidence to distinguish capability support from platform execution evidence",
       "copyrightHolderOrSourceAuthority": "Elliot Wu",
       "license": {
         "spdxExpression": "MIT"
       },
-      "reviewedOn": "2026-08-11",
+      "reviewedOn": "2026-08-12",
       "thirdPartyDependencies": [],
       "privateInformationReview": {
         "status": "passed",
@@ -420,18 +420,18 @@
       },
       "publicConformance": {
         "status": "not-applicable",
-        "notes": "Records the M2-004 external-process and strict DOCX/OMML boundary plus the current fact that later narrow application/observations do not promote general formula support."
+        "notes": "Records the M2-004 external-process and strict DOCX/OMML boundary, the six-cell result bound to historical branch object 94b5c1c, and the fact that neither later narrow application nor platform execution evidence promotes general formula support."
       },
       "independentReview": {
         "status": "passed",
-        "notes": "Earlier M2-004 review remains closed; bounded M3-005A document review corrected the stale future-M2-005 statement without changing a support status."
+        "notes": "Earlier M2-004 review remains closed; the current evidence wording preserves every support status and the false global claim switch while accepted-main M3-004B evidence remains pending."
       },
-      "notes": "Repository-owned compatibility policy through the M3-005A current-claim correction; public real-Pandoc evidence and purpose-bound direct-candidate receipt remain absent."
+      "notes": "Repository-owned compatibility policy through branch-object-bound six-cell pull-request CI; the next PR head, accepted-main CI/CodeQL, public real-Pandoc evidence, and the purpose-bound direct-candidate receipt remain absent."
     },
     {
       "path": "docs/DECISIONS.md",
       "kind": "new-clean-room",
-      "origin": "repository-owned decision register updated with completed D-043/M3-006 first-ref evidence and corrected D-041/M3-004B pull-request CI/security results; no new decision authority is added",
+      "origin": "repository-owned decision register updated with completed D-043/M3-006 first-ref evidence, corrected D-041/M3-004B pull-request CI/security results, the user's D-046 constructive-final-document requirement, and the user's D-047 branch-protection deferral",
       "copyrightHolderOrSourceAuthority": "Elliot Wu",
       "license": {
         "spdxExpression": "MIT"
@@ -448,13 +448,13 @@
       },
       "publicConformance": {
         "status": "not-applicable",
-        "notes": "Execution evidence updates accepted D-041 through D-045 without claiming completed M3-004B, npm publication, support, or release."
+        "notes": "Execution evidence updates accepted D-041 through D-045 without claiming completed M3-004B, npm publication, support, or release. D-046 governs final-document structure; D-047 defers branch protection. Neither grants product or release authority."
       },
       "independentReview": {
         "status": "passed",
         "notes": "Bounded final state/provenance review reports 0 blocker, 0 high, and 0 medium after historical checkpoint wording was separated from current state."
       },
-      "notes": "D-043/M3-006 first-ref evidence is complete; D-041/M3-004B remains partial after corrected pull-request CI passes all six cells because private-repository Dependency Review and accepted-main evidence remain absent."
+      "notes": "D-043/M3-006 first-ref evidence is complete; D-041/M3-004B remains partial after six-cell CI and Dependency Review passed for historical branch object 94b5c1c because the next PR head and accepted-main CI/CodeQL remain absent."
     },
     {
       "path": "docs/EFFECT_FIRST_IMPLEMENTATION_PLAN.md",
@@ -963,7 +963,7 @@
     {
       "path": "docs/M3-003_HANDOFF.md",
       "kind": "new-clean-room",
-      "origin": "independently authored from D-040's guarded package stage and updated through corrected pull-request CI run 31591756372 with the canonical package-local bin target required by npm on Windows",
+      "origin": "independently authored from D-040's guarded package stage and updated through branch-object-bound pull-request CI run 31594128100 plus security run 31594128139 with the canonical package-local bin target required by npm on Windows",
       "copyrightHolderOrSourceAuthority": "Elliot Wu",
       "license": {
         "spdxExpression": "MIT"
@@ -980,7 +980,7 @@
       },
       "publicConformance": {
         "status": "applicable",
-        "notes": "The exact first-ref package evidence is historical. The latest CLI source/target correction has fresh 24/24 package-stage and npm 10/11 guarded-build evidence, and corrected six-cell pull-request CI passes; private-repository Dependency Review and accepted-main evidence remain required."
+        "notes": "The exact first-ref package evidence is historical. The latest CLI source/target correction has fresh 24/24 package-stage and npm 10/11 guarded-build evidence. Six-cell pull-request CI and Dependency Review passed for historical branch object 94b5c1c; the next PR head and accepted-main CI/CodeQL remain required."
       },
       "independentReview": {
         "status": "passed",
@@ -991,7 +991,7 @@
     {
       "path": "docs/M3-004_HANDOFF.md",
       "kind": "new-clean-room",
-      "origin": "independently authored from D-041 and updated from public CI runs 31559642053/31591756372, security runs 31559642035/31591756442, and the repository-owned Windows portability correction",
+      "origin": "independently authored from D-041 and updated from public CI runs 31559642053/31591756372/31594128100, security runs 31559642035/31591756442/31594128139, the public visibility/dependency-graph transition, and the repository-owned Windows portability correction",
       "copyrightHolderOrSourceAuthority": "Elliot Wu",
       "license": {
         "spdxExpression": "MIT"
@@ -1014,18 +1014,18 @@
       },
       "publicConformance": {
         "status": "applicable",
-        "notes": "Two bounded reviews accept the latest Windows correction. Dual-runtime 216/24/1228 local evidence, npm 10/11 guarded builds, and corrected six-cell pull-request CI pass; private-repository Dependency Review and final-main evidence remain open."
+        "notes": "Two bounded reviews accept the latest Windows correction. Final frozen-byte dual-runtime 216/24/1228 local evidence and npm 10/11 guarded builds pass. Six-cell pull-request CI and Dependency Review passed for historical branch object 94b5c1c; the next PR head and accepted-main CI/CodeQL remain open."
       },
       "independentReview": {
         "status": "passed",
         "notes": "Bounded executable-code and final state/provenance reviews each report 0 blocker, 0 high, and 0 medium."
       },
-      "notes": "M3-004B is partial: corrected pull-request CI passes Ubuntu/macOS/Windows under Node 22/24 and first-ref CodeQL passes; private-repository Dependency Review and accepted-main evidence are absent."
+      "notes": "M3-004B is partial: Ubuntu/macOS/Windows pull-request CI and Dependency Review passed for historical branch object 94b5c1c, and first-ref CodeQL passes; the next PR head and accepted-main CI/CodeQL remain absent."
     },
     {
       "path": "docs/M3-005_HANDOFF.md",
       "kind": "new-clean-room",
-      "origin": "independently authored from the M3-005A/M3-005B evidence split and updated after completed M3-006 plus corrected pull-request CI/security runs 31591756372/31591756442",
+      "origin": "independently authored from the M3-005A/M3-005B evidence split, completed M3-006, branch-object-bound pull-request CI/security runs 31594128100/31594128139, and the user's D-046 constructive-final-document requirement",
       "copyrightHolderOrSourceAuthority": "Elliot Wu",
       "license": {
         "spdxExpression": "MIT"
@@ -1042,18 +1042,18 @@
       },
       "publicConformance": {
         "status": "not-applicable",
-        "notes": "Document responsibility only; corrected six-cell pull-request CI passes, while M3-005A remains complete and M3-005B remains blocked on Dependency Review resolution plus accepted-main CI/CodeQL."
+        "notes": "Document responsibility only; six-cell pull-request CI and Dependency Review passed for historical branch object 94b5c1c, while M3-005A remains complete and M3-005B remains blocked on fresh next-head plus accepted-main hosted evidence."
       },
       "independentReview": {
         "status": "passed",
         "notes": "Bounded final state/provenance review reports 0 blocker, 0 high, and 0 medium after the first-ref and partial-hosted state was reconciled."
       },
-      "notes": "M3-005A is complete; M3-005B remains blocked until M3-004B has complete hosted evidence."
+      "notes": "M3-005A is complete; M3-005B remains blocked until M3-004B has complete hosted evidence, then must pass D-046 cross-document constructive-structure review."
     },
     {
       "path": "docs/M3-006_HANDOFF.md",
       "kind": "new-clean-room",
-      "origin": "independently authored from D-043/D-045 and updated with the exact M3-006 first-ref evidence plus corrected pull-request CI/security runs 31591756372/31591756442",
+      "origin": "independently authored from D-043/D-045 and updated with the exact M3-006 first-ref evidence plus branch-object-bound pull-request CI/security runs 31594128100/31594128139",
       "copyrightHolderOrSourceAuthority": "Elliot Wu",
       "license": {
         "spdxExpression": "MIT"
@@ -1104,7 +1104,7 @@
         "status": "passed",
         "notes": "One bounded read-only challenge reported 3 blocker, 3 high, and 2 medium planning findings; D-035 incorporates them plus the main audit's redundant output authority and missing onboarding metadata findings."
       },
-      "notes": "Compaction-persistent five-layer M3 audit and candidate-alpha execution order; D-036 and D-037 completed the project-spine and exact-render steps while honest QA remains open."
+      "notes": "Compaction-persistent five-layer M3 audit and candidate-alpha execution order; D-036 and D-037 completed the project-spine and exact-render steps, and D-038 later completed honest blocked QA without changing the audit's fail-closed QA constraint."
     },
     {
       "path": "docs/NAME_AVAILABILITY.md",
@@ -1277,7 +1277,7 @@
     {
       "path": "docs/PROVENANCE_LEDGER.md",
       "kind": "new-clean-room",
-      "origin": "repository-owned clean-room provenance ledger updated with completed M3-006, two failed Windows diagnostic runs, corrected six-cell pull-request run 31591756372, security run 31591756442, and the exact 26-path portability follow-up",
+      "origin": "repository-owned clean-room provenance ledger updated with completed M3-006, the Windows diagnostic runs, branch-object-bound six-cell pull-request run 31594128100, security run 31594128139, the public visibility/dependency-graph transition, user-required D-046/D-047 document and governance decisions, and the exact 29-path portability/evidence follow-up",
       "copyrightHolderOrSourceAuthority": "Elliot Wu",
       "license": {
         "spdxExpression": "MIT"
@@ -1294,18 +1294,18 @@
       },
       "publicConformance": {
         "status": "not-applicable",
-        "notes": "The human ledger entry lists the exact 26-path relation, completed M3-006 facts, corrected six-cell pull-request CI, the exact historical executable-object boundary, and current 216/24/1228 dual-runtime plus npm 10/11 local evidence without promoting release claims."
+        "notes": "The human ledger entry lists the exact 29-path relation, completed M3-006 facts, six-cell pull-request CI bound to historical branch object 94b5c1c, the exact historical executable-object boundary, and final frozen-byte 216/24/1228 dual-runtime plus npm 10/11 local evidence without promoting release claims."
       },
       "independentReview": {
         "status": "passed",
-        "notes": "Two bounded current-byte reviews report 0 blocker, 0 high, and 0 medium after the 26-path relation and exact historical executable-object boundary were checked."
+        "notes": "Final frozen-byte execution passes under both admitted Node/npm pairs; the current exact 29-path relation now awaits only its bounded closing review and new pull-request-head hosted verification."
       },
-      "notes": "Human provenance through completed M3-006 and partial M3-004B; current local and six-cell pull-request CI evidence pass while private-repository Dependency Review and final-main evidence remain open."
+      "notes": "Human provenance through completed M3-006 and partial M3-004B; final frozen-byte local evidence passes, historical branch object 94b5c1c has six-cell pull-request CI and Dependency Review, and the next PR head plus accepted-main CI/CodeQL remain open."
     },
     {
       "path": "docs/RELEASE_GATES.md",
       "kind": "new-clean-room",
-      "origin": "repository-owned release gates updated with completed M3-006 and corrected M3-004B pull-request CI/security runs 31591756372/31591756442",
+      "origin": "repository-owned release gates updated with completed M3-006 and branch-object-bound M3-004B pull-request CI/security runs 31594128100/31594128139",
       "copyrightHolderOrSourceAuthority": "Elliot Wu",
       "license": {
         "spdxExpression": "MIT"
@@ -1328,7 +1328,7 @@
         "status": "passed",
         "notes": "Bounded final state/provenance review reports 0 blocker, 0 high, and 0 medium after current and historical gate states were separated."
       },
-      "notes": "G5/M3-004B remains partial after corrected six-cell pull-request CI because private-repository Dependency Review and accepted-main evidence remain missing; M3-005B remains blocked."
+      "notes": "G5/M3-004B remains partial after six-cell pull-request CI and Dependency Review passed for historical branch object 94b5c1c because the next PR head and accepted-main CI/CodeQL remain missing; M3-005B remains blocked."
     },
     {
       "path": "docs/REPRODUCIBILITY.md",
@@ -1361,12 +1361,12 @@
     {
       "path": "docs/SUPPORT_MATRIX.md",
       "kind": "new-clean-room",
-      "origin": "repository-owned support summary maintained during M3-005A to correct stale exact-QA/formula wording while keeping every status and the global claim switch unchanged",
+      "origin": "repository-owned support summary maintained through M3-005A and branch-object-bound pull-request run 31594128100 while keeping every status and the global claim switch unchanged",
       "copyrightHolderOrSourceAuthority": "Elliot Wu",
       "license": {
         "spdxExpression": "MIT"
       },
-      "reviewedOn": "2026-08-11",
+      "reviewedOn": "2026-08-12",
       "thirdPartyDependencies": [],
       "privateInformationReview": {
         "status": "passed",
@@ -1378,13 +1378,13 @@
       },
       "publicConformance": {
         "status": "applicable",
-        "notes": "The 60-row matrix remains 0 supported, 22 experimental, 3 manual, and 35 unsupported; exact D-038 blocked QA is distinguished from unavailable generic commands, and no local evidence promotes a row."
+        "notes": "The 60-row matrix remains 0 supported, 22 experimental, 3 manual, and 35 unsupported; pull-request CI passed all six platform/runtime cells for historical branch object 94b5c1c, but the next PR head and accepted-main evidence remain pending and no platform fact alone promotes a row."
       },
       "independentReview": {
         "status": "passed",
-        "notes": "Prior support review remains closed; bounded M3-005A review corrected stale CLI/QA and formula statements without changing any disposition or claim switch."
+        "notes": "Prior support review remains closed; the current evidence correction changes no disposition, evidence level, count, or global claim switch and awaits final cross-document review."
       },
-      "notes": "Repository-owned support boundary through the M3-005A wording correction; exact candidate/platform rows remain experimental, hosted evidence remains unavailable, and arbitrary input/delivery remain unavailable."
+      "notes": "Repository-owned support boundary through six-cell pull-request evidence bound to historical branch object 94b5c1c; platform rows remain experimental and the next PR head, accepted-main M3-004B evidence, plus arbitrary input/delivery remain unavailable."
     },
     {
       "path": "docs/THREAT_MODEL.md",
@@ -4050,7 +4050,7 @@
         "status": "passed",
         "notes": "Two bounded D-044 current-byte closing reviews reported 0 blocker, 0 high, and 0 medium; they confirmed the single active public identity, exact package and contract projections, provenance-set closure, and stable recovery identifiers."
       },
-      "notes": "Target-specific typed OMML applicator with a source-preserving product entry, native Office choice, and editable non-raster fallback. Structural artifacts remain non-deliverable by themselves; real-Pandoc coverage, human formula-content editability, arbitrary targets, and support remain unavailable. D-044 is an identity-only pre-public migration; no external source or compatibility alias was added."
+      "notes": "Target-specific typed OMML applicator with a source-preserving product entry, native Office choice, and editable non-raster fallback. D-032 records a feature-level edit observation, but it does not authorize this direct artifact; an exact direct-candidate receipt, real-Pandoc coverage, arbitrary targets, and support remain unavailable. D-044 is an identity-only pre-public migration; no external source or compatibility alias was added."
     },
     {
       "path": "packages/core/src/native-presentation-publication.mjs",
@@ -5091,12 +5091,12 @@
     {
       "path": "policy/support-matrix.json",
       "kind": "new-clean-room",
-      "origin": "repository-owned support matrix maintained during M3-005A to correct stale formula and platform limitation text while preserving all dispositions and the false global claim switch",
+      "origin": "repository-owned support matrix maintained through M3-005A and branch-object-bound pull-request run 31594128100 while preserving all dispositions, evidence levels, counts, and the false global claim switch",
       "copyrightHolderOrSourceAuthority": "Elliot Wu",
       "license": {
         "spdxExpression": "MIT"
       },
-      "reviewedOn": "2026-08-11",
+      "reviewedOn": "2026-08-12",
       "thirdPartyDependencies": [],
       "privateInformationReview": {
         "status": "passed",
@@ -5108,18 +5108,18 @@
       },
       "publicConformance": {
         "status": "applicable",
-        "notes": "The 60-row matrix is 0 supported, 22 experimental, 3 manual, and 35 unsupported; the exact candidate and blocked-QA closure has executable evidence while arbitrary input, passed visual/PowerPoint QA, delivery, and global claims remain unavailable/false."
+        "notes": "The 60-row matrix remains 0 supported, 22 experimental, 3 manual, and 35 unsupported; six pull-request platform cells passed for historical branch object 94b5c1c, the next PR head and accepted-main evidence remain pending, and arbitrary input, delivery, and global claims remain unavailable/false."
       },
       "independentReview": {
         "status": "passed",
-        "notes": "Prior support reviews remain closed; bounded M3-005A review corrected formula-roadmap and platform-row contradictions without promoting a status, evidence level, or global claim."
+        "notes": "Prior support reviews remain closed; the current platform-basis correction promotes no status, evidence level, count, or global claim and awaits final cross-document review."
       },
-      "notes": "Repository-owned support policy through the M3-005A wording correction; supportClaimsEnabled remains false and counts stay 0/22/3/35."
+      "notes": "Repository-owned support policy through six-cell pull-request CI bound to historical branch object 94b5c1c; supportClaimsEnabled remains false, counts stay 0/22/3/35, and the next PR head plus accepted-main M3-004B evidence remain pending."
     },
     {
       "path": "provenance/records.json",
       "kind": "new-clean-room",
-      "origin": "M0-004 machine-readable provenance source refreshed for all 267 admitted files, corrected pull-request CI/security runs 31591756372/31591756442, and the exact 26-path M3-006/M3-004B portability follow-up",
+      "origin": "M0-004 machine-readable provenance source refreshed for all 267 admitted files, branch-object-bound pull-request CI/security runs 31594128100/31594128139, the public visibility/dependency-graph transition, user-required D-046/D-047 decisions, and the exact 29-path M3-006/M3-004B portability/evidence follow-up",
       "copyrightHolderOrSourceAuthority": "Elliot Wu",
       "license": {
         "spdxExpression": "MIT"
@@ -5136,13 +5136,13 @@
       },
       "publicConformance": {
         "status": "applicable",
-        "notes": "Machine provenance covers all 267 admitted files and the exact 26-path current slice. Current dual-runtime local/package evidence and corrected six-cell pull-request CI pass; private-repository Dependency Review is externally blocked."
+        "notes": "Machine provenance covers all 267 admitted files and the exact 29-path current slice. Final frozen-byte Node 22/24 full and package-stage suites plus npm 10/11 guarded build, offline-install, and smoke evidence pass; new pull-request-head hosted evidence remains a merge prerequisite, and accepted-main CI/CodeQL remain separate."
       },
       "independentReview": {
         "status": "passed",
-        "notes": "Two bounded code reviews report 0 blocker, 0 high, and 0 medium for the second Windows correction; local and six-cell pull-request execution evidence pass."
+        "notes": "Two bounded code reviews report 0 blocker, 0 high, and 0 medium for the executable Windows correction; final frozen-byte execution passes and the expanded current documentation/evidence slice awaits one bounded closing review."
       },
-      "notes": "Machine-readable provenance through completed M3-006 and partial M3-004B; local and six-cell pull-request execution pass while private-repository Dependency Review, accepted-main evidence, npm publication, and release remain open."
+      "notes": "Machine-readable provenance through completed M3-006 and partial M3-004B; final frozen-byte local execution passes, historical branch object 94b5c1c has six-cell pull-request CI and Dependency Review, and the next PR head, accepted-main CI/CodeQL, npm publication, and release remain open."
     },
     {
       "path": "sbom.alpha.cdx.json",
@@ -6082,7 +6082,7 @@
         "status": "passed",
         "notes": "Two bounded D-044 current-byte closing reviews reported 0 blocker, 0 high, and 0 medium; they confirmed the single active public identity, exact package and contract projections, provenance-set closure, and stable recovery identifiers."
       },
-      "notes": "Private-workspace CLI entry point pending publishable bin/package metadata in M3-002. D-044 is an identity-only pre-public migration; no external source or compatibility alias was added."
+      "notes": "Private-workspace compatibility entry point. Publishable package-bin authority belongs to packages/cli/pptx-compiler.mjs and the guarded package plan; npm publication remains blocked. D-044 is an identity-only pre-public migration; no external source or compatibility alias was added."
     },
     {
       "path": "scripts/record-omml-formula-content-edit.mjs",
@@ -7020,7 +7020,7 @@
         "status": "passed",
         "notes": "Two bounded D-044 current-byte closing reviews reported 0 blocker, 0 high, and 0 medium; they confirmed the single active public identity, exact package and contract projections, provenance-set closure, and stable recovery identifiers."
       },
-      "notes": "Public-synthetic conformance only. Authenticators are injected test doubles; no real PowerPoint formula-content receipt or real-Pandoc output is tracked, COMPAT-OMML-001 remains pending, and supportClaimsEnabled remains false. D-044 is an identity-only pre-public migration; no external source or compatibility alias was added."
+      "notes": "Public-synthetic conformance only. Authenticators are injected test doubles; D-032 records a feature-level COMPAT-OMML-001 edit observation, but it cannot satisfy this exact direct-candidate receipt. No real-Pandoc output or direct formula-content receipt is tracked, and supportClaimsEnabled remains false. D-044 is an identity-only pre-public migration; no external source or compatibility alias was added."
     },
     {
       "path": "tests/receipt-bound-ordered-final-delivery.test.mjs",

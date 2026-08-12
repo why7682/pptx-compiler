@@ -101,10 +101,12 @@ history, canonical HTTPS transport, repository identity, and exact remote-main
 equality. The canonical
 repository ID/owner/name/URL are bound in package-plan schema v2 and projected
 into each leaf manifest plus the root SBOM component, while `private: true`
-continues to enforce the separate npm-publication guard. Corrected pull-request
-Public CI run `31591756372` passes all Ubuntu/macOS/Windows × Node 22/24 cells;
-first-ref CodeQL passes. Private-repository Dependency Review remains unavailable
-without GitHub Advanced Security, and accepted-main CI/CodeQL remain pending. See
+continues to enforce the separate npm-publication guard. For branch object
+`94b5c1c`, pull-request Public CI run `31594128100` passed all
+Ubuntu/macOS/Windows × Node 22/24 cells;
+first-ref CodeQL passes. After public visibility and the dependency graph were
+enabled, pull-request security run `31594128139` passed Dependency Review.
+Accepted-main CI/CodeQL remain pending. See
 [docs/M3-004_HANDOFF.md](docs/M3-004_HANDOFF.md) for the exact evidence boundary.
 
 ## License

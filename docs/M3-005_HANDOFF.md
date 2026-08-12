@@ -7,14 +7,17 @@ M3-005 is split at the real evidence boundary:
 - `M3-005A` owns the minimum pre-public reproducibility, vulnerability-
   reporting, contribution, and governance documents.
 - `M3-005B` owns the changelog, known limitations, and final support/release
-  wording after M3-004B supplies public hosted evidence.
+  wording after M3-004B supplies public hosted evidence. D-046 requires that
+  final reader-facing text construct one coherent system model rather than
+  concatenate TODO fragments or repair chronology.
 
 M3-005A is complete. The local document contract defines one private reporting
 process plus the minimum contribution, governance, and reproducibility
 boundaries. M3-006 has since completed the exact first public source ref.
-M3-005B remains blocked because M3-004B has only partial hosted evidence:
-corrected pull-request CI passes all six platform/runtime cells, but private-
-repository Dependency Review and accepted-main CI/CodeQL remain absent.
+M3-005B remains blocked because M3-004B has only partial hosted evidence: the
+six-cell pull-request CI and Dependency Review passed for historical branch
+object `94b5c1c`, while the next committed PR head still needs fresh checks and
+accepted-main CI/CodeQL remain absent.
 
 ## Responsibility boundary
 
@@ -88,4 +91,7 @@ reviews report 0 blocker, 0 high, and 0 medium findings.
    remote-main equality evidence.
 3. Complete M3-004B without converting partial hosted results into support or
    release claims.
-4. Freeze M3-005B text only after M3-004B closes.
+4. After M3-004B closes, construct M3-005B text in D-046 order: purpose and
+   boundary; fact ownership; data/control flow; executable contracts; evidence;
+   limitations; next authorized action. Then run one cross-document review
+   before freezing it.
