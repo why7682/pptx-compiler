@@ -68,7 +68,7 @@
       },
       "types": "./types/index.d.ts",
       "bin": {
-        "pptx-compiler": "./bin/pptx-compiler.mjs"
+        "pptx-compiler": "bin/pptx-compiler.mjs"
       },
       "files": [
         {

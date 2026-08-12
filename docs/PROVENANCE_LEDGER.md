@@ -2427,9 +2427,10 @@ notes: D-041 closes M3-004A's local definition and verification only. It does
   Dependency Review result, public repository, registry provenance, package
   publication, signing, malicious-JavaScript sandbox, or release authority.
   The dependency proof is limited to parser-proven static ESM edges; direct
-  loader/codegen checks are reviewed-source hardening. M3-006 must first create the
-  selected public remote and refresh repository-bound package bytes; M3-004B
-  must then retain the six hosted CI cell URLs and hosted security conclusions
+  loader/codegen checks are reviewed-source hardening. M3-006 later completed
+  the repository-bound package and exact first-ref transitions. M3-004B has
+  begun, but its first run passed only the Ubuntu/macOS cells and CodeQL; both
+  Windows cells failed and ordinary-PR Dependency Review remains absent
 ```
 
 ### M3-005A minimum public-document boundary
@@ -2494,12 +2495,11 @@ public_fixture_conformance: applicable; the focused policy suite passes 41/41
 independent_review: passed; the bounded final security, provenance, and state
   reviews close at 0 blocker, 0 high, and 0 medium after the repository-bound
   package-regeneration transition was made explicit before the first source ref
-notes: D-042 completes only the local M3-005A document definition. No public
-  remote, active private-vulnerability-reporting setting, hosted CI/security
-  result, package publication, support promotion, or release is claimed.
-  M3-006 owns empty-public-repository creation, positive channel activation and
-  verification, repository-bound package regeneration, and the first source
-  push; M3-005B remains blocked until public M3-004B evidence exists
+notes: D-042 completed only the local M3-005A document definition. D-045 and
+  M3-006 later supplied the live private-reporting and exact first-ref facts.
+  Those later facts do not claim package publication, complete hosted evidence,
+  support promotion, or release. M3-005B remains blocked until public M3-004B
+  evidence exists
 ```
 
 ### M3-006 local reachable-history preflight
@@ -2553,11 +2553,10 @@ independent_review: passed; bounded reviewers first found repository-selection,
   failures. The fixed raw-parent traversal, exact tree-byte grammar, sanitized
   Git environment, and forced-error fsck configuration were independently
   replayed under Node 22/24 and close at 0 blocker, 0 high, and 0 medium
-notes: D-043 closes only the local repeatable history-preflight definition.
-  D-044 now records the exact GitHub target and approved public identity.
-  M3-006 remains NEXT until the empty public/PVR/repository-bound package
-  transitions pass, the final commit is rescanned, and that exact object ID
-  alone is pushed
+notes: D-043 first closed the local repeatable history-preflight definition.
+  D-044 then fixed the exact GitHub target and approved public identity. M3-006
+  subsequently completed the final 14-commit zero-finding scan, canonical HTTPS
+  transport, exact-object-ID push, and remote-main/PVR equality checks
 ```
 
 ### D-044 pre-public identity migration
@@ -2702,8 +2701,7 @@ notes: At D-044 closure, `why7682/pptx-compiler` had no remote or source ref.
   checks, which reserve nothing. D-045 later created only the empty public
   shell, verified private vulnerability reporting, and bound its canonical
   identity. M3-006 has since closed the repository-bound dual-runtime package
-  gate and still owns the local commit/history scan and exact-object-ID first
-  push
+  gate, final history scan, and exact-object-ID first push
 ```
 
 ### D-045 empty public shell and repository-bound package authority
@@ -2779,12 +2777,77 @@ independent_review: passed for the current code/security boundary; one bounded
   ownership transfer, launch state machine, and 25-path provenance relation.
   The completed dual-runtime product/package evidence above was rerun after the
   runtime, package, and packed README source snapshot froze
-notes: The empty public GitHub shell and positive PVR status are real external
-  facts, but no local remote or source ref exists. GitHub source authorization
-  does not authorize npm publication. Before the first exact-object-ID push,
-  M3-006 must create and rescan the final main commit, reverify the exact
-  numeric repository/public/empty/PVR tuple and canonical resolved HTTPS push
-  URL, then require remote main equality
+notes: At D-045 closure the empty public GitHub shell and positive PVR status
+  were real external facts, but no local remote or source ref existed. GitHub
+  source authorization did not authorize npm publication. M3-006 later created
+  and rescanned the final main commit, reverified the exact repository/PVR tuple
+  and canonical HTTPS URL, pushed only that object ID, and required remote-main
+  equality
+```
+
+### M3-006 first public ref and M3-004B hosted portability follow-up
+
+```yaml
+paths:
+  - AGENTS.md
+  - HANDOFF.md
+  - README.md
+  - TODO.md
+  - docs/ARCHITECTURE_TARGET.md
+  - docs/DECISIONS.md
+  - docs/M3-003_HANDOFF.md
+  - docs/M3-004_HANDOFF.md
+  - docs/M3-005_HANDOFF.md
+  - docs/M3-006_HANDOFF.md
+  - docs/NAME_AVAILABILITY.md
+  - docs/PROVENANCE_LEDGER.md
+  - docs/RELEASE_GATES.md
+  - packages/adapter-pandoc-omml/src/node-process-runner.mjs
+  - packaging/alpha-package-plan.json
+  - provenance/records.json
+  - scripts/check-forbidden-materials.mjs
+  - scripts/lib/package-plan.mjs
+  - tests/create-only-assembly.test.mjs
+  - tests/package-plan.test.mjs
+  - tests/policy-gates.test.mjs
+kind: exact-first-ref execution evidence and first-hosted Windows portability
+  correction
+origin: independently derived from the completed D-043/D-045 first-ref
+  authority, GitHub run 31559642053, security run 31559642035, and the exact
+  repository-owned sources and tests. No hosted log, raw API response, external
+  implementation, package, asset, presentation, generated binary, or private
+  fixture entered Git
+original_author_or_holder: Elliot Wu
+created_or_reviewed_on: 2026-08-12
+license_or_rights_basis: MIT
+third_party_dependencies: []
+private_information_review: passed; only the approved public repository/OID,
+  aggregate hosted conclusions, public run identifiers, and repository-owned
+  synthetic regressions are recorded. No token, credential, private path,
+  private/local hostname, raw log, source presentation, private fixture, or
+  ignored package output is recorded
+project_constant_removal: passed; platform absolute-path construction, CRLF
+  normalization at one Git text-protocol boundary, canonical package-local bin
+  spelling, and child-close ownership replace four host-dependent special
+  cases. No Windows-only product branch or second package authority is added
+public_fixture_conformance: applicable; the exact current local candidate
+  passes 231/231 focused tests and 1217/1217 complete tests under both Node
+  22.23.2 and Node 24.19.0. The Node 22/npm 10.9.8 and Node 24/npm 11.17.0
+  pairs each pass the explicit guarded four-tarball build, offline joint
+  install, and installed-bin smoke; the CLI tar entry remains mode 0755, QA
+  remains blocked, and no BuildArtifact is created. This closes local frozen
+  candidate/source/package evidence only. Hosted Windows, ordinary-PR
+  Dependency Review, and accepted-final-main CI/CodeQL evidence remain required
+independent_review: the bounded current-byte review of the four executable
+  corrections and the final state/provenance review each report 0 blocker,
+  0 high, and 0 medium. The latter confirms this exact 21-path relation and
+  separates historical checkpoints from current state
+notes: M3-006 is complete at public main object
+  410642b668514ab7193212d617cc0f8acb837924. The final launch scan covered 14
+  commits, 505 leaf versions, 7,698,368 regular-blob bytes, and 28 identity
+  occurrences with zero finding; repository ID/PVR/remote-main equality were
+  reverified. M3-004B remains partial: four hosted OS/runtime cells and CodeQL
+  passed, both Windows cells failed, and Dependency Review was skipped on push
 ```
 
 The XML namespace, relationship-type, and MIME strings are interoperability

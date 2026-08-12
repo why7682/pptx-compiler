@@ -2,17 +2,13 @@
 
 ## Status
 
-M3-006 is active. GitHub now reports `why7682/pptx-compiler` as a public empty
-repository with numeric ID `1330979133`; the empty-repository refs endpoint
-returns HTTP 409, no local remote has been added, and no source ref exists.
-Private vulnerability reporting was enabled with HTTP 204 and subsequently
-verified by GET as exact `enabled: true`. D-044 and its dual-runtime evidence
-are closed. D-045 now implements the repository tuple, manifest/SBOM
-projection, separate npm-private guard, and readable-plan evidence binding.
-The repository-bound snapshot now passes the final dual-runtime/package gates.
-The active boundary is the reviewed local commit and final history scan; source
-publication remains forbidden until that exact object is rechecked and pushed
-by exact object ID.
+M3-006 is complete. The exact first public `main` object is
+`410642b668514ab7193212d617cc0f8acb837924`. Its final history scan covered
+14 commits, 505 unique leaf-entry versions, 7,698,368 regular-blob bytes, and
+28 identity occurrences with zero finding. The source ref was sent through the
+one canonical HTTPS endpoint. GitHub repository ID `1330979133`, public
+visibility, PVR `enabled: true`, and exact remote-main equality were verified
+after the push. No npm publication was authorized or performed.
 
 ## Core judgment
 
@@ -44,9 +40,9 @@ The gate intentionally ignores dangling objects, reflogs, and unrelated local
 refs because the launch uses one exact object-ID-to-`refs/heads/main` refspec.
 They are not reachable from, and are not transferred by, that push.
 
-## Current local evidence
+## Historical preflight and final evidence
 
-The current `main` history is non-shallow and has one ref, 13 commits, 286
+The earlier pre-source-ref `main` history was non-shallow and had one ref, 13 commits, 286
 unique leaf-entry versions, 3,677,606 scanned regular-blob bytes, and 26 exact
 author/committer occurrences. The history gate reports zero findings. A broader
 read-only audit also found no tag, note, stash, replace ref, remote, merge,
@@ -63,8 +59,9 @@ closing reviews reproduced the strongest environment, shallow-history,
 multi-parent, raw-tree, fsck-configuration, and redaction probes and report
 0 blocker, 0 high, and 0 medium.
 
-These observations apply only to the current pre-source-ref tip. The final
-repository-bound commit does not yet exist and must be scanned again.
+The final repository-bound commit was then scanned separately: 14 commits, 505
+unique leaf-entry versions, 7,698,368 regular-blob bytes, 28 identity
+occurrences, and zero finding. That exact object became remote `main`.
 
 The D-044 identity migration was first verified in the fixed non-FileProvider
 copy: Node 22.23.2 and Node 24.19.0 each pass 1206/1206 tests, and npm 10.9.8
@@ -76,26 +73,32 @@ not the current repository-bound evidence. Two bounded D-044 current-byte
 closing reviews report 0 blocker, 0 high, and 0 medium, so the local rename/
 provenance boundary closed without creating a remote.
 
-The current repository-bound snapshot passes 1217/1217 complete tests under
-both Node 22.23.2 and Node 24.19.0. The package-stage suite passes 24/24 under
+The exact first-ref repository-bound snapshot passed 1217/1217 complete tests under
+both Node 22.23.2 and Node 24.19.0. The package-stage suite passed 24/24 under
 each runtime. npm 10.9.8 and npm 11.17.0 each build and
 independently admit the four
 npm-private repository-bound tarballs, install them together offline, execute
 the installed `init -> inspect -> validate project -> render -> qa` spine from
 an unrelated working directory, return blocked QA, and create no BuildArtifact.
-The final retained reviewed set records Node 24/npm 11 evidence and exact
+The first-ref retained reviewed set recorded Node 24/npm 11 evidence and exact
 boundary fingerprints in the ignored fixed stage; those hashes are not copied
-into planning documents.
+into planning documents. The later Windows portability correction changed
+packed inputs, so it did not reuse that evidence. Its exact current local
+candidate has since passed 1217/1217 complete tests under both admitted
+runtimes, and the Node 22/npm 10.9.8 and Node 24/npm 11.17.0 pairs each passed
+the explicit guarded four-tarball build, offline joint install, and installed-
+bin smoke. This later local evidence does not change the published first-ref
+object or complete M3-004B.
 
-## Fail-closed launch state machine
+## Completed fail-closed launch state machine
 
 D-045 completed the one-time prefix: it verified the approved owner/identity,
 created exactly one empty public repository, enabled PVR, required PUT 204 and
 subsequent GET `enabled: true`, and retained GitHub's canonical tuple. Those
 creation transitions are historical facts, not commands to replay.
 
-The repository binding and dual-runtime/package portions of steps 1–2 are now
-complete. The current resumable state machine is:
+The transition completed the following state machine in order. The empty-shell
+creation steps are historical facts and must not be replayed:
 
 1. Re-read repository ID `1330979133`, exact owner/name/HTML URL, public
    visibility, empty refs, PVR `enabled: true`, authenticated account, and the
@@ -127,8 +130,7 @@ successful package build substitutes for the GitHub-owned remote facts.
 
 ## External authorization state
 
-D-044 records the exact target and the user's authorization to use the already
-approved public Git identity. D-045 used that authority only for the empty
-public shell and PVR activation; it did not create a local remote or source ref
-and did not authorize npm publication. The remaining gates above are mandatory
-before the first exact-object-ID push.
+D-044 authorized the exact GitHub target and approved public Git identity.
+M3-006 exercised that authority only after every recorded gate passed. It did
+not authorize npm publication, history rewriting, another repository, or an
+implicit merge/pull reconciliation.

@@ -609,16 +609,26 @@ function historyGitEnvironmentIsUnsafe(key) {
     /^GIT_CONFIG_(?:KEY|VALUE)_[0-9]+$/.test(normalized);
 }
 
-function strictFsckArguments(root, tip, environment) {
-  const variables = runGit(root, ["--no-pager", "help", "--config"], {
-    environment
-  }).split("\n").filter((value) => value.length > 0);
+export function parseFsckMessageKeys(output) {
+  if (typeof output !== "string") throw new TypeError("fsck-config-output");
+  const normalized = output.replaceAll("\r\n", "\n");
+  if (normalized.includes("\r")) throw new Error("fsck-config-line-ending");
+  const variables = normalized.split("\n").filter((value) => value.length > 0);
   const messageKeys = [...new Set(variables.filter((value) =>
     /^fsck\.[A-Za-z][A-Za-z0-9]*$/.test(value) && value !== "fsck.skipList"
   ))].sort(compareText);
   if (messageKeys.length === 0) {
     throw new Error("Git did not disclose its fsck message configuration");
   }
+  return messageKeys;
+}
+
+function strictFsckArguments(root, tip, environment) {
+  const messageKeys = parseFsckMessageKeys(runGit(
+    root,
+    ["--no-pager", "help", "--config"],
+    { environment }
+  ));
   return [
     ...messageKeys.flatMap((key) => ["-c", `${key}=error`]),
     "-c", `fsck.skipList=${devNull}`,

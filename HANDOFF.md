@@ -601,13 +601,29 @@ controlled and randomized comparisons, locked/flexible/scratch template modes,
 mandatory required-item reconciliation, fixed sources, and D-023 governance.
 Stable-snapshot closure found no remaining blocker, high, or medium issue.
 
-GitHub now contains one empty public shell at `why7682/pptx-compiler`; it has no
-source ref and is not configured as a local Git remote. Private vulnerability
-reporting is verified enabled. The repository-bound plan/manifests/SBOM and
-dual-runtime package evidence now pass. Keep source local until the final local
-commit and reachable-history scan pass; only an exact-object-ID push may create
-the first ref. The four npm-name checks remain time-bounded and reserve nothing,
-and npm publication is separately blocked.
+GitHub now contains the first public `main` ref for
+`why7682/pptx-compiler`. The exact published object is
+`410642b668514ab7193212d617cc0f8acb837924`. Immediately before transport,
+the final history scan covered 14 commits, 505 unique leaf-entry versions,
+7,698,368 regular-blob bytes, and 28 author/committer occurrences with zero
+finding. Repository ID `1330979133`, PVR `enabled: true`, and exact remote-main
+equality were reverified after the push. This completes M3-006; it is source
+publication, not an npm package or release.
+
+The first hosted run is partial M3-004B evidence. Ubuntu and macOS passed under
+Node 22 and 24; Windows failed under both lines. CodeQL passed, while Dependency
+Review was skipped because it runs only for ordinary pull requests. Four
+portability corrections are present in the current branch and the Node 22/24
+focused sets each pass 231/231. The exact current local candidate also passes
+1217/1217 complete tests under each runtime. Node 22/npm 10.9.8 and Node 24/
+npm 11.17.0 each pass the explicit guarded four-tarball build, offline joint
+install, and installed-bin smoke; the CLI entry remains mode 0755, QA remains
+blocked, and no BuildArtifact is created. This closes local frozen candidate,
+source, and package evidence only. Hosted Windows, ordinary-PR Dependency
+Review, and accepted-main CI/CodeQL evidence are still required. Final state/
+provenance review reports 0 blocker, 0 high, and 0 medium. The four
+npm-name checks remain time-bounded and reserve nothing, and npm publication is
+separately blocked.
 
 ## Persistent presentation-skill boundary
 
@@ -830,11 +846,11 @@ makes no sudden-power-loss directory-entry persistence claim. Public six-cell,
 CodeQL, and Dependency Review evidence remains M3-004B after M3-006. M3-005 is
 now split: M3-005A completes the local security/contribution/governance/
 reproduction contract, while M3-005B remains blocked on public evidence.
-GitHub private vulnerability reporting is now verified active on the empty
-public repository. D-045 binds its canonical identity into package-plan schema
-v2, the leaf manifests, and the root SBOM component. The complete repository-
-bound package gate now passes under both admitted runtimes; the first source ref
-still waits for the final local commit, history scan, and exact-OID transport.
+At the D-045 checkpoint, GitHub private vulnerability reporting was verified
+active on the then-empty public repository. D-045 bound its canonical identity
+into package-plan schema v2, the leaf manifests, and the root SBOM component.
+M3-006 later completed the final local commit, history scan, exact-OID transport,
+and post-push remote/PVR verification.
 
 D-042 completes M3-005A without publishing a personal contact or pretending a
 document activates a remote setting. `SECURITY.md`, `CONTRIBUTING.md`,
@@ -845,20 +861,20 @@ Node 22.23.2/npm 10.9.8 and Node 24.19.0/npm 11.17.0 pass 1198/1198 complete
 tests, the 124-file source gate, and the real four-package offline install plus
 installed CLI smoke. At that checkpoint this was still local evidence: no
 public repository, active private-reporting setting, hosted CI/security result,
-or publication was claimed. D-045 later created only the empty shell and
-verified PVR; hosted results and source publication remain absent. The final
+or publication was claimed. D-045 later created the empty shell and verified
+PVR; M3-006 later published the exact first source ref. The final
 bounded M3-005A reviews report 0 blocker, 0 high, and 0
 medium findings.
 
-D-043 defines the still-local first-public-ref boundary. The existing
+D-043 defined the then-local first-public-ref boundary. The existing
 forbidden-material scanner now has a bounded `history` mode that reads the
 policy from `refs/heads/main`, walks the tip's raw parent/tree OIDs, scans every
 reachable tree-entry version and commit message, and separately exact-checks
 author/committer metadata against
 the repository-local public Git identity without printing it. Deleted
 forbidden files, message leakage, identity drift, symlinks, oversized blobs,
-shallow/overridden history, and a moving main ref fail closed. The current 13-
-commit history scans 286 unique leaf-entry versions, 3,677,606 regular-blob
+shallow/overridden history, and a moving main ref fail closed. At the D-043
+preflight checkpoint, the 13-commit history scanned 286 unique leaf-entry versions, 3,677,606 regular-blob
 bytes, and 26 identity occurrences with zero finding; the focused policy suite
 passes 49/49. Raw commit parent/tree OIDs, not mutable shallow reachability,
 own ancestry; repository indirection, control-path injection, noncanonical tree
@@ -867,9 +883,9 @@ bytes.
 Bounded independent closing reviews reproduce the environment, shallow/merge,
 raw-tree, fsck-configuration, and redaction probes and close D-043 at 0 blocker,
 0 high, and 0 medium.
-This is preflight only. The final repository-bound commit must be rescanned and
-pushed by exact object ID only after the D-044 GitHub target is reverified, PVR is
-positively verified, and dual-runtime package/preflight evidence passes.
+That was preflight only. M3-006 later rescanned the final 14-commit history,
+pushed the exact reviewed object ID, and verified remote-main equality plus the
+repository/PVR tuple.
 
 D-044 now fixes the final pre-public identity at
 `why7682/pptx-compiler`. The CLI, four npm package names, workspace/package
@@ -885,17 +901,19 @@ spine, return blocked QA, and create no BuildArtifact. Two bounded current-byte
 closing reviews report 0 blocker, 0 high, and 0 medium; D-044 provenance is
 closed.
 
-D-045 closes the repository and local-package half of M3-006. GitHub reports the empty public
-repository as ID `1330979133` and PVR as exact `enabled: true`; no local remote
-or source ref exists. Package-plan schema v2 owns the exact GitHub
+D-045 closed the repository and local-package half of M3-006. At that
+checkpoint GitHub reported the empty public repository as ID `1330979133` and
+PVR as exact `enabled: true`; no local remote or source ref existed. Package-plan schema v2 owns the exact GitHub
 provider/ID/owner/name/URL tuple. Leaf repository objects and the root SBOM VCS
 reference are pure projections, while `private: true` plus
 `npm-publication-not-authorized` keeps npm closed. Package evidence/marker v2
 binds the canonical readable plan fingerprint so old tarballs cannot satisfy a
 new repository plan. Node 22.23.2 and Node 24.19.0 each pass the 1217-node
 complete suite; the 24-node package-stage suite and real npm 10.9.8/11.17.0
-four-tarball offline installed-CLI builds also pass. The next authorized work is
-the final local commit and history scan, not an unreviewed source push.
+four-tarball offline installed-CLI builds also passed. M3-006 subsequently
+completed the final 14-commit history scan, canonical HTTPS transport,
+exact-object-ID first push, remote-main equality check, and post-push
+repository/PVR verification.
 
 ## First commands after switching workspace
 
@@ -914,13 +932,12 @@ remain the machine command authority.
 
 ## Next work session
 
-1. Read `docs/M3-006_HANDOFF.md`, reverify repository ID `1330979133`, public
-   visibility, empty refs, PVR `enabled: true`, and the approved local Git
-   identity. Retain the completed repository-bound Node 22/24 package evidence,
-   commit the reviewed tree locally, and pass the exact-main history gate before
-   any source ref is pushed.
-2. Keep final release/platform/CI wording in M3-005B until M3-004B public
-   evidence exists.
+1. Read `docs/M3-004_HANDOFF.md`. Use an ordinary pull request to collect six-
+   cell CI plus Dependency Review
+   evidence. After the accepted main update, retain final main-run CI and CodeQL
+   evidence. Do not promote M3-004B while either Windows cell or Dependency
+   Review is absent.
+2. Keep final release/platform wording in M3-005B until M3-004B closes.
 3. Keep predecessor code, presentation assets, converter output, and generated
    archives out of Git; use only repository-owned text/synthetic fixtures for
    public tests.

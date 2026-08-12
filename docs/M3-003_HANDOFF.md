@@ -174,12 +174,20 @@ does not turn them into source or planning facts.
 ## Next dependency
 
 M3-004A has since defined the local public workflow contract; see
-`docs/M3-004_HANDOFF.md`. Its hosted evidence remains M3-004B, blocked until
-M3-006. M3-005A now completes the pre-public document contract and M3-005B
+`docs/M3-004_HANDOFF.md`. M3-006 has completed the exact first public source
+ref, and M3-004B now owns the partial hosted evidence. M3-005A completes the
+pre-public document contract and M3-005B
 waits for hosted evidence. M3-006 has created the user-selected repository as an
 empty public shell, verified private vulnerability reporting, and inserted its
 canonical identity into the plan, leaf manifests, and SBOM. Evidence/marker
-schema v2 binds the canonical plan fingerprint. The repository-bound rerun now
-passes: Node 22.23.2 and Node 24.19.0 each pass 1217/1217 complete tests, the
-24-node package-stage suite passes, and npm 10.9.8/11.17.0 each pass the real
-four-tarball offline install and installed CLI smoke. No source ref exists yet.
+schema v2 binds the canonical plan fingerprint. The exact first-ref repository-
+bound rerun passed: Node 22.23.2 and Node 24.19.0 each passed 1217/1217 complete
+tests, the 24-node package-stage suite passed, and npm 10.9.8/11.17.0 each passed the real
+four-tarball offline install and installed CLI smoke. Those numbers belong to
+the exact first-ref snapshot. The exact current portability candidate has since
+passed 1217/1217 complete tests under both admitted runtimes; Node 22/npm
+10.9.8 and Node 24/npm 11.17.0 each also passed the explicit guarded four-
+tarball build, offline joint install, and installed CLI smoke with the CLI tar
+entry still mode 0755. This is local package evidence only; hosted Windows,
+ordinary-PR Dependency Review, accepted-main, npm-publication, and release
+evidence remain separate.

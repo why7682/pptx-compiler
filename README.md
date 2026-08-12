@@ -16,14 +16,16 @@ The publishable boundary is now designed as four guarded packages: CLI, core,
 native-card-arrow, and public-synthetic. A machine-validated positive staging
 plan owns their exact files, exports, types, bin, dependencies, assets, license,
 runtime range, and currently unscoped alpha names. The final repository URL is
-now bound to the verified empty public GitHub repository through package-plan
+now bound to the verified public GitHub repository through package-plan
 schema v2; npm publication remains separately blocked. M3-003 materializes
 npm-private leaf manifests, creates and independently checks all four guarded
 tarballs, installs them together offline in one empty directory, and runs the
-complete installed-bin spine. The repository-bound snapshot passes 1217/1217
+complete installed-bin spine. The exact first-ref snapshot passed 1217/1217
 tests under both admitted Node lines, the 24-node package-stage suite, and real
-npm 10/11 four-tarball builds with offline installed-bin smoke. This is local
-pre-first-ref evidence, not publication or final release evidence.
+npm 10/11 four-tarball builds with offline installed-bin smoke. The subsequent
+Windows portability correction changes the package plan and packed README, so
+that historical evidence is not reused for the current working tree. This is
+source and local package evidence, not npm publication or final release evidence.
 
 This is not arbitrary-template compatibility, a general renderer, passed
 delivery QA, or a published package. `supportClaimsEnabled` remains false and
@@ -92,14 +94,17 @@ Select an admitted Node 22 or 24 runtime first and follow the exact sequence in
 [docs/REPRODUCIBILITY.md](docs/REPRODUCIBILITY.md). The guarded package build
 regenerates one ignored `.package-stage/`, checks four npm-private tarballs,
 installs them together offline, and runs the installed candidate-alpha spine.
-GitHub now owns an empty public `why7682/pptx-compiler` shell and reports private
-vulnerability reporting as enabled; no source ref exists. The canonical
+GitHub now owns the first public `main` ref for `why7682/pptx-compiler`.
+Private vulnerability reporting was reverified as enabled after the exact
+push. M3-006 verified the final
+history, canonical HTTPS transport, repository identity, and exact remote-main
+equality. The canonical
 repository ID/owner/name/URL are bound in package-plan schema v2 and projected
 into each leaf manifest plus the root SBOM component, while `private: true`
-continues to enforce the separate npm-publication guard. The repository-bound
-dual-runtime package/preflight evidence now passes; M3-006 must finish the local
-commit, final history scan, and exact-object-ID first push before M3-004B can
-collect hosted results.
+continues to enforce the separate npm-publication guard. The first M3-004B run
+passed all Ubuntu and macOS cells plus CodeQL, but both Windows cells failed and
+Dependency Review has not yet run on an ordinary pull request. See
+[docs/M3-004_HANDOFF.md](docs/M3-004_HANDOFF.md) for the exact evidence boundary.
 
 ## License
 

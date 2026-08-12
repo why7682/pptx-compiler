@@ -6,15 +6,15 @@ M3-004 has two different facts and they must not be conflated:
 
 - `M3-004A` defines and locally verifies the public-safe workflow, development-
   toolchain, source-policy, license, and static-ESM SBOM projection contracts.
-- `M3-004B` is the six-cell public GitHub Actions run. The empty public shell
-  now exists, but it remains blocked until M3-006 publishes the exact reviewed
-  first source ref.
+- `M3-004B` owns the public six-cell and security evidence. M3-006 has now
+  published the exact reviewed first source ref, so M3-004B is `NEXT` rather
+  than blocked on repository creation.
 
-The local workflow definition is complete. No Linux, Windows, macOS, CodeQL, or
-dependency-review run is claimed merely because the YAML exists or local macOS
-tests pass. M3-005A completes the local public-document contract. D-045 created
-the empty shell and verified private reporting; M3-006 must still close the
-repository-bound local evidence and exact first-ref publication.
+The local workflow definition is complete. The first public CI run passed
+Ubuntu and macOS under Node 22 and 24 but failed Windows under both lines. The
+first security run passed CodeQL; Dependency Review was skipped because that
+job is restricted to ordinary pull requests. M3-004B is therefore partial and
+not complete.
 
 ## Kernel-style judgment
 
@@ -147,22 +147,27 @@ residual, not permission to weaken the exact stage inventory.
 These local macOS results are also recorded in `TODO.md`. They do not substitute
 for the six public runner cells.
 
-## Public evidence still required
+## Current public evidence
 
-M3-006 has created the empty public shell, verified PVR, inserted the exact
-repository identity into package-plan schema v2/manifests, and regenerated the
-static-ESM SBOM projection. The repository-bound M3-003 gate now passes under
-both admitted runtimes, including real npm 10/11 four-tarball offline install
-and installed CLI smoke. M3-004B must still retain the public URLs and
-conclusions for all six CI cells plus CodeQL and Dependency Review. Until then
-no platform row, support switch, publication, or security-scan claim is
-promoted.
+- CI: https://github.com/why7682/pptx-compiler/actions/runs/31559642053
+- Security: https://github.com/why7682/pptx-compiler/actions/runs/31559642035
+- Passed: Ubuntu 22/24, macOS 22/24, and CodeQL.
+- Missing or failed: Windows 22/24 and ordinary-PR Dependency Review.
+
+The Windows failures exposed four real portability defects: platform-invalid
+test output naming, CRLF-sensitive Git capability parsing, npm `bin` spelling
+that did not receive executable mode on Windows, and a killed Pandoc child whose
+runner resolved before `close`. The exact current local candidate passes
+231/231 focused tests and 1217/1217 complete tests under both admitted
+runtimes. Node 22/npm 10.9.8 and Node 24/npm 11.17.0 each pass the explicit
+guarded four-tarball build, offline joint install, and installed-bin smoke; the
+CLI tar entry remains mode 0755, QA remains blocked, and no BuildArtifact is
+created. This closes local frozen candidate/source/package evidence only. It
+does not prove corrected Windows behavior.
 
 ## Next dependency
 
-M3-005A now supplies only the minimum pre-public security, contribution,
-governance, and reproducibility text. M3-006 has completed its empty-shell/PVR
-prefix, repository binding, and complete dual-runtime package gate; it must now
-create and history-scan the reviewed local commit before an exact source ref.
-M3-005B keeps final changelog/release wording blocked until public CI evidence
-exists rather than predicting it.
+Open an ordinary pull request for the six-cell and Dependency Review jobs.
+After the accepted change reaches `main`, retain the final-main CI and CodeQL
+results for those exact bytes. M3-005B remains blocked until that hosted
+evidence is complete.

@@ -111,11 +111,17 @@ G4 is not final release evidence yet. M3-004A tracks a deterministic CycloneDX
 ESM edges; the dev-only TypeScript compiler is correctly excluded. This is not
 a sandbox proof against adversarial computed loaders. M3-006 reverified the
 D-045 public target and PVR state, retained the npm-private guard and verified
-repository projection, and completed the repository-bound package gate under
-both admitted runtimes. Public three-platform CI, final published-ref SBOM validation,
-signing, registry provenance, and reviewed-to-published equality remain G5/G6
-work. Source-tree facade tests or successful `npm pack --dry-run` alone never
-satisfy this gate.
+repository projection, completed the repository-bound package gate, and later
+published the exact first source ref. The first public run is only partial
+three-platform evidence: Ubuntu and macOS pass under both Node lines, while
+both Windows cells fail. The exact current local candidate now passes
+1217/1217 complete tests under both admitted runtimes, and both the Node 22/
+npm 10.9.8 and Node 24/npm 11.17.0 pairs pass the explicit guarded four-
+tarball build, offline joint install, and installed-bin smoke. That closes the
+fresh local G4 package evidence only. Final published-ref SBOM validation,
+signing, registry
+provenance, and reviewed-to-published equality remain G5/G6 work. Source-tree
+facade tests or successful `npm pack --dry-run` alone never satisfy this gate.
 
 ## G5 — Project security and maintenance
 
@@ -131,19 +137,16 @@ M3-004A closes only the local definition half of this gate: exactly two
 canonical workflows, fixed full-SHA actions and hosted-runner labels, read-only
 ordinary CI, isolated CodeQL/Dependency Review permissions, one exact dev
 toolchain, real declaration typecheck, source/import policy, MIT/provenance
-relations, and the static-ESM SBOM projection. M3-004B remains unsatisfied until
-the public remote records all six OS/runtime cells plus the security jobs.
+relations, and the static-ESM SBOM projection. M3-004B remains unsatisfied. Run
+`31559642053` passed Ubuntu 22/24 and macOS 22/24 but failed Windows 22/24;
+security run `31559642035` passed CodeQL while Dependency Review was skipped on
+the push event and still requires an ordinary pull request.
 M3-005A closes the local vulnerability-reporting, contribution, governance,
 and reproduction document contract. D-045 now records the empty public shell,
-HTTP 204 activation, and subsequent exact `enabled: true` status without
-claiming any source ref or hosted result. Repository-bound package regeneration
-now passes; the final local main commit must pass the reachable-history gate and be pushed only
-by its exact object ID. Immediately before that push, the resolved push URL set
-must contain exactly one credential-free HTTPS URL for
-`why7682/pptx-compiler`, with no `pushurl`, extra endpoint, SSH form, or URL
-rewrite; the same numeric repository identity, public/empty state, and PVR
-status must be re-read. Afterward, remote `main` must equal the scanned object
-ID.
+HTTP 204 activation, and subsequent exact `enabled: true` status. M3-006 then
+completed the reachable-history gate, one canonical credential-free HTTPS
+transport, exact-object-ID first push, and post-push repository/PVR/remote-main
+equality checks. That completed first-ref evidence does not satisfy M3-004B.
 M3-005B owns final claim text after hosted evidence. No local workflow or
 document check upgrades a support or active-security-setting claim.
 
@@ -682,8 +685,8 @@ create-only. This closes M3-001's product spine, not the package/release gate:
 M3-002 package boundaries, M3-003 tarball/leakage, and M3-004A local workflow
 contracts and M3-005A's minimum public documents are complete. D-045 later
 closed the empty-shell, PVR, repository binding, and repository-bound package
-gate. The first ref, M3-004B public cross-platform evidence, and M3-005B final
-claim text remain open in that order.
+gate. M3-006 later completed the first ref. M3-004B remains partial, and
+M3-005B remains blocked on its complete hosted evidence.
 
 The D-029 authority rule applies to that work: the source template owns
 unchanged inherited content/structure; readable authored semantic sources,

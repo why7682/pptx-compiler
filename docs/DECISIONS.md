@@ -44,11 +44,11 @@ No item below is decided merely because a recommendation is recorded.
 | D-038 | ACCEPTED | Honest blocked QA for the exact candidate | Re-derive the current authenticated candidate and canonical record from readable project authorities, exact-compare both stable-read files, and emit the existing fixed blocked QaReport when external visual/compatibility evidence is unavailable; never create BuildArtifact or scan local evidence. | Full QaReport output, three pass/three unavailable checks, normative manual-gate rows, exact pair/replay checks, missing/tampered/stale/resource/symlink/validator mutations, create-only and deterministic output, 99 focused and 1085 complete tests, closing 0/0/0 review, unchanged support counts, and false global support switch. |
 | D-039 | ACCEPTED | Guarded candidate-alpha package graph | Publish only CLI, core, native-card-arrow, and public-synthetic in the first alpha graph; make resource ownership explicit and expose narrow facades. D-045 supersedes only D-039's former repository-pending guard. | Positive source-to-stage plan, exact exports/types/bin/import aliases/assets, dependency and forbidden-closure mutations, split-resource full-spine execution, executable-bin check, and no labs/PowerPoint/Pandoc/OMML/ordered/final-delivery content. |
 | D-040 | ACCEPTED | Fixed-stage and tgz byte acceptance boundary | Keep the readable plan and retained source/policy bytes authoritative; use one recoverable owned stage, treat npm as a constrained packer, independently admit only canonical exact tgz bytes, and keep final hashes as boundary fingerprints. | Private leaf manifests, strict gzip/ustar and forbidden-material mutations, control/source/tarball retained-byte checks, live/stale stage and completion recovery, offline four-package install, installed-bin full spine, blocked QA, and no BuildArtifact. |
-| D-041 | ACCEPTED | Local public-workflow and development-toolchain boundary | Keep exactly two canonical least-privilege workflows, derive declaration paths and the static-ESM SBOM projection from the alpha package plan, and separate local workflow definition from public runner evidence. | Full-SHA action pins, fixed three-OS/two-Node matrix, real TypeScript consumer, exact dev lock, source/release/workflow mutations, local Node 22/24 verification, and public evidence deferred until M3-006. |
-| D-042 | ACCEPTED | Minimum public documents and first-ref private-reporting boundary | Give security, contribution, governance, and reproduction one readable owner each; use GitHub private vulnerability reporting without publishing a second personal contact, and require empty-public-repository creation, positive activation/status verification, repository-bound package regeneration, and a fresh package gate before any source branch/ref is pushed. | Exact document routing and workflow-command projection, fail-closed document mutations, zero text/copyright leakage exceptions, dual-runtime local verification, D-045 remote activation, and completed M3-006 repository-bound regeneration; the first ref remains separate. |
-| D-043 | ACCEPTED | Reachable-history and exact-first-ref boundary | Reuse the current forbidden-material policy to scan every commit/tree-entry/message reachable from local `refs/heads/main`, derive reachability from raw parent/tree OIDs, verify metadata against the repository-local public Git identity without echoing it, and push only the scanned exact object ID after remote/PVR/package reconciliation. | Bounded history mode, eight deletion/redirect/grammar/message/identity/type/resource regressions, current 13-commit zero-finding scan, broader object/ref audit, and remote creation plus final repository-bound rescan deferred to the externally authorized M3-006 transition. |
+| D-041 | ACCEPTED | Local public-workflow and development-toolchain boundary | Keep exactly two canonical least-privilege workflows, derive declaration paths and the static-ESM SBOM projection from the alpha package plan, and separate local workflow definition from public runner evidence. | Full-SHA action pins, fixed three-OS/two-Node matrix, real TypeScript consumer, exact dev lock, source/release/workflow mutations, and local Node 22/24 verification. M3-006 is complete; the first hosted run remains partial with Windows failures and no Dependency Review result. |
+| D-042 | ACCEPTED | Minimum public documents and first-ref private-reporting boundary | Give security, contribution, governance, and reproduction one readable owner each; use GitHub private vulnerability reporting without publishing a second personal contact, and require empty-public-repository creation, positive activation/status verification, repository-bound package regeneration, and a fresh package gate before any source branch/ref is pushed. | Exact document routing and workflow-command projection, fail-closed document mutations, zero text/copyright leakage exceptions, dual-runtime local verification, D-045 remote activation, and completed M3-006 repository-bound regeneration plus separately gated first ref. |
+| D-043 | ACCEPTED | Reachable-history and exact-first-ref boundary | Reuse the current forbidden-material policy to scan every commit/tree-entry/message reachable from local `refs/heads/main`, derive reachability from raw parent/tree OIDs, verify metadata against the repository-local public Git identity without echoing it, and push only the scanned exact object ID after remote/PVR/package reconciliation. | Bounded history mode, eight deletion/redirect/grammar/message/identity/type/resource regressions, final 14-commit/505-leaf/7,698,368-byte/28-identity zero-finding scan, canonical HTTPS push, and exact remote-main equality. |
 | D-044 | ACCEPTED | Final pre-public product and repository identity | Use `pptx-compiler` as the one public repository, CLI, package, import, and serialized-contract stem; keep only the existing ignored transaction namespace and dated history under the former working name. | User selected `why7682/pptx-compiler`; exact GitHub and four-name npm checks were clear on 2026-08-11, and the atomic rename must pass dual-runtime package and contract evidence before the first ref. |
-| D-045 | ACCEPTED | Empty public shell, repository binding, and separate npm guard | Bind GitHub repository ID `1330979133` plus its exact owner/name/URL into package-plan schema v2 after empty-public creation and positive PVR verification; derive manifest/SBOM repository data from that tuple while retaining `private: true` and a blocked npm release guard. | Public/empty repository facts, PVR PUT 204 plus GET `enabled: true`, exact repository/manifest/SBOM mutations, canonical-plan evidence fingerprint, and repository-bound dual-runtime package verification. The final first-ref history scan remains M3-006 completion evidence. |
+| D-045 | ACCEPTED | Empty public shell, repository binding, and separate npm guard | Bind GitHub repository ID `1330979133` plus its exact owner/name/URL into package-plan schema v2 after empty-public creation and positive PVR verification; derive manifest/SBOM repository data from that tuple while retaining `private: true` and a blocked npm release guard. | Public/empty repository facts, PVR PUT 204 plus GET `enabled: true`, exact repository/manifest/SBOM mutations, canonical-plan evidence fingerprint, and repository-bound dual-runtime package verification; M3-006 later supplied the final first-ref evidence. |
 
 Record a decision by changing its status to `ACCEPTED`, adding the date and
 rationale below the table, and updating every affected contract/TODO in the
@@ -583,8 +583,11 @@ same change.
   runtime graph. The workflow checker enumerates the real directory and rejects
   indirection, extra workflows, floating actions/runners, dangerous triggers,
   secrets, cache/artifact/publication paths, and no-op gate substitution.
-  M3-004B remains the public six-cell plus CodeQL/Dependency Review evidence and
-  cannot exist before M3-006 publishes the reviewed first source ref. All platforms flush
+  M3-004B remains the public six-cell plus CodeQL/Dependency Review evidence.
+  M3-006 has published the reviewed first source ref; the first hosted run
+  passed four OS/runtime cells and CodeQL, failed both Windows cells, and did
+  not run Dependency Review. Those observations advance but do not close
+  M3-004B. All platforms flush
   owned regular files before logical commit markers; POSIX additionally
   requests parent-directory fsync barriers, while Windows makes no sudden-
   power-loss directory-entry persistence claim. A managed FileProvider created
@@ -600,8 +603,8 @@ same change.
   the repository REST endpoint, required a subsequent exact `enabled: true`
   status, and bound GitHub's canonical repository identity into the package
   plan, leaf manifests, and SBOM. M3-006 has since completed the repository-
-  bound package gate under both admitted runtimes; the first source ref still
-  waits for the final local history scan. A failed create, enable, verification, metadata, or
+  bound package gate, final history scan, canonical transport, and exact first
+  source ref. A failed create, enable, verification, metadata, or
   package-gate step leaves the public shell without source and grants no
   publication evidence. M3-005A mechanically binds the four human process
   documents and the canonical workflow command projection, while M3-005B still
@@ -618,21 +621,23 @@ same change.
   author/committer to equal the single repository-local public identity without
   emitting the identity value. Shallow/overridden object graphs, unsupported
   commit metadata, forbidden historical modes/content, resource overflow,
-  identity drift, and a moving tip fail closed. The current 13 commits, 286
+  identity drift, and a moving tip fail closed. The D-043 preflight's 13 commits, 286
   leaf-entry versions, 3,677,606 regular-blob bytes, and 26 identity occurrences
-  pass with zero finding; eight regressions bring the policy focus to 49/49.
+  passed the preflight with zero finding; eight regressions bring the policy focus to 49/49.
   This does not
   authorize a history rewrite or source ref. D-044/D-045 later confirmed the
-  exact owner/repository and existing public identity; the final repository-
-  bound commit must still be rescanned and pushed only by exact object ID with no tags,
-  wildcard, mirror, force, or implicit reconciliation.
+  exact owner/repository and existing public identity. M3-006 later scanned the
+  final 14-commit history with 505 leaf versions, 7,698,368 regular-blob bytes,
+  and 28 identity occurrences at zero finding, then used canonical HTTPS
+  transport and verified exact remote-main equality. No tags, wildcard, mirror,
+  force, or implicit reconciliation was used.
 - **D-044 accepted:** the user selected `why7682/pptx-compiler` as the exact
   first public repository. The active product identity is one atomic stem:
   `pptx-compiler` for the CLI, `pptx-compiler-*` for the other three alpha
   packages, `#pptx-compiler/*` for workspace/package aliases, and
   `urn:pptx-compiler:*` for the unpublished serialized contract namespace.
-  There is no old-name compatibility alias because no public ref, npm package,
-  or external userspace exists. The local workspace folder is not public
+  There is no old-name compatibility alias because at D-044 acceptance no
+  public ref, npm package, or external userspace existed. The local workspace folder is not public
   identity and remains unchanged. The existing ignored stage owner, package
   plan ID, and `.pptx-pipeline-*` transaction prefixes remain stable so a crash
   scene created before the rename is not reclassified as foreign. D-001 and
@@ -641,8 +646,10 @@ same change.
   search returned no `pptx-compiler` repository, and the official npm registry
   returned E404 for all four selected package names. Those checks reserve
   nothing. The rename is accepted only after regenerated contracts/SBOM,
-  dual-runtime tests, package build/install smoke, and an independent review;
-  repository-bound metadata still waits for the empty-remote/PVR transition.
+  dual-runtime tests, package build/install smoke, and an independent review.
+  At that checkpoint repository-bound metadata still waited for the empty-
+  remote/PVR transition; D-045 and M3-006 later completed it and the exact first
+  source ref.
 - **D-045 accepted:** M3-006 created only the empty public GitHub shell and
   verified its private-reporting setting before any source ref. GitHub reports
   repository ID `1330979133`, owner `why7682`, name `pptx-compiler`, canonical
@@ -658,8 +665,9 @@ same change.
   a pre-binding tarball cannot be recovered as evidence for a changed plan with
   the same plan ID/version/file shape. The previously reviewed set must be
   authenticated under its own code and moved intact before the fixed stage is
-  reused. The repository-bound dual-runtime rebuild now passes; no source ref
-  may precede the final local history scan and exact-object-ID push.
+  reused. The repository-bound dual-runtime rebuild passed, and M3-006 later
+  completed the final history scan and exact-object-ID push. npm publication
+  remains separately unauthorized.
 
 ## MIT versus Apache-2.0 review
 

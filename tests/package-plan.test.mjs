@@ -71,6 +71,9 @@ test("the alpha package plan closes one guarded four-package graph", async () =>
     state: "blocked",
     reason: "npm-publication-not-authorized"
   });
+  assert.deepEqual(packageById(plan, "cli").bin, {
+    "pptx-compiler": "bin/pptx-compiler.mjs"
+  });
   assert.equal(plan.namePolicy.result, "all-names-e404-not-reserved");
   assert.equal(plan.stagingRoot, ".package-stage");
 

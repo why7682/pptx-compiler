@@ -710,10 +710,10 @@ criterion is recorded in the repository.
 | M3-002 | DONE | Define explicit publishable packages and decide scoped versus unscoped npm names after the installed spine is stable. | Each package has positive `files`, `exports`, `types`, `bin` where applicable, license, engines, and staged metadata; D-045 now binds the exact repository tuple while npm publication remains blocked. |
 | M3-003 | DONE | Add repository and npm leakage gates. | Tarball is at most 5 MiB compressed/20 MiB unpacked, at most 300 files/1 MiB each, matches an allowlist, contains no forbidden magic/extensions, and installs in an empty directory. |
 | M3-004A | DONE | Define and locally verify the public-safe CI/security, development-toolchain, source-policy, license, and static-ESM SBOM projection contracts. | Two canonical workflows and all local gates pass under admitted Node 22/24 in one fixed non-FileProvider copy without model/GUI/private inputs. |
-| M3-004B | BLOCKED | Collect the six Linux/Windows/macOS × Node 22/24 public CI cells plus CodeQL and Dependency Review evidence. | The public remote created by M3-006 records stable URLs and conclusions for every hosted job; local YAML or macOS runs are not substitutes. |
+| M3-004B | NEXT | Collect the six Linux/Windows/macOS × Node 22/24 public CI cells plus CodeQL and Dependency Review evidence. | The public remote records stable URLs and conclusions for every hosted job; local YAML or macOS runs are not substitutes. |
 | M3-005A | DONE | Add the minimum pre-public security, contribution, governance, and reproducibility documents. | The local documents define and mechanically verify one fail-closed repository-native private-reporting process; D-045 separately records its live remote activation. |
 | M3-005B | BLOCKED | Freeze changelog, known limitations, final support wording, and release text from public evidence. | After M3-004B, every final claim cites the matching hosted evidence and executable support state. |
-| M3-006 | NEXT | Create and scan the final local main commit, then push that exact object ID as the first source ref; the repository-bound dual-runtime package/preflight evidence is complete. | GitHub reports public repository ID `1330979133` for `why7682/pptx-compiler`, an empty ref set, and private vulnerability reporting `enabled: true`; no ref is pushed unless repository-bound manifests/SBOM/tarballs pass, the exact final history has zero finding, one canonical resolved HTTPS push URL is proved, and the same remote facts plus remote-main equality are verified around the push. |
+| M3-006 | DONE | Create and scan the final local main commit, then push that exact object ID as the first source ref. | GitHub reports public repository ID `1330979133` for `why7682/pptx-compiler`, private vulnerability reporting `enabled: true`, and remote `main` equal to the exact scanned object ID after canonical HTTPS transport. |
 | M3-007 | DEFERRED | Implement `doctor`, generic `onboard`, standalone `diff`, and optional formula CLI only from demonstrated user workflows. | Each added command has one non-duplicated data authority and executable need; generic onboarding never hard-codes capability-specific binding rules. |
 
 ### M3-005A completion — 2026-08-11
@@ -722,10 +722,10 @@ criterion is recorded in the repository.
   minimum contribution, single-maintainer, and human reproduction boundaries.
   Package scripts and the canonical workflow remain the command authority.
 - `SECURITY.md` selects GitHub private vulnerability reporting as the sole
-  private channel without publishing an email address. M3-006 has now created
-  the repository empty and public, enabled the feature, and verified the REST
-  status; the still-empty remote remains without code until every later package
-  and history gate succeeds.
+  private channel without publishing an email address. At the M3-005A
+  checkpoint, activation and source publication were still future remote facts;
+  D-045 and M3-006 later enabled the feature and published the exact reviewed
+  first source ref.
 - The forbidden-material compiler admits path exceptions only for path rules.
   Text and copyright rules have no exception representation, so SECURITY does
   not create a leakage-policy special case.
@@ -753,7 +753,7 @@ criterion is recorded in the repository.
   OIDs, scans reachable old tree-entry versions and commit messages,
   exact-checks author/committer occurrences against the repository-local public
   identity without printing it, and fails on shallow or overridden history.
-- The current non-shallow 13-commit history passes with 286 unique leaf-entry
+- At that preflight checkpoint, the non-shallow 13-commit history passed with 286 unique leaf-entry
   versions, 3,677,606 regular-blob bytes, 26 identity occurrences, and zero finding.
   The broader read-only audit finds no tags, remote, replace/graft/alternate
   object source, token/credential/private-path pattern, or private fixture hash;
@@ -768,10 +768,10 @@ criterion is recorded in the repository.
 - Bounded independent closing reviews reproduced transient shallow and merge
   ancestry, Git environment selection, raw-tree bytes, local/global fsck
   downgrade, and redaction probes and close at 0 blocker, 0 high, and 0 medium.
-- This was not M3-006 completion. The final repository-bound commit still does
-  not exist. D-044 subsequently closed the atomic rename and local evidence;
-  M3-006 then created only the empty public shell and enabled its private
-  reporting channel. No local remote or source ref exists.
+- This was not M3-006 completion: the final repository-bound commit did not yet
+  exist. D-044 subsequently closed the atomic rename and local evidence; D-045
+  created the empty public shell and enabled its private reporting channel;
+  M3-006 later completed the exact first-ref transition.
 
 ### M3-006 empty shell and repository binding — 2026-08-11
 
@@ -792,12 +792,44 @@ criterion is recorded in the repository.
   readable package plan. This is a boundary fingerprint, not a planning model,
   and prevents pre-repository tarballs from being accepted under an unchanged
   plan ID/version/file shape.
-- The repository-bound snapshot passes 1217/1217 complete tests under both
+- At the D-045 checkpoint, the repository-bound snapshot passed 1217/1217 complete tests under both
   Node 22.23.2 and Node 24.19.0. The 24-node package-stage suite passes, and
   npm 10.9.8 plus npm 11.17.0 each admit four repository-bound private
   tarballs, install them together offline, execute the installed CLI spine,
-  return blocked QA, and create no BuildArtifact. The remaining transition is
-  the final local commit/history scan and exact-object-ID first push.
+  return blocked QA, and create no BuildArtifact. M3-006 later completed the
+  then-remaining final commit/history scan and exact-object-ID first push.
+
+### M3-006 first-public-ref completion — 2026-08-12
+
+- The reviewed first public `main` object is
+  `410642b668514ab7193212d617cc0f8acb837924`.
+- Its final pre-push history scan covered 14 commits, 505 unique leaf-entry
+  versions, 7,698,368 regular-blob bytes, and 28 identity occurrences with zero
+  finding.
+- The push used the one canonical HTTPS endpoint. Repository ID `1330979133`,
+  public visibility, PVR `enabled: true`, and remote-main equality were verified
+  after transport.
+- This closes M3-006 only. It does not publish npm packages or prove hosted
+  platform, compatibility, support, or release results.
+
+### M3-004B first hosted run — 2026-08-12
+
+- Public CI run `31559642053` passed Ubuntu 22/24 and macOS 22/24, but failed
+  Windows 22/24.
+- Security run `31559642035` passed CodeQL. Dependency Review was skipped on the
+  push event and still requires an ordinary pull request.
+- The failures exposed four portability boundaries: a POSIX-only test path,
+  CRLF handling in the Git capability parser, noncanonical npm `bin` target
+  spelling, and returning from forced process termination before child `close`.
+- The exact current local candidate passes the 231/231 focused set and the
+  1217/1217 complete suite under each admitted runtime. Node 22/npm 10.9.8 and
+  Node 24/npm 11.17.0 each pass the explicit guarded four-tarball build,
+  offline joint install, and installed-bin smoke; the CLI tar entry remains
+  mode 0755, QA remains blocked, and no BuildArtifact is created. This closes
+  local frozen candidate/source/package evidence only. Hosted Windows,
+  ordinary-PR Dependency Review, and accepted-main CI/CodeQL results remain
+  required. Bounded code and final state/provenance reviews each report
+  0 blocker, 0 high, and 0 medium.
 
 ### D-044 pre-public identity migration — 2026-08-11
 
@@ -820,8 +852,8 @@ criterion is recorded in the repository.
   the same `.package-stage/` path produced the renamed set.
 - Two bounded current-byte closing reviews report 0 blocker, 0 high, and 0
   medium. D-044 provenance is closed; M3-006 has since completed the empty-
-  shell/PVR prefix and repository-bound dual-runtime rebuild, but no source ref
-  may precede the final local commit and history scan.
+  shell/PVR prefix, repository-bound dual-runtime rebuild, final local history
+  scan, and exact first source ref.
 
 ### M3-001 first CLI slice — 2026-08-11
 
@@ -999,9 +1031,10 @@ criterion is recorded in the repository.
   comment, and line-terminator mutations. Final re-review reports 0 blocker,
   0 high, and 0 medium.
 - M3-002 itself created no stage, tarball, installation, publication,
-  repository, or release claim. M3-003 has since implemented that local gate in
-  the one ignored `.package-stage/`; D-045 later created only the empty public
-  shell and verified PVR, while source/ref and release evidence remain absent.
+  repository, or release claim. M3-003 later implemented that local gate,
+  D-045 created the empty public shell and verified PVR, and M3-006 completed
+  the exact first source ref. Package publication and release evidence remain
+  absent.
 
 ### M3-003 guarded package-stage completion — 2026-08-11
 
@@ -1036,11 +1069,11 @@ criterion is recorded in the repository.
   unknown empty conflict directories may be removed, while files, links, and
   nonempty unknown entries fail closed. A pre-marker interruption restores the
   last complete review and retains the unfinished candidate in `failed`.
-- This is local package evidence only. M3-004A owns the public-safe workflow
+- This was the D-040 local package checkpoint only. M3-004A owns the public-safe workflow
   definition; M3-004B owns only its hosted cross-platform evidence. D-045
   changed the repository-bound manifest and tgz inputs; the resulting
-  repository-bound Node 22/24 package gate now passes, while the first source
-  ref still waits for the final local history gate.
+  repository-bound Node 22/24 package gate later passed, and M3-006 subsequently
+  completed the final local history gate and exact first source ref.
 
 ### M3-004A local workflow-contract completion — 2026-08-11
 

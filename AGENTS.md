@@ -130,8 +130,8 @@ For maintenance or audit of the completed `M3-003` guarded package stage, read:
 9. `docs/RELEASE_GATES.md`
 10. `docs/PROVENANCE_LEDGER.md`
 
-For maintenance or audit of the completed local `M3-004A` workflow contract,
-read:
+For maintenance or audit of the completed local `M3-004A` workflow contract
+or the active `M3-004B` hosted-evidence follow-up, read:
 
 3. `docs/M3-004_HANDOFF.md`
 4. `scripts/lib/public-workflows.mjs`
@@ -152,7 +152,7 @@ or before starting `M3-006`, read:
 9. `docs/DECISIONS.md`
 10. `docs/PROVENANCE_LEDGER.md`
 
-For the active `M3-006` first-public-ref transition, then read:
+For audit of the completed `M3-006` first-public-ref transition, then read:
 
 3. `docs/M3-006_HANDOFF.md`
 4. `scripts/check-forbidden-materials.mjs`
@@ -426,14 +426,16 @@ For code review, report:
   private fixtures, signing material, publication credentials, or ignored local
   evidence. Windows directory fsync remains unavailable through Node; retain
   file flush, logical commit ordering, and exact recovery without claiming
-  sudden-power-loss directory-entry persistence. Public run evidence remains
-  `M3-004B`, blocked until M3-006 publishes the reviewed first source ref.
+  sudden-power-loss directory-entry persistence. M3-006 has published and
+  verified the reviewed first source ref. Public run evidence remains
+  `M3-004B`; partial hosted results do not satisfy it.
 - When maintaining `M3-005A`, preserve one owner each for vulnerability
   reporting, contribution, governance, and reproduction. Text and copyright
   leakage rules have no path exceptions. D-045 created the empty public GitHub
-  repository and positively verified private vulnerability reporting without a
-  source ref. M3-006 must reverify that exact numeric repository identity,
-  public/empty state, and PVR status before the first source ref. Do not write final release claims, changelog
+  repository and positively verified private vulnerability reporting. M3-006
+  subsequently reverified the repository tuple, scanned the final history, and
+  published the exact first source ref. That publication is not platform,
+  release, or npm-publication evidence. Do not write final release claims, changelog
   results, platform support, or CI conclusions before their public evidence
   exists.
 - When maintaining `M3-006`, scan the complete reachable `refs/heads/main`

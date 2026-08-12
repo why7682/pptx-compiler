@@ -6,6 +6,8 @@ import path from "node:path";
 import test from "node:test";
 import { fileURLToPath } from "node:url";
 
+import { parseFsckMessageKeys } from "../scripts/check-forbidden-materials.mjs";
+
 const projectRoot = fileURLToPath(new URL("..", import.meta.url));
 const forbiddenScript = path.join(projectRoot, "scripts", "check-forbidden-materials.mjs");
 const provenanceScript = path.join(projectRoot, "scripts", "check-provenance.mjs");
@@ -408,6 +410,16 @@ test("public-history gate passes and emits byte-stable JSON", async (t) => {
   const scannerSource = await readFile(forbiddenScript, "utf8");
   assert.equal(scannerSource.includes('"rev-list"'), false);
   assert.equal(scannerSource.includes('"cat-file", "commit"'), true);
+  const fsckVariables = "fsck.badDate\nfsck.skipList\nfsck.zeroPaddedDate\nfsck.badDate\n";
+  assert.deepEqual(
+    parseFsckMessageKeys(fsckVariables),
+    ["fsck.badDate", "fsck.zeroPaddedDate"]
+  );
+  assert.deepEqual(
+    parseFsckMessageKeys(fsckVariables.replaceAll("\n", "\r\n")),
+    ["fsck.badDate", "fsck.zeroPaddedDate"]
+  );
+  assert.throws(() => parseFsckMessageKeys("fsck.badDate\rfsck.zeroPaddedDate\n"));
   const first = runGate(forbiddenScript, root, "history");
   const second = runGate(forbiddenScript, root, "history");
   assert.equal(first.status, 0);
