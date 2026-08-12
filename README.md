@@ -1,113 +1,185 @@
 # PPTX Compiler
 
-A template-first, contract-driven compiler for editable PPTX with
-rendered-outcome verification.
+A contract-driven, template-grounded pipeline for deterministic PPTX candidates
+and evidence-backed QA.
 
-## Status
+## Purpose and current boundary
 
-This repository implements one narrow candidate-alpha spine under the MIT
-License. The CLI can create the repository-owned public-synthetic project,
-inspect its bounded POTX profile, validate the complete project graph, render
-one explicitly opted-in native-card candidate, and emit an honest
-`decision: "blocked"` QA report while required visual and compatibility
-evidence is unavailable. It never creates a `BuildArtifact` for that result.
+PPTX Compiler is intended to compile semantic presentation data against a
+user-owned PowerPoint template while preserving the template's design language
+and native editability wherever an explicitly declared capability supports it.
+Structural correctness is necessary, but a candidate becomes a delivery only
+after the same artifact has the required mechanical, rendered, independent
+visual, and compatibility evidence.
 
-The publishable boundary is now designed as four guarded packages: CLI, core,
-native-card-arrow, and public-synthetic. A machine-validated positive staging
-plan owns their exact files, exports, types, bin, dependencies, assets, license,
-runtime range, and currently unscoped alpha names. The final repository URL is
-now bound to the verified public GitHub repository through package-plan
-schema v2; npm publication remains separately blocked. M3-003 materializes
-npm-private leaf manifests, creates and independently checks all four guarded
-tarballs, installs them together offline in one empty directory, and runs the
-complete installed-bin spine. The exact first-ref snapshot passed 1217/1217
-tests under both admitted Node lines, the 24-node package-stage suite, and real
-npm 10/11 four-tarball builds with offline installed-bin smoke. The subsequent
-Windows portability correction changes the package plan and packed README, so
-that historical evidence is not reused for the current working tree. This is
-source and local package evidence, not npm publication or final release evidence.
+The current candidate-alpha boundary is deliberately much smaller. It can:
 
-This is not arbitrary-template compatibility, a general renderer, passed
-delivery QA, or a published package. `supportClaimsEnabled` remains false and
-no support row is `supported`. Do not publish until the release gates in
-[TODO.md](TODO.md) pass.
+1. create one repository-owned public-synthetic project;
+2. inspect its bounded POTX source into a normalized `TemplateIndex`;
+3. validate the complete project graph and preflight one exact capability batch;
+4. render one explicitly opted-in, one-slide native-card candidate; and
+5. re-derive that candidate and emit a schema-valid `QaReport` whose decision is
+   `"blocked"` because required external evidence is unavailable.
 
-## Intended function
+That blocked result is successful, honest assessment. It creates no
+`BuildArtifact` and grants no delivery authority.
 
-The project will accept a user-owned PPTX or POTX template, a semantic deck
-specification, data-only capability overlays, formulas, and local assets. It
-will produce an editable PPTX where the declared capability supports native
-objects, plus auditable validation and compatibility evidence.
+This repository does **not** currently provide arbitrary-template
+compatibility, a general renderer, passed delivery QA, or a published npm
+package. The normative global switch remains `supportClaimsEnabled: false`, and
+no support row is `supported`.
 
-Project onboarding should normally create configuration and schema-validated
-data, not a new renderer. Project-specific code is permitted only as an
-explicit extension package implementing the same capability contract and test
-suite as built-in capabilities.
+## Fact ownership
 
-The initial product is not a prompt-to-slides generator, a universal design
-file importer, or a complete replacement for PowerPoint. The supported input
-and OOXML feature matrix will be explicit and fail closed.
+One readable owner is kept for each fact:
 
-## Start here
+| Fact | Authority |
+| --- | --- |
+| Unchanged inherited content and package structure | The source template |
+| Authored content and relationships, including formula LaTeX | Raw brief, evidence, and `DeckSpec` |
+| Normalized observable template structure | `TemplateIndex`, derived through bounded inspection |
+| Project-specific semantic bindings | `ProjectOverlay` |
+| Editable layout intent, slots, padding, sizing, and constraints | `SlideLayoutIR` |
+| Frozen EMU geometry and deterministic constraint results | `ComposedSlidePlan` |
+| Candidate layout/build replay and exact candidate identity | `CandidateBuildRecord` |
+| Checks, unavailable evidence, and the aggregate QA decision | `QaReport` |
+| Final delivered outputs after every required gate passes | `BuildArtifact` |
+| Current support dispositions | `policy/support-matrix.json` |
+| Four-package source and dependency graph | `packaging/alpha-package-plan.json` |
+| Release eligibility | `docs/RELEASE_GATES.md` |
 
-1. Read [HANDOFF.md](HANDOFF.md).
-2. Read [TODO.md](TODO.md).
-3. For the completed support boundary, read
-   [docs/SUPPORT_MATRIX.md](docs/SUPPORT_MATRIX.md) and
-   [docs/COMPATIBILITY_POLICY.md](docs/COMPATIBILITY_POLICY.md).
-4. For the versioned data contracts, read
-   [docs/M1-002_HANDOFF.md](docs/M1-002_HANDOFF.md).
-5. For the explicit runtime context, read
-   [docs/M1-003_HANDOFF.md](docs/M1-003_HANDOFF.md).
-6. For the semantic inspector boundary, read
-   [docs/M1-004_HANDOFF.md](docs/M1-004_HANDOFF.md).
-7. For the secure ZIP/XML boundary, read
-   [docs/M1-005_HANDOFF.md](docs/M1-005_HANDOFF.md).
-8. For the runtime capability dispatcher, read
-   [docs/M2-001_HANDOFF.md](docs/M2-001_HANDOFF.md).
-9. For semantic project resolution and clone/fill planning, read
-   [docs/M2-002_HANDOFF.md](docs/M2-002_HANDOFF.md).
-10. For the native card-arrow capability and its non-insertable ID boundary,
-    read [docs/M2-003_HANDOFF.md](docs/M2-003_HANDOFF.md).
-11. For the optional Pandoc/OMML process, attribution, and non-insertable
-    formula boundary, read [docs/M2-004_HANDOFF.md](docs/M2-004_HANDOFF.md).
-12. For the candidate-alpha CLI and blocked-QA boundary, read
-    [docs/M3-001_HANDOFF.md](docs/M3-001_HANDOFF.md).
-13. For the guarded four-package staging boundary, read
-    [docs/M3-002_HANDOFF.md](docs/M3-002_HANDOFF.md).
-14. For fixed-stage tarball inspection and clean-install evidence, read
-    [docs/M3-003_HANDOFF.md](docs/M3-003_HANDOFF.md).
-15. For the local public CI/security and development-toolchain contract, read
-    [docs/M3-004_HANDOFF.md](docs/M3-004_HANDOFF.md).
-16. For the completed minimum public-document boundary, read
-    [docs/M3-005_HANDOFF.md](docs/M3-005_HANDOFF.md).
-17. To reproduce the local public-safe boundary, follow
-    [docs/REPRODUCIBILITY.md](docs/REPRODUCIBILITY.md).
-18. Report suspected vulnerabilities through [SECURITY.md](SECURITY.md), and
-    never through a public issue, discussion, or pull request.
-19. Before proposing a change, read [CONTRIBUTING.md](CONTRIBUTING.md) and
-    [GOVERNANCE.md](GOVERNANCE.md).
-20. Load broader project/architecture documents only when the handoff routes to
-    them.
+Hashes bind exact objects at authority boundaries. They do not replace the
+readable source, semantic, layout, or evidence model.
 
-Select an admitted Node 22 or 24 runtime first and follow the exact sequence in
-[docs/REPRODUCIBILITY.md](docs/REPRODUCIBILITY.md). The guarded package build
-regenerates one ignored `.package-stage/`, checks four npm-private tarballs,
-installs them together offline, and runs the installed candidate-alpha spine.
-GitHub now owns the first public `main` ref for `why7682/pptx-compiler`.
-Private vulnerability reporting was reverified as enabled after the exact
-push. M3-006 verified the final
-history, canonical HTTPS transport, repository identity, and exact remote-main
-equality. The canonical
-repository ID/owner/name/URL are bound in package-plan schema v2 and projected
-into each leaf manifest plus the root SBOM component, while `private: true`
-continues to enforce the separate npm-publication guard. For branch object
-`94b5c1c`, pull-request Public CI run `31594128100` passed all
-Ubuntu/macOS/Windows × Node 22/24 cells;
-first-ref CodeQL passes. After public visibility and the dependency graph were
-enabled, pull-request security run `31594128139` passed Dependency Review.
-Accepted-main CI/CodeQL remain pending. See
-[docs/M3-004_HANDOFF.md](docs/M3-004_HANDOFF.md) for the exact evidence boundary.
+## Executable flow
+
+The installed candidate-alpha spine is:
+
+```text
+public-synthetic project
+  -> bounded POTX ingestion and TemplateIndex
+  -> exact project validation and full-batch preflight
+  -> semantic slot and SlideLayoutIR
+  -> deterministic ComposedSlidePlan
+  -> fresh one-shot native-card dispatch
+  -> typed OOXML assembly and exact collateral diff
+  -> CandidateBuildRecord first, candidate PPTX as commit marker
+  -> independent re-derivation and exact pair comparison
+  -> blocked QaReport, with no BuildArtifact
+```
+
+`validate project` discards its preflight plan without executing the project.
+`render` prepares a fresh one-shot plan. `qa` independently reloads the readable
+project facts, re-runs the same layout derivation, reconstructs the expected
+candidate pair, and compares the complete bytes and replay record. It does not
+search for screenshots, PowerPoint transcripts, or other ignored local
+evidence.
+
+All commands require explicit project paths. In JSON mode the CLI emits one
+deterministic envelope and uses only process exits `0` (success), `1`
+(domain/runtime failure), and `2` (usage failure). Errors expose a bounded code
+and pointer, never source content, XML, an absolute path, or a stack trace.
+
+## Packages and contracts
+
+The guarded alpha graph contains exactly four npm-private packages:
+
+```text
+pptx-compiler
+  |-- pptx-compiler-core
+  |-- pptx-compiler-native-card-arrow --> pptx-compiler-core
+  `-- pptx-compiler-public-synthetic
+```
+
+The CLI is the composition root. Core does not import the CLI, optional process
+or PowerPoint adapters, model-assisted labs, private fixtures, or a presentation
+project. Each package owns the schemas, fixtures, and static resources it
+interprets. The package plan positively maps every staged file and keeps npm
+publication blocked.
+
+Contract version `0.1.0` has nine closed serialized roots:
+`ProjectConfig`, `TemplateProfile`, `TemplateIndex`, `CapabilityRegistry`,
+`ProjectOverlay`, `DeckSpec`, `CandidateBuildRecord`, `QaReport`, and
+`BuildArtifact`. JSON Schema is normative; checked TypeScript declarations are
+generated from it. Unknown versions, fields, bindings, features, and mutation
+requests fail closed.
+
+Node.js 22.x and 24.x are the admitted runtime lines. Follow the canonical
+source and guarded-package procedure in
+[docs/REPRODUCIBILITY.md](docs/REPRODUCIBILITY.md); there is no npm installation
+command because the packages have not been published.
+
+## Public evidence
+
+The accepted executable baseline is Git object
+`c4dee58a8920a8e71c20f53ab93c62a96d3cb89d`. Its hosted evidence is:
+
+| Boundary | Result |
+| --- | --- |
+| [Pull-request CI](https://github.com/why7682/pptx-compiler/actions/runs/31600528716) | Ubuntu, Windows, and macOS under Node 22 and 24 passed |
+| [Dependency Review](https://github.com/why7682/pptx-compiler/actions/runs/31600528742) | Passed on the ordinary pull request |
+| [Accepted-main CI](https://github.com/why7682/pptx-compiler/actions/runs/31600806512) | All six platform/runtime cells passed |
+| [Accepted-main security](https://github.com/why7682/pptx-compiler/actions/runs/31600806350) | CodeQL passed |
+
+Those runs also exercise the public-safe source gates, complete test suite,
+guarded four-package build, clean joint installation, and installed CLI smoke.
+They prove the workflow on the named Git objects. They do not prove arbitrary
+template support, absence of every vulnerability, registry publication,
+reviewed-to-published equality, signing, or release eligibility.
+
+The machine-readable matrix currently contains 60 rows: 0 `supported`, 22
+`experimental`, 3 `manual`, and 35 `unsupported`. The six platform/runtime rows
+remain experimental because platform execution evidence alone cannot promote a
+product capability or enable the global support switch.
+
+## Limitations
+
+- The public candidate path accepts only the exact repository-owned synthetic
+  profile. Arbitrary PPTX input and arbitrary POTX templates remain unavailable.
+- The public CLI exposes one native-card candidate flow. General clone/fill,
+  DrawingML, ordered native/OMML delivery, direct formula delivery, and a
+  formula CLI are not public alpha capabilities.
+- The optional Pandoc adapter is externally configured, not bundled, and is
+  outside the four-package alpha graph. Real-Pandoc public conformance is absent.
+- PowerPoint compatibility evidence is a narrow trusted-local fact. It does not
+  generalize to another template, platform, feature, or candidate.
+- Planning and visual-review experiments under `labs/` are non-authorizing.
+  Model preference is not evidence of actual audience comprehension or effect.
+- Windows preserves the logical create-only state machine and flushed file
+  bytes, but Node exposes no parent-directory fsync equivalent there; no sudden-
+  power-loss directory-entry persistence claim is made.
+- No npm artifact, release tag, signature, registry provenance, or
+  reviewed-to-published byte equality exists yet.
+
+## Next authorized action
+
+This reader-facing bundle now constructs the candidate from purpose through
+limitations and has passed the M3-005B cross-document gate. The repository may
+prepare the `0.1.0-alpha.1` release gate, but npm publication still requires
+separate explicit authorization plus a clean-tag build, signing/provenance, and
+reviewed-to-published byte equality. Main-branch protection remains deliberately
+deferred and must not be claimed as active.
+
+## Documentation and project processes
+
+- Start with the [unreleased changelog](CHANGELOG.md), the single
+  [known-limitations list](docs/KNOWN_LIMITATIONS.md), and the
+  [draft `0.1.0-alpha.1` note](docs/releases/0.1.0-alpha.1.md) for the current
+  reader-facing candidate scope.
+- Read the human [support matrix](docs/SUPPORT_MATRIX.md) together with the
+  [compatibility policy](docs/COMPATIBILITY_POLICY.md).
+- See [docs/ARCHITECTURE_TARGET.md](docs/ARCHITECTURE_TARGET.md) for the complete
+  authority, control-flow, security, and delivery model.
+- Use the [release gates](docs/RELEASE_GATES.md) as the publication authority;
+  the changelog and draft release note cannot authorize a release.
+- Follow [docs/REPRODUCIBILITY.md](docs/REPRODUCIBILITY.md) for the canonical
+  public-safe verification sequence.
+- Report vulnerabilities only through [SECURITY.md](SECURITY.md).
+- Before proposing a change, read [CONTRIBUTING.md](CONTRIBUTING.md) and
+  [GOVERNANCE.md](GOVERNANCE.md).
+- [HANDOFF.md](HANDOFF.md) and [TODO.md](TODO.md) retain implementation history
+  and dependency-ordered work; they are intentionally last rather than the main
+  product explanation.
 
 ## License
 

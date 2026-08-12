@@ -49,8 +49,9 @@ references, positive examples, cross-document keys/bindings, safe relative
 paths, QA/manual aggregation, and generated TypeScript drift. The example
 bundle is machine-marked `schema-conformance-only`; its placeholder executor
 references and fictional build/QA records are not runtime or support evidence.
-The 146-test suite passes on Node.js 22.23.1 and 24.14.0; cross-platform OS
-evidence remains M3-004B.
+The 146-test suite passes on Node.js 22.23.1 and 24.14.0. At that checkpoint,
+cross-platform OS evidence remained assigned to M3-004B; M3-004B has since
+closed without promoting this schema-only claim.
 
 `M1-003` is complete: `ProjectContext` revalidates a detached frozen
 `ProjectConfig 0.1.0` snapshot through an explicit synchronous dependency and
@@ -610,29 +611,22 @@ finding. Repository ID `1330979133`, PVR `enabled: true`, and exact remote-main
 equality were reverified after the push. This completes M3-006; it is source
 publication, not an npm package or release.
 
-M3-004B remains partial. The first hosted run passed Ubuntu and macOS under
-Node 22/24 and passed CodeQL, but failed both Windows cells. Pull-request run
-`31582316951` again passed the four Ubuntu/macOS cells while exposing two
-remaining Windows boundaries: Git for Windows needs Git's `/dev/null` pathname
-instead of Node's Win32 null-device spelling, and npm did not raise the tar mode
-for a nested bin target. The current correction uses one Git-native null path,
-one package-root CLI entry, and a tip-owned schema-v2 policy that binds the
-retired executable only by exact historical path plus blob OID; current/index/
-working-tree admission remains limited to the new path. Independent code review
-reports 0 blocker, 0 high, and 0 medium. In the fixed non-FileProvider copy,
-Node 22.23.2 and Node 24.19.0 each pass the 216-node affected focus, the
-24-node package-stage suite, and the 1228-node complete suite. npm 10.9.8 and
-npm 11.17.0 each build, admit, install offline, and smoke all four packages;
-the package-root CLI member is mode 0755. Pull-request Public CI run
-for branch object `94b5c1c` then passed all six Ubuntu/macOS/Windows × Node 22/24 cells,
-including complete tests, guarded packages, working-tree recheck, and drift
-check. After public visibility and the dependency graph were enabled,
-pull-request security run `31594128139` passed Dependency Review. Those hosted
-results are historical evidence bound to branch object `94b5c1c`; the next
-committed evidence/document snapshot requires fresh pull-request CI and
-Dependency Review before merge. Accepted-main CI/CodeQL remain required after
-merge. The four npm-name checks remain time-bounded and reserve nothing, and
-npm publication is separately blocked.
+M3-004B is complete. Accepted pull-request head
+`f6ba6bad48c928d31c356d47911dd929ccf3b2d1` passed all six
+Ubuntu/macOS/Windows × Node 22/24 cells in CI run `31600528716` and passed
+Dependency Review in security run `31600528742`; CodeQL was skipped by the
+pull-request event design. Accepted main
+`c4dee58a8920a8e71c20f53ab93c62a96d3cb89d` passed the same six cells in CI
+run `31600806512` and passed CodeQL in security run `31600806350`; Dependency
+Review was skipped by the push-event design. Both commits share tree
+`4e70ec4323807824b0578241fe4a4d94951cd608` with no tree diff, so the PR and
+accepted-main evidence cover the same bytes. Earlier failed and branch-bound
+runs remain historical portability diagnostics in `docs/M3-004_HANDOFF.md`.
+The event-specific skips are expected, not missing jobs. This closure does not
+enable support claims, promote a platform or capability, publish npm packages,
+or declare a release. M3-005B is complete under D-046; M4-001 preparation is
+next, while npm publication still requires explicit authorization and D-047
+remains deferred.
 
 ## Persistent presentation-skill boundary
 
@@ -851,10 +845,13 @@ consumer. Stable-source syntax policy, exact package scripts, mechanical MIT/
 provenance relations, and a deterministic four-package CycloneDX static-ESM SBOM projection
 close the local development boundary. All admitted platforms file-flush owned
 payloads; POSIX additionally requests directory fsync barriers, while Windows
-makes no sudden-power-loss directory-entry persistence claim. Public six-cell,
-CodeQL, and Dependency Review evidence remains M3-004B after M3-006. M3-005 is
-now split: M3-005A completes the local security/contribution/governance/
-reproduction contract, while M3-005B remains blocked on public evidence.
+makes no sudden-power-loss directory-entry persistence claim. M3-004B has now
+closed the public six-cell, CodeQL, and Dependency Review evidence on the
+byte-identical accepted PR/main tree. M3-005 is split: M3-005A completes the
+local security/contribution/governance/reproduction contract. M3-005B has since
+frozen the constructive reader model, limitations, changelog, and draft release
+note. Hosted execution and document closure do not alter support or release
+authority.
 At the D-045 checkpoint, GitHub private vulnerability reporting was verified
 active on the then-empty public repository. D-045 bound its canonical identity
 into package-plan schema v2, the leaf manifests, and the root SBOM component.
@@ -941,15 +938,21 @@ remain the machine command authority.
 
 ## Next work session
 
-1. Read `docs/M3-004_HANDOFF.md`. PR #1's six-cell CI and Dependency Review
-   passed for historical branch object `94b5c1c`. Retain fresh checks for the
-   next committed PR head before merge, then retain final main-run CI and
-   CodeQL evidence before promoting M3-004B.
-2. Keep final release/platform wording in M3-005B until M3-004B closes.
-   Apply D-046: final reader-facing documents must construct the system from
-   purpose and fact ownership through flow, contracts, evidence, limitations,
-   and next action; chronology stays in handoffs/decisions/provenance.
-3. Keep predecessor code, presentation assets, converter output, and generated
+1. Read `docs/M3-005_HANDOFF.md`. Retain M3-004B as complete on accepted PR
+   runs `31600528716`/`31600528742` and accepted-main runs
+   `31600806512`/`31600806350`; do not convert those hosted results into
+   support or release claims.
+2. Retain M3-005B as complete under D-046. Its content-frozen commit
+   `ad7c5007823fc28dca838db4ed2d0e9d2703e7ab` passed 1247/1247 complete tests
+   under Node 22.23.2/npm 10.9.8 and Node 24.19.0/npm 11.17.0, plus the guarded
+   four-package build, admission, offline joint install, and installed-CLI
+   smoke under both runtime/npm pairs.
+3. Prepare M4-001 release evidence only. Do not create a tag, publish npm
+   packages, enable support claims, or declare a release without explicit
+   authorization.
+4. Keep D-047/M3-008 branch protection deferred; M3-005B completion does not
+   automatically resume it.
+5. Keep predecessor code, presentation assets, converter output, and generated
    archives out of Git; use only repository-owned text/synthetic fixtures for
    public tests.
 

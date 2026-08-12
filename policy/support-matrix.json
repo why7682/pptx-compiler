@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "matrixVersion": "0.1.0",
-  "updatedOn": "2026-08-11",
+  "updatedOn": "2026-08-12",
   "productStage": "pre-alpha-contract-only",
   "supportClaimsEnabled": false,
   "statusDefinitions": {
@@ -1104,40 +1104,76 @@
         "label": "Linux with Node.js 22.x LTS",
         "status": "experimental",
         "disposition": "accept-with-warning",
-        "currentBasis": "The pull-request cell passed for historical branch object 94b5c1c; the next committed PR head needs fresh CI and accepted-main M3-004B CI/CodeQL remain pending.",
+        "currentBasis": "The Linux/Node 22 cell passed on accepted-main object c4dee58 in Public CI run 31600806512 after the matching pull-request cell passed in run 31600528716.",
         "limitations": ["This platform row alone authorizes no PPTX capability; the exact capability closure, explicit opt-in, and all required evidence must also pass."],
-        "roadmap": "M3-004B after M3-006",
-        "evidence": { "level": "none", "artifacts": [] }
+        "roadmap": "Revalidate on every declared Node, runner, workflow, or release-tag change",
+        "evidence": {
+          "level": "automated-public",
+          "artifacts": [
+            {
+              "type": "cross-platform-ci",
+              "path": "docs/M3-004_HANDOFF.md",
+              "note": "Records the accepted-main Linux/Node 22 cell in Public CI run 31600806512 and its pull-request baseline in run 31600528716."
+            }
+          ]
+        }
       },
       {
         "id": "linux-node-24",
         "label": "Linux with Node.js 24.x LTS",
         "status": "experimental",
         "disposition": "accept-with-warning",
-        "currentBasis": "The pull-request cell passed for historical branch object 94b5c1c; the next committed PR head needs fresh CI and accepted-main M3-004B CI/CodeQL remain pending.",
+        "currentBasis": "The Linux/Node 24 cell passed on accepted-main object c4dee58 in Public CI run 31600806512 after the matching pull-request cell passed in run 31600528716.",
         "limitations": ["This platform row alone authorizes no PPTX capability; the exact capability closure, explicit opt-in, and all required evidence must also pass."],
-        "roadmap": "M3-004B after M3-006",
-        "evidence": { "level": "none", "artifacts": [] }
+        "roadmap": "Revalidate on every declared Node, runner, workflow, or release-tag change",
+        "evidence": {
+          "level": "automated-public",
+          "artifacts": [
+            {
+              "type": "cross-platform-ci",
+              "path": "docs/M3-004_HANDOFF.md",
+              "note": "Records the accepted-main Linux/Node 24 cell in Public CI run 31600806512 and its pull-request baseline in run 31600528716."
+            }
+          ]
+        }
       },
       {
         "id": "macos-node-22",
         "label": "macOS with Node.js 22.x LTS",
         "status": "experimental",
         "disposition": "accept-with-warning",
-        "currentBasis": "The pull-request cell passed for historical branch object 94b5c1c; the next committed PR head needs fresh CI and accepted-main M3-004B CI/CodeQL remain pending.",
+        "currentBasis": "The macOS/Node 22 cell passed on accepted-main object c4dee58 in Public CI run 31600806512 after the matching pull-request cell passed in run 31600528716.",
         "limitations": ["This platform row alone authorizes no PPTX capability; the exact capability closure, explicit opt-in, and all required evidence must also pass."],
-        "roadmap": "M3-004B after M3-006",
-        "evidence": { "level": "none", "artifacts": [] }
+        "roadmap": "Revalidate on every declared Node, runner, workflow, or release-tag change",
+        "evidence": {
+          "level": "automated-public",
+          "artifacts": [
+            {
+              "type": "cross-platform-ci",
+              "path": "docs/M3-004_HANDOFF.md",
+              "note": "Records the accepted-main macOS/Node 22 cell in Public CI run 31600806512 and its pull-request baseline in run 31600528716."
+            }
+          ]
+        }
       },
       {
         "id": "macos-node-24",
         "label": "macOS with Node.js 24.x LTS",
         "status": "experimental",
         "disposition": "accept-with-warning",
-        "currentBasis": "The pull-request cell passed for historical branch object 94b5c1c; the next committed PR head needs fresh CI and accepted-main M3-004B CI/CodeQL remain pending.",
+        "currentBasis": "The macOS/Node 24 cell passed on accepted-main object c4dee58 in Public CI run 31600806512 after the matching pull-request cell passed in run 31600528716.",
         "limitations": ["This platform row alone authorizes no PPTX capability; the exact capability closure, explicit opt-in, and all required evidence must also pass."],
-        "roadmap": "M3-004B after M3-006",
-        "evidence": { "level": "none", "artifacts": [] }
+        "roadmap": "Revalidate on every declared Node, runner, workflow, or release-tag change",
+        "evidence": {
+          "level": "automated-public",
+          "artifacts": [
+            {
+              "type": "cross-platform-ci",
+              "path": "docs/M3-004_HANDOFF.md",
+              "note": "Records the accepted-main macOS/Node 24 cell in Public CI run 31600806512 and its pull-request baseline in run 31600528716."
+            }
+          ]
+        }
       },
       {
         "id": "macos-powerpoint-automation",
@@ -1208,20 +1244,38 @@
         "label": "Windows with Node.js 22.x LTS",
         "status": "experimental",
         "disposition": "accept-with-warning",
-        "currentBasis": "The pull-request cell passed for historical branch object 94b5c1c; the next committed PR head needs fresh CI and accepted-main M3-004B CI/CodeQL remain pending.",
+        "currentBasis": "The Windows/Node 22 cell passed on accepted-main object c4dee58 in Public CI run 31600806512 after the matching pull-request cell passed in run 31600528716.",
         "limitations": ["This platform row alone authorizes no PPTX capability; the exact capability closure, explicit opt-in, and all required evidence must also pass."],
-        "roadmap": "M3-004B after M3-006",
-        "evidence": { "level": "none", "artifacts": [] }
+        "roadmap": "Revalidate on every declared Node, runner, workflow, or release-tag change",
+        "evidence": {
+          "level": "automated-public",
+          "artifacts": [
+            {
+              "type": "cross-platform-ci",
+              "path": "docs/M3-004_HANDOFF.md",
+              "note": "Records the accepted-main Windows/Node 22 cell in Public CI run 31600806512 and its pull-request baseline in run 31600528716."
+            }
+          ]
+        }
       },
       {
         "id": "windows-node-24",
         "label": "Windows with Node.js 24.x LTS",
         "status": "experimental",
         "disposition": "accept-with-warning",
-        "currentBasis": "The pull-request cell passed for historical branch object 94b5c1c; the next committed PR head needs fresh CI and accepted-main M3-004B CI/CodeQL remain pending.",
+        "currentBasis": "The Windows/Node 24 cell passed on accepted-main object c4dee58 in Public CI run 31600806512 after the matching pull-request cell passed in run 31600528716.",
         "limitations": ["This platform row alone authorizes no PPTX capability; the exact capability closure, explicit opt-in, and all required evidence must also pass."],
-        "roadmap": "M3-004B after M3-006",
-        "evidence": { "level": "none", "artifacts": [] }
+        "roadmap": "Revalidate on every declared Node, runner, workflow, or release-tag change",
+        "evidence": {
+          "level": "automated-public",
+          "artifacts": [
+            {
+              "type": "cross-platform-ci",
+              "path": "docs/M3-004_HANDOFF.md",
+              "note": "Records the accepted-main Windows/Node 24 cell in Public CI run 31600806512 and its pull-request baseline in run 31600528716."
+            }
+          ]
+        }
       },
       {
         "id": "windows-powerpoint-automation",
@@ -1240,9 +1294,9 @@
         "label": "Automated public synthetic conformance evidence",
         "status": "experimental",
         "disposition": "accept-with-warning",
-        "currentBasis": "Foundation gates, deterministic repository-owned PPTX/POTX generation, schema-only data-contract conformance, and dispatcher-mechanics conformance have public automated tests.",
+        "currentBasis": "Repository-owned synthetic conformance, complete tests, guarded package builds, working-tree rechecks, and drift checks passed in all six accepted-main Linux/macOS/Windows and Node 22/24 cells for object c4dee58 in Public CI run 31600806512.",
         "limitations": ["Cannot support a PPTX capability until its own complete product artifacts, mutation safety, platform evidence, enabled claim switch, and reviewed matrix promotion exist."],
-        "roadmap": "M1-001 through local M3-004A; hosted evidence remains M3-004B after M3-006",
+        "roadmap": "M4-001 clean-tag reproduction and reviewed-to-published artifact equality; support promotion remains separate",
         "evidence": {
           "level": "automated-public",
           "artifacts": [
@@ -1310,6 +1364,11 @@
               "type": "qa-assertions",
               "path": "tests/capability-dispatcher.test.mjs",
               "note": "Checks atomic admission, batch preflight, one-shot execution, schemas, support decisions, QA, limits, and claim isolation."
+            },
+            {
+              "type": "cross-platform-ci",
+              "path": "docs/M3-004_HANDOFF.md",
+              "note": "Records the six accepted-main OS/runtime cells in Public CI run 31600806512, their pull-request baseline in run 31600528716, passing Dependency Review, and accepted-main CodeQL."
             }
           ]
         }

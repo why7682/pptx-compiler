@@ -15,6 +15,13 @@ const REQUIRED_DOCUMENTS = Object.freeze([
   "GOVERNANCE.md",
   "docs/REPRODUCIBILITY.md"
 ]);
+const PUBLIC_REPOSITORY_URL = "https://github.com/why7682/pptx-compiler";
+const HOSTED_RUN_IDS = Object.freeze([
+  "31600528716",
+  "31600528742",
+  "31600806512",
+  "31600806350"
+]);
 
 const documents = new Map(await Promise.all(REQUIRED_DOCUMENTS.map(async (relativePath) => [
   relativePath,
@@ -70,6 +77,9 @@ function validatePrePublicDocuments(files, expectedRuns) {
   if (requiredReadmeLinks.some((link) => !readme.includes(link))) {
     findings.push(finding("public-doc-readme-links", "README.md"));
   }
+  if (!readme.includes(PUBLIC_REPOSITORY_URL)) {
+    findings.push(finding("public-doc-repository-fact", "README.md"));
+  }
 
   for (const relativePath of REQUIRED_DOCUMENTS.filter((value) => value !== "README.md")) {
     const text = files.get(relativePath) ?? "";
@@ -83,7 +93,7 @@ function validatePrePublicDocuments(files, expectedRuns) {
   if (!securityProse.includes("GitHub private vulnerability reporting") ||
       !securityProse.includes("Report a vulnerability") ||
       !securityProse.includes("enabled: true") ||
-      !securityProse.includes("Before any source branch or ref is pushed")) {
+      !securityProse.includes("This is the project's only private reporting channel")) {
     findings.push(finding("public-doc-security-channel", "SECURITY.md"));
   }
   if (!securityProse.includes("Do not disclose a suspected vulnerability in a") ||
@@ -101,13 +111,8 @@ function validatePrePublicDocuments(files, expectedRuns) {
       !securityProse.includes("promises no fixed response, fix, release, CVE, or support timeline")) {
     findings.push(finding("public-doc-security-boundary", "SECURITY.md"));
   }
-  if ([
-    "private vulnerability reporting is enabled",
-    "private vulnerability reporting has been enabled",
-    "the public repository exists",
-    "the public repository has been created"
-  ].some((value) => securityProse.toLowerCase().includes(value))) {
-    findings.push(finding("public-doc-security-premature-claim", "SECURITY.md"));
+  if (/private vulnerability reporting is (?:not|still not|not yet) enabled|public repository (?:does not|doesn't) exist/iu.test(securityProse)) {
+    findings.push(finding("public-doc-security-state-contradiction", "SECURITY.md"));
   }
 
   const contributing = files.get("CONTRIBUTING.md") ?? "";
@@ -147,10 +152,17 @@ function validatePrePublicDocuments(files, expectedRuns) {
     findings.push(finding("public-doc-reproduction-commands", "docs/REPRODUCIBILITY.md"));
   }
   const reproductionProse = prose(reproduction);
-  if (!reproductionProse.includes("does not prove hosted Linux, Windows, or") ||
-      !reproductionProse.includes("PowerPoint, Pandoc, models") ||
+  if (!reproductionProse.includes("PowerPoint, Pandoc, models") ||
       !reproductionProse.includes('decision: "blocked"')) {
     findings.push(finding("public-doc-reproduction-boundary", "docs/REPRODUCIBILITY.md"));
+  }
+  if (!reproductionProse.includes("A local pass remains local evidence") ||
+      !reproductionProse.includes("That hosted closure does not make this local procedure proof") ||
+      HOSTED_RUN_IDS.some((runId) => !reproduction.includes(runId))) {
+    findings.push(finding("public-doc-reproduction-evidence-scope", "docs/REPRODUCIBILITY.md"));
+  }
+  if (/hosted (?:CI|evidence)[^.]{0,80}(?:is |remains )?(?:absent|unavailable|not (?:yet )?(?:available|collected|present))/iu.test(reproductionProse)) {
+    findings.push(finding("public-doc-reproduction-stale-hosted-state", "docs/REPRODUCIBILITY.md"));
   }
   return Object.freeze(findings);
 }
@@ -186,9 +198,9 @@ test("pre-public document mutations fail closed", async (t) => {
       .some(({ code }) => code === "public-doc-placeholder"), true);
   });
 
-  await t.test("missing private-reporting activation gate", () => {
+  await t.test("missing verified private-reporting state", () => {
     const value = mutate("SECURITY.md", (text) =>
-      text.replace("Before any source branch\nor ref is pushed", "After publication"));
+      text.replace("status is `enabled: true`", "status was requested"));
     assert.equal(validatePrePublicDocuments(value, canonicalRuns)
       .some(({ code }) => code === "public-doc-security-channel"), true);
   });
@@ -214,11 +226,18 @@ test("pre-public document mutations fail closed", async (t) => {
       .some(({ code }) => code === "public-doc-security-boundary"), true);
   });
 
-  await t.test("remote activation is claimed without remote evidence", () => {
-    const value = mutate("SECURITY.md", (text) =>
-      `${text}\nPrivate vulnerability reporting is enabled.\n`);
+  await t.test("verified public repository identity is removed", () => {
+    const value = mutate("README.md", (text) =>
+      text.replaceAll(PUBLIC_REPOSITORY_URL, "https://github.invalid/local-only"));
     assert.equal(validatePrePublicDocuments(value, canonicalRuns)
-      .some(({ code }) => code === "public-doc-security-premature-claim"), true);
+      .some(({ code }) => code === "public-doc-repository-fact"), true);
+  });
+
+  await t.test("verified private-reporting state is contradicted", () => {
+    const value = mutate("SECURITY.md", (text) =>
+      `${text}\nPrivate vulnerability reporting is not enabled.\n`);
+    assert.equal(validatePrePublicDocuments(value, canonicalRuns)
+      .some(({ code }) => code === "public-doc-security-state-contradiction"), true);
   });
 
   await t.test("reproduction command is reordered", () => {
@@ -228,6 +247,14 @@ test("pre-public document mutations fail closed", async (t) => {
     ));
     assert.equal(validatePrePublicDocuments(value, canonicalRuns)
       .some(({ code }) => code === "public-doc-reproduction-commands"), true);
+  });
+
+  await t.test("local and hosted evidence are conflated", () => {
+    const value = mutate("docs/REPRODUCIBILITY.md", (text) =>
+      text.replace(/A local pass\s+remains local evidence\./u,
+        "A local pass proves the hosted matrix."));
+    assert.equal(validatePrePublicDocuments(value, canonicalRuns)
+      .some(({ code }) => code === "public-doc-reproduction-evidence-scope"), true);
   });
 
   await t.test("synthetic-only contribution boundary is removed", () => {

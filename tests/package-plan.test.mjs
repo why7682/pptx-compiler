@@ -38,6 +38,31 @@ const sourceSnapshots = new Map(await Promise.all(
     return [source, { bytes, mode: metadata.mode }];
   })
 ));
+const packageReadmeSources = Object.freeze({
+  cli: "packages/cli/README.md",
+  core: "packages/core/README.md",
+  "native-card-arrow": "plugins/native-card-arrow/README.md",
+  "public-synthetic": "packages/public-synthetic/README.md"
+});
+const packageReadmeSections = Object.freeze([
+  "## Purpose and boundary",
+  "## Fact ownership and dependency flow",
+  "## Executable contract",
+  "## Evidence",
+  "## Limitations",
+  "## Next authorized action",
+  "## License"
+]);
+
+function orderedSections(text, sections) {
+  let cursor = -1;
+  for (const section of sections) {
+    const next = text.indexOf(`${section}\n`);
+    if (next <= cursor) return false;
+    cursor = next;
+  }
+  return true;
+}
 
 function clonePlan() {
   return structuredClone(plan);
@@ -87,6 +112,32 @@ test("the alpha package plan closes one guarded four-package graph", async () =>
     "native-card-arrow": ["core"],
     "public-synthetic": []
   });
+  assert.deepEqual(Object.fromEntries(plan.packages.map((item) => [
+    item.packageId,
+    flattenPackageFiles(item).find(({ target }) => target === "README.md")?.source
+  ])), packageReadmeSources);
+});
+
+test("each package README is constructive, absolute-linked, and capability-scoped", () => {
+  for (const item of plan.packages) {
+    const source = packageReadmeSources[item.packageId];
+    const text = sourceSnapshots.get(source).bytes.toString("utf8");
+    assert.equal(text.startsWith(`# ${item.name}\n\n`), true, source);
+    assert.equal(orderedSections(text, packageReadmeSections), true, source);
+    const links = [...text.matchAll(/\[[^\]]+\]\(([^)]+)\)/gu)].map((match) => match[1]);
+    assert.equal(links.length > 0, true, source);
+    assert.equal(links.every((target) =>
+      target.startsWith("https://github.com/why7682/pptx-compiler")), true, source);
+    assert.match(text, /private: true/u, source);
+    assert.match(text, /supportClaimsEnabled: false/u, source);
+    assert.match(text, /not been published|publication is blocked/u, source);
+  }
+  assert.match(sourceSnapshots.get(packageReadmeSources.cli).bytes.toString("utf8"),
+    /pptx-compiler-native-card-arrow --> pptx-compiler-core/u);
+  assert.match(sourceSnapshots.get(packageReadmeSources["native-card-arrow"]).bytes.toString("utf8"),
+    /unbound plan with `insertable: false`[\s\S]*Core validates[\s\S]*remaps target-local identifiers/u);
+  assert.match(sourceSnapshots.get(packageReadmeSources["public-synthetic"]).bytes.toString("utf8"),
+    /imports no other alpha package/u);
 });
 
 test("the readable package plan has one canonical JSON representation", () => {
@@ -429,6 +480,14 @@ test("package-plan mutations fail closed", async (t) => {
       paths: ["readme.md"]
     });
     assert.equal((await findingCodes(value)).has("package-target-alias"), true);
+  });
+
+  await t.test("a leaf package cannot inherit the workspace README", async () => {
+    const value = clonePlan();
+    const documentation = packageById(value, "core").files
+      .find((entry) => entry.role === "documentation");
+    documentation.sourceRoot = ".";
+    assert.equal((await findingCodes(value)).has("package-readme-source"), true);
   });
 
   await t.test("repository binding fields cannot drift independently", async (repositoryTest) => {
