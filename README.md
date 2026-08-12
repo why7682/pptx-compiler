@@ -153,10 +153,9 @@ product capability or enable the global support switch.
 
 ## Next authorized action
 
-This reader-facing bundle constructs the candidate from purpose through
-limitations and is being frozen by the M3-005B cross-document gate. Once that
-gate records its final evidence, the repository may prepare the
-`0.1.0-alpha.1` release gate. npm publication still requires
+This reader-facing bundle now constructs the candidate from purpose through
+limitations and has passed the M3-005B cross-document gate. The repository may
+prepare the `0.1.0-alpha.1` release gate, but npm publication still requires
 separate explicit authorization plus a clean-tag build, signing/provenance, and
 reviewed-to-published byte equality. Main-branch protection remains deliberately
 deferred and must not be claimed as active.

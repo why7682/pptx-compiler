@@ -176,7 +176,8 @@ does not turn them into source or planning facts.
 M3-004A has since defined the local public workflow contract; see
 `docs/M3-004_HANDOFF.md`. M3-006 has completed the exact first public source
 ref, and M3-004B has completed the hosted evidence. M3-005A completes the
-pre-public document contract, and M3-005B is now the next dependency. M3-006
+pre-public document contract, and M3-005B has since completed the constructive
+reader-document and package-local README boundary. M4-001 preparation is next. M3-006
 created the user-selected repository as an
 empty public shell, verified private vulnerability reporting, and inserted its
 canonical identity into the plan, leaf manifests, and SBOM. Evidence/marker

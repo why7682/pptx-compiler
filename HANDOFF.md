@@ -624,8 +624,9 @@ accepted-main evidence cover the same bytes. Earlier failed and branch-bound
 runs remain historical portability diagnostics in `docs/M3-004_HANDOFF.md`.
 The event-specific skips are expected, not missing jobs. This closure does not
 enable support claims, promote a platform or capability, publish npm packages,
-or declare a release. M3-005B is now the next dependency; D-047 remains
-deferred.
+or declare a release. M3-005B is complete under D-046; M4-001 preparation is
+next, while npm publication still requires explicit authorization and D-047
+remains deferred.
 
 ## Persistent presentation-skill boundary
 
@@ -847,9 +848,10 @@ payloads; POSIX additionally requests directory fsync barriers, while Windows
 makes no sudden-power-loss directory-entry persistence claim. M3-004B has now
 closed the public six-cell, CodeQL, and Dependency Review evidence on the
 byte-identical accepted PR/main tree. M3-005 is split: M3-005A completes the
-local security/contribution/governance/reproduction contract, while M3-005B is
-now the next constructive-document dependency. Hosted execution does not alter
-support or release authority.
+local security/contribution/governance/reproduction contract. M3-005B has since
+frozen the constructive reader model, limitations, changelog, and draft release
+note. Hosted execution and document closure do not alter support or release
+authority.
 At the D-045 checkpoint, GitHub private vulnerability reporting was verified
 active on the then-empty public repository. D-045 bound its canonical identity
 into package-plan schema v2, the leaf manifests, and the root SBOM component.
@@ -940,12 +942,17 @@ remain the machine command authority.
    runs `31600528716`/`31600528742` and accepted-main runs
    `31600806512`/`31600806350`; do not convert those hosted results into
    support or release claims.
-2. Execute M3-005B under D-046: final reader-facing documents must construct
-   the system from
-   purpose and fact ownership through flow, contracts, evidence, limitations,
-   and next action; chronology stays in handoffs/decisions/provenance.
-3. Keep D-047/M3-008 branch protection deferred until M3-005B completes.
-4. Keep predecessor code, presentation assets, converter output, and generated
+2. Retain M3-005B as complete under D-046. Its content-frozen commit
+   `ad7c5007823fc28dca838db4ed2d0e9d2703e7ab` passed 1247/1247 complete tests
+   under Node 22.23.2/npm 10.9.8 and Node 24.19.0/npm 11.17.0, plus the guarded
+   four-package build, admission, offline joint install, and installed-CLI
+   smoke under both runtime/npm pairs.
+3. Prepare M4-001 release evidence only. Do not create a tag, publish npm
+   packages, enable support claims, or declare a release without explicit
+   authorization.
+4. Keep D-047/M3-008 branch protection deferred; M3-005B completion does not
+   automatically resume it.
+5. Keep predecessor code, presentation assets, converter output, and generated
    archives out of Git; use only repository-owned text/synthetic fixtures for
    public tests.
 

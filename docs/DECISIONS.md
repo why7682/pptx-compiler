@@ -614,8 +614,9 @@ same change.
   source ref. A failed create, enable, verification, metadata, or
   package-gate step leaves the public shell without source and grants no
   publication evidence. M3-005A mechanically binds the four human process
-  documents and the canonical workflow command projection, while M3-005B still
-  waits for hosted evidence. This GitHub-only alpha channel does not promise a
+  documents and the canonical workflow command projection. M3-004B later
+  supplied the hosted evidence, and M3-005B then completed the D-046 reader-
+  document boundary without authorizing publication. This GitHub-only alpha channel does not promise a
   mirror, email fallback, response SLA, support status, CVE, or release date.
 - **D-043 accepted:** current-tree cleanliness does not prove first-push
   cleanliness. A file committed and later deleted, a commit message, or Git
@@ -690,8 +691,9 @@ same change.
   final cross-document review and may not close on sentence-level cleanup alone.
 - **D-047 deferred on 2026-08-12:** the user explicitly postponed main-branch
   protection. No protection rule is configured or claimed by this decision.
-  Revisit force-push/deletion restrictions and required status checks only
-  after M3-005B is complete. Closing M3-004B does not activate this work.
+  M3-005B has since completed, but that fact does not automatically resume the
+  deferred work. Revisit force-push/deletion restrictions and required status
+  checks only after the user explicitly reauthorizes D-047/M3-008.
 
 ## MIT versus Apache-2.0 review
 

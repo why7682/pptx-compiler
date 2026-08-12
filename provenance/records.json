@@ -196,7 +196,7 @@
       },
       "publicConformance": {
         "status": "applicable",
-        "notes": "The focused final-document, pre-public-document, and support-matrix suites pass 47/47. The changelog is explicitly Unreleased and cross-document checked against support counts, hosted runs, blocked QA, npm guard, and release gates. No final dual-runtime complete-suite or guarded four-package rebuild result is claimed for the current constructive-document bytes."
+        "notes": "The focused final-document, pre-public-document, and support-matrix suites pass 47/47. The changelog is explicitly Unreleased and cross-document checked against support counts, hosted runs, blocked QA, npm guard, and release gates. Content-frozen commit ad7c5007823fc28dca838db4ed2d0e9d2703e7ab passes 1247/1247 complete tests and the guarded four-package sequence under both admitted runtime/npm pairs."
       },
       "independentReview": {
         "status": "passed",
@@ -280,13 +280,13 @@
       },
       "publicConformance": {
         "status": "applicable",
-        "notes": "The focused final-document, pre-public-document, and support-matrix suites pass 47/47. The current bytes are checked against the D-046 constructive model and accepted hosted-evidence boundary; no final dual-runtime complete-suite or guarded four-package rebuild result is claimed."
+        "notes": "The focused final-document, pre-public-document, and support-matrix suites pass 47/47. Content-frozen commit ad7c5007823fc28dca838db4ed2d0e9d2703e7ab passes 1247/1247 complete tests and the complete guarded four-package build/offline-install/CLI-smoke sequence under both Node 22.23.2/npm 10.9.8 and Node 24.19.0/npm 11.17.0; QA remains blocked and no BuildArtifact exists."
       },
       "independentReview": {
         "status": "passed",
         "notes": "One bounded current-byte constructive, package-document, and provenance cold review closed with 0 blocker, 0 high, and 0 medium findings after package-local README ownership, absolute-link, dependency-graph, editability-boundary, and mutation-test corrections."
       },
-      "notes": "Accepted PR head f6ba6bad48c928d31c356d47911dd929ccf3b2d1 passed Public CI 31600528716 and Dependency Review 31600528742; accepted main c4dee58a8920a8e71c20f53ab93c62a96d3cb89d passed Public CI 31600806512 and CodeQL 31600806350. Both commits share exact tree 4e70ec4323807824b0578241fe4a4d94951cd608 with no diff. M3-004B is complete; M3-005B is the active constructive-document dependency. Support, npm publication, release, and branch protection remain unchanged."
+      "notes": "Accepted PR head f6ba6bad48c928d31c356d47911dd929ccf3b2d1 passed Public CI 31600528716 and Dependency Review 31600528742; accepted main c4dee58a8920a8e71c20f53ab93c62a96d3cb89d passed Public CI 31600806512 and CodeQL 31600806350. Both commits share exact tree 4e70ec4323807824b0578241fe4a4d94951cd608 with no diff. M3-004B and M3-005B are complete; M4-001 preparation is next while publication remains unauthorized. Support, npm publication, release, and branch protection remain unchanged."
     },
     {
       "path": "LICENSE",
@@ -336,7 +336,7 @@
       },
       "publicConformance": {
         "status": "not-applicable",
-        "notes": "The focused final-document, pre-public-document, and support-matrix suites pass 47/47. The current bytes are checked against the D-046 constructive model and accepted hosted-evidence boundary; no final dual-runtime complete-suite or guarded four-package rebuild result is claimed."
+        "notes": "The focused final-document, pre-public-document, and support-matrix suites pass 47/47. Content-frozen commit ad7c5007823fc28dca838db4ed2d0e9d2703e7ab passes 1247/1247 complete tests and the complete guarded four-package build/offline-install/CLI-smoke sequence under both Node 22.23.2/npm 10.9.8 and Node 24.19.0/npm 11.17.0; QA remains blocked and no BuildArtifact exists."
       },
       "independentReview": {
         "status": "passed",
@@ -392,13 +392,13 @@
       },
       "publicConformance": {
         "status": "applicable",
-        "notes": "The focused final-document, pre-public-document, and support-matrix suites pass 47/47. The current bytes are checked against the D-046 constructive model and accepted hosted-evidence boundary; no final dual-runtime complete-suite or guarded four-package rebuild result is claimed."
+        "notes": "The focused final-document, pre-public-document, and support-matrix suites pass 47/47. Content-frozen commit ad7c5007823fc28dca838db4ed2d0e9d2703e7ab passes 1247/1247 complete tests and the complete guarded four-package build/offline-install/CLI-smoke sequence under both Node 22.23.2/npm 10.9.8 and Node 24.19.0/npm 11.17.0; QA remains blocked and no BuildArtifact exists."
       },
       "independentReview": {
         "status": "passed",
         "notes": "One bounded current-byte constructive, package-document, and provenance cold review closed with 0 blocker, 0 high, and 0 medium findings after package-local README ownership, absolute-link, dependency-graph, editability-boundary, and mutation-test corrections."
       },
-      "notes": "Accepted PR head f6ba6bad48c928d31c356d47911dd929ccf3b2d1 passed Public CI 31600528716 and Dependency Review 31600528742; accepted main c4dee58a8920a8e71c20f53ab93c62a96d3cb89d passed Public CI 31600806512 and CodeQL 31600806350. Both commits share exact tree 4e70ec4323807824b0578241fe4a4d94951cd608 with no diff. M3-004B is DONE, M3-005B is NEXT during this slice, M3-008 is DEFERRED, and M4-001 remains pending."
+      "notes": "Accepted PR head f6ba6bad48c928d31c356d47911dd929ccf3b2d1 passed Public CI 31600528716 and Dependency Review 31600528742; accepted main c4dee58a8920a8e71c20f53ab93c62a96d3cb89d passed Public CI 31600806512 and CodeQL 31600806350. Both commits share exact tree 4e70ec4323807824b0578241fe4a4d94951cd608 with no diff. M3-004B and M3-005B are DONE, M3-008 remains DEFERRED, and M4-001 is NEXT for preparation only; tag creation and npm publication remain unauthorized."
     },
     {
       "path": "docs/ARCHITECTURE_TARGET.md",
@@ -420,7 +420,7 @@
       },
       "publicConformance": {
         "status": "not-applicable",
-        "notes": "The focused final-document, pre-public-document, and support-matrix suites pass 47/47. The current bytes are checked against the D-046 constructive model and accepted hosted-evidence boundary; no final dual-runtime complete-suite or guarded four-package rebuild result is claimed."
+        "notes": "The focused final-document, pre-public-document, and support-matrix suites pass 47/47. Content-frozen commit ad7c5007823fc28dca838db4ed2d0e9d2703e7ab passes 1247/1247 complete tests and the complete guarded four-package build/offline-install/CLI-smoke sequence under both Node 22.23.2/npm 10.9.8 and Node 24.19.0/npm 11.17.0; QA remains blocked and no BuildArtifact exists."
       },
       "independentReview": {
         "status": "passed",
@@ -448,7 +448,7 @@
       },
       "publicConformance": {
         "status": "not-applicable",
-        "notes": "The focused final-document, pre-public-document, and support-matrix suites pass 47/47. The current bytes are checked against the D-046 constructive model and accepted hosted-evidence boundary; no final dual-runtime complete-suite or guarded four-package rebuild result is claimed."
+        "notes": "The focused final-document, pre-public-document, and support-matrix suites pass 47/47. Content-frozen commit ad7c5007823fc28dca838db4ed2d0e9d2703e7ab passes 1247/1247 complete tests and the complete guarded four-package build/offline-install/CLI-smoke sequence under both Node 22.23.2/npm 10.9.8 and Node 24.19.0/npm 11.17.0; QA remains blocked and no BuildArtifact exists."
       },
       "independentReview": {
         "status": "passed",
@@ -532,7 +532,7 @@
       },
       "publicConformance": {
         "status": "applicable",
-        "notes": "The focused final-document, pre-public-document, and support-matrix suites pass 47/47. Required negative areas and their unlock conditions are cross-document checked. No final dual-runtime complete-suite or guarded four-package rebuild result is claimed for the current constructive-document bytes."
+        "notes": "The focused final-document, pre-public-document, and support-matrix suites pass 47/47. Required negative areas and their unlock conditions are cross-document checked. Content-frozen commit ad7c5007823fc28dca838db4ed2d0e9d2703e7ab passes 1247/1247 complete tests and the guarded four-package sequence under both admitted runtime/npm pairs."
       },
       "independentReview": {
         "status": "passed",
@@ -1036,7 +1036,7 @@
       },
       "publicConformance": {
         "status": "applicable",
-        "notes": "The focused final-document, pre-public-document, and support-matrix suites pass 47/47. Earlier guarded-build evidence is retained as historical; the current constructive-document package inputs still require a fresh final rebuild."
+        "notes": "The focused final-document, pre-public-document, and support-matrix suites pass 47/47. Earlier guarded-build evidence remains historical; content-frozen commit ad7c5007823fc28dca838db4ed2d0e9d2703e7ab now passes the fresh guarded four-package sequence under both admitted runtime/npm pairs."
       },
       "independentReview": {
         "status": "passed",
@@ -1070,7 +1070,7 @@
       },
       "publicConformance": {
         "status": "applicable",
-        "notes": "Accepted PR head f6ba6bad48c928d31c356d47911dd929ccf3b2d1 passed Public CI 31600528716 and Dependency Review 31600528742; accepted main c4dee58a8920a8e71c20f53ab93c62a96d3cb89d passed Public CI 31600806512 and CodeQL 31600806350. Both commits share exact tree 4e70ec4323807824b0578241fe4a4d94951cd608 with no diff. Event-specific CodeQL/Dependency Review skips are the intended workflow partition. The 47/47 documentation/support focus passes; no final full/package result is claimed for current document bytes."
+        "notes": "Accepted PR head f6ba6bad48c928d31c356d47911dd929ccf3b2d1 passed Public CI 31600528716 and Dependency Review 31600528742; accepted main c4dee58a8920a8e71c20f53ab93c62a96d3cb89d passed Public CI 31600806512 and CodeQL 31600806350. Both commits share exact tree 4e70ec4323807824b0578241fe4a4d94951cd608 with no diff. Event-specific CodeQL/Dependency Review skips are the intended workflow partition. The 47/47 documentation/support focus passes; content-frozen commit ad7c5007823fc28dca838db4ed2d0e9d2703e7ab passes 1247/1247 and the guarded four-package sequence under both admitted runtime/npm pairs."
       },
       "independentReview": {
         "status": "passed",
@@ -1098,13 +1098,13 @@
       },
       "publicConformance": {
         "status": "not-applicable",
-        "notes": "The focused final-document, pre-public-document, and support-matrix suites pass 47/47. The current bytes are checked against the D-046 constructive model and accepted hosted-evidence boundary; no final dual-runtime complete-suite or guarded four-package rebuild result is claimed."
+        "notes": "The focused final-document, pre-public-document, and support-matrix suites pass 47/47. Content-frozen commit ad7c5007823fc28dca838db4ed2d0e9d2703e7ab passes 1247/1247 complete tests and the complete guarded four-package build/offline-install/CLI-smoke sequence under both Node 22.23.2/npm 10.9.8 and Node 24.19.0/npm 11.17.0; QA remains blocked and no BuildArtifact exists."
       },
       "independentReview": {
         "status": "passed",
         "notes": "One bounded current-byte constructive, package-document, and provenance cold review closed with 0 blocker, 0 high, and 0 medium findings after package-local README ownership, absolute-link, dependency-graph, editability-boundary, and mutation-test corrections."
       },
-      "notes": "M3-005A remains complete. M3-005B owns changelog, limitations, support, and release wording; it does not authorize npm publication or a release."
+      "notes": "M3-005A and M3-005B are complete. The frozen changelog, limitations, support, and release wording do not authorize npm publication or a release."
     },
     {
       "path": "docs/M3-006_HANDOFF.md",
@@ -1126,7 +1126,7 @@
       },
       "publicConformance": {
         "status": "applicable",
-        "notes": "The focused final-document, pre-public-document, and support-matrix suites pass 47/47. The current bytes are checked against the D-046 constructive model and accepted hosted-evidence boundary; no final dual-runtime complete-suite or guarded four-package rebuild result is claimed."
+        "notes": "The focused final-document, pre-public-document, and support-matrix suites pass 47/47. Content-frozen commit ad7c5007823fc28dca838db4ed2d0e9d2703e7ab passes 1247/1247 complete tests and the complete guarded four-package build/offline-install/CLI-smoke sequence under both Node 22.23.2/npm 10.9.8 and Node 24.19.0/npm 11.17.0; QA remains blocked and no BuildArtifact exists."
       },
       "independentReview": {
         "status": "passed",
@@ -1350,13 +1350,13 @@
       },
       "publicConformance": {
         "status": "not-applicable",
-        "notes": "Accepted PR head f6ba6bad48c928d31c356d47911dd929ccf3b2d1 passed Public CI 31600528716 and Dependency Review 31600528742; accepted main c4dee58a8920a8e71c20f53ab93c62a96d3cb89d passed Public CI 31600806512 and CodeQL 31600806350. Both commits share exact tree 4e70ec4323807824b0578241fe4a4d94951cd608 with no diff. The 47/47 focused document/support suite passes. Its latest human block covers the exact 30-path current slice; final admitted-runtime full/package verification remains pending."
+        "notes": "Accepted PR head f6ba6bad48c928d31c356d47911dd929ccf3b2d1 passed Public CI 31600528716 and Dependency Review 31600528742; accepted main c4dee58a8920a8e71c20f53ab93c62a96d3cb89d passed Public CI 31600806512 and CodeQL 31600806350. Both commits share exact tree 4e70ec4323807824b0578241fe4a4d94951cd608 with no diff. The 47/47 focused document/support suite passes. Its latest human block covers the exact 30-path content slice; content-frozen commit ad7c5007823fc28dca838db4ed2d0e9d2703e7ab passes 1247/1247 and the guarded four-package sequence under both admitted runtime/npm pairs."
       },
       "independentReview": {
         "status": "passed",
         "notes": "One bounded current-byte constructive, package-document, and provenance cold review closed with 0 blocker, 0 high, and 0 medium findings after package-local README ownership, absolute-link, dependency-graph, editability-boundary, and mutation-test corrections."
       },
-      "notes": "The new ledger block exactly covers every current HEAD diff endpoint plus the ledger and provenance/records.json, including eight new files. Closing independent review and final admitted-runtime full/package verification remain pending."
+      "notes": "The new ledger block exactly covers every content commit diff endpoint, including eight new files. Bounded independent review and final admitted-runtime dual-line full/package verification pass."
     },
     {
       "path": "docs/RELEASE_GATES.md",
@@ -1378,7 +1378,7 @@
       },
       "publicConformance": {
         "status": "not-applicable",
-        "notes": "The focused final-document, pre-public-document, and support-matrix suites pass 47/47. The current bytes are checked against the D-046 constructive model and accepted hosted-evidence boundary; no final dual-runtime complete-suite or guarded four-package rebuild result is claimed."
+        "notes": "The focused final-document, pre-public-document, and support-matrix suites pass 47/47. Content-frozen commit ad7c5007823fc28dca838db4ed2d0e9d2703e7ab passes 1247/1247 complete tests and the complete guarded four-package build/offline-install/CLI-smoke sequence under both Node 22.23.2/npm 10.9.8 and Node 24.19.0/npm 11.17.0; QA remains blocked and no BuildArtifact exists."
       },
       "independentReview": {
         "status": "passed",
@@ -1406,7 +1406,7 @@
       },
       "publicConformance": {
         "status": "applicable",
-        "notes": "The focused final-document, pre-public-document, and support-matrix suites pass 47/47. The current bytes are checked against the D-046 constructive model and accepted hosted-evidence boundary; no final dual-runtime complete-suite or guarded four-package rebuild result is claimed."
+        "notes": "The focused final-document, pre-public-document, and support-matrix suites pass 47/47. Content-frozen commit ad7c5007823fc28dca838db4ed2d0e9d2703e7ab passes 1247/1247 complete tests and the complete guarded four-package build/offline-install/CLI-smoke sequence under both Node 22.23.2/npm 10.9.8 and Node 24.19.0/npm 11.17.0; QA remains blocked and no BuildArtifact exists."
       },
       "independentReview": {
         "status": "passed",
@@ -1434,7 +1434,7 @@
       },
       "publicConformance": {
         "status": "applicable",
-        "notes": "The 47/47 focused suite passes. The matrix remains 0 supported, 22 experimental, 3 manual, and 35 unsupported with supportClaimsEnabled false; no final full/package result is claimed."
+        "notes": "The 47/47 focused suite passes. The matrix remains 0 supported, 22 experimental, 3 manual, and 35 unsupported with supportClaimsEnabled false; content-frozen commit ad7c5007823fc28dca838db4ed2d0e9d2703e7ab passes 1247/1247 and the guarded four-package sequence under both admitted runtime/npm pairs."
       },
       "independentReview": {
         "status": "passed",
@@ -1490,7 +1490,7 @@
       },
       "publicConformance": {
         "status": "applicable",
-        "notes": "The focused final-document, pre-public-document, and support-matrix suites pass 47/47. The note is exact-checked as draft/not released, blocked QA/no BuildArtifact, npm-publication blocked, support counts unchanged, and M4-001 owned by release gates. No final dual-runtime complete-suite or guarded four-package rebuild result is claimed for the current constructive-document bytes."
+        "notes": "The focused final-document, pre-public-document, and support-matrix suites pass 47/47. The note is exact-checked as draft/not released, blocked QA/no BuildArtifact, npm-publication blocked, support counts unchanged, and M4-001 owned by release gates. Content-frozen commit ad7c5007823fc28dca838db4ed2d0e9d2703e7ab passes 1247/1247 and the guarded four-package sequence under both admitted runtime/npm pairs."
       },
       "independentReview": {
         "status": "passed",
@@ -3568,7 +3568,7 @@
       },
       "publicConformance": {
         "status": "applicable",
-        "notes": "Final verification for the current package-local README mapping and packed bytes is pending on admitted Node 22/24 runtimes and the guarded four-package rebuild; no non-admitted runtime result is used as closure evidence."
+        "notes": "Content-frozen commit ad7c5007823fc28dca838db4ed2d0e9d2703e7ab verifies this package-local README in the guarded tarball under Node 22.23.2/npm 10.9.8 and Node 24.19.0/npm 11.17.0; both offline installs and installed CLI smoke flows pass with blocked QA and no BuildArtifact."
       },
       "independentReview": {
         "status": "passed",
@@ -3820,7 +3820,7 @@
       },
       "publicConformance": {
         "status": "applicable",
-        "notes": "Final verification for the current package-local README mapping and packed bytes is pending on admitted Node 22/24 runtimes and the guarded four-package rebuild; no non-admitted runtime result is used as closure evidence."
+        "notes": "Content-frozen commit ad7c5007823fc28dca838db4ed2d0e9d2703e7ab verifies this package-local README in the guarded tarball under Node 22.23.2/npm 10.9.8 and Node 24.19.0/npm 11.17.0; both offline installs and installed CLI smoke flows pass with blocked QA and no BuildArtifact."
       },
       "independentReview": {
         "status": "passed",
@@ -4716,7 +4716,7 @@
       },
       "publicConformance": {
         "status": "applicable",
-        "notes": "Final verification for the current package-local README mapping and packed bytes is pending on admitted Node 22/24 runtimes and the guarded four-package rebuild; no non-admitted runtime result is used as closure evidence."
+        "notes": "Content-frozen commit ad7c5007823fc28dca838db4ed2d0e9d2703e7ab verifies this package-local README in the guarded tarball under Node 22.23.2/npm 10.9.8 and Node 24.19.0/npm 11.17.0; both offline installs and installed CLI smoke flows pass with blocked QA and no BuildArtifact."
       },
       "independentReview": {
         "status": "passed",
@@ -4912,7 +4912,7 @@
       },
       "publicConformance": {
         "status": "applicable",
-        "notes": "Final verification for the current package-local README and package-plan bytes is pending on admitted Node 22/24 runtimes and the guarded four-package rebuild; no non-admitted runtime result is used as closure evidence."
+        "notes": "Content-frozen commit ad7c5007823fc28dca838db4ed2d0e9d2703e7ab verifies the package-local README mapping and package-plan bytes under Node 22.23.2/npm 10.9.8 and Node 24.19.0/npm 11.17.0; both guarded builds, offline installs, and installed CLI smoke flows pass."
       },
       "independentReview": {
         "status": "passed",
@@ -5024,7 +5024,7 @@
       },
       "publicConformance": {
         "status": "applicable",
-        "notes": "Final verification for the current package-local README mapping and packed bytes is pending on admitted Node 22/24 runtimes and the guarded four-package rebuild; no non-admitted runtime result is used as closure evidence."
+        "notes": "Content-frozen commit ad7c5007823fc28dca838db4ed2d0e9d2703e7ab verifies this package-local README in the guarded tarball under Node 22.23.2/npm 10.9.8 and Node 24.19.0/npm 11.17.0; both offline installs and installed CLI smoke flows pass with blocked QA and no BuildArtifact."
       },
       "independentReview": {
         "status": "passed",
@@ -5304,7 +5304,7 @@
       },
       "publicConformance": {
         "status": "applicable",
-        "notes": "The 47/47 focused suite passes. All 60 rows validate at 0 supported / 22 experimental / 3 manual / 35 unsupported; supportClaimsEnabled remains false; no final full/package result is claimed."
+        "notes": "The 47/47 focused suite passes. All 60 rows validate at 0 supported / 22 experimental / 3 manual / 35 unsupported; supportClaimsEnabled remains false. Content-frozen commit ad7c5007823fc28dca838db4ed2d0e9d2703e7ab passes 1247/1247 and the guarded four-package sequence under both admitted runtime/npm pairs."
       },
       "independentReview": {
         "status": "passed",
@@ -5332,13 +5332,13 @@
       },
       "publicConformance": {
         "status": "applicable",
-        "notes": "The 47/47 focused document/support suite passes. Records remain unique and codepoint sorted across exactly 275 admitted working-tree paths; final admitted-runtime full/package verification remains pending."
+        "notes": "The 47/47 focused document/support suite passes. Records remain unique and codepoint sorted across exactly 275 admitted paths; content-frozen commit ad7c5007823fc28dca838db4ed2d0e9d2703e7ab passes 1247/1247 and the guarded four-package sequence under both admitted runtime/npm pairs."
       },
       "independentReview": {
         "status": "passed",
         "notes": "One bounded current-byte constructive, package-document, and provenance cold review closed with 0 blocker, 0 high, and 0 medium findings after package-local README ownership, absolute-link, dependency-graph, editability-boundary, and mutation-test corrections."
       },
-      "notes": "Accepted PR head f6ba6bad48c928d31c356d47911dd929ccf3b2d1 passed Public CI 31600528716 and Dependency Review 31600528742; accepted main c4dee58a8920a8e71c20f53ab93c62a96d3cb89d passed Public CI 31600806512 and CodeQL 31600806350. Both commits share exact tree 4e70ec4323807824b0578241fe4a4d94951cd608 with no diff. All current-byte changed/new endpoints remain independently pending until bounded closing review; no final full/package rebuild is claimed."
+      "notes": "Accepted PR head f6ba6bad48c928d31c356d47911dd929ccf3b2d1 passed Public CI 31600528716 and Dependency Review 31600528742; accepted main c4dee58a8920a8e71c20f53ab93c62a96d3cb89d passed Public CI 31600806512 and CodeQL 31600806350. Both commits share exact tree 4e70ec4323807824b0578241fe4a4d94951cd608 with no diff. All changed and new content endpoints passed bounded independent review. Content-frozen commit ad7c5007823fc28dca838db4ed2d0e9d2703e7ab passes both admitted runtime complete suites and guarded package builds."
     },
     {
       "path": "sbom.alpha.cdx.json",
@@ -6095,7 +6095,7 @@
       },
       "publicConformance": {
         "status": "applicable",
-        "notes": "Final verification for the current package-local README validator bytes is pending on admitted Node 22/24 runtimes and the guarded four-package rebuild; no non-admitted runtime result is used as closure evidence."
+        "notes": "Content-frozen commit ad7c5007823fc28dca838db4ed2d0e9d2703e7ab verifies the package-local README validator under Node 22.23.2 and Node 24.19.0 complete suites plus both guarded package builds."
       },
       "independentReview": {
         "status": "passed",
@@ -6981,7 +6981,7 @@
       },
       "publicConformance": {
         "status": "applicable",
-        "notes": "Final verification for the current package-local README tests is pending on admitted Node 22/24 runtimes and the guarded four-package rebuild; no non-admitted runtime result is used as closure evidence."
+        "notes": "Content-frozen commit ad7c5007823fc28dca838db4ed2d0e9d2703e7ab verifies the package-local README tests under Node 22.23.2 and Node 24.19.0 complete suites plus both guarded package builds."
       },
       "independentReview": {
         "status": "passed",

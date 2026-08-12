@@ -712,7 +712,7 @@ criterion is recorded in the repository.
 | M3-004A | DONE | Define and locally verify the public-safe CI/security, development-toolchain, source-policy, license, and static-ESM SBOM projection contracts. | Two canonical workflows and all local gates pass under admitted Node 22/24 in one fixed non-FileProvider copy without model/GUI/private inputs. |
 | M3-004B | DONE | Collect the six Linux/Windows/macOS × Node 22/24 public CI cells plus CodeQL and Dependency Review evidence. | The public remote records stable URLs and conclusions for every hosted job; local YAML or macOS runs are not substitutes. |
 | M3-005A | DONE | Add the minimum pre-public security, contribution, governance, and reproducibility documents. | The local documents define and mechanically verify one fail-closed repository-native private-reporting process; D-045 separately records its live remote activation. |
-| M3-005B | NEXT | Construct and freeze changelog, known limitations, final support wording, and release text from public evidence. | After M3-004B, every final claim cites the matching hosted evidence and executable support state, and D-046's purpose→ownership→flow→contract→evidence→limitations→next-action structure passes cross-document review. |
+| M3-005B | DONE | Construct and freeze changelog, known limitations, final support wording, and release text from public evidence. | Every final claim cites the matching hosted evidence and executable support state; D-046's purpose→ownership→flow→contract→evidence→limitations→next-action structure passes cross-document review and dual-runtime package verification. |
 | M3-006 | DONE | Create and scan the final local main commit, then push that exact object ID as the first source ref. | GitHub reports public repository ID `1330979133` for `why7682/pptx-compiler`, private vulnerability reporting `enabled: true`, and remote `main` equal to the exact scanned object ID after canonical HTTPS transport. |
 | M3-007 | DEFERRED | Implement `doctor`, generic `onboard`, standalone `diff`, and optional formula CLI only from demonstrated user workflows. | Each added command has one non-duplicated data authority and executable need; generic onboarding never hard-codes capability-specific binding rules. |
 | M3-008 | DEFERRED | Revisit main-branch protection after the current hosted-evidence and final-document sequence. | D-047 is explicitly resumed; force-push/deletion restrictions and required checks are configured and verified without claiming they existed earlier. |
@@ -857,9 +857,33 @@ criterion is recorded in the repository.
   `4e70ec4323807824b0578241fe4a4d94951cd608`, and their trees have no diff.
   The event-specific skips are expected workflow partitioning, so this closes
   M3-004B on the accepted bytes.
-- M3-005B is now `NEXT`. Platform/capability support, `supportClaimsEnabled`,
+- M3-005B has since completed under D-046. Platform/capability support, `supportClaimsEnabled`,
   npm publication, and release state are unchanged. D-047/M3-008 branch
   protection remains deferred.
+
+### M3-005B completion — 2026-08-12
+
+- D-046 is implemented as one constructive reader model: purpose and boundary;
+  fact ownership; data/control flow; executable contracts; evidence;
+  limitations; and the next authorized action. Repair chronology remains in
+  the handoffs, decisions, and provenance rather than leading the public docs.
+- The workspace README, architecture, support/compatibility/release documents,
+  changelog, known-limitations owner, draft alpha note, and four package-local
+  READMEs pass the bounded constructive/package-document cold review at
+  0 blocker, 0 high, and 0 medium. The focused constructive-document and
+  package-plan suite passes 82/82 under both admitted Node runtimes.
+- Content-frozen commit `ad7c5007823fc28dca838db4ed2d0e9d2703e7ab`
+  (tree `5dc99284a2be71e110ee4c64099abbd16c4d4e20`) passes 1247/1247 complete tests
+  under Node 22.23.2/npm 10.9.8 and Node 24.19.0/npm 11.17.0. Both runtime/npm
+  pairs pass four-package admission, guarded build, offline joint install,
+  installed CLI smoke, expected blocked QA, and no BuildArtifact.
+- This closes final-document construction, not product support or release:
+  the matrix remains 0 supported / 22 experimental / 3 manual / 35 unsupported,
+  `supportClaimsEnabled` remains false, and no tag, GitHub Release, npm
+  publication, signature, or registry provenance is claimed.
+- M4-001 is next for preparation and audit only. Tag creation and publication
+  still require separate explicit authorization. D-047/M3-008 branch
+  protection remains deferred and does not resume automatically.
 
 ### D-044 pre-public identity migration — 2026-08-11
 
@@ -1135,7 +1159,7 @@ criterion is recorded in the repository.
 
 | ID | Status | Task | Exit criterion |
 | --- | --- | --- | --- |
-| M4-001 | PENDING | Release `0.1.0-alpha.1` after all alpha gates pass. | Signed/provenance-enabled release is reproducible from a clean tag; published contents equal the reviewed tarball. |
+| M4-001 | NEXT | Prepare `0.1.0-alpha.1` for a separately authorized release after all alpha gates pass. | Signed/provenance-enabled release is reproducible from a clean tag; published contents equal the reviewed tarball; no tag or npm publication occurs without explicit authorization. |
 | M4-002 | PENDING | Collect compatibility evidence without expanding claims beyond tests. | Each tested external template records only redacted feature-level results and the public fixture remains sufficient for CI. |
 | M4-003 | PENDING | Define beta and 1.0 stability, migration, deprecation, and support promises. | Compatibility policy and conformance suite enforce the promises. |
 

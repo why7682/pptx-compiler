@@ -21,9 +21,13 @@ M3-004B is also complete. Pull-request head
 main CI run `31600806512` passed all six hosted cells; PR security run
 `31600528742` passed Dependency Review while CodeQL was skipped by event design,
 and main security run `31600806350` passed CodeQL while Dependency Review
-was skipped by event design. M3-005B is therefore `NEXT`, not complete: it still
-must construct and cross-review the final text required by D-046. Hosted
-execution evidence alone does not enable support claims or authorize release.
+was skipped by event design. M3-005B is complete: the final reader-facing text
+constructs the D-046 model, its cross-document and package-document cold review
+closed at 0 blocker / 0 high / 0 medium, and content-frozen commit
+`ad7c5007823fc28dca838db4ed2d0e9d2703e7ab` passed 1247/1247 complete tests
+under each admitted runtime and the guarded four-package build, admission,
+offline joint install, and installed-CLI smoke under both runtime/npm pairs.
+This does not enable support claims or authorize release.
 
 ## Responsibility boundary
 
@@ -90,6 +94,18 @@ BuildArtifact check. The focused content-policy and document suites pass 41/41
 and 14/14 respectively. The bounded final security, provenance, and state
 reviews report 0 blocker, 0 high, and 0 medium findings.
 
+For M3-005B, content-frozen commit
+`ad7c5007823fc28dca838db4ed2d0e9d2703e7ab` (tree
+`5dc99284a2be71e110ee4c64099abbd16c4d4e20`) passes 1247/1247 complete tests
+under Node 22.23.2/npm 10.9.8 and Node 24.19.0/npm 11.17.0. Both runtime/npm
+pairs also pass canonical four-package admission, guarded build, offline joint
+install, installed CLI smoke, expected blocked QA, and the no-BuildArtifact
+boundary. The focused constructive-document/package-plan suite passes 82/82,
+and bounded current-byte cold review closes at 0 blocker, 0 high, and 0 medium.
+The subsequent completion-status/provenance-only delta is covered by focused
+and lightweight gates rather than being misrepresented as the same content
+tree.
+
 ## Next actions
 
 1. Retain M3-005A as complete.
@@ -97,8 +113,10 @@ reviews report 0 blocker, 0 high, and 0 medium findings.
    remote-main equality evidence.
 3. Retain M3-004B as complete without converting its hosted results into
    support or release claims.
-4. Construct M3-005B text in D-046 order: purpose and
-   boundary; fact ownership; data/control flow; executable contracts; evidence;
-   limitations; next authorized action. Then run one cross-document review
-   before freezing it.
-5. Keep D-047 branch protection deferred until the M3-005B sequence completes.
+4. Retain M3-005B as complete in D-046 order: purpose and boundary; fact
+   ownership; data/control flow; executable contracts; evidence; limitations;
+   next authorized action.
+5. Prepare M4-001 evidence without creating a tag or publishing npm until the
+   user separately authorizes that external release action.
+6. Keep D-047 branch protection deferred. M3-005B completion does not resume it
+   by implication.

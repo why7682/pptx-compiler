@@ -463,8 +463,8 @@ capability or enable global support.
 
 ## Next authorized action
 
-This architecture is part of the reader-facing bundle being frozen by the
-M3-005B cross-document gate. Only after that gate records its final evidence may the project prepare
+This architecture is part of the reader-facing bundle frozen by the completed
+M3-005B cross-document gate. The project may now prepare
 the `0.1.0-alpha.1` release gate. Actual npm publication still requires explicit
 authorization, a clean-tag build, signing/provenance, and equality between the
 reviewed and published tarballs. Deferred branch-protection work must be resumed

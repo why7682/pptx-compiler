@@ -2876,8 +2876,10 @@ notes: M3-006 is complete at public main object
   D-046 additionally requires M3-005B's final reader-facing documents to build
   one coherent model from purpose and fact ownership through flow, contracts,
   evidence, limitations, and next action; chronology remains in audit records.
-  D-047 separately defers branch protection until the current M3-004B/M3-005B
-  sequence is complete; no protection rule is configured or claimed here
+  D-047 separately deferred branch protection through the M3-004B/M3-005B
+  sequence. That sequence has since completed, but only explicit user
+  reauthorization can resume M3-008; no protection rule is configured or
+  claimed here
 ```
 
 ### M3-004B accepted-main closure and D-046 constructive M3-005B document slice
@@ -2950,9 +2952,14 @@ public_fixture_conformance: applicable; the focused final-document,
   31600806512 passes the same six cells and main security run 31600806350
   passes CodeQL. PR head f6ba6bad48c928d31c356d47911dd929ccf3b2d1 and
   main c4dee58a8920a8e71c20f53ab93c62a96d3cb89d share exact tree
-  4e70ec4323807824b0578241fe4a4d94951cd608 with no diff. The current
-  constructive-document and package-local README bytes have no final admitted-
-  runtime dual-line complete-suite or guarded four-package rebuild evidence yet
+  4e70ec4323807824b0578241fe4a4d94951cd608 with no diff. Content-frozen commit
+  ad7c5007823fc28dca838db4ed2d0e9d2703e7ab (tree
+  5dc99284a2be71e110ee4c64099abbd16c4d4e20) passes 1247/1247 complete tests
+  under Node 22.23.2/npm 10.9.8 and Node 24.19.0/npm 11.17.0. Both guarded
+  builds pass four-package admission, offline joint install, installed CLI
+  smoke, blocked QA, and no BuildArtifact. The later completion-status and
+  provenance-only delta is covered by focused and lightweight gates, not
+  claimed as the same content tree
 independent_review: passed; one bounded current-byte constructive, package-
   document, and provenance cold review reports 0 blocker, 0 high, and 0 medium
   findings after package-local README ownership, absolute-link, dependency-graph,
@@ -2963,7 +2970,9 @@ notes: M3-004B is complete on the accepted equal-tree evidence. D-046 governs
   action. The support matrix remains 0 supported / 22 experimental / 3 manual /
   35 unsupported with supportClaimsEnabled false; QA remains blocked and
   creates no BuildArtifact; npm publication and release remain absent. D-047 /
-  M3-008 branch protection remains deferred and is not configured or claimed
+  M3-008 branch protection remains deferred and is not configured or claimed.
+  M3-005B is complete; M4-001 preparation is next, but tag creation and npm
+  publication remain outside the current authorization
 ```
 
 The XML namespace, relationship-type, and MIME strings are interoperability

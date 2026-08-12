@@ -193,8 +193,7 @@ complete hosted evidence to one byte-identical tree.
 
 ## Next dependency
 
-M3-004B is complete. M3-005B is now the next dependency and must construct the
-final reader-facing changelog, limitations, support wording, and release text
-under D-046. The hosted evidence does not by itself change the support matrix,
-enable support claims, publish npm packages, or satisfy the remaining release
-gates. D-047 branch protection remains deferred through the M3-005B work.
+M3-004B is complete, and M3-005B has since frozen the D-046 reader model. M4-001
+release preparation is next. Neither closure changes the support matrix,
+enables support claims, publishes npm packages, or satisfies G6. D-047 branch
+protection remains separately deferred.

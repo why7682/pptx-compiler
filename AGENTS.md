@@ -141,7 +141,7 @@ completed `M3-004B` hosted-evidence follow-up, read:
 8. `docs/PROVENANCE_LEDGER.md`
 
 For maintenance or audit of the completed `M3-005A` process-document contract,
-the active `M3-005B` constructive final-document work, or before auditing
+the completed `M3-005B` constructive final-document work, or before auditing
 `M3-006`, read:
 
 3. `docs/M3-005_HANDOFF.md`
@@ -446,9 +446,9 @@ For code review, report:
   subsequently reverified the repository tuple, scanned the final history, and
   published the exact first source ref. That publication is not platform,
   release, or npm-publication evidence. Cite M3-004B hosted conclusions only
-  with their exact run and commit bindings. M3-005B still owns final changelog,
-  limitations, support, and release wording; hosted CI alone grants none of
-  those authorities.
+  with their exact run and commit bindings. M3-005B owns the frozen changelog,
+  limitations, support, and release wording; its completion and hosted CI grant
+  no support, npm-publication, or release authority.
 - When writing or freezing final reader-facing documentation under D-046,
   construct one coherent model in this order: purpose and boundary; fact
   ownership; data/control flow; executable contracts; evidence; limitations;
