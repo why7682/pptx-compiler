@@ -1,5 +1,5 @@
 {
-  "schemaVersion": 2,
+  "schemaVersion": 3,
   "planId": "pptx-pipeline-alpha-package-plan",
   "packageVersion": "0.1.0-alpha.1",
   "license": "MIT",
@@ -11,7 +11,7 @@
   "namePolicy": {
     "style": "unscoped",
     "registry": "https://registry.npmjs.org",
-    "checkedOn": "2026-08-11",
+    "checkedOn": "2026-08-13",
     "result": "all-names-e404-not-reserved",
     "names": [
       "pptx-compiler",
@@ -28,8 +28,14 @@
     "htmlUrl": "https://github.com/why7682/pptx-compiler"
   },
   "releaseGuard": {
-    "state": "blocked",
-    "reason": "npm-publication-not-authorized"
+    "state": "authorized",
+    "decisionId": "D-048"
+  },
+  "publication": {
+    "registry": "https://registry.npmjs.org/",
+    "tag": "alpha",
+    "access": "public",
+    "provenance": true
   },
   "packages": [
     {

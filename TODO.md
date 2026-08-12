@@ -1,6 +1,7 @@
 # TODO
 
-Status values: `DONE`, `NEXT`, `BLOCKED`, `PENDING`, and `DEFERRED`.
+Status values: `DONE`, `IN_PROGRESS`, `NEXT`, `BLOCKED`, `PENDING`, and
+`DEFERRED`.
 
 Complete tasks in dependency order. A task is complete only when its exit
 criterion is recorded in the repository.
@@ -707,7 +708,7 @@ criterion is recorded in the repository.
 | ID | Status | Task | Exit criterion |
 | --- | --- | --- | --- |
 | M3-001 | DONE | Complete one candidate-alpha spine: public-synthetic bootstrap -> inspect -> whole-project validate -> candidate-only render -> honest QA. Auxiliary command breadth does not block alpha. | One installed, explicit-root project reaches CandidateBuildRecord-bound PPTX output through normative support/preflight; incomplete evidence yields a schema-valid blocked QaReport and no BuildArtifact. |
-| M3-002 | DONE | Define explicit publishable packages and decide scoped versus unscoped npm names after the installed spine is stable. | Each package has positive `files`, `exports`, `types`, `bin` where applicable, license, engines, and staged metadata; D-045 now binds the exact repository tuple while npm publication remains blocked. |
+| M3-002 | DONE | Define explicit publishable packages and decide scoped versus unscoped npm names after the installed spine is stable. | Each package has positive `files`, `exports`, `types`, `bin` where applicable, license, engines, and staged metadata; D-045 bound the repository tuple, and D-048 later authorized the exact alpha channel without claiming that publication has occurred. |
 | M3-003 | DONE | Add repository and npm leakage gates. | Tarball is at most 5 MiB compressed/20 MiB unpacked, at most 300 files/1 MiB each, matches an allowlist, contains no forbidden magic/extensions, and installs in an empty directory. |
 | M3-004A | DONE | Define and locally verify the public-safe CI/security, development-toolchain, source-policy, license, and static-ESM SBOM projection contracts. | Two canonical workflows and all local gates pass under admitted Node 22/24 in one fixed non-FileProvider copy without model/GUI/private inputs. |
 | M3-004B | DONE | Collect the six Linux/Windows/macOS × Node 22/24 public CI cells plus CodeQL and Dependency Review evidence. | The public remote records stable URLs and conclusions for every hosted job; local YAML or macOS runs are not substitutes. |
@@ -868,7 +869,7 @@ criterion is recorded in the repository.
   limitations; and the next authorized action. Repair chronology remains in
   the handoffs, decisions, and provenance rather than leading the public docs.
 - The workspace README, architecture, support/compatibility/release documents,
-  changelog, known-limitations owner, draft alpha note, and four package-local
+  changelog, known-limitations owner, initial alpha note, and four package-local
   READMEs pass the bounded constructive/package-document cold review at
   0 blocker, 0 high, and 0 medium. The focused constructive-document and
   package-plan suite passes 82/82 under both admitted Node runtimes.
@@ -881,9 +882,12 @@ criterion is recorded in the repository.
   the matrix remains 0 supported / 22 experimental / 3 manual / 35 unsupported,
   `supportClaimsEnabled` remains false, and no tag, GitHub Release, npm
   publication, signature, or registry provenance is claimed.
-- M4-001 is next for preparation and audit only. Tag creation and publication
-  still require separate explicit authorization. D-047/M3-008 branch
-  protection remains deferred and does not resume automatically.
+- At this checkpoint M4-001 was next for preparation and audit only. Tag
+  creation and publication were later explicitly authorized by D-048 and the
+  milestone is now split into active
+  contract, candidate/tag, and publication phases. At this M3-005B checkpoint
+  no tag or publication existed. D-047/M3-008 branch protection remains
+  deferred and does not resume automatically.
 
 ### D-044 pre-public identity migration — 2026-08-11
 
@@ -1159,9 +1163,106 @@ criterion is recorded in the repository.
 
 | ID | Status | Task | Exit criterion |
 | --- | --- | --- | --- |
-| M4-001 | NEXT | Prepare `0.1.0-alpha.1` for a separately authorized release after all alpha gates pass. | Signed/provenance-enabled release is reproducible from a clean tag; published contents equal the reviewed tarball; no tag or npm publication occurs without explicit authorization. |
+| M4-001A | DONE | Implement and verify the fail-closed `0.1.0-alpha.1` release contract authorized by D-048, without treating authorization as execution evidence. | Package-plan schema 3, the release plan, release-lock validator, exact-tag/history admission, dual-builder tar-payload equality with fixed-builder release-envelope identity, registry recovery states, public workflow policy, documentation, provenance, and adversarial tests agree; mutable external lifecycle state remains outside the locked-input contract. |
+| M4-001B | IN_PROGRESS | Freeze the exact candidate, create its tracked dual-builder lock, merge that lock as the GitHub-verified commit `S`, append the one permitted repository-local public-identity attestation `A`, run history admission at `A`, and then create annotated tag `v0.1.0-alpha.1` on unchanged `S`. | Node 22.23.2/npm 10.9.8 and Node 24.19.0/npm 11.17.0 produce four byte-identical canonical tar payloads; the lock records both builders' gzip envelopes and assigns only the fixed Node 24/npm 11 envelopes as release bytes tracked by `S`. `A` has `S` as its sole parent and its tip-owned policy grants exactly `S`; the full reachable-history gate passes with remote `main=A`; only then does the annotated tag peel to `S`, and the tag-bound Public CI and Security workflows pass before npm publication. |
+| M4-001C | PENDING | Publish and verify the four public npm packages in dependency-graph order, then create the GitHub Release last and retire the bootstrap credential. | The package-plan dependency graph derives `core -> native-card-arrow -> public-synthetic -> CLI`; publication completes with absent/equal/mismatch recovery, official-registry byte reread, npm provenance, `alpha` and no `latest`, then the GitHub Release binds the exact tag/lock/artifacts last. After that last publication mutation, all four exact npm Trusted Publisher bindings are configured, the bootstrap token is revoked, and GitHub `NPM_TOKEN` is deleted before M4-001C may be marked `DONE`; only non-secret configuration facts are recorded by non-lock state owners while the locked changelog, limitations, and release note remain lifecycle-neutral. |
 | M4-002 | PENDING | Collect compatibility evidence without expanding claims beyond tests. | Each tested external template records only redacted feature-level results and the public fixture remains sufficient for CI. |
 | M4-003 | PENDING | Define beta and 1.0 stability, migration, deprecation, and support promises. | Compatibility policy and conformance suite enforce the promises. |
+
+### M4-001 authorization and active boundary — 2026-08-12
+
+- D-048 records the user's explicit authorization for the exact annotated
+  `v0.1.0-alpha.1` tag and GitHub Release, the four public npm packages under
+  dist-tag `alpha`, and GitHub Actions plus npm provenance.
+- Authorization is not execution evidence. The tracked changelog, limitations,
+  and release note bind candidate facts without encoding mutable lifecycle
+  labels; Release Gates and other non-lock state owners record observed phase
+  completion.
+- The accepted reader-facing baseline is constructive-document PR #2 head
+  `093d527fc3fadf7cae577139b8d400719755dd52`, Public CI/Security runs
+  `31608992503`/`31608992491`, and accepted-main
+  `8cdf968b72f8dd5f41fee37a68e239e477dec44b` with tree
+  `1d6d148a8bc347dc3cbc13dde3fd4314d86c421a` and runs
+  `31609285181`/`31609285220`. These facts do not satisfy a release phase.
+- The release candidate must bind the package plan, release plan, support
+  matrix, SBOM, changelog, limitations, and lifecycle-neutral release note.
+  Both fixed runtime/npm pairs must first produce the same exact decompressed
+  tar payload for all four packages. The lock records each builder's distinct
+  canonical gzip SHA-256, SHA-512, and compressed size, and selects only the
+  fixed Node 24/npm 11 envelopes as release bytes. Each tar payload is also
+  re-admitted member-by-member against the tracked package-plan source
+  projection rather than trusted from stage metadata. The lock is reviewed and merged as the
+  GitHub-verified commit `S`; exactly one repository-local public-identity
+  attestation commit `A` is then appended with `S` as its sole parent and an
+  exact tip-owned policy grant for `S`. The full reachable-history gate runs at
+  remote `main=A`; only afterward may the annotated tag target unchanged `S`.
+- The package plan owns publication settings and the dependency graph; that
+  graph derives `pptx-compiler-core`, `pptx-compiler-native-card-arrow`,
+  `pptx-compiler-public-synthetic`, then `pptx-compiler` as the npm order.
+  Release Gates owns the phase order. Registry absence permits publishing only
+  the reviewed tarball; exact present bytes permit continuation; any mismatch
+  is a hard stop and is never repaired with `npm unpublish`.
+- Every package must be reread from the official registry with exact bytes and
+  npm provenance, dist-tag `alpha` must point to the release, and `latest` must
+  not. The GitHub Release is created only after all four pass. The first
+  publication uses the narrowly exposed environment token; npm Trusted
+  Publisher is configured after all four initial package identities exist.
+- On 2026-08-13 the user confirmed that the npm account email is verified, 2FA
+  is enabled, and GitHub environment `npm-release` contains the one-time
+  bootstrap `NPM_TOKEN`. This records no secret value and is not publication
+  evidence. After all four initial package identities exist, configure the exact Trusted
+  Publisher bindings, revoke the bootstrap token, and delete the GitHub secret.
+- D-047/M3-008 branch protection remains independently deferred. D-048 does
+  not resume or satisfy it, and it is not an M4-001 prerequisite.
+
+### M4-001A completion — 2026-08-13
+
+- On the exact 52-path pre-close snapshot, Node 22.23.2/npm 10.9.8 and
+  Node 24.19.0/npm 11.17.0 each pass 1322 of 1324 complete test nodes. Under
+  both runtimes, the only two failures are the release-metadata baseline and
+  file-alias baseline caused by the same 52 deliberately pending provenance
+  records; the Git-backed contract suite runs normally.
+- The same two frozen Git snapshots each pass the guarded four-package build,
+  exact package admission, offline joint install, and installed-CLI
+  `init -> inspect -> validate -> render -> qa` smoke. QA remains `blocked`
+  and no `BuildArtifact` exists.
+- The exact source-projection lock, tag-tree rederivation, registry recovery,
+  Sigstore identity, final GitHub Release declaration, and public workflow
+  boundaries have bounded independent reviews with 0 blocker, 0 high, and
+  0 medium. The completion-status/provenance-only delta is admitted by the
+  focused document and canonical lightweight gates.
+- M4-001A created no lock, tag, npm package, registry provenance result, or
+  GitHub Release. M4-001B is now the sole next release phase; M4-001C remains
+  pending, support remains 0/22/3/35 with its global switch false, and
+  D-047/M3-008 remains deferred.
+
+### M4-001B lock checkpoint — 2026-08-13
+
+- The exact frozen source is M4-001A commit
+  `b80761a62cff23cb90101605e09cc6e3c2924abd`, tree
+  `e4a4ca28fbfa3a83080142af63c9b08b36291ccc`. Its fixed Node 22.23.2/npm
+  10.9.8 and Node 24.19.0/npm 11.17.0 guarded stages supplied the two canonical
+  evidence records bound by the lock.
+- Create-only generation produced
+  `packaging/releases/0.1.0-alpha.1.lock.json` with exact SHA-256
+  `d3b4818e9bcdb43f39df557847613d3e5ce0afa2f6fffda5af655217f2f5170a`
+  and package-source projection
+  `962defc231e784627c142f01df84669b08d9a7b3f1bae39da2ea1f2728d95312`.
+  Both builders bind byte-identical canonical tar payloads for all four
+  packages; their evidence identities and every gzip envelope remain recorded
+  separately, with only the fixed Node 24/npm 11 envelopes eligible as release
+  bytes.
+- This starts but does not complete M4-001B. One bounded review independently
+  recomputed the exact lock/blob/size, six inputs, 89 Git sources projected into
+  96 members with modes and lengths, both stage/evidence identities, four tar
+  payloads, fixed Node 24/npm 11 admission, dependency order, and forbidden-
+  material result; it reports 0 blocker, 0 high, and 0 medium with Taste=good.
+  The lock is included in this nine-path tracked-admission change. The next
+  boundary is to commit and merge it unchanged as `S`.
+- No `S`, attestation `A`, tag, tag-hosted run, npm package, registry
+  equality/provenance result, or GitHub Release exists at this checkpoint.
+  M4-001C remains pending, support remains unchanged, and D-047/M3-008 remains
+  deferred.
 
 ## Deferred follow-through from the predecessor project
 

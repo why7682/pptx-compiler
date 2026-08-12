@@ -1,4 +1,4 @@
-# Initial Threat Model
+# Threat Model
 
 ## Protected assets
 
@@ -64,6 +64,23 @@
     drifted repository ID/owner/name/URL/directory/protocol, or a pre-binding
     reviewed stage being accepted under a changed plan to produce a packable
     but unusable, stale, or leaking package.
+15. releasing from a mutable working tree, a moved tag, a source commit that is
+    not admitted by the complete reachable-history policy, a stale or partial
+    package stage, or a lock that does not bind both fixed builders to the same
+    four canonical tar payload byte strings and the fixed builder's exact gzip
+    release envelopes.
+16. publishing one package before a later package's already-observable registry
+    conflict is discovered, replaying an earlier partial publication with
+    different bytes, allowing `latest` to move, or treating `npm unpublish` as
+    rollback for an irreversible registry write.
+17. accepting a self-asserted provenance payload without proving the Sigstore
+    certificate identity, allowing a workflow run from another repository,
+    ref, commit, or attempt to authorize the current package, or exposing npm
+    and GitHub credentials to the same execution boundary.
+18. creating a GitHub Release before the complete registry graph is reread and
+    verified, or accepting an existing Release whose tag, target, prerelease
+    state, body, lock identity, or package identities differ from the closed
+    release plan.
 
 ## Default controls
 
@@ -80,6 +97,19 @@
 - use positive Git/package allowlists and inspect binary magic;
 - separate public PR, trusted release, and PowerPoint/self-hosted workflows;
 - bind release provenance to the reviewed commit and tarball digest.
+- keep release planning, package planning, and observed completion separate:
+  one tracked release plan fixes the tag/builders/inputs/recovery contract, one
+  create-only lock binds exact locked inputs and tarball bytes, the exact tag
+  binds the source candidate, and only official GitHub/npm responses can prove
+  that publication occurred;
+- complete a read-only four-package registry admission before the first write,
+  freeze admitted tarball buffers outside the reviewed stage, publish only the
+  exact dependency prefix, and never use unpublish as recovery;
+- validate npm provenance cryptographically against the exact GitHub Actions
+  certificate identity and issuer as well as the closed SLSA payload, package
+  digest, source tag, source commit, workflow, and invocation relation;
+- isolate GitHub source verification, npm publication, and final GitHub Release
+  declaration so no process receives both npm and GitHub write credentials;
 - derive package staging only from the closed positive package plan; validate
   every source/target, export, type, bin, import alias, dependency edge, asset
   owner, mode, count, and size before copying. Installed composition receives
@@ -727,3 +757,98 @@ Local M3-004A conformance proves only that the intended workflows and readable
 metadata close under the local implementation. M3-004B requires the hosted
 Linux/Windows/macOS × Node 22/24 runs after M3-006. No platform support,
 security-scan success, release, or publication claim follows from local YAML.
+
+## Candidate-alpha release boundary
+
+The candidate-alpha release is a state transition over three independent
+authorities rather than a shell command. The package plan owns the four public
+manifests, dependency graph, registry, access, dist-tag, and provenance mode.
+The release plan owns one exact annotated tag, two fixed builders, six readable
+locked inputs, recovery states, and the requirement that GitHub Release be
+last. The create-only tracked release lock binds the canonical release plan,
+both complete reviewed-stage evidence objects, each builder's gzip length,
+SHA-256, and SHA-512, plus the shared canonical tar-payload length and SHA-256.
+Hashes authenticate those readable relations; they do not replace either plan
+or prove external publication. Only the fixed Node 24/npm 11 gzip envelopes are
+eligible release bytes.
+
+The reviewed source commit `S` cannot authorize its own hosted merge identity.
+Remote `main` must therefore be exactly one repository-local attestation commit
+`A` ahead of `S`: `A` has `S` as its sole parent, changes only the tip-owned
+forbidden-material policy, preserves every earlier grant, and adds exactly the
+GitHub-verified OID of `S`. The complete reachable-history gate runs at `A`
+with its fixed public identity anchor. Only after that gate passes may the exact
+annotated tag point back to unchanged `S`. The release workflow checks the tag
+object and target, the strict `S -> A` relation, the policy delta, current
+public repository tuple, and the tag/main workflow results. It rereads mutable
+remote facts before every absent-package write and after completion. A moved or
+deleted tag, changed main, changed repository state, missing workflow result,
+early public GitHub Release, replacement object, shallow history, or dirty tag
+checkout fails closed.
+
+Both fixed builders must independently produce the same admitted four canonical
+tar payload byte strings before the lock exists. Their zlib versions may emit
+different gzip envelopes, so both identities are recorded while only the fixed
+builder owns the publishable envelopes. Lock generation reads every mapped
+package source from the candidate tree, rebuilds the expected manifest/file
+projection, and admits both stages' tar members, modes, and content bytes
+against that projection; a self-consistent marker/evidence pair cannot mint a
+different package. Builder runtime and smoke fields remain operator-produced
+evidence, not a cryptographic runtime attestation. Preparation reads the tag
+tree rather than trusting mutable working objects, verifies the tracked lock
+and all six locked inputs, structurally revalidates the ignored reviewed stage,
+and compares its real tarballs with the lock. The publisher then copies the retained buffers into one
+owned mode-restricted temporary directory and compares them again immediately
+before and after npm use. It never hands npm a mutable reviewed-stage pathname.
+
+Registry recovery is prefix-shaped. Before the first write, all four exact
+versions and their packuments are read. An existing version must match the
+locked bytes, metadata, provenance, and allowed dist-tag state; an absent
+version must have no conflicting `alpha` or `latest` tag. Existing packages may
+form only the exact dependency prefix. Each absent member is reread immediately
+before its write, published from the frozen buffer, reread from the official
+registry, and added to the signature-audit prefix. A byte mismatch, later
+member already present after an absent predecessor, foreign dist-tag, invalid
+signature, or unexpected registry response stops without publishing another
+member. An exact earlier prefix is resumable; `npm unpublish` is never a repair
+operation, and `latest` is never created or moved by this alpha lane.
+
+npm's signed SLSA statement is not trusted as self-description. The verifier
+requires one exact subject and one exact resolved source dependency, the locked
+package SHA-512 and source commit `S`, the exact repository/tag/workflow and
+canonical invocation identifiers, a keyless Sigstore bundle, and a certificate
+whose issuer is GitHub Actions and whose subject alternative name matches only
+the exact alpha-release workflow at the exact tag. The fixed npm 11.17.0
+runtime and its bundled Sigstore implementation are part of the admitted
+verification boundary. Newly published packages bind the current invocation;
+an exact resumable prefix may bind a prior canonical invocation after all other
+identity checks pass.
+
+Credentials are split by process and workflow step. The initial source-
+admission process sees a read-only GitHub token and rejects an npm token. npm
+publication sees only the environment-scoped bootstrap token plus OIDC inputs
+and rejects GitHub tokens. The final declaration process receives one GitHub
+contents-write token, uses it for its fresh source and Release checks plus the
+sole permitted Release POST, and rejects npm/OIDC publication credentials.
+The final public GitHub Release declaration runs only after a fresh complete registry,
+provenance, signature, source, tag, and lock verification; it receives GitHub
+write authority but no npm token or OIDC publication authority. It creates or
+exactly reuses one non-draft prerelease with `make_latest` disabled and then
+rereads the Release and all bound external facts. An early or mismatched
+Release is not reconciled by deletion or overwrite.
+
+These controls do not make npm or GitHub transactions atomic. A network or
+service failure can leave an exact published prefix, which is why the recovery
+model admits only byte-equal forward completion. Anonymous registry and public
+GitHub responses can change between reads; bounded immediate rereads convert
+detected drift into a hard stop but cannot provide a cross-service transaction.
+A private GitHub draft created after the credentialed source check is not
+observable to the credential-free npm process; it is not a public declaration,
+but its existence makes the final declaration hard-stop rather than overwrite
+or delete it. Within this controlled workflow, its only authorized non-draft/
+public GitHub Release mutation occurs last; the blind window may instead leave
+the authorized npm graph complete and the GitHub Release deliberately
+incomplete.
+Branch protection remains separately deferred, so the strict source rereads
+and exact attestation relation are release prerequisites rather than inferred
+repository settings.

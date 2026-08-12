@@ -24,10 +24,11 @@ The current candidate-alpha boundary is deliberately much smaller. It can:
 That blocked result is successful, honest assessment. It creates no
 `BuildArtifact` and grants no delivery authority.
 
-This repository does **not** currently provide arbitrary-template
-compatibility, a general renderer, passed delivery QA, or a published npm
-package. The normative global switch remains `supportClaimsEnabled: false`, and
-no support row is `supported`.
+This version does **not** provide arbitrary-template compatibility, a general
+renderer, or passed delivery QA. Whether exact package bytes were distributed
+is a separate official-registry/lock/provenance fact and never changes that
+capability boundary. The normative global switch remains
+`supportClaimsEnabled: false`, and no support row is `supported`.
 
 ## Fact ownership
 
@@ -45,8 +46,9 @@ One readable owner is kept for each fact:
 | Checks, unavailable evidence, and the aggregate QA decision | `QaReport` |
 | Final delivered outputs after every required gate passes | `BuildArtifact` |
 | Current support dispositions | `policy/support-matrix.json` |
-| Four-package source and dependency graph | `packaging/alpha-package-plan.json` |
-| Release eligibility | `docs/RELEASE_GATES.md` |
+| Four-package source graph and authorized public-alpha channel | `packaging/alpha-package-plan.json` |
+| Exact release tag, builders, lock inputs, recovery, and completion rules | `packaging/alpha-release-plan.json` |
+| Release phase order, eligibility, and phase evidence | `docs/RELEASE_GATES.md` |
 
 Hashes bind exact objects at authority boundaries. They do not replace the
 readable source, semantic, layout, or evidence model.
@@ -82,7 +84,7 @@ and pointer, never source content, XML, an absolute path, or a stack trace.
 
 ## Packages and contracts
 
-The guarded alpha graph contains exactly four npm-private packages:
+The private workspace projects exactly four public-alpha npm packages:
 
 ```text
 pptx-compiler
@@ -94,8 +96,10 @@ pptx-compiler
 The CLI is the composition root. Core does not import the CLI, optional process
 or PowerPoint adapters, model-assisted labs, private fixtures, or a presentation
 project. Each package owns the schemas, fixtures, and static resources it
-interprets. The package plan positively maps every staged file and keeps npm
-publication blocked.
+interprets. Package-plan schema 3 positively maps every staged file and records
+D-048's exact public channel: version `0.1.0-alpha.1`, official npm registry,
+dist-tag `alpha`, public access, and npm provenance. That is authorization and
+staging policy, not evidence that any package has been published.
 
 Contract version `0.1.0` has nine closed serialized roots:
 `ProjectConfig`, `TemplateProfile`, `TemplateIndex`, `CapabilityRegistry`,
@@ -106,26 +110,31 @@ requests fail closed.
 
 Node.js 22.x and 24.x are the admitted runtime lines. Follow the canonical
 source and guarded-package procedure in
-[docs/REPRODUCIBILITY.md](docs/REPRODUCIBILITY.md); there is no npm installation
-command because the packages have not been published.
+[docs/REPRODUCIBILITY.md](docs/REPRODUCIBILITY.md). That source procedure uses
+guarded local tarballs; consumers must trust an npm installation only when the
+official-registry bytes, tracked release lock, and npm provenance agree.
 
 ## Public evidence
 
-The accepted executable baseline is Git object
-`c4dee58a8920a8e71c20f53ab93c62a96d3cb89d`. Its hosted evidence is:
+The latest accepted pre-M4 reader baseline is pull-request head
+`093d527fc3fadf7cae577139b8d400719755dd52` and accepted main
+`8cdf968b72f8dd5f41fee37a68e239e477dec44b`. They share tree
+`1d6d148a8bc347dc3cbc13dde3fd4314d86c421a`. Its hosted evidence is:
 
 | Boundary | Result |
 | --- | --- |
-| [Pull-request CI](https://github.com/why7682/pptx-compiler/actions/runs/31600528716) | Ubuntu, Windows, and macOS under Node 22 and 24 passed |
-| [Dependency Review](https://github.com/why7682/pptx-compiler/actions/runs/31600528742) | Passed on the ordinary pull request |
-| [Accepted-main CI](https://github.com/why7682/pptx-compiler/actions/runs/31600806512) | All six platform/runtime cells passed |
-| [Accepted-main security](https://github.com/why7682/pptx-compiler/actions/runs/31600806350) | CodeQL passed |
+| [Pull-request CI](https://github.com/why7682/pptx-compiler/actions/runs/31608992503) | Ubuntu, Windows, and macOS under Node 22 and 24 passed |
+| [Pull-request security](https://github.com/why7682/pptx-compiler/actions/runs/31608992491) | Dependency Review passed |
+| [Accepted-main CI](https://github.com/why7682/pptx-compiler/actions/runs/31609285181) | All six platform/runtime cells passed |
+| [Accepted-main security](https://github.com/why7682/pptx-compiler/actions/runs/31609285220) | CodeQL passed |
 
-Those runs also exercise the public-safe source gates, complete test suite,
-guarded four-package build, clean joint installation, and installed CLI smoke.
-They prove the workflow on the named Git objects. They do not prove arbitrary
-template support, absence of every vulnerability, registry publication,
-reviewed-to-published equality, signing, or release eligibility.
+Those runs preserve the earlier M3-004B implementation evidence while checking
+the accepted constructive reader bundle. They exercise the public-safe source
+gates, complete test suite, guarded four-package build, clean joint
+installation, and installed CLI smoke. They prove the workflow on the named Git
+objects. They do not prove an M4 candidate, annotated tag, arbitrary-template
+support, absence of every vulnerability, registry publication,
+reviewed-to-published equality, provenance, or release eligibility.
 
 The machine-readable matrix currently contains 60 rows: 0 `supported`, 22
 `experimental`, 3 `manual`, and 35 `unsupported`. The six platform/runtime rows
@@ -148,30 +157,39 @@ product capability or enable the global support switch.
 - Windows preserves the logical create-only state machine and flushed file
   bytes, but Node exposes no parent-directory fsync equivalent there; no sudden-
   power-loss directory-entry persistence claim is made.
-- No npm artifact, release tag, signature, registry provenance, or
-  reviewed-to-published byte equality exists yet.
+- D-048 authorizes the exact public-alpha release, but this README does not
+  assert mutable external lifecycle state. Exact tag/lock identity,
+  official-registry bytes, npm provenance, and the GitHub Release record own
+  those facts.
 
 ## Next authorized action
 
-This reader-facing bundle now constructs the candidate from purpose through
-limitations and has passed the M3-005B cross-document gate. The repository may
-prepare the `0.1.0-alpha.1` release gate, but npm publication still requires
-separate explicit authorization plus a clean-tag build, signing/provenance, and
-reviewed-to-published byte equality. Main-branch protection remains deliberately
-deferred and must not be claimed as active.
+D-048 already authorizes annotated tag `v0.1.0-alpha.1`, the four public npm
+packages under dist-tag `alpha`, GitHub Actions npm provenance, and the GitHub
+Release. Release Gates records the current phase; any incomplete M4-001 attempt
+advances only through its earliest unsatisfied transition. M4-001A completes
+and reviews the non-publishing contract. M4-001B freezes both builder results,
+writes the lock, and merges it as GitHub-verified commit `S`; then exactly one
+repository-local single-parent attestation `A` with sole parent `S` must grant
+`S` and pass the history gate at `main=A` before the exact clean tag is created
+on unchanged `S`. Tag Public CI and Security must pass before M4-001C runs its
+dependency-order registry publication, official-registry byte reread,
+provenance, and dist-tag checks. The GitHub Release is created last.
+Main-branch protection remains deliberately
+deferred by D-047/M3-008 and must not be claimed as active.
 
 ## Documentation and project processes
 
-- Start with the [unreleased changelog](CHANGELOG.md), the single
+- Start with the [candidate changelog](CHANGELOG.md), the single
   [known-limitations list](docs/KNOWN_LIMITATIONS.md), and the
-  [draft `0.1.0-alpha.1` note](docs/releases/0.1.0-alpha.1.md) for the current
+  [state-neutral `0.1.0-alpha.1` note](docs/releases/0.1.0-alpha.1.md) for the
   reader-facing candidate scope.
 - Read the human [support matrix](docs/SUPPORT_MATRIX.md) together with the
   [compatibility policy](docs/COMPATIBILITY_POLICY.md).
 - See [docs/ARCHITECTURE_TARGET.md](docs/ARCHITECTURE_TARGET.md) for the complete
   authority, control-flow, security, and delivery model.
 - Use the [release gates](docs/RELEASE_GATES.md) as the publication authority;
-  the changelog and draft release note cannot authorize a release.
+  the lock-bound changelog and release note cannot authorize a release.
 - Follow [docs/REPRODUCIBILITY.md](docs/REPRODUCIBILITY.md) for the canonical
   public-safe verification sequence.
 - Report vulnerabilities only through [SECURITY.md](SECURITY.md).

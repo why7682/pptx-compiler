@@ -2975,6 +2975,241 @@ notes: M3-004B is complete on the accepted equal-tree evidence. D-046 governs
   publication remain outside the current authorization
 ```
 
+### M4-001A candidate-alpha release contract and fail-closed publication/declaration lane
+
+```yaml
+paths:
+  - .github/workflows/alpha-release.yml
+  - .github/workflows/ci.yml
+  - .github/workflows/security.yml
+  - AGENTS.md
+  - CHANGELOG.md
+  - HANDOFF.md
+  - README.md
+  - TODO.md
+  - docs/ARCHITECTURE_TARGET.md
+  - docs/COMPATIBILITY_POLICY.md
+  - docs/DECISIONS.md
+  - docs/KNOWN_LIMITATIONS.md
+  - docs/M3-006_HANDOFF.md
+  - docs/M4-001_HANDOFF.md
+  - docs/NAME_AVAILABILITY.md
+  - docs/PROVENANCE_LEDGER.md
+  - docs/RELEASE_GATES.md
+  - docs/REPRODUCIBILITY.md
+  - docs/SUPPORT_MATRIX.md
+  - docs/THREAT_MODEL.md
+  - docs/releases/0.1.0-alpha.1.md
+  - packages/cli/README.md
+  - packages/core/README.md
+  - packages/public-synthetic/README.md
+  - packaging/alpha-package-plan.json
+  - packaging/alpha-release-plan.json
+  - plugins/native-card-arrow/README.md
+  - policy/forbidden-materials.json
+  - policy/support-matrix.json
+  - provenance/records.json
+  - scripts/check-alpha-release-preparation.mjs
+  - scripts/check-forbidden-materials.mjs
+  - scripts/check-public-workflows.mjs
+  - scripts/create-alpha-github-release.mjs
+  - scripts/generate-alpha-release-lock.mjs
+  - scripts/lib/alpha-release.mjs
+  - scripts/lib/package-plan.mjs
+  - scripts/lib/package-stage.mjs
+  - scripts/lib/package-tarball.mjs
+  - scripts/lib/public-workflows.mjs
+  - scripts/lib/release-metadata.mjs
+  - scripts/publish-alpha-release.mjs
+  - tests/alpha-github-release.test.mjs
+  - tests/alpha-publication.test.mjs
+  - tests/alpha-release.test.mjs
+  - tests/final-public-docs.test.mjs
+  - tests/package-plan.test.mjs
+  - tests/package-stage.test.mjs
+  - tests/policy-gates.test.mjs
+  - tests/pre-public-docs.test.mjs
+  - tests/public-workflows.test.mjs
+  - tests/support-matrix.test.mjs
+kind: additive candidate-alpha contract, exact source/tag/history and dual-builder
+  canonical-tar-payload admission, fixed Node 24/npm 11 publication envelope,
+  create-only lock projection, ordered npm recovery and Sigstore verification,
+  credential-separated GitHub Release-last declaration, public workflow policy,
+  lifecycle-neutral reader documentation, and adversarial tests
+origin: independently authored from D-048's exact release authorization, the
+  existing D-039 through D-046 package/source/workflow/document authorities,
+  the repository-owned package and support graphs, the public Git/GitHub/npm
+  interfaces, and runtime-built synthetic mutations. No predecessor source,
+  external implementation, package content, hosted log, raw API response,
+  presentation, private fixture, generated tarball, or credential entered Git
+original_author_or_holder: Elliot Wu
+created_or_reviewed_on: 2026-08-13
+license_or_rights_basis: MIT
+third_party_dependencies:
+  - Node.js 22.23.2 (MIT; fixed verification runtime, not vendored)
+  - npm CLI 10.9.8 (Artistic-2.0; fixed verification builder, not vendored)
+  - Node.js 24.19.0 (MIT; fixed release runtime, not vendored)
+  - npm CLI 11.17.0 (Artistic-2.0; fixed release builder, not vendored)
+  - sigstore 4.1.1 (Apache-2.0; bundled in the exact npm 11.17.0 installation,
+    loaded only from that admitted installation, and not vendored)
+  - TypeScript 6.0.2 (Apache-2.0; exact dev-only declaration checker, not
+    vendored or included in the four-package runtime closure)
+  - actions/checkout v7.0.1 at 3d3c42e5aac5ba805825da76410c181273ba90b1
+    (MIT; pinned remote GitHub Action, not vendored)
+  - actions/setup-node v7.0.0 at 820762786026740c76f36085b0efc47a31fe5020
+    (MIT; pinned remote GitHub Action, not vendored)
+  - actions/dependency-review-action v5.0.0 at
+    a1d282b36b6f3519aa1f3fc636f609c47dddb294
+    (MIT; pinned remote GitHub Action, not vendored)
+  - github/codeql-action v4.37.6 at
+    5595ccaf912efad79be6eef63a5619ff05969be3
+    (MIT; pinned remote GitHub Action, not vendored)
+private_information_review: passed; current bytes contain only approved public
+  repository/package identity, fixed public tool/action versions, previously
+  admitted public GitHub object/run identifiers, repository-owned synthetic
+  evidence, and the user's narrow configuration attestation. No token value,
+  password, OTP, credential, private/local hostname, absolute private path,
+  private fixture, source presentation, raw log/API response, ignored render,
+  generated archive, or registry payload is recorded
+project_constant_removal: passed; package settings remain in the schema-3
+  package plan, exact candidate/lock/declaration settings remain in the release
+  plan, support remains in the unchanged matrix, and phase order remains in
+  Release Gates. GitHub source verification, npm publication, and final Release
+  declaration have separate credentials. No second package graph, support
+  authority, release note, lifecycle-state root, wildcard identity grant,
+  rollback-by-unpublish, predecessor constant, or compatibility alias was added
+public_fixture_conformance: applicable; on exact Git-backed frozen source bytes
+  immediately before this final provenance-status flip, Node 22.23.2 and Node
+  24.19.0 each pass 1322 of 1324 full-suite nodes. Under both runtimes, the only
+  failures are the same release-metadata baseline and file-alias checks, caused
+  solely by five release-source records among this relation's 52 deliberately
+  pending records. The exact alpha-release focus passes 20/20 under each
+  runtime. Guarded Node 22.23.2/npm 10.9.8 and Node 24.19.0/npm 11.17.0 builds
+  each exit 0, admit the four schema-3 packages with exact planned members and
+  modes, perform an offline joint installation with lifecycle scripts disabled,
+  and pass installed CLI init/inspect/validate/render/qa smoke; QA remains
+  blocked and no BuildArtifact is present. The post-flip focused current-state
+  delta then passes release metadata; the Node 22 combined release-metadata,
+  final-public-doc, pre-public-doc, and support selection 81/81; forbidden
+  working-tree 286; support 60; contracts; package-plan 4; public-workflows 3;
+  provenance working-tree 286; and `git diff --check`. This focused delta is not
+  presented as a post-flip complete dual-runtime full run. The local guarded
+  builds happen to produce identical four gzip envelopes. The contract still
+  requires only byte-identical canonical tar payloads across builders, records
+  each builder envelope separately, and selects only fully reprojected fixed
+  Node 24/npm 11 envelopes for publication
+independent_review: passed; the bounded latest-byte code and source-projection
+  review reports 0 blocker, 0 high, and 0 medium after the tracked-source stage
+  reprojection and exact-tag-tree source-projection binding repairs. It confirms
+  exact source/package path, role, Git/package mode, byte-count, and digest
+  binding; package-plan binding; immutable-tree rederivation; pre/post stability
+  checks; and content plus Git-mode mutation rejection
+notes: This relation admits the M4-001A contract only. It records no release
+  lock, annotated tag, npm package publication, registry equality/provenance
+  result, or GitHub Release. On 2026-08-13 the user stated that the npm account
+  email is verified, 2FA is enabled, and the GitHub `npm-release` environment
+  contains `NPM_TOKEN`; that statement is not an independent credential check,
+  no value is recorded, and it is not publication evidence. The relation covers
+  the exact 52 current endpoints: 41 modified and 11 new files. This admits the
+  completed M4-001A contract while M4-001B is the next phase; the release lock,
+  tag, registry publication and verification, and GitHub Release remain later
+  lifecycle work.
+```
+
+### M4-001B create-only dual-builder candidate-lock checkpoint
+
+```yaml
+paths:
+  - HANDOFF.md
+  - TODO.md
+  - docs/COMPATIBILITY_POLICY.md
+  - docs/M4-001_HANDOFF.md
+  - docs/PROVENANCE_LEDGER.md
+  - docs/RELEASE_GATES.md
+  - packaging/releases/0.1.0-alpha.1.lock.json
+  - provenance/records.json
+  - tests/alpha-release.test.mjs
+  - tests/final-public-docs.test.mjs
+kind: generated canonical release-candidate identity record plus its narrow
+  M4-001B state and provenance projection
+origin: the lock was deterministically generated create-only by
+  scripts/generate-alpha-release-lock.mjs from exact Git-backed M4-001A source
+  commit b80761a62cff23cb90101605e09cc6e3c2924abd (tree
+  e4a4ca28fbfa3a83080142af63c9b08b36291ccc), the repository-owned release and
+  package plans plus their locked inputs, and the two fixed guarded package
+  stages. The other nine paths independently project only the resulting M4-001B
+  state and exact provenance relation. No predecessor source, external
+  implementation, registry payload, hosted output, presentation, private
+  fixture, generated archive bytes, or credential entered these bytes
+original_author_or_holder: Elliot Wu
+created_or_reviewed_on: 2026-08-13
+license_or_rights_basis: MIT
+third_party_dependencies:
+  - Node.js 22.23.2 (MIT; fixed verification runtime, not vendored)
+  - npm CLI 10.9.8 (Artistic-2.0; fixed verification builder, not vendored)
+  - Node.js 24.19.0 (MIT; fixed release runtime, not vendored)
+  - npm CLI 11.17.0 (Artistic-2.0; fixed release builder, not vendored)
+private_information_review: passed; the canonical JSON contains only approved
+  public identities, repository-relative input paths, fixed public tool
+  versions, byte counts, and SHA-256/SHA-512 fingerprints. It contains no token
+  value, password, OTP, credential, hostname, absolute local path, private
+  fixture, source presentation, raw log/API response, registry payload, or
+  generated tarball bytes
+project_constant_removal: passed; the lock projects its existing authorities
+  without adding a second package graph, support root, source-path authority,
+  publication order, lifecycle label, or release declaration
+public_fixture_conformance: applicable; the create-only canonical lock has
+  SHA-256 d3b4818e9bcdb43f39df557847613d3e5ce0afa2f6fffda5af655217f2f5170a
+  (Git blob 61d6df477769d3ebd5cd3ab3607fb977fc21ab5b, 6218 bytes)
+  and package-source-projection SHA-256
+  962defc231e784627c142f01df84669b08d9a7b3f1bae39da2ea1f2728d95312.
+  Node 22.23.2/npm 10.9.8 evidence is
+  f4e2da682b0870b1f26c07d3f522bf63ae2619708ec8b2230554f0a1be49e360 over
+  14409 bytes; Node 24.19.0/npm 11.17.0 evidence is
+  524b6a43da205d65347c48740792aba25b560ebc2fd340ceb407898829e3c795 over
+  14410 bytes. Both builders bind the same exact canonical tar payloads for
+  core (c33c94e65b9b21a59c8c42c24779e0e5e5fd8dc205c8cadc3c3d95b4fd35ef42,
+  720896 bytes), native-card-arrow
+  (64d3ce1971231ecb42907b820a89d5499de798b91eacdabec1b239c587d5618c,
+  57856 bytes), public-synthetic
+  (7c48c74fac58d8ce9b93c8221520fe7bb7d2ec366b4e2185ba28087c4372862c,
+  106496 bytes), and CLI
+  (473523a49a99bc4ee4cfadf986bdf33ac9d0ef6c9f31ef112973d158da449010,
+  69120 bytes). Public CI run 31649380644 exposed ambient GITHUB_SHA leaking
+  into the synthetic tag repository; Public CI run 31650128937 then passed all
+  four Linux/macOS cells but exposed that filesystem chmod did not create a
+  100755 Git index entry in either Windows cell. Security run 31650128942
+  passed Dependency Review while CodeQL skipped by the designed PR-event
+  split. The fixtures now remove only the ambient synthetic-repository SHA and,
+  after each initial git add, derive the package-plan bin sources and admit
+  their executable modes explicitly through git update-index. Production tag
+  admission is unchanged. With both hostile hosted values represented, the
+  exact current alpha-release focus passes 20/20 under both Node 22.23.2 and
+  Node 24.19.0
+independent_review: passed; one bounded exact-lock review reports 0 blocker,
+  0 high, and 0 medium with Taste=good. It independently recomputed canonical
+  lock/blob/size identity, all six locked inputs, 89 Git sources projected into
+  96 package members including modes and byte lengths, projection
+  962defc231e784627c142f01df84669b08d9a7b3f1bae39da2ea1f2728d95312,
+  both reviewed stage/evidence identities, all four cross-builder tar payloads,
+  fixed Node 24/npm 11 release-envelope admission, dependency-graph publication
+  order, and the forbidden-material scan. A second bounded review of the
+  hosted-SHA fixture correction also reports 0 blocker, 0 high, and 0 medium with
+  Taste=good; it confirms that only the synthetic temporary-repository fixture
+  removes ambient GITHUB_SHA, while production exact-tag admission and its
+  explicit mismatch mutation remain fail-closed. A third bounded review of the
+  Windows Git-mode correction reports 0 blocker, 0 high, and 0 medium with
+  Taste=good; it confirms that the index owns the 100755 contract on every
+  platform, both fixture paths are covered, and the existing 100755-to-100644
+  drift mutation still exercises the production rejection
+notes: This is a narrow M4-001B candidate-lock relation; it does not rewrite
+  M4-001A history. The exact ten-path lock/state/provenance/test slice is now
+  independently reviewed and provenance-admitted. It has not yet been committed
+  or merged as GitHub-verified S; no attestation A, tag, tag-hosted evidence,
+  npm publication, registry equality/provenance result, or GitHub Release is
+  claimed.
+```
+
 The XML namespace, relationship-type, and MIME strings are interoperability
 identifiers from the public format specification. They do not convey third-
 party presentation content. The fictional `Synthetic Sans` typeface name does

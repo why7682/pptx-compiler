@@ -624,9 +624,60 @@ accepted-main evidence cover the same bytes. Earlier failed and branch-bound
 runs remain historical portability diagnostics in `docs/M3-004_HANDOFF.md`.
 The event-specific skips are expected, not missing jobs. This closure does not
 enable support claims, promote a platform or capability, publish npm packages,
-or declare a release. M3-005B is complete under D-046; M4-001 preparation is
-next, while npm publication still requires explicit authorization and D-047
-remains deferred.
+or declare a release. M3-005B is complete under D-046. The later constructive-
+document PR #2 head `093d527fc3fadf7cae577139b8d400719755dd52`
+passed Public CI run `31608992503` and Security run `31608992491`; accepted
+main `8cdf968b72f8dd5f41fee37a68e239e477dec44b` passed Public CI run
+`31609285181` and Security run `31609285220`. Both commits share tree
+`1d6d148a8bc347dc3cbc13dde3fd4314d86c421a`. This later evidence supplements
+the historical M3-004B baseline; it does not rewrite it or establish a release.
+
+D-048 now records the user's explicit authorization for annotated tag
+`v0.1.0-alpha.1` and its GitHub Release, all four public npm packages under
+dist-tag `alpha`, and GitHub Actions plus npm provenance. Authorization is not
+execution evidence, and this handoff does not encode mutable external lifecycle
+labels in the locked candidate inputs; Release Gates and the official GitHub/npm
+records own observed phase completion. M4-001B's exact generated lock is now
+independently reviewed and included in this tracked-admission change, but there
+is no merge `S`, attestation `A`, tag, hosted tag result, npm publication,
+registry result, or GitHub Release. D-047/M3-008 branch protection remains
+independently deferred.
+
+On 2026-08-13, the user confirmed that the npm account email is verified, 2FA
+is enabled, and the GitHub `npm-release` environment contains the one-time
+bootstrap `NPM_TOKEN`. This is a user-attested configuration fact, not an
+independent secret-value check and not publication evidence; no token value is
+recorded. After the first four package identities exist, M4-001C must configure
+their exact Trusted Publisher bindings, revoke the bootstrap token, and remove
+the GitHub secret before treating the credential migration as complete.
+
+M4-001A is complete on the exact 52-path contract snapshot. Git-backed frozen
+copies under Node 22.23.2/npm 10.9.8 and Node 24.19.0/npm 11.17.0 each pass
+1322/1324 complete test nodes before the final provenance flip; the only two
+failures under each runtime are the expected release-metadata baseline and
+alias checks caused by those deliberately pending records. Both snapshots also
+pass the guarded four-package build, offline joint install, and installed-CLI
+smoke. Bounded independent review reports 0 blocker, 0 high, and 0 medium. The
+completion delta changes only non-package, non-lock-input state/provenance
+bytes. It creates no lock, tag, npm publication, registry result, or GitHub
+Release.
+
+M4-001B is now in progress. Create-only generation from exact M4-001A commit
+`b80761a62cff23cb90101605e09cc6e3c2924abd` and tree
+`e4a4ca28fbfa3a83080142af63c9b08b36291ccc`, using the fixed Node
+22.23.2/npm 10.9.8 and Node 24.19.0/npm 11.17.0 guarded stages, produced
+`packaging/releases/0.1.0-alpha.1.lock.json`. Its exact SHA-256 is
+`d3b4818e9bcdb43f39df557847613d3e5ce0afa2f6fffda5af655217f2f5170a` and
+its package-source projection is
+`962defc231e784627c142f01df84669b08d9a7b3f1bae39da2ea1f2728d95312`.
+The lock binds matching canonical tar payloads for all four packages and keeps
+both builders' evidence and gzip envelopes separate. A bounded exact-lock
+review independently recomputed its six inputs, 89 Git sources projected into
+96 members, both stage/evidence identities, four tar payloads, fixed Node
+24/npm 11 admission, dependency order, and forbidden-material result; it reports
+0 blocker, 0 high, and 0 medium with Taste=good. The exact lock is included in
+this nine-path tracked-admission change but has not been committed or merged as
+`S`.
 
 ## Persistent presentation-skill boundary
 
@@ -648,6 +699,22 @@ mandatory startup path:
   methods; repository contracts and generators remain authoritative.
 
 ## Immediate objective
+
+M4-001A's non-publishing contract slice is complete and M4-001B is in progress.
+The frozen inputs and two fixed builder results have produced one exact
+create-only lock, and that exact lock has passed independent review and is
+included in this tracked-admission change. Commit and merge it unchanged as the
+GitHub-verified lock-containing commit `S`. Append exactly one repository-local
+public-identity attestation `A` whose sole parent is `S` and whose tip policy
+exact-grants `S`; pass the full history gate at `main=A`; only then create the
+exact annotated candidate on unchanged `S` before external publication. The
+package plan owns publication settings and the dependency graph that derives
+`core -> native-card-arrow -> public-synthetic -> CLI`; the release plan owns
+the exact tag, builders, locked inputs, recovery, and completion rules; Release
+Gates owns phase order. M4-001C uses the derived npm order with
+absent/equal/mismatch recovery, official-registry byte reread, npm provenance,
+`alpha` and no `latest`, then creates the GitHub Release last. The lock-bound
+changelog, limitations, and release note remain lifecycle-state neutral.
 
 The completed M2-005 boundary includes typed native and OMML application,
 semantic-slot composition plan, collision gate, non-deliverable candidate
@@ -801,8 +868,9 @@ engines, MIT metadata, import aliases, internal edges, and package-owned static
 resources. The installed composition no longer treats the monorepo root as a
 runtime resource root; the old explicit-root CLI remains compatible. The four
 unscoped names returned E404 from the official npm registry on 2026-08-11, but
-that reserves nothing. D-045 now binds the created GitHub repository while npm
-publication remains blocked.
+that reserves nothing. At the D-039/D-045 checkpoint, the created GitHub
+repository was bound while npm publication remained blocked. D-048 later
+authorized only the exact candidate-alpha transition described below.
 
 The package/CLI/native/policy focus passes 146/146 and the complete Node 22
 strict suite passes 1107/1107. Package-plan, forbidden-material, provenance,
@@ -848,9 +916,10 @@ payloads; POSIX additionally requests directory fsync barriers, while Windows
 makes no sudden-power-loss directory-entry persistence claim. M3-004B has now
 closed the public six-cell, CodeQL, and Dependency Review evidence on the
 byte-identical accepted PR/main tree. M3-005 is split: M3-005A completes the
-local security/contribution/governance/reproduction contract. M3-005B has since
-frozen the constructive reader model, limitations, changelog, and draft release
-note. Hosted execution and document closure do not alter support or release
+local security/contribution/governance/reproduction contract. M3-005B froze the
+constructive reader model, limitations, changelog, and initial release-facing
+note. M4-001 later made the three lock-bound release documents lifecycle-state
+neutral. Hosted execution and document closure do not alter support or release
 authority.
 At the D-045 checkpoint, GitHub private vulnerability reporting was verified
 active on the then-empty public repository. D-045 bound its canonical identity
@@ -886,6 +955,16 @@ passes 49/49. Raw commit parent/tree OIDs, not mutable shallow reachability,
 own ancestry; repository indirection, control-path injection, noncanonical tree
 grammar, and fsck warnings fail closed without echoing private path/identity
 bytes.
+Policy schema v3 preserves the same tip-owned authority for accepted GitHub
+merge commits: only exact object OIDs whose GitHub records were separately
+reviewed as verified/valid may use the closed two-parent GitHub merge/OpenPGP
+grammar, every grant must be reachable and consumed, and message/tree/material
+checks still run. A new hosted merge cannot self-authorize; a later local commit
+under the approved repository identity must attest its exact OID. A release tag
+therefore remains on unchanged verified lock-containing merge `S` while the
+publisher proves that current remote `main=A` is exactly one attestation commit
+ahead, `A` has `S` as its sole parent and exact policy grant, and comparison
+reports `ahead_by=1`, `behind_by=0`.
 Bounded independent closing reviews reproduce the environment, shallow/merge,
 raw-tree, fsck-configuration, and redaction probes and close D-043 at 0 blocker,
 0 high, and 0 medium.
@@ -938,20 +1017,26 @@ remain the machine command authority.
 
 ## Next work session
 
-1. Read `docs/M3-005_HANDOFF.md`. Retain M3-004B as complete on accepted PR
+1. Read `docs/M4-001_HANDOFF.md`. Retain M3-004B as complete on accepted PR
    runs `31600528716`/`31600528742` and accepted-main runs
-   `31600806512`/`31600806350`; do not convert those hosted results into
-   support or release claims.
+   `31600806512`/`31600806350`. Retain constructive-document PR #2 evidence on
+   runs `31608992503`/`31608992491` and accepted-main runs
+   `31609285181`/`31609285220`; neither evidence set is release evidence.
 2. Retain M3-005B as complete under D-046. Its content-frozen commit
    `ad7c5007823fc28dca838db4ed2d0e9d2703e7ab` passed 1247/1247 complete tests
    under Node 22.23.2/npm 10.9.8 and Node 24.19.0/npm 11.17.0, plus the guarded
    four-package build, admission, offline joint install, and installed-CLI
    smoke under both runtime/npm pairs.
-3. Prepare M4-001 release evidence only. Do not create a tag, publish npm
-   packages, enable support claims, or declare a release without explicit
-   authorization.
-4. Keep D-047/M3-008 branch protection deferred; M3-005B completion does not
-   automatically resume it.
+3. Continue M4-001 under D-048's exact authorization. M4-001A is complete and
+   M4-001B's exact dual-builder lock is independently reviewed and included in
+   this tracked-admission change. Commit and merge it unchanged as `S`, append
+   single-parent attestation `A`, pass the history gate at `main=A`, tag
+   on unchanged `S`, clean-tag, and tag-hosted evidence before publishing;
+   complete all four official-registry equality/provenance/dist-tag checks
+   before creating the GitHub Release last. Do not add a lifecycle label to the
+   lock-bound reader documents from authorization or a partial publication.
+4. Keep support unchanged and D-047/M3-008 branch protection deferred. D-048
+   does not automatically resume it.
 5. Keep predecessor code, presentation assets, converter output, and generated
    archives out of Git; use only repository-owned text/synthetic fixtures for
    public tests.

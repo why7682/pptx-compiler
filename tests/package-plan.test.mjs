@@ -93,8 +93,14 @@ test("the alpha package plan closes one guarded four-package graph", async () =>
     htmlUrl: "https://github.com/why7682/pptx-compiler"
   });
   assert.deepEqual(plan.releaseGuard, {
-    state: "blocked",
-    reason: "npm-publication-not-authorized"
+    state: "authorized",
+    decisionId: "D-048"
+  });
+  assert.deepEqual(plan.publication, {
+    registry: "https://registry.npmjs.org/",
+    tag: "alpha",
+    access: "public",
+    provenance: true
   });
   assert.deepEqual(packageById(plan, "cli").bin, {
     "pptx-compiler": "pptx-compiler.mjs"
@@ -128,9 +134,13 @@ test("each package README is constructive, absolute-linked, and capability-scope
     assert.equal(links.length > 0, true, source);
     assert.equal(links.every((target) =>
       target.startsWith("https://github.com/why7682/pptx-compiler")), true, source);
-    assert.match(text, /private: true/u, source);
+    assert.match(text, /publication is permitted only through/iu, source);
+    assert.match(text,
+      /publication status is owned by the official-registry byte[\s\S]*tracked release lock[\s\S]*npm provenance/iu,
+      source);
+    assert.match(text, /this README never asserts[\s\S]*current lifecycle state/iu, source);
     assert.match(text, /supportClaimsEnabled: false/u, source);
-    assert.match(text, /not been published|publication is blocked/u, source);
+    assert.doesNotMatch(text, /not yet been published|has not yet been published|not a published npm release/iu, source);
   }
   assert.match(sourceSnapshots.get(packageReadmeSources.cli).bytes.toString("utf8"),
     /pptx-compiler-native-card-arrow --> pptx-compiler-core/u);
@@ -152,8 +162,8 @@ test("the readable package plan has one canonical JSON representation", () => {
     /alpha-package-plan-canonical/u
   );
   const reordered = text.replace(
-    '  "schemaVersion": 2,\n  "planId": "pptx-pipeline-alpha-package-plan",\n',
-    '  "planId": "pptx-pipeline-alpha-package-plan",\n  "schemaVersion": 2,\n'
+    '  "schemaVersion": 3,\n  "planId": "pptx-pipeline-alpha-package-plan",\n',
+    '  "planId": "pptx-pipeline-alpha-package-plan",\n  "schemaVersion": 3,\n'
   );
   assert.throws(
     () => parseAlphaPackagePlanBytes(Buffer.from(reordered)),
@@ -509,10 +519,25 @@ test("package-plan mutations fail closed", async (t) => {
     }
   });
 
-  await t.test("repository binding does not authorize npm publication", async () => {
+  await t.test("the recorded decision is the only npm authorization", async () => {
     const value = clonePlan();
-    value.releaseGuard.state = "ready";
+    value.releaseGuard.decisionId = "D-999";
     assert.equal((await findingCodes(value)).has("package-release-guard"), true);
+  });
+
+  await t.test("publication facts cannot drift", async (publicationTest) => {
+    for (const [label, key, changed] of [
+      ["registry", "registry", "https://example.invalid/"],
+      ["tag", "tag", "latest"],
+      ["access", "access", "restricted"],
+      ["provenance", "provenance", false]
+    ]) {
+      await publicationTest.test(label, async () => {
+        const value = clonePlan();
+        value.publication[key] = changed;
+        assert.equal((await findingCodes(value)).has("package-publication"), true);
+      });
+    }
   });
 
   await t.test("repository directories cannot be reassigned between packages", async () => {

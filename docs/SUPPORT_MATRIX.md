@@ -25,6 +25,9 @@ generalized to arbitrary presentations.
 | Support resolution and promotion rules | `docs/COMPATIBILITY_POLICY.md` |
 | Release eligibility | `docs/RELEASE_GATES.md` |
 | Hosted CI and security run record | `docs/M3-004_HANDOFF.md` |
+| Alpha package graph, publication settings, and derived npm order | `packaging/alpha-package-plan.json` |
+| Exact tag, builders, locked inputs, recovery, and completion rules | `packaging/alpha-release-plan.json` |
+| Release phase order and eligibility | `docs/RELEASE_GATES.md` |
 | User-visible negative boundaries | `docs/KNOWN_LIMITATIONS.md` |
 
 Roadmap text, a passing test, a local PowerPoint probe, or a release note cannot
@@ -116,23 +119,29 @@ modifies the source template, or flattens an editable object to an image.
 ## Public evidence
 
 M3-004B established hosted execution for the declared runtime envelope without
-promoting support:
+promoting support. The latest accepted pre-M4 reader baseline preserves that
+closure on pull-request head
+`093d527fc3fadf7cae577139b8d400719755dd52` and accepted main
+`8cdf968b72f8dd5f41fee37a68e239e477dec44b`; both commits share tree
+`1d6d148a8bc347dc3cbc13dde3fd4314d86c421a`:
 
-- [pull-request Public CI run 31600528716](https://github.com/why7682/pptx-compiler/actions/runs/31600528716)
+- [pull-request Public CI run 31608992503](https://github.com/why7682/pptx-compiler/actions/runs/31608992503)
   passed all six Linux/macOS/Windows × Node 22/24 cells before merge;
-- [pull-request Security run 31600528742](https://github.com/why7682/pptx-compiler/actions/runs/31600528742)
+- [pull-request Security run 31608992491](https://github.com/why7682/pptx-compiler/actions/runs/31608992491)
   passed Dependency Review;
-- [accepted-main Public CI run 31600806512](https://github.com/why7682/pptx-compiler/actions/runs/31600806512)
-  passed all six cells for object `c4dee58`;
-- [accepted-main Security run 31600806350](https://github.com/why7682/pptx-compiler/actions/runs/31600806350)
+- [accepted-main Public CI run 31609285181](https://github.com/why7682/pptx-compiler/actions/runs/31609285181)
+  passed all six cells for the accepted-main object;
+- [accepted-main Security run 31609285220](https://github.com/why7682/pptx-compiler/actions/runs/31609285220)
   passed CodeQL for the same object.
 
-Each of the six platform rows now carries `automated-public` evidence with a
-`cross-platform-ci` record pointing to `docs/M3-004_HANDOFF.md`. This proves
-that the canonical public workflow executed on those runners. It does not, by
-itself, authorize a PPTX capability, enable the global claim switch, prove
-PowerPoint compatibility, or prove that a future release tag reproduces the
-reviewed tarballs.
+Each of the six platform rows carries `automated-public` evidence with a
+`cross-platform-ci` record. The current projection is recorded in
+`docs/RELEASE_GATES.md`; `docs/M3-004_HANDOFF.md` retains the earlier
+implementation-baseline detail. This proves that the canonical public workflow
+executed on those runners. It does not establish an M4 candidate, authorize a
+PPTX capability, enable the global claim switch, prove PowerPoint
+compatibility, or prove that an annotated release tag reproduces the reviewed
+tarballs.
 
 Repository-owned fixtures, schemas, mutation tests, package installation, and
 the installed CLI smoke flow provide the remaining automated evidence for the
@@ -152,8 +161,10 @@ The practical boundaries are collected in
   package graph;
 - Windows preserves create-only ordering and reconciliation but makes no
   sudden-power-loss directory-entry persistence claim;
-- npm publication, a release tag, signing/provenance-enabled publication, and
-  reviewed-to-published tarball equality remain absent.
+- D-048 authorizes the four public-alpha package identities and npm provenance,
+  but this support summary does not assert mutable external lifecycle state.
+  Exact tag/lock identity, official-registry bytes, npm provenance, and GitHub
+  Release records own those facts and cannot change a support row.
 
 ## Verification
 
@@ -171,9 +182,12 @@ declared state; it does not change that state.
 
 ## Next authorized action
 
-M3-004B supplies the required hosted evidence, but the repository is still an
-unreleased candidate. The next release action is M4-001: build from a clean
-reviewed tag, rerun the public gates, prove the published artifacts equal the
-reviewed tarballs, and use the required signing/provenance channel. Until that
-boundary passes, keep the global claim switch false, every current status
-unchanged, and npm publication blocked.
+D-048 authorizes the exact release; Release Gates owns current phase state. Any
+incomplete M4-001 attempt advances only through its earliest unsatisfied step:
+freeze and build; write the lock; merge it as GitHub-verified `S`; append the
+single-parent local attestation `A` whose sole parent is `S`; pass the full
+history gate at `main=A`; tag unchanged `S`; pass tag Public CI and Security;
+publish npm in package-graph dependency order; then create the GitHub Release
+last. Keep the global claim switch false and every current support status
+unchanged. D-047/M3-008 branch protection remains deferred and is not a
+release prerequisite.

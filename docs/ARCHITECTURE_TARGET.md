@@ -67,8 +67,9 @@ those facts, but may not silently replace their owner.
 | Candidate layout/build replay | `CandidateBuildRecord` | It binds exact candidate bytes and replay facts but grants no delivery authority |
 | QA facts and aggregate decision | `QaReport` | Missing or manual evidence remains visible rather than becoming a passing boolean |
 | Final delivered outputs | `BuildArtifact` | It exists only after exact candidate-bound evidence passes and is published last |
-| Public package graph | `packaging/alpha-package-plan.json` | Manifests, tarballs, installations, and the SBOM are projections, not competing package graphs |
-| Release eligibility | `docs/RELEASE_GATES.md` | A passing test or plausible deck alone is never a release decision |
+| Public package graph, authorized channel, and derived dependency order | `packaging/alpha-package-plan.json` | Manifests, tarballs, installations, and the SBOM are projections, not competing package graphs |
+| Exact release tag, builders, lock inputs, recovery, and completion rules | `packaging/alpha-release-plan.json` | Publication cannot improvise a different tag, builder, or mismatch policy |
+| Release phase order, eligibility, and phase evidence | `docs/RELEASE_GATES.md` | A passing test or plausible deck alone is never a release decision |
 
 SHA-256 values are boundary fingerprints. They prove equality of exact objects
 at a named boundary; they do not carry semantic meaning, replace a readable
@@ -356,9 +357,42 @@ work is preserved, and foreign content is quarantined by rename. Tarballs are
 installed together offline into an empty directory before the installed CLI
 smoke runs.
 
-Every leaf manifest remains `private: true`, and the readable release guard is
-`blocked: npm-publication-not-authorized`. A local reviewed tarball is neither a
-published package nor release evidence.
+The workspace root remains `private: true`. Package-plan schema 3 instead
+authorizes generated leaf manifests for the exact D-048 channel: four unscoped
+public packages at `0.1.0-alpha.1`, official npm registry, dist-tag `alpha`, and
+npm provenance. A local reviewed tarball is still neither a published package
+nor release evidence.
+
+### Alpha release boundary
+
+Authorization, candidate admission, publication, and release declaration are
+separate state transitions:
+
+```text
+D-048 authorization + schema-3 package plan
+  -> M4-001A non-publishing contract and adversarial verification
+  -> Node 22.23.2/npm 10.9.8 and Node 24.19.0/npm 11.17.0
+  -> exact four-tarball equality + create-only tracked release lock
+  -> reviewed lock merge as GitHub-verified commit S
+  -> single-parent local attestation A: sole parent S, exact policy grant S
+  -> complete reachable-history gate at current main=A
+  -> M4-001B exact annotated tag on unchanged S + clean admission
+  -> tag-triggered Public CI and Security evidence
+  -> M4-001C core -> native-card-arrow -> public-synthetic -> CLI
+  -> official-registry byte/provenance/dist-tag reread
+  -> GitHub Release last
+```
+
+The npm order is a deterministic projection of the package-plan dependency
+graph: core, native-card-arrow, public-synthetic, then CLI. For each
+package/version, registry absence permits publishing only the retained
+lock-matching tarball; exact present bytes permit continuation; any mismatch is
+a hard stop. Publication consumes a publisher-owned read-only materialization
+of the frozen bytes rather than reopening the reviewed-stage path, and each
+published dependency prefix must pass signature audit before publication can
+advance. Unpublish is never rollback. The architecture does not infer current
+external lifecycle state; the M4 handoff and official registry/GitHub records
+own observed phase facts.
 
 ## CLI contract
 
@@ -409,23 +443,27 @@ from readable template/project/DeckSpec facts.
 
 ## Evidence and support state
 
-The accepted executable baseline is
-`c4dee58a8920a8e71c20f53ab93c62a96d3cb89d`. Public evidence for that baseline
+The latest accepted pre-M4 reader baseline is pull-request head
+`093d527fc3fadf7cae577139b8d400719755dd52` and accepted main
+`8cdf968b72f8dd5f41fee37a68e239e477dec44b`. They share tree
+`1d6d148a8bc347dc3cbc13dde3fd4314d86c421a`. Public evidence for that baseline
 includes:
 
 | Boundary | Evidence |
 | --- | --- |
-| Pull-request workflow | [CI run 31600528716](https://github.com/why7682/pptx-compiler/actions/runs/31600528716): Ubuntu, Windows, and macOS under Node 22/24 passed |
-| Pull-request dependency policy | [Dependency Review 31600528742](https://github.com/why7682/pptx-compiler/actions/runs/31600528742): passed |
-| Accepted main workflow | [CI run 31600806512](https://github.com/why7682/pptx-compiler/actions/runs/31600806512): all six cells passed |
-| Accepted main static security | [Security run 31600806350](https://github.com/why7682/pptx-compiler/actions/runs/31600806350): CodeQL passed |
+| Pull-request workflow | [CI run 31608992503](https://github.com/why7682/pptx-compiler/actions/runs/31608992503): Ubuntu, Windows, and macOS under Node 22/24 passed |
+| Pull-request dependency policy | [Security run 31608992491](https://github.com/why7682/pptx-compiler/actions/runs/31608992491): Dependency Review passed |
+| Accepted main workflow | [CI run 31609285181](https://github.com/why7682/pptx-compiler/actions/runs/31609285181): all six cells passed |
+| Accepted main static security | [Security run 31609285220](https://github.com/why7682/pptx-compiler/actions/runs/31609285220): CodeQL passed |
 
 The canonical workflow also executes source and policy admission, declaration
 typechecking, the complete public test suite, guarded four-package creation,
 clean joint installation, the installed CLI spine, working-tree rechecks, and
-drift detection. These are object-bound workflow facts. They are not a claim
-that every platform or capability is supported, that static analysis found
-every vulnerability, or that a registry artifact equals the reviewed tarball.
+drift detection. These object-bound workflow facts preserve the earlier
+M3-004B implementation evidence. They do not cover the current uncommitted M4
+bytes or claim that every platform or capability is supported, that static
+analysis found every vulnerability, or that a registry artifact equals the
+reviewed tarball.
 
 The normative matrix currently contains 60 rows:
 
@@ -456,16 +494,24 @@ capability or enable global support.
   a pass.
 - Windows has no Node parent-directory fsync equivalent, so the durability claim
   is narrower than on POSIX.
-- The current packages are npm-private. No release tag, signature, registry
-  provenance, or reviewed-to-published byte equality exists.
+- D-048 authorizes four public-alpha package identities, but authorization does
+  not prove publication. Actual tag, lock, registry provenance, GitHub Release,
+  and reviewed-to-published equality facts belong to their exact external and
+  non-lock evidence owners.
 - Branch protection is deliberately deferred and is not a current repository
   security claim.
 
 ## Next authorized action
 
-This architecture is part of the reader-facing bundle frozen by the completed
-M3-005B cross-document gate. The project may now prepare
-the `0.1.0-alpha.1` release gate. Actual npm publication still requires explicit
-authorization, a clean-tag build, signing/provenance, and equality between the
-reviewed and published tarballs. Deferred branch-protection work must be resumed
-explicitly rather than folded into the release path by implication.
+D-048 supplies the exact release authorization. Release Gates owns current
+phase state; the architecture fixes the dependency order. M4-001A must finish
+the non-publishing contract before M4-001B may require dual-builder canonical
+tar-payload equality, bind the fixed builder's gzip release envelopes, create a
+reviewed lock, and merge it as
+GitHub-verified `S`; single-parent attestation `A` must then exact-grant `S` and
+pass the history gate at `main=A` before the annotated tag may target unchanged
+`S`. M4-001C may complete only when ordered npm publication proves
+official-registry byte equality, provenance, dist-tag `alpha`, and absence of a
+`latest` assignment; the GitHub Release follows last. D-047/M3-008 branch
+protection remains deferred and must be resumed explicitly rather than folded
+into the release path by implication.

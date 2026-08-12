@@ -44,6 +44,18 @@ its repository path and Git blob OID match the exact pair in the same tip-owned
 policy. That narrow executable-bit grant does not bypass path, content, magic,
 size, symlink, submodule, identity, or history-grammar checks.
 
+Policy schema v3 keeps that one tip-owned authority when GitHub merge commits
+enter the reachable graph. Only exact merge object OIDs whose GitHub commit
+records were separately reviewed as verified/valid are listed. Each grant also
+must satisfy the closed two-parent GitHub merge/OpenPGP grammar, remain
+reachable, and be consumed; the scanner still checks its message and complete
+tree. Author/committer names or a signature-shaped header cannot substitute for
+the OID. Since a merge cannot authorize its own object ID, a later local commit
+using the approved repository identity records the exact grant. Release tooling
+may keep an annotated tag on the unchanged verified merge only after proving
+that current remote `main` is the single later attestation commit and that the
+tagged merge is its strict parent ancestor.
+
 The gate intentionally ignores dangling objects, reflogs, and unrelated local
 refs because the launch uses one exact object-ID-to-`refs/heads/main` refspec.
 They are not reachable from, and are not transferred by, that push.

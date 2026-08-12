@@ -76,8 +76,74 @@ async function initializeForbiddenRepository(t) {
 async function initializeHistoryRepository(t) {
   const root = await initializeForbiddenRepository(t);
   git(root, "symbolic-ref", "HEAD", "refs/heads/main");
+  const historyPolicy = cleanHistoryPolicy();
+  await writeRelative(
+    root,
+    "policy/forbidden-materials.json",
+    `${JSON.stringify(historyPolicy, null, 2)}\n`
+  );
+  git(root, "add", "policy/forbidden-materials.json");
   git(root, "commit", "-qm", "synthetic baseline");
   return root;
+}
+
+function cleanHistoryPolicy() {
+  const document = structuredClone(policy);
+  document.approvedGitHubVerifiedMergeCommitObjects = [];
+  return document;
+}
+
+function appendSyntheticGitHubMerge(root, {
+  message = "synthetic GitHub merge\n",
+  signatureBody = " dGVzdA==",
+  signatureChecksum = " =AAAA",
+  signatureTrailingContinuation = " ",
+  extraHeader = ""
+} = {}) {
+  const firstParent = git(root, "rev-parse", "HEAD");
+  const tree = git(root, "rev-parse", `${firstParent}^{tree}`);
+  const secondParent = gitWithInput(
+    root,
+    ["commit-tree", tree, "-p", firstParent],
+    "synthetic side parent\n"
+  ).trim();
+  const timestamp = "1760000000 +0000";
+  const githubUserEmail = ["123456+synthetic-user", "@", "users.noreply.github.com"].join("");
+  const githubCommitterEmail = ["noreply", "@", "github.com"].join("");
+  const raw = [
+    `tree ${tree}`,
+    `parent ${firstParent}`,
+    `parent ${secondParent}`,
+    `author Synthetic GitHub User <${githubUserEmail}> ${timestamp}`,
+    `committer GitHub <${githubCommitterEmail}> ${timestamp}`,
+    ...(extraHeader === "" ? [] : [extraHeader]),
+    "gpgsig -----BEGIN PGP SIGNATURE-----",
+    " ",
+    signatureBody,
+    signatureChecksum,
+    " -----END PGP SIGNATURE-----",
+    signatureTrailingContinuation,
+    "",
+    message
+  ].join("\n");
+  const merge = gitWithInput(
+    root,
+    ["hash-object", "-t", "commit", "--stdin", "-w"],
+    raw
+  ).trim();
+  git(root, "update-ref", "refs/heads/main", merge, firstParent);
+  return merge;
+}
+
+async function attestSyntheticGitHubMerge(root, merge, document = cleanHistoryPolicy()) {
+  document.approvedGitHubVerifiedMergeCommitObjects = [merge];
+  await writeRelative(
+    root,
+    "policy/forbidden-materials.json",
+    `${JSON.stringify(document, null, 2)}\n`
+  );
+  git(root, "add", "policy/forbidden-materials.json");
+  git(root, "commit", "-qm", "attest synthetic GitHub merge object");
 }
 
 function appendRawTreeCommit(root, { mode, name, oid }) {
@@ -422,7 +488,7 @@ test("historical executable grants are exact and history-only", async (t) => {
   await rm(path.join(root, ...oldPath.split("/")));
   await writeRelative(root, newPath, bytes);
   git(root, "add", "-A");
-  const migrated = structuredClone(policy);
+  const migrated = cleanHistoryPolicy();
   migrated.approvedHistoricalExecutableObjects = [{ path: oldPath, objectId }];
   await writeRelative(
     root,
@@ -470,7 +536,7 @@ test("historical executable grants reject drift and malformed policy", async (t)
     git(root, "update-index", "--chmod=+x", alternatePath);
     const objectId = git(root, "rev-parse", `:${alternatePath}`);
     git(root, "commit", "-qm", "synthetic alternate historical path");
-    const mutated = structuredClone(policy);
+    const mutated = cleanHistoryPolicy();
     mutated.approvedHistoricalExecutableObjects = [{ path: oldPath, objectId }];
     await writeRelative(
       root,
@@ -493,7 +559,7 @@ test("historical executable grants reject drift and malformed policy", async (t)
     git(root, "update-index", "--chmod=+x", oldPath);
     git(root, "commit", "-qm", "synthetic historical content rule");
     const objectId = git(root, "rev-parse", `HEAD:${oldPath}`);
-    const mutated = structuredClone(policy);
+    const mutated = cleanHistoryPolicy();
     mutated.approvedHistoricalExecutableObjects = [{ path: oldPath, objectId }];
     await writeRelative(
       root,
@@ -570,8 +636,140 @@ test("public-history gate passes and emits byte-stable JSON", async (t) => {
   assert.equal(first.report.history.ref, "refs/heads/main");
   assert.equal(first.report.history.commitsScanned, 1);
   assert.equal(first.report.history.identityOccurrences, 2);
+  assert.equal(first.report.history.githubVerifiedMergeGrantsConsumed, 0);
   assert.equal(first.report.history.leafEntriesScanned, first.report.filesScanned);
   assert.equal(first.stdout, second.stdout);
+});
+
+test("exact GitHub verified merge grants are tip-owned, reachable, and consumed", async (t) => {
+  const root = await initializeHistoryRepository(t);
+  const merge = appendSyntheticGitHubMerge(root);
+  await attestSyntheticGitHubMerge(root, merge);
+
+  const result = runGate(forbiddenScript, root, "history");
+  assert.equal(result.status, 0, result.stdout);
+  assert.equal(result.report.ok, true);
+  assert.equal(result.report.history.githubVerifiedMergeGrantsConsumed, 1);
+  assert.equal(result.report.history.commitsScanned, 4);
+  assert.equal(result.report.history.identityOccurrences, 8);
+});
+
+test("GitHub merge grants do not bypass commit-message or tree content scans", async (t) => {
+  await t.test("the exact granted commit message remains scanned", async (t) => {
+    const root = await initializeHistoryRepository(t);
+    const privatePath = ["/", "Users", "/", "synthetic-granted-merge", "/", "secret.txt"]
+      .join("");
+    const merge = appendSyntheticGitHubMerge(root, { message: `${privatePath}\n` });
+    await attestSyntheticGitHubMerge(root, merge);
+    const result = runGate(forbiddenScript, root, "history");
+    assertRejected(result, "absolute-local-user-path");
+    assert.equal(result.stdout.includes(privatePath), false);
+  });
+
+  await t.test("the exact granted commit tree remains scanned", async (t) => {
+    const root = await initializeHistoryRepository(t);
+    await writeRelative(root, "removed-after-granted-merge.pptx", "synthetic text only\n");
+    git(root, "add", "removed-after-granted-merge.pptx");
+    git(root, "commit", "-qm", "synthetic pre-merge tree");
+    const merge = appendSyntheticGitHubMerge(root);
+    await rm(path.join(root, "removed-after-granted-merge.pptx"));
+    git(root, "add", "-A");
+    await attestSyntheticGitHubMerge(root, merge);
+    assertRejected(
+      runGate(forbiddenScript, root, "history"),
+      "forbidden-presentation-extension"
+    );
+  });
+});
+
+test("GitHub merge grants fail closed on grammar, reachability, and self-authorization", async (t) => {
+  await t.test("a granted object must use the closed PGP armor grammar", async (t) => {
+    const root = await initializeHistoryRepository(t);
+    const merge = appendSyntheticGitHubMerge(root, { signatureBody: " not-base64*" });
+    await attestSyntheticGitHubMerge(root, merge);
+    const result = runGate(forbiddenScript, root, "history");
+    assertRejected(result, "malformed-github-verified-merge-commit-object");
+    assertRejected(result, "unconsumed-github-verified-merge-commit-grant");
+  });
+
+  await t.test("a granted object cannot add another commit header", async (t) => {
+    const root = await initializeHistoryRepository(t);
+    const merge = appendSyntheticGitHubMerge(root, { extraHeader: "encoding UTF-8" });
+    await attestSyntheticGitHubMerge(root, merge);
+    assertRejected(
+      runGate(forbiddenScript, root, "history"),
+      "malformed-github-verified-merge-commit-object"
+    );
+  });
+
+  await t.test("the exact GitHub signature trailing continuation is required", async (t) => {
+    const root = await initializeHistoryRepository(t);
+    const merge = appendSyntheticGitHubMerge(root, { signatureTrailingContinuation: "" });
+    await attestSyntheticGitHubMerge(root, merge);
+    assertRejected(
+      runGate(forbiddenScript, root, "history"),
+      "malformed-github-verified-merge-commit-object"
+    );
+  });
+
+  await t.test("every tip-owned grant must be reachable and consumed", async (t) => {
+    const root = await initializeHistoryRepository(t);
+    const document = cleanHistoryPolicy();
+    document.approvedGitHubVerifiedMergeCommitObjects = ["f".repeat(40)];
+    await writeRelative(
+      root,
+      "policy/forbidden-materials.json",
+      `${JSON.stringify(document, null, 2)}\n`
+    );
+    git(root, "add", "policy/forbidden-materials.json");
+    git(root, "commit", "-qm", "synthetic unreachable grant");
+    assertRejected(
+      runGate(forbiddenScript, root, "history"),
+      "unconsumed-github-verified-merge-commit-grant"
+    );
+  });
+
+  await t.test("a new GitHub merge cannot authorize its own object ID", async (t) => {
+    const root = await initializeHistoryRepository(t);
+    appendSyntheticGitHubMerge(root);
+    const result = runGate(forbiddenScript, root, "history");
+    assertRejected(result, "unsupported-history-commit-header");
+    assertRejected(result, "unexpected-history-author-identity");
+    assertRejected(result, "unexpected-history-committer-identity");
+  });
+});
+
+test("GitHub merge object grant policy is exact, sorted, and closed", async (t) => {
+  for (const [name, mutate] of [
+    ["missing collection", (document) => {
+      delete document.approvedGitHubVerifiedMergeCommitObjects;
+    }],
+    ["invalid object ID", (document) => {
+      document.approvedGitHubVerifiedMergeCommitObjects = ["not-an-object-id"];
+    }],
+    ["null object ID", (document) => {
+      document.approvedGitHubVerifiedMergeCommitObjects = ["0".repeat(40)];
+    }],
+    ["duplicate object IDs", (document) => {
+      document.approvedGitHubVerifiedMergeCommitObjects = ["a".repeat(40), "a".repeat(40)];
+    }],
+    ["unsorted object IDs", (document) => {
+      document.approvedGitHubVerifiedMergeCommitObjects = ["b".repeat(40), "a".repeat(40)];
+    }]
+  ]) {
+    await t.test(name, async (t) => {
+      const root = await initializeForbiddenRepository(t);
+      const document = structuredClone(policy);
+      mutate(document);
+      await writeRelative(
+        root,
+        "policy/forbidden-materials.json",
+        `${JSON.stringify(document, null, 2)}\n`
+      );
+      git(root, "add", "policy/forbidden-materials.json");
+      assertRejected(runGate(forbiddenScript, root), "policy-configuration-error");
+    });
+  }
 });
 
 test("mutation: deleted forbidden history remains rejected by the tip policy", async (t) => {
@@ -583,7 +781,7 @@ test("mutation: deleted forbidden history remains rejected by the tip policy", a
   git(root, "add", "-A");
   git(root, "commit", "-qm", "remove synthetic history input");
 
-  const weakened = structuredClone(policy);
+  const weakened = cleanHistoryPolicy();
   for (const rule of weakened.forbiddenExtensions) {
     rule.extensions = rule.extensions.filter((extension) => extension !== ".pptx");
   }

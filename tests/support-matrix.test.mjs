@@ -230,13 +230,40 @@ test("support matrix validates and produces byte-stable findings", () => {
       path: platform.evidence.artifacts[0].path
     }, {
       type: "cross-platform-ci",
-      path: "docs/M3-004_HANDOFF.md"
+      path: "docs/RELEASE_GATES.md"
     }, platform.id);
-    assert.match(platform.currentBasis, /31600806512/u, platform.id);
-    assert.match(platform.currentBasis, /31600528716/u, platform.id);
-    assert.match(platform.evidence.artifacts[0].note, /31600806512/u, platform.id);
-    assert.match(platform.evidence.artifacts[0].note, /31600528716/u, platform.id);
+    for (const binding of [
+      "093d527fc3fadf7cae577139b8d400719755dd52",
+      "8cdf968b72f8dd5f41fee37a68e239e477dec44b",
+      "1d6d148a8bc347dc3cbc13dde3fd4314d86c421a",
+      "31608992503",
+      "31609285181"
+    ]) assert.match(platform.currentBasis, new RegExp(binding, "u"), platform.id);
+    for (const runId of [
+      "31608992503",
+      "31608992491",
+      "31609285181",
+      "31609285220"
+    ]) assert.match(platform.evidence.artifacts[0].note, new RegExp(runId, "u"), platform.id);
   }
+  const automatedPublic = matrix.dimensions.evidenceLevels.find((item) =>
+    item.id === "automated-public-synthetic");
+  const currentCrossPlatformEvidence = automatedPublic.evidence.artifacts.find((artifact) =>
+    artifact.type === "cross-platform-ci");
+  assert.equal(currentCrossPlatformEvidence.path, "docs/RELEASE_GATES.md");
+  for (const binding of [
+    "093d527fc3fadf7cae577139b8d400719755dd52",
+    "8cdf968b72f8dd5f41fee37a68e239e477dec44b",
+    "1d6d148a8bc347dc3cbc13dde3fd4314d86c421a",
+    "31608992503",
+    "31609285181"
+  ]) assert.match(automatedPublic.currentBasis, new RegExp(binding, "u"));
+  for (const runId of [
+    "31608992503",
+    "31608992491",
+    "31609285181",
+    "31609285220"
+  ]) assert.match(currentCrossPlatformEvidence.note, new RegExp(runId, "u"));
   const rows = new Map(Object.values(matrix.dimensions).flat().map((item) => [item.id, item]));
   assert.equal(PUBLIC_SYNTHETIC_NATIVE_CARD_CANDIDATE_PROFILE.supportItemIds.length, 15);
   for (const itemId of PUBLIC_SYNTHETIC_NATIVE_CARD_CANDIDATE_PROFILE.supportItemIds) {
