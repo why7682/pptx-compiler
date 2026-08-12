@@ -5472,13 +5472,13 @@
       },
       "publicConformance": {
         "status": "applicable",
-        "notes": "Applicable for the M4-001B tracked-lock checkpoint. The machine ledger contains 287 sorted unique current-path records and the human relation names exactly nine endpoints. Lock SHA-256 d3b4818e9bcdb43f39df557847613d3e5ce0afa2f6fffda5af655217f2f5170a and package-source projection 962defc231e784627c142f01df84669b08d9a7b3f1bae39da2ea1f2728d95312 are admitted; the exact alpha-release focus passes 20/20 on Node 22.23.2 and 20/20 on Node 24.19.0. No S, A, tag, hosted tag result, npm publication, registry result, or GitHub Release is claimed."
+        "notes": "Applicable for the M4-001B tracked-lock checkpoint. The machine ledger contains 287 sorted unique current-path records and the human relation names exactly ten endpoints, including the hosted tag-fixture correction discovered by Public CI run 31649380644. Lock SHA-256 d3b4818e9bcdb43f39df557847613d3e5ce0afa2f6fffda5af655217f2f5170a and package-source projection 962defc231e784627c142f01df84669b08d9a7b3f1bae39da2ea1f2728d95312 are admitted. No S, A, tag, hosted tag result, npm publication, registry result, or GitHub Release is claimed."
       },
       "independentReview": {
         "status": "passed",
         "notes": "Passed. One bounded independent exact-lock review reports 0 blocker, 0 high, and 0 medium with Taste=good after recomputing the lock, inputs, source projection, reviewed stages, package members and modes, tar payloads, release-envelope admission, dependency order, and forbidden-material result."
       },
-      "notes": "Contains 287 sorted unique current-path records and one exact nine-path M4-001B tracked-lock relation. The reviewed lock is admitted by this change but has not been committed or merged as S; no A, tag, hosted result, npm publication, registry result, or GitHub Release is claimed."
+      "notes": "Contains 287 sorted unique current-path records and one exact ten-path M4-001B tracked-lock and hosted-fixture-correction relation. The reviewed lock is admitted by this change but has not been merged as S; no A, tag, hosted result, npm publication, registry result, or GitHub Release is claimed."
     },
     {
       "path": "sbom.alpha.cdx.json",
@@ -6829,7 +6829,7 @@
     {
       "path": "tests/alpha-release.test.mjs",
       "kind": "new-clean-room",
-      "origin": "current M4-001A bytes independently authored or updated from D-048's exact authorization, the file's existing repository-owned clean-room lineage, D-039 through D-046 public package/source/workflow/document contracts, public Git/GitHub/npm interfaces where applicable, and repository-owned synthetic mutations; no predecessor source, external implementation, hosted output, package content, presentation, private fixture, generated tarball, registry payload, or credential was copied",
+      "origin": "current M4-001B hosted-environment fixture correction independently authored from the exact GitHub Actions failure in Public CI run 31649380644 and the existing synthetic exact-tag contract; no hosted log bytes, predecessor test, external implementation, package content, presentation, private fixture, registry payload, or credential was copied",
       "copyrightHolderOrSourceAuthority": "Elliot Wu",
       "license": {
         "spdxExpression": "MIT"
@@ -6844,7 +6844,7 @@
       ],
       "privateInformationReview": {
         "status": "passed",
-        "notes": "Current M4-001A bytes contain only approved public repository/package identity, fixed public tool/action versions where applicable, repository-owned synthetic facts, and narrow lifecycle-neutral release rules. No token value, password, OTP, credential, private/local hostname, absolute private path, private fixture, source presentation, raw hosted log/API response, ignored render, generated tarball, or registry payload is admitted."
+        "notes": "The fixture uses only one synthetic 40-hex GITHUB_SHA and repository-owned temporary Git objects. No real token value, password, OTP, credential, private/local hostname, absolute private path, private fixture, source presentation, raw hosted log/API response, generated tarball bytes, or registry payload is admitted."
       },
       "projectConstantCleanup": {
         "status": "passed",
@@ -6852,13 +6852,13 @@
       },
       "publicConformance": {
         "status": "applicable",
-        "notes": "Applicable for M4-001A contract admission. On exact Git-backed frozen source bytes immediately before this final status flip, Node 22.23.2 and Node 24.19.0 each passed 1322 of 1324 full-suite nodes; under both runtimes the only failures were the release-metadata baseline and file-alias checks, caused solely by five release-source records among these 52 deliberately pending records. The exact current alpha-release focus passed 20/20 under each runtime. Guarded Node 22.23.2/npm 10.9.8 and Node 24.19.0/npm 11.17.0 builds both exited 0, admitted four schema-3 packages with exact planned members and modes, performed an offline joint installation with lifecycle scripts disabled, and passed installed CLI init/inspect/validate/render/qa smoke; qaDecision remained blocked and BuildArtifact absent. The post-flip focused current-state delta then passed release metadata; the Node 22 combined release-metadata, final-public-doc, pre-public-doc, and support selection 81/81; forbidden working-tree 286; support 60; contracts; package-plan 4; public-workflows 3; provenance working-tree 286; and git diff --check. This focused delta is not presented as a post-flip complete dual-runtime full run. The local guarded builds produced identical four gzip envelopes; the contract still admits different builder envelopes, requires exact canonical tar-payload equality, records envelope identities separately, and fixes fully reprojected Node 24/npm 11 bytes as publication authority. No release lock, tag, npm publication, registry result, or GitHub Release is claimed."
+        "notes": "Applicable for the M4-001B tracked-lock checkpoint. Public CI run 31649380644 exposed five tag-fixture failures because the hosted PR GITHUB_SHA leaked into a temporary synthetic repository. The fixture now removes that ambient hosted SHA while a separate explicit mismatch assertion still proves that production tag admission rejects a wrong GITHUB_SHA. The targeted test passes both with and without an ambient hosted SHA, and the exact Node 22 tag/lock focus passes 20/20."
       },
       "independentReview": {
         "status": "passed",
-        "notes": "Passed. A bounded latest-byte code and source-projection review reported 0 blocker, 0 high, and 0 medium after the tracked-source package-stage reprojection and exact-tag-tree source-projection binding repairs. It confirmed exact package/source path, role, Git/package mode, byte-count, and digest projection; exact-set and package-plan binding; immutable Git-tree rederivation during lock generation and candidate admission; pre/post working-tree and ref stability checks; and content plus Git-mode mutation rejection."
+        "notes": "Passed. A bounded hosted-fixture review reports 0 blocker, 0 high, and 0 medium with Taste=good. It confirms that only the synthetic temporary-repository fixture drops ambient GITHUB_SHA, while production exact-tag admission still consumes process.env and the explicit mismatch mutation remains fail-closed."
       },
-      "notes": "Exercises release-plan, distinct gzip-envelope admission, exact canonical tar-payload equality, fixed Node 24/npm 11 publication-envelope selection, dual-builder lock, locked-input, exact tag/history, recovery, and deterministic GitHub Release projection mutations. This is contract/admission evidence only: no release lock, annotated tag, npm publication, registry equality/provenance result, or GitHub Release is claimed."
+      "notes": "Exercises the release plan, dual-builder lock, source projection, exact tag, registry recovery, and release declaration. The hosted fixture correction does not weaken the production GITHUB_SHA boundary or claim any tag, npm publication, registry result, or GitHub Release."
     },
     {
       "path": "tests/candidate-build-record.test.mjs",

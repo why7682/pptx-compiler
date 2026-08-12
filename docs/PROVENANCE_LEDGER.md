@@ -3128,6 +3128,7 @@ paths:
   - docs/RELEASE_GATES.md
   - packaging/releases/0.1.0-alpha.1.lock.json
   - provenance/records.json
+  - tests/alpha-release.test.mjs
   - tests/final-public-docs.test.mjs
 kind: generated canonical release-candidate identity record plus its narrow
   M4-001B state and provenance projection
@@ -3136,7 +3137,7 @@ origin: the lock was deterministically generated create-only by
   commit b80761a62cff23cb90101605e09cc6e3c2924abd (tree
   e4a4ca28fbfa3a83080142af63c9b08b36291ccc), the repository-owned release and
   package plans plus their locked inputs, and the two fixed guarded package
-  stages. The other eight paths independently project only the resulting M4-001B
+  stages. The other nine paths independently project only the resulting M4-001B
   state and exact provenance relation. No predecessor source, external
   implementation, registry payload, hosted output, presentation, private
   fixture, generated archive bytes, or credential entered these bytes
@@ -3183,9 +3184,13 @@ independent_review: passed; one bounded exact-lock review reports 0 blocker,
   962defc231e784627c142f01df84669b08d9a7b3f1bae39da2ea1f2728d95312,
   both reviewed stage/evidence identities, all four cross-builder tar payloads,
   fixed Node 24/npm 11 release-envelope admission, dependency-graph publication
-  order, and the forbidden-material scan
+  order, and the forbidden-material scan. A second bounded review of the
+  hosted-fixture correction also reports 0 blocker, 0 high, and 0 medium with
+  Taste=good; it confirms that only the synthetic temporary-repository fixture
+  removes ambient GITHUB_SHA, while production exact-tag admission and its
+  explicit mismatch mutation remain fail-closed
 notes: This is a narrow M4-001B candidate-lock relation; it does not rewrite
-  M4-001A history. The exact nine-path lock/state/provenance slice is now
+  M4-001A history. The exact ten-path lock/state/provenance/test slice is now
   independently reviewed and provenance-admitted. It has not yet been committed
   or merged as GitHub-verified S; no attestation A, tag, tag-hosted evidence,
   npm publication, registry equality/provenance result, or GitHub Release is

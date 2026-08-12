@@ -333,12 +333,15 @@ async function createLockGenerationFixture(t) {
   return { root, verificationStage, fixedStage, environment: cleanEnvironment };
 }
 
-async function createTagInspectionFixture(t, { trackedLock = true } = {}) {
+async function createTagInspectionFixture(t, {
+  trackedLock = true,
+  ambientEnvironment = process.env
+} = {}) {
   const temporary = await mkdtemp(path.join(os.tmpdir(), "pptx-alpha-release-tag."));
   t.after(async () => rm(temporary, { recursive: true, force: true }));
   const root = await realpath(temporary);
-  const cleanEnvironment = Object.fromEntries(Object.entries(process.env)
-    .filter(([key]) => !key.toUpperCase().startsWith("GIT_")));
+  const cleanEnvironment = Object.fromEntries(Object.entries(ambientEnvironment)
+    .filter(([key]) => !key.toUpperCase().startsWith("GIT_") && key !== "GITHUB_SHA"));
   const run = (arguments_, { input } = {}) => {
     const result = spawnSync("git", arguments_, {
       cwd: root,
@@ -917,7 +920,9 @@ test("release-lock generation writes once from two complete external reviewed st
 });
 
 test("release tag inspection rejects dirty, redirected, and lightweight states", async (t) => {
-  const fixture = await createTagInspectionFixture(t);
+  const fixture = await createTagInspectionFixture(t, {
+    ambientEnvironment: { ...process.env, GITHUB_SHA: "f".repeat(40) }
+  });
 
   const processEnvironmentLike = Object.assign(Object.create({}), fixture.environment);
   const inspected = await inspectAlphaReleaseTag({
