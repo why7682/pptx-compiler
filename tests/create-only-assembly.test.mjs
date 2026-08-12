@@ -265,7 +265,10 @@ test("archive byte ceilings apply before assembly or publication snapshots", asy
     )
   );
   await assert.rejects(
-    publishCreateOnlyPresentation({ archiveBytes: oversized, destinationPath: "/bounded-output.pptx" }),
+    publishCreateOnlyPresentation({
+      archiveBytes: oversized,
+      destinationPath: path.join(os.tmpdir(), "bounded-output.pptx")
+    }),
     (error) => assertAssemblyError(error, "ASSEMBLY_OUTPUT_INVALID", "/archiveBytes")
   );
 });

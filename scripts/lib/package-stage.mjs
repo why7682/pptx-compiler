@@ -1337,7 +1337,7 @@ async function verifyInstalledPackages({ installRoot, plan, materialized }) {
       }
     }
   }
-  const installedBin = path.join(nodeModules, "pptx-compiler", "bin", "pptx-compiler.mjs");
+  const installedBin = path.join(nodeModules, "pptx-compiler", "pptx-compiler.mjs");
   const binRoot = path.join(nodeModules, ".bin");
   await regularDirectory(binRoot, "installed-bin-link");
   const binEntries = await readdir(binRoot, { withFileTypes: true });

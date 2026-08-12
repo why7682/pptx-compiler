@@ -2,16 +2,16 @@
 
 import { constants as fsConstants } from "node:fs";
 import { lstat, open, realpath } from "node:fs/promises";
-import { devNull } from "node:os";
 import path from "node:path";
 import process from "node:process";
 import { spawnSync } from "node:child_process";
 import { fileURLToPath } from "node:url";
 
 const REPORT_SCHEMA_VERSION = 1;
-const POLICY_SCHEMA_VERSION = 1;
+const POLICY_SCHEMA_VERSION = 2;
 const DEFAULT_POLICY_PATH = "policy/forbidden-materials.json";
 const PUBLIC_HISTORY_REF = "refs/heads/main";
+export const GIT_NULL_DEVICE = "/dev/null";
 const MAX_HISTORY_COMMITS = 64;
 const MAX_HISTORY_TREE_ENTRIES = 4096;
 const MAX_HISTORY_BYTES = 64 * 1024 * 1024;
@@ -127,6 +127,7 @@ export function compileForbiddenMaterialPolicy(policy) {
     "schemaVersion",
     "maxFileBytes",
     "approvedExecutablePaths",
+    "approvedHistoricalExecutableObjects",
     "approvedPublicIdentities",
     "copyrightIdentityRule",
     "forbiddenExtensions",
@@ -145,6 +146,30 @@ export function compileForbiddenMaterialPolicy(policy) {
   assertStringArray(policy.approvedExecutablePaths, "policy.approvedExecutablePaths", { allowEmpty: true });
   if (policy.approvedExecutablePaths.some((item) => !canonicalPath(item))) {
     throw new Error("policy.approvedExecutablePaths contains a non-canonical path");
+  }
+  if (!Array.isArray(policy.approvedHistoricalExecutableObjects)) {
+    throw new Error("policy.approvedHistoricalExecutableObjects must be an array");
+  }
+  let previousHistoricalExecutableKey;
+  for (const [index, item] of policy.approvedHistoricalExecutableObjects.entries()) {
+    const label = `policy.approvedHistoricalExecutableObjects[${index}]`;
+    if (!isPlainObject(item)) {
+      throw new Error(`${label} must be an object`);
+    }
+    assertOnlyKeys(item, new Set(["path", "objectId"]), label);
+    if (!canonicalPath(item.path) || !historyObjectId(item.objectId) ||
+        /^0+$/u.test(item.objectId)) {
+      throw new Error(`${label} must bind one canonical path to one object identifier`);
+    }
+    if (policy.approvedExecutablePaths.includes(item.path)) {
+      throw new Error(`${label}.path overlaps the current executable allowlist`);
+    }
+    const key = `${item.path}\0${item.objectId}`;
+    if (previousHistoricalExecutableKey !== undefined &&
+        compareText(previousHistoricalExecutableKey, key) >= 0) {
+      throw new Error("policy.approvedHistoricalExecutableObjects must be sorted and unique");
+    }
+    previousHistoricalExecutableKey = key;
   }
   assertStringArray(policy.approvedPublicIdentities, "policy.approvedPublicIdentities");
 
@@ -585,10 +610,10 @@ function baseHistoryGitEnvironment() {
 function cleanHistoryGitEnvironment() {
   return {
     ...baseHistoryGitEnvironment(),
-    GIT_CONFIG: devNull,
-    GIT_CONFIG_GLOBAL: devNull,
+    GIT_CONFIG: GIT_NULL_DEVICE,
+    GIT_CONFIG_GLOBAL: GIT_NULL_DEVICE,
     GIT_CONFIG_NOSYSTEM: "1",
-    GIT_CONFIG_SYSTEM: devNull,
+    GIT_CONFIG_SYSTEM: GIT_NULL_DEVICE,
     GIT_NO_LAZY_FETCH: "1",
     GIT_TERMINAL_PROMPT: "0"
   };
@@ -597,9 +622,9 @@ function cleanHistoryGitEnvironment() {
 function historyIdentityGitEnvironment() {
   return {
     ...baseHistoryGitEnvironment(),
-    GIT_CONFIG_GLOBAL: devNull,
+    GIT_CONFIG_GLOBAL: GIT_NULL_DEVICE,
     GIT_CONFIG_NOSYSTEM: "1",
-    GIT_CONFIG_SYSTEM: devNull
+    GIT_CONFIG_SYSTEM: GIT_NULL_DEVICE
   };
 }
 
@@ -609,19 +634,29 @@ function historyGitEnvironmentIsUnsafe(key) {
     /^GIT_CONFIG_(?:KEY|VALUE)_[0-9]+$/.test(normalized);
 }
 
-function strictFsckArguments(root, tip, environment) {
-  const variables = runGit(root, ["--no-pager", "help", "--config"], {
-    environment
-  }).split("\n").filter((value) => value.length > 0);
+export function parseFsckMessageKeys(output) {
+  if (typeof output !== "string") throw new TypeError("fsck-config-output");
+  const normalized = output.replaceAll("\r\n", "\n");
+  if (normalized.includes("\r")) throw new Error("fsck-config-line-ending");
+  const variables = normalized.split("\n").filter((value) => value.length > 0);
   const messageKeys = [...new Set(variables.filter((value) =>
     /^fsck\.[A-Za-z][A-Za-z0-9]*$/.test(value) && value !== "fsck.skipList"
   ))].sort(compareText);
   if (messageKeys.length === 0) {
     throw new Error("Git did not disclose its fsck message configuration");
   }
+  return messageKeys;
+}
+
+function strictFsckArguments(root, tip, environment) {
+  const messageKeys = parseFsckMessageKeys(runGit(
+    root,
+    ["--no-pager", "help", "--config"],
+    { environment }
+  ));
   return [
     ...messageKeys.flatMap((key) => ["-c", `${key}=error`]),
-    "-c", `fsck.skipList=${devNull}`,
+    "-c", `fsck.skipList=${GIT_NULL_DEVICE}`,
     "--no-replace-objects",
     "fsck", "--strict", "--no-dangling", tip
   ];
@@ -720,7 +755,15 @@ async function scanForbiddenHistory(
           break;
         }
         scannedEntries.add(entryKey);
-        findings.push(...inspectForbiddenMaterialPath(fullPath, entry.mode, policy));
+        const executableApproved = policy.approvedExecutablePaths.includes(fullPath) ||
+          (commit.oid !== tip && policy.approvedHistoricalExecutableObjects.some((item) =>
+            item.path === fullPath && item.objectId === entry.oid));
+        findings.push(...inspectForbiddenMaterialPathWithExecutableApproval(
+          fullPath,
+          entry.mode,
+          policy,
+          executableApproved
+        ));
         if (!canonicalPath(fullPath)) continue;
         if (entry.type === "tree") {
           pendingTrees.push({ oid: entry.oid, prefix: fullPath });
@@ -846,7 +889,12 @@ function finding(filePath, ruleId, location) {
   return result;
 }
 
-export function inspectForbiddenMaterialPath(filePath, mode, policy) {
+function inspectForbiddenMaterialPathWithExecutableApproval(
+  filePath,
+  mode,
+  policy,
+  executableApproved
+) {
   const findings = [];
   if (!canonicalPath(filePath)) {
     findings.push(finding("<non-canonical-path>", "non-canonical-repository-path"));
@@ -876,11 +924,10 @@ export function inspectForbiddenMaterialPath(filePath, mode, policy) {
       findings.push(finding(filePath, rule.id));
     }
   }
-  if (mode === "100755" && !policy.approvedExecutablePaths.includes(filePath)) {
+  if (mode === "100755" && !executableApproved) {
     findings.push(finding(filePath, "unapproved-executable-bit"));
   }
-  if (mode !== undefined && policy.approvedExecutablePaths.includes(filePath) &&
-      mode !== "100755") {
+  if (mode !== undefined && executableApproved && mode !== "100755") {
     findings.push(finding(filePath, "approved-executable-bit-missing"));
   }
   if (mode === "120000") {
@@ -890,6 +937,15 @@ export function inspectForbiddenMaterialPath(filePath, mode, policy) {
     findings.push(finding(filePath, "forbidden-submodule"));
   }
   return findings;
+}
+
+export function inspectForbiddenMaterialPath(filePath, mode, policy) {
+  return inspectForbiddenMaterialPathWithExecutableApproval(
+    filePath,
+    mode,
+    policy,
+    policy.approvedExecutablePaths.includes(filePath)
+  );
 }
 
 export function inspectForbiddenMaterialContent(filePath, content, policy) {

@@ -116,7 +116,7 @@ prefixes retain the former stem so pre-rename crash state remains recognizable;
 they grant no public package, schema, or repository identity.
 
 D-045 separates three facts that must not be collapsed. GitHub owns live public
-visibility, empty refs, and private-reporting state. Package-plan schema v2 owns
+visibility, ref state, and private-reporting state. Package-plan schema v2 owns
 only the fixed repository provider/ID/owner/name/HTML-URL tuple. Leaf manifest
 `repository` objects and the root CycloneDX VCS reference are pure projections
 of that tuple. The independent release guard keeps every leaf `private: true`

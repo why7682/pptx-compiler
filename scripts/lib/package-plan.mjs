@@ -96,8 +96,8 @@ const PACKAGE_PROFILES = Object.freeze({
         "pptx-compiler-public-synthetic/package-assets"
     }),
     types: "./types/index.d.ts",
-    bin: Object.freeze({ "pptx-compiler": "./bin/pptx-compiler.mjs" }),
-    requiredTargets: Object.freeze(["bin/pptx-compiler.mjs"])
+    bin: Object.freeze({ "pptx-compiler": "pptx-compiler.mjs" }),
+    requiredTargets: Object.freeze(["pptx-compiler.mjs"])
   }),
   core: Object.freeze({
     name: "pptx-compiler-core",
@@ -743,6 +743,7 @@ export async function validateAlphaPackagePlan(plan, {
     packageFiles.set(item.packageId, flattened);
     const profile = PACKAGE_PROFILES[item.packageId];
     const targetSet = new Set(flattened.map((entry) => entry.target));
+    const packageTargets = new Map(flattened.map((entry) => [entry.target, entry]));
     if (profile !== undefined &&
         profile.requiredTargets.some((target) => !targetSet.has(target))) {
       add(findings, "package-required-target", `/packages/${item.packageId}/files`);
@@ -760,8 +761,8 @@ export async function validateAlphaPackagePlan(plan, {
       }
     }
     for (const [name, target] of Object.entries(item.bin ?? {})) {
-      if (name !== "pptx-compiler" || !mappedTargets.has(target) ||
-          mappedTargets.get(target).role !== "bin") {
+      if (name !== "pptx-compiler" || !canonicalRelative(target) ||
+          !packageTargets.has(target) || packageTargets.get(target).role !== "bin") {
         add(findings, "package-bin-target", `/packages/${item.packageId}/bin/${name}`);
       }
     }

@@ -6,15 +6,19 @@ M3-004 has two different facts and they must not be conflated:
 
 - `M3-004A` defines and locally verifies the public-safe workflow, development-
   toolchain, source-policy, license, and static-ESM SBOM projection contracts.
-- `M3-004B` is the six-cell public GitHub Actions run. The empty public shell
-  now exists, but it remains blocked until M3-006 publishes the exact reviewed
-  first source ref.
+- `M3-004B` owns the public six-cell and security evidence. M3-006 has now
+  published the exact reviewed first source ref, so M3-004B is `NEXT` rather
+  than blocked on repository creation.
 
-The local workflow definition is complete. No Linux, Windows, macOS, CodeQL, or
-dependency-review run is claimed merely because the YAML exists or local macOS
-tests pass. M3-005A completes the local public-document contract. D-045 created
-the empty shell and verified private reporting; M3-006 must still close the
-repository-bound local evidence and exact first-ref publication.
+The local workflow definition is complete. The first public CI run passed
+Ubuntu and macOS under Node 22 and 24 but failed Windows under both lines. The
+pull-request run `31594128100` passes all six cells for branch object
+`94b5c1c`. First-ref CodeQL
+passes; pull-request CodeQL is skipped by event design. After public visibility
+and the dependency graph were enabled, security run `31594128139` passed
+Dependency Review. Those hosted runs are historical evidence bound to branch
+object `94b5c1c`. M3-004B remains partial until the next committed PR head has
+fresh six-cell CI and Dependency Review and the accepted main has CI/CodeQL.
 
 ## Kernel-style judgment
 
@@ -147,22 +151,40 @@ residual, not permission to weaken the exact stage inventory.
 These local macOS results are also recorded in `TODO.md`. They do not substitute
 for the six public runner cells.
 
-## Public evidence still required
+## Current public evidence
 
-M3-006 has created the empty public shell, verified PVR, inserted the exact
-repository identity into package-plan schema v2/manifests, and regenerated the
-static-ESM SBOM projection. The repository-bound M3-003 gate now passes under
-both admitted runtimes, including real npm 10/11 four-tarball offline install
-and installed CLI smoke. M3-004B must still retain the public URLs and
-conclusions for all six CI cells plus CodeQL and Dependency Review. Until then
-no platform row, support switch, publication, or security-scan claim is
-promoted.
+- First CI: https://github.com/why7682/pptx-compiler/actions/runs/31559642053
+- PR CI for branch object `94b5c1c`: https://github.com/why7682/pptx-compiler/actions/runs/31594128100
+- First-ref security: https://github.com/why7682/pptx-compiler/actions/runs/31559642035
+- Pull-request security: https://github.com/why7682/pptx-compiler/actions/runs/31594128139
+- Passed: Ubuntu/macOS/Windows × Node 22/24 in the corrected PR run, plus
+  first-ref CodeQL.
+- Missing: accepted-main CI/CodeQL.
+
+The first correction covered a platform-invalid test path, strict LF/CRLF Git
+text parsing, canonical bin spelling, and waiting for a killed child to close.
+Pull-request run `31582316951` again passed Ubuntu/macOS 22/24 but showed that
+Git for Windows needs Git's `/dev/null` pathname rather than Node's Win32 null-
+device spelling, and that npm leaves a nested bin target at tar mode 0644. The
+second correction uses one Git-native null path and moves the package entry to
+the package root, where both admitted npm lines produce mode 0755. Policy v2
+keeps only that new path in current executable admission and binds the retired
+public-history object by exact old path plus blob OID. This local correction
+passes the 216-node affected focus, 24-node package-stage suite, and 1228-node
+complete suite under both Node 22.23.2 and Node 24.19.0. npm 10.9.8 and npm
+11.17.0 each rebuild, admit, install offline, and smoke all four packages, with
+the package-root CLI member at mode 0755. For branch object `94b5c1c`,
+pull-request Public CI run `31594128100` passes all six cells, including complete tests, guarded packages,
+working-tree recheck, and drift check.
+
+After the repository returned to public visibility and its dependency graph was
+enabled, pull-request security run `31594128139` passed Dependency Review;
+CodeQL remained skipped by the pull-request event contract.
 
 ## Next dependency
 
-M3-005A now supplies only the minimum pre-public security, contribution,
-governance, and reproducibility text. M3-006 has completed its empty-shell/PVR
-prefix, repository binding, and complete dual-runtime package gate; it must now
-create and history-scan the reviewed local commit before an exact source ref.
-M3-005B keeps final changelog/release wording blocked until public CI evidence
-exists rather than predicting it.
+Commit and push the frozen evidence/document snapshot, then merge only after
+that exact PR head has fresh six-cell CI and Dependency Review. Once the
+accepted change reaches `main`, retain final-main CI and CodeQL results for
+those exact bytes, then close M3-004B. M3-005B remains blocked until that hosted
+evidence is complete.

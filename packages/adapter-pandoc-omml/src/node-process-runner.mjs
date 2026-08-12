@@ -191,6 +191,7 @@ export function createPandocProcessRunner(options) {
       }
 
       let settled = false;
+      let forcedOutcome = null;
       let stdoutBytes = 0;
       let stderrBytes = 0;
       const stdoutChunks = [];
@@ -207,20 +208,22 @@ export function createPandocProcessRunner(options) {
       };
 
       const terminate = (kind) => {
-        if (settled) return;
+        if (settled || forcedOutcome !== null) return;
+        forcedOutcome = kind;
+        clearTimeout(timer);
+        child.stdin.destroy();
         try {
           child.kill("SIGKILL");
         } catch {
           // The stable failure result is independent of platform kill details.
         }
-        finish(outcome(kind));
       };
 
       const timer = setTimeout(() => terminate("timed-out"), request.timeoutMs);
       timer.unref?.();
 
       child.stdout.on("data", (chunk) => {
-        if (settled) return;
+        if (settled || forcedOutcome !== null) return;
         stdoutBytes += chunk.length;
         if (stdoutBytes > request.maxStdoutBytes) {
           terminate("output-limit");
@@ -229,7 +232,7 @@ export function createPandocProcessRunner(options) {
         stdoutChunks.push(Buffer.from(chunk));
       });
       child.stderr.on("data", (chunk) => {
-        if (settled) return;
+        if (settled || forcedOutcome !== null) return;
         stderrBytes += chunk.length;
         if (stderrBytes > request.maxStderrBytes) {
           terminate("output-limit");
@@ -245,6 +248,10 @@ export function createPandocProcessRunner(options) {
       });
       child.once("close", (exitCode, signal) => {
         if (settled) return;
+        if (forcedOutcome !== null) {
+          finish(outcome(forcedOutcome));
+          return;
+        }
         if (signal !== null) {
           finish(outcome("signaled", null, String(signal)));
           return;

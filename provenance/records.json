@@ -80,7 +80,7 @@
       },
       "publicConformance": {
         "status": "applicable",
-        "notes": "Exact-byte workflow checks and mutation tests cover pins, least privilege, runner matrix, command order, checkout credentials, absent cache/artifact upload, and the ban on private or publication paths. No public runner execution is claimed."
+        "notes": "Exact-byte workflow checks and mutation tests cover pins, least privilege, runner matrix, command order, checkout credentials, absent cache/artifact upload, and the ban on private or publication paths. Pull-request run 31594128100 passes all six public runner cells for branch object 94b5c1c; accepted-main CI remains separate."
       },
       "independentReview": {
         "status": "passed",
@@ -112,7 +112,7 @@
       },
       "publicConformance": {
         "status": "applicable",
-        "notes": "Exact-byte workflow checks and mutation tests cover trigger separation, minimal permissions, build-mode none, complete action pins, and absence of repository-code execution in CodeQL. No CodeQL or Dependency Review run is claimed."
+        "notes": "Exact-byte workflow checks and mutation tests cover trigger separation, minimal permissions, build-mode none, complete action pins, and absence of repository-code execution in CodeQL. First-ref CodeQL passes, and pull-request security run 31594128139 passes Dependency Review for historical branch object 94b5c1c after public visibility plus the dependency graph were enabled; the next PR head and accepted-main CodeQL remain separate."
       },
       "independentReview": {
         "status": "passed",
@@ -151,16 +151,16 @@
     {
       "path": "AGENTS.md",
       "kind": "new-clean-room",
-      "origin": "repository-owned clean-room instructions updated through accepted D-043 and the active M3-006 first-public-ref boundary while preserving presentation-skill, fixed-stage, and hosted-evidence responsibilities; D-045 updates these current bytes from the verified empty public GitHub repository and repository-bound package authority",
+      "origin": "repository-owned clean-room instructions updated from the completed M3-006 exact first ref, branch-object-bound M3-004B hosted evidence, and user-required D-046 constructive-document discipline while preserving presentation-skill, fixed-stage, and hosted-evidence responsibilities",
       "copyrightHolderOrSourceAuthority": "Elliot Wu",
       "license": {
         "spdxExpression": "MIT"
       },
-      "reviewedOn": "2026-08-11",
+      "reviewedOn": "2026-08-12",
       "thirdPartyDependencies": [],
       "privateInformationReview": {
         "status": "passed",
-        "notes": "D-045 adds only the approved public owner/repository, numeric GitHub repository ID, canonical public URLs, aggregate status facts, and repository-owned synthetic evidence. It contains no token or credential; no private/local hostname or absolute/private path; no unapproved account or Git remote configuration; and no private fixture, source presentation, raw API transcript, or ignored artifact."
+        "notes": "Records only the approved public repository/OID, public run identifiers, aggregate hosted conclusions, and repository-owned technical rules; no raw log, API response, token, credential, private path, private/local hostname, source presentation, private fixture, or ignored output."
       },
       "projectConstantCleanup": {
         "status": "passed",
@@ -168,13 +168,13 @@
       },
       "publicConformance": {
         "status": "not-applicable",
-        "notes": "Records the verified repository/PVR and repository-bound package authority; the final fixed-copy Node 22/24 suites each pass 1217/1217, package-stage passes 24/24 under both runtimes, and npm 10/11 builds pass after the live-claim/release race correction. Final commit/history/exact HTTPS push/remote equality remain; no hosted or npm-publication claim is made."
+        "notes": "Responsibility and read-order authority only; M3-006 is complete and M3-004B remains partial. No npm-publication, support, or release authority is created."
       },
       "independentReview": {
         "status": "passed",
-        "notes": "Bounded D-045 current-byte and claim-race closing reviews reported 0 blocker, 0 high, and 0 medium; they confirmed the repository tuple, npm-private projections, plan-fingerprint recovery, live-claim/release ownership transfer, launch state machine, and 25-path provenance relation."
+        "notes": "Bounded current-byte review of the executable Windows portability correction reports 0 blocker, 0 high, and 0 medium; final state/provenance review remains separately bounded."
       },
-      "notes": "D-045 records the real empty public GitHub shell, positive PVR status, exact repository-bound package metadata, separate npm-private guard, completed dual-runtime/package evidence, and pending final commit/history/exact-push gates; no local remote, source ref, hosted result, or npm publication is claimed."
+      "notes": "M3-006 is complete. Pull-request Public CI run 31594128100 passed all six OS/runtime cells for historical branch object 94b5c1c, security run 31594128139 passed Dependency Review, and first-ref CodeQL passed; the next PR head and accepted-main CI/CodeQL remain absent. npm publication remains blocked."
     },
     {
       "path": "CONTRIBUTING.md",
@@ -235,16 +235,16 @@
     {
       "path": "HANDOFF.md",
       "kind": "new-clean-room",
-      "origin": "repository-owned handoff updated through completed M3-005A and accepted D-043 with the externally blocked M3-006 first-ref transition next; D-045 updates these current bytes from the verified empty public GitHub repository and repository-bound package authority",
+      "origin": "repository-owned handoff updated from the completed M3-006 exact first ref, public CI runs 31559642053/31591756372/31594128100, security runs 31559642035/31591756442/31594128139, the public visibility/dependency-graph transition, user-required D-046 constructive-document discipline, and the repository-owned Windows portability correction",
       "copyrightHolderOrSourceAuthority": "Elliot Wu",
       "license": {
         "spdxExpression": "MIT"
       },
-      "reviewedOn": "2026-08-11",
+      "reviewedOn": "2026-08-12",
       "thirdPartyDependencies": [],
       "privateInformationReview": {
         "status": "passed",
-        "notes": "D-045 adds only the approved public owner/repository, numeric GitHub repository ID, canonical public URLs, aggregate status facts, and repository-owned synthetic evidence. It contains no token or credential; no private/local hostname or absolute/private path; no unapproved account or Git remote configuration; and no private fixture, source presentation, raw API transcript, or ignored artifact."
+        "notes": "Records only the approved public repository/OID, public run identifiers, and aggregate hosted conclusions; no raw log, API response, token, credential, private path, private/local hostname, source presentation, private fixture, or ignored output."
       },
       "projectConstantCleanup": {
         "status": "passed",
@@ -252,13 +252,13 @@
       },
       "publicConformance": {
         "status": "applicable",
-        "notes": "Records the verified empty public repository/PVR and canonical repository-bound package authority; Node 22/24 each pass 1217/1217, package-stage passes 24/24, and npm 10/11 builds pass. Final commit/history/exact HTTPS push/remote equality remain; no hosted or npm-publication claim is made."
+        "notes": "M3-006 is complete. For the latest Windows correction, two bounded reviews report 0 blocker/high/medium and final frozen-byte dual-runtime local tests plus guarded-package evidence pass. Six-cell pull-request CI and Dependency Review passed for historical branch object 94b5c1c; the next committed PR head and accepted main require fresh hosted evidence."
       },
       "independentReview": {
         "status": "passed",
-        "notes": "A bounded D-045 current-byte security/code review reported 0 blocker, 0 high, and 0 medium; it confirmed the exact repository tuple and directory/protocol mutations, npm-private manifests, root-only SBOM projection, plan-fingerprint recovery, launch state machine, and 25-path provenance relation."
+        "notes": "Bounded executable-code and final state/provenance reviews each report 0 blocker, 0 high, and 0 medium."
       },
-      "notes": "D-045 records the real empty public GitHub shell, positive PVR status, exact repository-bound package metadata, separate npm-private guard, completed dual-runtime/package evidence, and pending final commit/history/exact-push gates; no local remote, source ref, hosted result, or npm publication is claimed."
+      "notes": "M3-006 is complete at object 410642b668514ab7193212d617cc0f8acb837924. M3-004B remains partial: six-cell pull-request CI and Dependency Review passed for historical branch object 94b5c1c, while the next committed PR head and accepted-main CI/CodeQL remain unresolved; npm publication remains blocked."
     },
     {
       "path": "LICENSE",
@@ -291,16 +291,16 @@
     {
       "path": "README.md",
       "kind": "new-clean-room",
-      "origin": "repository-owned public overview updated through completed M3-005A and the M3-006 activation-before-first-ref boundary; D-045 updates these current bytes from the verified empty public GitHub repository and repository-bound package authority",
+      "origin": "repository-owned public overview updated from completed M3-006, branch-object-bound pull-request CI/security runs 31594128100/31594128139, and the verified public visibility/dependency-graph transition",
       "copyrightHolderOrSourceAuthority": "Elliot Wu",
       "license": {
         "spdxExpression": "MIT"
       },
-      "reviewedOn": "2026-08-11",
+      "reviewedOn": "2026-08-12",
       "thirdPartyDependencies": [],
       "privateInformationReview": {
         "status": "passed",
-        "notes": "D-045 adds only the approved public owner/repository, numeric GitHub repository ID, canonical public URLs, aggregate status facts, and repository-owned synthetic evidence. It contains no token or credential; no private/local hostname or absolute/private path; no unapproved account or Git remote configuration; and no private fixture, source presentation, raw API transcript, or ignored artifact."
+        "notes": "Records only the approved public repository/OID and aggregate hosted conclusions; no raw log, API response, token, credential, private path, private/local hostname, source presentation, private fixture, or ignored output."
       },
       "projectConstantCleanup": {
         "status": "passed",
@@ -308,13 +308,13 @@
       },
       "publicConformance": {
         "status": "not-applicable",
-        "notes": "Records the verified empty public repository/PVR and canonical repository-bound package authority; Node 22/24 each pass 1217/1217, package-stage passes 24/24, and npm 10/11 builds pass. Final commit/history/exact HTTPS push/remote equality remain; no hosted or npm-publication claim is made."
+        "notes": "Public overview only. The exact first-ref package evidence remains historical and was not reused after package-plan changes. Pull-request run 31594128100 passes all six cells for branch object 94b5c1c and security run 31594128139 passes Dependency Review. The final mapped README bytes are included in refreshed Node 22/24 full and package-stage evidence plus npm 10/11 guarded build, offline-install, and smoke evidence; a new pull-request head still requires hosted verification before merge."
       },
       "independentReview": {
         "status": "passed",
-        "notes": "A bounded D-045 current-byte security/code review reported 0 blocker, 0 high, and 0 medium; it confirmed the exact repository tuple and directory/protocol mutations, npm-private manifests, root-only SBOM projection, plan-fingerprint recovery, launch state machine, and 25-path provenance relation."
+        "notes": "Bounded executable-code and final state/provenance reviews each report 0 blocker, 0 high, and 0 medium."
       },
-      "notes": "D-045 records the real empty public GitHub shell, positive PVR status, exact repository-bound package metadata, separate npm-private guard, completed dual-runtime/package evidence, and pending final commit/history/exact-push gates; no local remote, source ref, hosted result, or npm publication is claimed."
+      "notes": "M3-006 source publication is complete; M3-004B is partial and npm publication, support promotion, and release remain unclaimed."
     },
     {
       "path": "SECURITY.md",
@@ -347,16 +347,16 @@
     {
       "path": "TODO.md",
       "kind": "new-clean-room",
-      "origin": "repository-owned milestone ledger updated through D-043's local M3-006 history preflight and the M3-006-to-M3-004B-to-M3-005B dependency chain; D-045 updates these current bytes from the verified empty public GitHub repository and repository-bound package authority",
+      "origin": "repository-owned milestone ledger updated from completed M3-006, branch-object-bound pull-request CI/security runs 31594128100/31594128139, the public visibility/dependency-graph transition, user-required D-046 constructive-document discipline, the D-047 branch-protection deferral, and the current Windows portability correction",
       "copyrightHolderOrSourceAuthority": "Elliot Wu",
       "license": {
         "spdxExpression": "MIT"
       },
-      "reviewedOn": "2026-08-11",
+      "reviewedOn": "2026-08-12",
       "thirdPartyDependencies": [],
       "privateInformationReview": {
         "status": "passed",
-        "notes": "D-045 adds only the approved public owner/repository, numeric GitHub repository ID, canonical public URLs, aggregate status facts, and repository-owned synthetic evidence. It contains no token or credential; no private/local hostname or absolute/private path; no unapproved account or Git remote configuration; and no private fixture, source presentation, raw API transcript, or ignored artifact."
+        "notes": "Records only the approved public repository/OID, public run identifiers, and aggregate hosted conclusions; no raw log, API response, token, credential, private path, private/local hostname, source presentation, private fixture, or ignored output."
       },
       "projectConstantCleanup": {
         "status": "passed",
@@ -364,27 +364,27 @@
       },
       "publicConformance": {
         "status": "applicable",
-        "notes": "Records the verified empty public repository/PVR and canonical repository-bound package authority; Node 22/24 each pass 1217/1217, package-stage passes 24/24, and npm 10/11 builds pass. Final commit/history/exact HTTPS push/remote equality remain; no hosted or npm-publication claim is made."
+        "notes": "M3-004B remains partial. Final frozen-byte dual-runtime local/package evidence passes; six-cell pull-request CI and Dependency Review passed for historical branch object 94b5c1c, while the next committed PR head and accepted-main CI/CodeQL still require hosted evidence."
       },
       "independentReview": {
         "status": "passed",
-        "notes": "A bounded D-045 current-byte security/code review reported 0 blocker, 0 high, and 0 medium; it confirmed the exact repository tuple and directory/protocol mutations, npm-private manifests, root-only SBOM projection, plan-fingerprint recovery, launch state machine, and 25-path provenance relation."
+        "notes": "Bounded executable-code and final state/provenance reviews each report 0 blocker, 0 high, and 0 medium."
       },
-      "notes": "D-045 records the real empty public GitHub shell, positive PVR status, exact repository-bound package metadata, separate npm-private guard, completed dual-runtime/package evidence, and pending final commit/history/exact-push gates; no local remote, source ref, hosted result, or npm publication is claimed."
+      "notes": "M3-006 is DONE, M3-004B is NEXT and partial, M3-005B remains BLOCKED, and D-047/M3-008 defer branch protection; npm publication, support promotion, and release remain unclaimed."
     },
     {
       "path": "docs/ARCHITECTURE_TARGET.md",
       "kind": "new-clean-room",
-      "origin": "repository-owned architecture updated through D-041's local workflow, toolchain, static-ESM SBOM, and platform durability boundary; D-045 updates these current bytes from the verified empty public GitHub repository and repository-bound package authority",
+      "origin": "repository-owned architecture updated after M3-006 to retain GitHub-owned live ref state without freezing the historical empty-ref checkpoint",
       "copyrightHolderOrSourceAuthority": "Elliot Wu",
       "license": {
         "spdxExpression": "MIT"
       },
-      "reviewedOn": "2026-08-11",
+      "reviewedOn": "2026-08-12",
       "thirdPartyDependencies": [],
       "privateInformationReview": {
         "status": "passed",
-        "notes": "D-045 adds only the approved public owner/repository, numeric GitHub repository ID, canonical public URLs, aggregate status facts, and repository-owned synthetic evidence. It contains no token or credential; no private/local hostname or absolute/private path; no unapproved account or Git remote configuration; and no private fixture, source presentation, raw API transcript, or ignored artifact."
+        "notes": "Records only approved public repository facts and abstract authority relationships; no raw log, API response, token, credential, private path, private/local hostname, source presentation, private fixture, or ignored output."
       },
       "projectConstantCleanup": {
         "status": "passed",
@@ -392,23 +392,23 @@
       },
       "publicConformance": {
         "status": "not-applicable",
-        "notes": "Records the verified empty public repository/PVR and canonical repository-bound package authority; Node 22/24 each pass 1217/1217, package-stage passes 24/24, and npm 10/11 builds pass. Final commit/history/exact HTTPS push/remote equality remain; no hosted or npm-publication claim is made."
+        "notes": "Architecture wording only; changing empty refs to live ref state does not promote platform, support, npm-publication, or release evidence."
       },
       "independentReview": {
         "status": "passed",
-        "notes": "A bounded D-045 current-byte security/code review reported 0 blocker, 0 high, and 0 medium; it confirmed the exact repository tuple and directory/protocol mutations, npm-private manifests, root-only SBOM projection, plan-fingerprint recovery, launch state machine, and 25-path provenance relation."
+        "notes": "Bounded final state/provenance review reports 0 blocker, 0 high, and 0 medium after the stale empty-ref assertion was removed."
       },
-      "notes": "D-045 records the real empty public GitHub shell, positive PVR status, exact repository-bound package metadata, separate npm-private guard, completed dual-runtime/package evidence, and pending final commit/history/exact-push gates; no local remote, source ref, hosted result, or npm publication is claimed."
+      "notes": "GitHub owns live public/ref/PVR state; readable plan and derived package projections remain separate authorities."
     },
     {
       "path": "docs/COMPATIBILITY_POLICY.md",
       "kind": "new-clean-room",
-      "origin": "repository-owned compatibility policy maintained in M3-005A to distinguish the unbound adapter result from later narrow target application and local observations",
+      "origin": "repository-owned compatibility policy maintained through M3-005A and branch-object-bound M3-004B pull-request evidence to distinguish capability support from platform execution evidence",
       "copyrightHolderOrSourceAuthority": "Elliot Wu",
       "license": {
         "spdxExpression": "MIT"
       },
-      "reviewedOn": "2026-08-11",
+      "reviewedOn": "2026-08-12",
       "thirdPartyDependencies": [],
       "privateInformationReview": {
         "status": "passed",
@@ -420,27 +420,27 @@
       },
       "publicConformance": {
         "status": "not-applicable",
-        "notes": "Records the M2-004 external-process and strict DOCX/OMML boundary plus the current fact that later narrow application/observations do not promote general formula support."
+        "notes": "Records the M2-004 external-process and strict DOCX/OMML boundary, the six-cell result bound to historical branch object 94b5c1c, and the fact that neither later narrow application nor platform execution evidence promotes general formula support."
       },
       "independentReview": {
         "status": "passed",
-        "notes": "Earlier M2-004 review remains closed; bounded M3-005A document review corrected the stale future-M2-005 statement without changing a support status."
+        "notes": "Earlier M2-004 review remains closed; the current evidence wording preserves every support status and the false global claim switch while accepted-main M3-004B evidence remains pending."
       },
-      "notes": "Repository-owned compatibility policy through the M3-005A current-claim correction; public real-Pandoc evidence and purpose-bound direct-candidate receipt remain absent."
+      "notes": "Repository-owned compatibility policy through branch-object-bound six-cell pull-request CI; the next PR head, accepted-main CI/CodeQL, public real-Pandoc evidence, and the purpose-bound direct-candidate receipt remain absent."
     },
     {
       "path": "docs/DECISIONS.md",
       "kind": "new-clean-room",
-      "origin": "repository-owned decision register updated through accepted D-043 reachable-history and exact-first-ref contract; D-045 updates these current bytes from the verified empty public GitHub repository and repository-bound package authority",
+      "origin": "repository-owned decision register updated with completed D-043/M3-006 first-ref evidence, corrected D-041/M3-004B pull-request CI/security results, the user's D-046 constructive-final-document requirement, and the user's D-047 branch-protection deferral",
       "copyrightHolderOrSourceAuthority": "Elliot Wu",
       "license": {
         "spdxExpression": "MIT"
       },
-      "reviewedOn": "2026-08-11",
+      "reviewedOn": "2026-08-12",
       "thirdPartyDependencies": [],
       "privateInformationReview": {
         "status": "passed",
-        "notes": "D-045 adds only the approved public owner/repository, numeric GitHub repository ID, canonical public URLs, aggregate status facts, and repository-owned synthetic evidence. It contains no token or credential; no private/local hostname or absolute/private path; no unapproved account or Git remote configuration; and no private fixture, source presentation, raw API transcript, or ignored artifact."
+        "notes": "Records only the approved public repository/OID, public run identifiers, and aggregate hosted conclusions; no raw log, API response, token, credential, private path, private/local hostname, source presentation, private fixture, or ignored output."
       },
       "projectConstantCleanup": {
         "status": "passed",
@@ -448,13 +448,13 @@
       },
       "publicConformance": {
         "status": "not-applicable",
-        "notes": "Records the verified empty public repository/PVR and canonical repository-bound package authority; Node 22/24 each pass 1217/1217, package-stage passes 24/24, and npm 10/11 builds pass. Final commit/history/exact HTTPS push/remote equality remain; no hosted or npm-publication claim is made."
+        "notes": "Execution evidence updates accepted D-041 through D-045 without claiming completed M3-004B, npm publication, support, or release. D-046 governs final-document structure; D-047 defers branch protection. Neither grants product or release authority."
       },
       "independentReview": {
         "status": "passed",
-        "notes": "A bounded D-045 current-byte security/code review reported 0 blocker, 0 high, and 0 medium; it confirmed the exact repository tuple and directory/protocol mutations, npm-private manifests, root-only SBOM projection, plan-fingerprint recovery, launch state machine, and 25-path provenance relation."
+        "notes": "Bounded final state/provenance review reports 0 blocker, 0 high, and 0 medium after historical checkpoint wording was separated from current state."
       },
-      "notes": "D-045 records the real empty public GitHub shell, positive PVR status, exact repository-bound package metadata, separate npm-private guard, completed dual-runtime/package evidence, and pending final commit/history/exact-push gates; no local remote, source ref, hosted result, or npm publication is claimed."
+      "notes": "D-043/M3-006 first-ref evidence is complete; D-041/M3-004B remains partial after six-cell CI and Dependency Review passed for historical branch object 94b5c1c because the next PR head and accepted-main CI/CodeQL remain absent."
     },
     {
       "path": "docs/EFFECT_FIRST_IMPLEMENTATION_PLAN.md",
@@ -963,7 +963,7 @@
     {
       "path": "docs/M3-003_HANDOFF.md",
       "kind": "new-clean-room",
-      "origin": "independently authored from D-040 and the executable guarded tarball, fixed-stage recovery, offline install, and installed-bin evidence; D-045 adds repository-bound authority and the final live-claim/release race correction",
+      "origin": "independently authored from D-040's guarded package stage and updated through branch-object-bound pull-request CI run 31594128100 plus security run 31594128139 with the canonical package-local bin target required by npm on Windows",
       "copyrightHolderOrSourceAuthority": "Elliot Wu",
       "license": {
         "spdxExpression": "MIT"
@@ -980,23 +980,23 @@
       },
       "publicConformance": {
         "status": "applicable",
-        "notes": "Records repository-bound package authority and live-claim ownership classification; final fixed-copy Node 22/24 suites each pass 1217/1217, package-stage passes 24/24 under both runtimes, and npm 10/11 builds pass. Commit/history/exact push remain."
+        "notes": "The exact first-ref package evidence is historical. The latest CLI source/target correction has fresh 24/24 package-stage and npm 10/11 guarded-build evidence. Six-cell pull-request CI and Dependency Review passed for historical branch object 94b5c1c; the next PR head and accepted-main CI/CodeQL remain required."
       },
       "independentReview": {
         "status": "passed",
-        "notes": "Bounded D-045 and claim-race closing reviews reported 0 blocker, 0 high, and 0 medium; they confirmed live foreign candidates, exact-own/dead recovery, release ownership transfer, and narrow test cleanup."
+        "notes": "Bounded current-byte review of the executable Windows portability correction reports 0 blocker, 0 high, and 0 medium; corrected six-cell pull-request CI passes and accepted-main evidence remains separate."
       },
-      "notes": "Current M3-003 package-stage handoff through the repository-bound dual-runtime evidence and final claim-race correction; no source ref or npm publication is claimed."
+      "notes": "M3-006 source publication is complete. The current plan/bin correction did not reuse the first-ref reviewed tarballs and now has fresh dual-runtime guarded-build evidence; npm publication remains blocked."
     },
     {
       "path": "docs/M3-004_HANDOFF.md",
       "kind": "new-clean-room",
-      "origin": "independently authored from D-041 and the locally executable workflow, development-toolchain, source-policy, license, and alpha static-ESM SBOM projection contracts; D-045 updates these current bytes from the verified empty public GitHub repository and repository-bound package authority",
+      "origin": "independently authored from D-041 and updated from public CI runs 31559642053/31591756372/31594128100, security runs 31559642035/31591756442/31594128139, the public visibility/dependency-graph transition, and the repository-owned Windows portability correction",
       "copyrightHolderOrSourceAuthority": "Elliot Wu",
       "license": {
         "spdxExpression": "MIT"
       },
-      "reviewedOn": "2026-08-11",
+      "reviewedOn": "2026-08-12",
       "thirdPartyDependencies": [
         "TypeScript 6.0.2 (Apache-2.0; exact dev-only declaration type checker, not bundled or redistributed)",
         "actions/checkout v7.0.1 at 3d3c42e5aac5ba805825da76410c181273ba90b1 (MIT; pinned remote CI action, not vendored)",
@@ -1006,7 +1006,7 @@
       ],
       "privateInformationReview": {
         "status": "passed",
-        "notes": "D-045 adds only the approved public owner/repository, numeric GitHub repository ID, canonical public URLs, aggregate status facts, and repository-owned synthetic evidence. It contains no token or credential; no private/local hostname or absolute/private path; no unapproved account or Git remote configuration; and no private fixture, source presentation, raw API transcript, or ignored artifact."
+        "notes": "Records only approved public repository/OID, public run identifiers, aggregate hosted conclusions, and repository-owned regressions; no raw log, API response, token, credential, private path, private/local hostname, private fixture, or ignored output."
       },
       "projectConstantCleanup": {
         "status": "passed",
@@ -1014,46 +1014,18 @@
       },
       "publicConformance": {
         "status": "applicable",
-        "notes": "Records the verified empty public repository/PVR and canonical repository-bound package authority; Node 22/24 each pass 1217/1217, package-stage passes 24/24, and npm 10/11 builds pass. Final commit/history/exact HTTPS push/remote equality remain; no hosted or npm-publication claim is made."
+        "notes": "Two bounded reviews accept the latest Windows correction. Final frozen-byte dual-runtime 216/24/1228 local evidence and npm 10/11 guarded builds pass. Six-cell pull-request CI and Dependency Review passed for historical branch object 94b5c1c; the next PR head and accepted-main CI/CodeQL remain open."
       },
       "independentReview": {
         "status": "passed",
-        "notes": "A bounded D-045 current-byte security/code review reported 0 blocker, 0 high, and 0 medium; it confirmed the exact repository tuple and directory/protocol mutations, npm-private manifests, root-only SBOM projection, plan-fingerprint recovery, launch state machine, and 25-path provenance relation."
+        "notes": "Bounded executable-code and final state/provenance reviews each report 0 blocker, 0 high, and 0 medium."
       },
-      "notes": "D-045 records the real empty public GitHub shell, positive PVR status, exact repository-bound package metadata, separate npm-private guard, completed dual-runtime/package evidence, and pending final commit/history/exact-push gates; no local remote, source ref, hosted result, or npm publication is claimed."
+      "notes": "M3-004B is partial: Ubuntu/macOS/Windows pull-request CI and Dependency Review passed for historical branch object 94b5c1c, and first-ref CodeQL passes; the next PR head and accepted-main CI/CodeQL remain absent."
     },
     {
       "path": "docs/M3-005_HANDOFF.md",
       "kind": "new-clean-room",
-      "origin": "independently authored from the M3-005A/M3-005B evidence split, D-042's minimum public-document contract, and GitHub's public private-vulnerability-reporting API boundary; D-045 updates these current bytes from the verified empty public GitHub repository and repository-bound package authority",
-      "copyrightHolderOrSourceAuthority": "Elliot Wu",
-      "license": {
-        "spdxExpression": "MIT"
-      },
-      "reviewedOn": "2026-08-11",
-      "thirdPartyDependencies": [],
-      "privateInformationReview": {
-        "status": "passed",
-        "notes": "D-045 adds only the approved public owner/repository, numeric GitHub repository ID, canonical public URLs, aggregate status facts, and repository-owned synthetic evidence. It contains no token or credential; no private/local hostname or absolute/private path; no unapproved account or Git remote configuration; and no private fixture, source presentation, raw API transcript, or ignored artifact."
-      },
-      "projectConstantCleanup": {
-        "status": "passed",
-        "notes": "Keeps one owner for contribution, governance, reproduction, security reporting, support, and release facts and adds no second support or command model."
-      },
-      "publicConformance": {
-        "status": "not-applicable",
-        "notes": "Records the verified empty public repository/PVR and canonical repository-bound package authority; Node 22/24 each pass 1217/1217, package-stage passes 24/24, and npm 10/11 builds pass. Final commit/history/exact HTTPS push/remote equality remain; no hosted or npm-publication claim is made."
-      },
-      "independentReview": {
-        "status": "passed",
-        "notes": "A bounded D-045 current-byte security/code review reported 0 blocker, 0 high, and 0 medium; it confirmed the exact repository tuple and directory/protocol mutations, npm-private manifests, root-only SBOM projection, plan-fingerprint recovery, launch state machine, and 25-path provenance relation."
-      },
-      "notes": "D-045 records the real empty public GitHub shell, positive PVR status, exact repository-bound package metadata, separate npm-private guard, completed dual-runtime/package evidence, and pending final commit/history/exact-push gates; no local remote, source ref, hosted result, or npm publication is claimed."
-    },
-    {
-      "path": "docs/M3-006_HANDOFF.md",
-      "kind": "new-clean-room",
-      "origin": "independently authored from D-043, the current first-public history audit, the existing forbidden-material policy, D-003 public Git identity, and D-042 remote/PVR boundary; D-045 updates these current bytes from the verified empty public GitHub repository and repository-bound package authority",
+      "origin": "independently authored from the M3-005A/M3-005B evidence split, completed M3-006, branch-object-bound pull-request CI/security runs 31594128100/31594128139, and the user's D-046 constructive-final-document requirement",
       "copyrightHolderOrSourceAuthority": "Elliot Wu",
       "license": {
         "spdxExpression": "MIT"
@@ -1062,7 +1034,35 @@
       "thirdPartyDependencies": [],
       "privateInformationReview": {
         "status": "passed",
-        "notes": "D-045 adds only the approved public owner/repository, numeric GitHub repository ID, canonical public URLs, aggregate status facts, and repository-owned synthetic evidence. It contains no token or credential; no private/local hostname or absolute/private path; no unapproved account or Git remote configuration; and no private fixture, source presentation, raw API transcript, or ignored artifact."
+        "notes": "Records only approved public repository/OID and aggregate hosted conclusions; no raw log, API response, token, credential, private path, private/local hostname, private fixture, or ignored output."
+      },
+      "projectConstantCleanup": {
+        "status": "passed",
+        "notes": "Keeps one owner for contribution, governance, reproduction, security reporting, support, and release facts and adds no second support or command model."
+      },
+      "publicConformance": {
+        "status": "not-applicable",
+        "notes": "Document responsibility only; six-cell pull-request CI and Dependency Review passed for historical branch object 94b5c1c, while M3-005A remains complete and M3-005B remains blocked on fresh next-head plus accepted-main hosted evidence."
+      },
+      "independentReview": {
+        "status": "passed",
+        "notes": "Bounded final state/provenance review reports 0 blocker, 0 high, and 0 medium after the first-ref and partial-hosted state was reconciled."
+      },
+      "notes": "M3-005A is complete; M3-005B remains blocked until M3-004B has complete hosted evidence, then must pass D-046 cross-document constructive-structure review."
+    },
+    {
+      "path": "docs/M3-006_HANDOFF.md",
+      "kind": "new-clean-room",
+      "origin": "independently authored from D-043/D-045 and updated with the exact M3-006 first-ref evidence plus branch-object-bound pull-request CI/security runs 31594128100/31594128139",
+      "copyrightHolderOrSourceAuthority": "Elliot Wu",
+      "license": {
+        "spdxExpression": "MIT"
+      },
+      "reviewedOn": "2026-08-12",
+      "thirdPartyDependencies": [],
+      "privateInformationReview": {
+        "status": "passed",
+        "notes": "Records only approved public repository/OID and aggregate launch facts; no raw log, API response, token, credential, private path, private/local hostname, private fixture, or ignored output."
       },
       "projectConstantCleanup": {
         "status": "passed",
@@ -1070,13 +1070,13 @@
       },
       "publicConformance": {
         "status": "applicable",
-        "notes": "Records the verified empty public repository/PVR and canonical repository-bound package authority; Node 22/24 each pass 1217/1217, package-stage passes 24/24, and npm 10/11 builds pass. Final commit/history/exact HTTPS push/remote equality remain; no hosted or npm-publication claim is made."
+        "notes": "Records exact first-ref object 410642b668514ab7193212d617cc0f8acb837924, the 14-commit/505-leaf/7,698,368-byte/28-identity zero-finding scan, canonical HTTPS transport, and remote equality."
       },
       "independentReview": {
         "status": "passed",
-        "notes": "A bounded D-045 current-byte security/code review reported 0 blocker, 0 high, and 0 medium; it confirmed the exact repository tuple and directory/protocol mutations, npm-private manifests, root-only SBOM projection, plan-fingerprint recovery, launch state machine, and 25-path provenance relation."
+        "notes": "Bounded final state/provenance review reports 0 blocker, 0 high, and 0 medium and confirms historical preflight is not presented as current state."
       },
-      "notes": "D-045 records the real empty public GitHub shell, positive PVR status, exact repository-bound package metadata, separate npm-private guard, completed dual-runtime/package evidence, and pending final commit/history/exact-push gates; no local remote, source ref, hosted result, or npm publication is claimed."
+      "notes": "M3-006 is complete; this does not claim npm publication, complete hosted-platform evidence, support, or release."
     },
     {
       "path": "docs/M3_LINUS_AUDIT.md",
@@ -1104,21 +1104,21 @@
         "status": "passed",
         "notes": "One bounded read-only challenge reported 3 blocker, 3 high, and 2 medium planning findings; D-035 incorporates them plus the main audit's redundant output authority and missing onboarding metadata findings."
       },
-      "notes": "Compaction-persistent five-layer M3 audit and candidate-alpha execution order; D-036 and D-037 completed the project-spine and exact-render steps while honest QA remains open."
+      "notes": "Compaction-persistent five-layer M3 audit and candidate-alpha execution order; D-036 and D-037 completed the project-spine and exact-render steps, and D-038 later completed honest blocked QA without changing the audit's fail-closed QA constraint."
     },
     {
       "path": "docs/NAME_AVAILABILITY.md",
       "kind": "new-clean-room",
-      "origin": "user-directed clean-room project planning; D-045 updates these current bytes from the verified empty public GitHub repository and repository-bound package authority",
+      "origin": "user-directed clean-room naming record updated with the completed M3-006 exact first-ref state while preserving dated availability observations",
       "copyrightHolderOrSourceAuthority": "Elliot Wu",
       "license": {
         "spdxExpression": "MIT"
       },
-      "reviewedOn": "2026-08-11",
+      "reviewedOn": "2026-08-12",
       "thirdPartyDependencies": [],
       "privateInformationReview": {
         "status": "passed",
-        "notes": "D-045 adds only the approved public owner/repository, numeric GitHub repository ID, canonical public URLs, aggregate status facts, and repository-owned synthetic evidence. It contains no token or credential; no private/local hostname or absolute/private path; no unapproved account or Git remote configuration; and no private fixture, source presentation, raw API transcript, or ignored artifact."
+        "notes": "Records only approved public repository/OID and dated public availability facts; no raw log, API response, token, credential, private path, private/local hostname, private fixture, or ignored output."
       },
       "projectConstantCleanup": {
         "status": "passed",
@@ -1126,13 +1126,13 @@
       },
       "publicConformance": {
         "status": "not-applicable",
-        "notes": "Records the verified empty public repository/PVR and canonical repository-bound package authority; Node 22/24 each pass 1217/1217, package-stage passes 24/24, and npm 10/11 builds pass. Final commit/history/exact HTTPS push/remote equality remain; no hosted or npm-publication claim is made."
+        "notes": "Naming and current repository-state record only; npm observations remain time-bounded and reserve nothing."
       },
       "independentReview": {
         "status": "passed",
-        "notes": "A bounded D-045 current-byte security/code review reported 0 blocker, 0 high, and 0 medium; it confirmed the exact repository tuple and directory/protocol mutations, npm-private manifests, root-only SBOM projection, plan-fingerprint recovery, launch state machine, and 25-path provenance relation."
+        "notes": "Bounded final state/provenance review reports 0 blocker, 0 high, and 0 medium after the stale empty-repository claim was replaced by the exact first-ref fact."
       },
-      "notes": "D-045 records the real empty public GitHub shell, positive PVR status, exact repository-bound package metadata, separate npm-private guard, completed dual-runtime/package evidence, and pending final commit/history/exact-push gates; no local remote, source ref, hosted result, or npm publication is claimed."
+      "notes": "The selected repository now has the exact M3-006 first ref; no npm reservation, trademark clearance, or npm-publication claim is created."
     },
     {
       "path": "docs/OPEN_SOURCE_READINESS.md",
@@ -1277,7 +1277,7 @@
     {
       "path": "docs/PROVENANCE_LEDGER.md",
       "kind": "new-clean-room",
-      "origin": "repository-owned clean-room provenance ledger updated through accepted D-043 and the local M3-006 reachable-history preflight; D-045 updates these current bytes from the verified empty public GitHub repository and repository-bound package authority",
+      "origin": "repository-owned clean-room provenance ledger updated with completed M3-006, the Windows diagnostic runs, branch-object-bound six-cell pull-request run 31594128100, security run 31594128139, the public visibility/dependency-graph transition, user-required D-046/D-047 document and governance decisions, and the exact 29-path portability/evidence follow-up",
       "copyrightHolderOrSourceAuthority": "Elliot Wu",
       "license": {
         "spdxExpression": "MIT"
@@ -1294,27 +1294,27 @@
       },
       "publicConformance": {
         "status": "not-applicable",
-        "notes": "The D-045 human ledger lists the exact 25-path set, repository/PVR/binding, final dual-runtime package evidence, live-claim correction, and pending commit/history/exact-push transition."
+        "notes": "The human ledger entry lists the exact 29-path relation, completed M3-006 facts, six-cell pull-request CI bound to historical branch object 94b5c1c, the exact historical executable-object boundary, and final frozen-byte 216/24/1228 dual-runtime plus npm 10/11 local evidence without promoting release claims."
       },
       "independentReview": {
         "status": "passed",
-        "notes": "Bounded D-045 and claim-race closing reviews reported 0 blocker, 0 high, and 0 medium and confirmed the 25-path relation plus final claim/release ownership semantics."
+        "notes": "Final frozen-byte execution passes under both admitted Node/npm pairs; the current exact 29-path relation now awaits only its bounded closing review and new pull-request-head hosted verification."
       },
-      "notes": "Human provenance through D-045; repository/PVR/binding and dual-runtime package evidence are complete while the final commit/history/exact-push transition remains pending."
+      "notes": "Human provenance through completed M3-006 and partial M3-004B; final frozen-byte local evidence passes, historical branch object 94b5c1c has six-cell pull-request CI and Dependency Review, and the next PR head plus accepted-main CI/CodeQL remain open."
     },
     {
       "path": "docs/RELEASE_GATES.md",
       "kind": "new-clean-room",
-      "origin": "repository-owned release gates updated through D-043's reachable-history admission and exact-first-ref boundary; D-045 updates these current bytes from the verified empty public GitHub repository and repository-bound package authority",
+      "origin": "repository-owned release gates updated with completed M3-006 and branch-object-bound M3-004B pull-request CI/security runs 31594128100/31594128139",
       "copyrightHolderOrSourceAuthority": "Elliot Wu",
       "license": {
         "spdxExpression": "MIT"
       },
-      "reviewedOn": "2026-08-11",
+      "reviewedOn": "2026-08-12",
       "thirdPartyDependencies": [],
       "privateInformationReview": {
         "status": "passed",
-        "notes": "D-045 adds only the approved public owner/repository, numeric GitHub repository ID, canonical public URLs, aggregate status facts, and repository-owned synthetic evidence. It contains no token or credential; no private/local hostname or absolute/private path; no unapproved account or Git remote configuration; and no private fixture, source presentation, raw API transcript, or ignored artifact."
+        "notes": "Records only approved public repository/OID, public run identifiers, and aggregate hosted conclusions; no raw log, API response, token, credential, private path, private/local hostname, private fixture, or ignored output."
       },
       "projectConstantCleanup": {
         "status": "passed",
@@ -1322,13 +1322,13 @@
       },
       "publicConformance": {
         "status": "not-applicable",
-        "notes": "Records the verified empty public repository/PVR and canonical repository-bound package authority; Node 22/24 each pass 1217/1217, package-stage passes 24/24, and npm 10/11 builds pass. Final commit/history/exact HTTPS push/remote equality remain; no hosted or npm-publication claim is made."
+        "notes": "Release-gate status only: M3-006 is complete, but M3-004B/M3-005B remain open and no support or release promotion occurs."
       },
       "independentReview": {
         "status": "passed",
-        "notes": "A bounded D-045 current-byte security/code review reported 0 blocker, 0 high, and 0 medium; it confirmed the exact repository tuple and directory/protocol mutations, npm-private manifests, root-only SBOM projection, plan-fingerprint recovery, launch state machine, and 25-path provenance relation."
+        "notes": "Bounded final state/provenance review reports 0 blocker, 0 high, and 0 medium after current and historical gate states were separated."
       },
-      "notes": "D-045 records the real empty public GitHub shell, positive PVR status, exact repository-bound package metadata, separate npm-private guard, completed dual-runtime/package evidence, and pending final commit/history/exact-push gates; no local remote, source ref, hosted result, or npm publication is claimed."
+      "notes": "G5/M3-004B remains partial after six-cell pull-request CI and Dependency Review passed for historical branch object 94b5c1c because the next PR head and accepted-main CI/CodeQL remain missing; M3-005B remains blocked."
     },
     {
       "path": "docs/REPRODUCIBILITY.md",
@@ -1361,12 +1361,12 @@
     {
       "path": "docs/SUPPORT_MATRIX.md",
       "kind": "new-clean-room",
-      "origin": "repository-owned support summary maintained during M3-005A to correct stale exact-QA/formula wording while keeping every status and the global claim switch unchanged",
+      "origin": "repository-owned support summary maintained through M3-005A and branch-object-bound pull-request run 31594128100 while keeping every status and the global claim switch unchanged",
       "copyrightHolderOrSourceAuthority": "Elliot Wu",
       "license": {
         "spdxExpression": "MIT"
       },
-      "reviewedOn": "2026-08-11",
+      "reviewedOn": "2026-08-12",
       "thirdPartyDependencies": [],
       "privateInformationReview": {
         "status": "passed",
@@ -1378,13 +1378,13 @@
       },
       "publicConformance": {
         "status": "applicable",
-        "notes": "The 60-row matrix remains 0 supported, 22 experimental, 3 manual, and 35 unsupported; exact D-038 blocked QA is distinguished from unavailable generic commands, and no local evidence promotes a row."
+        "notes": "The 60-row matrix remains 0 supported, 22 experimental, 3 manual, and 35 unsupported; pull-request CI passed all six platform/runtime cells for historical branch object 94b5c1c, but the next PR head and accepted-main evidence remain pending and no platform fact alone promotes a row."
       },
       "independentReview": {
         "status": "passed",
-        "notes": "Prior support review remains closed; bounded M3-005A review corrected stale CLI/QA and formula statements without changing any disposition or claim switch."
+        "notes": "Prior support review remains closed; the current evidence correction changes no disposition, evidence level, count, or global claim switch and awaits final cross-document review."
       },
-      "notes": "Repository-owned support boundary through the M3-005A wording correction; exact candidate/platform rows remain experimental, hosted evidence remains unavailable, and arbitrary input/delivery remain unavailable."
+      "notes": "Repository-owned support boundary through six-cell pull-request evidence bound to historical branch object 94b5c1c; platform rows remain experimental and the next PR head, accepted-main M3-004B evidence, plus arbitrary input/delivery remain unavailable."
     },
     {
       "path": "docs/THREAT_MODEL.md",
@@ -3416,8 +3416,8 @@
         "spdxExpression": "MIT"
       },
       "thirdPartyDependencies": [],
-      "origin": "independently authored from the M2-004 repository contract, existing public dispatcher and secure ZIP/XML APIs, public ECMA-376 structures, documented Node.js process APIs, and official Pandoc behavior; no predecessor or upstream implementation copied",
-      "reviewedOn": "2026-08-05",
+      "origin": "independently authored from the M2-004 repository contract and documented Node child-process lifecycle; updated from the public Windows EBUSY failure where forced termination resolved before close",
+      "reviewedOn": "2026-08-12",
       "privateInformationReview": {
         "status": "passed",
         "notes": "Contains only repository-owned synthetic data, public technical identifiers, normalized version facts, and approved project metadata; no private fixture, path, stderr, or presentation content is admitted."
@@ -3428,13 +3428,13 @@
       },
       "publicConformance": {
         "status": "applicable",
-        "notes": "Covered by the 115-node focused adapter suite, 330-node strict dispatcher/resolver/native/formula/support focus, and 738-node full dual-Node run; the emitted fragment remains unbound and non-insertable."
+        "notes": "First-ref evidence is retained as historical. The latest correction passes current dual-runtime local/package evidence and corrected six-cell pull-request CI."
       },
       "independentReview": {
         "status": "passed",
-        "notes": "The bounded M2-004 closing review's relationship-profile high and content-type medium were fixed with exact mappings and 10 regression subtests; bounded re-review found no remaining blocker or high finding."
+        "notes": "Bounded current-byte review reports 0 blocker, 0 high, and 0 medium: forced outcome freezes first, stream data is ignored while terminating, and resolution waits for child close."
       },
-      "notes": "Repository-owned adapter source; no package manifest is added before M3-002 and no converter binary or output is tracked."
+      "notes": "Repository-owned adapter runner; no Windows-only product branch, converter binary, raw process output, or support promotion is added."
     },
     {
       "path": "packages/adapter-pandoc-omml/src/pandoc-omml-adapter.mjs",
@@ -3465,14 +3465,14 @@
       "notes": "Repository-owned adapter source; no package manifest is added before M3-002 and no converter binary or output is tracked."
     },
     {
-      "path": "packages/cli/bin/pptx-compiler.mjs",
+      "path": "packages/cli/pptx-compiler.mjs",
       "kind": "new-clean-room",
-      "origin": "independently authored from D-039 as the minimal installed candidate-alpha process entry; D-044 applies the user-selected pre-public identity migration from the same repository-owned authority",
+      "origin": "independently authored from D-039 as the minimal installed candidate-alpha process entry, moved to the package root after the hosted Windows npm tar-mode failure exposed pacote's nested-bin mode mismatch",
       "copyrightHolderOrSourceAuthority": "Elliot Wu",
       "license": {
         "spdxExpression": "MIT"
       },
-      "reviewedOn": "2026-08-11",
+      "reviewedOn": "2026-08-12",
       "thirdPartyDependencies": [],
       "privateInformationReview": {
         "status": "passed",
@@ -3480,17 +3480,17 @@
       },
       "projectConstantCleanup": {
         "status": "passed",
-        "notes": "No repository root, private fixture, PowerPoint, lab, OMML, ordered, or final-delivery authority is present. D-044 changes only active public identity to the single pptx-compiler stem; neutral protocol facts remain owned here."
+        "notes": "No repository root, private fixture, PowerPoint, lab, OMML, ordered, or final-delivery authority is present. One package-root executable avoids a second wrapper or post-pack archive rewrite."
       },
       "publicConformance": {
         "status": "applicable",
-        "notes": "The package gate locks the exact bin path and executable mode; CLI spine tests cover its delegated behavior."
+        "notes": "The package gate locks the exact package-root bin path and 0755 tar mode; CLI spine tests cover its delegated behavior under both admitted Node/npm pairs."
       },
       "independentReview": {
         "status": "passed",
-        "notes": "Two bounded D-044 current-byte closing reviews reported 0 blocker, 0 high, and 0 medium; they confirmed the single active public identity, exact package and contract projections, provenance-set closure, and stable recovery identifiers."
+        "notes": "Two bounded current-byte reviews report 0 blocker, 0 high, and 0 medium for the package-root CLI entry and strict 0755 tar boundary."
       },
-      "notes": "Executable ESM bin for the guarded CLI package. D-044 is an identity-only pre-public migration; no external source or compatibility alias was added."
+      "notes": "Executable ESM bin for the guarded CLI package; the source and staged package now share one relative layout."
     },
     {
       "path": "packages/cli/src/cli.mjs",
@@ -4050,7 +4050,7 @@
         "status": "passed",
         "notes": "Two bounded D-044 current-byte closing reviews reported 0 blocker, 0 high, and 0 medium; they confirmed the single active public identity, exact package and contract projections, provenance-set closure, and stable recovery identifiers."
       },
-      "notes": "Target-specific typed OMML applicator with a source-preserving product entry, native Office choice, and editable non-raster fallback. Structural artifacts remain non-deliverable by themselves; real-Pandoc coverage, human formula-content editability, arbitrary targets, and support remain unavailable. D-044 is an identity-only pre-public migration; no external source or compatibility alias was added."
+      "notes": "Target-specific typed OMML applicator with a source-preserving product entry, native Office choice, and editable non-raster fallback. D-032 records a feature-level edit observation, but it does not authorize this direct artifact; an exact direct-candidate receipt, real-Pandoc coverage, arbitrary targets, and support remain unavailable. D-044 is an identity-only pre-public migration; no external source or compatibility alias was added."
     },
     {
       "path": "packages/core/src/native-presentation-publication.mjs",
@@ -4727,12 +4727,12 @@
     {
       "path": "packaging/alpha-package-plan.json",
       "kind": "new-clean-room",
-      "origin": "independently authored from D-039, the completed candidate-alpha import closure, and repository-owned assets; D-045 updates these current bytes from the verified empty public GitHub repository and repository-bound package authority",
+      "origin": "independently authored from D-039/D-045 package authority and updated from the hosted Windows npm tar-mode failure to use one canonical package-local bin target",
       "copyrightHolderOrSourceAuthority": "Elliot Wu",
       "license": {
         "spdxExpression": "MIT"
       },
-      "reviewedOn": "2026-08-11",
+      "reviewedOn": "2026-08-12",
       "thirdPartyDependencies": [],
       "privateInformationReview": {
         "status": "passed",
@@ -4744,13 +4744,13 @@
       },
       "publicConformance": {
         "status": "applicable",
-        "notes": "Package-plan schema v2 exact-compares the GitHub provider/ID/owner/name/URL tuple and separate npm guard; mutations reject every repository field, package directory reassignment, and guard drift."
+        "notes": "The latest package-root bin mapping has bounded 0/0/0 review, dual-runtime package evidence, and passing corrected Windows hosted cells."
       },
       "independentReview": {
         "status": "passed",
-        "notes": "A bounded D-045 current-byte security/code review reported 0 blocker, 0 high, and 0 medium; it confirmed the exact repository tuple and directory/protocol mutations, npm-private manifests, root-only SBOM projection, plan-fingerprint recovery, launch state machine, and 25-path provenance relation."
+        "notes": "Two bounded current-byte reviews report 0 blocker, 0 high, and 0 medium for the package-root bin projection and unchanged repository/npm guard."
       },
-      "notes": "Normative schema-v2 repository/package authority: one exact GitHub tuple, one separate blocked npm guard, four fixed packages, and no PVR or publication-token field."
+      "notes": "Normative schema-v2 authority retains the exact repository tuple and blocked npm guard; only the CLI bin target spelling changes."
     },
     {
       "path": "plugins/clone-fill/schemas/input.schema.json",
@@ -5063,12 +5063,12 @@
     {
       "path": "policy/forbidden-materials.json",
       "kind": "new-clean-room",
-      "origin": "M0-004 clean-room policy extended through D-041's preinstall shrinkwrap and Git-index executable-authority controls; D-044 applies the user-selected pre-public identity migration from the same repository-owned authority",
+      "origin": "M0-004 clean-room policy extended through D-041's preinstall controls and D-043 history admission; schema v2 keeps the new current CLI path separate from one exact retired path/blob object after the hosted Windows bin migration",
       "copyrightHolderOrSourceAuthority": "Elliot Wu",
       "license": {
         "spdxExpression": "MIT"
       },
-      "reviewedOn": "2026-08-11",
+      "reviewedOn": "2026-08-12",
       "thirdPartyDependencies": [],
       "privateInformationReview": {
         "status": "passed",
@@ -5076,27 +5076,27 @@
       },
       "projectConstantCleanup": {
         "status": "passed",
-        "notes": "No predecessor-specific identifiers or conditions are present. D-044 changes only active public identity to the single pptx-compiler stem; neutral protocol facts remain owned here."
+        "notes": "Current executable admission contains only the package-root CLI path. The retired nested path is bound to one already-public blob OID for non-tip history only; it is not a current compatibility alias."
       },
       "publicConformance": {
         "status": "applicable",
-        "notes": "Exercised by 41 current policy-gate nodes, including install/executable authority and compile-time rejection of every text/copyright path-exception representation."
+        "notes": "Executable tests cover current index/working admission plus exact non-tip historical path/OID matching, tip replay, path/OID drift, content-rule preservation, schema rejection, and Git-native null-device handling."
       },
       "independentReview": {
         "status": "passed",
-        "notes": "Two bounded D-044 current-byte closing reviews reported 0 blocker, 0 high, and 0 medium; they confirmed the single active public identity, exact package and contract projections, provenance-set closure, and stable recovery identifiers."
+        "notes": "Two bounded current-byte reviews report 0 blocker, 0 high, and 0 medium for the schema-v2 executable split and Windows portability correction."
       },
-      "notes": "Normative versioned forbidden-material policy. D-044 is an identity-only pre-public migration; no external source or compatibility alias was added."
+      "notes": "Normative versioned forbidden-material policy with one current executable path and one exact retired historical object; no external source or live compatibility alias is added."
     },
     {
       "path": "policy/support-matrix.json",
       "kind": "new-clean-room",
-      "origin": "repository-owned support matrix maintained during M3-005A to correct stale formula and platform limitation text while preserving all dispositions and the false global claim switch",
+      "origin": "repository-owned support matrix maintained through M3-005A and branch-object-bound pull-request run 31594128100 while preserving all dispositions, evidence levels, counts, and the false global claim switch",
       "copyrightHolderOrSourceAuthority": "Elliot Wu",
       "license": {
         "spdxExpression": "MIT"
       },
-      "reviewedOn": "2026-08-11",
+      "reviewedOn": "2026-08-12",
       "thirdPartyDependencies": [],
       "privateInformationReview": {
         "status": "passed",
@@ -5108,18 +5108,18 @@
       },
       "publicConformance": {
         "status": "applicable",
-        "notes": "The 60-row matrix is 0 supported, 22 experimental, 3 manual, and 35 unsupported; the exact candidate and blocked-QA closure has executable evidence while arbitrary input, passed visual/PowerPoint QA, delivery, and global claims remain unavailable/false."
+        "notes": "The 60-row matrix remains 0 supported, 22 experimental, 3 manual, and 35 unsupported; six pull-request platform cells passed for historical branch object 94b5c1c, the next PR head and accepted-main evidence remain pending, and arbitrary input, delivery, and global claims remain unavailable/false."
       },
       "independentReview": {
         "status": "passed",
-        "notes": "Prior support reviews remain closed; bounded M3-005A review corrected formula-roadmap and platform-row contradictions without promoting a status, evidence level, or global claim."
+        "notes": "Prior support reviews remain closed; the current platform-basis correction promotes no status, evidence level, count, or global claim and awaits final cross-document review."
       },
-      "notes": "Repository-owned support policy through the M3-005A wording correction; supportClaimsEnabled remains false and counts stay 0/22/3/35."
+      "notes": "Repository-owned support policy through six-cell pull-request CI bound to historical branch object 94b5c1c; supportClaimsEnabled remains false, counts stay 0/22/3/35, and the next PR head plus accepted-main M3-004B evidence remain pending."
     },
     {
       "path": "provenance/records.json",
       "kind": "new-clean-room",
-      "origin": "M0-004 machine-readable provenance source refreshed for the 267-file working tree through accepted D-043 and local M3-006 history preflight; D-045 updates these current bytes from the verified empty public GitHub repository and repository-bound package authority",
+      "origin": "M0-004 machine-readable provenance source refreshed for all 267 admitted files, branch-object-bound pull-request CI/security runs 31594128100/31594128139, the public visibility/dependency-graph transition, user-required D-046/D-047 decisions, and the exact 29-path M3-006/M3-004B portability/evidence follow-up",
       "copyrightHolderOrSourceAuthority": "Elliot Wu",
       "license": {
         "spdxExpression": "MIT"
@@ -5128,7 +5128,7 @@
       "thirdPartyDependencies": [],
       "privateInformationReview": {
         "status": "passed",
-        "notes": "D-045 adds only the approved public owner/repository, numeric GitHub repository ID, canonical public URLs, aggregate status facts, and repository-owned synthetic evidence. It contains no token or credential; no private/local hostname or absolute/private path; no unapproved account or Git remote configuration; and no private fixture, source presentation, raw API transcript, or ignored artifact."
+        "notes": "Records only approved public repository/OID, public run identifiers, aggregate hosted conclusions, and repository-owned regressions; no raw log, API response, token, credential, private path, private/local hostname, private fixture, external implementation, or ignored output."
       },
       "projectConstantCleanup": {
         "status": "passed",
@@ -5136,13 +5136,13 @@
       },
       "publicConformance": {
         "status": "applicable",
-        "notes": "Machine provenance covers all 267 admitted files; D-045 records final 1217/1217 dual-runtime, dual-runtime 24/24 package-stage, npm 10/11 package evidence, and the live-claim/release correction without claiming npm publication."
+        "notes": "Machine provenance covers all 267 admitted files and the exact 29-path current slice. Final frozen-byte Node 22/24 full and package-stage suites plus npm 10/11 guarded build, offline-install, and smoke evidence pass; new pull-request-head hosted evidence remains a merge prerequisite, and accepted-main CI/CodeQL remain separate."
       },
       "independentReview": {
         "status": "passed",
-        "notes": "Bounded D-045 and claim-race closing reviews reported 0 blocker, 0 high, and 0 medium and confirmed the exact 25-path relation and final ownership classification."
+        "notes": "Two bounded code reviews report 0 blocker, 0 high, and 0 medium for the executable Windows correction; final frozen-byte execution passes and the expanded current documentation/evidence slice awaits one bounded closing review."
       },
-      "notes": "Machine-readable provenance for all 267 files; D-045 local repository/package evidence is complete and the final commit/history/exact-push transition remains open."
+      "notes": "Machine-readable provenance through completed M3-006 and partial M3-004B; final frozen-byte local execution passes, historical branch object 94b5c1c has six-cell pull-request CI and Dependency Review, and the next PR head, accepted-main CI/CodeQL, npm publication, and release remain open."
     },
     {
       "path": "sbom.alpha.cdx.json",
@@ -5595,12 +5595,12 @@
     {
       "path": "scripts/check-forbidden-materials.mjs",
       "kind": "new-clean-room",
-      "origin": "M0-004 clean-room scanner extended by D-043 with one bounded reachable-history mode that reuses the same compiled forbidden-material policy",
+      "origin": "M0-004/D-043 clean-room scanner updated from hosted Git-for-Windows failures to accept strict LF/CRLF text, use Git's `/dev/null` pathname, and keep current versus exact historical executable admission in one tip-owned schema-v2 policy",
       "copyrightHolderOrSourceAuthority": "Elliot Wu",
       "license": {
         "spdxExpression": "MIT"
       },
-      "reviewedOn": "2026-08-11",
+      "reviewedOn": "2026-08-12",
       "thirdPartyDependencies": [],
       "privateInformationReview": {
         "status": "passed",
@@ -5612,13 +5612,13 @@
       },
       "publicConformance": {
         "status": "applicable",
-        "notes": "Forty-nine policy test nodes cover index/working-tree behavior plus stable history output, raw-parent/tree traversal, repository/common-directory and case-variant environment redirection, BOM/control/high-bit tree grammar, forced-error quiet fsck, committed-then-deleted content, messages, identity drift, symlink mode, oversized blobs, and tip-policy authority."
+        "notes": "Tests exact-compare LF/CRLF capability output, reject stray CR, bind Git's `/dev/null`, and exercise current, tip, and exact non-tip historical executable admission without weakening content checks."
       },
       "independentReview": {
         "status": "passed",
-        "notes": "Earlier tree/tar reviews remain closed; bounded D-043 closing reviews report 0 blocker, 0 high, and 0 medium after environment-selection, transient-shallow, raw-tree, and fsck-configuration bypasses were fixed and reproduced."
+        "notes": "Two bounded current-byte reviews report 0 blocker, 0 high, and 0 medium; Git environment/history/redaction boundaries remain fail closed."
       },
-      "notes": "Fail-closed index, working-tree, and fixed-main history gate plus pure compiled policy helpers; only path rules can carry exact path exceptions."
+      "notes": "Fail-closed index/working-tree/history gate; parsed fsck keys remain strict, sorted, unique, and exclude fsck.skipList, while historical executable grants require exact non-tip path/OID identity."
     },
     {
       "path": "scripts/check-package-plan.mjs",
@@ -5882,16 +5882,16 @@
     {
       "path": "scripts/lib/package-plan.mjs",
       "kind": "new-clean-room",
-      "origin": "independently authored from D-039/D-040 package authority and extended in D-041 with canonical plan bytes, parser-proven staged static ESM edges, and cross-platform source-mode ownership; D-045 updates these current bytes from the verified empty public GitHub repository and repository-bound package authority",
+      "origin": "independently authored D-039/D-045 package authority updated from the hosted Windows npm bin/tar-mode failure to compare the canonical package-local target",
       "copyrightHolderOrSourceAuthority": "Elliot Wu",
       "license": {
         "spdxExpression": "MIT"
       },
-      "reviewedOn": "2026-08-11",
+      "reviewedOn": "2026-08-12",
       "thirdPartyDependencies": [],
       "privateInformationReview": {
         "status": "passed",
-        "notes": "D-045 adds only the approved public owner/repository, numeric GitHub repository ID, canonical public URLs, aggregate status facts, and repository-owned synthetic evidence. It contains no token or credential; no private/local hostname or absolute/private path; no unapproved account or Git remote configuration; and no private fixture, source presentation, raw API transcript, or ignored artifact."
+        "notes": "Contains only approved public package/repository identities and repository-relative targets; no raw log, token, credential, private path, private/local hostname, private fixture, or ignored output."
       },
       "projectConstantCleanup": {
         "status": "passed",
@@ -5899,18 +5899,18 @@
       },
       "publicConformance": {
         "status": "applicable",
-        "notes": "The current package-plan suite covers canonical schema v2 bytes, exact repository binding and directories, separate npm guard, fixed profiles, staged static-ESM edges, and reviewed-source loader hardening."
+        "notes": "The package-root mapping has bounded 0/0/0 review, dual-runtime package evidence, and passing corrected Windows hosted cells."
       },
       "independentReview": {
         "status": "passed",
-        "notes": "A bounded D-045 current-byte security/code review reported 0 blocker, 0 high, and 0 medium; it confirmed the exact repository tuple and directory/protocol mutations, npm-private manifests, root-only SBOM projection, plan-fingerprint recovery, launch state machine, and 25-path provenance relation."
+        "notes": "Two bounded current-byte reviews report 0 blocker, 0 high, and 0 medium for the package-root mapping and unchanged release/repository guards."
       },
-      "notes": "Dependency-free canonical package-plan authority with exact D-045 repository binding and separate npm guard; the legacy plan ID remains recovery identity only."
+      "notes": "Dependency-free package authority with canonical package-root `pptx-compiler.mjs`; repository binding and npm-private guard are unchanged."
     },
     {
       "path": "scripts/lib/package-stage.mjs",
       "kind": "new-clean-room",
-      "origin": "independently authored from D-040's exact package stage, D-041 portability controls, and D-045 repository binding; the final correction derives from an observed Node 24 live-claim classification race",
+      "origin": "independently authored from D-040's exact package stage, D-041 portability controls, and D-045 repository binding; current bytes also project the package-root CLI entry required by the hosted Windows npm tar-mode correction",
       "copyrightHolderOrSourceAuthority": "Elliot Wu",
       "license": {
         "spdxExpression": "MIT"
@@ -5929,11 +5929,11 @@
       },
       "publicConformance": {
         "status": "applicable",
-        "notes": "The fixed-copy 24-node suite passes under Node 22/24 and covers plan fingerprints, repository-bound private manifests, four real tgz files, offline installed smoke, recovery/deletion authority, live foreign candidates, and release ownership transfer."
+        "notes": "The fixed-copy suite passes 24/24 under both runtimes and covers plan fingerprints, repository-bound private manifests, four real tgz files, package-root installed-bin smoke, recovery/deletion authority, live foreign candidates, and release ownership transfer."
       },
       "independentReview": {
         "status": "passed",
-        "notes": "Two bounded claim-race closing reviews report 0 blocker, 0 high, and 0 medium; foreign-live, exact-own, dead cleanup, disappearing marker, release transfer, and test deletion boundaries were checked."
+        "notes": "Two bounded current-byte reviews report 0 blocker, 0 high, and 0 medium for the package-root install path and retained stage safety boundaries."
       },
       "notes": "Local ignored transaction with schema-v2 plan binding and fail-closed live-claim classification; unlinking the authenticated active marker is the release point."
     },
@@ -6082,7 +6082,7 @@
         "status": "passed",
         "notes": "Two bounded D-044 current-byte closing reviews reported 0 blocker, 0 high, and 0 medium; they confirmed the single active public identity, exact package and contract projections, provenance-set closure, and stable recovery identifiers."
       },
-      "notes": "Private-workspace CLI entry point pending publishable bin/package metadata in M3-002. D-044 is an identity-only pre-public migration; no external source or compatibility alias was added."
+      "notes": "Private-workspace compatibility entry point. Publishable package-bin authority belongs to packages/cli/pptx-compiler.mjs and the guarded package plan; npm publication remains blocked. D-044 is an identity-only pre-public migration; no external source or compatibility alias was added."
     },
     {
       "path": "scripts/record-omml-formula-content-edit.mjs",
@@ -6404,12 +6404,12 @@
     {
       "path": "tests/create-only-assembly.test.mjs",
       "kind": "new-clean-room",
-      "origin": "independently authored M2-005A tests from repository contracts and repository-owned text-derived synthetic package fixtures",
+      "origin": "independently authored M2-005A synthetic tests updated from the hosted Windows failure caused by a POSIX-only absolute test path",
       "copyrightHolderOrSourceAuthority": "Elliot Wu",
       "license": {
         "spdxExpression": "MIT"
       },
-      "reviewedOn": "2026-08-07",
+      "reviewedOn": "2026-08-12",
       "thirdPartyDependencies": [],
       "privateInformationReview": {
         "status": "passed",
@@ -6421,13 +6421,13 @@
       },
       "publicConformance": {
         "status": "applicable",
-        "notes": "Seven tests cover real PPTX assembly, deterministic bytes, unsupported targets, exact source facts, pre-copy resource limits, and create-only atomic publication."
+        "notes": "The platform-absolute pre-copy limit regression and the current 1228-node complete suite pass under both admitted Node lines."
       },
       "independentReview": {
         "status": "passed",
-        "notes": "Bounded M2-005 closing re-review found no remaining blocker, high, or medium finding; 34/34 focused tests passed."
+        "notes": "Bounded current-byte review reports 0 blocker, 0 high, and 0 medium; only test data changed and product validation order remains intact."
       },
-      "notes": "Public synthetic conformance tests for the deliberately narrow M2-005A backend."
+      "notes": "Public synthetic test now derives an absolute destination from the host path API rather than assuming POSIX root syntax."
     },
     {
       "path": "tests/design-planning.test.mjs",
@@ -6740,16 +6740,16 @@
     {
       "path": "tests/package-plan.test.mjs",
       "kind": "new-clean-room",
-      "origin": "independently authored from D-039 package metadata, facade, resource, import-closure, and adversarial requirements; D-045 updates these current bytes from the verified empty public GitHub repository and repository-bound package authority",
+      "origin": "independently authored D-039/D-045 package regressions updated to lock the canonical package-local CLI bin spelling exposed by hosted Windows",
       "copyrightHolderOrSourceAuthority": "Elliot Wu",
       "license": {
         "spdxExpression": "MIT"
       },
-      "reviewedOn": "2026-08-11",
+      "reviewedOn": "2026-08-12",
       "thirdPartyDependencies": [],
       "privateInformationReview": {
         "status": "passed",
-        "notes": "D-045 adds only the approved public owner/repository, numeric GitHub repository ID, canonical public URLs, aggregate status facts, and repository-owned synthetic evidence. It contains no token or credential; no private/local hostname or absolute/private path; no unapproved account or Git remote configuration; and no private fixture, source presentation, raw API transcript, or ignored artifact."
+        "notes": "Uses only approved public package identities and repository-owned mutations; no raw log, token, credential, private path, private/local hostname, private fixture, or ignored output."
       },
       "projectConstantCleanup": {
         "status": "passed",
@@ -6757,18 +6757,18 @@
       },
       "publicConformance": {
         "status": "applicable",
-        "notes": "The current 33-node file passes within the 59-node package-plan/release focus and rejects repository tuple, directory, guard, profile, source-graph, and canonical-plan drift."
+        "notes": "The file locks exact package-root `pptx-compiler.mjs` spelling, source/target mapping, and runtime dependency closure; guarded package builds must retain tar mode 0755."
       },
       "independentReview": {
         "status": "passed",
-        "notes": "A bounded D-045 current-byte security/code review reported 0 blocker, 0 high, and 0 medium; it confirmed the exact repository tuple and directory/protocol mutations, npm-private manifests, root-only SBOM projection, plan-fingerprint recovery, launch state machine, and 25-path provenance relation."
+        "notes": "Two bounded current-byte reviews report 0 blocker, 0 high, and 0 medium for the package-root mapping and strict final tar-mode authority."
       },
-      "notes": "D-045 package-plan/repository/guard conformance and mutation evidence using only repository-owned readable inputs."
+      "notes": "Canonical-bin regression preserves repository binding, npm-private guard, and strict final tar-mode authority."
     },
     {
       "path": "tests/package-stage.test.mjs",
       "kind": "new-clean-room",
-      "origin": "independently authored D-040 fixed-stage conformance, updated by D-045 for repository binding and the observed Node 24 live-claim classification regression",
+      "origin": "independently authored D-040 fixed-stage conformance, updated by D-045 for repository binding, live-claim classification, and the hosted Windows package-root bin/install regression",
       "copyrightHolderOrSourceAuthority": "Elliot Wu",
       "license": {
         "spdxExpression": "MIT"
@@ -6785,11 +6785,11 @@
       },
       "publicConformance": {
         "status": "applicable",
-        "notes": "The fixed-copy 24-node file passes under Node 22/24 and covers repository-bound tarballs, completion drift, exact active contention, a zero-byte foreign live candidate that remains preserved, and precise test-owned quarantine cleanup."
+        "notes": "The fixed-copy file passes 24/24 under both runtimes and covers repository-bound tarballs, completion drift, exact active contention, a zero-byte foreign live candidate, precise test-owned cleanup, and exact package-root manifest/install mapping."
       },
       "independentReview": {
         "status": "passed",
-        "notes": "Two bounded claim-race closing reviews report 0 blocker, 0 high, and 0 medium and confirm that the regression stays strict while cleanup deletes only exact test-owned bytes."
+        "notes": "Two bounded current-byte reviews report 0 blocker, 0 high, and 0 medium for the root-bin assertion and unchanged stage safety boundaries."
       },
       "notes": "D-045 fixed-stage conformance covering repository-bound private tarballs, plan-fingerprint recovery, and deterministic live-claim classification."
     },
@@ -6824,12 +6824,12 @@
     {
       "path": "tests/policy-gates.test.mjs",
       "kind": "new-clean-room",
-      "origin": "M0-004 clean-room gate tests extended through D-043's reachable-history and tip-policy regressions; D-044 applies the user-selected pre-public identity migration from the same repository-owned authority",
+      "origin": "M0-004/D-043 clean-room gate tests updated with strict LF/CRLF parsing, Git's `/dev/null`, and schema-v2 exact historical executable-object regressions from hosted Windows failures",
       "copyrightHolderOrSourceAuthority": "Elliot Wu",
       "license": {
         "spdxExpression": "MIT"
       },
-      "reviewedOn": "2026-08-11",
+      "reviewedOn": "2026-08-12",
       "thirdPartyDependencies": [],
       "privateInformationReview": {
         "status": "passed",
@@ -6841,13 +6841,13 @@
       },
       "publicConformance": {
         "status": "applicable",
-        "notes": "Forty-nine current test nodes retain every index/working-tree policy regression and add eight history cases for stable positive output, deleted forbidden content, repository/common-directory and case-variant environment redirection, BOM/control/high-bit tree grammar, forced-error fsck warnings, message leakage, identity drift, symlink mode, and oversized content."
+        "notes": "Current nodes retain all prior gates and additionally lock LF/CRLF equivalence, Git's `/dev/null`, current/index/working/tip rejection, exact non-tip path/OID admission, content-rule preservation, and malformed-policy rejection."
       },
       "independentReview": {
         "status": "passed",
-        "notes": "Two bounded D-044 current-byte closing reviews reported 0 blocker, 0 high, and 0 medium; they confirmed the single active public identity, exact package and contract projections, provenance-set closure, and stable recovery identifiers."
+        "notes": "Two bounded current-byte reviews report 0 blocker, 0 high, and 0 medium; the temporary regressions are self-contained and preserve history/redaction boundaries."
       },
-      "notes": "Dependency-free mutation tests using isolated temporary Git repositories; no remote, package-stage, or publication operation is exercised. D-044 is an identity-only pre-public migration; no external source or compatibility alias was added."
+      "notes": "Dependency-free temporary-repository mutations; no remote, package-stage, publication, external implementation, or private input is used."
     },
     {
       "path": "tests/pre-public-docs.test.mjs",
@@ -7020,7 +7020,7 @@
         "status": "passed",
         "notes": "Two bounded D-044 current-byte closing reviews reported 0 blocker, 0 high, and 0 medium; they confirmed the single active public identity, exact package and contract projections, provenance-set closure, and stable recovery identifiers."
       },
-      "notes": "Public-synthetic conformance only. Authenticators are injected test doubles; no real PowerPoint formula-content receipt or real-Pandoc output is tracked, COMPAT-OMML-001 remains pending, and supportClaimsEnabled remains false. D-044 is an identity-only pre-public migration; no external source or compatibility alias was added."
+      "notes": "Public-synthetic conformance only. Authenticators are injected test doubles; D-032 records a feature-level COMPAT-OMML-001 edit observation, but it cannot satisfy this exact direct-candidate receipt. No real-Pandoc output or direct formula-content receipt is tracked, and supportClaimsEnabled remains false. D-044 is an identity-only pre-public migration; no external source or compatibility alias was added."
     },
     {
       "path": "tests/receipt-bound-ordered-final-delivery.test.mjs",

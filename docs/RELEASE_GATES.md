@@ -111,11 +111,23 @@ G4 is not final release evidence yet. M3-004A tracks a deterministic CycloneDX
 ESM edges; the dev-only TypeScript compiler is correctly excluded. This is not
 a sandbox proof against adversarial computed loaders. M3-006 reverified the
 D-045 public target and PVR state, retained the npm-private guard and verified
-repository projection, and completed the repository-bound package gate under
-both admitted runtimes. Public three-platform CI, final published-ref SBOM validation,
-signing, registry provenance, and reviewed-to-published equality remain G5/G6
-work. Source-tree facade tests or successful `npm pack --dry-run` alone never
-satisfy this gate.
+repository projection, completed the repository-bound package gate, and later
+published the exact first source ref. The first public run is only partial
+three-platform evidence: Ubuntu and macOS pass under both Node lines, while
+both Windows cells fail. Later Windows corrections changed package inputs and
+history policy. The fixed-copy correction now passes the 216-node affected
+focus, 24-node package-stage suite, and 1228-node complete suite under both
+admitted Node lines; npm 10/11 each pass the guarded offline package spine. A
+pull-request run `31594128100` passes all six platform/runtime cells for branch
+object `94b5c1c`. After public visibility and the dependency graph were enabled,
+pull-request security run `31594128139` passes Dependency Review while CodeQL
+remains skipped by event design. Those runs are historical evidence bound to
+branch object `94b5c1c`; the next committed PR head needs fresh checks, and
+accepted-main CI/CodeQL remain open.
+Final published-ref SBOM validation,
+signing, registry
+provenance, and reviewed-to-published equality remain G5/G6 work. Source-tree
+facade tests or successful `npm pack --dry-run` alone never satisfy this gate.
 
 ## G5 — Project security and maintenance
 
@@ -131,19 +143,23 @@ M3-004A closes only the local definition half of this gate: exactly two
 canonical workflows, fixed full-SHA actions and hosted-runner labels, read-only
 ordinary CI, isolated CodeQL/Dependency Review permissions, one exact dev
 toolchain, real declaration typecheck, source/import policy, MIT/provenance
-relations, and the static-ESM SBOM projection. M3-004B remains unsatisfied until
-the public remote records all six OS/runtime cells plus the security jobs.
+relations, and the static-ESM SBOM projection. M3-004B remains unsatisfied. Run
+`31559642053` passed Ubuntu 22/24 and macOS 22/24 but failed Windows 22/24;
+security run `31559642035` passed CodeQL while Dependency Review was skipped on
+the push event. Pull-request run `31582316951` again passed Ubuntu/macOS but
+failed Windows on two remaining portability boundaries. Pull-request security
+run `31582316939` then recorded the former private-repository Dependency Review
+failure. After public visibility and the dependency graph were enabled, run
+`31594128139` passed Dependency Review for branch object `94b5c1c`. These
+pull-request runs are historical object-bound evidence; the next committed PR
+head needs fresh CI and Dependency Review, and M3-004B also remains open for
+accepted-main CI/CodeQL evidence.
 M3-005A closes the local vulnerability-reporting, contribution, governance,
 and reproduction document contract. D-045 now records the empty public shell,
-HTTP 204 activation, and subsequent exact `enabled: true` status without
-claiming any source ref or hosted result. Repository-bound package regeneration
-now passes; the final local main commit must pass the reachable-history gate and be pushed only
-by its exact object ID. Immediately before that push, the resolved push URL set
-must contain exactly one credential-free HTTPS URL for
-`why7682/pptx-compiler`, with no `pushurl`, extra endpoint, SSH form, or URL
-rewrite; the same numeric repository identity, public/empty state, and PVR
-status must be re-read. Afterward, remote `main` must equal the scanned object
-ID.
+HTTP 204 activation, and subsequent exact `enabled: true` status. M3-006 then
+completed the reachable-history gate, one canonical credential-free HTTPS
+transport, exact-object-ID first push, and post-push repository/PVR/remote-main
+equality checks. That completed first-ref evidence does not satisfy M3-004B.
 M3-005B owns final claim text after hosted evidence. No local workflow or
 document check upgrades a support or active-security-setting claim.
 
@@ -211,7 +227,16 @@ dependencies:
   history that an exact first-ref push would expose; it is a pre-push gate, not
   a hosted-PR workflow step;
 - `npm test` proves deterministic reports and fail-closed behavior with
-  repository-owned temporary text fixtures and 31 rejection mutations.
+  repository-owned temporary text fixtures and closed history/executable
+  mutations.
+
+Policy schema v2 keeps current executable paths separate from exact retired
+history objects. Index, working-tree, package, and tip-history checks recognize
+only current paths. A non-tip historical executable is admitted only when both
+its path and Git blob OID match the one pair in the same tip-owned policy; all
+path, content, magic, size, type, identity, and history-grammar checks still
+apply. This is a bounded historical identity exception, not a second policy or
+a current-path compatibility alias.
 
 Both CLIs emit deterministic human output by default and accept `--json` for a
 versioned machine report. A configuration error is itself a gate failure.
@@ -682,8 +707,10 @@ create-only. This closes M3-001's product spine, not the package/release gate:
 M3-002 package boundaries, M3-003 tarball/leakage, and M3-004A local workflow
 contracts and M3-005A's minimum public documents are complete. D-045 later
 closed the empty-shell, PVR, repository binding, and repository-bound package
-gate. The first ref, M3-004B public cross-platform evidence, and M3-005B final
-claim text remain open in that order.
+gate. M3-006 later completed the first ref. Pull-request six-cell CI and
+Dependency Review passed for historical branch object `94b5c1c`; the next
+committed PR head still needs fresh checks, and M3-004B also remains partial for
+accepted-main CI/CodeQL. M3-005B remains blocked on that hosted evidence.
 
 The D-029 authority rule applies to that work: the source template owns
 unchanged inherited content/structure; readable authored semantic sources,

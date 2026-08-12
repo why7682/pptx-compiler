@@ -17,14 +17,15 @@ Read-only checks found:
 This evidence drove D-044's atomic pre-public rename. It did not reserve either
 kind of name and is not trademark clearance.
 
-## Current repository state — 2026-08-11
+## Current repository state — 2026-08-12
 
-After D-044 closed, M3-006 created `why7682/pptx-compiler` as an empty public
-GitHub repository. GitHub reports numeric repository ID `1330979133`, the refs
-API reports the repository is empty, and private vulnerability reporting was
-enabled with HTTP 204 then verified by GET as exact `enabled: true`. No source
-ref has been created. The npm availability observations above remain only dated
-observations and still reserve nothing.
+M3-006 published the exact reviewed object
+`410642b668514ab7193212d617cc0f8acb837924` as the first public `main` ref for
+`why7682/pptx-compiler`. GitHub reports numeric repository ID `1330979133`;
+after the exact push, private vulnerability reporting was reverified as
+`enabled: true` and remote `main` was reverified equal to that object. This is
+source publication only: npm publication remains unauthorized. The npm
+availability observations above remain dated observations and reserve nothing.
 
 ## Historical working-name check
 

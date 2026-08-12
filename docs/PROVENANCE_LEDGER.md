@@ -2427,9 +2427,13 @@ notes: D-041 closes M3-004A's local definition and verification only. It does
   Dependency Review result, public repository, registry provenance, package
   publication, signing, malicious-JavaScript sandbox, or release authority.
   The dependency proof is limited to parser-proven static ESM edges; direct
-  loader/codegen checks are reviewed-source hardening. M3-006 must first create the
-  selected public remote and refresh repository-bound package bytes; M3-004B
-  must then retain the six hosted CI cell URLs and hosted security conclusions
+  loader/codegen checks are reviewed-source hardening. M3-006 later completed
+  the repository-bound package and exact first-ref transitions. M3-004B has
+  begun: its first run passed Ubuntu/macOS plus CodeQL and failed Windows; the
+  pull-request run `31594128100` later passed all six cells for branch object
+  `94b5c1c`. After
+  public visibility and the dependency graph were enabled, security run
+  `31594128139` passed Dependency Review. Accepted-main CI/CodeQL remain absent
 ```
 
 ### M3-005A minimum public-document boundary
@@ -2494,12 +2498,11 @@ public_fixture_conformance: applicable; the focused policy suite passes 41/41
 independent_review: passed; the bounded final security, provenance, and state
   reviews close at 0 blocker, 0 high, and 0 medium after the repository-bound
   package-regeneration transition was made explicit before the first source ref
-notes: D-042 completes only the local M3-005A document definition. No public
-  remote, active private-vulnerability-reporting setting, hosted CI/security
-  result, package publication, support promotion, or release is claimed.
-  M3-006 owns empty-public-repository creation, positive channel activation and
-  verification, repository-bound package regeneration, and the first source
-  push; M3-005B remains blocked until public M3-004B evidence exists
+notes: D-042 completed only the local M3-005A document definition. D-045 and
+  M3-006 later supplied the live private-reporting and exact first-ref facts.
+  Those later facts do not claim package publication, complete hosted evidence,
+  support promotion, or release. M3-005B remains blocked until public M3-004B
+  evidence exists
 ```
 
 ### M3-006 local reachable-history preflight
@@ -2553,11 +2556,10 @@ independent_review: passed; bounded reviewers first found repository-selection,
   failures. The fixed raw-parent traversal, exact tree-byte grammar, sanitized
   Git environment, and forced-error fsck configuration were independently
   replayed under Node 22/24 and close at 0 blocker, 0 high, and 0 medium
-notes: D-043 closes only the local repeatable history-preflight definition.
-  D-044 now records the exact GitHub target and approved public identity.
-  M3-006 remains NEXT until the empty public/PVR/repository-bound package
-  transitions pass, the final commit is rescanned, and that exact object ID
-  alone is pushed
+notes: D-043 first closed the local repeatable history-preflight definition.
+  D-044 then fixed the exact GitHub target and approved public identity. M3-006
+  subsequently completed the final 14-commit zero-finding scan, canonical HTTPS
+  transport, exact-object-ID push, and remote-main/PVR equality checks
 ```
 
 ### D-044 pre-public identity migration
@@ -2702,8 +2704,7 @@ notes: At D-044 closure, `why7682/pptx-compiler` had no remote or source ref.
   checks, which reserve nothing. D-045 later created only the empty public
   shell, verified private vulnerability reporting, and bound its canonical
   identity. M3-006 has since closed the repository-bound dual-runtime package
-  gate and still owns the local commit/history scan and exact-object-ID first
-  push
+  gate, final history scan, and exact-object-ID first push
 ```
 
 ### D-045 empty public shell and repository-bound package authority
@@ -2779,12 +2780,104 @@ independent_review: passed for the current code/security boundary; one bounded
   ownership transfer, launch state machine, and 25-path provenance relation.
   The completed dual-runtime product/package evidence above was rerun after the
   runtime, package, and packed README source snapshot froze
-notes: The empty public GitHub shell and positive PVR status are real external
-  facts, but no local remote or source ref exists. GitHub source authorization
-  does not authorize npm publication. Before the first exact-object-ID push,
-  M3-006 must create and rescan the final main commit, reverify the exact
-  numeric repository/public/empty/PVR tuple and canonical resolved HTTPS push
-  URL, then require remote main equality
+notes: At D-045 closure the empty public GitHub shell and positive PVR status
+  were real external facts, but no local remote or source ref existed. GitHub
+  source authorization did not authorize npm publication. M3-006 later created
+  and rescanned the final main commit, reverified the exact repository/PVR tuple
+  and canonical HTTPS URL, pushed only that object ID, and required remote-main
+  equality
+```
+
+### M3-006 first public ref and M3-004B hosted portability follow-up
+
+```yaml
+paths:
+  - AGENTS.md
+  - HANDOFF.md
+  - README.md
+  - TODO.md
+  - docs/ARCHITECTURE_TARGET.md
+  - docs/COMPATIBILITY_POLICY.md
+  - docs/DECISIONS.md
+  - docs/M3-003_HANDOFF.md
+  - docs/M3-004_HANDOFF.md
+  - docs/M3-005_HANDOFF.md
+  - docs/M3-006_HANDOFF.md
+  - docs/NAME_AVAILABILITY.md
+  - docs/PROVENANCE_LEDGER.md
+  - docs/RELEASE_GATES.md
+  - docs/SUPPORT_MATRIX.md
+  - packages/adapter-pandoc-omml/src/node-process-runner.mjs
+  - packages/cli/bin/pptx-compiler.mjs
+  - packages/cli/pptx-compiler.mjs
+  - packaging/alpha-package-plan.json
+  - policy/forbidden-materials.json
+  - policy/support-matrix.json
+  - provenance/records.json
+  - scripts/check-forbidden-materials.mjs
+  - scripts/lib/package-plan.mjs
+  - scripts/lib/package-stage.mjs
+  - tests/create-only-assembly.test.mjs
+  - tests/package-plan.test.mjs
+  - tests/package-stage.test.mjs
+  - tests/policy-gates.test.mjs
+kind: exact-first-ref execution evidence, first-hosted Windows portability
+  correction, public-evidence synchronization, and D-046 constructive final-
+  document authority plus D-047 branch-protection deferral
+origin: independently derived from the completed D-043/D-045 first-ref
+  authority, first-ref GitHub run 31559642053, first-ref security run
+  31559642035, pull-request GitHub runs 31582316951, 31591756372, and
+  31594128100, pull-request security runs 31582316939, 31591756442, and
+  31594128139, the user's D-046 constructive-final-document requirement and
+  D-047 instruction to defer branch protection, and the exact repository-owned
+  sources and tests. No hosted log, raw API response, external implementation,
+  package, asset, presentation, generated binary, or private fixture entered Git
+original_author_or_holder: Elliot Wu
+created_or_reviewed_on: 2026-08-12
+license_or_rights_basis: MIT
+third_party_dependencies: []
+private_information_review: passed; only the approved public repository/OID,
+  aggregate hosted conclusions, public run identifiers, and repository-owned
+  synthetic regressions are recorded. No token, credential, private path,
+  private/local hostname, raw log, source presentation, private fixture, or
+  ignored package output is recorded
+project_constant_removal: passed; platform absolute-path construction, strict
+  LF/CRLF parsing plus Git's own `/dev/null` pathname, one package-root bin,
+  child-close ownership, and one exact retired path/blob pair replace the
+  observed host-dependent special cases. No Windows-only product branch, post-
+  pack archive rewrite, current-path alias, or second package/policy authority
+  is added
+public_fixture_conformance: applicable; Node 22.23.2 and Node 24.19.0 each pass
+  the 216-node affected focus, 24-node package-stage suite, and 1228-node
+  complete suite in the fixed non-FileProvider copy. npm 10.9.8 and npm 11.17.0
+  each rebuild, admit, install offline, and smoke all four packages; the
+  package-root CLI member is mode 0755. For branch object `94b5c1c`, pull-
+  request Public CI run `31594128100` passes all six platform/runtime cells.
+  After public visibility
+  plus the dependency graph were enabled, security run `31594128139` passes
+  Dependency Review. These hosted results are historical evidence bound to
+  branch object `94b5c1c`; the next committed PR head requires fresh six-cell
+  CI and Dependency Review. Accepted-final-main CI/CodeQL remain required
+independent_review: passed; two bounded current-byte reviews report 0 blocker,
+  0 high, and 0 medium after exact historical-object, current-tip replay,
+  content-rule, Git-null-device, package-root bin, tar-mode, and installed-path
+  boundaries were checked
+notes: M3-006 is complete at public main object
+  410642b668514ab7193212d617cc0f8acb837924. The final launch scan covered 14
+  commits, 505 leaf versions, 7,698,368 regular-blob bytes, and 28 identity
+  occurrences with zero finding; repository ID/PVR/remote-main equality were
+  reverified. M3-004B remains partial: pull-request Public CI run
+  `31594128100` passes all six Ubuntu/macOS/Windows × Node 22/24 cells for
+  branch object `94b5c1c` after the
+  Git-null-device and package-root-bin corrections, and security run
+  `31594128139` passes Dependency Review. Those runs remain bound to historical
+  branch object `94b5c1c`; the next committed PR head requires fresh hosted
+  checks, and accepted-main CI/CodeQL remain pending.
+  D-046 additionally requires M3-005B's final reader-facing documents to build
+  one coherent model from purpose and fact ownership through flow, contracts,
+  evidence, limitations, and next action; chronology remains in audit records.
+  D-047 separately defers branch protection until the current M3-004B/M3-005B
+  sequence is complete; no protection rule is configured or claimed here
 ```
 
 The XML namespace, relationship-type, and MIME strings are interoperability

@@ -71,6 +71,9 @@ test("the alpha package plan closes one guarded four-package graph", async () =>
     state: "blocked",
     reason: "npm-publication-not-authorized"
   });
+  assert.deepEqual(packageById(plan, "cli").bin, {
+    "pptx-compiler": "pptx-compiler.mjs"
+  });
   assert.equal(plan.namePolicy.result, "all-names-e404-not-reserved");
   assert.equal(plan.stagingRoot, ".package-stage");
 
@@ -137,7 +140,7 @@ test("positive file mappings exclude every non-alpha implementation boundary", (
   assert.doesNotMatch(files.join("\n"), /(?:^|\/)(?:labs|tests|packages\/adapter-pandoc-omml|packages\/powerpoint-macos|plugins\/clone-fill)(?:\/|$)/u);
   assert.doesNotMatch(files.join("\n"), /(?:native-omml|native-presentation-publication|ordered-slide-assembly|receipt-bound-final-delivery)/u);
   assert.match(files.join("\n"), /core:packages\/core\/src\/candidate-alpha[.]mjs/u);
-  assert.match(files.join("\n"), /cli:packages\/cli\/bin\/pptx-compiler[.]mjs/u);
+  assert.match(files.join("\n"), /cli:packages\/cli\/pptx-compiler[.]mjs->pptx-compiler[.]mjs/u);
 });
 
 test("package asset descriptors are frozen projections of staged targets", () => {
@@ -278,7 +281,7 @@ test("module import analysis parses static ESM and rejects reviewed direct hazar
 
 test("package-plan mutations fail closed", async (t) => {
   await t.test("the shipped CLI bin cannot hide a runtime dependency", async () => {
-    const binSource = "packages/cli/bin/pptx-compiler.mjs";
+    const binSource = "packages/cli/pptx-compiler.mjs";
     for (const [source, expected] of [
       ['await import("left-pad");\n', "package-dynamic-import"],
       ['import "left-pad";\n', "package-bare-import"]
@@ -298,7 +301,7 @@ test("package-plan mutations fail closed", async (t) => {
   });
 
   await t.test("the direct getBuiltinModule form fails in every shipped module role", async () => {
-    const binSource = "packages/cli/bin/pptx-compiler.mjs";
+    const binSource = "packages/cli/pptx-compiler.mjs";
     const changed = new Map(sourceSnapshots);
     changed.set(binSource, {
       ...changed.get(binSource),
@@ -315,7 +318,7 @@ test("package-plan mutations fail closed", async (t) => {
   });
 
   await t.test("reviewed direct loader and code-generation forms are rejected", async () => {
-    const binSource = "packages/cli/bin/pptx-compiler.mjs";
+    const binSource = "packages/cli/pptx-compiler.mjs";
     for (const bytes of [
       Buffer.from('import Module from "node:module"; Module._load("left-pad");\n'),
       Buffer.from('Function("return import(\\"left-pad\\")")();\n')

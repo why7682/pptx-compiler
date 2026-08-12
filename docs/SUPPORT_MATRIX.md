@@ -120,11 +120,12 @@ effect evidence. `supportClaimsEnabled` remains `false`.
 
 The six experimental platform rows are the declared Node.js 22.x/24.x runtime
 envelope on Linux, macOS, and Windows. The public-automated evidence level and
-the exact D-037 closure account for the other experimental rows. Platform rows
-remain experimental until hosted M3-004B cross-platform CI exists after M3-006;
-only the runtime row matching the executing platform and Node major can
-authorize this candidate. Local M3-004A workflow definitions and macOS runs do
-not promote a platform row.
+the exact D-037 closure account for the other experimental rows. Pull-request
+CI passed all six cells for historical branch object `94b5c1c`; the next
+committed PR head still needs fresh CI and Dependency Review, and accepted-main
+CI/CodeQL remain pending. The rows therefore remain experimental: only
+the runtime row matching the executing platform and Node major can authorize
+this candidate, and platform evidence alone cannot promote support.
 
 ## Status vocabulary
 

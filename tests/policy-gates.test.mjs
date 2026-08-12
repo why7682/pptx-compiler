@@ -6,6 +6,11 @@ import path from "node:path";
 import test from "node:test";
 import { fileURLToPath } from "node:url";
 
+import {
+  GIT_NULL_DEVICE,
+  parseFsckMessageKeys
+} from "../scripts/check-forbidden-materials.mjs";
+
 const projectRoot = fileURLToPath(new URL("..", import.meta.url));
 const forbiddenScript = path.join(projectRoot, "scripts", "check-forbidden-materials.mjs");
 const provenanceScript = path.join(projectRoot, "scripts", "check-provenance.mjs");
@@ -301,7 +306,7 @@ test("mutation: unapproved executable bit is rejected", async (t) => {
 
 test("the one declared CLI bin may carry the executable bit", async (t) => {
   const root = await initializeForbiddenRepository(t);
-  const approvedPath = "packages/cli/bin/pptx-compiler.mjs";
+  const approvedPath = "packages/cli/pptx-compiler.mjs";
   await writeRelative(root, approvedPath, "#!/usr/bin/env node\n");
   await chmod(path.join(root, ...approvedPath.split("/")), 0o755);
   git(root, "add", "-A");
@@ -313,7 +318,7 @@ test("the one declared CLI bin may carry the executable bit", async (t) => {
 
 test("mutation: the declared CLI bin must retain its Git executable bit", async (t) => {
   const root = await initializeForbiddenRepository(t);
-  const approvedPath = "packages/cli/bin/pptx-compiler.mjs";
+  const approvedPath = "packages/cli/pptx-compiler.mjs";
   await writeRelative(root, approvedPath, "#!/usr/bin/env node\n");
   git(root, "add", "-A");
   git(root, "update-index", "--chmod=-x", approvedPath);
@@ -403,11 +408,161 @@ test("mutation: malformed policy fails closed", async (t) => {
   assertRejected(runGate(forbiddenScript, root), "policy-configuration-error");
 });
 
+test("historical executable grants are exact and history-only", async (t) => {
+  const root = await initializeHistoryRepository(t);
+  const oldPath = "packages/cli/bin/pptx-compiler.mjs";
+  const newPath = "packages/cli/pptx-compiler.mjs";
+  const bytes = "#!/usr/bin/env node\nexport {};\n";
+  await writeRelative(root, oldPath, bytes);
+  git(root, "add", oldPath);
+  git(root, "update-index", "--chmod=+x", oldPath);
+  git(root, "commit", "-qm", "synthetic old executable path");
+  const objectId = git(root, "rev-parse", `HEAD:${oldPath}`);
+
+  await rm(path.join(root, ...oldPath.split("/")));
+  await writeRelative(root, newPath, bytes);
+  git(root, "add", "-A");
+  const migrated = structuredClone(policy);
+  migrated.approvedHistoricalExecutableObjects = [{ path: oldPath, objectId }];
+  await writeRelative(
+    root,
+    "policy/forbidden-materials.json",
+    `${JSON.stringify(migrated, null, 2)}\n`
+  );
+  git(root, "add", "-A");
+  git(root, "update-index", "--chmod=+x", newPath);
+  git(root, "commit", "-qm", "synthetic executable path migration");
+
+  const history = runGate(forbiddenScript, root, "history");
+  assert.equal(history.status, 0, history.stdout);
+
+  await rm(path.join(root, ...newPath.split("/")));
+  await writeRelative(root, oldPath, bytes);
+  git(root, "add", "-A");
+  git(root, "update-index", "--chmod=+x", oldPath);
+  assertRejected(runGate(forbiddenScript, root), "unapproved-executable-bit");
+  assertRejected(runGate(forbiddenScript, root, "working-tree"), "unapproved-executable-bit");
+  git(root, "commit", "-qm", "synthetic current-path replay");
+  assertRejected(runGate(forbiddenScript, root, "history"), "unapproved-executable-bit");
+});
+
+test("historical executable grants reject drift and malformed policy", async (t) => {
+  const oldPath = "packages/cli/bin/pptx-compiler.mjs";
+  const exactObjectId = policy.approvedHistoricalExecutableObjects[0].objectId;
+
+  await t.test("the same historical path with different bytes is rejected", async (t) => {
+    const root = await initializeHistoryRepository(t);
+    await writeRelative(root, oldPath, "#!/usr/bin/env node\nexport const drift = true;\n");
+    git(root, "add", oldPath);
+    git(root, "update-index", "--chmod=+x", oldPath);
+    git(root, "commit", "-qm", "synthetic executable drift");
+    await rm(path.join(root, ...oldPath.split("/")));
+    git(root, "add", "-A");
+    git(root, "commit", "-qm", "remove synthetic executable drift");
+    assertRejected(runGate(forbiddenScript, root, "history"), "unapproved-executable-bit");
+  });
+
+  await t.test("the same historical object at another path is rejected", async (t) => {
+    const root = await initializeHistoryRepository(t);
+    const alternatePath = "historical-executable-object";
+    await writeRelative(root, alternatePath, "#!/usr/bin/env node\nexport {};\n");
+    git(root, "add", alternatePath);
+    git(root, "update-index", "--chmod=+x", alternatePath);
+    const objectId = git(root, "rev-parse", `:${alternatePath}`);
+    git(root, "commit", "-qm", "synthetic alternate historical path");
+    const mutated = structuredClone(policy);
+    mutated.approvedHistoricalExecutableObjects = [{ path: oldPath, objectId }];
+    await writeRelative(
+      root,
+      "policy/forbidden-materials.json",
+      `${JSON.stringify(mutated, null, 2)}\n`
+    );
+    await rm(path.join(root, alternatePath));
+    git(root, "add", "-A");
+    git(root, "commit", "-qm", "synthetic historical path drift");
+    const history = runGate(forbiddenScript, root, "history");
+    assert.notEqual(history.status, 0, history.stdout);
+    assertRejected(history, "unapproved-executable-bit");
+  });
+
+  await t.test("an executable grant does not bypass content rules", async (t) => {
+    const root = await initializeHistoryRepository(t);
+    const content = ["/", "Users", "/", "synthetic-history", "/", "secret.txt\n"].join("");
+    await writeRelative(root, oldPath, content);
+    git(root, "add", oldPath);
+    git(root, "update-index", "--chmod=+x", oldPath);
+    git(root, "commit", "-qm", "synthetic historical content rule");
+    const objectId = git(root, "rev-parse", `HEAD:${oldPath}`);
+    const mutated = structuredClone(policy);
+    mutated.approvedHistoricalExecutableObjects = [{ path: oldPath, objectId }];
+    await writeRelative(
+      root,
+      "policy/forbidden-materials.json",
+      `${JSON.stringify(mutated, null, 2)}\n`
+    );
+    await rm(path.join(root, ...oldPath.split("/")));
+    git(root, "add", "-A");
+    git(root, "commit", "-qm", "synthetic exact grant");
+    assertRejected(runGate(forbiddenScript, root, "history"), "absolute-local-user-path");
+  });
+
+  for (const [name, mutate] of [
+    ["unknown fields", (document) => {
+      document.approvedHistoricalExecutableObjects[0].extra = true;
+    }],
+    ["invalid object IDs", (document) => {
+      document.approvedHistoricalExecutableObjects[0].objectId = "not-an-object-id";
+    }],
+    ["null object IDs", (document) => {
+      document.approvedHistoricalExecutableObjects[0].objectId = "0".repeat(40);
+    }],
+    ["duplicates", (document) => {
+      document.approvedHistoricalExecutableObjects.push(
+        structuredClone(document.approvedHistoricalExecutableObjects[0])
+      );
+    }],
+    ["unsorted entries", (document) => {
+      document.approvedHistoricalExecutableObjects = [
+        { path: "z-old.mjs", objectId: exactObjectId },
+        { path: "a-old.mjs", objectId: exactObjectId }
+      ];
+    }],
+    ["current-path overlap", (document) => {
+      document.approvedHistoricalExecutableObjects[0].path =
+        document.approvedExecutablePaths[0];
+    }]
+  ]) {
+    await t.test(name, async (t) => {
+      const root = await initializeForbiddenRepository(t);
+      const mutated = structuredClone(policy);
+      mutate(mutated);
+      await writeRelative(
+        root,
+        "policy/forbidden-materials.json",
+        `${JSON.stringify(mutated, null, 2)}\n`
+      );
+      git(root, "add", "-A");
+      assertRejected(runGate(forbiddenScript, root), "policy-configuration-error");
+    });
+  }
+});
+
 test("public-history gate passes and emits byte-stable JSON", async (t) => {
   const root = await initializeHistoryRepository(t);
   const scannerSource = await readFile(forbiddenScript, "utf8");
   assert.equal(scannerSource.includes('"rev-list"'), false);
   assert.equal(scannerSource.includes('"cat-file", "commit"'), true);
+  assert.equal(GIT_NULL_DEVICE, "/dev/null");
+  const fsckVariables = "fsck.badDate\nfsck.skipList\nfsck.zeroPaddedDate\nfsck.badDate\n";
+  assert.deepEqual(
+    parseFsckMessageKeys(fsckVariables),
+    ["fsck.badDate", "fsck.zeroPaddedDate"]
+  );
+  assert.deepEqual(
+    parseFsckMessageKeys(fsckVariables.replaceAll("\n", "\r\n")),
+    ["fsck.badDate", "fsck.zeroPaddedDate"]
+  );
+  assert.throws(() => parseFsckMessageKeys("fsck.badDate\rfsck.zeroPaddedDate\n"));
   const first = runGate(forbiddenScript, root, "history");
   const second = runGate(forbiddenScript, root, "history");
   assert.equal(first.status, 0);
