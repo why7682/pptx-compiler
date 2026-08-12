@@ -17,6 +17,7 @@ const admittedPaths = new Set([
   "docs/M2-001_HANDOFF.md",
   "docs/M2-003_HANDOFF.md",
   "docs/M2-004_HANDOFF.md",
+  "docs/M3-004_HANDOFF.md",
   "docs/PRIVATE_FIXTURE_POLICY.md",
   "docs/RELEASE_GATES.md",
   "fixtures/source-parts/minimal/fixture.json",
@@ -208,6 +209,34 @@ test("support matrix validates and produces byte-stable findings", () => {
       .map((item) => item.status),
     ["experimental", "unsupported"]
   );
+  const hostedPlatformIds = [
+    "linux-node-22",
+    "linux-node-24",
+    "macos-node-22",
+    "macos-node-24",
+    "windows-node-22",
+    "windows-node-24"
+  ];
+  const hostedPlatforms = matrix.dimensions.platforms
+    .filter((item) => hostedPlatformIds.includes(item.id));
+  assert.deepEqual(hostedPlatforms.map((item) => item.id), hostedPlatformIds);
+  for (const platform of hostedPlatforms) {
+    assert.equal(platform.status, "experimental", platform.id);
+    assert.equal(platform.disposition, "accept-with-warning", platform.id);
+    assert.equal(platform.evidence.level, "automated-public", platform.id);
+    assert.equal(platform.evidence.artifacts.length, 1, platform.id);
+    assert.deepEqual({
+      type: platform.evidence.artifacts[0].type,
+      path: platform.evidence.artifacts[0].path
+    }, {
+      type: "cross-platform-ci",
+      path: "docs/M3-004_HANDOFF.md"
+    }, platform.id);
+    assert.match(platform.currentBasis, /31600806512/u, platform.id);
+    assert.match(platform.currentBasis, /31600528716/u, platform.id);
+    assert.match(platform.evidence.artifacts[0].note, /31600806512/u, platform.id);
+    assert.match(platform.evidence.artifacts[0].note, /31600528716/u, platform.id);
+  }
   const rows = new Map(Object.values(matrix.dimensions).flat().map((item) => [item.id, item]));
   assert.equal(PUBLIC_SYNTHETIC_NATIVE_CARD_CANDIDATE_PROFILE.supportItemIds.length, 15);
   for (const itemId of PUBLIC_SYNTHETIC_NATIVE_CARD_CANDIDATE_PROFILE.supportItemIds) {

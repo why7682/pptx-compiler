@@ -769,8 +769,12 @@ export async function validateAlphaPackagePlan(plan, {
     if (item.packageId !== "cli" && Object.keys(item.bin ?? {}).length !== 0) {
       add(findings, "package-bin-owner", `/packages/${item.packageId}/bin`);
     }
-    if (!mappedTargets.has("./LICENSE") || !mappedTargets.has("./README.md")) {
+    const readme = mappedTargets.get("./README.md");
+    if (!mappedTargets.has("./LICENSE") || readme === undefined) {
       add(findings, "package-notice-missing", `/packages/${item.packageId}/files`);
+    } else if (readme.role !== "documentation" ||
+        readme.source !== `${item.repositoryDirectory}/README.md`) {
+      add(findings, "package-readme-source", `/packages/${item.packageId}/files`);
     }
   }
 

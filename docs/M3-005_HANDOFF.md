@@ -14,10 +14,16 @@ M3-005 is split at the real evidence boundary:
 M3-005A is complete. The local document contract defines one private reporting
 process plus the minimum contribution, governance, and reproducibility
 boundaries. M3-006 has since completed the exact first public source ref.
-M3-005B remains blocked because M3-004B has only partial hosted evidence: the
-six-cell pull-request CI and Dependency Review passed for historical branch
-object `94b5c1c`, while the next committed PR head still needs fresh checks and
-accepted-main CI/CodeQL remain absent.
+M3-004B is also complete. Pull-request head
+`f6ba6bad48c928d31c356d47911dd929ccf3b2d1` and accepted main
+`c4dee58a8920a8e71c20f53ab93c62a96d3cb89d` share tree
+`4e70ec4323807824b0578241fe4a4d94951cd608`. PR CI run `31600528716` and
+main CI run `31600806512` passed all six hosted cells; PR security run
+`31600528742` passed Dependency Review while CodeQL was skipped by event design,
+and main security run `31600806350` passed CodeQL while Dependency Review
+was skipped by event design. M3-005B is therefore `NEXT`, not complete: it still
+must construct and cross-review the final text required by D-046. Hosted
+execution evidence alone does not enable support claims or authorize release.
 
 ## Responsibility boundary
 
@@ -89,9 +95,10 @@ reviews report 0 blocker, 0 high, and 0 medium findings.
 1. Retain M3-005A as complete.
 2. Retain the exact M3-006 repository identity, PVR state, first-ref OID, and
    remote-main equality evidence.
-3. Complete M3-004B without converting partial hosted results into support or
-   release claims.
-4. After M3-004B closes, construct M3-005B text in D-046 order: purpose and
+3. Retain M3-004B as complete without converting its hosted results into
+   support or release claims.
+4. Construct M3-005B text in D-046 order: purpose and
    boundary; fact ownership; data/control flow; executable contracts; evidence;
    limitations; next authorized action. Then run one cross-document review
    before freezing it.
+5. Keep D-047 branch protection deferred until the M3-005B sequence completes.

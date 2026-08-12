@@ -2880,6 +2880,92 @@ notes: M3-006 is complete at public main object
   sequence is complete; no protection rule is configured or claimed here
 ```
 
+### M3-004B accepted-main closure and D-046 constructive M3-005B document slice
+
+```yaml
+paths:
+  - AGENTS.md
+  - CHANGELOG.md
+  - HANDOFF.md
+  - README.md
+  - TODO.md
+  - docs/ARCHITECTURE_TARGET.md
+  - docs/COMPATIBILITY_POLICY.md
+  - docs/DECISIONS.md
+  - docs/KNOWN_LIMITATIONS.md
+  - docs/M3-003_HANDOFF.md
+  - docs/M3-004_HANDOFF.md
+  - docs/M3-005_HANDOFF.md
+  - docs/M3-006_HANDOFF.md
+  - docs/PROVENANCE_LEDGER.md
+  - docs/RELEASE_GATES.md
+  - docs/REPRODUCIBILITY.md
+  - docs/SUPPORT_MATRIX.md
+  - docs/releases/0.1.0-alpha.1.md
+  - packages/cli/README.md
+  - packages/core/README.md
+  - packages/public-synthetic/README.md
+  - packaging/alpha-package-plan.json
+  - plugins/native-card-arrow/README.md
+  - policy/support-matrix.json
+  - provenance/records.json
+  - scripts/lib/package-plan.mjs
+  - tests/final-public-docs.test.mjs
+  - tests/package-plan.test.mjs
+  - tests/pre-public-docs.test.mjs
+  - tests/support-matrix.test.mjs
+kind: accepted-main M3-004B evidence closure plus one D-046 constructive
+  reader-document, package-local documentation, support-policy,
+  release-wording, package-plan, and cross-document-test slice
+origin: independently derived from accepted pull-request head
+  f6ba6bad48c928d31c356d47911dd929ccf3b2d1 and its public runs
+  31600528716/31600528742, accepted main
+  c4dee58a8920a8e71c20f53ab93c62a96d3cb89d and its public runs
+  31600806512/31600806350, their equal tree
+  4e70ec4323807824b0578241fe4a4d94951cd608, the user's D-046 requirement
+  that final documentation construct one coherent model, and the user's D-047
+  decision to defer branch protection. No hosted log, raw API response,
+  external implementation, package, asset, presentation, generated binary, or
+  private fixture entered Git
+original_author_or_holder: Elliot Wu
+created_or_reviewed_on: 2026-08-12
+license_or_rights_basis: MIT
+third_party_dependencies: []
+private_information_review: passed; the slice records only approved public
+  repository identity, public object and run identifiers, aggregate hosted
+  conclusions, repository-owned contracts, and public synthetic test facts. It
+  contains no token, credential, private path or hostname, raw log/API response,
+  private fixture, source presentation, or ignored package/render output
+project_constant_removal: passed; reader documents now preserve one authority
+  for source facts, semantic content, layout intent, resolved geometry,
+  candidate replay, QA, support, and release. Repair chronology remains in
+  handoffs, decisions, and provenance. Each leaf package now projects only its
+  own purpose, dependency flow, executable contract, evidence, limitations,
+  and next action from package-local source; no second support matrix, release
+  gate, delivery receipt, package graph, or branch-protection claim was added
+public_fixture_conformance: applicable; the focused final-document,
+  pre-public-document, and support-matrix suites pass 47/47. Accepted PR CI run
+  31600528716 passes all six Ubuntu/macOS/Windows x Node 22/24 cells and PR
+  security run 31600528742 passes Dependency Review. Accepted-main CI run
+  31600806512 passes the same six cells and main security run 31600806350
+  passes CodeQL. PR head f6ba6bad48c928d31c356d47911dd929ccf3b2d1 and
+  main c4dee58a8920a8e71c20f53ab93c62a96d3cb89d share exact tree
+  4e70ec4323807824b0578241fe4a4d94951cd608 with no diff. The current
+  constructive-document and package-local README bytes have no final admitted-
+  runtime dual-line complete-suite or guarded four-package rebuild evidence yet
+independent_review: passed; one bounded current-byte constructive, package-
+  document, and provenance cold review reports 0 blocker, 0 high, and 0 medium
+  findings after package-local README ownership, absolute-link, dependency-graph,
+  editability-boundary, and mutation-test corrections
+notes: M3-004B is complete on the accepted equal-tree evidence. D-046 governs
+  this M3-005B slice: purpose and boundary -> fact ownership -> data/control
+  flow -> executable contracts -> evidence -> limitations -> next authorized
+  action. The support matrix remains 0 supported / 22 experimental / 3 manual /
+  35 unsupported with supportClaimsEnabled false; QA remains blocked and
+  creates no BuildArtifact; npm publication and release remain absent. D-047 /
+  M3-008 branch protection remains deferred and is not configured or claimed
+```
+
 The XML namespace, relationship-type, and MIME strings are interoperability
 identifiers from the public format specification. They do not convey third-
 party presentation content. The fictional `Synthetic Sans` typeface name does

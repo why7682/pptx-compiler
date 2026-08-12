@@ -95,15 +95,16 @@ packed inputs, so they do not reuse that evidence. The current fixed-copy
 correction passes 216/216 affected tests, 24/24 package-stage tests, and
 1228/1228 complete tests under both admitted Node lines; npm 10.9.8 and npm
 11.17.0 each rebuild, install offline, and smoke the four-package graph with
-the package-root CLI member at mode 0755. For branch object `94b5c1c`,
-pull-request Public CI run `31594128100` passes the six-cell
-platform/runtime matrix. After public
-visibility and the dependency graph were enabled, pull-request security run
-`31594128139` passes Dependency Review while CodeQL remains skipped by design;
-those runs are historical evidence bound to branch object `94b5c1c`, and the
-next committed PR head needs fresh checks. Accepted-main CI/CodeQL remain
-pending. This does not change
-the published first-ref object or complete M3-004B.
+the package-root CLI member at mode 0755. Those local and earlier hosted runs
+remain historical portability evidence. M3-004B later closed on accepted PR
+head `f6ba6bad48c928d31c356d47911dd929ccf3b2d1` and accepted main
+`c4dee58a8920a8e71c20f53ab93c62a96d3cb89d`, whose shared tree is
+`4e70ec4323807824b0578241fe4a4d94951cd608`. PR CI run `31600528716` and
+main CI run `31600806512` passed all six platform/runtime cells. PR security
+run `31600528742` passed Dependency Review while CodeQL was skipped by event
+design; main security run `31600806350` passed CodeQL while Dependency Review
+was skipped by event design. That later closure does not change the published
+first-ref object, promote support, publish npm packages, or declare a release.
 
 ## Completed fail-closed launch state machine
 

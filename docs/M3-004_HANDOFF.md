@@ -6,19 +6,21 @@ M3-004 has two different facts and they must not be conflated:
 
 - `M3-004A` defines and locally verifies the public-safe workflow, development-
   toolchain, source-policy, license, and static-ESM SBOM projection contracts.
-- `M3-004B` owns the public six-cell and security evidence. M3-006 has now
-  published the exact reviewed first source ref, so M3-004B is `NEXT` rather
-  than blocked on repository creation.
+- `M3-004B` owns the public six-cell and security evidence. It is complete for
+  the accepted pull-request tree and its resulting `main` merge.
 
-The local workflow definition is complete. The first public CI run passed
-Ubuntu and macOS under Node 22 and 24 but failed Windows under both lines. The
-pull-request run `31594128100` passes all six cells for branch object
-`94b5c1c`. First-ref CodeQL
-passes; pull-request CodeQL is skipped by event design. After public visibility
-and the dependency graph were enabled, security run `31594128139` passed
-Dependency Review. Those hosted runs are historical evidence bound to branch
-object `94b5c1c`. M3-004B remains partial until the next committed PR head has
-fresh six-cell CI and Dependency Review and the accepted main has CI/CodeQL.
+The accepted pull-request head is
+`f6ba6bad48c928d31c356d47911dd929ccf3b2d1`. Public CI run `31600528716`
+passed all six Ubuntu/macOS/Windows × Node 22/24 cells. Pull-request security
+run `31600528742` passed Dependency Review; CodeQL was skipped by the
+pull-request event design. The accepted `main` merge is
+`c4dee58a8920a8e71c20f53ab93c62a96d3cb89d`. Public CI run `31600806512`
+passed the same six cells, and push security run `31600806350` passed CodeQL;
+Dependency Review was skipped by the push-event design. Both commits have tree
+`4e70ec4323807824b0578241fe4a4d94951cd608`, and their trees have no diff.
+The two event-specific skips are expected workflow partitioning, not missing
+evidence. This closes M3-004B without promoting platform support, enabling
+support claims, publishing npm packages, or declaring a release.
 
 ## Kernel-style judgment
 
@@ -153,13 +155,17 @@ for the six public runner cells.
 
 ## Current public evidence
 
-- First CI: https://github.com/why7682/pptx-compiler/actions/runs/31559642053
-- PR CI for branch object `94b5c1c`: https://github.com/why7682/pptx-compiler/actions/runs/31594128100
-- First-ref security: https://github.com/why7682/pptx-compiler/actions/runs/31559642035
-- Pull-request security: https://github.com/why7682/pptx-compiler/actions/runs/31594128139
-- Passed: Ubuntu/macOS/Windows × Node 22/24 in the corrected PR run, plus
-  first-ref CodeQL.
-- Missing: accepted-main CI/CodeQL.
+- Accepted PR CI: https://github.com/why7682/pptx-compiler/actions/runs/31600528716
+- Accepted PR security: https://github.com/why7682/pptx-compiler/actions/runs/31600528742
+- Accepted-main CI: https://github.com/why7682/pptx-compiler/actions/runs/31600806512
+- Accepted-main security: https://github.com/why7682/pptx-compiler/actions/runs/31600806350
+- PR conclusion: six CI cells and Dependency Review passed; CodeQL skipped by
+  event design.
+- Main conclusion: six CI cells and CodeQL passed; Dependency Review skipped by
+  event design.
+- Byte relation: PR head `f6ba6bad48c928d31c356d47911dd929ccf3b2d1`
+  and accepted main `c4dee58a8920a8e71c20f53ab93c62a96d3cb89d` share
+  tree `4e70ec4323807824b0578241fe4a4d94951cd608` with no tree diff.
 
 The first correction covered a platform-invalid test path, strict LF/CRLF Git
 text parsing, canonical bin spelling, and waiting for a killed child to close.
@@ -174,17 +180,21 @@ passes the 216-node affected focus, 24-node package-stage suite, and 1228-node
 complete suite under both Node 22.23.2 and Node 24.19.0. npm 10.9.8 and npm
 11.17.0 each rebuild, admit, install offline, and smoke all four packages, with
 the package-root CLI member at mode 0755. For branch object `94b5c1c`,
-pull-request Public CI run `31594128100` passes all six cells, including complete tests, guarded packages,
+pull-request Public CI run `31594128100` passed all six cells, including complete tests, guarded packages,
 working-tree recheck, and drift check.
 
 After the repository returned to public visibility and its dependency graph was
 enabled, pull-request security run `31594128139` passed Dependency Review;
 CodeQL remained skipped by the pull-request event contract.
 
+Those earlier runs are retained as portability diagnostics. They are not the
+closure authority. The four accepted-PR/accepted-main runs above bind the
+complete hosted evidence to one byte-identical tree.
+
 ## Next dependency
 
-Commit and push the frozen evidence/document snapshot, then merge only after
-that exact PR head has fresh six-cell CI and Dependency Review. Once the
-accepted change reaches `main`, retain final-main CI and CodeQL results for
-those exact bytes, then close M3-004B. M3-005B remains blocked until that hosted
-evidence is complete.
+M3-004B is complete. M3-005B is now the next dependency and must construct the
+final reader-facing changelog, limitations, support wording, and release text
+under D-046. The hosted evidence does not by itself change the support matrix,
+enable support claims, publish npm packages, or satisfy the remaining release
+gates. D-047 branch protection remains deferred through the M3-005B work.

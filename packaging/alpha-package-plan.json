@@ -80,7 +80,7 @@
           ]
         },
         {
-          "sourceRoot": ".",
+          "sourceRoot": "packages/cli",
           "targetRoot": ".",
           "role": "documentation",
           "paths": [
@@ -151,7 +151,7 @@
           ]
         },
         {
-          "sourceRoot": ".",
+          "sourceRoot": "packages/core",
           "targetRoot": ".",
           "role": "documentation",
           "paths": [
@@ -292,7 +292,7 @@
           ]
         },
         {
-          "sourceRoot": ".",
+          "sourceRoot": "plugins/native-card-arrow",
           "targetRoot": ".",
           "role": "documentation",
           "paths": [
@@ -367,7 +367,7 @@
           ]
         },
         {
-          "sourceRoot": ".",
+          "sourceRoot": "packages/public-synthetic",
           "targetRoot": ".",
           "role": "documentation",
           "paths": [

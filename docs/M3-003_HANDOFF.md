@@ -175,9 +175,9 @@ does not turn them into source or planning facts.
 
 M3-004A has since defined the local public workflow contract; see
 `docs/M3-004_HANDOFF.md`. M3-006 has completed the exact first public source
-ref, and M3-004B now owns the partial hosted evidence. M3-005A completes the
-pre-public document contract and M3-005B
-waits for hosted evidence. M3-006 has created the user-selected repository as an
+ref, and M3-004B has completed the hosted evidence. M3-005A completes the
+pre-public document contract, and M3-005B is now the next dependency. M3-006
+created the user-selected repository as an
 empty public shell, verified private vulnerability reporting, and inserted its
 canonical identity into the plan, leaf manifests, and SBOM. Evidence/marker
 schema v2 binds the canonical plan fingerprint. The exact first-ref repository-
@@ -189,9 +189,15 @@ the CLI source/target mapping and did not reuse those first-ref tarballs. Its
 fresh fixed-copy evidence passes 24/24 package-stage tests under both runtimes;
 npm 10.9.8 and npm 11.17.0 each rebuild, install offline, and smoke all four
 packages with the package-root CLI at mode 0755. For branch object `94b5c1c`,
-pull-request Public CI run `31594128100` passes the full six-cell
+pull-request Public CI run `31594128100` passed the full six-cell
 platform/runtime matrix, and security run
-`31594128139` passes Dependency Review after public visibility plus the
-dependency graph were enabled. Those hosted runs are historical evidence bound
-to branch object `94b5c1c`; the next committed PR head needs fresh checks.
-Accepted-main CI/CodeQL, npm-publication, and release evidence remain separate.
+`31594128139` passed Dependency Review after public visibility plus the
+dependency graph were enabled. Those runs remain historical portability
+evidence. M3-004B later closed on byte-identical tree
+`4e70ec4323807824b0578241fe4a4d94951cd608`: accepted PR head
+`f6ba6bad48c928d31c356d47911dd929ccf3b2d1` passed six-cell CI run
+`31600528716` plus Dependency Review in security run `31600528742`, and
+accepted main `c4dee58a8920a8e71c20f53ab93c62a96d3cb89d` passed six-cell CI
+run `31600806512` plus CodeQL in security run `31600806350`. PR CodeQL and
+push Dependency Review were skipped by event design. npm publication, support,
+and release evidence remain separate.

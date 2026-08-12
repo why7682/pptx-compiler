@@ -130,8 +130,8 @@ For maintenance or audit of the completed `M3-003` guarded package stage, read:
 9. `docs/RELEASE_GATES.md`
 10. `docs/PROVENANCE_LEDGER.md`
 
-For maintenance or audit of the completed local `M3-004A` workflow contract
-or the active `M3-004B` hosted-evidence follow-up, read:
+For maintenance or audit of the completed `M3-004A` workflow contract or the
+completed `M3-004B` hosted-evidence follow-up, read:
 
 3. `docs/M3-004_HANDOFF.md`
 4. `scripts/lib/public-workflows.mjs`
@@ -140,8 +140,9 @@ or the active `M3-004B` hosted-evidence follow-up, read:
 7. `docs/RELEASE_GATES.md`
 8. `docs/PROVENANCE_LEDGER.md`
 
-For maintenance or audit of the completed `M3-005A` public-document contract,
-or before starting `M3-006`, read:
+For maintenance or audit of the completed `M3-005A` process-document contract,
+the active `M3-005B` constructive final-document work, or before auditing
+`M3-006`, read:
 
 3. `docs/M3-005_HANDOFF.md`
 4. `SECURITY.md`
@@ -151,6 +152,13 @@ or before starting `M3-006`, read:
 8. `docs/RELEASE_GATES.md`
 9. `docs/DECISIONS.md`
 10. `docs/PROVENANCE_LEDGER.md`
+
+For maintenance or audit of `M3-005B`, additionally read:
+
+11. `CHANGELOG.md`
+12. `docs/KNOWN_LIMITATIONS.md`
+13. `docs/releases/0.1.0-alpha.1.md`
+14. `tests/final-public-docs.test.mjs`
 
 For audit of the completed `M3-006` first-public-ref transition, then read:
 
@@ -427,17 +435,20 @@ For code review, report:
   evidence. Windows directory fsync remains unavailable through Node; retain
   file flush, logical commit ordering, and exact recovery without claiming
   sudden-power-loss directory-entry persistence. M3-006 has published and
-  verified the reviewed first source ref. Public run evidence remains
-  `M3-004B`; partial hosted results do not satisfy it.
+  verified the reviewed first source ref. M3-004B records the complete accepted
+  pull-request and accepted-main hosted evidence; an isolated partial run never
+  satisfies that boundary, and hosted execution does not promote support or
+  release.
 - When maintaining `M3-005A`, preserve one owner each for vulnerability
   reporting, contribution, governance, and reproduction. Text and copyright
   leakage rules have no path exceptions. D-045 created the empty public GitHub
   repository and positively verified private vulnerability reporting. M3-006
   subsequently reverified the repository tuple, scanned the final history, and
   published the exact first source ref. That publication is not platform,
-  release, or npm-publication evidence. Do not write final release claims, changelog
-  results, platform support, or CI conclusions before their public evidence
-  exists.
+  release, or npm-publication evidence. Cite M3-004B hosted conclusions only
+  with their exact run and commit bindings. M3-005B still owns final changelog,
+  limitations, support, and release wording; hosted CI alone grants none of
+  those authorities.
 - When writing or freezing final reader-facing documentation under D-046,
   construct one coherent model in this order: purpose and boundary; fact
   ownership; data/control flow; executable contracts; evidence; limitations;

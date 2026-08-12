@@ -710,9 +710,9 @@ criterion is recorded in the repository.
 | M3-002 | DONE | Define explicit publishable packages and decide scoped versus unscoped npm names after the installed spine is stable. | Each package has positive `files`, `exports`, `types`, `bin` where applicable, license, engines, and staged metadata; D-045 now binds the exact repository tuple while npm publication remains blocked. |
 | M3-003 | DONE | Add repository and npm leakage gates. | Tarball is at most 5 MiB compressed/20 MiB unpacked, at most 300 files/1 MiB each, matches an allowlist, contains no forbidden magic/extensions, and installs in an empty directory. |
 | M3-004A | DONE | Define and locally verify the public-safe CI/security, development-toolchain, source-policy, license, and static-ESM SBOM projection contracts. | Two canonical workflows and all local gates pass under admitted Node 22/24 in one fixed non-FileProvider copy without model/GUI/private inputs. |
-| M3-004B | NEXT | Collect the six Linux/Windows/macOS × Node 22/24 public CI cells plus CodeQL and Dependency Review evidence. | The public remote records stable URLs and conclusions for every hosted job; local YAML or macOS runs are not substitutes. |
+| M3-004B | DONE | Collect the six Linux/Windows/macOS × Node 22/24 public CI cells plus CodeQL and Dependency Review evidence. | The public remote records stable URLs and conclusions for every hosted job; local YAML or macOS runs are not substitutes. |
 | M3-005A | DONE | Add the minimum pre-public security, contribution, governance, and reproducibility documents. | The local documents define and mechanically verify one fail-closed repository-native private-reporting process; D-045 separately records its live remote activation. |
-| M3-005B | BLOCKED | Construct and freeze changelog, known limitations, final support wording, and release text from public evidence. | After M3-004B, every final claim cites the matching hosted evidence and executable support state, and D-046's purpose→ownership→flow→contract→evidence→limitations→next-action structure passes cross-document review. |
+| M3-005B | NEXT | Construct and freeze changelog, known limitations, final support wording, and release text from public evidence. | After M3-004B, every final claim cites the matching hosted evidence and executable support state, and D-046's purpose→ownership→flow→contract→evidence→limitations→next-action structure passes cross-document review. |
 | M3-006 | DONE | Create and scan the final local main commit, then push that exact object ID as the first source ref. | GitHub reports public repository ID `1330979133` for `why7682/pptx-compiler`, private vulnerability reporting `enabled: true`, and remote `main` equal to the exact scanned object ID after canonical HTTPS transport. |
 | M3-007 | DEFERRED | Implement `doctor`, generic `onboard`, standalone `diff`, and optional formula CLI only from demonstrated user workflows. | Each added command has one non-duplicated data authority and executable need; generic onboarding never hard-codes capability-specific binding rules. |
 | M3-008 | DEFERRED | Revisit main-branch protection after the current hosted-evidence and final-document sequence. | D-047 is explicitly resumed; force-push/deletion restrictions and required checks are configured and verified without claiming they existed earlier. |
@@ -813,7 +813,7 @@ criterion is recorded in the repository.
 - This closes M3-006 only. It does not publish npm packages or prove hosted
   platform, compatibility, support, or release results.
 
-### M3-004B first hosted run — 2026-08-12
+### M3-004B first hosted run and portability diagnostics — 2026-08-12
 
 - Public CI run `31559642053` passed Ubuntu 22/24 and macOS 22/24, but failed
   Windows 22/24.
@@ -833,15 +833,33 @@ criterion is recorded in the repository.
   complete suite. npm 10.9.8 and npm 11.17.0 each build and admit four private
   tarballs, install them together offline, smoke the installed CLI spine, and
   retain the package-root CLI at tar mode 0755.
-- For branch object `94b5c1c`, pull-request Public CI run `31594128100` passes all six Ubuntu/macOS/Windows
+- For branch object `94b5c1c`, pull-request Public CI run `31594128100` passed all six Ubuntu/macOS/Windows
   × Node 22/24 cells, including complete tests, guarded packages, working-tree
   recheck, and drift check. The repository was then restored to public
   visibility, its dependency graph was enabled, and pull-request security run
-  `31594128139` passed Dependency Review; CodeQL remains skipped by the
+  `31594128139` passed Dependency Review; CodeQL was skipped by the
   pull-request event design. Those runs are historical evidence bound to branch
-  object `94b5c1c`; the next committed snapshot requires fresh pull-request CI
-  and Dependency Review before merge. Accepted-main CI/CodeQL remain required
-  afterward.
+  object `94b5c1c`; they explain the portability repairs but are not the later
+  closure authority.
+
+### M3-004B completion — 2026-08-12
+
+- Accepted pull-request head
+  `f6ba6bad48c928d31c356d47911dd929ccf3b2d1` passed all six
+  Ubuntu/macOS/Windows × Node 22/24 cells in Public CI run `31600528716`.
+- Pull-request security run `31600528742` passed Dependency Review. CodeQL
+  was skipped by the pull-request event design.
+- Accepted main `c4dee58a8920a8e71c20f53ab93c62a96d3cb89d` passed all six cells in
+  Public CI run `31600806512`.
+- Main security run `31600806350` passed CodeQL. Dependency Review was skipped
+  by the push-event design.
+- The accepted PR and main commits share tree
+  `4e70ec4323807824b0578241fe4a4d94951cd608`, and their trees have no diff.
+  The event-specific skips are expected workflow partitioning, so this closes
+  M3-004B on the accepted bytes.
+- M3-005B is now `NEXT`. Platform/capability support, `supportClaimsEnabled`,
+  npm publication, and release state are unchanged. D-047/M3-008 branch
+  protection remains deferred.
 
 ### D-044 pre-public identity migration — 2026-08-11
 
@@ -1109,8 +1127,9 @@ criterion is recorded in the repository.
   Independent closing review reports 0 blocker, 0 high, and 0 medium.
 - This is local macOS contract evidence only. No Linux, Windows, hosted macOS,
   CodeQL, Dependency Review, public repository, platform-support promotion,
-  signing, publication, or release result is claimed. Those hosted facts remain
-  M3-004B after M3-006.
+  signing, publication, or release result was claimed at this checkpoint. The
+  hosted facts were assigned to M3-004B and later completed without promoting
+  support, publication, or release.
 
 ## M4 — Release progression
 

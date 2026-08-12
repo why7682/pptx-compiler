@@ -59,5 +59,12 @@ content merely because its directory name looks temporary.
 Record the operating system, Node and npm versions, exact command, exit status,
 and whether the checkout was clean. Do not publish private paths, credentials,
 input decks, ignored evidence, or local artifact identities. A local pass
-remains local evidence; the six hosted runner cells and security jobs remain
-M3-004B work after the public remote exists.
+remains local evidence. M3-004B separately records six-cell PR CI run
+`31600528716` plus PR Dependency Review run `31600528742`, and six-cell
+accepted-main CI run `31600806512` plus main CodeQL run `31600806350`. The PR
+head `f6ba6bad48c928d31c356d47911dd929ccf3b2d1` and accepted main
+`c4dee58a8920a8e71c20f53ab93c62a96d3cb89d` share tree
+`4e70ec4323807824b0578241fe4a4d94951cd608`. PR CodeQL and push Dependency
+Review were skipped by event design. That hosted closure does not make this
+local procedure proof of platform support, publication, or release, and any
+changed snapshot needs its own hosted evidence.
