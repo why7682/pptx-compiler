@@ -40,6 +40,9 @@ const M3_IMPLEMENTATION_RUN_IDS = Object.freeze([
   "31600806350"
 ]);
 
+const CURRENT_ALPHA_LOCK_SHA256 =
+  "d3b4818e9bcdb43f39df557847613d3e5ce0afa2f6fffda5af655217f2f5170a";
+
 const ORDERED_SECTION_CHAINS = Object.freeze({
   "README.md": Object.freeze([
     "## Purpose and current boundary",
@@ -104,6 +107,7 @@ const ORDERED_SECTION_CHAINS = Object.freeze({
     "## Publication and recovery state machine",
     "## Current public evidence",
     "## M4-001A completion evidence",
+    "## M4-001B tracked-lock checkpoint",
     "## Next actions"
   ]),
   "packages/cli/README.md": Object.freeze([
@@ -436,13 +440,26 @@ function validateFinalPublicDocuments(files, matrixDocument, packageDocument) {
     findings.push(finding("final-doc-release-fact-owner", "docs/M4-001_HANDOFF.md"));
   }
   const compatibility = files.get("docs/COMPATIBILITY_POLICY.md") ?? "";
+  const compatibilityProse = prose(compatibility);
+  const m4HandoffProse = prose(m4Handoff);
   if (!m4Handoff.includes("`M4-001A` is complete") ||
-      !m4Handoff.includes("`M4-001B` is next") ||
+      !m4Handoff.includes("`M4-001B` is in progress") ||
       !files.get("docs/RELEASE_GATES.md")?.includes("### M4-001A — contract admission (complete)") ||
-      !files.get("docs/RELEASE_GATES.md")?.includes("### M4-001B — exact candidate and lock (next)") ||
+      !files.get("docs/RELEASE_GATES.md")?.includes("### M4-001B — exact candidate and lock (in progress)") ||
       !compatibility.includes("Release Gates is the sole current release-phase owner") ||
       !compatibility.includes("M4-001A contract\nadmission is complete") ||
-      /M4-001A is active|M4-001B remains pending/iu.test(compatibility)) {
+      !compatibility.includes("M4-001B is in progress") ||
+      !m4Handoff.includes(CURRENT_ALPHA_LOCK_SHA256) ||
+      !files.get("docs/RELEASE_GATES.md")?.includes(CURRENT_ALPHA_LOCK_SHA256) ||
+      !compatibility.includes(CURRENT_ALPHA_LOCK_SHA256) ||
+      !m4HandoffProse.includes("exact reviewed lock") ||
+      !m4HandoffProse.includes("included in this tracked-admission change") ||
+      !m4HandoffProse.includes("has not been merged as S") ||
+      !releaseGates.includes("exact independently reviewed dual-builder lock is included in this tracked-admission change") ||
+      !releaseGates.includes("remaining M4-001B boundary is its unchanged commit and GitHub-verified merge as S") ||
+      !compatibilityProse.includes("included in the current tracked-admission change") ||
+      !compatibilityProse.includes("Release Gates owns the remaining merge S, attestation A, history, tag, hosted-evidence, and M4-001C registry/declaration phases") ||
+      /M4-001A is active|M4-001B (?:is next|remains pending)|review-pending candidate lock/iu.test(compatibility)) {
     findings.push(finding("final-doc-release-phase", "docs/M4-001_HANDOFF.md"));
   }
   if (!reproduction.includes("four\nreviewed public-alpha candidate tarballs") ||
@@ -635,6 +652,13 @@ test("final public-document mutations fail closed", async (t) => {
   await t.test("the completed contract phase regresses to active", () => {
     const value = mutateDocument("docs/M4-001_HANDOFF.md", (text) => text
       .replace("`M4-001A` is complete", "`M4-001A` is in progress"));
+    assert.equal(validateFinalPublicDocuments(value, supportMatrix, packagePlan)
+      .some(({ code }) => code === "final-doc-release-phase"), true);
+  });
+
+  await t.test("the reviewed tracked-lock checkpoint regresses to next", () => {
+    const value = mutateDocument("docs/M4-001_HANDOFF.md", (text) => text
+      .replace("`M4-001B` is in progress", "`M4-001B` is next"));
     assert.equal(validateFinalPublicDocuments(value, supportMatrix, packagePlan)
       .some(({ code }) => code === "final-doc-release-phase"), true);
   });

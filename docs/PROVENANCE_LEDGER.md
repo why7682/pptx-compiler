@@ -3116,6 +3116,82 @@ notes: This relation admits the M4-001A contract only. It records no release
   lifecycle work.
 ```
 
+### M4-001B create-only dual-builder candidate-lock checkpoint
+
+```yaml
+paths:
+  - HANDOFF.md
+  - TODO.md
+  - docs/COMPATIBILITY_POLICY.md
+  - docs/M4-001_HANDOFF.md
+  - docs/PROVENANCE_LEDGER.md
+  - docs/RELEASE_GATES.md
+  - packaging/releases/0.1.0-alpha.1.lock.json
+  - provenance/records.json
+  - tests/final-public-docs.test.mjs
+kind: generated canonical release-candidate identity record plus its narrow
+  M4-001B state and provenance projection
+origin: the lock was deterministically generated create-only by
+  scripts/generate-alpha-release-lock.mjs from exact Git-backed M4-001A source
+  commit b80761a62cff23cb90101605e09cc6e3c2924abd (tree
+  e4a4ca28fbfa3a83080142af63c9b08b36291ccc), the repository-owned release and
+  package plans plus their locked inputs, and the two fixed guarded package
+  stages. The other eight paths independently project only the resulting M4-001B
+  state and exact provenance relation. No predecessor source, external
+  implementation, registry payload, hosted output, presentation, private
+  fixture, generated archive bytes, or credential entered these bytes
+original_author_or_holder: Elliot Wu
+created_or_reviewed_on: 2026-08-13
+license_or_rights_basis: MIT
+third_party_dependencies:
+  - Node.js 22.23.2 (MIT; fixed verification runtime, not vendored)
+  - npm CLI 10.9.8 (Artistic-2.0; fixed verification builder, not vendored)
+  - Node.js 24.19.0 (MIT; fixed release runtime, not vendored)
+  - npm CLI 11.17.0 (Artistic-2.0; fixed release builder, not vendored)
+private_information_review: passed; the canonical JSON contains only approved
+  public identities, repository-relative input paths, fixed public tool
+  versions, byte counts, and SHA-256/SHA-512 fingerprints. It contains no token
+  value, password, OTP, credential, hostname, absolute local path, private
+  fixture, source presentation, raw log/API response, registry payload, or
+  generated tarball bytes
+project_constant_removal: passed; the lock projects its existing authorities
+  without adding a second package graph, support root, source-path authority,
+  publication order, lifecycle label, or release declaration
+public_fixture_conformance: applicable; the create-only canonical lock has
+  SHA-256 d3b4818e9bcdb43f39df557847613d3e5ce0afa2f6fffda5af655217f2f5170a
+  (Git blob 61d6df477769d3ebd5cd3ab3607fb977fc21ab5b, 6218 bytes)
+  and package-source-projection SHA-256
+  962defc231e784627c142f01df84669b08d9a7b3f1bae39da2ea1f2728d95312.
+  Node 22.23.2/npm 10.9.8 evidence is
+  f4e2da682b0870b1f26c07d3f522bf63ae2619708ec8b2230554f0a1be49e360 over
+  14409 bytes; Node 24.19.0/npm 11.17.0 evidence is
+  524b6a43da205d65347c48740792aba25b560ebc2fd340ceb407898829e3c795 over
+  14410 bytes. Both builders bind the same exact canonical tar payloads for
+  core (c33c94e65b9b21a59c8c42c24779e0e5e5fd8dc205c8cadc3c3d95b4fd35ef42,
+  720896 bytes), native-card-arrow
+  (64d3ce1971231ecb42907b820a89d5499de798b91eacdabec1b239c587d5618c,
+  57856 bytes), public-synthetic
+  (7c48c74fac58d8ce9b93c8221520fe7bb7d2ec366b4e2185ba28087c4372862c,
+  106496 bytes), and CLI
+  (473523a49a99bc4ee4cfadf986bdf33ac9d0ef6c9f31ef112973d158da449010,
+  69120 bytes). The exact current alpha-release focus passes 20/20 under both
+  Node 22.23.2 and Node 24.19.0
+independent_review: passed; one bounded exact-lock review reports 0 blocker,
+  0 high, and 0 medium with Taste=good. It independently recomputed canonical
+  lock/blob/size identity, all six locked inputs, 89 Git sources projected into
+  96 package members including modes and byte lengths, projection
+  962defc231e784627c142f01df84669b08d9a7b3f1bae39da2ea1f2728d95312,
+  both reviewed stage/evidence identities, all four cross-builder tar payloads,
+  fixed Node 24/npm 11 release-envelope admission, dependency-graph publication
+  order, and the forbidden-material scan
+notes: This is a narrow M4-001B candidate-lock relation; it does not rewrite
+  M4-001A history. The exact nine-path lock/state/provenance slice is now
+  independently reviewed and provenance-admitted. It has not yet been committed
+  or merged as GitHub-verified S; no attestation A, tag, tag-hosted evidence,
+  npm publication, registry equality/provenance result, or GitHub Release is
+  claimed.
+```
+
 The XML namespace, relationship-type, and MIME strings are interoperability
 identifiers from the public format specification. They do not convey third-
 party presentation content. The fictional `Synthetic Sans` typeface name does

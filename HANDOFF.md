@@ -637,7 +637,10 @@ D-048 now records the user's explicit authorization for annotated tag
 dist-tag `alpha`, and GitHub Actions plus npm provenance. Authorization is not
 execution evidence, and this handoff does not encode mutable external lifecycle
 labels in the locked candidate inputs; Release Gates and the official GitHub/npm
-records own observed phase completion. D-047/M3-008 branch protection remains
+records own observed phase completion. M4-001B's exact generated lock is now
+independently reviewed and included in this tracked-admission change, but there
+is no merge `S`, attestation `A`, tag, hosted tag result, npm publication,
+registry result, or GitHub Release. D-047/M3-008 branch protection remains
 independently deferred.
 
 On 2026-08-13, the user confirmed that the npm account email is verified, 2FA
@@ -658,6 +661,23 @@ smoke. Bounded independent review reports 0 blocker, 0 high, and 0 medium. The
 completion delta changes only non-package, non-lock-input state/provenance
 bytes. It creates no lock, tag, npm publication, registry result, or GitHub
 Release.
+
+M4-001B is now in progress. Create-only generation from exact M4-001A commit
+`b80761a62cff23cb90101605e09cc6e3c2924abd` and tree
+`e4a4ca28fbfa3a83080142af63c9b08b36291ccc`, using the fixed Node
+22.23.2/npm 10.9.8 and Node 24.19.0/npm 11.17.0 guarded stages, produced
+`packaging/releases/0.1.0-alpha.1.lock.json`. Its exact SHA-256 is
+`d3b4818e9bcdb43f39df557847613d3e5ce0afa2f6fffda5af655217f2f5170a` and
+its package-source projection is
+`962defc231e784627c142f01df84669b08d9a7b3f1bae39da2ea1f2728d95312`.
+The lock binds matching canonical tar payloads for all four packages and keeps
+both builders' evidence and gzip envelopes separate. A bounded exact-lock
+review independently recomputed its six inputs, 89 Git sources projected into
+96 members, both stage/evidence identities, four tar payloads, fixed Node
+24/npm 11 admission, dependency order, and forbidden-material result; it reports
+0 blocker, 0 high, and 0 medium with Taste=good. The exact lock is included in
+this nine-path tracked-admission change but has not been committed or merged as
+`S`.
 
 ## Persistent presentation-skill boundary
 
@@ -680,8 +700,10 @@ mandatory startup path:
 
 ## Immediate objective
 
-M4-001A's non-publishing contract slice is complete. Freeze M4-001B's inputs,
-run both fixed builders, create the tracked lock, and merge it as the
+M4-001A's non-publishing contract slice is complete and M4-001B is in progress.
+The frozen inputs and two fixed builder results have produced one exact
+create-only lock, and that exact lock has passed independent review and is
+included in this tracked-admission change. Commit and merge it unchanged as the
 GitHub-verified lock-containing commit `S`. Append exactly one repository-local
 public-identity attestation `A` whose sole parent is `S` and whose tip policy
 exact-grants `S`; pass the full history gate at `main=A`; only then create the
@@ -1005,9 +1027,10 @@ remain the machine command authority.
    under Node 22.23.2/npm 10.9.8 and Node 24.19.0/npm 11.17.0, plus the guarded
    four-package build, admission, offline joint install, and installed-CLI
    smoke under both runtime/npm pairs.
-3. Continue M4-001 under D-048's exact authorization. M4-001A is complete;
-   execute M4-001B's dual-builder lock, merge `S`, single-parent attestation
-   `A`, history gate at `main=A`, tag
+3. Continue M4-001 under D-048's exact authorization. M4-001A is complete and
+   M4-001B's exact dual-builder lock is independently reviewed and included in
+   this tracked-admission change. Commit and merge it unchanged as `S`, append
+   single-parent attestation `A`, pass the history gate at `main=A`, tag
    on unchanged `S`, clean-tag, and tag-hosted evidence before publishing;
    complete all four official-registry equality/provenance/dist-tag checks
    before creating the GitHub Release last. Do not add a lifecycle label to the

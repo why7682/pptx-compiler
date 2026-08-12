@@ -67,7 +67,7 @@ registry digest cannot turn different bytes into the reviewed tarball.
 | G3 — Capability correctness | Satisfied for the exact candidate path | One opt-in native-card candidate replays readable layout facts, proves exact diff/source isolation, and produces blocked QA with no BuildArtifact. |
 | G4 — Package boundary | Satisfied for the guarded package contract | Four allowlisted public-alpha candidate tarballs install together offline and execute the installed candidate flow; none is published yet, and exact release-tag tarballs plus publication equality remain G6. |
 | G5 — Project security and maintenance | **Satisfied** | Least-privilege workflows, CodeQL, Dependency Review, private vulnerability reporting, SBOM, and public process documents are present and evidenced. Branch protection is outside this closure and remains deferred. |
-| G6 — Release evidence | **In progress under D-048** | M4-001A contract admission is complete and M4-001B is next; no reviewed tag, release lock, published package, registry equality, provenance result, or GitHub Release exists yet. |
+| G6 — Release evidence | **In progress under D-048** | M4-001A contract admission is complete. M4-001B's exact independently reviewed dual-builder lock is included in this tracked-admission change, but it has not been merged as `S`; no `A`, tag, tag-hosted result, published package, registry equality/provenance result, or GitHub Release exists yet. |
 
 This table is scope-sensitive. “Satisfied” for G2 or G3 refers only to the
 fixed repository-owned candidate profile. It is not arbitrary-template,
@@ -235,7 +235,7 @@ skip any of its three machine-observable phases.
   GitHub Release;
 - this phase performs no tag creation, npm publication, or GitHub Release.
 
-### M4-001B — exact candidate and lock (next)
+### M4-001B — exact candidate and lock (in progress)
 
 - Node 22.23.2/npm 10.9.8 and Node 24.19.0/npm 11.17.0 independently build and
   smoke the four public tarballs;
@@ -262,6 +262,22 @@ skip any of its three machine-observable phases.
   approved public tagger, exact message, and remote ref/object all agree; and
 - the tag checkout is clean and full-history with no replace refs, grafts,
   alternates, or shallow boundary, then passes the complete canonical gates.
+
+Current checkpoint: create-only generation from exact M4-001A commit
+`b80761a62cff23cb90101605e09cc6e3c2924abd` (tree
+`e4a4ca28fbfa3a83080142af63c9b08b36291ccc`) and both fixed guarded stages
+produced lock
+`d3b4818e9bcdb43f39df557847613d3e5ce0afa2f6fffda5af655217f2f5170a`
+with package-source projection
+`962defc231e784627c142f01df84669b08d9a7b3f1bae39da2ea1f2728d95312`.
+One bounded independent review recomputed the exact lock/blob/size, six inputs,
+89 Git sources projected into 96 members with modes and lengths, two stage
+evidence records, four cross-builder tar payloads, fixed Node 24/npm 11 release
+envelopes, dependency order, and forbidden-material result; it reports
+0 blocker, 0 high, and 0 medium with Taste=good. That exact reviewed lock is
+included in this nine-path tracked-admission change. The remaining M4-001B
+boundary is its unchanged commit and GitHub-verified merge as `S`, followed by
+`A`, history admission, tag creation, and tag-hosted evidence.
 
 The source identity claim is deliberately narrow: this is an exact annotated
 tag pointing to a GitHub-verified accepted-main commit, followed by tag Public
@@ -365,11 +381,12 @@ contract. The release-critical facts are: zero supported rows, blocked QA, no
 BuildArtifact, no arbitrary-template flow, no release tag, and no published npm
 package.
 
-M4-001A is complete without a publication mutation. The next action is to
-freeze M4-001B's inputs, produce the dual-builder lock, and merge that reviewed lock as
-verified `S`. Append single-parent attestation `A`, exact-grant `S`, and pass the
-history gate at `main=A`; only afterward may the annotated tag target unchanged
-`S` and run the clean-tag gates. Only that complete lock/tag state may enter M4-001C's
-ordered registry state machine. If any byte or claim changes, rerun the affected
-gate rather than citing an older result. Branch protection remains separately
-deferred by D-047 and is not folded into G6.
+M4-001A is complete without a publication mutation. M4-001B's exact reviewed
+dual-builder lock is included in this tracked-admission change; the next action
+is to commit and merge it unchanged as verified `S`. Append single-parent
+attestation `A`, exact-grant `S`, and pass the history gate at `main=A`; only
+afterward may the annotated tag target unchanged `S` and run the clean-tag
+gates. Only that complete lock/tag state may enter M4-001C's ordered registry
+state machine. If any byte or claim changes, rerun the affected gate rather
+than citing an older result. Branch protection remains separately deferred by
+D-047 and is not folded into G6.

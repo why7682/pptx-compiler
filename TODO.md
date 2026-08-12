@@ -1164,7 +1164,7 @@ criterion is recorded in the repository.
 | ID | Status | Task | Exit criterion |
 | --- | --- | --- | --- |
 | M4-001A | DONE | Implement and verify the fail-closed `0.1.0-alpha.1` release contract authorized by D-048, without treating authorization as execution evidence. | Package-plan schema 3, the release plan, release-lock validator, exact-tag/history admission, dual-builder tar-payload equality with fixed-builder release-envelope identity, registry recovery states, public workflow policy, documentation, provenance, and adversarial tests agree; mutable external lifecycle state remains outside the locked-input contract. |
-| M4-001B | NEXT | Freeze the exact candidate, create its tracked dual-builder lock, merge that lock as the GitHub-verified commit `S`, append the one permitted repository-local public-identity attestation `A`, run history admission at `A`, and then create annotated tag `v0.1.0-alpha.1` on unchanged `S`. | Node 22.23.2/npm 10.9.8 and Node 24.19.0/npm 11.17.0 produce four byte-identical canonical tar payloads; the lock records both builders' gzip envelopes and assigns only the fixed Node 24/npm 11 envelopes as release bytes tracked by `S`. `A` has `S` as its sole parent and its tip-owned policy grants exactly `S`; the full reachable-history gate passes with remote `main=A`; only then does the annotated tag peel to `S`, and the tag-bound Public CI and Security workflows pass before npm publication. |
+| M4-001B | IN_PROGRESS | Freeze the exact candidate, create its tracked dual-builder lock, merge that lock as the GitHub-verified commit `S`, append the one permitted repository-local public-identity attestation `A`, run history admission at `A`, and then create annotated tag `v0.1.0-alpha.1` on unchanged `S`. | Node 22.23.2/npm 10.9.8 and Node 24.19.0/npm 11.17.0 produce four byte-identical canonical tar payloads; the lock records both builders' gzip envelopes and assigns only the fixed Node 24/npm 11 envelopes as release bytes tracked by `S`. `A` has `S` as its sole parent and its tip-owned policy grants exactly `S`; the full reachable-history gate passes with remote `main=A`; only then does the annotated tag peel to `S`, and the tag-bound Public CI and Security workflows pass before npm publication. |
 | M4-001C | PENDING | Publish and verify the four public npm packages in dependency-graph order, then create the GitHub Release last and retire the bootstrap credential. | The package-plan dependency graph derives `core -> native-card-arrow -> public-synthetic -> CLI`; publication completes with absent/equal/mismatch recovery, official-registry byte reread, npm provenance, `alpha` and no `latest`, then the GitHub Release binds the exact tag/lock/artifacts last. After that last publication mutation, all four exact npm Trusted Publisher bindings are configured, the bootstrap token is revoked, and GitHub `NPM_TOKEN` is deleted before M4-001C may be marked `DONE`; only non-secret configuration facts are recorded by non-lock state owners while the locked changelog, limitations, and release note remain lifecycle-neutral. |
 | M4-002 | PENDING | Collect compatibility evidence without expanding claims beyond tests. | Each tested external template records only redacted feature-level results and the public fixture remains sufficient for CI. |
 | M4-003 | PENDING | Define beta and 1.0 stability, migration, deprecation, and support promises. | Compatibility policy and conformance suite enforce the promises. |
@@ -1235,6 +1235,34 @@ criterion is recorded in the repository.
   GitHub Release. M4-001B is now the sole next release phase; M4-001C remains
   pending, support remains 0/22/3/35 with its global switch false, and
   D-047/M3-008 remains deferred.
+
+### M4-001B lock checkpoint — 2026-08-13
+
+- The exact frozen source is M4-001A commit
+  `b80761a62cff23cb90101605e09cc6e3c2924abd`, tree
+  `e4a4ca28fbfa3a83080142af63c9b08b36291ccc`. Its fixed Node 22.23.2/npm
+  10.9.8 and Node 24.19.0/npm 11.17.0 guarded stages supplied the two canonical
+  evidence records bound by the lock.
+- Create-only generation produced
+  `packaging/releases/0.1.0-alpha.1.lock.json` with exact SHA-256
+  `d3b4818e9bcdb43f39df557847613d3e5ce0afa2f6fffda5af655217f2f5170a`
+  and package-source projection
+  `962defc231e784627c142f01df84669b08d9a7b3f1bae39da2ea1f2728d95312`.
+  Both builders bind byte-identical canonical tar payloads for all four
+  packages; their evidence identities and every gzip envelope remain recorded
+  separately, with only the fixed Node 24/npm 11 envelopes eligible as release
+  bytes.
+- This starts but does not complete M4-001B. One bounded review independently
+  recomputed the exact lock/blob/size, six inputs, 89 Git sources projected into
+  96 members with modes and lengths, both stage/evidence identities, four tar
+  payloads, fixed Node 24/npm 11 admission, dependency order, and forbidden-
+  material result; it reports 0 blocker, 0 high, and 0 medium with Taste=good.
+  The lock is included in this nine-path tracked-admission change. The next
+  boundary is to commit and merge it unchanged as `S`.
+- No `S`, attestation `A`, tag, tag-hosted run, npm package, registry
+  equality/provenance result, or GitHub Release exists at this checkpoint.
+  M4-001C remains pending, support remains unchanged, and D-047/M3-008 remains
+  deferred.
 
 ## Deferred follow-through from the predecessor project
 

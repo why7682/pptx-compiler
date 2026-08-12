@@ -205,11 +205,12 @@ provenance result, or GitHub Release exists. D-048 authorizes those exact alpha
 actions but does not prove that they occurred.
 
 Release Gates is the sole current release-phase owner. M4-001A contract
-admission is complete without changing support. M4-001B is next and requires
-the dual-builder lock to be reviewed and accepted on main before a subsequent
-exact clean annotated tag binds that same tree; M4-001C remains pending until
-the registry state machine proves ordered publication and exact
-official-registry reread. None of those phases changes support by itself. Any
-later support promotion must name one demonstrated user scope, update its exact
-matrix rows, and retain every unknown case as fail-closed. D-047/M3-008 branch
-protection remains separately deferred.
+admission is complete without changing support. M4-001B is in progress: exact
+independently reviewed lock
+`d3b4818e9bcdb43f39df557847613d3e5ce0afa2f6fffda5af655217f2f5170a` is
+included in the current tracked-admission change. Release Gates owns the
+remaining merge `S`, attestation `A`, history, tag, hosted-evidence, and M4-001C
+registry/declaration phases. None of those phases changes support by itself.
+Any later support promotion must name one demonstrated user scope, update its
+exact matrix rows, and retain every unknown case as fail-closed. D-047/M3-008
+branch protection remains separately deferred.

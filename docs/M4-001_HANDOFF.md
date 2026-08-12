@@ -6,20 +6,23 @@ M4-001 is active and split at observable boundaries:
 
 - `M4-001A` is complete: the fail-closed non-publishing release contract and
   its current-byte provenance/review boundary are admitted;
-- `M4-001B` is next: freeze one exact candidate, produce and merge one
-  dual-builder lock as GitHub-verified commit `S`, append the single-parent
-  local attestation commit `A`, pass the history gate at `main=A`, then create
-  annotated tag `v0.1.0-alpha.1` on unchanged `S` and run the clean-tag gates;
+- `M4-001B` is in progress: exact reviewed lock
+  `d3b4818e9bcdb43f39df557847613d3e5ce0afa2f6fffda5af655217f2f5170a`
+  is included in this tracked-admission change; merge as GitHub-verified commit
+  `S`, the single-parent local attestation commit `A`, history gate at
+  `main=A`, annotated tag `v0.1.0-alpha.1` on unchanged `S`, and clean-tag gates
+  remain outstanding;
 - `M4-001C` is pending: publish and reread four npm packages, verify provenance
   and dist-tags, then create the GitHub Release last.
 
 D-048 records the user's explicit authorization for the exact tag and GitHub
 Release, four public npm packages under dist-tag `alpha`, and GitHub Actions
 plus npm provenance. Authorization is not evidence that an action occurred.
-There is currently no release tag, npm publication, release lock, registry
-provenance result, or GitHub Release. The lock-bound changelog, limitations,
-and release note are lifecycle-state neutral so their bytes remain truthful
-before and after any authorized external transition.
+The exact reviewed release lock is now admitted by this change, but it has not
+been merged as `S`; there is no attestation `A`, release tag, tag-hosted result,
+npm publication, registry provenance result, or GitHub Release. The lock-bound
+changelog, limitations, and release note are lifecycle-state neutral so their
+bytes remain truthful before and after any authorized external transition.
 
 D-047/M3-008 branch protection is separately deferred. No M4 state resumes it
 or makes it a release prerequisite.
@@ -40,7 +43,7 @@ Publisher, revoke the token, and remove the GitHub secret.
 | Package graph, public manifest, registry, access, dist-tag, provenance setting, derived dependency order | `packaging/alpha-package-plan.json` schema 3 |
 | Exact tag, builders, lock inputs, recovery and completion rules | `packaging/alpha-release-plan.json` |
 | Release phase order and eligibility | `docs/RELEASE_GATES.md` |
-| Candidate source/artifact identity | `packaging/releases/0.1.0-alpha.1.lock.json` once M4-001B passes |
+| Candidate source/artifact identity | Reviewed `packaging/releases/0.1.0-alpha.1.lock.json`; tracked admission is part of this change, while merge `S` and later phases remain outstanding |
 | Current support state | `policy/support-matrix.json` |
 | User-facing delta and limits | `CHANGELOG.md`, `docs/KNOWN_LIMITATIONS.md`, state-neutral release note |
 | Eligibility and transition rules | `docs/RELEASE_GATES.md` |
@@ -78,8 +81,9 @@ evidence. The artifact signature/provenance boundary is npm Sigstore provenance
 from the admitted GitHub Actions publication.
 
 The tracked lock path is
-`packaging/releases/0.1.0-alpha.1.lock.json`. It is not generated during
-M4-001A. Its closed fields are:
+`packaging/releases/0.1.0-alpha.1.lock.json`. It was not generated during
+M4-001A; it is independently reviewed and included in this M4-001B
+tracked-admission change. Its closed fields are:
 
 ```text
 schemaVersion
@@ -247,11 +251,40 @@ overlap package mappings or release-lock inputs.
 This closes contract admission only. No release lock, annotated tag, npm
 publication, registry provenance result, or GitHub Release was created.
 
+## M4-001B tracked-lock checkpoint
+
+The frozen lock-generation base is exact M4-001A commit
+`b80761a62cff23cb90101605e09cc6e3c2924abd`, tree
+`e4a4ca28fbfa3a83080142af63c9b08b36291ccc`. The fixed Node 22.23.2/npm
+10.9.8 stage contributes evidence SHA-256
+`f4e2da682b0870b1f26c07d3f522bf63ae2619708ec8b2230554f0a1be49e360`
+over 14409 bytes; the fixed Node 24.19.0/npm 11.17.0 stage contributes
+`524b6a43da205d65347c48740792aba25b560ebc2fd340ceb407898829e3c795`
+over 14410 bytes. Both bind the same canonical tar payload for each of the four
+packages.
+
+Create-only generation produced canonical lock SHA-256
+`d3b4818e9bcdb43f39df557847613d3e5ce0afa2f6fffda5af655217f2f5170a`
+(Git blob `61d6df477769d3ebd5cd3ab3607fb977fc21ab5b`, 6218 bytes) and package-source
+projection
+`962defc231e784627c142f01df84669b08d9a7b3f1bae39da2ea1f2728d95312`.
+The projection covers 89 exact Git sources and 96 package members, including
+modes and byte lengths. The lock records both builder-local evidence records
+and gzip envelopes; only the fixed Node 24/npm 11 entries may become release
+bytes.
+
+One bounded independent exact-lock review recomputed the six inputs, source
+projection, both reviewed stages, four tar payloads, fixed-builder admission,
+dependency order, and forbidden-material result. It reports 0 blocker, 0 high,
+and 0 medium with Taste=good. The exact lock and its state/provenance projection
+are admitted in this nine-path tracked change. M4-001B remains in progress:
+this change has not been merged as `S`, and no `A`, tag, hosted tag result, npm
+publication, registry equality/provenance result, or GitHub Release exists.
+
 ## Next actions
 
-1. Freeze the exact source and reader-facing bytes, run both fixed builders,
-   create the lock, and merge the reviewed lock as verified `S` without changing
-   its inputs.
+1. Commit and merge this exact reviewed tracked lock as verified `S` without
+   changing the lock or its inputs.
 2. Append the single-parent local-identity history-attestation `A` with sole parent
    `S` and an exact grant for `S`; run the reachable-history gate at `main=A`;
    then create the annotated tag on unchanged `S` and pass the clean-tag,
