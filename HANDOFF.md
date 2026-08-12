@@ -623,8 +623,10 @@ reports 0 blocker, 0 high, and 0 medium. In the fixed non-FileProvider copy,
 Node 22.23.2 and Node 24.19.0 each pass the 216-node affected focus, the
 24-node package-stage suite, and the 1228-node complete suite. npm 10.9.8 and
 npm 11.17.0 each build, admit, install offline, and smoke all four packages;
-the package-root CLI member is mode 0755. A corrected hosted run remains
-pending. Pull-request Dependency
+the package-root CLI member is mode 0755. Pull-request Public CI run
+`31591756372` then passed all six Ubuntu/macOS/Windows × Node 22/24 cells,
+including complete tests, guarded packages, working-tree recheck, and drift
+check. Pull-request Dependency
 Review is externally blocked because this private repository lacks the required
 GitHub Advanced Security capability. The four npm-name checks remain time-
 bounded and reserve nothing, and npm publication is separately blocked.
@@ -936,9 +938,9 @@ remain the machine command authority.
 
 ## Next work session
 
-1. Read `docs/M3-004_HANDOFF.md`. Finish PR #1's corrected six-cell CI. Do not
-   merge or promote M3-004B while Windows evidence is red or while private-repo
-   Dependency Review remains an unresolved external capability decision. After
+1. Read `docs/M3-004_HANDOFF.md`. PR #1's corrected six-cell CI passes. Do not
+   merge or promote M3-004B while private-repo Dependency Review remains an
+   unresolved external capability decision. After
    an accepted main update, retain final main-run CI and CodeQL evidence.
 2. Keep final release/platform wording in M3-005B until M3-004B closes.
 3. Keep predecessor code, presentation assets, converter output, and generated

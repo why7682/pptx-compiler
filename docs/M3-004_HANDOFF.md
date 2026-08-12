@@ -12,9 +12,10 @@ M3-004 has two different facts and they must not be conflated:
 
 The local workflow definition is complete. The first public CI run passed
 Ubuntu and macOS under Node 22 and 24 but failed Windows under both lines. The
-first security run passed CodeQL; Dependency Review was skipped because that
-job is restricted to ordinary pull requests. M3-004B is therefore partial and
-not complete.
+corrected pull-request run `31591756372` passes all six cells. First-ref CodeQL
+passes; pull-request CodeQL is skipped by event design, and Dependency Review
+fails because this private repository lacks GitHub Advanced Security. M3-004B
+is therefore partial and not complete.
 
 ## Kernel-style judgment
 
@@ -149,10 +150,13 @@ for the six public runner cells.
 
 ## Current public evidence
 
-- CI: https://github.com/why7682/pptx-compiler/actions/runs/31559642053
-- Security: https://github.com/why7682/pptx-compiler/actions/runs/31559642035
-- Passed: Ubuntu 22/24, macOS 22/24, and CodeQL.
-- Missing or failed: Windows 22/24 and ordinary-PR Dependency Review.
+- First CI: https://github.com/why7682/pptx-compiler/actions/runs/31559642053
+- Corrected PR CI: https://github.com/why7682/pptx-compiler/actions/runs/31591756372
+- First-ref security: https://github.com/why7682/pptx-compiler/actions/runs/31559642035
+- Pull-request security: https://github.com/why7682/pptx-compiler/actions/runs/31591756442
+- Passed: Ubuntu/macOS/Windows × Node 22/24 in the corrected PR run, plus
+  first-ref CodeQL.
+- Missing or failed: ordinary-PR Dependency Review and accepted-main CI/CodeQL.
 
 The first correction covered a platform-invalid test path, strict LF/CRLF Git
 text parsing, canonical bin spelling, and waiting for a killed child to close.
@@ -166,18 +170,18 @@ public-history object by exact old path plus blob OID. This local correction
 passes the 216-node affected focus, 24-node package-stage suite, and 1228-node
 complete suite under both Node 22.23.2 and Node 24.19.0. npm 10.9.8 and npm
 11.17.0 each rebuild, admit, install offline, and smoke all four packages, with
-the package-root CLI member at mode 0755. Corrected hosted evidence remains
-required.
+the package-root CLI member at mode 0755. Pull-request Public CI run
+`31591756372` passes all six cells, including complete tests, guarded packages,
+working-tree recheck, and drift check.
 
-Pull-request security run `31582316939` failed Dependency Review because this
+Pull-request security run `31591756442` failed Dependency Review because this
 private repository does not have the required GitHub Advanced Security
-capability. That is an unresolved external gate, not a product-code failure or
-pass.
+capability; CodeQL was skipped by the pull-request event contract. That is an
+unresolved external gate, not a product-code failure or pass.
 
 ## Next dependency
 
-Finish PR #1's corrected six-cell CI. Do not merge or promote M3-004B until the
-Windows cells are green and the private-repository Dependency Review capability
-has an explicit resolution. After an accepted change reaches `main`, retain the
+Do not merge or promote M3-004B until the private-repository Dependency Review
+capability has an explicit resolution. After an accepted change reaches `main`, retain the
 final-main CI and CodeQL results for those exact bytes. M3-005B remains blocked
 until that hosted evidence is complete.

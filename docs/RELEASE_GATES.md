@@ -118,7 +118,11 @@ both Windows cells fail. Later Windows corrections changed package inputs and
 history policy. The fixed-copy correction now passes the 216-node affected
 focus, 24-node package-stage suite, and 1228-node complete suite under both
 admitted Node lines; npm 10/11 each pass the guarded offline package spine. A
-corrected hosted run remains pending. Final published-ref SBOM validation,
+corrected pull-request run, `31591756372`, passes all six platform/runtime cells.
+Pull-request security run `31591756442` skips CodeQL by event design and fails
+Dependency Review because the private repository lacks GitHub Advanced
+Security. Accepted-main CI/CodeQL also remain open.
+Final published-ref SBOM validation,
 signing, registry
 provenance, and reviewed-to-published equality remain G5/G6 work. Source-tree
 facade tests or successful `npm pack --dry-run` alone never satisfy this gate.

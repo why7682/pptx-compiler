@@ -12,8 +12,9 @@ M3-005 is split at the real evidence boundary:
 M3-005A is complete. The local document contract defines one private reporting
 process plus the minimum contribution, governance, and reproducibility
 boundaries. M3-006 has since completed the exact first public source ref.
-M3-005B remains blocked because M3-004B has only partial hosted evidence: both
-Windows cells failed and Dependency Review has not yet run.
+M3-005B remains blocked because M3-004B has only partial hosted evidence:
+corrected pull-request CI passes all six platform/runtime cells, but private-
+repository Dependency Review and accepted-main CI/CodeQL remain absent.
 
 ## Responsibility boundary
 

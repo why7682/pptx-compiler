@@ -2429,8 +2429,9 @@ notes: D-041 closes M3-004A's local definition and verification only. It does
   The dependency proof is limited to parser-proven static ESM edges; direct
   loader/codegen checks are reviewed-source hardening. M3-006 later completed
   the repository-bound package and exact first-ref transitions. M3-004B has
-  begun, but its first run passed only the Ubuntu/macOS cells and CodeQL; both
-  Windows cells failed and ordinary-PR Dependency Review remains absent
+  begun: its first run passed Ubuntu/macOS plus CodeQL and failed Windows; the
+  corrected pull-request run `31591756372` later passed all six cells. Ordinary-
+  PR Dependency Review and accepted-main CI/CodeQL remain absent
 ```
 
 ### M3-005A minimum public-document boundary
@@ -2819,8 +2820,8 @@ kind: exact-first-ref execution evidence and first-hosted Windows portability
   correction
 origin: independently derived from the completed D-043/D-045 first-ref
   authority, first-ref GitHub run 31559642053, first-ref security run
-  31559642035, pull-request GitHub run 31582316951, pull-request security run
-  31582316939, and the exact repository-owned sources and tests. No hosted log,
+  31559642035, pull-request GitHub runs 31582316951 and 31591756372, pull-request
+  security runs 31582316939 and 31591756442, and the exact repository-owned sources and tests. No hosted log,
   raw API response, external implementation, package, asset, presentation,
   generated binary, or private fixture entered Git
 original_author_or_holder: Elliot Wu
@@ -2842,9 +2843,9 @@ public_fixture_conformance: applicable; Node 22.23.2 and Node 24.19.0 each pass
   the 216-node affected focus, 24-node package-stage suite, and 1228-node
   complete suite in the fixed non-FileProvider copy. npm 10.9.8 and npm 11.17.0
   each rebuild, admit, install offline, and smoke all four packages; the
-  package-root CLI member is mode 0755. Hosted Windows and accepted-final-main
-  CI/CodeQL evidence remain
-  required. Pull-request Dependency Review is externally blocked while this
+  package-root CLI member is mode 0755. Pull-request Public CI run
+  `31591756372` passes all six platform/runtime cells. Accepted-final-main
+  CI/CodeQL remain required. Pull-request Dependency Review is externally blocked while this
   private repository lacks the required GitHub Advanced Security capability
 independent_review: passed; two bounded current-byte reviews report 0 blocker,
   0 high, and 0 medium after exact historical-object, current-tip replay,
@@ -2854,9 +2855,9 @@ notes: M3-006 is complete at public main object
   410642b668514ab7193212d617cc0f8acb837924. The final launch scan covered 14
   commits, 505 leaf versions, 7,698,368 regular-blob bytes, and 28 identity
   occurrences with zero finding; repository ID/PVR/remote-main equality were
-  reverified. M3-004B remains partial: the first PR run again passed the four
-  Ubuntu/macOS cells, but both Windows cells failed on Git null-device and
-  nested-bin mode handling. Dependency Review also failed because this private
+  reverified. M3-004B remains partial: corrected pull-request Public CI run
+  `31591756372` passes all six Ubuntu/macOS/Windows × Node 22/24 cells after the
+  Git-null-device and package-root-bin corrections. Dependency Review failed because this private
   repository does not have the required GitHub Advanced Security capability
 ```
 

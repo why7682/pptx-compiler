@@ -832,9 +832,12 @@ criterion is recorded in the repository.
   complete suite. npm 10.9.8 and npm 11.17.0 each build and admit four private
   tarballs, install them together offline, smoke the installed CLI spine, and
   retain the package-root CLI at tar mode 0755.
-- Corrected hosted Windows evidence remains pending. Pull-request Dependency Review run `31582316939`
+- Pull-request Public CI run `31591756372` passes all six Ubuntu/macOS/Windows
+  × Node 22/24 cells, including complete tests, guarded packages, working-tree
+  recheck, and drift check. Pull-request Dependency Review run `31591756442`
   failed because the private repository lacks the required GitHub Advanced
-  Security capability; this external gate is unresolved, not a code pass.
+  Security capability, and CodeQL was skipped by the pull-request event design;
+  this external gate is unresolved, not a code pass.
 
 ### D-044 pre-public identity migration — 2026-08-11
 
