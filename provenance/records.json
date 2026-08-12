@@ -1396,7 +1396,7 @@
     {
       "path": "docs/PROVENANCE_LEDGER.md",
       "kind": "new-clean-room",
-      "origin": "current M4-001B tracked-lock checkpoint bytes independently updated from D-048, admitted M4-001A, exact base commit/tree, and reviewed lock d3b4818e9bcdb43f39df557847613d3e5ce0afa2f6fffda5af655217f2f5170a; no predecessor source, external implementation, hosted output, package content, presentation, private fixture, generated tarball bytes, registry payload, or credential was copied",
+      "origin": "current M4-001B tracked-lock and hosted-fixture checkpoint bytes independently updated from D-048, admitted M4-001A, exact base commit/tree, reviewed lock d3b4818e9bcdb43f39df557847613d3e5ce0afa2f6fffda5af655217f2f5170a, and the public failure conclusions of Public CI runs 31649380644 and 31650128937; no hosted log bytes, predecessor source, external implementation, package content, presentation, private fixture, generated tarball bytes, registry payload, or credential was copied",
       "copyrightHolderOrSourceAuthority": "Elliot Wu",
       "license": {
         "spdxExpression": "MIT"
@@ -1413,13 +1413,13 @@
       },
       "publicConformance": {
         "status": "applicable",
-        "notes": "Applicable for the M4-001B tracked-lock checkpoint. The new human relation names exactly nine endpoints and admits reviewed lock d3b4818e9bcdb43f39df557847613d3e5ce0afa2f6fffda5af655217f2f5170a plus its state/provenance/test projection. The alpha-release focus passes 20/20 on both fixed Node lines."
+        "notes": "Applicable for the M4-001B tracked-lock checkpoint. The human relation names exactly ten endpoints and admits reviewed lock d3b4818e9bcdb43f39df557847613d3e5ce0afa2f6fffda5af655217f2f5170a plus its state/provenance/test projection. Public CI run 31650128937 passed all four Linux/macOS cells and exposed only two Windows fixture cells where filesystem chmod had not created a 100755 Git index entry; Security run 31650128942 passed Dependency Review while CodeQL skipped by PR design. Explicit index-mode admission fixes both synthetic fixture paths, and the exact alpha-release focus passes 20/20 on both fixed Node lines."
       },
       "independentReview": {
         "status": "passed",
-        "notes": "Passed. The bounded exact-lock review reports 0 blocker, 0 high, and 0 medium with Taste=good after independently recomputing lock SHA-256, Git blob 61d6df477769d3ebd5cd3ab3607fb977fc21ab5b, 6218-byte size, inputs, projection, stages, payloads, release envelopes, graph order, and forbidden scan."
+        "notes": "Passed. The bounded exact-lock, hosted-SHA fixture, and Windows Git-mode fixture reviews each report 0 blocker, 0 high, and 0 medium with Taste=good. The latest review confirms that Git index mode is the cross-platform authority, both fixture paths are covered, and the existing executable-mode drift mutation remains fail-closed."
       },
-      "notes": "Appends one exact nine-path M4-001B relation without rewriting the historical 52-path M4-001A relation. The lock is included in this tracked-admission change; no merge S, A, tag, hosted result, npm publication, registry result, or GitHub Release is claimed."
+      "notes": "Appends one exact ten-path M4-001B relation without rewriting the historical 52-path M4-001A relation. The lock and two bounded hosted-fixture portability corrections are included in this tracked-admission change; no merge S, A, tag-hosted result, npm publication, registry result, or GitHub Release is claimed."
     },
     {
       "path": "docs/RELEASE_GATES.md",
@@ -5450,7 +5450,7 @@
     {
       "path": "provenance/records.json",
       "kind": "new-clean-room",
-      "origin": "current M4-001B tracked-lock checkpoint bytes independently updated from D-048, the admitted M4-001A contract, exact base commit/tree, and reviewed lock d3b4818e9bcdb43f39df557847613d3e5ce0afa2f6fffda5af655217f2f5170a; no predecessor source, external implementation, hosted output, package content, presentation, private fixture, generated tarball bytes, registry payload, or credential was copied",
+      "origin": "current M4-001B tracked-lock and hosted-fixture checkpoint bytes independently updated from D-048, the admitted M4-001A contract, exact base commit/tree, reviewed lock d3b4818e9bcdb43f39df557847613d3e5ce0afa2f6fffda5af655217f2f5170a, and the public failure conclusions of Public CI runs 31649380644 and 31650128937; no hosted log bytes, predecessor source, external implementation, package content, presentation, private fixture, generated tarball bytes, registry payload, or credential was copied",
       "copyrightHolderOrSourceAuthority": "Elliot Wu",
       "license": {
         "spdxExpression": "MIT"
@@ -5472,13 +5472,13 @@
       },
       "publicConformance": {
         "status": "applicable",
-        "notes": "Applicable for the M4-001B tracked-lock checkpoint. The machine ledger contains 287 sorted unique current-path records and the human relation names exactly ten endpoints, including the hosted tag-fixture correction discovered by Public CI run 31649380644. Lock SHA-256 d3b4818e9bcdb43f39df557847613d3e5ce0afa2f6fffda5af655217f2f5170a and package-source projection 962defc231e784627c142f01df84669b08d9a7b3f1bae39da2ea1f2728d95312 are admitted. No S, A, tag, hosted tag result, npm publication, registry result, or GitHub Release is claimed."
+        "notes": "Applicable for the M4-001B tracked-lock checkpoint. The machine ledger contains 287 sorted unique current-path records and the human relation names exactly ten endpoints, including the hosted SHA and Windows Git-index-mode fixture corrections exposed by Public CI runs 31649380644 and 31650128937. Security run 31650128942 passed Dependency Review while CodeQL skipped by PR design. Lock SHA-256 d3b4818e9bcdb43f39df557847613d3e5ce0afa2f6fffda5af655217f2f5170a and package-source projection 962defc231e784627c142f01df84669b08d9a7b3f1bae39da2ea1f2728d95312 are admitted. No S, A, tag, hosted tag result, npm publication, registry result, or GitHub Release is claimed."
       },
       "independentReview": {
         "status": "passed",
-        "notes": "Passed. One bounded independent exact-lock review reports 0 blocker, 0 high, and 0 medium with Taste=good after recomputing the lock, inputs, source projection, reviewed stages, package members and modes, tar payloads, release-envelope admission, dependency order, and forbidden-material result."
+        "notes": "Passed. The bounded exact-lock, hosted-SHA fixture, and Windows Git-mode fixture reviews each report 0 blocker, 0 high, and 0 medium with Taste=good. They confirm exact lock/source identities, unchanged production tag admission, explicit cross-platform Git index-mode authority, both fixture paths, and the retained executable-mode drift rejection."
       },
-      "notes": "Contains 287 sorted unique current-path records and one exact ten-path M4-001B tracked-lock and hosted-fixture-correction relation. The reviewed lock is admitted by this change but has not been merged as S; no A, tag, hosted result, npm publication, registry result, or GitHub Release is claimed."
+      "notes": "Contains 287 sorted unique current-path records and one exact ten-path M4-001B tracked-lock and two-stage hosted-fixture-correction relation. The reviewed lock is admitted by this change but has not been merged as S; no A, tag, tag-hosted result, npm publication, registry result, or GitHub Release is claimed."
     },
     {
       "path": "sbom.alpha.cdx.json",
@@ -6829,7 +6829,7 @@
     {
       "path": "tests/alpha-release.test.mjs",
       "kind": "new-clean-room",
-      "origin": "current M4-001B hosted-environment fixture correction independently authored from the exact GitHub Actions failure in Public CI run 31649380644 and the existing synthetic exact-tag contract; no hosted log bytes, predecessor test, external implementation, package content, presentation, private fixture, registry payload, or credential was copied",
+      "origin": "current M4-001B hosted-environment fixture corrections independently authored from the exact failure conclusions of Public CI runs 31649380644 and 31650128937 plus the existing synthetic exact-tag and Git-mode contracts; no hosted log bytes, predecessor test, external implementation, package content, presentation, private fixture, registry payload, or credential was copied",
       "copyrightHolderOrSourceAuthority": "Elliot Wu",
       "license": {
         "spdxExpression": "MIT"
@@ -6852,13 +6852,13 @@
       },
       "publicConformance": {
         "status": "applicable",
-        "notes": "Applicable for the M4-001B tracked-lock checkpoint. Public CI run 31649380644 exposed five tag-fixture failures because the hosted PR GITHUB_SHA leaked into a temporary synthetic repository. The fixture now removes that ambient hosted SHA while a separate explicit mismatch assertion still proves that production tag admission rejects a wrong GITHUB_SHA. The targeted test passes both with and without an ambient hosted SHA, and the exact Node 22 tag/lock focus passes 20/20."
+        "notes": "Applicable for the M4-001B tracked-lock checkpoint. Public CI run 31649380644 exposed five tag-fixture failures because hosted PR GITHUB_SHA leaked into a temporary synthetic repository; Public CI run 31650128937 then passed all four Linux/macOS cells but exposed four failures in each Windows cell because filesystem chmod did not create the fixture's required 100755 Git index entry. Security run 31650128942 passed Dependency Review while CodeQL skipped by PR design. The fixture removes only the ambient synthetic-repository SHA and derives package-plan bin sources for explicit update-index executable admission after git add. Production code is unchanged, the explicit wrong-SHA and 100755-to-100644 mutations still reject, and the exact Node 22.23.2 and Node 24.19.0 tag/lock focuses each pass 20/20."
       },
       "independentReview": {
         "status": "passed",
-        "notes": "Passed. A bounded hosted-fixture review reports 0 blocker, 0 high, and 0 medium with Taste=good. It confirms that only the synthetic temporary-repository fixture drops ambient GITHUB_SHA, while production exact-tag admission still consumes process.env and the explicit mismatch mutation remains fail-closed."
+        "notes": "Passed. Separate bounded hosted-SHA and Windows Git-mode fixture reviews each report 0 blocker, 0 high, and 0 medium with Taste=good. They confirm that only synthetic fixture state is normalized, Git index mode is the executable authority on every platform, both fixture creation paths are covered, production exact-tag admission is unchanged, and the wrong-SHA plus executable-mode drift mutations remain fail-closed."
       },
-      "notes": "Exercises the release plan, dual-builder lock, source projection, exact tag, registry recovery, and release declaration. The hosted fixture correction does not weaken the production GITHUB_SHA boundary or claim any tag, npm publication, registry result, or GitHub Release."
+      "notes": "Exercises the release plan, dual-builder lock, source projection, exact tag, registry recovery, and release declaration. The two hosted fixture corrections do not weaken production GITHUB_SHA or Git-mode boundaries and claim no tag, npm publication, registry result, or GitHub Release."
     },
     {
       "path": "tests/candidate-build-record.test.mjs",

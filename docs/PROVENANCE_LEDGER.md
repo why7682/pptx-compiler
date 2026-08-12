@@ -3175,8 +3175,17 @@ public_fixture_conformance: applicable; the create-only canonical lock has
   (7c48c74fac58d8ce9b93c8221520fe7bb7d2ec366b4e2185ba28087c4372862c,
   106496 bytes), and CLI
   (473523a49a99bc4ee4cfadf986bdf33ac9d0ef6c9f31ef112973d158da449010,
-  69120 bytes). The exact current alpha-release focus passes 20/20 under both
-  Node 22.23.2 and Node 24.19.0
+  69120 bytes). Public CI run 31649380644 exposed ambient GITHUB_SHA leaking
+  into the synthetic tag repository; Public CI run 31650128937 then passed all
+  four Linux/macOS cells but exposed that filesystem chmod did not create a
+  100755 Git index entry in either Windows cell. Security run 31650128942
+  passed Dependency Review while CodeQL skipped by the designed PR-event
+  split. The fixtures now remove only the ambient synthetic-repository SHA and,
+  after each initial git add, derive the package-plan bin sources and admit
+  their executable modes explicitly through git update-index. Production tag
+  admission is unchanged. With both hostile hosted values represented, the
+  exact current alpha-release focus passes 20/20 under both Node 22.23.2 and
+  Node 24.19.0
 independent_review: passed; one bounded exact-lock review reports 0 blocker,
   0 high, and 0 medium with Taste=good. It independently recomputed canonical
   lock/blob/size identity, all six locked inputs, 89 Git sources projected into
@@ -3185,10 +3194,14 @@ independent_review: passed; one bounded exact-lock review reports 0 blocker,
   both reviewed stage/evidence identities, all four cross-builder tar payloads,
   fixed Node 24/npm 11 release-envelope admission, dependency-graph publication
   order, and the forbidden-material scan. A second bounded review of the
-  hosted-fixture correction also reports 0 blocker, 0 high, and 0 medium with
+  hosted-SHA fixture correction also reports 0 blocker, 0 high, and 0 medium with
   Taste=good; it confirms that only the synthetic temporary-repository fixture
   removes ambient GITHUB_SHA, while production exact-tag admission and its
-  explicit mismatch mutation remain fail-closed
+  explicit mismatch mutation remain fail-closed. A third bounded review of the
+  Windows Git-mode correction reports 0 blocker, 0 high, and 0 medium with
+  Taste=good; it confirms that the index owns the 100755 contract on every
+  platform, both fixture paths are covered, and the existing 100755-to-100644
+  drift mutation still exercises the production rejection
 notes: This is a narrow M4-001B candidate-lock relation; it does not rewrite
   M4-001A history. The exact ten-path lock/state/provenance/test slice is now
   independently reviewed and provenance-admitted. It has not yet been committed

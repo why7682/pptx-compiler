@@ -105,6 +105,15 @@ function projectedSourceModes() {
     ])));
 }
 
+function admitPackageBinModes(git) {
+  const binSources = [...new Set(packagePlan.packages.flatMap((item) =>
+    flattenPackageFiles(item)
+      .filter((entry) => entry.role === "bin")
+      .map((entry) => entry.source)))].sort();
+  assert.notEqual(binSources.length, 0);
+  git("update-index", "--chmod=+x", "--", ...binSources);
+}
+
 function reviewedTarballs({ compressionLevel = 9, contentSuffix = "" } = {}) {
   const tarHeader = (archivePath, content, mode) => {
     const header = Buffer.alloc(512);
@@ -325,6 +334,7 @@ async function createLockGenerationFixture(t) {
   git("config", "user.name", "Public Test");
   git("config", "user.email", ["public-test", "@", "example.invalid"].join(""));
   git("add", ".");
+  admitPackageBinModes(git);
   git("commit", "--quiet", "-m", "public lock fixture");
   const verificationStage = path.join(resolvedTemporary, "verification-reviewed");
   const fixedStage = path.join(resolvedTemporary, "fixed-reviewed");
@@ -384,6 +394,7 @@ async function createTagInspectionFixture(t, {
     await writeFile(lockPath, canonicalAlphaReleaseLockText(releaseLock()));
   }
   git("add", ".");
+  admitPackageBinModes(git);
   git("commit", "--quiet", "-m", "reviewed release candidate");
   git(
     "tag",
