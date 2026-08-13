@@ -33,10 +33,21 @@ M4-001 remains active at a forward-only recovery boundary:
   occurred. `alpha.2` is a preserved partial publication, not a release.
 - D-050 authorizes the fresh `0.1.0-alpha.3` four-package recovery. Its contract
   must accept the observed npm seed-`latest` invariant, use bounded provenance
-  propagation retries, and preserve all old versions and refs. Candidate
-  projection, lock, reviewed merge/attestation, annotated tag, hosted gates,
-  npm graph, GitHub prerelease, Trusted Publishers, and credential retirement
-  remain separately evidenced transitions.
+  propagation retries, and preserve all old versions and refs. Exact pre-lock
+  source commit `131b15d80b9dfc51b48092a13357348c242d4103` and both fixed
+  builder results have produced the fresh create-only schema-2 lock. It is
+  6218 bytes, mode `100644`, with SHA-256
+  `f5e3b8ceff284b908b6febb678501f63e07d50eff041b3c60532a8f6511dd675`
+  and package-source projection
+  `71269e5d7b25ada8f208893e57a3160766374a51bb23808b5df18893e60d9548`.
+  Independent no-local/no-hardlink regeneration and direct Git-tree/tar
+  recomputation report 0 blocker, 0 high, and 0 medium with Taste=good.
+  The exact lock is admitted for tracking as Git blob
+  `eb875526ffefc81b4bbaa2c15ed4412b31a8d026` but remains untracked; any byte
+  change invalidates the review. Reviewed merge/attestation, annotated tag,
+  hosted gates, npm graph, GitHub prerelease, Trusted Publishers, and
+  credential retirement remain separately evidenced transitions and have not
+  occurred.
 
 D-047/M3-008 branch protection remains independently deferred. Neither D-050
 nor any M4 phase resumes it or makes it a release prerequisite.
@@ -52,7 +63,7 @@ nor any M4 phase resumes it or makes it a release prerequisite.
 | Current support state | `policy/support-matrix.json` |
 | User-facing delta and negative contract | `CHANGELOG.md`, `docs/KNOWN_LIMITATIONS.md`, and lifecycle-neutral `docs/releases/0.1.0-alpha.3.md`; the `alpha.2` note is immutable history |
 | Exact `alpha.2` candidate/artifact identity | Immutable `packaging/releases/0.1.0-alpha.2.lock.json`, lock merge `S2=b884b39bdded17d7bc2ccedad159605523329bae`, attestation `A2=626560ec43e748ac8002352d9f849ee0d6e09b2f`, and annotated tag `v0.1.0-alpha.2 -> S2` |
-| Exact `alpha.3` candidate/artifact identity | A fresh create-only release lock after both fixed builders and independent admission; no old lock or tag is reusable authority |
+| Exact `alpha.3` candidate/artifact identity | The fresh create-only `packaging/releases/0.1.0-alpha.3.lock.json` from both fixed builders is independently admitted for tracking at SHA-256 `f5e3b8ceff284b908b6febb678501f63e07d50eff041b3c60532a8f6511dd675` / blob `eb875526ffefc81b4bbaa2c15ed4412b31a8d026`; it remains untracked, and no old lock or tag is reusable authority |
 | Actual npm/GitHub lifecycle state | Official registry responses, fetched npm provenance/signatures, exact GitHub tag and Release records |
 
 The package plan owns publication settings and dependency edges exactly once.
@@ -137,6 +148,19 @@ lock must pass independent recomputation, enter exact provenance, be tracked,
 and be merged unchanged before the tag exists. The immutable `alpha.2` lock,
 its builders, and its published core envelope are audit inputs only; they
 cannot supply or authorize any `alpha.3` byte.
+
+Current create-only checkpoint: exact source commit
+`131b15d80b9dfc51b48092a13357348c242d4103` produced the untracked 6218-byte
+lock at mode `100644`, SHA-256
+`f5e3b8ceff284b908b6febb678501f63e07d50eff041b3c60532a8f6511dd675`,
+and package-source projection
+`71269e5d7b25ada8f208893e57a3160766374a51bb23808b5df18893e60d9548`.
+Its six locked inputs, 89 unique mapped sources, 92 source mappings, 96 final
+package members, and lock bytes are frozen. Independent regeneration and direct
+Git-tree/tar recomputation report 0 blocker, 0 high, and 0 medium with
+Taste=good and admit only exact blob
+`eb875526ffefc81b4bbaa2c15ed4412b31a8d026` for tracking. It remains
+untracked; admission is not `S3`, `A3`, tag, hosted, or publication evidence.
 
 ## GitHub Actions OIDC and provenance boundary
 
@@ -327,13 +351,12 @@ exists. D-050 and the registry-model correction do not change those facts.
 
 ## Next exact action
 
-1. Correct the release contract to model package identity, immutable version,
-   complete dist-tag map, and bounded attestation propagation separately; pass
-   its positive and adversarial verification without a registry mutation.
-2. Project all four packages and lifecycle-neutral reader inputs to
-   `0.1.0-alpha.3`, produce both fixed-builder results, create and independently
-   admit the fresh lock, merge it unchanged as GitHub-verified `S3`, and append
-   only its exact single-parent attestation `A3`.
+1. Track only exact lock blob
+   `eb875526ffefc81b4bbaa2c15ed4412b31a8d026`, rerun staged leakage,
+   provenance, support, contract, release-metadata, and lock-admission gates,
+   and reject any byte or mode drift.
+2. Merge that unchanged lock as GitHub-verified `S3`, then append only its exact
+   single-parent attestation `A3`.
 3. Pass current-main history admission, create the annotated tag on unchanged
    `S3`, and require tag Public CI and Security. Only then run the
    dependency-order registry state machine and complete

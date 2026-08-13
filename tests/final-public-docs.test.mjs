@@ -45,6 +45,13 @@ const M3_IMPLEMENTATION_RUN_IDS = Object.freeze([
 const HISTORICAL_ALPHA1_LOCK_SHA256 =
   "d3b4818e9bcdb43f39df557847613d3e5ce0afa2f6fffda5af655217f2f5170a";
 
+const CURRENT_ALPHA3_PRELOCK_COMMIT =
+  "131b15d80b9dfc51b48092a13357348c242d4103";
+const CURRENT_ALPHA3_LOCK_SHA256 =
+  "f5e3b8ceff284b908b6febb678501f63e07d50eff041b3c60532a8f6511dd675";
+const CURRENT_ALPHA3_SOURCE_PROJECTION_SHA256 =
+  "71269e5d7b25ada8f208893e57a3160766374a51bb23808b5df18893e60d9548";
+
 const ORDERED_SECTION_CHAINS = Object.freeze({
   "README.md": Object.freeze([
     "## Purpose and current boundary",
@@ -520,9 +527,7 @@ function validateFinalPublicDocuments(files, matrixDocument, packageDocument) {
     "D-050's fresh `alpha.3` lane derives npm dependency order",
     "GitHub Release last"
   ]) || !hasOrderedPhrases(m4Handoff, [
-    "Correct the release contract",
-    "Project all four packages",
-    "fresh lock",
+    "Track only exact lock blob\n   `eb875526ffefc81b4bbaa2c15ed4412b31a8d026`",
     "GitHub-verified `S3`",
     "single-parent attestation `A3`",
     "Pass current-main history admission",
@@ -654,10 +659,18 @@ function validateFinalPublicDocuments(files, matrixDocument, packageDocument) {
       !m4Handoff.includes(HISTORICAL_ALPHA1_LOCK_SHA256) ||
       !m4HandoffProse.includes("fresh create-only packaging/releases/0.1.0-alpha.3.lock.json") ||
       !m4HandoffProse.includes("Generation establishes a candidate identity, not review or admission") ||
+      !m4Handoff.includes(CURRENT_ALPHA3_PRELOCK_COMMIT) ||
+      !m4Handoff.includes(CURRENT_ALPHA3_LOCK_SHA256) ||
+      !m4Handoff.includes(CURRENT_ALPHA3_SOURCE_PROJECTION_SHA256) ||
+      !m4Handoff.includes("The exact lock is admitted for tracking as Git blob") ||
+      !m4Handoff.includes("It remains\nuntracked; admission is not `S3`, `A3`, tag, hosted, or publication evidence") ||
+      !releaseGates.includes(CURRENT_ALPHA3_LOCK_SHA256) ||
+      !releaseGates.includes("Exact Git blob eb875526ffefc81b4bbaa2c15ed4412b31a8d026 is admitted for tracking but remains untracked") ||
+      !compatibilityProse.includes("Independent exact review admits only its frozen bytes for tracking, but the lock remains untracked and has not become S3") ||
       !releaseGates.includes("G6 — Release evidence") ||
       !releaseGates.includes("In progress under D-050") ||
       !compatibilityProse.includes("old alpha.2 candidate is immutable partial publication") ||
-      !compatibilityProse.includes("fresh alpha.3 boundary must admit registry seed-tag and eventual-provenance behavior") ||
+      !compatibilityProse.includes("fresh alpha.3 boundary has admitted registry seed-tag and eventual-provenance behavior") ||
       /M4-001A is active|M4-001D (?:is next|remains pending)|alpha\.3[^.]{0,80}(?:lock exists|review passed|tag exists|is released)/iu.test(compatibility)) {
     findings.push(finding("final-doc-release-phase", "docs/M4-001_HANDOFF.md"));
   }
@@ -927,6 +940,16 @@ test("final public-document mutations fail closed", async (t) => {
       .replace(
         "Generation establishes a candidate identity, not review or admission",
         "Generation establishes a reviewed and admitted alpha.3 release lock"
+      ));
+    assert.equal(validateFinalPublicDocuments(value, supportMatrix, packagePlan)
+      .some(({ code }) => code === "final-doc-release-phase"), true);
+  });
+
+  await t.test("the created alpha.3 lock is overclaimed as independently reviewed", () => {
+    const value = mutateDocument("docs/M4-001_HANDOFF.md", (text) => text
+      .replace(
+        "The exact lock is admitted for tracking as Git blob",
+        "The exact lock is tracked and merged as S3 from Git blob"
       ));
     assert.equal(validateFinalPublicDocuments(value, supportMatrix, packagePlan)
       .some(({ code }) => code === "final-doc-release-phase"), true);

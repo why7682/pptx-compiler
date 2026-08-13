@@ -758,6 +758,22 @@ The ambient
 to satisfy the fail-closed Git-environment boundary; no source/config change
 occurred.
 
+The fresh `alpha.3` create-only generation used exact pre-lock commit
+`131b15d80b9dfc51b48092a13357348c242d4103` and both fixed guarded builder
+results. It produced schema-2
+`packaging/releases/0.1.0-alpha.3.lock.json`, 6218 bytes, mode `100644`,
+SHA-256
+`f5e3b8ceff284b908b6febb678501f63e07d50eff041b3c60532a8f6511dd675`,
+with package-source projection
+`71269e5d7b25ada8f208893e57a3160766374a51bb23808b5df18893e60d9548`.
+Independent no-local/no-hardlink regeneration and direct Git-tree/tar
+recomputation report 0 blocker, 0 high, and 0 medium with Taste=good. The exact
+mode-`100644`, 6218-byte file is admitted for tracking at Git blob
+`eb875526ffefc81b4bbaa2c15ed4412b31a8d026`; it remains untracked and any byte
+change invalidates the review. No `S3`, `A3`, annotated tag, hosted result, npm
+`alpha.3` publication, GitHub Release, Trusted Publisher binding,
+bootstrap-token revocation, or environment-secret deletion has occurred.
+
 ## Persistent presentation-skill boundary
 
 This boundary survives compaction because this file and `AGENTS.md` are on the
@@ -785,11 +801,12 @@ core was published, the other three versions and GitHub Release remain absent,
 and later independent byte/provenance verification passed. Do not rerun,
 unpublish, move an old tag, reuse a version, or repair its dist-tags.
 
-M4-001D owns D-050's fresh `alpha.3` recovery. First admit the corrected
-registry model and bounded propagation behavior without a write. Then project
-all four packages and lifecycle-neutral reader inputs to exact `alpha.3`,
-reproduce both fixed builders, create and independently admit the fresh lock,
-merge it unchanged as `S3`, append sole-child exact-grant `A3`, pass history,
+M4-001D owns D-050's fresh `alpha.3` recovery. The corrected registry model,
+bounded propagation behavior, exact package/reader projection, two fixed
+builders, and independently reviewed create-only lock now exist without a
+registry write. Next, track only exact blob
+`eb875526ffefc81b4bbaa2c15ed4412b31a8d026` and merge it unchanged as `S3`,
+append sole-child exact-grant `A3`, pass history,
 annotated-tag, Public CI, and Security gates, and only then enter npm.
 
 The package plan owns publication settings and the dependency graph deriving
@@ -1115,11 +1132,12 @@ remain the machine command authority.
    smoke under both runtime/npm pairs.
 3. Preserve D-048/D-049's `alpha.1` and `alpha.2` locks, refs, hosted records,
    and exact partial registry state without movement or reuse. Continue M4-001D
-   under D-050: admit the corrected seed-tag/propagation model, create the fresh
-   `alpha.3` projection and lock, close `S3 -> A3`, tag-hosted gates, ordered
-   registry equality/provenance/tag-map checks, and GitHub-prerelease-last
-   declaration. Record Trusted Publishers only as configured/visible with
-   allowed action npm publish; retire bootstrap credentials as authorized.
+   under D-050: track only the independently admitted exact `alpha.3` lock blob
+   `eb875526ffefc81b4bbaa2c15ed4412b31a8d026`, merge it unchanged as `S3`,
+   close `S3 -> A3`, tag-hosted gates, ordered registry equality/provenance/
+   tag-map checks, and GitHub-prerelease-last declaration. Record Trusted
+   Publishers only as configured/visible with allowed action npm publish;
+   retire bootstrap credentials as authorized.
 4. Keep support unchanged and D-047/M3-008 branch protection deferred. D-050
    does not automatically resume it.
 5. Keep predecessor code, presentation assets, converter output, and generated

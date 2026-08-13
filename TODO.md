@@ -1419,6 +1419,30 @@ invalidated it, and D-050 plus M4-001D now own the seed-`latest` recovery model.
   visible on npm is not execution proof; a future tokenless OIDC publication is
   the first proof that the binding works.
 
+### M4-001D `alpha.3` create-only lock checkpoint — 2026-08-14
+
+- Exact pre-lock commit
+  `131b15d80b9dfc51b48092a13357348c242d4103` supplied the six frozen locked
+  inputs, 89 mapped sources, and both fixed guarded builder results.
+  Create-only generation wrote schema-2
+  `packaging/releases/0.1.0-alpha.3.lock.json`.
+- The untracked lock is 6218 bytes, mode `100644`, with SHA-256
+  `f5e3b8ceff284b908b6febb678501f63e07d50eff041b3c60532a8f6511dd675`
+  and package-source projection
+  `71269e5d7b25ada8f208893e57a3160766374a51bb23808b5df18893e60d9548`.
+  It binds distinct Node 22.23.2/npm 10.9.8 and Node 24.19.0/npm 11.17.0
+  evidence and gzip envelopes plus equal canonical decompressed tar payloads
+  for all four packages.
+- Independent no-local/no-hardlink regeneration and direct Git-tree/tar
+  recomputation report 0 blocker, 0 high, and 0 medium with Taste=good. They
+  admit only the exact mode-`100644`, 6218-byte lock at Git blob
+  `eb875526ffefc81b4bbaa2c15ed4412b31a8d026` for tracking; it remains
+  untracked and any byte change requires a new dual-builder and independent
+  review. M4-001D stays `IN_PROGRESS`. No `S3`, `A3`, annotated tag, tag-hosted
+  result, npm `alpha.3` package, registry provenance/signature or dist-tag
+  result, GitHub Release, Trusted Publisher binding, bootstrap-token
+  revocation, or environment-secret deletion exists by this checkpoint.
+
 ## Deferred follow-through from the predecessor project
 
 These entries intentionally remain at the tail so the generic public core is

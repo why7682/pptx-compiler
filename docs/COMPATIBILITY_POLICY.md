@@ -209,12 +209,14 @@ compatibility status.
 Release Gates is the sole current release-phase owner; see
 [`docs/RELEASE_GATES.md`](RELEASE_GATES.md). M4-001A contract
 admission is complete, as is the immutable `alpha.2` candidate/tag boundary,
-without changing support. The fresh `alpha.3` boundary must admit registry
-seed-tag and eventual-provenance behavior, then establish its own lock,
-`S3 -> A3`, tag, hosted evidence, registry graph, and declaration. Release
-Gates owns those facts. None changes compatibility by itself, and consumers
-must select the prerelease by exact version or `@alpha` rather than infer
-compatibility from package-level `latest`.
+without changing support. The fresh `alpha.3` boundary has admitted registry
+seed-tag and eventual-provenance behavior and has created its own exact
+dual-builder lock. Independent exact review admits only its frozen bytes for
+tracking, but the lock remains untracked and has not become `S3`. It must still
+establish `S3 -> A3`, tag, hosted evidence, registry graph, and declaration.
+Release Gates owns those facts. None changes compatibility by itself, and
+consumers must select the prerelease by exact version or `@alpha` rather than
+infer compatibility from package-level `latest`.
 Any later support promotion must name one demonstrated user scope, update its
 exact matrix rows, and retain every unknown case as fail-closed. D-047/M3-008
 branch protection remains separately deferred.

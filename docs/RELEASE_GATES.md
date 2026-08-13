@@ -27,7 +27,7 @@ alpha is a different, later boundary.
 | Release delta and state-neutral release-facing projection | `CHANGELOG.md` and `docs/releases/0.1.0-alpha.3.md`; the `alpha.2` note is immutable history |
 | Exact tag, builders, locked inputs, recovery, and completion rules | D-050 and `packaging/alpha-release-plan.json`; D-048/D-049 remain old-version history |
 | Release phase order and eligibility | This document |
-| Exact candidate and artifact identity | `alpha.2` is bound by its immutable lock, `S2`, `A2`, and annotated tag; `alpha.3` requires a fresh create-only lock, reviewed `S3`, `A3`, and tag before publication |
+| Exact candidate and artifact identity | `alpha.2` is bound by its immutable lock, `S2`, `A2`, and annotated tag; the fresh create-only `alpha.3` lock is independently admitted for tracking but remains untracked and still requires reviewed `S3`, `A3`, and tag before publication |
 
 The support matrix may block a release, but a release cannot promote the
 matrix. The package plan owns intended files, while the final reviewed tarball
@@ -65,7 +65,7 @@ registry digest cannot turn different bytes into the reviewed tarball.
 
 | Gate | Candidate-alpha state | Decisive boundary |
 | --- | --- | --- |
-| G0 — Identity, rights, provenance | Satisfied through immutable `alpha.2`; pending for `alpha.3` | Public identity, MIT rights, exact provenance, leakage policy, and the `S2 -> A2`/tag relation are recorded; `alpha.3` needs its own exact lock/source/attestation/tag admission. |
+| G0 — Identity, rights, provenance | Satisfied through immutable `alpha.2`; pending for `alpha.3` | Public identity, MIT rights, exact provenance, leakage policy, and the `S2 -> A2`/tag relation are recorded; the fresh `alpha.3` lock is independently admitted for tracking, while actual tracking/merge, source attestation, and tag remain pending. |
 | G1 — Public reproducibility | Satisfied for the accepted M3-004B implementation baseline | Canonical workflow passed Linux/macOS/Windows × Node 22/24 on accepted main; the release tag must rerun under G6. |
 | G2 — Input security | Satisfied for the fixed public-synthetic profile | Bounded filesystem, ZIP, XML, OPC, relationship, and high-risk rejections pass; arbitrary templates remain outside scope. |
 | G3 — Capability correctness | Satisfied for the exact candidate path | One opt-in native-card candidate replays readable layout facts, proves exact diff/source isolation, and produces blocked QA with no BuildArtifact. |
@@ -290,6 +290,19 @@ separate `npm dist-tag add/rm`, or declaration occurred.
 
 ### M4-001D — fresh `alpha.3` candidate and publication (in progress)
 
+Create-only generation has completed from exact pre-lock commit
+`131b15d80b9dfc51b48092a13357348c242d4103`. The untracked schema-2 lock is
+6218 bytes at mode `100644`, with SHA-256
+`f5e3b8ceff284b908b6febb678501f63e07d50eff041b3c60532a8f6511dd675`
+and package-source projection
+`71269e5d7b25ada8f208893e57a3160766374a51bb23808b5df18893e60d9548`.
+Independent no-local/no-hardlink regeneration and direct Git-tree/tar
+recomputation report 0 blocker, 0 high, and 0 medium with Taste=good. Exact Git
+blob `eb875526ffefc81b4bbaa2c15ed4412b31a8d026` is admitted for tracking but
+remains untracked; any byte or mode drift invalidates that admission. This is
+not `S3`, `A3`, a tag, hosted evidence, npm publication, GitHub Release,
+Trusted Publisher configuration, or credential retirement.
+
 The replacement proceeds in this order:
 
 1. admit a contract that separates package identity, immutable version,
@@ -398,9 +411,9 @@ installation is intentionally inconsistent across package identities until a
 later stable release can own a coherent `latest`; consumers of this prerelease
 must select the exact version or `@alpha`.
 
-The next action is read-only admission of the corrected registry model,
-followed by the fresh `alpha.3` projection, fixed-builder lock, `S3 -> A3`, tag,
-and hosted gates. Only then may the ordered registry state machine write. If
-any byte or claim changes, rerun the affected gate rather than citing an older
-result. Branch protection remains separately deferred by D-047 and is not
-folded into G6.
+The next action is tracking of only exact admitted lock blob
+`eb875526ffefc81b4bbaa2c15ed4412b31a8d026`, followed by staged gates and
+unchanged merge as `S3`, `S3 -> A3`, tag, and hosted gates. Only then may the
+ordered registry state machine write. If any byte or claim changes, rerun the
+affected gate rather than citing an older result. Branch protection remains
+separately deferred by D-047 and is not folded into G6.
