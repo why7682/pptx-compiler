@@ -61,6 +61,7 @@ const MAX_SIGSTORE_CERTIFICATE_BYTES = 64 * 1024;
 const MAX_SIGSTORE_SIGNATURE_BYTES = 64 * 1024;
 const STAGE_ROOT = ".package-stage/reviewed";
 const GITHUB_API_ROOT = "https://api.github.com/";
+const GITHUB_ACTIONS_OIDC_HOST_SUFFIX = ".actions.githubusercontent.com";
 const GITHUB_WORKFLOWS = Object.freeze([
   Object.freeze({ id: "ci.yml", path: ".github/workflows/ci.yml" }),
   Object.freeze({ id: "security.yml", path: ".github/workflows/security.yml" })
@@ -768,12 +769,26 @@ export function validateAlphaNpmProvenanceEnvironment({
   }
   let oidcUrl;
   try {
+    if (typeof environment.ACTIONS_ID_TOKEN_REQUEST_URL !== "string" ||
+        !/^[\x21-\x7e]+$/u.test(environment.ACTIONS_ID_TOKEN_REQUEST_URL)) {
+      fail("alpha-publication-provenance-environment");
+    }
     oidcUrl = new URL(environment.ACTIONS_ID_TOKEN_REQUEST_URL);
   } catch {
     fail("alpha-publication-provenance-environment");
   }
+  const oidcAuthority = environment.ACTIONS_ID_TOKEN_REQUEST_URL
+    .match(/^https:\/\/([^/?#]+)/u)?.[1];
+  const oidcHostPrefix = oidcUrl.hostname.endsWith(
+    GITHUB_ACTIONS_OIDC_HOST_SUFFIX
+  )
+    ? oidcUrl.hostname.slice(0, -GITHUB_ACTIONS_OIDC_HOST_SUFFIX.length)
+    : "";
   if (oidcUrl.protocol !== "https:" ||
-      oidcUrl.hostname !== "pipelines.actions.githubusercontent.com" ||
+      oidcAuthority !== oidcUrl.hostname ||
+      !/^[a-z0-9](?:[a-z0-9-]{0,61}[a-z0-9])?$/u
+        .test(oidcHostPrefix) ||
+      oidcHostPrefix.startsWith("xn--") ||
       oidcUrl.username !== "" || oidcUrl.password !== "" || oidcUrl.port !== "" ||
       oidcUrl.hash !== "" || oidcUrl.pathname === "/" || oidcUrl.pathname === "") {
     fail("alpha-publication-provenance-environment");

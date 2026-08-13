@@ -94,7 +94,7 @@ test("the alpha package plan closes one guarded four-package graph", async () =>
   });
   assert.deepEqual(plan.releaseGuard, {
     state: "authorized",
-    decisionId: "D-048"
+    decisionId: "D-049"
   });
   assert.deepEqual(plan.publication, {
     registry: "https://registry.npmjs.org/",
@@ -154,8 +154,8 @@ test("the readable package plan has one canonical JSON representation", () => {
   assert.deepEqual(parseAlphaPackagePlanBytes(planBytes), plan);
   const text = planBytes.toString("utf8");
   const duplicate = text.replace(
-    '  "packageVersion": "0.1.0-alpha.1",\n',
-    '  "packageVersion": "9.9.9",\n  "packageVersion": "0.1.0-alpha.1",\n'
+    '  "packageVersion": "0.1.0-alpha.2",\n',
+    '  "packageVersion": "9.9.9",\n  "packageVersion": "0.1.0-alpha.2",\n'
   );
   assert.throws(
     () => parseAlphaPackagePlanBytes(Buffer.from(duplicate)),

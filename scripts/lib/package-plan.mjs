@@ -16,7 +16,7 @@ export const ALPHA_REPOSITORY = Object.freeze({
 });
 export const ALPHA_RELEASE_GUARD = Object.freeze({
   state: "authorized",
-  decisionId: "D-048"
+  decisionId: "D-049"
 });
 export const ALPHA_PUBLICATION = Object.freeze({
   registry: "https://registry.npmjs.org/",
@@ -553,7 +553,7 @@ export async function validateAlphaPackagePlan(plan, {
   }
   if (plan.schemaVersion !== ALPHA_PACKAGE_PLAN_VERSION ||
       plan.planId !== "pptx-pipeline-alpha-package-plan" ||
-      plan.packageVersion !== "0.1.0-alpha.1" || plan.license !== "MIT" ||
+      plan.packageVersion !== "0.1.0-alpha.2" || plan.license !== "MIT" ||
       plan.moduleType !== "module" || plan.stagingRoot !== ".package-stage") {
     add(findings, "package-plan-identity", "/");
   }

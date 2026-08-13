@@ -1,16 +1,16 @@
 {
   "schemaVersion": 2,
   "planId": "pptx-compiler-alpha-release-plan",
-  "releaseVersion": "0.1.0-alpha.1",
+  "releaseVersion": "0.1.0-alpha.2",
   "packagePlanPath": "packaging/alpha-package-plan.json",
   "publicationSource": "packaging/alpha-package-plan.json#/publication",
   "authorizationSource": "packaging/alpha-package-plan.json#/releaseGuard",
-  "releaseLockPath": "packaging/releases/0.1.0-alpha.1.lock.json",
+  "releaseLockPath": "packaging/releases/0.1.0-alpha.2.lock.json",
   "sourceTag": {
-    "name": "v0.1.0-alpha.1",
+    "name": "v0.1.0-alpha.2",
     "type": "annotated",
     "targetPolicy": "exact-clean-verified-commit",
-    "message": "pptx-compiler 0.1.0-alpha.1"
+    "message": "pptx-compiler 0.1.0-alpha.2"
   },
   "builders": {
     "fixed": {
@@ -26,7 +26,7 @@
   "lockedInputs": [
     "CHANGELOG.md",
     "docs/KNOWN_LIMITATIONS.md",
-    "docs/releases/0.1.0-alpha.1.md",
+    "docs/releases/0.1.0-alpha.2.md",
     "packaging/alpha-package-plan.json",
     "policy/support-matrix.json",
     "sbom.alpha.cdx.json"
@@ -40,8 +40,8 @@
   "githubRelease": {
     "order": "last",
     "requiresCompleteRegistryVerification": true,
-    "name": "pptx-compiler 0.1.0-alpha.1",
-    "bodySource": "docs/releases/0.1.0-alpha.1.md",
+    "name": "pptx-compiler 0.1.0-alpha.2",
+    "bodySource": "docs/releases/0.1.0-alpha.2.md",
     "bodyProjection": "locked-note-plus-release-identity-v1",
     "target": "source-tag-target",
     "draft": false,

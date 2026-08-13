@@ -2,15 +2,52 @@
 
 ## Purpose and boundary
 
-This file freezes the user-visible contents associated with the first public
-candidate alpha. It deliberately does not announce or deny an external release:
+This file constructs the user-visible candidate-alpha line from product scope
+through executable contracts, evidence, and limits. The current projection is
+`0.1.0-alpha.2`. It deliberately does not announce or deny an external release:
 that mutable lifecycle fact is not owned by a lock-bound changelog.
 Current support remains owned by
 [`policy/support-matrix.json`](policy/support-matrix.json), release eligibility
 by [`docs/RELEASE_GATES.md`](docs/RELEASE_GATES.md), and negative boundaries by
 [`docs/KNOWN_LIMITATIONS.md`](docs/KNOWN_LIMITATIONS.md).
 
-## 0.1.0-alpha.1 candidate contents
+## 0.1.0-alpha.2 candidate contents
+
+`0.1.0-alpha.2` preserves the exact product boundary below: one installed
+public-synthetic project, one explicit native-card candidate path, replayable
+`CandidateBuildRecord`, honest blocked QA, and no `BuildArtifact`. It does not
+add arbitrary-template compatibility, a general renderer, delivery authority,
+or a supported matrix row.
+
+The release boundary now admits the GitHub Actions OIDC request endpoint as
+HTTPS on exactly one validated runner-service label beneath
+`actions.githubusercontent.com`. It continues to reject user info, explicit
+ports, fragments, empty paths, nested labels, suffix confusion, Unicode host
+ambiguity, and non-GitHub endpoints. npm provenance still must pass the exact
+workflow/tag certificate identity and GitHub Actions issuer checks; accepting a
+service-owned runner shard does not weaken that cryptographic binding.
+
+D-049 authorizes the exact annotated `v0.1.0-alpha.2` tag and GitHub
+prerelease, the same four packages at `0.1.0-alpha.2` under dist-tag `alpha`,
+and GitHub Actions npm provenance followed by Trusted Publisher migration and
+bootstrap-token retirement. Authorization is not publication evidence. Current
+lifecycle state is established only by joining the exact tracked `alpha.2`
+lock identity with official GitHub and npm records; this sentence asserts no
+current phase. See the
+[state-neutral `alpha.2` release projection](docs/releases/0.1.0-alpha.2.md).
+
+### `alpha.1` publication history
+
+The immutable `v0.1.0-alpha.1` source candidate passed tag Public CI run
+`31652084833` and Security run `31652084727`. Manual release run
+`31652404999` then failed closed at OIDC environment admission before the
+first npm publish; its GitHub declaration job was skipped. All four exact
+`0.1.0-alpha.1` npm versions and the GitHub Release remained absent, so no
+rollback or unpublish occurred. That version is retired unpublished; its tag,
+lock, note, source commit, attestation commit, and run evidence remain immutable
+history and are not reused as `alpha.2` authority.
+
+## 0.1.0-alpha.1 candidate contents (historical)
 
 These are the exact reader-facing changes for version `0.1.0-alpha.1`. D-048
 authorizes its exact tag, four public npm packages under dist-tag `alpha`, and
@@ -113,18 +150,21 @@ Release result.
 - No branch-protection claim; D-047 deliberately defers that repository setting.
 
 See [`docs/KNOWN_LIMITATIONS.md`](docs/KNOWN_LIMITATIONS.md) for the complete
-current boundary and
-[`docs/releases/0.1.0-alpha.1.md`](docs/releases/0.1.0-alpha.1.md) for the
-state-neutral release-facing projection.
+current boundary. The immutable historical
+[`alpha.1` projection](docs/releases/0.1.0-alpha.1.md) remains available beside
+the current [`alpha.2` projection](docs/releases/0.1.0-alpha.2.md).
 
 ## Release verification boundary
 
-M4-001 may advance only through the earliest unsatisfied release gate. Freeze
-the inputs and two builder results; create, review, commit, and merge the lock
-as GitHub-verified commit `S`; append exactly one repository-local identity
-attestation `A` whose sole parent is `S` and whose tip policy grants `S`; pass
-the full history gate at `main=A`; then annotate `S` as
-`v0.1.0-alpha.1`. Tag-triggered Public CI and Security precede dependency-order
+At any lifecycle state, M4-001 may advance only through the earliest
+unsatisfied `alpha.2` release gate. The required order is: freeze the inputs and
+two builder results; create, review, commit, and
+merge the lock as GitHub-verified commit `S2`; append exactly one repository-
+local identity attestation `A2` whose sole parent is `S2` and whose tip policy
+grants `S2`; pass the full history gate at `main=A2`; then annotate `S2` as
+`v0.1.0-alpha.2`. Tag-triggered Public CI and Security precede dependency-order
 npm publication. Official-registry bytes, provenance, and dist-tags must match
 the lock before the GitHub Release is created last. D-047 branch protection
-remains separately deferred and is never implied by this sequence.
+remains separately deferred and is never implied by this sequence. Whether the
+sequence is pending or complete belongs to Release Gates and official records,
+not this changelog.

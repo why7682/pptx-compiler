@@ -30,6 +30,16 @@ authorization does not reserve a name or prove that a registry write occurred.
 The npm availability observations above remain dated observations and reserve
 nothing.
 
+## Latest official-registry observation — 2026-08-13
+
+After the retired `alpha.1` workflow stopped before its first npm write, fresh
+official-registry reads returned E404 for all four package packuments and all
+four exact `0.1.0-alpha.1` versions. No npm identity was created or reserved by
+that attempt. D-049 now authorizes the same four names at
+`0.1.0-alpha.2`; candidate preparation and publication must still recheck the
+official registry at their own time-of-use boundaries. This dated observation
+is neither reservation nor publication evidence.
+
 ## Historical working-name check
 
 The former working stem `pptx-pipeline` was initially checked on 2026-07-30 and

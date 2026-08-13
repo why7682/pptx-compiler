@@ -67,16 +67,16 @@ test("ordinary CI/security and the isolated alpha release workflow are canonical
     /^[0-9a-f]{40}$/u.test(sha)), true);
   assert.equal(REQUIRED_PUBLIC_SCRIPTS.every((name) =>
     typeof packageDocument.scripts[name] === "string"), true);
-  assert.equal(ALPHA_RELEASE_TAG, "v0.1.0-alpha.1");
+  assert.equal(ALPHA_RELEASE_TAG, "v0.1.0-alpha.2");
   assert.equal(ALPHA_RELEASE_ENVIRONMENT, "npm-release");
   assert.equal(ALPHA_RELEASE_PREPARATION_COMMAND,
-    "node scripts/check-alpha-release-preparation.mjs --mode release-tag --tag v0.1.0-alpha.1 --stage-root .package-stage/reviewed");
+    "node scripts/check-alpha-release-preparation.mjs --mode release-tag --tag v0.1.0-alpha.2 --stage-root .package-stage/reviewed");
   assert.equal(ALPHA_RELEASE_SOURCE_VERIFICATION_COMMAND,
-    "node scripts/publish-alpha-release.mjs --mode verify-source --tag v0.1.0-alpha.1 --stage-root .package-stage/reviewed");
+    "node scripts/publish-alpha-release.mjs --mode verify-source --tag v0.1.0-alpha.2 --stage-root .package-stage/reviewed");
   assert.equal(ALPHA_RELEASE_PUBLISH_COMMAND,
-    "node scripts/publish-alpha-release.mjs --mode publish --tag v0.1.0-alpha.1 --stage-root .package-stage/reviewed");
+    "node scripts/publish-alpha-release.mjs --mode publish --tag v0.1.0-alpha.2 --stage-root .package-stage/reviewed");
   assert.equal(ALPHA_GITHUB_RELEASE_COMMAND,
-    "node scripts/create-alpha-github-release.mjs --tag v0.1.0-alpha.1 --stage-root .package-stage/reviewed");
+    "node scripts/create-alpha-github-release.mjs --tag v0.1.0-alpha.2 --stage-root .package-stage/reviewed");
   assert.equal(ALPHA_RELEASE_RUNTIME_COMMAND,
     "test \"$(node --version)\" = \"v24.19.0\" && test \"$(npm --version)\" = \"11.17.0\"");
   assert.equal(PUBLIC_MAIN_HISTORY_CONDITION,
@@ -413,7 +413,7 @@ test("workflow mutations fail closed without a general YAML parser", async (t) =
       sourceTokenMutation
     ).some(({ code }) => code === "workflow-release-scope"), true);
 
-    const releaseMutation = `${original}      - run: gh release create v0.1.0-alpha.1\n`;
+    const releaseMutation = `${original}      - run: gh release create v0.1.0-alpha.2\n`;
     assert.equal(inspectPublicWorkflowText(
       ".github/workflows/alpha-release.yml",
       releaseMutation

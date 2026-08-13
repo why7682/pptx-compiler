@@ -8,13 +8,13 @@ on:
         required: true
         type: choice
         options:
-          - v0.1.0-alpha.1
+          - v0.1.0-alpha.2
 
 permissions:
   contents: read
 
 concurrency:
-  group: alpha-release-v0.1.0-alpha.1
+  group: alpha-release-v0.1.0-alpha.2
   cancel-in-progress: false
 
 jobs:
@@ -27,7 +27,7 @@ jobs:
     steps:
       - name: Require the exact manual tag ref
         env:
-          EXPECTED_TAG: v0.1.0-alpha.1
+          EXPECTED_TAG: v0.1.0-alpha.2
           RELEASE_EVENT: ${{ github.event_name }}
           RELEASE_REF_TYPE: ${{ github.ref_type }}
           RELEASE_REF_NAME: ${{ github.ref_name }}
@@ -84,13 +84,13 @@ jobs:
       - name: Reject tracked-file drift
         run: git diff --exit-code
       - name: Bind the exact tag to the reviewed release candidate
-        run: node scripts/check-alpha-release-preparation.mjs --mode release-tag --tag v0.1.0-alpha.1 --stage-root .package-stage/reviewed
+        run: node scripts/check-alpha-release-preparation.mjs --mode release-tag --tag v0.1.0-alpha.2 --stage-root .package-stage/reviewed
       - name: Verify the exact public GitHub source commit
-        run: node scripts/publish-alpha-release.mjs --mode verify-source --tag v0.1.0-alpha.1 --stage-root .package-stage/reviewed
+        run: node scripts/publish-alpha-release.mjs --mode verify-source --tag v0.1.0-alpha.2 --stage-root .package-stage/reviewed
         env:
           GITHUB_TOKEN: ${{ github.token }}
       - name: Publish exact reviewed tarballs to npm
-        run: node scripts/publish-alpha-release.mjs --mode publish --tag v0.1.0-alpha.1 --stage-root .package-stage/reviewed
+        run: node scripts/publish-alpha-release.mjs --mode publish --tag v0.1.0-alpha.2 --stage-root .package-stage/reviewed
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
           NPM_CONFIG_REGISTRY: https://registry.npmjs.org/
@@ -145,8 +145,8 @@ jobs:
       - name: Reject tracked-file drift
         run: git diff --exit-code
       - name: Bind the exact tag to the reviewed release candidate
-        run: node scripts/check-alpha-release-preparation.mjs --mode release-tag --tag v0.1.0-alpha.1 --stage-root .package-stage/reviewed
+        run: node scripts/check-alpha-release-preparation.mjs --mode release-tag --tag v0.1.0-alpha.2 --stage-root .package-stage/reviewed
       - name: Verify npm completion and declare the exact GitHub prerelease
-        run: node scripts/create-alpha-github-release.mjs --tag v0.1.0-alpha.1 --stage-root .package-stage/reviewed
+        run: node scripts/create-alpha-github-release.mjs --tag v0.1.0-alpha.2 --stage-root .package-stage/reviewed
         env:
           GITHUB_TOKEN: ${{ github.token }}

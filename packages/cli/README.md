@@ -2,7 +2,7 @@
 
 ## Purpose and boundary
 
-`pptx-compiler` is the public-release candidate `0.1.0-alpha.1` CLI composition
+`pptx-compiler` is the public-release candidate `0.1.0-alpha.2` CLI composition
 root. It exposes one exact installed candidate flow, not a general PPTX renderer, arbitrary-
 template tool or delivery approval system. Distribution of this package does
 not turn its candidate flow into a support or delivery claim.
@@ -48,7 +48,7 @@ unavailable. Registry presence proves distribution of exact bytes only.
 
 Consult the [release gates](https://github.com/why7682/pptx-compiler/blob/main/docs/RELEASE_GATES.md)
 and [known limitations](https://github.com/why7682/pptx-compiler/blob/main/docs/KNOWN_LIMITATIONS.md).
-Publication is authorized only through the exact D-048 release workflow and
+Publication is authorized only through the exact D-049 release workflow and
 reviewed tarball; do not publish a directory or a locally repacked artifact.
 
 ## License

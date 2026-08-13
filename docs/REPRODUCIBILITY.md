@@ -7,8 +7,9 @@ package candidate-alpha boundary. It does not prove hosted Linux, Windows, or
 macOS CI, platform support, publication, signing, or reviewed-to-published
 equality.
 
-M4-001 adds a stricter release-candidate boundary. D-048 authorizes the exact
-tag and publication channel, but this ordinary checkout procedure still cannot
+M4-001 adds a stricter release-candidate boundary. D-049 authorizes the exact
+`0.1.0-alpha.2` tag and publication channel, but this ordinary checkout
+procedure still cannot
 prove an annotated tag, dual-builder release lock, npm provenance, official-
 registry equality, or a GitHub Release.
 
@@ -60,6 +61,36 @@ filesystem creates conflict entries, stop and reproduce from one clean checkout
 on an ordinary filesystem. Do not delete preserved failed or conflicting stage
 content merely because its directory name looks temporary.
 
+On macOS, Finder may create `.DS_Store` in a local ignored staging directory.
+The package-stage inventory must reject it as a foreign entry; do not add an
+exception, silently delete it, or relax the inventory. A Finder preference such
+as `DSDontWriteNetworkStores` is not a control for an ordinary local directory.
+Apple's [File System Programming Guide](https://developer.apple.com/library/archive/documentation/FileManagement/Conceptual/FileSystemProgrammingGuide/FileSystemOverview/FileSystemOverview.html)
+also distinguishes Finder's presentation of hidden files from programmatic
+directory enumeration, so the gate observing an entry hidden by Finder is
+expected behavior.
+
+For frozen macOS full-suite and guarded-build evidence, use this boundary:
+
+1. create a fresh system temporary directory outside synchronized or
+   Finder-browsed trees;
+2. create a Git-backed snapshot there from the exact source `HEAD`, including
+   a consistent index and object database, and apply the complete reviewed
+   delta rather than copying only its surviving files;
+3. before running either fixed runtime, compare the complete candidate
+   projection: added, deleted, and renamed paths; Git object types and modes;
+   blob bytes; and absence of any extra endpoint;
+4. run full suites and builders sequentially, retain reviewed evidence outside
+   the repository, and verify the stage has no unknown entry; and
+5. treat any snapshot-only commit as disposable verification scaffolding, not
+   as the candidate commit, provenance origin, or release evidence.
+
+A source-only copy without a consistent, verified Git index and object database
+is insufficient because Git-aware contract tests use those facts; the transfer
+mechanism itself is not authority. If the source stage is already polluted,
+preserve its exact contents for diagnosis and start from a new isolated
+snapshot rather than mutating the stage until the gate passes.
+
 ## Reporting a result
 
 Record the operating system, Node and npm versions, exact command, exit status,
@@ -106,16 +137,16 @@ lifecycle-state neutral. It then requires this exact order:
    complete evidence record are bound separately, while one top-level SHA-256
    binds the canonical package/source projection used for both validations,
    with only Node 24/npm 11 envelopes eligible for publication, before writing
-   create-only `packaging/releases/0.1.0-alpha.1.lock.json`;
+   create-only `packaging/releases/0.1.0-alpha.2.lock.json`;
 5. review, provenance admission, commit, and accepted-main merge of that exact
    tracked lock without changing any locked input; call that GitHub-verified
-   merge commit `S`;
-6. exactly one repository-local public-identity attestation commit `A` whose
-   sole parent is `S` and whose tip-owned policy grants exact OID `S`;
-7. the complete reachable-history gate at current `main=A`, followed by a
-   remote comparison proving `S` is its sole direct parent with `ahead_by=1`
+   merge commit `S2`;
+6. exactly one repository-local public-identity attestation commit `A2` whose
+   sole parent is `S2` and whose tip-owned policy grants exact OID `S2`;
+7. the complete reachable-history gate at current `main=A2`, followed by a
+   remote comparison proving `S2` is its sole direct parent with `ahead_by=1`
    and `behind_by=0`;
-8. annotated tag `v0.1.0-alpha.1` peeling to unchanged `S` and its intended
+8. annotated tag `v0.1.0-alpha.2` peeling to unchanged `S2` and its intended
    tree; and
 9. a clean, full-history tag checkout with no shallow boundary, replace refs,
    grafts, or object alternates, followed by the complete tag gates and the
@@ -130,14 +161,26 @@ ordinary tag-triggered Public CI and Security workflows contain no publication
 credential and separately supply the six portable cells and CodeQL before npm
 publication may begin.
 
+Immediately before the first publish, the workflow admits the GitHub Actions
+OIDC request URL only as HTTPS on exactly one validated DNS label beneath
+`actions.githubusercontent.com`, with a nonempty path and no user info,
+explicit port, fragment, nested label, suffix confusion, non-ASCII raw URL
+text, or non-GitHub authority. That environment check is not provenance
+proof: the fetched v0.3 bundle must still pass fixed npm 11.17.0 Sigstore
+verification for the exact workflow/tag certificate identity and GitHub
+Actions issuer.
+
 M4-001C derives npm dependency order from the package graph: core,
-native-card-arrow, public-synthetic, then CLI. For each name/version, `absent`
+native-card-arrow, public-synthetic, then CLI. For each exact
+`0.1.0-alpha.2` name/version, `absent`
 permits publishing
 only the locked tarball, `present-equal` permits continuation, and
 `present-mismatch` stops without unpublish. Completion requires downloading all
 four official-registry tarballs, matching lock bytes, validating npm
 provenance, requiring dist-tag `alpha` and no `latest`, then creating the
-GitHub Release last. The lock-bound changelog, limitations, and release note
+GitHub Release last, then configuring all four Trusted Publisher bindings and
+retiring the bootstrap token plus GitHub `NPM_TOKEN`. The lock-bound changelog,
+limitations, and release note
 remain lifecycle-state neutral; observed completion belongs in Release Gates,
 the handoff/decision/provenance records, and the official registry/GitHub state.
 

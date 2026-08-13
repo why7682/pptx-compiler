@@ -161,7 +161,7 @@ The practical boundaries are collected in
   package graph;
 - Windows preserves create-only ordering and reconciliation but makes no
   sudden-power-loss directory-entry persistence claim;
-- D-048 authorizes the four public-alpha package identities and npm provenance,
+- D-049 authorizes the four `0.1.0-alpha.2` package identities and npm provenance,
   but this support summary does not assert mutable external lifecycle state.
   Exact tag/lock identity, official-registry bytes, npm provenance, and GitHub
   Release records own those facts and cannot change a support row.
@@ -182,11 +182,12 @@ declared state; it does not change that state.
 
 ## Next authorized action
 
-D-048 authorizes the exact release; Release Gates owns current phase state. Any
-incomplete M4-001 attempt advances only through its earliest unsatisfied step:
-freeze and build; write the lock; merge it as GitHub-verified `S`; append the
-single-parent local attestation `A` whose sole parent is `S`; pass the full
-history gate at `main=A`; tag unchanged `S`; pass tag Public CI and Security;
+D-049 authorizes the exact `alpha.2` release; Release Gates owns current phase
+state. Any incomplete M4-001 attempt advances only through its earliest
+unsatisfied step: freeze and build; write the lock; merge it as GitHub-verified
+`S2`; append the single-parent local attestation `A2` whose sole parent is
+`S2`; pass the full history gate at `main=A2`; tag unchanged `S2`; pass tag
+Public CI and Security;
 publish npm in package-graph dependency order; then create the GitHub Release
 last. Keep the global claim switch false and every current support status
 unchanged. D-047/M3-008 branch protection remains deferred and is not a

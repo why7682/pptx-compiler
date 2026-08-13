@@ -9,7 +9,7 @@ import {
   verifyExactAlphaGitHubRelease
 } from "../scripts/create-alpha-github-release.mjs";
 
-const TAG = "v0.1.0-alpha.1";
+const TAG = "v0.1.0-alpha.2";
 const HEAD = "a".repeat(40);
 const TAG_OBJECT = "b".repeat(40);
 const MAIN = "c".repeat(40);
@@ -18,7 +18,7 @@ const BODY = "# Locked note\n\n---\n\n## Release identity\n";
 function prepared() {
   return Object.freeze({
     releasePlan: Object.freeze({
-      githubRelease: Object.freeze({ name: "pptx-compiler 0.1.0-alpha.1" })
+      githubRelease: Object.freeze({ name: "pptx-compiler 0.1.0-alpha.2" })
     }),
     releaseTag: Object.freeze({
       headCommitOid: HEAD,
@@ -75,7 +75,7 @@ function githubReleaseFetch({
         const request = {
           tag_name: TAG,
           target_commitish: HEAD,
-          name: "pptx-compiler 0.1.0-alpha.1",
+          name: "pptx-compiler 0.1.0-alpha.2",
           body: BODY
         };
         created = releaseValue(request, drift);
@@ -106,7 +106,7 @@ test("GitHub Release arguments and exact request are closed", () => {
   assert.deepEqual(alphaGitHubReleaseRequest({ prepared: prepared(), body: BODY }), {
     tag_name: TAG,
     target_commitish: HEAD,
-    name: "pptx-compiler 0.1.0-alpha.1",
+    name: "pptx-compiler 0.1.0-alpha.2",
     body: BODY,
     draft: false,
     prerelease: true,
@@ -193,7 +193,7 @@ test("Release declaration is exact-idempotent and reconciles only a 422 race", a
     { body: "foreign" },
     { draft: true },
     { prerelease: false },
-    { tag_name: "v0.1.0-alpha.2" },
+    { tag_name: "v0.1.0-alpha.999" },
     { assets: [{ id: 1 }] }
   ]) {
     const mismatch = githubReleaseFetch({ initial: "present", drift });
@@ -216,7 +216,7 @@ test("Release declaration is exact-idempotent and reconciles only a 422 race", a
 test("orchestration isolates GitHub credentials and verifies source and registry twice", async () => {
   const preparedValue = {
     ...prepared(),
-    packagePlan: { packageVersion: "0.1.0-alpha.1" },
+    packagePlan: { packageVersion: "0.1.0-alpha.2" },
     releaseLock: {},
     lockedInputBytes: new Map(),
     publicationOrder: [{ packageId: "core" }],

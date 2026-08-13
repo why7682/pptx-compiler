@@ -184,6 +184,7 @@ release contract, read:
 8. `docs/REPRODUCIBILITY.md`
 9. `docs/DECISIONS.md`
 10. `docs/PROVENANCE_LEDGER.md`
+11. `docs/releases/0.1.0-alpha.2.md`
 
 Read `docs/PROJECT_DEFINITION.md` and `docs/ARCHITECTURE_TARGET.md` only before
 changing product scope, public contracts, packages, or dependency direction.
@@ -439,6 +440,20 @@ For code review, report:
   persistent rename-only quarantine, npm cache/config/tmp are ignored
   non-authoritative tool state, and neither a local reviewed tarball nor either
   persistent tree is publication or cross-platform evidence.
+  On macOS, treat `.DS_Store` and any other Finder-created file or link inside
+  the stage as foreign state, not harmless noise: an exact-inventory rejection
+  is the correct result. Do not allowlist the entry, weaken the stage grammar,
+  recursively clean the stage, or rely on a global Finder preference as a
+  release control. Run frozen full/package verification from a fresh Git-backed
+  snapshot in a non-Finder-browsed system temporary directory. Construct it
+  from the exact source `HEAD`, apply the complete reviewed delta, and before
+  execution prove the complete candidate projection equal: added, deleted, and
+  renamed paths; Git object types and `100644`/`100755` modes; blob bytes; and
+  the absence of any extra endpoint. A source-only copy without a consistent,
+  verified Git index and object database is not an adequate snapshot; the copy
+  mechanism itself is not authority. A temporary snapshot commit is
+  verification scaffolding, never release or provenance evidence. Preserve a
+  polluted stage for diagnosis and restart verification from a clean snapshot.
 - When maintaining `M3-004A`, keep exactly two canonical ordinary public
   verification workflows and one plan-derived static-ESM SBOM projection.
   M4-001 adds one separately gated manual alpha-release workflow; it does not
@@ -488,10 +503,15 @@ For code review, report:
   rewrite to another endpoint; after push, require the same GitHub repository
   ID and remote `main` equal to the scanned local object ID.
 - When maintaining `M4-001`, keep authorization, candidate admission,
-  publication, and release declaration as distinct facts. D-048 authorizes the
-  exact annotated `v0.1.0-alpha.1` tag, the four unscoped public npm packages
-  under dist-tag `alpha`, and GitHub Actions npm provenance; it does not prove
-  that any of those actions has happened. Admit only an exact clean,
+  publication, and release declaration as distinct facts. Preserve D-048,
+  immutable `v0.1.0-alpha.1`, its lock, `S1`/`A1`, and its hosted runs as
+  historical evidence: tag gates completed, but release run `31652404999`
+  failed closed before the first npm publish and that version is retired
+  unpublished. D-049 authorizes the replacement annotated
+  `v0.1.0-alpha.2` tag and GitHub Release, the same four unscoped public npm
+  packages at `0.1.0-alpha.2` under dist-tag `alpha`, GitHub Actions npm
+  provenance, and the post-publication Trusted Publisher/token-retirement
+  transition. Authorization does not prove execution. Admit only an exact clean,
   full-history tag target with no replace/graft/alternate source, require
   Node 22.23.2/npm 10.9.8 and Node 24.19.0/npm 11.17.0 to produce the same four
   exact decompressed canonical tar payloads after member-by-member tracked-
@@ -510,7 +530,7 @@ For code review, report:
   assignment before creating the GitHub Release last. Candidate admission must
   prove the lock and every locked input are tracked in the tag target tree, not
   merely clean or present in the working directory. The first publication
-  may use the environment-scoped token authorized by D-048; migrate to npm
+  may use the environment-scoped token authorized by D-049; migrate to npm
   Trusted Publisher after all four initial package identities exist. D-047/M3-008
   branch protection remains deferred and is not a release prerequisite.
   Keep GitHub source verification, npm publication, and final GitHub Release
@@ -524,6 +544,11 @@ For code review, report:
   alpha-release workflow/tag certificate identity and GitHub Actions OIDC
   issuer. Payload fields, registry signatures, and a later audit cannot
   substitute for that certificate-bound cryptographic verification.
+  Before publication, admit the GitHub Actions OIDC request URL as HTTPS on
+  exactly one DNS label beneath `actions.githubusercontent.com`, with no user
+  info, explicit port, fragment, empty path, non-ASCII raw URL text, nested
+  label, or suffix confusion. Do not pin one observed runner shard hostname as
+  the service contract.
   Exact GitHub-verified merge-object grants are tip-owned history exceptions,
   not an identity wildcard. A GitHub merge cannot authorize its own OID; after
   a reviewed merge, append one repository-local public-identity attestation

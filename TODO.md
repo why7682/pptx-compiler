@@ -1164,8 +1164,8 @@ criterion is recorded in the repository.
 | ID | Status | Task | Exit criterion |
 | --- | --- | --- | --- |
 | M4-001A | DONE | Implement and verify the fail-closed `0.1.0-alpha.1` release contract authorized by D-048, without treating authorization as execution evidence. | Package-plan schema 3, the release plan, release-lock validator, exact-tag/history admission, dual-builder tar-payload equality with fixed-builder release-envelope identity, registry recovery states, public workflow policy, documentation, provenance, and adversarial tests agree; mutable external lifecycle state remains outside the locked-input contract. |
-| M4-001B | IN_PROGRESS | Freeze the exact candidate, create its tracked dual-builder lock, merge that lock as the GitHub-verified commit `S`, append the one permitted repository-local public-identity attestation `A`, run history admission at `A`, and then create annotated tag `v0.1.0-alpha.1` on unchanged `S`. | Node 22.23.2/npm 10.9.8 and Node 24.19.0/npm 11.17.0 produce four byte-identical canonical tar payloads; the lock records both builders' gzip envelopes and assigns only the fixed Node 24/npm 11 envelopes as release bytes tracked by `S`. `A` has `S` as its sole parent and its tip-owned policy grants exactly `S`; the full reachable-history gate passes with remote `main=A`; only then does the annotated tag peel to `S`, and the tag-bound Public CI and Security workflows pass before npm publication. |
-| M4-001C | PENDING | Publish and verify the four public npm packages in dependency-graph order, then create the GitHub Release last and retire the bootstrap credential. | The package-plan dependency graph derives `core -> native-card-arrow -> public-synthetic -> CLI`; publication completes with absent/equal/mismatch recovery, official-registry byte reread, npm provenance, `alpha` and no `latest`, then the GitHub Release binds the exact tag/lock/artifacts last. After that last publication mutation, all four exact npm Trusted Publisher bindings are configured, the bootstrap token is revoked, and GitHub `NPM_TOKEN` is deleted before M4-001C may be marked `DONE`; only non-secret configuration facts are recorded by non-lock state owners while the locked changelog, limitations, and release note remain lifecycle-neutral. |
+| M4-001B | IN_PROGRESS | Preserve the completed immutable `alpha.1` candidate/tag gates as retired unpublished history, then admit the fresh D-049 `0.1.0-alpha.2` package projection, dual-builder lock, reviewed merge `S2`, single-parent attestation `A2`, exact history relation, annotated tag, and tag-hosted gates. | The bounded OIDC environment correction is reviewed; Node 22.23.2/npm 10.9.8 and Node 24.19.0/npm 11.17.0 produce four byte-identical `alpha.2` canonical tar payloads; a new create-only tracked lock records both builders and assigns only fixed Node 24/npm 11 release envelopes; remote `main=A2`, `A2` sole-parent/exact-grant `S2`, annotated `v0.1.0-alpha.2 -> S2`, and tag Public CI/Security all pass before npm publication. |
+| M4-001C | PENDING | Publish and verify the four exact `0.1.0-alpha.2` npm packages in dependency-graph order, create the matching GitHub prerelease last, then retire the bootstrap credential. | The graph derives `core -> native-card-arrow -> public-synthetic -> CLI`; publication completes with absent/equal/mismatch recovery, official-registry byte reread, certificate-bound npm provenance/signatures, `alpha` and no `latest`, then the GitHub Release binds the exact tag/lock/artifacts last. All four exact npm Trusted Publisher bindings are configured, the bootstrap token is revoked, and GitHub `NPM_TOKEN` is deleted before `DONE`; only non-secret configuration facts are recorded while the lock-bound changelog, limitations, and `alpha.2` note remain lifecycle-neutral. |
 | M4-002 | PENDING | Collect compatibility evidence without expanding claims beyond tests. | Each tested external template records only redacted feature-level results and the public fixture remains sufficient for CI. |
 | M4-003 | PENDING | Define beta and 1.0 stability, migration, deprecation, and support promises. | Compatibility policy and conformance suite enforce the promises. |
 
@@ -1262,6 +1262,83 @@ criterion is recorded in the repository.
 - No `S`, attestation `A`, tag, tag-hosted run, npm package, registry
   equality/provenance result, or GitHub Release exists at this checkpoint.
   M4-001C remains pending, support remains unchanged, and D-047/M3-008 remains
+  deferred.
+
+### M4-001B `alpha.1` candidate admission and pre-publish stop — 2026-08-13
+
+- GitHub merged the reviewed lock as verified source commit
+  `S1=ad4ab94959e9f7cff56834c81be4ddecd11e7332`. The repository-local
+  public-identity attestation
+  `A1=7d8341ebc01f8769a73020103d18c93b4049468f` has `S1` as its sole parent,
+  exact-grants `S1`, passed the complete reachable-history gate, and became
+  remote `main`.
+- Annotated tag `v0.1.0-alpha.1` has immutable tag object
+  `0d23ce3903052454ba77e6c88360f0c4fffa4173` and peels to `S1`. Tag Public CI
+  run `31652084833` and Security run `31652084727` passed. This completes the
+  `alpha.1` source/lock/tag-hosted portion of M4-001B.
+- Manual Alpha npm Release run `31652404999` then passed immutable checkout,
+  source/history/workflow policy, complete tests, guarded package build,
+  candidate/tag admission, and exact remote-main verification. In the first
+  publish step, the OIDC environment gate rejected GitHub's legitimate sharded
+  `ACTIONS_ID_TOKEN_REQUEST_URL` because the implementation required one
+  previously observed hostname.
+- The failure was before the first `npm publish`; the GitHub declaration job
+  was skipped. Official-registry rereads found all four exact package
+  packuments/versions absent, and the GitHub Release was absent. No rollback,
+  unpublish, tag movement, or destructive reconciliation occurred.
+- `0.1.0-alpha.1` is retired unpublished. D-048, its lock, note, `S1`, `A1`,
+  tag, and hosted runs remain immutable history and cannot authorize replacement
+  bytes.
+
+### M4-001B `alpha.2` recovery authorization — 2026-08-13
+
+- D-049 records the user's explicit authorization for all three replacement
+  effects: annotated tag and GitHub prerelease `v0.1.0-alpha.2`; the same four
+  public packages at `0.1.0-alpha.2` under dist-tag `alpha`; and GitHub Actions
+  npm provenance followed by all four Trusted Publisher bindings, bootstrap-
+  token revocation, and GitHub `NPM_TOKEN` deletion.
+- The real defect is the overly fixed OIDC-host representation. The smallest
+  correction admits HTTPS on exactly one validated DNS label beneath
+  `actions.githubusercontent.com` while retaining rejections for user info,
+  ports, fragments, empty paths, nested labels, suffix confusion, non-ASCII raw
+  URL text, and non-GitHub authorities. The later fetched provenance bundle
+  must still pass exact workflow/tag certificate and issuer verification.
+- Recovery starts from a fresh version projection. It must create a new
+  lifecycle-neutral `alpha.2` note, dual-builder package results, create-only
+  lock, reviewed `S2`, sole-parent exact-grant `A2`, annotated tag, and tag-
+  hosted evidence. Historical `alpha.1` objects are inputs only to the audit
+  trail, never copied authority.
+- The fresh create-only `alpha.2` lock now exists. Independent exact
+  recomputation and exact nine-endpoint provenance admission passed with
+  0 blocker, 0 high, and 0 medium; this checkpoint admits the lock for
+  tracking. Reviewed merge as `S2` remains pending. No `A2`, tag, tag-hosted result,
+  npm package, registry provenance/signature result, dist-tag, Trusted Publisher
+  binding, credential-retirement result, or GitHub Release exists by this
+  checkpoint. M4-001B is in progress, M4-001C remains pending, support stays
+  0/22/3/35 with its global switch false, and D-047/M3-008 remains deferred.
+
+### M4-001B `alpha.2` create-only lock checkpoint — 2026-08-13
+
+- Exact source commit `3ddc8f36d636adfdb40c7b6a58c429543b9bd690`
+  supplied the admitted release/package plans, six locked inputs, and both
+  fixed guarded builder results. Create-only generation wrote schema-2
+  `packaging/releases/0.1.0-alpha.2.lock.json`.
+- The generated lock is 6218 bytes, mode `100644`, with SHA-256
+  `922a862092d3785ccca17ba4f6740afb95bb038ae718aaed80a105d086200a31`
+  and package-source projection
+  `a022eb1e9a768bac7c22b0d50a7ab2c7ac11f4435f5751cd53033bc1c8b906e7`.
+  It keeps both builders' evidence and gzip envelopes separate while binding
+  equal canonical decompressed tar payloads for all four packages.
+- This checkpoint records generation plus the completed independent exact-lock
+  and provenance reviews. Both report 0 blocker, 0 high, and 0 medium; the
+  nine-endpoint change admits the lock for tracking, while unchanged reviewed
+  merge as `S2` remains pending. The ambient `GIT_PAGER=cat` override was removed from the
+  generator execution environment to satisfy the fail-closed Git-environment
+  boundary; no source/config change occurred.
+- No `S2`, `A2`, annotated `alpha.2` tag, tag-hosted result, npm package,
+  registry verification, dist-tag, Trusted Publisher binding, credential
+  retirement, or GitHub Release exists. M4-001B remains `IN_PROGRESS`, M4-001C
+  remains `PENDING`, support stays unchanged, and branch protection remains
   deferred.
 
 ## Deferred follow-through from the predecessor project

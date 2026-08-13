@@ -1,7 +1,7 @@
 {
   "schemaVersion": 3,
   "planId": "pptx-pipeline-alpha-package-plan",
-  "packageVersion": "0.1.0-alpha.1",
+  "packageVersion": "0.1.0-alpha.2",
   "license": "MIT",
   "moduleType": "module",
   "engines": {
@@ -29,7 +29,7 @@
   },
   "releaseGuard": {
     "state": "authorized",
-    "decisionId": "D-048"
+    "decisionId": "D-049"
   },
   "publication": {
     "registry": "https://registry.npmjs.org/",
@@ -46,15 +46,15 @@
       "dependencies": [
         {
           "packageId": "core",
-          "version": "0.1.0-alpha.1"
+          "version": "0.1.0-alpha.2"
         },
         {
           "packageId": "native-card-arrow",
-          "version": "0.1.0-alpha.1"
+          "version": "0.1.0-alpha.2"
         },
         {
           "packageId": "public-synthetic",
-          "version": "0.1.0-alpha.1"
+          "version": "0.1.0-alpha.2"
         }
       ],
       "exports": {
@@ -270,7 +270,7 @@
       "dependencies": [
         {
           "packageId": "core",
-          "version": "0.1.0-alpha.1"
+          "version": "0.1.0-alpha.2"
         }
       ],
       "exports": {

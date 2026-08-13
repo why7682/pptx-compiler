@@ -2,7 +2,7 @@
 
 ## Purpose and boundary
 
-`pptx-compiler-core` is the dependency-free `0.1.0-alpha.1` runtime for
+`pptx-compiler-core` is the dependency-free `0.1.0-alpha.2` runtime for
 contracts, secure ingestion, deterministic layout and candidate primitives,
 replay records, and honest blocked QA. It is not a CLI or general renderer.
 
