@@ -97,7 +97,7 @@ The CLI is the composition root. Core does not import the CLI, optional process
 or PowerPoint adapters, model-assisted labs, private fixtures, or a presentation
 project. Each package owns the schemas, fixtures, and static resources it
 interprets. Package-plan schema 3 positively maps every staged file and records
-D-048's exact public channel: version `0.1.0-alpha.1`, official npm registry,
+D-049's exact public channel: version `0.1.0-alpha.2`, official npm registry,
 dist-tag `alpha`, public access, and npm provenance. That is authorization and
 staging policy, not evidence that any package has been published.
 
@@ -157,24 +157,27 @@ product capability or enable the global support switch.
 - Windows preserves the logical create-only state machine and flushed file
   bytes, but Node exposes no parent-directory fsync equivalent there; no sudden-
   power-loss directory-entry persistence claim is made.
-- D-048 authorizes the exact public-alpha release, but this README does not
+- D-049 authorizes the exact public-alpha release, but this README does not
   assert mutable external lifecycle state. Exact tag/lock identity,
   official-registry bytes, npm provenance, and the GitHub Release record own
   those facts.
 
 ## Next authorized action
 
-D-048 already authorizes annotated tag `v0.1.0-alpha.1`, the four public npm
-packages under dist-tag `alpha`, GitHub Actions npm provenance, and the GitHub
-Release. Release Gates records the current phase; any incomplete M4-001 attempt
-advances only through its earliest unsatisfied transition. M4-001A completes
-and reviews the non-publishing contract. M4-001B freezes both builder results,
-writes the lock, and merges it as GitHub-verified commit `S`; then exactly one
-repository-local single-parent attestation `A` with sole parent `S` must grant
-`S` and pass the history gate at `main=A` before the exact clean tag is created
-on unchanged `S`. Tag Public CI and Security must pass before M4-001C runs its
+D-049 authorizes annotated tag `v0.1.0-alpha.2`, the four public npm packages
+at `0.1.0-alpha.2` under dist-tag `alpha`, GitHub Actions npm provenance, the
+GitHub prerelease, and the post-publication credential migration. Release Gates
+records the current phase; any incomplete M4-001 attempt advances only through
+its earliest unsatisfied transition. M4-001A's contract is complete. M4-001B
+must freeze the `alpha.2` builder results, write the new lock, and merge it as
+GitHub-verified commit `S2`; then exactly one repository-local single-parent
+attestation `A2` with sole parent `S2` must grant `S2` and pass the history gate
+at `main=A2` before the exact clean tag is created on unchanged `S2`. Tag Public
+CI and Security must pass before M4-001C runs its
 dependency-order registry publication, official-registry byte reread,
-provenance, and dist-tag checks. The GitHub Release is created last.
+provenance, signature, and dist-tag checks. The GitHub Release is created last;
+M4-001C closes only after all four Trusted Publisher bindings exist and the
+bootstrap token plus GitHub `NPM_TOKEN` are removed.
 Main-branch protection remains deliberately
 deferred by D-047/M3-008 and must not be claimed as active.
 
@@ -182,7 +185,7 @@ deferred by D-047/M3-008 and must not be claimed as active.
 
 - Start with the [candidate changelog](CHANGELOG.md), the single
   [known-limitations list](docs/KNOWN_LIMITATIONS.md), and the
-  [state-neutral `0.1.0-alpha.1` note](docs/releases/0.1.0-alpha.1.md) for the
+  [state-neutral `0.1.0-alpha.2` note](docs/releases/0.1.0-alpha.2.md) for the
   reader-facing candidate scope.
 - Read the human [support matrix](docs/SUPPORT_MATRIX.md) together with the
   [compatibility policy](docs/COMPATIBILITY_POLICY.md).

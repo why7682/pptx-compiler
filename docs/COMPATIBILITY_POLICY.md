@@ -200,17 +200,18 @@ must project the current matrix shipped in the same reviewed commit.
 The complete user-facing list is
 [`docs/KNOWN_LIMITATIONS.md`](KNOWN_LIMITATIONS.md). The decisive current facts
 are that arbitrary templates are unsupported, the candidate QA result is
-blocked, no BuildArtifact is created, and no npm package, release tag,
-provenance result, or GitHub Release exists. D-048 authorizes those exact alpha
-actions but does not prove that they occurred.
+blocked, and no BuildArtifact is created. D-049 authorizes the exact
+`0.1.0-alpha.2` external transition but does not prove any tag, lock, package,
+provenance, dist-tag, Trusted Publisher, credential-retirement, or GitHub
+Release fact for that version.
 
 Release Gates is the sole current release-phase owner. M4-001A contract
-admission is complete without changing support. M4-001B is in progress: exact
-independently reviewed lock
-`d3b4818e9bcdb43f39df557847613d3e5ce0afa2f6fffda5af655217f2f5170a` is
-included in the current tracked-admission change. Release Gates owns the
-remaining merge `S`, attestation `A`, history, tag, hosted-evidence, and M4-001C
-registry/declaration phases. None of those phases changes support by itself.
+admission is complete without changing support. M4-001B is in progress on a
+fresh `alpha.2` candidate boundary: its package/version projection,
+dual-builder lock, merge `S2`, attestation `A2`, history admission, tag, and
+hosted evidence must be independently established. Release Gates owns those
+facts and M4-001C's registry/declaration/credential-retirement phases. None of
+them changes support by itself.
 Any later support promotion must name one demonstrated user scope, update its
 exact matrix rows, and retain every unknown case as fail-closed. D-047/M3-008
 branch protection remains separately deferred.

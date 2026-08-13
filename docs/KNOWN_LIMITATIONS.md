@@ -3,7 +3,7 @@
 ## Purpose and boundary
 
 This is the user-facing negative contract for candidate-alpha version
-`0.1.0-alpha.1`. It states what the product does not promise and how failure
+`0.1.0-alpha.2`. It states what the product does not promise and how failure
 remains visible. It intentionally does not assert whether mutable tag, registry,
 provenance, or GitHub Release records currently exist. The normative support
 status is still
@@ -27,7 +27,7 @@ delivery authority.
 
 | Area | Current behavior | Boundary and unlock condition |
 | --- | --- | --- |
-| Release state | This lock-bound document makes no current external-release assertion. D-048 is authorization, not execution evidence. | Determine release state only by joining the exact annotated tag and tracked lock with official-registry bytes, npm provenance/dist-tags, and the GitHub Release record. A partial chain is not a release declaration. |
+| Release state | This lock-bound document makes no current external-release assertion. D-049 is authorization, not execution evidence. | Determine `alpha.2` release state only by joining its exact annotated tag and tracked lock with official-registry bytes, npm provenance/dist-tags, and the GitHub Release record. A partial chain is not a release declaration. |
 | Support claims | Zero rows are `supported`; `supportClaimsEnabled=false`. | The 22 experimental rows are exact opt-in dependencies, not general promises. Promotion requires a separate reviewed matrix change. |
 | Input class | The CLI accepts only the installation-owned public-synthetic POTX/profile. | User-owned PPTX, arbitrary POTX structures, unknown OOXML, and other document/design formats remain unsupported. |
 | Output authority | `render` creates one native-card candidate PPTX plus `CandidateBuildRecord`; `deliveryEligible=false`. | A candidate is not a delivery. Final authority requires exact candidate-bound mechanical, render, independent-pixel, and required compatibility receipts. |
@@ -41,13 +41,13 @@ delivery authority.
 | Archive/profile limits | Input is limited to 1 MiB, 32 ZIP members, 256 KiB per member, 1 MiB expanded total, 100:1 compression ratio, XML depth 64, and 50,000 elements. | These fixed security ceilings are not user-configurable. Broader grammar requires public positive and adversarial evidence plus a matrix review. |
 | Windows durability | Windows keeps file flush, create-only links, logical commit ordering, and exact recovery. | Node exposes no parent-directory fsync equivalent there, so sudden-power-loss directory-entry persistence is not claimed. |
 | Filesystem races | Portable Node APIs cannot provide a universal descriptor-relative walk or `openat` publication boundary. | Stable-handle checks, `O_NOFOLLOW` where available, identity rechecks, create-only writes, and fail-closed recovery reduce but do not erase same-principal race residuals. |
-| Package distribution | Historical M3 private tarballs remain package-boundary evidence; package-plan schema 3 defines the authorized public manifests. | Private tarballs are not release bytes. The dual-builder lock requires equal canonical tar payloads and identifies only the fixed Node 24/npm 11 gzip envelopes as release bytes; actual distribution is owned by official-registry byte/provenance records. |
+| Package distribution | Historical local tarballs are boundary evidence only; package-plan schema 3 defines the authorized `alpha.2` public manifests. | Earlier tarballs are not `alpha.2` release bytes. The exact dual-builder lock must require equal canonical tar payloads and identify only its fixed Node 24/npm 11 gzip envelopes as release bytes; actual distribution and current phase are owned by official-registry byte/provenance records and Release Gates. |
 | Package stage | One ignored fixed stage retains reviewed output and failed/quarantined attempts. | Concurrent builds and unknown nonempty stage entries fail closed. Directory names alone never authorize recursive deletion. |
 | Runtime envelope | Hosted CI passed Linux/macOS/Windows under Node 22/24. | Those platform rows remain experimental and authorize nothing alone. Browsers and undeclared Node/OS versions are unsupported. |
 | CLI breadth | `init`, `inspect`, `validate document`, `validate project`, exact `render`, and exact `qa` exist. | `doctor`, generic `onboard`, standalone `diff`, and formula CLI remain deferred until a demonstrated workflow justifies them. |
 | Contract stability | Public contracts are versioned `0.x`. | Breaking changes increment the minor version with migration notes and negative tests; no 1.0 stability promise exists. |
 | Private fixtures | Optional private probes may find narrow defects. | They remain outside Git and public CI and cannot be required for reproduction or used to establish public support. |
-| Branch protection | Main-branch protection is not configured or claimed. | D-047 requires a new explicit user authorization; M3/M4 completion and D-048 do not resume it. |
+| Branch protection | Main-branch protection is not configured or claimed. | D-047 requires a new explicit user authorization; M3/M4 completion and D-048/D-049 do not resume it. |
 
 ## Public evidence
 
@@ -81,11 +81,14 @@ compatibility, delivery QA, a release tag, or published package equality.
 
 ## Next authorized action
 
-For any M4-001 attempt, take only the earliest unsatisfied transition: freeze
-and build; write the lock; merge the lock as GitHub-verified `S`; append the
-single-parent local attestation `A` with sole parent `S`; pass the complete
-history gate at `main=A`; tag unchanged `S`; pass tag Public CI and Security;
+For any D-049 `alpha.2` lifecycle state, Release Gates—not this lock-bound
+document—identifies whether a transition remains. If the chain is incomplete,
+take only its earliest unsatisfied transition:
+freeze and build; write the new lock; merge it as GitHub-verified `S2`; append
+the single-parent local attestation `A2` with sole parent `S2`; pass the complete
+history gate at `main=A2`; tag unchanged `S2`; pass tag Public CI and Security;
 publish npm in dependency order; then create the GitHub Release last. It must
 not silently broaden input, capability, compatibility, support, or D-047
-branch-protection scope. Every broader limitation requires its own executable
-user need, public conformance evidence, and exact matrix review.
+branch-protection scope. If no transition remains, this document authorizes no
+additional release mutation. Every broader limitation requires its own
+executable user need, public conformance evidence, and exact matrix review.

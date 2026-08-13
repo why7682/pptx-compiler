@@ -3,7 +3,7 @@ const SETUP_NODE_SHA = "820762786026740c76f36085b0efc47a31fe5020";
 const CODEQL_SHA = "5595ccaf912efad79be6eef63a5619ff05969be3";
 const DEPENDENCY_REVIEW_SHA = "a1d282b36b6f3519aa1f3fc636f609c47dddb294";
 
-export const ALPHA_RELEASE_TAG = "v0.1.0-alpha.1";
+export const ALPHA_RELEASE_TAG = "v0.1.0-alpha.2";
 export const ALPHA_RELEASE_ENVIRONMENT = "npm-release";
 export const ALPHA_RELEASE_PREPARATION_COMMAND =
   `node scripts/check-alpha-release-preparation.mjs --mode release-tag --tag ${ALPHA_RELEASE_TAG} --stage-root .package-stage/reviewed`;

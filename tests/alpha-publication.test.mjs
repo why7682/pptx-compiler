@@ -29,8 +29,8 @@ import {
 } from "../scripts/publish-alpha-release.mjs";
 
 const repositoryRoot = fileURLToPath(new URL("..", import.meta.url));
-const TAG = "v0.1.0-alpha.1";
-const VERSION = "0.1.0-alpha.1";
+const TAG = "v0.1.0-alpha.2";
+const VERSION = "0.1.0-alpha.2";
 const HEAD = "b".repeat(40);
 const MAIN_TIP = "c".repeat(40);
 const TAG_OBJECT = "a".repeat(40);
@@ -186,7 +186,7 @@ function provenanceEnvironment(overrides = {}) {
   return {
     ACTIONS_ID_TOKEN_REQUEST_TOKEN: "oidc-token",
     ACTIONS_ID_TOKEN_REQUEST_URL:
-      "https://pipelines.actions.githubusercontent.com/example/token?api-version=2.0",
+      "https://pipelinesghubeus4.actions.githubusercontent.com/example/token?api-version=2.0",
     CI: "true",
     GITHUB_ACTIONS: "true",
     GITHUB_EVENT_NAME: "workflow_dispatch",
@@ -853,6 +853,18 @@ test("npm provenance environment is exact before the first irreversible publish"
   assert.equal(publishEnvironment.NODE_AUTH_TOKEN, "npm-secret");
   assert.equal(publishEnvironment.GITLAB_CI, undefined);
   assert.equal(publishEnvironment.PRIVATE_VALUE, undefined);
+  for (const oidcUrl of [
+    "https://pipelinesghubeus4.actions.githubusercontent.com/example/token?api-version=2.0",
+    "https://pipelines.actions.githubusercontent.com/example/token?api-version=2.0"
+  ]) {
+    assert.doesNotThrow(() => validateAlphaNpmProvenanceEnvironment({
+      environment: provenanceEnvironment({
+        ACTIONS_ID_TOKEN_REQUEST_URL: oidcUrl
+      }),
+      headCommitOid: HEAD,
+      repositoryOwnerId: OWNER_ID
+    }), oidcUrl);
+  }
   for (const [key, value] of [
     ["CI", "false"],
     ["GITHUB_ACTIONS", "false"],
@@ -867,7 +879,6 @@ test("npm provenance environment is exact before the first irreversible publish"
     ["GITHUB_RUN_ID", "01"],
     ["GITHUB_RUN_ATTEMPT", "0"],
     ["RUNNER_ENVIRONMENT", "self-hosted"],
-    ["ACTIONS_ID_TOKEN_REQUEST_URL", "https://example.test/token"],
     ["ACTIONS_ID_TOKEN_REQUEST_TOKEN", ""]
   ]) {
     assert.throws(() => validateAlphaNpmProvenanceEnvironment({
@@ -875,6 +886,32 @@ test("npm provenance environment is exact before the first irreversible publish"
       headCommitOid: HEAD,
       repositoryOwnerId: OWNER_ID
     }), /alpha-publication-provenance-environment/u, key);
+  }
+  for (const oidcUrl of [
+    "https://actions.githubusercontent.com/example/token",
+    "https://evilactions.githubusercontent.com/example/token",
+    "https://pipelines.actions.githubusercontent.com.evil/example/token",
+    "https://nested.pipelines.actions.githubusercontent.com/example/token",
+    "https://\u00e9.actions.githubusercontent.com/example/token",
+    "https://xn--9ca.actions.githubusercontent.com/example/token",
+    "https://pipelines.actions.githubusercontent.com./example/token",
+    "https://pipelines..actions.githubusercontent.com/example/token",
+    "https://127.0.0.1/example/token",
+    " https://pipelines.actions.githubusercontent.com/example/token",
+    "http://pipelines.actions.githubusercontent.com/example/token",
+    `https://user${"@"}pipelines.actions.githubusercontent.com/example/token`,
+    `https://user:password${"@"}pipelines.actions.githubusercontent.com/example/token`,
+    "https://pipelines.actions.githubusercontent.com:443/example/token",
+    "https://pipelines.actions.githubusercontent.com/example/token#fragment",
+    "https://pipelines.actions.githubusercontent.com/"
+  ]) {
+    assert.throws(() => validateAlphaNpmProvenanceEnvironment({
+      environment: provenanceEnvironment({
+        ACTIONS_ID_TOKEN_REQUEST_URL: oidcUrl
+      }),
+      headCommitOid: HEAD,
+      repositoryOwnerId: OWNER_ID
+    }), /alpha-publication-provenance-environment/u, oidcUrl);
   }
 });
 
@@ -895,11 +932,11 @@ test("the fixed npm Sigstore verifier binds one exact workflow certificate ident
   await chmod(cachePath, 0o700);
   const certificateIdentity =
     "https://github.com/why7682/pptx-compiler/" +
-    ".github/workflows/alpha-release.yml@refs/tags/v0.1.0-alpha.1";
+    ".github/workflows/alpha-release.yml@refs/tags/v0.1.0-alpha.2";
   const certificateIdentityPattern =
     "^https://github\\.com/why7682/pptx-compiler/" +
     "\\.github/workflows/alpha-release\\.yml@refs/tags/" +
-    "v0\\.1\\.0-alpha\\.1$";
+    "v0\\.1\\.0-alpha\\.2$";
   const certificateIssuer = "https://token.actions.githubusercontent.com";
   await Promise.all([
     writeFile(npmCli, "module.exports = {};\n"),

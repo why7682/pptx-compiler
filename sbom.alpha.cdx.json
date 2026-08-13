@@ -5,9 +5,9 @@
   "metadata": {
     "component": {
       "type": "application",
-      "bom-ref": "urn:pptx-compiler:alpha-package-set:0.1.0-alpha.1",
+      "bom-ref": "urn:pptx-compiler:alpha-package-set:0.1.0-alpha.2",
       "name": "pptx-compiler-alpha-package-set",
-      "version": "0.1.0-alpha.1",
+      "version": "0.1.0-alpha.2",
       "licenses": [
         {
           "license": {
@@ -32,9 +32,9 @@
   "components": [
     {
       "type": "library",
-      "bom-ref": "pkg:npm/pptx-compiler-core@0.1.0-alpha.1",
+      "bom-ref": "pkg:npm/pptx-compiler-core@0.1.0-alpha.2",
       "name": "pptx-compiler-core",
-      "version": "0.1.0-alpha.1",
+      "version": "0.1.0-alpha.2",
       "licenses": [
         {
           "license": {
@@ -42,7 +42,7 @@
           }
         }
       ],
-      "purl": "pkg:npm/pptx-compiler-core@0.1.0-alpha.1",
+      "purl": "pkg:npm/pptx-compiler-core@0.1.0-alpha.2",
       "properties": [
         {
           "name": "pptx-compiler:package-id",
@@ -52,9 +52,9 @@
     },
     {
       "type": "library",
-      "bom-ref": "pkg:npm/pptx-compiler-native-card-arrow@0.1.0-alpha.1",
+      "bom-ref": "pkg:npm/pptx-compiler-native-card-arrow@0.1.0-alpha.2",
       "name": "pptx-compiler-native-card-arrow",
-      "version": "0.1.0-alpha.1",
+      "version": "0.1.0-alpha.2",
       "licenses": [
         {
           "license": {
@@ -62,7 +62,7 @@
           }
         }
       ],
-      "purl": "pkg:npm/pptx-compiler-native-card-arrow@0.1.0-alpha.1",
+      "purl": "pkg:npm/pptx-compiler-native-card-arrow@0.1.0-alpha.2",
       "properties": [
         {
           "name": "pptx-compiler:package-id",
@@ -72,9 +72,9 @@
     },
     {
       "type": "library",
-      "bom-ref": "pkg:npm/pptx-compiler-public-synthetic@0.1.0-alpha.1",
+      "bom-ref": "pkg:npm/pptx-compiler-public-synthetic@0.1.0-alpha.2",
       "name": "pptx-compiler-public-synthetic",
-      "version": "0.1.0-alpha.1",
+      "version": "0.1.0-alpha.2",
       "licenses": [
         {
           "license": {
@@ -82,7 +82,7 @@
           }
         }
       ],
-      "purl": "pkg:npm/pptx-compiler-public-synthetic@0.1.0-alpha.1",
+      "purl": "pkg:npm/pptx-compiler-public-synthetic@0.1.0-alpha.2",
       "properties": [
         {
           "name": "pptx-compiler:package-id",
@@ -92,9 +92,9 @@
     },
     {
       "type": "application",
-      "bom-ref": "pkg:npm/pptx-compiler@0.1.0-alpha.1",
+      "bom-ref": "pkg:npm/pptx-compiler@0.1.0-alpha.2",
       "name": "pptx-compiler",
-      "version": "0.1.0-alpha.1",
+      "version": "0.1.0-alpha.2",
       "licenses": [
         {
           "license": {
@@ -102,7 +102,7 @@
           }
         }
       ],
-      "purl": "pkg:npm/pptx-compiler@0.1.0-alpha.1",
+      "purl": "pkg:npm/pptx-compiler@0.1.0-alpha.2",
       "properties": [
         {
           "name": "pptx-compiler:package-id",
@@ -113,34 +113,34 @@
   ],
   "dependencies": [
     {
-      "ref": "urn:pptx-compiler:alpha-package-set:0.1.0-alpha.1",
+      "ref": "urn:pptx-compiler:alpha-package-set:0.1.0-alpha.2",
       "dependsOn": [
-        "pkg:npm/pptx-compiler-core@0.1.0-alpha.1",
-        "pkg:npm/pptx-compiler-native-card-arrow@0.1.0-alpha.1",
-        "pkg:npm/pptx-compiler-public-synthetic@0.1.0-alpha.1",
-        "pkg:npm/pptx-compiler@0.1.0-alpha.1"
+        "pkg:npm/pptx-compiler-core@0.1.0-alpha.2",
+        "pkg:npm/pptx-compiler-native-card-arrow@0.1.0-alpha.2",
+        "pkg:npm/pptx-compiler-public-synthetic@0.1.0-alpha.2",
+        "pkg:npm/pptx-compiler@0.1.0-alpha.2"
       ]
     },
     {
-      "ref": "pkg:npm/pptx-compiler-core@0.1.0-alpha.1",
+      "ref": "pkg:npm/pptx-compiler-core@0.1.0-alpha.2",
       "dependsOn": []
     },
     {
-      "ref": "pkg:npm/pptx-compiler-native-card-arrow@0.1.0-alpha.1",
+      "ref": "pkg:npm/pptx-compiler-native-card-arrow@0.1.0-alpha.2",
       "dependsOn": [
-        "pkg:npm/pptx-compiler-core@0.1.0-alpha.1"
+        "pkg:npm/pptx-compiler-core@0.1.0-alpha.2"
       ]
     },
     {
-      "ref": "pkg:npm/pptx-compiler-public-synthetic@0.1.0-alpha.1",
+      "ref": "pkg:npm/pptx-compiler-public-synthetic@0.1.0-alpha.2",
       "dependsOn": []
     },
     {
-      "ref": "pkg:npm/pptx-compiler@0.1.0-alpha.1",
+      "ref": "pkg:npm/pptx-compiler@0.1.0-alpha.2",
       "dependsOn": [
-        "pkg:npm/pptx-compiler-core@0.1.0-alpha.1",
-        "pkg:npm/pptx-compiler-native-card-arrow@0.1.0-alpha.1",
-        "pkg:npm/pptx-compiler-public-synthetic@0.1.0-alpha.1"
+        "pkg:npm/pptx-compiler-core@0.1.0-alpha.2",
+        "pkg:npm/pptx-compiler-native-card-arrow@0.1.0-alpha.2",
+        "pkg:npm/pptx-compiler-public-synthetic@0.1.0-alpha.2"
       ]
     }
   ]

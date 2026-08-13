@@ -3,7 +3,6 @@ import { spawnSync } from "node:child_process";
 import { constants as fsConstants } from "node:fs";
 import {
   lstat,
-  mkdir,
   open,
   readFile,
   readdir,
@@ -35,9 +34,16 @@ import {
 export const ALPHA_RELEASE_PLAN_VERSION = 2;
 export const ALPHA_RELEASE_PLAN_PATH = "packaging/alpha-release-plan.json";
 export const ALPHA_RELEASE_LOCK_PATH =
-  "packaging/releases/0.1.0-alpha.1.lock.json";
-export const ALPHA_RELEASE_TAG_NAME = "v0.1.0-alpha.1";
-export const ALPHA_RELEASE_TAG_MESSAGE = "pptx-compiler 0.1.0-alpha.1";
+  "packaging/releases/0.1.0-alpha.2.lock.json";
+export const ALPHA_RELEASE_TAG_NAME = "v0.1.0-alpha.2";
+export const ALPHA_RELEASE_TAG_MESSAGE = "pptx-compiler 0.1.0-alpha.2";
+export const ALPHA_HISTORICAL_RELEASE_LOCK = Object.freeze({
+  path: "packaging/releases/0.1.0-alpha.1.lock.json",
+  mode: "100644",
+  blobOid: "61d6df477769d3ebd5cd3ab3607fb977fc21ab5b",
+  sha256: "d3b4818e9bcdb43f39df557847613d3e5ce0afa2f6fffda5af655217f2f5170a",
+  bytes: 6218
+});
 export const ALPHA_FIXED_BUILDER = Object.freeze({
   nodeVersion: "24.19.0",
   npmVersion: "11.17.0"
@@ -58,7 +64,7 @@ const MAX_RELEASE_HISTORY_COMMITS = 64;
 const LOCKED_INPUTS = Object.freeze([
   "CHANGELOG.md",
   "docs/KNOWN_LIMITATIONS.md",
-  "docs/releases/0.1.0-alpha.1.md",
+  "docs/releases/0.1.0-alpha.2.md",
   ALPHA_PACKAGE_PLAN_PATH,
   "policy/support-matrix.json",
   "sbom.alpha.cdx.json"
@@ -240,7 +246,8 @@ function readGitTreeBlob(root, treeOid, relativePath, environment, {
   if (objectOid !== match[2]) throw new Error("alpha-release-tree-object");
   return Object.freeze({
     bytes,
-    mode: match[1]
+    mode: match[1],
+    objectOid: match[2]
   });
 }
 
@@ -364,7 +371,7 @@ export function validateAlphaReleasePlan(plan, { packagePlan } = {}) {
     add(findings, "release-plan-identity", "/planId");
   }
   if (!isPlainRecord(packagePlan) || plan.releaseVersion !== packagePlan.packageVersion ||
-      plan.releaseVersion !== "0.1.0-alpha.1") {
+      plan.releaseVersion !== "0.1.0-alpha.2") {
     add(findings, "release-plan-version", "/releaseVersion");
   }
   if (plan.packagePlanPath !== ALPHA_PACKAGE_PLAN_PATH ||
@@ -414,7 +421,7 @@ export function validateAlphaReleasePlan(plan, { packagePlan } = {}) {
   ]) || plan.githubRelease.order !== "last" ||
       plan.githubRelease.requiresCompleteRegistryVerification !== true ||
       plan.githubRelease.name !== ALPHA_RELEASE_TAG_MESSAGE ||
-      plan.githubRelease.bodySource !== "docs/releases/0.1.0-alpha.1.md" ||
+      plan.githubRelease.bodySource !== "docs/releases/0.1.0-alpha.2.md" ||
       !plan.lockedInputs.includes(plan.githubRelease.bodySource) ||
       plan.githubRelease.bodyProjection !==
         "locked-note-plus-release-identity-v1" ||
@@ -433,7 +440,7 @@ export function validateAlphaReleasePlan(plan, { packagePlan } = {}) {
   }
   if (!isDeepStrictEqual(packagePlan?.releaseGuard, {
     state: "authorized",
-    decisionId: "D-048"
+    decisionId: "D-049"
   })) {
     add(findings, "release-plan-authorization", "/authorizationSource");
   }
@@ -1328,6 +1335,12 @@ export async function inspectAlphaReleaseCandidateSnapshot({
         environment.GITHUB_SHA !== headCommitOid)) {
     throw new Error("alpha-release-tag-target");
   }
+  await assertHistoricalAlphaReleaseLock({
+    root: resolvedRoot,
+    treeOid: tagTargetTreeOid,
+    environment: gitEnvironment,
+    currentLockPresent: true
+  });
 
   const releasePlanBytes = readGitTreeFile(
     resolvedRoot,
@@ -1444,6 +1457,12 @@ export async function inspectAlphaReleaseCandidateSnapshot({
     throw new Error("alpha-release-repository-changed");
   }
   await workingFilesEqualTree(resolvedRoot, workingFiles);
+  await assertHistoricalAlphaReleaseLock({
+    root: resolvedRoot,
+    treeOid: tagTargetTreeOid,
+    environment: gitEnvironment,
+    currentLockPresent: true
+  });
 
   const releaseTag = Object.freeze({
     tagName,
@@ -1548,7 +1567,7 @@ export function renderAlphaGitHubReleaseBody({
       note === null || note.length < 1 || note.length > MAX_CONTROL_BYTES ||
       !GIT_OID.test(targetCommitOid) ||
       releasePlan.githubRelease.bodySource !==
-        "docs/releases/0.1.0-alpha.1.md" ||
+        "docs/releases/0.1.0-alpha.2.md" ||
       releasePlan.githubRelease.bodyProjection !==
         "locked-note-plus-release-identity-v1") {
     throw new Error("alpha-release-github-body-input");
@@ -1712,6 +1731,91 @@ async function assertCanonicalDirectory(absolutePath, code) {
   }
 }
 
+async function assertAlphaReleaseDirectoryInventory(
+  releaseDirectory,
+  { currentLockPresent = false } = {}
+) {
+  const expected = [path.posix.basename(ALPHA_HISTORICAL_RELEASE_LOCK.path)];
+  if (currentLockPresent) expected.push(path.posix.basename(ALPHA_RELEASE_LOCK_PATH));
+  expected.sort();
+  let actual;
+  try {
+    actual = (await readdir(releaseDirectory)).sort();
+  } catch {
+    throw new Error("alpha-release-lock-directory-inventory");
+  }
+  if (!isDeepStrictEqual(actual, expected)) {
+    throw new Error("alpha-release-lock-directory-inventory");
+  }
+}
+
+async function assertHistoricalAlphaReleaseLock({
+  root,
+  treeOid,
+  environment,
+  currentLockPresent = false
+}) {
+  const packagingDirectory = path.join(root, "packaging");
+  const releaseDirectory = path.join(packagingDirectory, "releases");
+  const absolutePath = path.join(
+    root,
+    ...ALPHA_HISTORICAL_RELEASE_LOCK.path.split("/")
+  );
+  await assertCanonicalDirectory(packagingDirectory, "alpha-release-lock-parent");
+  await assertCanonicalDirectory(releaseDirectory, "alpha-release-lock-directory");
+  await assertAlphaReleaseDirectoryInventory(releaseDirectory, {
+    currentLockPresent
+  });
+
+  let treeEntry;
+  try {
+    treeEntry = readGitTreeBlob(
+      root,
+      treeOid,
+      ALPHA_HISTORICAL_RELEASE_LOCK.path,
+      environment,
+      {
+        maximumBytes: ALPHA_HISTORICAL_RELEASE_LOCK.bytes,
+        allowedModes: [ALPHA_HISTORICAL_RELEASE_LOCK.mode]
+      }
+    );
+  } catch {
+    throw new Error("alpha-release-historical-lock-tree");
+  }
+  if (treeEntry.mode !== ALPHA_HISTORICAL_RELEASE_LOCK.mode ||
+      treeEntry.objectOid !== ALPHA_HISTORICAL_RELEASE_LOCK.blobOid ||
+      treeEntry.bytes.length !== ALPHA_HISTORICAL_RELEASE_LOCK.bytes ||
+      sha256(treeEntry.bytes) !== ALPHA_HISTORICAL_RELEASE_LOCK.sha256) {
+    throw new Error("alpha-release-historical-lock-tree");
+  }
+
+  let before;
+  let after;
+  let workingBytes;
+  try {
+    before = await lstat(absolutePath, { bigint: true });
+    if (!before.isFile() || before.isSymbolicLink() ||
+        await realpath(absolutePath) !== path.resolve(absolutePath)) {
+      throw new Error("alpha-release-historical-lock-worktree");
+    }
+    workingBytes = await stableReadAlphaFile(
+      absolutePath,
+      ALPHA_HISTORICAL_RELEASE_LOCK.bytes
+    );
+    after = await lstat(absolutePath, { bigint: true });
+  } catch (error) {
+    if (error?.message === "alpha-release-historical-lock-worktree") throw error;
+    throw new Error("alpha-release-historical-lock-worktree");
+  }
+  if (!after.isFile() || after.isSymbolicLink() ||
+      !sameFileStat(before, after) ||
+      workingBytes.length !== ALPHA_HISTORICAL_RELEASE_LOCK.bytes ||
+      sha256(workingBytes) !== ALPHA_HISTORICAL_RELEASE_LOCK.sha256 ||
+      !workingBytes.equals(treeEntry.bytes)) {
+    throw new Error("alpha-release-historical-lock-worktree");
+  }
+}
+
 function assertCleanLockWorkspace(root, environment) {
   const status = runGit(root, [
     "--no-replace-objects", "status", "--porcelain=v1", "--untracked-files=all"
@@ -1782,6 +1886,8 @@ async function syncAlphaDirectory(directory) {
 
 async function writeAlphaReleaseLockCreateOnly({
   root,
+  treeOid,
+  environment,
   lock,
   releasePlan,
   packagePlan,
@@ -1792,21 +1898,8 @@ async function writeAlphaReleaseLockCreateOnly({
   const outputPath = path.join(root, ...ALPHA_RELEASE_LOCK_PATH.split("/"));
   await assertCanonicalDirectory(packagingDirectory, "alpha-release-lock-parent");
   if (await pathExists(outputPath)) throw new Error("alpha-release-lock-exists");
-  if (await pathExists(releaseDirectory)) {
-    await assertCanonicalDirectory(releaseDirectory, "alpha-release-lock-directory");
-    if ((await readdir(releaseDirectory)).length !== 0) {
-      throw new Error("alpha-release-lock-directory-not-empty");
-    }
-  } else {
-    try {
-      await mkdir(releaseDirectory, { mode: 0o755 });
-    } catch {
-      throw new Error("alpha-release-lock-directory-create");
-    }
-    await assertCanonicalDirectory(releaseDirectory, "alpha-release-lock-directory");
-    await syncAlphaDirectory(packagingDirectory);
-  }
-  if (await pathExists(outputPath) || (await readdir(releaseDirectory)).length !== 0) {
+  await assertHistoricalAlphaReleaseLock({ root, treeOid, environment });
+  if (await pathExists(outputPath)) {
     throw new Error("alpha-release-lock-output-state");
   }
 
@@ -1828,6 +1921,12 @@ async function writeAlphaReleaseLockCreateOnly({
     await handle?.close().catch(() => {});
   }
   await syncAlphaDirectory(releaseDirectory);
+  await assertHistoricalAlphaReleaseLock({
+    root,
+    treeOid,
+    environment,
+    currentLockPresent: true
+  });
   const persisted = await stableReadAlphaFile(outputPath);
   if (!persisted.equals(bytes)) throw new Error("alpha-release-lock-persisted-bytes");
   const parsed = parseAlphaReleaseLockBytes(persisted);
@@ -1869,7 +1968,6 @@ export async function generateAlphaReleaseLockFile({
   }
   const outputPath = path.join(root, ...ALPHA_RELEASE_LOCK_PATH.split("/"));
   if (await pathExists(outputPath)) throw new Error("alpha-release-lock-exists");
-  assertCleanLockWorkspace(root, gitEnvironment);
 
   const headCommitOid = runGit(root, [
     "--no-replace-objects", "rev-parse", "--verify", "HEAD^{commit}"
@@ -1880,6 +1978,12 @@ export async function generateAlphaReleaseLockFile({
   if (!GIT_OID.test(headCommitOid) || !GIT_OID.test(headTreeOid)) {
     throw new Error("alpha-release-lock-head");
   }
+  await assertHistoricalAlphaReleaseLock({
+    root,
+    treeOid: headTreeOid,
+    environment: gitEnvironment
+  });
+  assertCleanLockWorkspace(root, gitEnvironment);
   const releasePlanBytes = readGitTreeFile(
     root,
     headTreeOid,
@@ -1969,6 +2073,8 @@ export async function generateAlphaReleaseLockFile({
   assertCleanLockWorkspace(root, gitEnvironment);
   return writeAlphaReleaseLockCreateOnly({
     root,
+    treeOid: headTreeOid,
+    environment: gitEnvironment,
     lock,
     releasePlan,
     packagePlan,

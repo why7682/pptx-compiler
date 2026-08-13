@@ -1,89 +1,102 @@
 # M4-001 Handoff — Candidate-Alpha Release
 
-## Status
+## Purpose and boundary
 
-M4-001 is active and split at observable boundaries:
+The release publishes one narrow candidate-alpha toolchain, not a general PPTX
+renderer or delivery-approved product. Its installed path creates the exact
+public-synthetic project, securely inspects its bounded POTX, validates and
+preflights one exact experimental capability batch, renders one native-card
+candidate plus `CandidateBuildRecord`, and emits a schema-valid blocked
+`QaReport`. It creates no `BuildArtifact`.
 
-- `M4-001A` is complete: the fail-closed non-publishing release contract and
-  its current-byte provenance/review boundary are admitted;
-- `M4-001B` is in progress: exact reviewed lock
-  `d3b4818e9bcdb43f39df557847613d3e5ce0afa2f6fffda5af655217f2f5170a`
-  is included in this tracked-admission change; merge as GitHub-verified commit
-  `S`, the single-parent local attestation commit `A`, history gate at
-  `main=A`, annotated tag `v0.1.0-alpha.1` on unchanged `S`, and clean-tag gates
-  remain outstanding;
-- `M4-001C` is pending: publish and reread four npm packages, verify provenance
-  and dist-tags, then create the GitHub Release last.
+Release success distributes exact reviewed bytes. It cannot promote support,
+invent compatibility, change blocked QA to pass, or turn a candidate PPTX into
+a delivery.
 
-D-048 records the user's explicit authorization for the exact tag and GitHub
-Release, four public npm packages under dist-tag `alpha`, and GitHub Actions
-plus npm provenance. Authorization is not evidence that an action occurred.
-The exact reviewed release lock is now admitted by this change, but it has not
-been merged as `S`; there is no attestation `A`, release tag, tag-hosted result,
-npm publication, registry provenance result, or GitHub Release. The lock-bound
-changelog, limitations, and release note are lifecycle-state neutral so their
-bytes remain truthful before and after any authorized external transition.
+## Current status
 
-D-047/M3-008 branch protection is separately deferred. No M4 state resumes it
-or makes it a release prerequisite.
+M4-001 remains active at a fail-closed recovery boundary:
 
-On 2026-08-13, the user confirmed the external bootstrap prerequisites: the npm
-account email is verified, account 2FA is enabled, and GitHub environment
-`npm-release` contains `NPM_TOKEN`. The repository records only this attestation,
-never the token value. It is not an independent credential check and does not
-prove that any package was published. The bootstrap token remains temporary:
-after all four initial package identities exist, configure each exact npm Trusted
-Publisher, revoke the token, and remove the GitHub secret.
+- `M4-001A` is complete. The non-publishing release contract, fixed builders,
+  package graph, registry recovery states, Sigstore verification, workflow
+  credential separation, and GitHub-Release-last declaration are admitted.
+- The immutable `0.1.0-alpha.1` candidate completed its M4-001B source, lock,
+  attestation, annotated-tag, and tag-hosted gates. Its first manual release
+  run then stopped before the first npm publish. That version is retired
+  unpublished and remains immutable historical evidence.
+- `M4-001B` is now in progress for the D-049-authorized replacement
+  `0.1.0-alpha.2`. It requires a fresh package/version projection, dual-builder
+  lock, reviewed merge `S2`, attestation `A2`, full-history admission,
+  annotated tag, and tag-hosted gates. None of those `alpha.2` objects is
+  asserted yet.
+- `M4-001C` remains pending. It may begin only after complete `alpha.2`
+  candidate admission, and it is not complete until ordered npm publication,
+  official-registry/provenance/signature/dist-tag verification, GitHub Release
+  declaration, all four Trusted Publisher bindings, bootstrap-token revocation,
+  and deletion of GitHub `NPM_TOKEN` are evidenced.
+
+D-047/M3-008 branch protection remains independently deferred. Neither D-049
+nor any M4 phase resumes it or makes it a release prerequisite.
 
 ## Fact ownership
 
 | Fact | Owner |
 | --- | --- |
-| External-action authorization | D-048 in `docs/DECISIONS.md` |
-| Package graph, public manifest, registry, access, dist-tag, provenance setting, derived dependency order | `packaging/alpha-package-plan.json` schema 3 |
-| Exact tag, builders, lock inputs, recovery and completion rules | `packaging/alpha-release-plan.json` |
+| External-action authorization | D-049 in `docs/DECISIONS.md`; D-048 remains the immutable historical `alpha.1` authority |
+| Package graph, version, public manifests, registry, access, dist-tag, provenance setting, dependency order | `packaging/alpha-package-plan.json` |
+| Exact tag, builders, locked inputs, recovery and completion rules | `packaging/alpha-release-plan.json` |
 | Release phase order and eligibility | `docs/RELEASE_GATES.md` |
-| Candidate source/artifact identity | Reviewed `packaging/releases/0.1.0-alpha.1.lock.json`; tracked admission is part of this change, while merge `S` and later phases remain outstanding |
 | Current support state | `policy/support-matrix.json` |
-| User-facing delta and limits | `CHANGELOG.md`, `docs/KNOWN_LIMITATIONS.md`, state-neutral release note |
-| Eligibility and transition rules | `docs/RELEASE_GATES.md` |
-| Actual npm/GitHub state | Official registry responses, npm provenance, GitHub tag and Release records |
+| User-facing delta and negative contract | `CHANGELOG.md`, `docs/KNOWN_LIMITATIONS.md`, and `docs/releases/0.1.0-alpha.2.md` |
+| Exact `alpha.2` candidate/artifact identity | Future reviewed `packaging/releases/0.1.0-alpha.2.lock.json`; no lock exists by documentation assertion |
+| Actual npm/GitHub lifecycle state | Official registry responses, fetched npm provenance/signatures, exact GitHub tag and Release records |
 
-The package plan owns publication settings and dependency edges exactly once;
-the publisher derives `core -> native-card-arrow -> public-synthetic -> CLI`
-from that graph. The release plan uses JSON pointers to publication settings
-rather than copying them, while Release Gates owns the phase sequence. A
-release lock is an exact-boundary record, not a second package plan and not a
-support authority.
+The package plan owns publication settings and dependency edges exactly once.
+The publisher derives `core -> native-card-arrow -> public-synthetic -> CLI`
+from that graph. The release plan references those settings and owns exact
+candidate/recovery rules. Release Gates owns phase order. A release lock is an
+identity boundary, not another package plan or support authority.
 
-Release-plan schema 2 also closes the final declaration: exact title, locked
-note source, deterministic lock/package identity projection, tag-target
-binding, non-draft prerelease state, `make_latest=false`, disabled generated
-notes, no assets, and create-or-exact idempotency. These fields project already
-owned facts; they do not create a second release note or mutable state record.
+## `alpha.2` candidate admission
 
-## Release candidate and lock
+D-049 authorizes exact package version `0.1.0-alpha.2`, annotated tag
+`v0.1.0-alpha.2` with message `pptx-compiler 0.1.0-alpha.2`, public access,
+dist-tag `alpha`, GitHub Actions npm provenance, and a matching non-draft
+GitHub prerelease created last. Authorization is not execution evidence.
 
-The only candidate tag is the annotated `v0.1.0-alpha.1`, with exact message
-`pptx-compiler 0.1.0-alpha.1`. Candidate admission
-must prove that it peels to reviewed GitHub-verified lock-containing commit
-`S` and its intended tree, while current remote `main=A` has `S` as its sole
-parent; that the tagger is the already-approved public Git identity; that the tag
-object has no extra header, signature block, control text, or unreviewed
-message; and that the checkout is clean, full-history, and free of replace
-refs, grafts, alternates, or a shallow boundary. A lightweight, moving,
-mismatched, malformed, or dirty candidate fails closed.
+Candidate admission must prove that the tag peels to the exact reviewed
+GitHub-verified lock-containing commit `S2`, while current remote `main=A2` is
+exactly its one-commit public-identity attestation. `A2` must have `S2` as its
+sole parent, its tip-owned policy must exact-grant `S2`, and GitHub comparison
+must report `ahead_by=1` and `behind_by=0`. Equality, a deeper descendant, an
+additional parent, or another verified commit fails closed.
 
-The tag is an exact annotated identity binding to a GitHub-verified accepted-
-main commit, not a cryptographically signed tag; no local signing key is
-configured or claimed. Tag-triggered Public CI and CodeQL supply source-test
-evidence. The artifact signature/provenance boundary is npm Sigstore provenance
-from the admitted GitHub Actions publication.
+The annotated tag must have the approved public tagger, exact message, no extra
+header/signature/control text, the expected raw object identity, and exact
+remote/local agreement. Its checkout must be clean and full-history with no
+replace refs, grafts, alternates, shallow boundary, or tracked-input drift.
+Candidate inspection rereads every mapped blob and mode from the exact tag
+tree; a clean working directory is not a substitute for tracked membership.
 
-The tracked lock path is
-`packaging/releases/0.1.0-alpha.1.lock.json`. It was not generated during
-M4-001A; it is independently reviewed and included in this M4-001B
-tracked-admission change. Its closed fields are:
+This is an annotated identity binding, not a cryptographically signed Git tag.
+Tag Public CI and CodeQL supply source-test evidence. npm Sigstore provenance
+supplies the artifact signature boundary.
+
+## Fixed builders and release lock
+
+The two builder identities remain fixed and ordered:
+
+1. Node 22.23.2 with npm 10.9.8;
+2. Node 24.19.0 with npm 11.17.0.
+
+Both builders must independently pass the guarded four-package build, exact
+package admission, offline joint installation, and installed CLI smoke. Each
+package must have byte-identical canonical decompressed tar payloads after
+member-by-member tracked-source projection. Builder-local evidence records and
+gzip SHA-256, SHA-512, and compressed sizes remain separate. Only the fixed
+Node 24/npm 11 gzip envelopes may become publication bytes.
+
+The new create-only `packaging/releases/0.1.0-alpha.2.lock.json` must bind:
 
 ```text
 schemaVersion
@@ -102,79 +115,58 @@ builderResults[{
 }]
 ```
 
-The two builder results are fixed and ordered:
+Locked inputs include the package/release plans, support matrix, SBOM,
+changelog, known limitations, and state-neutral `alpha.2` release note. The
+lock does not exist until both fixed results, exact source projection, review,
+and create-only write have succeeded. It must then be tracked and merged before
+the tag exists.
 
-1. Node 22.23.2 with npm 10.9.8;
-2. Node 24.19.0 with npm 11.17.0.
+## GitHub Actions OIDC and provenance boundary
 
-`evidenceSha256` and `evidenceBytes` bind each builder's complete canonical
-`package-evidence.json`; they are not summaries reconstructed by the lock
-writer. `packageSourceProjectionSha256` binds the complete canonical package
-projection used to admit both builders: package ID and every generated
-manifest or mapped source's source/target path, role, admitted source mode,
-package mode, byte length, and SHA-256. Candidate inspection rereads every
-mapped blob and mode from the exact tag-target tree, rederives that projection,
-and rejects any mismatch before admitting the tag. npm 10 and npm 11 may encode
-the same canonical tar payload into different canonical gzip streams. For each
-package ID, `tarSha256` and
-`tarBytes` must therefore match across both builders, while each builder's own
-gzip SHA-256, SHA-512, and compressed size remain separately recorded. Only
-the fixed Node 24/npm 11 builder's gzip envelopes are release bytes; official-
-registry equality remains byte-for-byte against those envelopes. A single
-successful builder, different tar payloads, or an older M3 private tarball
-cannot mint the release lock. The lock also binds the package plan, release
-plan, support matrix, SBOM, changelog, limitations, and state-neutral release
-note that readers will receive.
+The real observed problem was an environment precondition, not npm account,
+token, package, source, or tarball drift. GitHub Actions supplies an OIDC
+request URL whose runner shard is service-selected. The old check admitted one
+observed hostname; the hosted runner used another legitimate single-label
+subdomain of `actions.githubusercontent.com`.
 
-The ordering is mandatory: freeze the locked inputs, run both builders, write
-the lock create-only, review and commit the lock, and merge it as the
-GitHub-verified lock-containing commit `S`. Then append exactly one
-repository-local public-identity attestation commit `A`: `A` must have `S` as
-its sole parent and its tip-owned policy must grant exact OID `S`. Run the full
-reachable-history gate at current `main=A`, and only then create the annotated
-tag on unchanged `S`. The publisher must prove remote `main` is exactly `A`,
-the tag target is exactly `S`, and GitHub comparison reports `ahead_by=1` and
-`behind_by=0`; equality or a deeper descendant fails closed.
-Creating the tag before committing the lock is an impossible state because the
-tag checkout would not contain the authority it is required to verify.
+The bounded correction admits only:
 
-## Hosted workflow boundary
+- HTTPS;
+- exactly one ASCII DNS label beneath `actions.githubusercontent.com`;
+- no username, password, explicit port, or fragment; and
+- a nonempty request path.
 
-Public CI and Security may run on the exact tag to collect the six
-Ubuntu/macOS/Windows × Node 22/24 cells and CodeQL without publication
-credentials. Their ordinary pull-request and main behavior remains
-least-privilege and cannot publish.
+It rejects the bare suffix, nested labels, lookalike suffixes, trailing-dot or
+empty-label forms, non-ASCII raw URL text, whitespace/control bytes, IP
+addresses, and non-GitHub hosts. This check only authenticates the expected
+environment class. A published provenance payload remains untrusted until the
+same fetched v0.3 keyless bundle passes the fixed npm 11.17.0 Sigstore verifier
+with the exact alpha-release workflow/tag certificate identity and GitHub
+Actions issuer.
 
-The separate alpha-release workflow is manual-only. Its one input choice is
-`v0.1.0-alpha.1`, and an admission job must match the event, tag ref type, ref
-name, and input before the publish job exists. The publish job checks out exact
-event `github.sha`, not a tag name that could be retargeted while queued, with
-full history; the candidate checker then proves that the locally fetched exact
-annotated `v0.1.0-alpha.1` still peels to `HEAD`. It uses GitHub-hosted Ubuntu
-24.04, Node 24.19.0, environment `npm-release`, `contents: read`, and
-`id-token: write`, then reruns the complete source/package gates and release
-candidate check.
+## Workflow and credential separation
 
-Before candidate preparation, the publisher's `verify-source` mode uses the
-GitHub API without npm credentials and requires event `HEAD=S`, current remote
-`main=A`, `S` as `A`'s sole parent, and `A`'s tip-owned policy to grant exact
-OID `S`. The remote annotated-tag ref/object must equal the locally admitted
-tag object and target, and `S`'s `verification.verified` value must be `true`.
-Only `publish` mode in the final
-publish step may see the first-release npm token. The first release uses that
-narrow bootstrap because npm Trusted Publisher is configured against package
-identities that do not exist before initial publication. After the package
-identities exist, migrate the workflow to Trusted Publisher and remove the
-token fallback. A separate `declare` job in the same manual workflow needs the
-successful publish job, starts from a fresh immutable checkout, rebuilds the
-reviewed stage, and receives only `contents: write`/`actions: read` plus the
-job-scoped GitHub token—never the npm token or OIDC inputs. It performs a fresh
-complete source, lock, registry-byte, provenance, dist-tag, and signature
-verification before the first Release write.
+Ordinary Public CI and Security run on the exact tag without publication
+credentials. The separate alpha-release workflow is manual-only. Its admission
+job must match the event, ref type/name, input, and immutable event commit. The
+publish job checks out that event commit with full history and proves the exact
+fetched tag still peels to `HEAD`; it never resolves a mutable tag name after
+queuing.
+
+Source verification uses GitHub read authority without npm credentials. Only
+the final publish step may see the environment-scoped bootstrap npm token and
+OIDC request inputs. A separate fresh-checkout declaration job receives
+GitHub contents-write authority but no npm token or OIDC request inputs. No
+process receives both npm and GitHub write credentials.
+
+The user confirmed on 2026-08-13 that the npm account email is verified, 2FA is
+enabled, and GitHub environment `npm-release` contains the one-time
+`NPM_TOKEN`. This is a user-attested non-secret configuration fact, not a token
+value check or publication result.
 
 ## Publication and recovery state machine
 
-Publication order is the dependency order:
+Publication order is derived from the package graph:
 
 ```text
 pptx-compiler-core
@@ -183,118 +175,84 @@ pptx-compiler-core
   -> pptx-compiler
 ```
 
-Before each step, query the official registry for the exact name/version:
+Before each exact `0.1.0-alpha.2` step, query the official registry:
 
-- `absent`: publish only the retained lock-matching tarball, with public
-  access, dist-tag `alpha`, and npm provenance;
-- `present-equal`: download and exact-compare registry bytes, provenance, and
-  metadata, then continue without republishing;
-- `present-mismatch`: hard-stop. Never unpublish, overwrite, or continue under
-  the same version.
+- `absent`: publish only the retained lock-matching tarball with public access,
+  dist-tag `alpha`, and npm provenance;
+- `present-equal`: download and exact-compare registry bytes, metadata,
+  provenance, and signature, then continue without republishing;
+- `present-mismatch`: hard-stop permanently for that version. Never unpublish,
+  overwrite, or continue.
 
-The publisher never hands npm a mutable reviewed-stage path. It materializes
-the already-frozen tarball bytes into its own private read-only temporary file,
-verifies that file, publishes it, and removes only that owned temporary root.
-After each package becomes present-equal, signature audit of the complete
-published dependency prefix must pass before the next package is touched; a
-final four-package audit still runs at completion.
+The publisher materializes frozen bytes into its own private read-only
+temporary file; it never gives npm a mutable reviewed-stage path. After each
+package becomes present-equal, the complete published dependency prefix must
+pass signature audit before publication advances.
 
-After all four are present-equal, reread all four official-registry tarballs and
-require exact lock bytes, valid npm provenance bound to the exact source
-workflow/tag, `alpha` pointing to `0.1.0-alpha.1`, and no `latest` assignment.
-Only that complete state permits the GitHub Release to be created. The GitHub
-Release must bind the exact annotated tag, lock and package identities without
-broadening the support matrix. Immediately after an authenticated 404 and
-before POST, the declaration lane rechecks the exact tag/main source relation.
-It creates only the closed non-draft prerelease, accepts an existing Release or
-a 422 race only when a fresh authenticated read exactly equals the deterministic
-request, and never patches or deletes a mismatch. Afterward it rereads source,
-all four registry packages and signatures, and the exact Release, with the
-Release read last.
+After all four exist, reread all official-registry tarballs and require exact
+lock bytes, valid certificate-bound npm provenance/signatures, dist-tag `alpha`
+pointing to `0.1.0-alpha.2`, and no `latest` assignment. Only that complete
+state permits the GitHub prerelease to be created. The declaration lane repeats
+source and registry verification, creates an absent exact non-draft prerelease
+or accepts an exact-equal retry, and never patches or deletes a mismatch.
+
+GitHub Release creation is the last publication mutation, but M4-001C remains
+incomplete until all four package settings contain the exact Trusted Publisher
+binding for `why7682/pptx-compiler`, workflow `alpha-release.yml`, environment
+`npm-release`; the bootstrap npm token is revoked; and GitHub `NPM_TOKEN` is
+deleted. Only non-secret configuration facts may be recorded.
+
+## Immutable `alpha.1` evidence
+
+The retired candidate remains a useful proof that the release state machine
+stopped before mutation:
+
+| Fact | Exact evidence |
+| --- | --- |
+| Lock-containing merge `S1` | `ad4ab94959e9f7cff56834c81be4ddecd11e7332` |
+| Sole-child attestation `A1` | `7d8341ebc01f8769a73020103d18c93b4049468f` |
+| Annotated tag object | `v0.1.0-alpha.1`, object `0d23ce3903052454ba77e6c88360f0c4fffa4173`, peeling to `S1` |
+| Tag Public CI | [run 31652084833](https://github.com/why7682/pptx-compiler/actions/runs/31652084833), success |
+| Tag Security | [run 31652084727](https://github.com/why7682/pptx-compiler/actions/runs/31652084727), success |
+| Manual release | [run 31652404999](https://github.com/why7682/pptx-compiler/actions/runs/31652404999), failed closed before first npm publish; declaration skipped |
+| External result | Four exact npm versions absent; GitHub Release absent; no rollback or unpublish |
+
+The historical lock SHA-256 remains
+`d3b4818e9bcdb43f39df557847613d3e5ce0afa2f6fffda5af655217f2f5170a`,
+with package-source projection
+`962defc231e784627c142f01df84669b08d9a7b3f1bae39da2ea1f2728d95312`.
+Those immutable facts cannot authorize an `alpha.2` byte, tag, package,
+provenance result, or Release.
 
 ## Current public evidence
 
-M3-004B remains the implementation-baseline evidence on accepted PR head
+M3-004B remains the implementation baseline on accepted PR head
 `f6ba6bad48c928d31c356d47911dd929ccf3b2d1` and accepted main
-`c4dee58a8920a8e71c20f53ab93c62a96d3cb89d`.
+`c4dee58a8920a8e71c20f53ab93c62a96d3cb89d`. The later constructive-document
+PR #2 head `093d527fc3fadf7cae577139b8d400719755dd52` passed Public CI/Security runs
+`31608992503`/`31608992491`; accepted main
+`8cdf968b72f8dd5f41fee37a68e239e477dec44b` passed runs
+`31609285181`/`31609285220`. Those object-bound records establish source and
+reader baselines, not `alpha.2` release evidence.
 
-The later constructive-document pull request #2 preserves rather than rewrites
-that history. PR head `093d527fc3fadf7cae577139b8d400719755dd52`
-passed Public CI run `31608992503` and Security run `31608992491`; accepted
-main `8cdf968b72f8dd5f41fee37a68e239e477dec44b` passed Public CI run
-`31609285181` and Security run `31609285220`. Both commits share tree
-`1d6d148a8bc347dc3cbc13dde3fd4314d86c421a`.
+Support remains 0 supported / 22 experimental / 3 manual / 35 unsupported,
+with `supportClaimsEnabled=false`. QA remains blocked and no `BuildArtifact`
+exists. D-049 and the OIDC correction do not change those facts.
 
-Those runs establish the accepted pre-M4 reader/document baseline. They are not
-clean-tag, public-manifest, release-lock, npm provenance, registry-equality, or
-GitHub Release evidence.
+## Next exact action
 
-## M4-001A completion evidence
+1. Finish the bounded OIDC-host correction review and complete the exact
+   `0.1.0-alpha.2` package/release projection without modifying historical
+   `alpha.1` objects.
+2. Run both fixed builders; create, review, and track the fresh `alpha.2` lock.
+3. Merge the unchanged lock as GitHub-verified `S2`; append only its exact
+   single-parent attestation `A2`; pass current-main history admission; create
+   the annotated tag on unchanged `S2`; and require tag Public CI and Security.
+4. Only then run M4-001C's dependency-order registry state machine, complete
+   byte/provenance/signature/dist-tag verification, and create the GitHub
+   prerelease last.
+5. Configure all four Trusted Publishers, revoke the bootstrap token, and
+   delete GitHub `NPM_TOKEN` before marking M4-001C complete.
 
-The exact 52-path pre-close snapshot was copied into two independent Git-backed
-worktrees. Node 22.23.2/npm 10.9.8 and Node 24.19.0/npm 11.17.0 each pass
-1322/1324 complete test nodes. The only two failures under each runtime are the
-release-metadata baseline and file-alias baseline caused by the same 52
-deliberately pending provenance records; no implementation or contract test
-fails.
-
-Both snapshots separately pass the guarded four-package build, exact package
-admission, offline joint install, and installed-CLI
-`init -> inspect -> validate -> render -> qa` smoke. QA remains `blocked` and
-no `BuildArtifact` exists. Bounded independent review of the final
-source-projection lock, publication state machine, workflow credentials, npm
-provenance identity, and GitHub Release-last boundary reports 0 blocker, 0
-high, and 0 medium. The subsequent completion-status/provenance-only delta is
-covered by the focused document and canonical lightweight gates and does not
-overlap package mappings or release-lock inputs.
-
-This closes contract admission only. No release lock, annotated tag, npm
-publication, registry provenance result, or GitHub Release was created.
-
-## M4-001B tracked-lock checkpoint
-
-The frozen lock-generation base is exact M4-001A commit
-`b80761a62cff23cb90101605e09cc6e3c2924abd`, tree
-`e4a4ca28fbfa3a83080142af63c9b08b36291ccc`. The fixed Node 22.23.2/npm
-10.9.8 stage contributes evidence SHA-256
-`f4e2da682b0870b1f26c07d3f522bf63ae2619708ec8b2230554f0a1be49e360`
-over 14409 bytes; the fixed Node 24.19.0/npm 11.17.0 stage contributes
-`524b6a43da205d65347c48740792aba25b560ebc2fd340ceb407898829e3c795`
-over 14410 bytes. Both bind the same canonical tar payload for each of the four
-packages.
-
-Create-only generation produced canonical lock SHA-256
-`d3b4818e9bcdb43f39df557847613d3e5ce0afa2f6fffda5af655217f2f5170a`
-(Git blob `61d6df477769d3ebd5cd3ab3607fb977fc21ab5b`, 6218 bytes) and package-source
-projection
-`962defc231e784627c142f01df84669b08d9a7b3f1bae39da2ea1f2728d95312`.
-The projection covers 89 exact Git sources and 96 package members, including
-modes and byte lengths. The lock records both builder-local evidence records
-and gzip envelopes; only the fixed Node 24/npm 11 entries may become release
-bytes.
-
-One bounded independent exact-lock review recomputed the six inputs, source
-projection, both reviewed stages, four tar payloads, fixed-builder admission,
-dependency order, and forbidden-material result. It reports 0 blocker, 0 high,
-and 0 medium with Taste=good. The exact lock and its state/provenance projection
-are admitted in this nine-path tracked change. M4-001B remains in progress:
-this change has not been merged as `S`, and no `A`, tag, hosted tag result, npm
-publication, registry equality/provenance result, or GitHub Release exists.
-
-## Next actions
-
-1. Commit and merge this exact reviewed tracked lock as verified `S` without
-   changing the lock or its inputs.
-2. Append the single-parent local-identity history-attestation `A` with sole parent
-   `S` and an exact grant for `S`; run the reachable-history gate at `main=A`;
-   then create the annotated tag on unchanged `S` and pass the clean-tag,
-   tag-hosted, and release-candidate gates.
-3. Only after the lock and tag-hosted gates pass, run M4-001C's ordered npm
-   state machine and official-registry reread.
-4. Create the GitHub Release last. Then configure all four exact npm Trusted
-   Publisher bindings, revoke the bootstrap token, and delete GitHub
-   `NPM_TOKEN`; M4-001C remains incomplete until those non-secret configuration
-   facts are recorded. Do not rewrite the lock-bound changelog, limitations, or
-   release note merely to add a lifecycle label.
-5. Keep every support row and D-047/M3-008 unchanged unless separately reviewed
-   and authorized.
+Do not add lifecycle claims to the lock-bound changelog, limitations, or
+`alpha.2` note. Do not resume branch protection by implication.

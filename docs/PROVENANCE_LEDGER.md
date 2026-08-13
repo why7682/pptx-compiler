@@ -3210,6 +3210,156 @@ notes: This is a narrow M4-001B candidate-lock relation; it does not rewrite
   claimed.
 ```
 
+### M4-001B D-049 `alpha.2` pre-lock recovery projection
+
+```yaml
+paths:
+  - .github/workflows/alpha-release.yml
+  - .github/workflows/ci.yml
+  - .github/workflows/security.yml
+  - AGENTS.md
+  - CHANGELOG.md
+  - HANDOFF.md
+  - README.md
+  - TODO.md
+  - docs/ARCHITECTURE_TARGET.md
+  - docs/COMPATIBILITY_POLICY.md
+  - docs/DECISIONS.md
+  - docs/KNOWN_LIMITATIONS.md
+  - docs/M4-001_HANDOFF.md
+  - docs/NAME_AVAILABILITY.md
+  - docs/PROVENANCE_LEDGER.md
+  - docs/RELEASE_GATES.md
+  - docs/REPRODUCIBILITY.md
+  - docs/SUPPORT_MATRIX.md
+  - docs/releases/0.1.0-alpha.2.md
+  - packages/cli/README.md
+  - packages/core/README.md
+  - packages/public-synthetic/README.md
+  - packaging/alpha-package-plan.json
+  - packaging/alpha-release-plan.json
+  - plugins/native-card-arrow/README.md
+  - provenance/records.json
+  - sbom.alpha.cdx.json
+  - scripts/lib/alpha-release.mjs
+  - scripts/lib/package-plan.mjs
+  - scripts/lib/public-workflows.mjs
+  - scripts/publish-alpha-release.mjs
+  - tests/alpha-github-release.test.mjs
+  - tests/alpha-publication.test.mjs
+  - tests/alpha-release.test.mjs
+  - tests/final-public-docs.test.mjs
+  - tests/package-plan.test.mjs
+  - tests/public-workflows.test.mjs
+kind: fresh D-049 alpha.2 package/release projection, bounded GitHub Actions
+  OIDC-host correction, immutable alpha.1-history authentication, constructive
+  lifecycle-neutral documentation, public workflow projection, and adversarial
+  tests
+origin: independently authored from the user's exact D-049 authorization, the
+  admitted M4-001 release contract, the immutable D-048 alpha.1 lock/tag/run
+  evidence, the public GitHub Actions OIDC service boundary, and repository-owned
+  synthetic mutations. No predecessor source, external implementation, hosted
+  log bytes, raw API response, package content, presentation, private fixture,
+  generated tarball, registry payload, or credential entered Git
+original_author_or_holder: Elliot Wu
+created_or_reviewed_on: 2026-08-13
+license_or_rights_basis: MIT
+third_party_dependencies:
+  - Node.js 22.23.2 (MIT; fixed verification runtime, not vendored)
+  - npm CLI 10.9.8 (Artistic-2.0; fixed verification builder, not vendored)
+  - Node.js 24.19.0 (MIT; fixed release runtime, not vendored)
+  - npm CLI 11.17.0 (Artistic-2.0; fixed release builder, not vendored)
+  - sigstore 4.1.1 (Apache-2.0; bundled in the exact npm 11.17.0 installation,
+    loaded only from that admitted installation, and not vendored)
+  - TypeScript 6.0.2 (Apache-2.0; exact dev-only declaration checker, not
+    vendored or included in the four-package runtime closure)
+  - actions/checkout v7.0.1 at 3d3c42e5aac5ba805825da76410c181273ba90b1
+    (MIT; pinned remote GitHub Action, not vendored)
+  - actions/setup-node v7.0.0 at 820762786026740c76f36085b0efc47a31fe5020
+    (MIT; pinned remote GitHub Action, not vendored)
+  - actions/dependency-review-action v5.0.0 at
+    a1d282b36b6f3519aa1f3fc636f609c47dddb294
+    (MIT; pinned remote GitHub Action, not vendored)
+  - github/codeql-action v4.37.6 at
+    5595ccaf912efad79be6eef63a5619ff05969be3
+    (MIT; pinned remote GitHub Action, not vendored)
+private_information_review: passed; current bytes contain only approved public
+  repository/package identity, public GitHub object/run identifiers, fixed
+  public tool/action versions, and repository-owned synthetic evidence. No
+  token value, password, OTP, credential, private/local hostname, absolute
+  private path, private fixture, source presentation, raw hosted log/API
+  response, ignored render, generated archive, or registry payload is recorded
+project_constant_removal: passed; D-049 changes the fresh version projection
+  without creating a second package graph, support root, release authority, or
+  lifecycle-state root. The historical alpha.1 lock has one exact immutable
+  identity and remains an authenticated input to alpha.2 generation and tag
+  inspection, never replacement authority. The OIDC correction admits only one
+  validated ASCII DNS label beneath actions.githubusercontent.com and explicitly
+  rejects the apex, nested labels, suffix confusion, non-ASCII and xn-- labels,
+  user info, ports, fragments, and empty paths
+public_fixture_conformance: applicable; exact disposable Git-backed verification
+  snapshot commit 93d9020c187816cbbb3cade47be5426a7fc8dfa0 was constructed from
+  base and source HEAD 7d8341ebc01f8769a73020103d18c93b4049468f plus the complete
+  reviewed pre-evidence delta. At that frozen boundary the source candidate and
+  snapshot trees both equal
+  d9f1af6bcc356b64f2258870cc50b7aefbd3c462 across 288 entries and 37
+  delta paths; the canonical name-status delta has SHA-256
+  766a09c73a8436aac57126cb475532dc2edb11ae90971a8cea45634b1609f629.
+  Admission compared additions, deletions, renames, Git object types,
+  100644/100755 modes, blob bytes, and absence of extra endpoints against a
+  consistent index and object database. Node 22.23.2/npm 10.9.8 passed all
+  1329 tests in 104828.609407 ms; Node 24.19.0/npm 11.17.0 passed all 1329
+  tests in 97404.523594 ms. Their TAP records remain untracked outside the
+  repository. The package-source projection was unchanged by the later
+  documentation-rule tightening: both fixed runtime/npm pairs exited 0 through
+  guarded four-package build, exact canonical admission, offline joint install,
+  and installed CLI smoke; QA remained blocked and no BuildArtifact existed.
+  All four builder-local gzip envelopes were distinct, while decompressed
+  canonical tar payloads were equal across builders: CLI 69120 bytes, core
+  720896 bytes, native-card-arrow 57856 bytes, and public-synthetic 106496
+  bytes. The fixed-Node release/OIDC/GitHub-Release and document/package/workflow
+  focuses passed; forbidden-material, release-metadata, support, contract,
+  provenance, and diff gates passed. Snapshot 93d therefore covers the complete
+  product, test, workflow, and tightened Finder-rule bytes, but it is not
+  claimed to contain the final wording subsequently written into this ledger
+  and `provenance/records.json`. That sole two-file evidence-record delta is
+  closed separately by the final provenance, release-metadata,
+  forbidden-material, support, contract, and diff gates plus the independent
+  read-only delta review. A `.DS_Store` in the source workspace's
+  ignored stage correctly failed exact inventory as foreign Finder metadata and
+  remained diagnostic state. Verification restarted from the exact-HEAD,
+  complete-delta, fully compared Git-backed snapshot; no entry was allowlisted
+  or silently deleted and no global Finder preference or source-only copy was
+  treated as authority
+independent_review: passed; the latest bounded current-byte pre-lock review,
+  including the tightened Finder-metadata snapshot rule, reports 0 blocker,
+  0 high, and 0 medium with Taste=good. It confirms exact source HEAD plus
+  complete-delta construction, added/deleted/renamed-path coverage, Git object
+  type and mode, blob-byte and no-extra comparison, the bounded OIDC correction,
+  immutable alpha.1 history, fresh alpha.2 projections, public workflows, and
+  constructive documentation
+notes: D-049 authorizes exactly the replacement annotated tag and GitHub
+  prerelease, the same four packages at 0.1.0-alpha.2 under alpha, GitHub
+  Actions npm provenance, and post-publication Trusted Publisher/token
+  retirement. Authorization is not execution. D-048 alpha.1 remains immutable
+  zero-npm-write, no-GitHub-Release, retired-unpublished history after release
+  run 31652404999 failed closed before the first npm publish; all four exact
+  versions remained absent.
+  This relation covers exactly 37 current endpoints, 36 modified and one new.
+  Snapshot commit 93d9020c187816cbbb3cade47be5426a7fc8dfa0 is disposable
+  verification scaffolding only: it is not release merge S2, a provenance
+  origin, hosted/external evidence, or publication authority. Unknown Finder
+  files and links remain a correct fail-closed result; reproducible recovery
+  starts from exact source HEAD, applies the complete reviewed delta, and proves
+  paths, deletions, renames, object types, modes, blobs, and no extras in a
+  consistent Git-backed system-temp snapshot. The copy mechanism, an allowlist,
+  recursive cleanup, global Finder preference, or source-only copy grants no
+  authority.
+  No alpha.2 lock, S2, A2, tag, hosted tag result, npm package,
+  provenance/signature result, dist-tag, Trusted Publisher binding,
+  credential-retirement result, or GitHub Release is claimed
+```
+
 The XML namespace, relationship-type, and MIME strings are interoperability
 identifiers from the public format specification. They do not convey third-
 party presentation content. The fictional `Synthetic Sans` typeface name does

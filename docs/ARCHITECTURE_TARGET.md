@@ -358,8 +358,8 @@ installed together offline into an empty directory before the installed CLI
 smoke runs.
 
 The workspace root remains `private: true`. Package-plan schema 3 instead
-authorizes generated leaf manifests for the exact D-048 channel: four unscoped
-public packages at `0.1.0-alpha.1`, official npm registry, dist-tag `alpha`, and
+authorizes generated leaf manifests for the exact D-049 channel: four unscoped
+public packages at `0.1.0-alpha.2`, official npm registry, dist-tag `alpha`, and
 npm provenance. A local reviewed tarball is still neither a published package
 nor release evidence.
 
@@ -369,14 +369,14 @@ Authorization, candidate admission, publication, and release declaration are
 separate state transitions:
 
 ```text
-D-048 authorization + schema-3 package plan
+D-049 alpha.2 authorization + schema-3 package plan
   -> M4-001A non-publishing contract and adversarial verification
   -> Node 22.23.2/npm 10.9.8 and Node 24.19.0/npm 11.17.0
   -> exact four-tarball equality + create-only tracked release lock
-  -> reviewed lock merge as GitHub-verified commit S
-  -> single-parent local attestation A: sole parent S, exact policy grant S
-  -> complete reachable-history gate at current main=A
-  -> M4-001B exact annotated tag on unchanged S + clean admission
+  -> reviewed lock merge as GitHub-verified commit S2
+  -> single-parent local attestation A2: sole parent S2, exact policy grant S2
+  -> complete reachable-history gate at current main=A2
+  -> M4-001B exact annotated v0.1.0-alpha.2 tag on unchanged S2
   -> tag-triggered Public CI and Security evidence
   -> M4-001C core -> native-card-arrow -> public-synthetic -> CLI
   -> official-registry byte/provenance/dist-tag reread
@@ -393,6 +393,15 @@ published dependency prefix must pass signature audit before publication can
 advance. Unpublish is never rollback. The architecture does not infer current
 external lifecycle state; the M4 handoff and official registry/GitHub records
 own observed phase facts.
+
+The provenance preflight accepts a GitHub Actions OIDC request endpoint only
+as HTTPS on exactly one validated DNS label beneath
+`actions.githubusercontent.com`. It rejects user info, explicit ports,
+fragments, empty paths, nested labels, suffix confusion, non-ASCII raw URL
+text, and non-GitHub authorities. This validates the service boundary
+without freezing one observed runner shard; the fetched npm provenance still
+requires certificate-bound verification for the exact workflow/tag identity
+and GitHub Actions issuer.
 
 ## CLI contract
 
@@ -494,7 +503,7 @@ capability or enable global support.
   a pass.
 - Windows has no Node parent-directory fsync equivalent, so the durability claim
   is narrower than on POSIX.
-- D-048 authorizes four public-alpha package identities, but authorization does
+- D-049 authorizes four `0.1.0-alpha.2` package identities, but authorization does
   not prove publication. Actual tag, lock, registry provenance, GitHub Release,
   and reviewed-to-published equality facts belong to their exact external and
   non-lock evidence owners.
@@ -503,15 +512,17 @@ capability or enable global support.
 
 ## Next authorized action
 
-D-048 supplies the exact release authorization. Release Gates owns current
-phase state; the architecture fixes the dependency order. M4-001A must finish
-the non-publishing contract before M4-001B may require dual-builder canonical
-tar-payload equality, bind the fixed builder's gzip release envelopes, create a
-reviewed lock, and merge it as
-GitHub-verified `S`; single-parent attestation `A` must then exact-grant `S` and
-pass the history gate at `main=A` before the annotated tag may target unchanged
-`S`. M4-001C may complete only when ordered npm publication proves
+D-049 supplies the exact `alpha.2` release authorization. Release Gates owns
+current phase state; the architecture fixes the dependency order. M4-001B must
+require fresh dual-builder canonical tar-payload equality, bind the fixed
+builder's gzip release envelopes, create a reviewed `alpha.2` lock, and merge
+it as GitHub-verified `S2`; single-parent attestation `A2` must then exact-grant
+`S2` and pass the history gate at `main=A2` before annotated tag
+`v0.1.0-alpha.2` may target unchanged `S2`. M4-001C may complete only when
+ordered npm publication proves
 official-registry byte equality, provenance, dist-tag `alpha`, and absence of a
-`latest` assignment; the GitHub Release follows last. D-047/M3-008 branch
+`latest` assignment; the GitHub Release follows last, then all four Trusted
+Publisher bindings and bootstrap credential retirement close the phase.
+D-047/M3-008 branch
 protection remains deferred and must be resumed explicitly rather than folded
 into the release path by implication.

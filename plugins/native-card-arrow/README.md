@@ -3,7 +3,7 @@
 ## Purpose and boundary
 
 `pptx-compiler-native-card-arrow` owns one exact, statically registered
-`0.1.0-alpha.1` card-and-arrow candidate capability. It is not a standalone
+`0.1.0-alpha.2` card-and-arrow candidate capability. It is not a standalone
 PPTX writer, a general DrawingML library, or evidence of editability.
 
 ## Fact ownership and dependency flow

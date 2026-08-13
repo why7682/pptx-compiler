@@ -52,6 +52,7 @@ No item below is decided merely because a recommendation is recorded.
 | D-046 | ACCEPTED | Constructive final-document structure | Write final reader-facing documentation by constructing one coherent model from goals and boundaries through fact ownership, data/control flow, executable contracts, evidence, limitations, and next actions; keep chronological repair history in handoffs, decisions, and provenance rather than using it as the main exposition. | Explicit user requirement; M3-005B reviewed the reader bundle before freezing it, and M4-001 keeps lock-bound release-facing documents lifecycle-state neutral. |
 | D-047 | DEFERRED | Main-branch protection | Do not configure or claim branch protection; resume force-push/deletion restrictions and required status checks only after a new explicit user authorization. | Explicit user instruction on 2026-08-12 to postpone this repository-setting change; completion of M3-004B, M3-005B, or M4 work does not activate it. |
 | D-048 | ACCEPTED | Exact candidate-alpha publication authority | Authorize the exact annotated `v0.1.0-alpha.1` tag and GitHub Release, the four unscoped public npm packages under dist-tag `alpha`, and GitHub Actions plus npm provenance; keep admission, publication, registry verification, and release declaration fail-closed and separately evidenced. | Explicit user authorization on 2026-08-12; package-plan schema 3 owns publication settings and graph-derived npm order, the release plan/lock owns exact candidate facts, Release Gates owns phase order, fixed dual-builder tar-payload equality plus fixed-builder release-envelope identity and absent/equal/mismatch recovery pass, and the GitHub Release is last. |
+| D-049 | ACCEPTED | Exact `alpha.2` recovery authority | Retire `0.1.0-alpha.1` without moving its tag or publishing its bytes; authorize annotated tag and GitHub Release `v0.1.0-alpha.2`, the same four packages at `0.1.0-alpha.2` under dist-tag `alpha`, GitHub Actions npm provenance, and post-publication Trusted Publisher plus bootstrap-token retirement. | Explicit user authorization on 2026-08-13; `alpha.1` source/tag gates passed, release run `31652404999` stopped before the first npm write on an overly narrow OIDC-host admission rule, all four exact npm versions and the GitHub Release remained absent, and the bounded fix admits one strict service-owned runner-shard label rather than one observed hostname. |
 
 Record a decision by changing its status to `ACCEPTED`, adding the date and
 rationale below the table, and updating every affected contract/TODO in the
@@ -749,6 +750,39 @@ same change.
   support row nor resumes D-047/M3-008. Observed completion is recorded only in
   non-lock state owners; the lock-bound reader documents remain
   lifecycle-state neutral.
+- **D-049 accepted on 2026-08-13:** the user explicitly authorized all three
+  external effects for the replacement candidate `0.1.0-alpha.2`: create the
+  exact annotated `v0.1.0-alpha.2` tag and its GitHub prerelease; publish
+  `pptx-compiler-core`, `pptx-compiler-native-card-arrow`,
+  `pptx-compiler-public-synthetic`, and `pptx-compiler` at that exact version
+  to the official npm registry under dist-tag `alpha`; and continue using
+  GitHub Actions plus npm provenance, then configure all four exact npm Trusted
+  Publisher bindings, revoke the bootstrap npm token, and delete GitHub
+  `NPM_TOKEN`. This supersedes only D-048's unexecuted publication target. It
+  does not move or delete the immutable `v0.1.0-alpha.1` tag, rewrite its lock,
+  reuse its package version, resume D-047/M3-008, or change support.
+
+  The observed reason is narrow and executable. Tag Public CI run
+  `31652084833` and Security run `31652084727` passed for
+  `v0.1.0-alpha.1` on exact source commit
+  `ad4ab94959e9f7cff56834c81be4ddecd11e7332`. Manual release run
+  `31652404999` then passed source, history, test, package, tag, and remote-main
+  admission before `publish` rejected the runner's legitimate sharded
+  `ACTIONS_ID_TOKEN_REQUEST_URL`: the implementation required one previously
+  observed hostname instead of GitHub's service-owned endpoint class. The
+  failure occurred before the first `npm publish`; all four exact package
+  versions and the GitHub Release still returned not found, so there was
+  nothing to roll back and `alpha.1` is retired unpublished.
+
+  The smallest safe correction keeps the existing environment and certificate
+  boundary while admitting HTTPS endpoints with exactly one validated DNS
+  label beneath `actions.githubusercontent.com`. User info, explicit ports,
+  fragments, an empty path, nested labels, suffix confusion, non-ASCII raw URL
+  text, and non-GitHub hosts remain rejected. `alpha.2` must receive its
+  own package/version projection, dual-builder lock, reviewed merge/attestation,
+  immutable annotated tag, tag-hosted evidence, and absent/equal/mismatch
+  registry checks. No `alpha.2` lock, tag, npm package, provenance result, or
+  GitHub Release is created merely by this decision.
 
 ## MIT versus Apache-2.0 review
 

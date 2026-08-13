@@ -8,6 +8,7 @@ import {
   readFile,
   realpath,
   rm,
+  symlink,
   writeFile
 } from "node:fs/promises";
 import os from "node:os";
@@ -18,6 +19,7 @@ import { gzipSync } from "node:zlib";
 
 import {
   ALPHA_FIXED_BUILDER,
+  ALPHA_HISTORICAL_RELEASE_LOCK,
   ALPHA_RELEASE_LOCK_PATH,
   ALPHA_RELEASE_PLAN_PATH,
   ALPHA_RELEASE_TAG_MESSAGE,
@@ -54,6 +56,10 @@ const releasePlan = await loadAlphaReleasePlan({ root: repositoryRoot });
 const packagePlan = await loadAlphaPackagePlan({ root: repositoryRoot });
 const releasePlanBytes = await readFile(new URL(
   "../packaging/alpha-release-plan.json",
+  import.meta.url
+));
+const historicalReleaseLockBytes = await readFile(new URL(
+  `../${ALPHA_HISTORICAL_RELEASE_LOCK.path}`,
   import.meta.url
 ));
 const forbiddenPolicyBytes = await readFile(new URL(
@@ -303,6 +309,12 @@ async function createLockGenerationFixture(t) {
     path.join(root, ...ALPHA_RELEASE_PLAN_PATH.split("/")),
     canonicalAlphaReleasePlanText(releasePlan)
   );
+  const historicalLockPath = path.join(
+    root,
+    ...ALPHA_HISTORICAL_RELEASE_LOCK.path.split("/")
+  );
+  await mkdir(path.dirname(historicalLockPath), { recursive: true });
+  await writeFile(historicalLockPath, historicalReleaseLockBytes);
   const inputs = lockedInputs();
   for (const inputPath of releasePlan.lockedInputs) {
     const absolute = path.join(root, ...inputPath.split("/"));
@@ -340,7 +352,13 @@ async function createLockGenerationFixture(t) {
   const fixedStage = path.join(resolvedTemporary, "fixed-reviewed");
   await writeReviewedStage(verificationStage, ALPHA_VERIFICATION_BUILDER);
   await writeReviewedStage(fixedStage, ALPHA_FIXED_BUILDER);
-  return { root, verificationStage, fixedStage, environment: cleanEnvironment };
+  return {
+    root,
+    verificationStage,
+    fixedStage,
+    environment: cleanEnvironment,
+    git
+  };
 }
 
 async function createTagInspectionFixture(t, {
@@ -388,6 +406,12 @@ async function createTagInspectionFixture(t, {
   const policyPath = path.join(root, "policy", "forbidden-materials.json");
   await mkdir(path.dirname(policyPath), { recursive: true });
   await writeFile(policyPath, forbiddenPolicyBytes);
+  const historicalLockPath = path.join(
+    root,
+    ...ALPHA_HISTORICAL_RELEASE_LOCK.path.split("/")
+  );
+  await mkdir(path.dirname(historicalLockPath), { recursive: true });
+  await writeFile(historicalLockPath, historicalReleaseLockBytes);
   if (trackedLock) {
     const lockPath = path.join(root, ...ALPHA_RELEASE_LOCK_PATH.split("/"));
     await mkdir(path.dirname(lockPath), { recursive: true });
@@ -453,8 +477,8 @@ test("the release plan references the package plan as the sole npm authority", (
   assert.deepEqual(releasePlan.githubRelease, {
     order: "last",
     requiresCompleteRegistryVerification: true,
-    name: "pptx-compiler 0.1.0-alpha.1",
-    bodySource: "docs/releases/0.1.0-alpha.1.md",
+    name: "pptx-compiler 0.1.0-alpha.2",
+    bodySource: "docs/releases/0.1.0-alpha.2.md",
     bodyProjection: "locked-note-plus-release-identity-v1",
     target: "source-tag-target",
     draft: false,
@@ -535,7 +559,7 @@ test("the GitHub Release body is a deterministic projection of locked facts", ()
   assert.equal(body.startsWith(note.toString("utf8")), true);
   assert.match(body, /## Release identity/u);
   assert.match(body, new RegExp("Target commit: `" + targetCommitOid + "`", "u"));
-  assert.equal((body.match(/^  - `pptx-compiler[^`]*@0[.]1[.]0-alpha[.]1`:/gmu) ?? [])
+  assert.equal((body.match(/^  - `pptx-compiler[^`]*@0[.]1[.]0-alpha[.]2`:/gmu) ?? [])
     .length, 4);
   assert.match(body, /does not broaden the support matrix/u);
 
@@ -580,7 +604,7 @@ test("the tracked lock binds six inputs, both envelopes, and one dual-builder ta
   assert.match(lock.packageSourceProjectionSha256, /^[a-f0-9]{64}$/u);
   assert.equal(
     lock.packageSourceProjectionSha256,
-    "3996c2499e49d8da640b2dff95a70e4d61e72102b67c3c6e934dc425d5dabff3"
+    "0aba029581bd570d45ff560bbd3b4fb1f3c44f5c7f5039ee0b6dc8fc133e4849"
   );
   assert.deepEqual(parseAlphaReleaseLockBytes(bytes), lock);
   assert.deepEqual(validateAlphaReleaseLock(lock, {
@@ -869,8 +893,96 @@ test("partial publication recovery is idempotent and mismatch stops permanently"
   assert.equal(Object.hasOwn(mismatch, "unpublish"), false);
 });
 
+test("the sole historical alpha.1 lock has one exact immutable identity", () => {
+  assert.deepEqual(ALPHA_HISTORICAL_RELEASE_LOCK, {
+    path: "packaging/releases/0.1.0-alpha.1.lock.json",
+    mode: "100644",
+    blobOid: "61d6df477769d3ebd5cd3ab3607fb977fc21ab5b",
+    sha256: "d3b4818e9bcdb43f39df557847613d3e5ce0afa2f6fffda5af655217f2f5170a",
+    bytes: 6218
+  });
+  assert.equal(historicalReleaseLockBytes.length, ALPHA_HISTORICAL_RELEASE_LOCK.bytes);
+  assert.equal(
+    hash("sha256", historicalReleaseLockBytes),
+    ALPHA_HISTORICAL_RELEASE_LOCK.sha256
+  );
+  assert.equal(
+    hash("sha1", Buffer.concat([
+      Buffer.from(`blob ${historicalReleaseLockBytes.length}\0`),
+      historicalReleaseLockBytes
+    ])),
+    ALPHA_HISTORICAL_RELEASE_LOCK.blobOid
+  );
+});
+
 test("release-lock generation writes once from two complete external reviewed stages", async (t) => {
   const fixture = await createLockGenerationFixture(t);
+  const historicalLockPath = path.join(
+    fixture.root,
+    ...ALPHA_HISTORICAL_RELEASE_LOCK.path.split("/")
+  );
+  await writeFile(historicalLockPath, Buffer.from("historical lock drift\n"));
+  await assert.rejects(
+    () => generateAlphaReleaseLockFile(fixture),
+    /alpha-release-historical-lock-worktree/u
+  );
+  await writeFile(historicalLockPath, historicalReleaseLockBytes);
+
+  const unknownReleaseEntry = path.join(
+    path.dirname(historicalLockPath),
+    "untracked.lock.json"
+  );
+  await writeFile(unknownReleaseEntry, "unknown release entry\n");
+  await assert.rejects(
+    () => generateAlphaReleaseLockFile(fixture),
+    /alpha-release-lock-directory-inventory/u
+  );
+  await rm(unknownReleaseEntry);
+
+  if (process.platform !== "win32") {
+    const symlinkTarget = path.join(path.dirname(fixture.root), "historical-lock-target");
+    await writeFile(symlinkTarget, historicalReleaseLockBytes);
+    await rm(historicalLockPath);
+    await symlink(symlinkTarget, historicalLockPath);
+    await assert.rejects(
+      () => generateAlphaReleaseLockFile(fixture),
+      /alpha-release-historical-lock-worktree/u
+    );
+    await rm(historicalLockPath);
+    await writeFile(historicalLockPath, historicalReleaseLockBytes);
+  }
+
+  await writeFile(historicalLockPath, Buffer.from("wrong tracked history\n"));
+  fixture.git("add", "--", ALPHA_HISTORICAL_RELEASE_LOCK.path);
+  fixture.git("commit", "--quiet", "-m", "wrong historical lock blob");
+  await assert.rejects(
+    () => generateAlphaReleaseLockFile(fixture),
+    /alpha-release-historical-lock-tree/u
+  );
+  await writeFile(historicalLockPath, historicalReleaseLockBytes);
+  fixture.git("add", "--", ALPHA_HISTORICAL_RELEASE_LOCK.path);
+  fixture.git("commit", "--quiet", "-m", "restore historical lock blob");
+
+  fixture.git(
+    "update-index",
+    "--chmod=+x",
+    "--",
+    ALPHA_HISTORICAL_RELEASE_LOCK.path
+  );
+  fixture.git("commit", "--quiet", "-m", "wrong historical lock mode");
+  await assert.rejects(
+    () => generateAlphaReleaseLockFile(fixture),
+    /alpha-release-historical-lock-tree/u
+  );
+  fixture.git(
+    "update-index",
+    "--chmod=-x",
+    "--",
+    ALPHA_HISTORICAL_RELEASE_LOCK.path
+  );
+  fixture.git("commit", "--quiet", "-m", "restore historical lock mode");
+  await chmod(historicalLockPath, 0o644);
+
   const ignoredLockPath = path.join(
     fixture.root,
     ...ALPHA_RELEASE_LOCK_PATH.split("/")
@@ -1004,6 +1116,77 @@ test("release tag inspection rejects mapped source drift after the lock was froz
     root: fixture.root,
     environment: fixture.environment
   }), /alpha-release-tag-source-projection/u);
+});
+
+test("release tag inspection binds the historical lock tree and stable worktree", async (t) => {
+  const worktreeFixture = await createTagInspectionFixture(t);
+  const worktreeHistoricalPath = path.join(
+    worktreeFixture.root,
+    ...ALPHA_HISTORICAL_RELEASE_LOCK.path.split("/")
+  );
+  worktreeFixture.git(
+    "update-index",
+    "--assume-unchanged",
+    "--",
+    ALPHA_HISTORICAL_RELEASE_LOCK.path
+  );
+  await writeFile(worktreeHistoricalPath, "hidden historical worktree drift\n");
+  assert.equal(
+    worktreeFixture.git("status", "--porcelain=v1", "--untracked-files=all"),
+    ""
+  );
+  await assert.rejects(() => inspectAlphaReleaseCandidateSnapshot({
+    root: worktreeFixture.root,
+    environment: worktreeFixture.environment
+  }), /alpha-release-historical-lock-worktree/u);
+
+  const contentFixture = await createTagInspectionFixture(t);
+  contentFixture.git("tag", "--delete", ALPHA_RELEASE_TAG_NAME);
+  await writeFile(
+    path.join(
+      contentFixture.root,
+      ...ALPHA_HISTORICAL_RELEASE_LOCK.path.split("/")
+    ),
+    "wrong historical tag-tree bytes\n"
+  );
+  contentFixture.git("add", "--", ALPHA_HISTORICAL_RELEASE_LOCK.path);
+  contentFixture.git("commit", "--quiet", "-m", "mutate historical lock bytes");
+  contentFixture.git(
+    "tag",
+    "--annotate",
+    ALPHA_RELEASE_TAG_NAME,
+    "--message",
+    ALPHA_RELEASE_TAG_MESSAGE
+  );
+  await assert.rejects(() => inspectAlphaReleaseCandidateSnapshot({
+    root: contentFixture.root,
+    environment: contentFixture.environment
+  }), /alpha-release-historical-lock-tree/u);
+
+  const modeFixture = await createTagInspectionFixture(t);
+  modeFixture.git("tag", "--delete", ALPHA_RELEASE_TAG_NAME);
+  modeFixture.git(
+    "update-index",
+    "--chmod=+x",
+    "--",
+    ALPHA_HISTORICAL_RELEASE_LOCK.path
+  );
+  modeFixture.git("commit", "--quiet", "-m", "mutate historical lock mode");
+  await chmod(
+    path.join(modeFixture.root, ...ALPHA_HISTORICAL_RELEASE_LOCK.path.split("/")),
+    0o755
+  );
+  modeFixture.git(
+    "tag",
+    "--annotate",
+    ALPHA_RELEASE_TAG_NAME,
+    "--message",
+    ALPHA_RELEASE_TAG_MESSAGE
+  );
+  await assert.rejects(() => inspectAlphaReleaseCandidateSnapshot({
+    root: modeFixture.root,
+    environment: modeFixture.environment
+  }), /alpha-release-historical-lock-tree/u);
 });
 
 test("release tag inspection rejects a mapped source Git-mode drift", async (t) => {
