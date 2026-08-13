@@ -3,7 +3,7 @@
 ## Purpose and boundary
 
 `pptx-compiler-native-card-arrow` owns one exact, statically registered
-`0.1.0-alpha.2` card-and-arrow candidate capability. It is not a standalone
+`0.1.0-alpha.3` card-and-arrow candidate capability. It is not a standalone
 PPTX writer, a general DrawingML library, or evidence of editability.
 
 ## Fact ownership and dependency flow
@@ -30,7 +30,9 @@ owns the application boundary. Neither source alone authorizes delivery.
 
 The public CLI ends with blocked QA and no `BuildArtifact`. This package proves
 only the exact card-arrow candidate cases; it does not prove arbitrary
-components, PowerPoint compatibility, or delivery readiness.
+components, PowerPoint compatibility, or delivery readiness. Select exact
+`0.1.0-alpha.3` or `@alpha`; do not treat a bare install as a version-selection
+contract for this prerelease.
 
 ## Next authorized action
 

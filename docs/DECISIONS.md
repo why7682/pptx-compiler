@@ -53,6 +53,7 @@ No item below is decided merely because a recommendation is recorded.
 | D-047 | DEFERRED | Main-branch protection | Do not configure or claim branch protection; resume force-push/deletion restrictions and required status checks only after a new explicit user authorization. | Explicit user instruction on 2026-08-12 to postpone this repository-setting change; completion of M3-004B, M3-005B, or M4 work does not activate it. |
 | D-048 | ACCEPTED | Exact candidate-alpha publication authority | Authorize the exact annotated `v0.1.0-alpha.1` tag and GitHub Release, the four unscoped public npm packages under dist-tag `alpha`, and GitHub Actions plus npm provenance; keep admission, publication, registry verification, and release declaration fail-closed and separately evidenced. | Explicit user authorization on 2026-08-12; package-plan schema 3 owns publication settings and graph-derived npm order, the release plan/lock owns exact candidate facts, Release Gates owns phase order, fixed dual-builder tar-payload equality plus fixed-builder release-envelope identity and absent/equal/mismatch recovery pass, and the GitHub Release is last. |
 | D-049 | ACCEPTED | Exact `alpha.2` recovery authority | Retire `0.1.0-alpha.1` without moving its tag or publishing its bytes; authorize annotated tag and GitHub Release `v0.1.0-alpha.2`, the same four packages at `0.1.0-alpha.2` under dist-tag `alpha`, GitHub Actions npm provenance, and post-publication Trusted Publisher plus bootstrap-token retirement. | Explicit user authorization on 2026-08-13; `alpha.1` source/tag gates passed, release run `31652404999` stopped before the first npm write on an overly narrow OIDC-host admission rule, all four exact npm versions and the GitHub Release remained absent, and the bounded fix admits one strict service-owned runner-shard label rather than one observed hostname. |
+| D-050 | ACCEPTED | Forward-only `alpha.3` recovery after partial `alpha.2` publication | Preserve every `alpha.1`/`alpha.2` tag, version, lock, and registry write; publish a fresh four-package `0.1.0-alpha.3` graph after admitting npm's package-level seed-`latest` invariant and bounded provenance propagation, without unpublish or a separate `npm dist-tag add/rm` mutation. | Explicit user authorization on 2026-08-14; `alpha.2` attempt 2 published exact reviewed core bytes before immediate attestation verification stopped, while the other three versions and GitHub Release remained absent. Official registry metadata and the observed first-package state require `latest`; later evidence exposed the expected keyless SLSA bundle after eventual propagation. |
 
 Record a decision by changing its status to `ACCEPTED`, adding the date and
 rationale below the table, and updating every affected contract/TODO in the
@@ -712,6 +713,11 @@ same change.
   Neither completion of M3-005B nor any M4-001 phase resumes the deferred work.
   Revisit force-push/deletion restrictions and required status checks only
   after the user explicitly reauthorizes D-047/M3-008.
+
+  **Historical scope note:** D-048 and D-049 below preserve their exact dated
+  candidate assumptions. In particular, D-048's no-`latest` condition is not a
+  current registry rule. D-050 owns the forward `alpha.3` model after live npm
+  evidence established the required seed-`latest` behavior.
 - **D-048 accepted on 2026-08-12:** the user explicitly authorized three
   external release effects for one exact candidate alpha: create annotated tag
   `v0.1.0-alpha.1` and its GitHub Release; publish
@@ -783,6 +789,78 @@ same change.
   immutable annotated tag, tag-hosted evidence, and absent/equal/mismatch
   registry checks. No `alpha.2` lock, tag, npm package, provenance result, or
   GitHub Release is created merely by this decision.
+
+- **D-050 accepted on 2026-08-14:** the user explicitly authorized the
+  forward-only `0.1.0-alpha.3` recovery: create a fresh exact annotated tag and
+  matching GitHub prerelease; publish the same four public packages at the new
+  version with GitHub Actions npm provenance; and finish the already authorized
+  Trusted Publisher/bootstrap-credential transition. This authority does not
+  permit moving either old tag, replacing a published version, unpublishing
+  `pptx-compiler-core@0.1.0-alpha.2`, or running a separate
+  `npm dist-tag add/rm` repair. The exact `npm publish --tag alpha` operation
+  inherently assigns `alpha`; npm itself may seed `latest` when it creates a
+  package identity. D-048 and D-049 remain unchanged historical authorities for their
+  exact versions.
+
+  The observed `alpha.2` state is an exact published prefix of length one.
+  Annotated tag `v0.1.0-alpha.2` peels to
+  `S2=b884b39bdded17d7bc2ccedad159605523329bae`; remote `main` remains the
+  sole-child attestation
+  `A2=626560ec43e748ac8002352d9f849ee0d6e09b2f`. Manual release run
+  `31665307969`, attempt 2, published only
+  `pptx-compiler-core@0.1.0-alpha.2`. Its official tarball is exactly the
+  fixed Node 24/npm 11 lock envelope: 118,488 bytes, SHA-256
+  `ed0cc4a2f66049ed9bd6823544913161377a229e290b70bb5527857520930268`,
+  SHA-512
+  `3aff97b21b51cbb639388b36d907b1e776ac8456bd5c3643350ae64c9eacafeddf6f928f668e4ddf4c7fa5bda8d51b3a0eb3238c6774e13b7b6ef0bdc1e7d1b6`,
+  and canonical tar SHA-256
+  `57216ed09b0bca7da6396d04ecbe784904599bd1a9df352f4d5f4f069c3add63`.
+  The registry records publish time `2026-08-13T19:43:34.408Z`, both
+  `alpha` and `latest` at `0.1.0-alpha.2`, one npm publish attestation, and one
+  keyless SLSA v1/v0.3 bundle whose subject digest, source commit, tag,
+  workflow, and invocation bind the same package and attempt. The other three
+  `alpha.2` versions and the GitHub Release are absent. No unpublish, Git-tag
+  move, separate dist-tag repair, or GitHub declaration occurred.
+
+  A later independent check—not the failed workflow—passed the fixed npm
+  11.17.0 bundled Sigstore 4.1.1 verifier against the exact certificate SAN and
+  GitHub Actions issuer, and isolated `npm audit signatures
+  --include-attestations` exited zero with empty invalid/missing sets. The
+  original workflow stopped before it recorded that later success.
+
+  This exposed two false assumptions in the old completion model. First,
+  `name`, immutable `name@version`, and mutable package-level dist-tags are
+  separate registry facts. npm's registry metadata contract says every package
+  has `latest`; the first published version seeds that package-level pointer
+  even though the publish request names `alpha`. Second, package bytes and
+  their attestations are not one synchronous visibility transaction. The
+  publish metadata time is `19:43:34.408Z`; the workflow stopped around
+  `19:43:35Z` during immediate attestation verification, while a later response
+  carried `Last-Modified: 19:44:33 GMT`, about 59 seconds after publication.
+  Because the suppressed child error cannot prove whether that first read was
+  404, empty, or cryptographically incomplete, 59 seconds is an observation,
+  not a registry SLA or exact first-visible time.
+
+  The corrected model accepts those facts instead of mutating around them.
+  Before any `alpha.3` write, all four package identities, versions, tarballs,
+  provenance, and complete dist-tag maps are reread. `core` must keep
+  `latest -> 0.1.0-alpha.2`; the exact `core@0.1.0-alpha.3 --tag alpha`
+  publication may move only `alpha -> 0.1.0-alpha.3`. Each other package begins with no identity, so its
+  first publication must result in both `alpha` and the registry-seeded
+  `latest` pointing to `0.1.0-alpha.3`. Those are publish effects, not a
+  separate tag-repair phase. Unknown or drifted tags stop the lane.
+  Provenance and packument reads use a bounded retry around exact expected
+  absence/incompleteness, then require the existing certificate-bound Sigstore
+  checks; synchronous mocks are not evidence of live propagation. Completion
+  remains forward-only and GitHub-Release-last.
+
+  The post-release credential transition requires four visible npm Trusted
+  Publisher settings with owner `why7682`, repository `pptx-compiler`, workflow
+  filename `alpha-release.yml`, environment `npm-release`, and allowed action
+  npm publish only—not npm stage publish. npm does not validate a binding on
+  save. The `alpha.3` close may therefore record configured/visible state and
+  retire the bootstrap credentials, but only a later exact OIDC publication may
+  be described as proof that the binding works.
 
 ## MIT versus Apache-2.0 review
 

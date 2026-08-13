@@ -20,6 +20,7 @@ import { gzipSync } from "node:zlib";
 import {
   ALPHA_FIXED_BUILDER,
   ALPHA_HISTORICAL_RELEASE_LOCK,
+  ALPHA_PREDECESSOR_RELEASE_LOCK,
   ALPHA_RELEASE_LOCK_PATH,
   ALPHA_RELEASE_PLAN_PATH,
   ALPHA_RELEASE_TAG_MESSAGE,
@@ -60,6 +61,10 @@ const releasePlanBytes = await readFile(new URL(
 ));
 const historicalReleaseLockBytes = await readFile(new URL(
   `../${ALPHA_HISTORICAL_RELEASE_LOCK.path}`,
+  import.meta.url
+));
+const predecessorReleaseLockBytes = await readFile(new URL(
+  `../${ALPHA_PREDECESSOR_RELEASE_LOCK.path}`,
   import.meta.url
 ));
 const forbiddenPolicyBytes = await readFile(new URL(
@@ -315,6 +320,11 @@ async function createLockGenerationFixture(t) {
   );
   await mkdir(path.dirname(historicalLockPath), { recursive: true });
   await writeFile(historicalLockPath, historicalReleaseLockBytes);
+  const predecessorLockPath = path.join(
+    root,
+    ...ALPHA_PREDECESSOR_RELEASE_LOCK.path.split("/")
+  );
+  await writeFile(predecessorLockPath, predecessorReleaseLockBytes);
   const inputs = lockedInputs();
   for (const inputPath of releasePlan.lockedInputs) {
     const absolute = path.join(root, ...inputPath.split("/"));
@@ -412,6 +422,11 @@ async function createTagInspectionFixture(t, {
   );
   await mkdir(path.dirname(historicalLockPath), { recursive: true });
   await writeFile(historicalLockPath, historicalReleaseLockBytes);
+  const predecessorLockPath = path.join(
+    root,
+    ...ALPHA_PREDECESSOR_RELEASE_LOCK.path.split("/")
+  );
+  await writeFile(predecessorLockPath, predecessorReleaseLockBytes);
   if (trackedLock) {
     const lockPath = path.join(root, ...ALPHA_RELEASE_LOCK_PATH.split("/"));
     await mkdir(path.dirname(lockPath), { recursive: true });
@@ -469,16 +484,31 @@ test("the release plan references the package plan as the sole npm authority", (
     digestEquality: "exact-tar-payload-bytes"
   });
   assert.deepEqual(releasePlan.recovery, {
-    absent: "publish-reviewed-tarball",
-    exact: "continue",
+    absent: "publish-reviewed-tarball-once",
+    exact: "continue-without-publish",
     mismatch: "hard-stop",
-    unpublish: false
+    absenceSampling: {
+      scope: "read-only-before-each-publish",
+      samples: 2,
+      delayMilliseconds: 10_000
+    },
+    stabilization: {
+      scope: "read-only-after-publish",
+      attempts: 7,
+      delayMilliseconds: 10_000,
+      retryableMissing: [
+        "identity", "version", "tarball", "provenance", "registry-signature",
+        "dist-tag"
+      ]
+    },
+    unpublish: false,
+    distTagMutation: false
   });
   assert.deepEqual(releasePlan.githubRelease, {
     order: "last",
     requiresCompleteRegistryVerification: true,
-    name: "pptx-compiler 0.1.0-alpha.2",
-    bodySource: "docs/releases/0.1.0-alpha.2.md",
+    name: "pptx-compiler 0.1.0-alpha.3",
+    bodySource: "docs/releases/0.1.0-alpha.3.md",
     bodyProjection: "locked-note-plus-release-identity-v1",
     target: "source-tag-target",
     draft: false,
@@ -487,6 +517,54 @@ test("the release plan references the package plan as the sole npm authority", (
     generateReleaseNotes: false,
     assets: "none",
     idempotency: "create-or-exact"
+  });
+  assert.deepEqual(releasePlan.credentialTransition, {
+    order: "after-github-release",
+    execution: "external-manual-after-release",
+    bindingEvidence: "fresh-npm-trust-list-exact",
+    releaseWorkflowMutation: false,
+    bindingReadback: {
+      command: "npm trust list <exact-package-name> --json",
+      cardinality: "exactly-one",
+      typeProjection: "github-to-github-actions",
+      fileProjection: "workflow-filename",
+      permissionProjection: "createPackage-to-npm-publish"
+    },
+    trustedPublisherBindings: [
+      "core", "native-card-arrow", "public-synthetic", "cli"
+    ].map((packageId) => {
+      const item = packagePlan.packages.find((candidate) =>
+        candidate.packageId === packageId);
+      return ({
+      packageId: item.packageId,
+      name: item.name,
+      provider: "github-actions",
+      owner: "why7682",
+      repository: "pptx-compiler",
+      workflow: "alpha-release.yml",
+      environment: "npm-release",
+      allowedAction: "npm publish"
+      });
+    }),
+    bootstrapToken: {
+      registry: "https://registry.npmjs.org/",
+      action: "revoke",
+      targetSelection: "operator-confirmed-unique-full-id-from-fresh-npm-token-list",
+      ambiguity: "hard-stop",
+      after: "four-exact-bindings-verified",
+      absenceEvidence: "fresh-npm-token-list-target-absent"
+    },
+    githubSecret: {
+      repository: "why7682/pptx-compiler",
+      scope: "environment",
+      environment: "npm-release",
+      name: "NPM_TOKEN",
+      action: "delete",
+      after: "bootstrap-token-revoked",
+      absenceEvidence: "fresh-github-environment-secret-list-name-absent"
+    },
+    savedConfigurationIsExecutionProof: false,
+    completion: "four-bindings-verified-and-token-revoked-and-secret-deleted"
   });
   assert.deepEqual(releasePlan.sourceTag, {
     name: ALPHA_RELEASE_TAG_NAME,
@@ -500,8 +578,8 @@ test("the release plan has one canonical JSON representation", () => {
   assert.deepEqual(parseAlphaReleasePlanBytes(releasePlanBytes), releasePlan);
   const text = releasePlanBytes.toString("utf8");
   assert.throws(() => parseAlphaReleasePlanBytes(Buffer.from(text.replace(
-    '  "schemaVersion": 2,\n  "planId":',
-    '  "planId": "shadow",\n  "schemaVersion": 2,\n  "planId":'
+    '  "schemaVersion": 3,\n  "planId":',
+    '  "planId": "shadow",\n  "schemaVersion": 3,\n  "planId":'
   ))), /alpha-release-plan-canonical/u);
 });
 
@@ -559,7 +637,7 @@ test("the GitHub Release body is a deterministic projection of locked facts", ()
   assert.equal(body.startsWith(note.toString("utf8")), true);
   assert.match(body, /## Release identity/u);
   assert.match(body, new RegExp("Target commit: `" + targetCommitOid + "`", "u"));
-  assert.equal((body.match(/^  - `pptx-compiler[^`]*@0[.]1[.]0-alpha[.]2`:/gmu) ?? [])
+  assert.equal((body.match(/^  - `pptx-compiler[^`]*@0[.]1[.]0-alpha[.]3`:/gmu) ?? [])
     .length, 4);
   assert.match(body, /does not broaden the support matrix/u);
 
@@ -596,6 +674,25 @@ test("plan validation rejects duplicated or unauthorized npm policy", () => {
   drifted.publication.registry = "https://example.invalid/";
   assert(codes(validateAlphaReleasePlan(releasePlan, { packagePlan: drifted }))
     .has("release-plan-publication"));
+
+  for (const mutate of [
+    (plan) => { plan.credentialTransition.trustedPublisherBindings[0].allowedAction = "*"; },
+    (plan) => { plan.credentialTransition.bindingEvidence = "saved-configuration"; },
+    (plan) => { plan.credentialTransition.execution = "release-workflow"; },
+    (plan) => { plan.credentialTransition.releaseWorkflowMutation = true; },
+    (plan) => { plan.credentialTransition.bindingReadback.permissionProjection = "any"; },
+    (plan) => { plan.credentialTransition.bootstrapToken.targetSelection = "token-name"; },
+    (plan) => { plan.credentialTransition.bootstrapToken.ambiguity = "pick-first"; },
+    (plan) => { plan.credentialTransition.githubSecret.scope = "repository"; },
+    (plan) => { plan.credentialTransition.githubSecret.environment = "production"; },
+    (plan) => { plan.credentialTransition.githubSecret.after = "before-token-revoke"; },
+    (plan) => { plan.credentialTransition.savedConfigurationIsExecutionProof = true; }
+  ]) {
+    const transitionDrift = structuredClone(releasePlan);
+    mutate(transitionDrift);
+    assert(codes(validateAlphaReleasePlan(transitionDrift, { packagePlan }))
+      .has("release-plan-credential-transition"));
+  }
 });
 
 test("the tracked lock binds six inputs, both envelopes, and one dual-builder tar payload", () => {
@@ -604,7 +701,7 @@ test("the tracked lock binds six inputs, both envelopes, and one dual-builder ta
   assert.match(lock.packageSourceProjectionSha256, /^[a-f0-9]{64}$/u);
   assert.equal(
     lock.packageSourceProjectionSha256,
-    "0aba029581bd570d45ff560bbd3b4fb1f3c44f5c7f5039ee0b6dc8fc133e4849"
+    "66a181bb43332232b82440ea615599929dea71de3bc530636ea81ac3c73c8bf0"
   );
   assert.deepEqual(parseAlphaReleaseLockBytes(bytes), lock);
   assert.deepEqual(validateAlphaReleaseLock(lock, {

@@ -1,7 +1,7 @@
 {
-  "schemaVersion": 3,
+  "schemaVersion": 4,
   "planId": "pptx-pipeline-alpha-package-plan",
-  "packageVersion": "0.1.0-alpha.2",
+  "packageVersion": "0.1.0-alpha.3",
   "license": "MIT",
   "moduleType": "module",
   "engines": {
@@ -11,8 +11,8 @@
   "namePolicy": {
     "style": "unscoped",
     "registry": "https://registry.npmjs.org",
-    "checkedOn": "2026-08-13",
-    "result": "all-names-e404-not-reserved",
+    "checkedOn": "2026-08-14",
+    "result": "core-present-three-names-e404",
     "names": [
       "pptx-compiler",
       "pptx-compiler-core",
@@ -29,7 +29,7 @@
   },
   "releaseGuard": {
     "state": "authorized",
-    "decisionId": "D-049"
+    "decisionId": "D-050"
   },
   "publication": {
     "registry": "https://registry.npmjs.org/",
@@ -46,15 +46,15 @@
       "dependencies": [
         {
           "packageId": "core",
-          "version": "0.1.0-alpha.2"
+          "version": "0.1.0-alpha.3"
         },
         {
           "packageId": "native-card-arrow",
-          "version": "0.1.0-alpha.2"
+          "version": "0.1.0-alpha.3"
         },
         {
           "packageId": "public-synthetic",
-          "version": "0.1.0-alpha.2"
+          "version": "0.1.0-alpha.3"
         }
       ],
       "exports": {
@@ -270,7 +270,7 @@
       "dependencies": [
         {
           "packageId": "core",
-          "version": "0.1.0-alpha.2"
+          "version": "0.1.0-alpha.3"
         }
       ],
       "exports": {

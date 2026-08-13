@@ -200,23 +200,23 @@ must project the current matrix shipped in the same reviewed commit.
 The complete user-facing list is
 [`docs/KNOWN_LIMITATIONS.md`](KNOWN_LIMITATIONS.md). The decisive current facts
 are that arbitrary templates are unsupported, the candidate QA result is
-blocked, and no BuildArtifact is created. D-049 authorizes the exact
-`0.1.0-alpha.2` external transition but does not prove its execution. A
-create-only dual-builder lock now exists as a generated candidate identity.
-Independent exact recomputation and exact provenance admission passed, and
-this checkpoint admits the lock for tracking; tag, package, registry
-provenance/signature, dist-tag, Trusted Publisher, credential-retirement, and
-GitHub Release facts remain unproved.
+blocked, and no BuildArtifact is created. D-050 authorizes the exact
+`0.1.0-alpha.3` forward transition but does not prove its execution. The old
+`alpha.2` candidate is immutable partial publication: exact core exists, the
+other three versions and GitHub Release do not. That lifecycle state changes no
+compatibility status.
 
-Release Gates is the sole current release-phase owner. M4-001A contract
-admission is complete without changing support. M4-001B is in progress on a
-fresh `alpha.2` candidate boundary: its package/version projection and local
-create-only dual-builder lock exist. Independent exact recomputation and the
-exact nine-endpoint provenance review passed, while reviewed merge `S2`,
-attestation `A2`, history admission, tag, and hosted evidence must still be
-established. Release Gates owns those
-facts and M4-001C's registry/declaration/credential-retirement phases. None of
-them changes support by itself.
+Release Gates is the sole current release-phase owner; see
+[`docs/RELEASE_GATES.md`](RELEASE_GATES.md). M4-001A contract
+admission is complete, as is the immutable `alpha.2` candidate/tag boundary,
+without changing support. The fresh `alpha.3` boundary has admitted registry
+seed-tag and eventual-provenance behavior and has created its own exact
+dual-builder lock. Independent exact review admits only its frozen bytes for
+tracking, but the lock remains untracked and has not become `S3`. It must still
+establish `S3 -> A3`, tag, hosted evidence, registry graph, and declaration.
+Release Gates owns those facts. None changes compatibility by itself, and
+consumers must select the prerelease by exact version or `@alpha` rather than
+infer compatibility from package-level `latest`.
 Any later support promotion must name one demonstrated user scope, update its
 exact matrix rows, and retain every unknown case as fail-closed. D-047/M3-008
 branch protection remains separately deferred.

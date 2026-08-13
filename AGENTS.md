@@ -184,7 +184,11 @@ release contract, read:
 8. `docs/REPRODUCIBILITY.md`
 9. `docs/DECISIONS.md`
 10. `docs/PROVENANCE_LEDGER.md`
-11. `docs/releases/0.1.0-alpha.2.md`
+11. `docs/releases/0.1.0-alpha.3.md`
+
+The immutable `docs/releases/0.1.0-alpha.1.md` and
+`docs/releases/0.1.0-alpha.2.md` are historical inputs only; read them when
+auditing their exact retired/partial states, not as the current projection.
 
 Read `docs/PROJECT_DEFINITION.md` and `docs/ARCHITECTURE_TARGET.md` only before
 changing product scope, public contracts, packages, or dependency direction.
@@ -511,7 +515,14 @@ For code review, report:
   `v0.1.0-alpha.2` tag and GitHub Release, the same four unscoped public npm
   packages at `0.1.0-alpha.2` under dist-tag `alpha`, GitHub Actions npm
   provenance, and the post-publication Trusted Publisher/token-retirement
-  transition. Authorization does not prove execution. Admit only an exact clean,
+  transition. Its attempt 2 published only exact reviewed
+  `pptx-compiler-core@0.1.0-alpha.2`; preserve that partial prefix and the
+  immutable `alpha.2` tag/lock as history. D-050 authorizes a fresh
+  `0.1.0-alpha.3` four-package recovery and matching tag/GitHub prerelease, with
+  no unpublish, old Git-tag movement, version reuse, or separate
+  `npm dist-tag add/rm` repair. The exact `npm publish --tag alpha` may assign
+  `alpha`, and npm may seed `latest` when it creates a package identity.
+  Authorization does not prove execution. Admit only an exact clean,
   full-history tag target with no replace/graft/alternate source, require
   Node 22.23.2/npm 10.9.8 and Node 24.19.0/npm 11.17.0 to produce the same four
   exact decompressed canonical tar payloads after member-by-member tracked-
@@ -526,12 +537,50 @@ For code review, report:
   CLI` order. For each package, registry absence permits the exact reviewed
   tarball to be published, exact present bytes permit continuation, and any
   mismatch is a hard stop; never use unpublish as rollback. Require official-
-  registry byte reread, npm provenance, `alpha` dist-tag, and no `latest`
-  assignment before creating the GitHub Release last. Candidate admission must
-  prove the lock and every locked input are tracked in the tag target tree, not
-  merely clean or present in the working directory. The first publication
-  may use the environment-scoped token authorized by D-049; migrate to npm
-  Trusted Publisher after all four initial package identities exist. D-047/M3-008
+  registry byte reread, npm provenance, and the complete exact dist-tag map
+  before creating the GitHub Release last. Separate package identity,
+  immutable `name@version`, and package-level dist-tags. The npm registry
+  requires each package to have `latest`: for `alpha.3`, core must retain
+  `latest -> 0.1.0-alpha.2` while `alpha` advances to `0.1.0-alpha.3`; each of
+  the three packages whose identity is first created by `alpha.3` must have
+  both registry-seeded `latest` and requested `alpha` at `0.1.0-alpha.3`.
+  Treat any other tag or movement as drift; do not run a separate dist-tag
+  mutation in the release lane. The publisher must also disable npm's own
+  fetch retry for the publish subprocess by fixing
+  `fetch-retries=0`. A single `npm publish` may otherwise retry its non-idempotent
+  registry `PUT` after a 5xx/timeout even when the first request committed. A
+  nonzero publish result is therefore outcome-uncertain: the same process may
+  perform only bounded read-only convergence against the exact locked version,
+  and it must never issue a second publish request. A later run may write only
+  after time-separated stable-absence samples; two adjacent 404 reads are not
+  stable evidence. This is a generic npm-publication rule, not an `alpha.3`
+  exception. Candidate admission must prove the lock and every locked input
+  are tracked in the tag target tree, not
+  merely clean or present in the working directory. D-050's forward recovery
+  may use the environment-scoped bootstrap token originally authorized by
+  D-049; migrate to npm Trusted Publisher after all four initial package
+  identities exist and the GitHub Release succeeds. The existing
+  `alpha-release.yml` workflow must not automatically modify npm or GitHub
+  settings; run the transition externally as a local interactive npm 11.17.0
+  procedure. For each exact package, begin with a fresh
+  `npm trust list <exact-package> --json`: an empty list permits one
+  `npm trust github` create, exactly one normalized exact binding permits an
+  idempotent rerun to continue without a write, and a mismatch or any other
+  cardinality is a hard stop. Normalize raw npm fields exactly:
+  `type: "github"` maps to provider `github-actions`; `file:
+  "alpha-release.yml"` is the workflow filename; and the sole `permissions:
+  ["createPackage"]` maps to allowed action npm publish. Reject
+  `createStagedPackage`. Each binding must name owner `why7682`, repository
+  `pptx-compiler`, environment `npm-release`, and no broader permission. After
+  all four fresh readbacks are exact, obtain a fresh `npm token list --json`;
+  the operator must uniquely identify the bootstrap token's full ID, with
+  ambiguity a hard stop, revoke only that ID, and require a fresh list in which
+  it is absent. Only then delete the GitHub Actions environment secret
+  `NPM_TOKEN` from repository `why7682/pptx-compiler`, environment
+  `npm-release`, and require a fresh environment-secret list in which that name
+  is absent. Record no secret value. npm does not validate a binding when it is
+  saved, so record only configured/visible state; a later exact tokenless OIDC
+  publication is the first proof that it works. D-047/M3-008
   branch protection remains deferred and is not a release prerequisite.
   Keep GitHub source verification, npm publication, and final GitHub Release
   declaration in separate credential boundaries: no process may receive both
@@ -544,6 +593,15 @@ For code review, report:
   alpha-release workflow/tag certificate identity and GitHub Actions OIDC
   issuer. Payload fields, registry signatures, and a later audit cannot
   substitute for that certificate-bound cryptographic verification.
+  Registry publication and attestation visibility are eventually consistent.
+  Use a bounded, classified retry for the exact expected post-publish
+  absence/incompleteness before cryptographic verification; never turn timeout,
+  malformed data, identity drift, or a bad signature into a retryable success.
+  Before designing or repairing a generic npm/GitHub failure, research the
+  current upstream registry contract and CLI documentation, then confirm it
+  against the live official endpoint. A synchronous mock proves deterministic
+  code paths, not registry timing or seed-tag behavior; observed live state wins
+  when documentation or assumptions disagree.
   Before publication, admit the GitHub Actions OIDC request URL as HTTPS on
   exactly one DNS label beneath `actions.githubusercontent.com`, with no user
   info, explicit port, fragment, empty path, non-ASCII raw URL text, nested

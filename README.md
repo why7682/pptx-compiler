@@ -96,8 +96,8 @@ pptx-compiler
 The CLI is the composition root. Core does not import the CLI, optional process
 or PowerPoint adapters, model-assisted labs, private fixtures, or a presentation
 project. Each package owns the schemas, fixtures, and static resources it
-interprets. Package-plan schema 3 positively maps every staged file and records
-D-049's exact public channel: version `0.1.0-alpha.2`, official npm registry,
+interprets. The current package plan positively maps every staged file and records
+D-050's exact public channel: version `0.1.0-alpha.3`, official npm registry,
 dist-tag `alpha`, public access, and npm provenance. That is authorization and
 staging policy, not evidence that any package has been published.
 
@@ -113,6 +113,12 @@ source and guarded-package procedure in
 [docs/REPRODUCIBILITY.md](docs/REPRODUCIBILITY.md). That source procedure uses
 guarded local tarballs; consumers must trust an npm installation only when the
 official-registry bytes, tracked release lock, and npm provenance agree.
+
+This prerelease must be selected explicitly with exact version
+`0.1.0-alpha.3` or dist-tag `@alpha`. A bare install resolves each package's
+package-level `latest`: npm requires that key, core retains its immutable
+`alpha.2` seed while the other three first identities seed at `alpha.3`. That
+mixed bare-install graph is a documented limitation, not a supported selector.
 
 ## Public evidence
 
@@ -136,6 +142,13 @@ objects. They do not prove an M4 candidate, annotated tag, arbitrary-template
 support, absence of every vulnerability, registry publication,
 reviewed-to-published equality, provenance, or release eligibility.
 
+The later immutable `alpha.2` tag passed Public CI run `31665054553` and
+Security run `31665054531`. Release run `31665307969`, attempt 2, published
+only exact reviewed `pptx-compiler-core@0.1.0-alpha.2`; later independent byte
+and certificate-bound provenance verification passed, while the other three
+versions and GitHub Release remained absent. This is partial historical release
+evidence, not the current four-package candidate.
+
 The machine-readable matrix currently contains 60 rows: 0 `supported`, 22
 `experimental`, 3 `manual`, and 35 `unsupported`. The six platform/runtime rows
 remain experimental because platform execution evidence alone cannot promote a
@@ -157,27 +170,34 @@ product capability or enable the global support switch.
 - Windows preserves the logical create-only state machine and flushed file
   bytes, but Node exposes no parent-directory fsync equivalent there; no sudden-
   power-loss directory-entry persistence claim is made.
-- D-049 authorizes the exact public-alpha release, but this README does not
+- D-050 authorizes the exact `alpha.3` recovery, but this README does not
   assert mutable external lifecycle state. Exact tag/lock identity,
   official-registry bytes, npm provenance, and the GitHub Release record own
   those facts.
 
 ## Next authorized action
 
-D-049 authorizes annotated tag `v0.1.0-alpha.2`, the four public npm packages
-at `0.1.0-alpha.2` under dist-tag `alpha`, GitHub Actions npm provenance, the
-GitHub prerelease, and the post-publication credential migration. Release Gates
-records the current phase; any incomplete M4-001 attempt advances only through
-its earliest unsatisfied transition. M4-001A's contract is complete. M4-001B
-must freeze the `alpha.2` builder results, write the new lock, and merge it as
-GitHub-verified commit `S2`; then exactly one repository-local single-parent
-attestation `A2` with sole parent `S2` must grant `S2` and pass the history gate
-at `main=A2` before the exact clean tag is created on unchanged `S2`. Tag Public
-CI and Security must pass before M4-001C runs its
-dependency-order registry publication, official-registry byte reread,
-provenance, signature, and dist-tag checks. The GitHub Release is created last;
-M4-001C closes only after all four Trusted Publisher bindings exist and the
-bootstrap token plus GitHub `NPM_TOKEN` are removed.
+D-050 authorizes annotated tag `v0.1.0-alpha.3`, the four public npm packages
+at exact `0.1.0-alpha.3` under dist-tag `alpha`, GitHub Actions npm provenance,
+the GitHub prerelease, and the post-publication credential migration. Release
+Gates records the current phase. The next chain admits the corrected registry
+model, freezes both builder results into a fresh lock, establishes reviewed
+`S3 -> A3`, passes tag-hosted gates, then publishes in dependency order with
+bounded provenance propagation and exact complete tag-map checks. The GitHub
+Release is created last. After it succeeds, the existing `alpha-release.yml`
+workflow does not automatically modify npm or GitHub settings. An external,
+local, interactive npm 11.17.0 procedure must fresh-read each exact package's
+Trusted Publisher setting, create only from an empty list, and accept an
+idempotent retry only when exactly one normalized binding matches owner
+`why7682`, repository `pptx-compiler`, workflow filename `alpha-release.yml`,
+environment `npm-release`, and allowed action npm publish only. Any mismatch
+hard-stops. After all four fresh readbacks match, the operator uniquely selects
+and revokes the bootstrap token by its full ID, proves it absent with a fresh
+token list, then deletes only the `NPM_TOKEN` environment secret from
+`why7682/pptx-compiler`'s `npm-release` environment and proves that name absent
+with a fresh secret list. These checks establish configured/visible state, not
+execution proof; only a future tokenless OIDC publication can prove the binding
+works.
 Main-branch protection remains deliberately
 deferred by D-047/M3-008 and must not be claimed as active.
 
@@ -185,7 +205,7 @@ deferred by D-047/M3-008 and must not be claimed as active.
 
 - Start with the [candidate changelog](CHANGELOG.md), the single
   [known-limitations list](docs/KNOWN_LIMITATIONS.md), and the
-  [state-neutral `0.1.0-alpha.2` note](docs/releases/0.1.0-alpha.2.md) for the
+  [state-neutral `0.1.0-alpha.3` note](docs/releases/0.1.0-alpha.3.md) for the
   reader-facing candidate scope.
 - Read the human [support matrix](docs/SUPPORT_MATRIX.md) together with the
   [compatibility policy](docs/COMPATIBILITY_POLICY.md).

@@ -1,0 +1,132 @@
+{
+  "schemaVersion": 2,
+  "lockType": "alpha-release",
+  "releaseVersion": "0.1.0-alpha.3",
+  "releasePlanSha256": "7418996ea242a867b9190f4e0d84ba337b3af470bf62ee4ac220053f30a09668",
+  "packagePlanSha256": "c25876a72e865b7457a03e08872a02170b734c0f7ad23e1cbe3a7966d0b1559b",
+  "packageSourceProjectionSha256": "71269e5d7b25ada8f208893e57a3160766374a51bb23808b5df18893e60d9548",
+  "inputs": [
+    {
+      "path": "CHANGELOG.md",
+      "sha256": "3b8f61e03bb2c1f1b0f954ebfd1e0a0ee834b7a2101a466b742a176dd906c6a0"
+    },
+    {
+      "path": "docs/KNOWN_LIMITATIONS.md",
+      "sha256": "51728263defafb0cbb85748602f52a24a3e1bf4eee16c2c4ae52620ea4e10979"
+    },
+    {
+      "path": "docs/releases/0.1.0-alpha.3.md",
+      "sha256": "eadefd96bc638cdb4f8d3126690bfbe3cd5601502ba633585e6a3a6b2329a3d9"
+    },
+    {
+      "path": "packaging/alpha-package-plan.json",
+      "sha256": "c25876a72e865b7457a03e08872a02170b734c0f7ad23e1cbe3a7966d0b1559b"
+    },
+    {
+      "path": "policy/support-matrix.json",
+      "sha256": "b773596388aa820d032f80788f915e49eb30b92fc4c686719562a9cff1cc0ec7"
+    },
+    {
+      "path": "sbom.alpha.cdx.json",
+      "sha256": "fcb884ce9ae3ad6d90990d3021f9f7353f27f77dd9986b1fcabb7e8dbe18c3a3"
+    }
+  ],
+  "builderResults": [
+    {
+      "nodeVersion": "22.23.2",
+      "npmVersion": "10.9.8",
+      "evidenceSha256": "9f1c95a21a0f13556fcca6b0c673afcc5b21fff45f5cec97ffdc05ba9991efff",
+      "evidenceBytes": 14409,
+      "packages": [
+        {
+          "packageId": "core",
+          "name": "pptx-compiler-core",
+          "tarball": "pptx-compiler-core-0.1.0-alpha.3.tgz",
+          "sha256": "082aa084e3035d07464b78e9f6e31a5183a061ba3ca827acc2a6d8e49e5dc786",
+          "sha512": "2d4354d9b561c54b9ee117010df740d45fe907715492dbdd8ec30992aefe08bba70325d64556e303f1e0b5bb3e2159be9583e18939d1bbfa0ccb979c3ade658b",
+          "compressedBytes": 118374,
+          "tarSha256": "b3778437e6056ef82c2d15082189cc0ee39eacee60ff76aad56ac5f0790db491",
+          "tarBytes": 721408
+        },
+        {
+          "packageId": "native-card-arrow",
+          "name": "pptx-compiler-native-card-arrow",
+          "tarball": "pptx-compiler-native-card-arrow-0.1.0-alpha.3.tgz",
+          "sha256": "9f9188d96b7311ce071f22949921c324f763614e334a2c055547e3f60806672d",
+          "sha512": "7994504577171a31a8560fc27d2ede33554b0b426ba1a8616e96b963b72588202428b841b401ff26dc5fd1cc114e3a7ee59c38197e11615471077bda18bffe05",
+          "compressedBytes": 10960,
+          "tarSha256": "808d320a8e4a3cba4f94721b0ec99ad3b3e20417513a72eb1e3d6c176f23b793",
+          "tarBytes": 58368
+        },
+        {
+          "packageId": "public-synthetic",
+          "name": "pptx-compiler-public-synthetic",
+          "tarball": "pptx-compiler-public-synthetic-0.1.0-alpha.3.tgz",
+          "sha256": "89bf9481c4e62638cc2ec43934ceaa7da5e1a4bc4019bcbfc870932dcc3051e7",
+          "sha512": "fd5e33723ed8616e537745f306a325d1607c30afb2c08c00df26231b8f17df679b0b57cd606e6862436f9edecbcaf590ec0f004d298a2d4b3e0535cfd48a8721",
+          "compressedBytes": 21141,
+          "tarSha256": "df5f05f1abdc4cebda56d016ae46b23dfb19f3b3f42beda46a7b86be99af347c",
+          "tarBytes": 107008
+        },
+        {
+          "packageId": "cli",
+          "name": "pptx-compiler",
+          "tarball": "pptx-compiler-0.1.0-alpha.3.tgz",
+          "sha256": "74e8223c13a4ccdf95930bc6ce9d858669204e2bfd133f015d579b3128fae5a0",
+          "sha512": "e069b199551dfa1311864d4c58d1b0df3c4ad8d535c71abf3657a856aae927dafa9dcebe78eaa25174e7000b71e357e2c88ed0ad0adafe5977521383184c8796",
+          "compressedBytes": 13787,
+          "tarSha256": "d7cc3b527e237c7683fe310cfa956b1e092701bff4dafc227098a341654a8cc2",
+          "tarBytes": 69632
+        }
+      ]
+    },
+    {
+      "nodeVersion": "24.19.0",
+      "npmVersion": "11.17.0",
+      "evidenceSha256": "83530890410b9945ec16b9c469efdf6b22a7f0f6fb5665d54d96fa3320aa0d20",
+      "evidenceBytes": 14410,
+      "packages": [
+        {
+          "packageId": "core",
+          "name": "pptx-compiler-core",
+          "tarball": "pptx-compiler-core-0.1.0-alpha.3.tgz",
+          "sha256": "60c9466bff289b72e88752bd21658f170c33d04740aac3e7cbfe1a823784905d",
+          "sha512": "1ca7037e703677ccd94bbd597c45f3e6401430c261b31254e854567b1489d230e2cfda275bd51729bd4cde2b072368eed6383251475fdd9e63bdb1a5bff0cefc",
+          "compressedBytes": 118555,
+          "tarSha256": "b3778437e6056ef82c2d15082189cc0ee39eacee60ff76aad56ac5f0790db491",
+          "tarBytes": 721408
+        },
+        {
+          "packageId": "native-card-arrow",
+          "name": "pptx-compiler-native-card-arrow",
+          "tarball": "pptx-compiler-native-card-arrow-0.1.0-alpha.3.tgz",
+          "sha256": "d66da46daf4369a51b252f971205465393ffd827a1908669d9a44dba2bfaeb63",
+          "sha512": "468817c64268feb40bcd4484cfa4aea0109e0f62f8185ffa58c69653f8b14dedbf98be8fb883f3472287b91a8f12d71fff858e559e4ce539ee03661ab2f42096",
+          "compressedBytes": 11012,
+          "tarSha256": "808d320a8e4a3cba4f94721b0ec99ad3b3e20417513a72eb1e3d6c176f23b793",
+          "tarBytes": 58368
+        },
+        {
+          "packageId": "public-synthetic",
+          "name": "pptx-compiler-public-synthetic",
+          "tarball": "pptx-compiler-public-synthetic-0.1.0-alpha.3.tgz",
+          "sha256": "17cc4300f012e1a93b745c7e91f6ec1a05dc3232566166f9253054d447f5358a",
+          "sha512": "a0786df6d01e230d54ea2b02a3ac5b8535191e247fa96686e4816920a366fba081c8f03345ca89431f1c4143a5eed440fe08a5cc2ad0f2912200d50958552efd",
+          "compressedBytes": 21242,
+          "tarSha256": "df5f05f1abdc4cebda56d016ae46b23dfb19f3b3f42beda46a7b86be99af347c",
+          "tarBytes": 107008
+        },
+        {
+          "packageId": "cli",
+          "name": "pptx-compiler",
+          "tarball": "pptx-compiler-0.1.0-alpha.3.tgz",
+          "sha256": "a3713bd6d88628148271b9122efbf7dce7d41d1a1120220fb094f6488cc30cb8",
+          "sha512": "30a7b31e9e2aa841b9d3b168ebc716140d7bea51339d89ebaa3b1f8872d4b39a39b99beec3c7a553267e1bc00571b994f31234fdb47654de29e2ed2d43538472",
+          "compressedBytes": 13829,
+          "tarSha256": "d7cc3b527e237c7683fe310cfa956b1e092701bff4dafc227098a341654a8cc2",
+          "tarBytes": 69632
+        }
+      ]
+    }
+  ]
+}

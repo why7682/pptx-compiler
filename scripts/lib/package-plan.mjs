@@ -5,7 +5,7 @@ import path from "node:path";
 import { isDeepStrictEqual } from "node:util";
 import { fileURLToPath } from "node:url";
 
-export const ALPHA_PACKAGE_PLAN_VERSION = 3;
+export const ALPHA_PACKAGE_PLAN_VERSION = 4;
 export const ALPHA_PACKAGE_PLAN_PATH = "packaging/alpha-package-plan.json";
 export const ALPHA_REPOSITORY = Object.freeze({
   provider: "github",
@@ -16,7 +16,7 @@ export const ALPHA_REPOSITORY = Object.freeze({
 });
 export const ALPHA_RELEASE_GUARD = Object.freeze({
   state: "authorized",
-  decisionId: "D-049"
+  decisionId: "D-050"
 });
 export const ALPHA_PUBLICATION = Object.freeze({
   registry: "https://registry.npmjs.org/",
@@ -553,7 +553,7 @@ export async function validateAlphaPackagePlan(plan, {
   }
   if (plan.schemaVersion !== ALPHA_PACKAGE_PLAN_VERSION ||
       plan.planId !== "pptx-pipeline-alpha-package-plan" ||
-      plan.packageVersion !== "0.1.0-alpha.2" || plan.license !== "MIT" ||
+      plan.packageVersion !== "0.1.0-alpha.3" || plan.license !== "MIT" ||
       plan.moduleType !== "module" || plan.stagingRoot !== ".package-stage") {
     add(findings, "package-plan-identity", "/");
   }
@@ -565,7 +565,8 @@ export async function validateAlphaPackagePlan(plan, {
       plan.namePolicy.style !== "unscoped" ||
       plan.namePolicy.registry !== "https://registry.npmjs.org" ||
       !/^20[0-9]{2}-[0-9]{2}-[0-9]{2}$/u.test(plan.namePolicy.checkedOn) ||
-      plan.namePolicy.result !== "all-names-e404-not-reserved" ||
+      plan.namePolicy.checkedOn !== "2026-08-14" ||
+      plan.namePolicy.result !== "core-present-three-names-e404" ||
       !Array.isArray(plan.namePolicy.names) || !sortedUnique(plan.namePolicy.names)) {
     add(findings, "package-name-policy", "/namePolicy");
   }

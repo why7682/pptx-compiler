@@ -3,7 +3,7 @@ name: Public CI
 on:
   push:
     branches: [main]
-    tags: [v0.1.0-alpha.2]
+    tags: [v0.1.0-alpha.3]
   pull_request:
 
 permissions:

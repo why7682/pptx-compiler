@@ -3427,6 +3427,240 @@ notes: This exact nine-endpoint checkpoint contains eight modified state,
   binding, credential-retirement result, or GitHub Release is claimed
 ```
 
+### M4-001D D-050 `alpha.3` pre-lock recovery projection
+
+```yaml
+paths:
+  - .github/workflows/alpha-release.yml
+  - .github/workflows/ci.yml
+  - .github/workflows/security.yml
+  - AGENTS.md
+  - CHANGELOG.md
+  - HANDOFF.md
+  - README.md
+  - TODO.md
+  - docs/ARCHITECTURE_TARGET.md
+  - docs/COMPATIBILITY_POLICY.md
+  - docs/DECISIONS.md
+  - docs/KNOWN_LIMITATIONS.md
+  - docs/M4-001_HANDOFF.md
+  - docs/NAME_AVAILABILITY.md
+  - docs/PROVENANCE_LEDGER.md
+  - docs/RELEASE_GATES.md
+  - docs/REPRODUCIBILITY.md
+  - docs/SUPPORT_MATRIX.md
+  - docs/THREAT_MODEL.md
+  - docs/releases/0.1.0-alpha.3.md
+  - packages/cli/README.md
+  - packages/core/README.md
+  - packages/public-synthetic/README.md
+  - packaging/alpha-package-plan.json
+  - packaging/alpha-release-plan.json
+  - plugins/native-card-arrow/README.md
+  - provenance/records.json
+  - sbom.alpha.cdx.json
+  - scripts/create-alpha-github-release.mjs
+  - scripts/lib/alpha-release.mjs
+  - scripts/lib/package-plan.mjs
+  - scripts/lib/public-workflows.mjs
+  - scripts/publish-alpha-release.mjs
+  - tests/alpha-github-release.test.mjs
+  - tests/alpha-publication.test.mjs
+  - tests/alpha-release.test.mjs
+  - tests/final-public-docs.test.mjs
+  - tests/package-plan.test.mjs
+  - tests/pre-public-docs.test.mjs
+  - tests/public-workflows.test.mjs
+kind: fresh D-050 alpha.3 package/release/recovery projection, lifecycle-neutral
+  reader note, post-Release manual Trusted Publisher and credential-retirement
+  contract, public workflow projection, canonical-Public-CI-section parser
+  repair, and adversarial tests
+origin: independently authored from the user's exact D-050 forward-only
+  authorization, the admitted M4-001 release contract, immutable alpha.1 and
+  partial alpha.2 evidence, current official npm/GitHub contracts where
+  applicable, and repository-owned synthetic mutations. No predecessor source,
+  external implementation, hosted log bytes, raw API response, registry
+  payload, package archive, presentation, private fixture, credential, or secret
+  value entered these bytes
+original_author_or_holder: Elliot Wu
+created_or_reviewed_on: 2026-08-14
+license_or_rights_basis: MIT
+third_party_dependencies:
+  - Node.js 22.23.2 (MIT; fixed verification runtime, not vendored)
+  - npm CLI 10.9.8 (Artistic-2.0; fixed verification builder, not vendored)
+  - Node.js 24.19.0 (MIT; fixed release runtime, not vendored)
+  - npm CLI 11.17.0 (Artistic-2.0; fixed release builder and Trusted Publisher
+    management CLI, not vendored)
+  - sigstore 4.1.1 (Apache-2.0; bundled in the exact npm 11.17.0 installation,
+    loaded only from that admitted installation, and not vendored)
+  - TypeScript 6.0.2 (Apache-2.0; exact dev-only declaration checker, not
+    vendored or included in the four-package runtime closure)
+  - actions/checkout v7.0.1 at 3d3c42e5aac5ba805825da76410c181273ba90b1
+    (MIT; pinned remote GitHub Action, not vendored)
+  - actions/setup-node v7.0.0 at 820762786026740c76f36085b0efc47a31fe5020
+    (MIT; pinned remote GitHub Action, not vendored)
+  - actions/dependency-review-action v5.0.0 at
+    a1d282b36b6f3519aa1f3fc636f609c47dddb294
+    (MIT; pinned remote GitHub Action, not vendored)
+  - github/codeql-action v4.37.6 at
+    5595ccaf912efad79be6eef63a5619ff05969be3
+    (MIT; pinned remote GitHub Action, not vendored)
+private_information_review: passed; current bytes contain only approved public
+  repository/package identity, immutable public alpha-history facts, fixed
+  public tool/action versions, repository-relative paths, and repository-owned
+  synthetic evidence. They record no token or secret value, password, OTP,
+  private/local hostname, absolute private path, private fixture, source
+  presentation, raw hosted log/API response, ignored render, generated archive,
+  or registry payload
+project_constant_removal: passed; D-050 replaces no old identity or evidence and
+  adds no second package graph, support root, release authority, lifecycle-state
+  root, compatibility alias, wildcard grant, unpublish rollback, or automatic
+  post-Release settings mutation. Package identity, immutable version,
+  package-level dist-tags, saved Trusted Publisher configuration, credential
+  retirement, and later tokenless OIDC execution proof remain separate facts
+public_fixture_conformance: applicable; exact disposable Git-backed snapshot commit
+  3f6aae89d87816dada85422b7749c1cef060e245 has sole parent
+  A2=626560ec43e748ac8002352d9f849ee0d6e09b2f and tree
+  8d982910be4419bb833d16a4dc36a82f7a39934a. Its 290-entry tree contains the
+  exact 40-endpoint candidate: 39 modifications plus the new alpha.3 note. On
+  those frozen bytes Node 22.23.2/npm 10.9.8 and Node 24.19.0/npm 11.17.0 each
+  passed 1349/1351 full-suite nodes. In each run the only failures were the
+  release-metadata baseline and alias checks, both caused solely by the four
+  deliberately pending publishable-package README records; there was no other
+  test failure. Separate isolated guarded builds under both fixed runtime/npm
+  pairs exited 0, admitted all four exact packages, performed the offline joint
+  install and installed CLI smoke, retained blocked QA, and emitted no
+  BuildArtifact. Node 22 package evidence is 14409 bytes with SHA-256
+  9f1c95a21a0f13556fcca6b0c673afcc5b21fff45f5cec97ffdc05ba9991efff;
+  Node 24 package evidence is 14410 bytes with SHA-256
+  83530890410b9945ec16b9c469efdf6b22a7f0f6fb5665d54d96fa3320aa0d20.
+  Builder-local gzip identities are, in CLI/core/native/public order, Node 22:
+  74e8223c13a4ccdf95930bc6ce9d858669204e2bfd133f015d579b3128fae5a0
+  (13787 bytes),
+  082aa084e3035d07464b78e9f6e31a5183a061ba3ca827acc2a6d8e49e5dc786
+  (118374),
+  9f9188d96b7311ce071f22949921c324f763614e334a2c055547e3f60806672d
+  (10960), and
+  89bf9481c4e62638cc2ec43934ceaa7da5e1a4bc4019bcbfc870932dcc3051e7
+  (21141); Node 24:
+  a3713bd6d88628148271b9122efbf7dce7d41d1a1120220fb094f6488cc30cb8
+  (13829),
+  60c9466bff289b72e88752bd21658f170c33d04740aac3e7cbfe1a823784905d
+  (118555),
+  d66da46daf4369a51b252f971205465393ffd827a1908669d9a44dba2bfaeb63
+  (11012), and
+  17cc4300f012e1a93b745c7e91f6ec1a05dc3232566166f9253054d447f5358a
+  (21242). Their decompressed canonical tar payloads are byte-identical across
+  builders: CLI 69632 bytes / SHA-256
+  d7cc3b527e237c7683fe310cfa956b1e092701bff4dafc227098a341654a8cc2;
+  core 721408 /
+  b3778437e6056ef82c2d15082189cc0ee39eacee60ff76aad56ac5f0790db491;
+  native 58368 /
+  808d320a8e4a3cba4f94721b0ec99ad3b3e20417513a72eb1e3d6c176f23b793;
+  public 107008 /
+  df5f05f1abdc4cebda56d016ae46b23dfb19f3b3f42beda46a7b86be99af347c.
+  The temporary commit and ignored build trees are verification scaffolding,
+  not release/provenance origins, locks, tags, hosted results, or publication.
+  The 1349/1351 counts are exact pre-flip full runs whose two failures were the
+  deliberate pending statuses; no post-flip dual-runtime full run is claimed.
+  The final two-file evidence/status projection is closed separately by the
+  provenance, release-metadata, forbidden-material, and diff gates
+independent_review: passed; one independent final read-only review of the exact
+  frozen 40-endpoint candidate reports 0 blocker, 0 high, and 0 medium with
+  Taste=good and explicitly permits the provenance status flip. It found no
+  release-blocking flaw in the forward-only recovery model, npm outcome-
+  uncertain handling, exact registry/provenance/signature gates, GitHub-
+  Release-last boundary, or post-Release manual credential transition. This
+  review is code/contract admission, not a lock, tag, hosted run, publication,
+  Trusted Publisher binding, or credential-retirement result
+notes: D-050 authorizes only a fresh forward recovery at 0.1.0-alpha.3 and does
+  not alter immutable alpha.1 or alpha.2 history. Alpha.2 remains a partial
+  publication: its exact reviewed core exists, while its other three versions
+  and GitHub Release remain absent. At this pre-lock checkpoint no alpha.3
+  release lock, GitHub-verified S3, sole-parent attestation A3, annotated tag,
+  tag-hosted result, npm package publication, registry provenance/signature or
+  dist-tag result, or GitHub Release is established or claimed. No Trusted
+  Publisher binding, bootstrap-token revocation, or GitHub environment-secret
+  deletion is established or claimed. Authorization and focused checks are not
+  execution evidence. This relation contains exactly 40 current endpoints: 39
+  modified and one new
+```
+
+### M4-001D `alpha.3` create-only lock checkpoint
+
+```yaml
+paths:
+  - HANDOFF.md
+  - TODO.md
+  - docs/COMPATIBILITY_POLICY.md
+  - docs/M4-001_HANDOFF.md
+  - docs/PROVENANCE_LEDGER.md
+  - docs/RELEASE_GATES.md
+  - packaging/releases/0.1.0-alpha.3.lock.json
+  - provenance/records.json
+  - tests/final-public-docs.test.mjs
+kind: generated schema-2 dual-builder candidate lock plus its narrow state and
+  exact provenance projection
+origin: the lock was deterministically written create-only from exact admitted
+  pre-lock commit 131b15d80b9dfc51b48092a13357348c242d4103 (tree
+  47566e2d1a92da348be58e6da35a8f2c35885f79; sole parent
+  626560ec43e748ac8002352d9f849ee0d6e09b2f), its repository-owned
+  package/release plans and six locked inputs, and the two fixed guarded builder
+  results. The other eight endpoints independently project only that generated
+  lock checkpoint, its negative lifecycle boundary, and the fail-closed
+  lock-created/review-passed document mutation contract. No predecessor source,
+  external implementation, registry payload, hosted output, presentation,
+  private fixture, generated tarball bytes, or credential entered these bytes
+original_author_or_holder: Elliot Wu
+created_or_reviewed_on: 2026-08-14
+license_or_rights_basis: MIT
+third_party_dependencies:
+  - Node.js 22.23.2 (MIT; fixed verification runtime, not vendored)
+  - npm CLI 10.9.8 (Artistic-2.0; fixed verification builder, not vendored)
+  - Node.js 24.19.0 (MIT; fixed release runtime, not vendored)
+  - npm CLI 11.17.0 (Artistic-2.0; fixed release builder, not vendored)
+private_information_review: passed; current bytes contain only approved public
+  package/repository identities, one public source commit, fixed public builder
+  versions, repository-relative input paths, byte counts, and SHA-256/SHA-512
+  boundary fingerprints. No token value, password, OTP, credential, hostname,
+  absolute local path, private fixture, source presentation, raw log/API
+  response, registry payload, or generated tarball bytes is recorded
+project_constant_removal: passed; the lock projects existing package, release,
+  support, SBOM, and reader-document authorities without adding a second package
+  graph, support root, publication order, lifecycle root, or release declaration
+public_fixture_conformance: applicable; create-only generation produced exact
+  schema-2 lock SHA-256
+  f5e3b8ceff284b908b6febb678501f63e07d50eff041b3c60532a8f6511dd675,
+  Git blob eb875526ffefc81b4bbaa2c15ed4412b31a8d026, 6218 bytes, mode
+  100644, with package-source projection
+  71269e5d7b25ada8f208893e57a3160766374a51bb23808b5df18893e60d9548.
+  The projection binds six exact locked inputs, 89 unique tracked source paths,
+  92 package-source mappings, and 96 final package members. Distinct
+  Node 22.23.2/npm 10.9.8 evidence
+  9f1c95a21a0f13556fcca6b0c673afcc5b21fff45f5cec97ffdc05ba9991efff
+  (14409 bytes) and Node 24.19.0/npm 11.17.0 evidence
+  83530890410b9945ec16b9c469efdf6b22a7f0f6fb5665d54d96fa3320aa0d20
+  (14410 bytes) bind distinct builder-local gzip envelopes and byte-identical
+  canonical decompressed tar payloads for all four packages. Independent exact
+  recomputation passed and this exact nine-endpoint provenance review admits the
+  lock identity for tracking
+independent_review: passed; one bounded current-byte exact-lock and
+  nine-endpoint state/contract-test review reports 0 blocker, 0 high, and
+  0 medium with Taste=good. A no-local/no-hardlink Git-backed regeneration and
+  direct Git-tree/tar recomputation verified the lock identity, six locked
+  inputs, 89-source/92-mapping/96-member projection, both builder envelopes,
+  all SHA-256/SHA-512 identities, and all four equal canonical tar payloads. It
+  also confirmed unchanged alpha.1/alpha.2 lock history, exact endpoint/record
+  closure, and no lifecycle overclaim
+notes: This exact nine-endpoint checkpoint contains eight modified state,
+  provenance, and contract-test authorities plus one new lock. M4-001D remains
+  IN_PROGRESS. The independently admitted lock is included in this
+  tracked-admission checkpoint but is not yet merged as S3. No A3, alpha.3 tag,
+  tag-hosted result, npm alpha.3 package, registry provenance/signature result,
+  dist-tag result, Trusted Publisher binding, bootstrap-token revocation,
+  NPM_TOKEN environment-secret deletion, or GitHub Release is claimed
+```
+
 The XML namespace, relationship-type, and MIME strings are interoperability
 identifiers from the public format specification. They do not convey third-
 party presentation content. The fictional `Synthetic Sans` typeface name does

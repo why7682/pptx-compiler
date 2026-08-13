@@ -31,12 +31,12 @@ import {
   inspectForbiddenMaterialContent
 } from "../check-forbidden-materials.mjs";
 
-export const ALPHA_RELEASE_PLAN_VERSION = 2;
+export const ALPHA_RELEASE_PLAN_VERSION = 3;
 export const ALPHA_RELEASE_PLAN_PATH = "packaging/alpha-release-plan.json";
 export const ALPHA_RELEASE_LOCK_PATH =
-  "packaging/releases/0.1.0-alpha.2.lock.json";
-export const ALPHA_RELEASE_TAG_NAME = "v0.1.0-alpha.2";
-export const ALPHA_RELEASE_TAG_MESSAGE = "pptx-compiler 0.1.0-alpha.2";
+  "packaging/releases/0.1.0-alpha.3.lock.json";
+export const ALPHA_RELEASE_TAG_NAME = "v0.1.0-alpha.3";
+export const ALPHA_RELEASE_TAG_MESSAGE = "pptx-compiler 0.1.0-alpha.3";
 export const ALPHA_HISTORICAL_RELEASE_LOCK = Object.freeze({
   path: "packaging/releases/0.1.0-alpha.1.lock.json",
   mode: "100644",
@@ -44,6 +44,17 @@ export const ALPHA_HISTORICAL_RELEASE_LOCK = Object.freeze({
   sha256: "d3b4818e9bcdb43f39df557847613d3e5ce0afa2f6fffda5af655217f2f5170a",
   bytes: 6218
 });
+export const ALPHA_PREDECESSOR_RELEASE_LOCK = Object.freeze({
+  path: "packaging/releases/0.1.0-alpha.2.lock.json",
+  mode: "100644",
+  blobOid: "b87a1530b574d83813b79d6ebbf2854fb7afc7fa",
+  sha256: "922a862092d3785ccca17ba4f6740afb95bb038ae718aaed80a105d086200a31",
+  bytes: 6218
+});
+export const ALPHA_HISTORICAL_RELEASE_LOCKS = Object.freeze([
+  ALPHA_HISTORICAL_RELEASE_LOCK,
+  ALPHA_PREDECESSOR_RELEASE_LOCK
+]);
 export const ALPHA_FIXED_BUILDER = Object.freeze({
   nodeVersion: "24.19.0",
   npmVersion: "11.17.0"
@@ -64,7 +75,7 @@ const MAX_RELEASE_HISTORY_COMMITS = 64;
 const LOCKED_INPUTS = Object.freeze([
   "CHANGELOG.md",
   "docs/KNOWN_LIMITATIONS.md",
-  "docs/releases/0.1.0-alpha.2.md",
+  "docs/releases/0.1.0-alpha.3.md",
   ALPHA_PACKAGE_PLAN_PATH,
   "policy/support-matrix.json",
   "sbom.alpha.cdx.json"
@@ -80,8 +91,11 @@ const TOP_KEYS = Object.freeze([
   "sourceTag",
   "builders",
   "lockedInputs",
+  "predecessorRelease",
+  "registryState",
   "recovery",
-  "githubRelease"
+  "githubRelease",
+  "credentialTransition"
 ]);
 const LOCK_KEYS = Object.freeze([
   "schemaVersion",
@@ -120,6 +134,87 @@ const CANDIDATE_KEYS = Object.freeze([
   "packagePlanSha256",
   "releaseLockSha256"
 ]);
+const PREDECESSOR_VERSION = "0.1.0-alpha.2";
+const CURRENT_VERSION = "0.1.0-alpha.3";
+const PREDECESSOR_TAG = "v0.1.0-alpha.2";
+const PREDECESSOR_TARGET_COMMIT = "b884b39bdded17d7bc2ccedad159605523329bae";
+const PREDECESSOR_PROVENANCE = Object.freeze({
+  packageId: "core",
+  predicateType: "https://slsa.dev/provenance/v1",
+  runId: "31665307969",
+  runAttempt: "2"
+});
+const PREDECESSOR_CORE_TARBALL = Object.freeze({
+  packageId: "core",
+  name: "pptx-compiler-core",
+  tarball: "pptx-compiler-core-0.1.0-alpha.2.tgz",
+  sha256: "ed0cc4a2f66049ed9bd6823544913161377a229e290b70bb5527857520930268",
+  sha512: "3aff97b21b51cbb639388b36d907b1e776ac8456bd5c3643350ae64c9eacafeddf6f928f668e4ddf4c7fa5bda8d51b3a0eb3238c6774e13b7b6ef0bdc1e7d1b6",
+  compressedBytes: 118488,
+  tarSha256: "57216ed09b0bca7da6396d04ecbe784904599bd1a9df352f4d5f4f069c3add63",
+  tarBytes: 720896
+});
+const REGISTRY_PACKAGE_IDS = Object.freeze([
+  "core",
+  "native-card-arrow",
+  "public-synthetic",
+  "cli"
+]);
+const TRUSTED_PUBLISHER_NAMES = Object.freeze({
+  core: "pptx-compiler-core",
+  "native-card-arrow": "pptx-compiler-native-card-arrow",
+  "public-synthetic": "pptx-compiler-public-synthetic",
+  cli: "pptx-compiler"
+});
+const REGISTRY_RETRYABLE_MISSING = Object.freeze([
+  "identity",
+  "version",
+  "tarball",
+  "provenance",
+  "registry-signature",
+  "dist-tag"
+]);
+
+function expectedRegistryState() {
+  const initial = REGISTRY_PACKAGE_IDS.map((packageId) => packageId === "core"
+    ? {
+        packageId,
+        identityState: "present",
+        versionStates: {
+          [PREDECESSOR_VERSION]: "present-exact-predecessor-lock",
+          [CURRENT_VERSION]: "absent"
+        },
+        distTags: { alpha: PREDECESSOR_VERSION, latest: PREDECESSOR_VERSION }
+      }
+    : {
+        packageId,
+        identityState: "absent",
+        versionStates: { [CURRENT_VERSION]: "absent" },
+        distTags: {}
+      });
+  const final = REGISTRY_PACKAGE_IDS.map((packageId) => packageId === "core"
+    ? {
+        packageId,
+        identityState: "present",
+        versionStates: {
+          [PREDECESSOR_VERSION]: "present-exact-predecessor-lock",
+          [CURRENT_VERSION]: "present-exact-current-lock"
+        },
+        distTags: { alpha: CURRENT_VERSION, latest: PREDECESSOR_VERSION }
+      }
+    : {
+        packageId,
+        identityState: "present",
+        versionStates: { [CURRENT_VERSION]: "present-exact-current-lock" },
+        distTags: { alpha: CURRENT_VERSION, latest: CURRENT_VERSION }
+      });
+  return {
+    model: "package-identity-version-dist-tags",
+    recoveryShape: "final-prefix-plus-initial-suffix",
+    initial,
+    final
+  };
+}
 
 function isPlainRecord(value) {
   if (value === null || typeof value !== "object" || Array.isArray(value)) return false;
@@ -307,11 +402,47 @@ function canonicalReleasePlanValue(plan) {
       digestEquality: plan.builders.digestEquality
     } : plan.builders,
     lockedInputs: plan.lockedInputs,
+    predecessorRelease: isPlainRecord(plan.predecessorRelease) ? {
+      version: plan.predecessorRelease.version,
+      tagName: plan.predecessorRelease.tagName,
+      targetCommitOid: plan.predecessorRelease.targetCommitOid,
+      releaseLock: isPlainRecord(plan.predecessorRelease.releaseLock) ? {
+        path: plan.predecessorRelease.releaseLock.path,
+        mode: plan.predecessorRelease.releaseLock.mode,
+        blobOid: plan.predecessorRelease.releaseLock.blobOid,
+        sha256: plan.predecessorRelease.releaseLock.sha256,
+        bytes: plan.predecessorRelease.releaseLock.bytes
+      } : plan.predecessorRelease.releaseLock,
+      npmProvenance: isPlainRecord(plan.predecessorRelease.npmProvenance) ? {
+        packageId: plan.predecessorRelease.npmProvenance.packageId,
+        predicateType: plan.predecessorRelease.npmProvenance.predicateType,
+        runId: plan.predecessorRelease.npmProvenance.runId,
+        runAttempt: plan.predecessorRelease.npmProvenance.runAttempt
+      } : plan.predecessorRelease.npmProvenance
+    } : plan.predecessorRelease,
+    registryState: isPlainRecord(plan.registryState) ? {
+      model: plan.registryState.model,
+      recoveryShape: plan.registryState.recoveryShape,
+      initial: plan.registryState.initial,
+      final: plan.registryState.final
+    } : plan.registryState,
     recovery: isPlainRecord(plan.recovery) ? {
       absent: plan.recovery.absent,
       exact: plan.recovery.exact,
       mismatch: plan.recovery.mismatch,
-      unpublish: plan.recovery.unpublish
+      absenceSampling: isPlainRecord(plan.recovery.absenceSampling) ? {
+        scope: plan.recovery.absenceSampling.scope,
+        samples: plan.recovery.absenceSampling.samples,
+        delayMilliseconds: plan.recovery.absenceSampling.delayMilliseconds
+      } : plan.recovery.absenceSampling,
+      stabilization: isPlainRecord(plan.recovery.stabilization) ? {
+        scope: plan.recovery.stabilization.scope,
+        attempts: plan.recovery.stabilization.attempts,
+        delayMilliseconds: plan.recovery.stabilization.delayMilliseconds,
+        retryableMissing: plan.recovery.stabilization.retryableMissing
+      } : plan.recovery.stabilization,
+      unpublish: plan.recovery.unpublish,
+      distTagMutation: plan.recovery.distTagMutation
     } : plan.recovery,
     githubRelease: isPlainRecord(plan.githubRelease) ? {
       order: plan.githubRelease.order,
@@ -327,7 +458,42 @@ function canonicalReleasePlanValue(plan) {
       generateReleaseNotes: plan.githubRelease.generateReleaseNotes,
       assets: plan.githubRelease.assets,
       idempotency: plan.githubRelease.idempotency
-    } : plan.githubRelease
+    } : plan.githubRelease,
+    credentialTransition: isPlainRecord(plan.credentialTransition) ? {
+      order: plan.credentialTransition.order,
+      execution: plan.credentialTransition.execution,
+      bindingEvidence: plan.credentialTransition.bindingEvidence,
+      releaseWorkflowMutation: plan.credentialTransition.releaseWorkflowMutation,
+      bindingReadback: isPlainRecord(plan.credentialTransition.bindingReadback) ? {
+        command: plan.credentialTransition.bindingReadback.command,
+        cardinality: plan.credentialTransition.bindingReadback.cardinality,
+        typeProjection: plan.credentialTransition.bindingReadback.typeProjection,
+        fileProjection: plan.credentialTransition.bindingReadback.fileProjection,
+        permissionProjection:
+          plan.credentialTransition.bindingReadback.permissionProjection
+      } : plan.credentialTransition.bindingReadback,
+      trustedPublisherBindings: plan.credentialTransition.trustedPublisherBindings,
+      bootstrapToken: isPlainRecord(plan.credentialTransition.bootstrapToken) ? {
+        registry: plan.credentialTransition.bootstrapToken.registry,
+        action: plan.credentialTransition.bootstrapToken.action,
+        targetSelection: plan.credentialTransition.bootstrapToken.targetSelection,
+        ambiguity: plan.credentialTransition.bootstrapToken.ambiguity,
+        after: plan.credentialTransition.bootstrapToken.after,
+        absenceEvidence: plan.credentialTransition.bootstrapToken.absenceEvidence
+      } : plan.credentialTransition.bootstrapToken,
+      githubSecret: isPlainRecord(plan.credentialTransition.githubSecret) ? {
+        repository: plan.credentialTransition.githubSecret.repository,
+        scope: plan.credentialTransition.githubSecret.scope,
+        environment: plan.credentialTransition.githubSecret.environment,
+        name: plan.credentialTransition.githubSecret.name,
+        action: plan.credentialTransition.githubSecret.action,
+        after: plan.credentialTransition.githubSecret.after,
+        absenceEvidence: plan.credentialTransition.githubSecret.absenceEvidence
+      } : plan.credentialTransition.githubSecret,
+      savedConfigurationIsExecutionProof:
+        plan.credentialTransition.savedConfigurationIsExecutionProof,
+      completion: plan.credentialTransition.completion
+    } : plan.credentialTransition
   };
 }
 
@@ -371,7 +537,7 @@ export function validateAlphaReleasePlan(plan, { packagePlan } = {}) {
     add(findings, "release-plan-identity", "/planId");
   }
   if (!isPlainRecord(packagePlan) || plan.releaseVersion !== packagePlan.packageVersion ||
-      plan.releaseVersion !== "0.1.0-alpha.2") {
+      plan.releaseVersion !== CURRENT_VERSION) {
     add(findings, "release-plan-version", "/releaseVersion");
   }
   if (plan.packagePlanPath !== ALPHA_PACKAGE_PLAN_PATH ||
@@ -399,10 +565,47 @@ export function validateAlphaReleasePlan(plan, { packagePlan } = {}) {
       !isDeepStrictEqual(plan.lockedInputs, LOCKED_INPUTS)) {
     add(findings, "release-plan-inputs", "/lockedInputs");
   }
-  if (!exactRecord(plan.recovery, ["absent", "exact", "mismatch", "unpublish"]) ||
-      plan.recovery.absent !== "publish-reviewed-tarball" ||
-      plan.recovery.exact !== "continue" ||
-      plan.recovery.mismatch !== "hard-stop" || plan.recovery.unpublish !== false) {
+  if (!exactRecord(plan.predecessorRelease, [
+    "version", "tagName", "targetCommitOid", "releaseLock", "npmProvenance"
+  ]) || plan.predecessorRelease.version !== PREDECESSOR_VERSION ||
+      plan.predecessorRelease.tagName !== PREDECESSOR_TAG ||
+      plan.predecessorRelease.targetCommitOid !== PREDECESSOR_TARGET_COMMIT ||
+      !isDeepStrictEqual(
+        plan.predecessorRelease.releaseLock,
+        ALPHA_PREDECESSOR_RELEASE_LOCK
+      ) ||
+      !isDeepStrictEqual(
+        plan.predecessorRelease.npmProvenance,
+        PREDECESSOR_PROVENANCE
+      )) {
+    add(findings, "release-plan-predecessor", "/predecessorRelease");
+  }
+  if (!isDeepStrictEqual(plan.registryState, expectedRegistryState())) {
+    add(findings, "release-plan-registry-state", "/registryState");
+  }
+  if (!exactRecord(plan.recovery, [
+    "absent", "exact", "mismatch", "absenceSampling", "stabilization",
+    "unpublish", "distTagMutation"
+  ]) || plan.recovery.absent !== "publish-reviewed-tarball-once" ||
+      plan.recovery.exact !== "continue-without-publish" ||
+      plan.recovery.mismatch !== "hard-stop" ||
+      !exactRecord(plan.recovery.absenceSampling, [
+        "scope", "samples", "delayMilliseconds"
+      ]) || plan.recovery.absenceSampling.scope !==
+        "read-only-before-each-publish" ||
+      plan.recovery.absenceSampling.samples !== 2 ||
+      plan.recovery.absenceSampling.delayMilliseconds !== 10_000 ||
+      !exactRecord(plan.recovery.stabilization, [
+        "scope", "attempts", "delayMilliseconds", "retryableMissing"
+      ]) ||
+      plan.recovery.stabilization.scope !== "read-only-after-publish" ||
+      plan.recovery.stabilization.attempts !== 7 ||
+      plan.recovery.stabilization.delayMilliseconds !== 10_000 ||
+      !isDeepStrictEqual(
+        plan.recovery.stabilization.retryableMissing,
+        REGISTRY_RETRYABLE_MISSING
+      ) || plan.recovery.unpublish !== false ||
+      plan.recovery.distTagMutation !== false) {
     add(findings, "release-plan-recovery", "/recovery");
   }
   if (!exactRecord(plan.githubRelease, [
@@ -421,7 +624,7 @@ export function validateAlphaReleasePlan(plan, { packagePlan } = {}) {
   ]) || plan.githubRelease.order !== "last" ||
       plan.githubRelease.requiresCompleteRegistryVerification !== true ||
       plan.githubRelease.name !== ALPHA_RELEASE_TAG_MESSAGE ||
-      plan.githubRelease.bodySource !== "docs/releases/0.1.0-alpha.2.md" ||
+      plan.githubRelease.bodySource !== "docs/releases/0.1.0-alpha.3.md" ||
       !plan.lockedInputs.includes(plan.githubRelease.bodySource) ||
       plan.githubRelease.bodyProjection !==
         "locked-note-plus-release-identity-v1" ||
@@ -434,13 +637,64 @@ export function validateAlphaReleasePlan(plan, { packagePlan } = {}) {
       plan.githubRelease.idempotency !== "create-or-exact") {
     add(findings, "release-plan-github-release", "/githubRelease");
   }
+  const transition = plan.credentialTransition;
+  const bindingKeys = [
+    "packageId", "name", "provider", "owner", "repository", "workflow",
+    "environment", "allowedAction"
+  ];
+  if (!exactRecord(transition, [
+    "order", "execution", "bindingEvidence", "releaseWorkflowMutation",
+    "bindingReadback", "trustedPublisherBindings", "bootstrapToken", "githubSecret",
+    "savedConfigurationIsExecutionProof", "completion"
+  ]) || transition.order !== "after-github-release" ||
+      transition.execution !== "external-manual-after-release" ||
+      transition.bindingEvidence !== "fresh-npm-trust-list-exact" ||
+      transition.releaseWorkflowMutation !== false ||
+      !isDeepStrictEqual(transition.bindingReadback, {
+        command: "npm trust list <exact-package-name> --json",
+        cardinality: "exactly-one",
+        typeProjection: "github-to-github-actions",
+        fileProjection: "workflow-filename",
+        permissionProjection: "createPackage-to-npm-publish"
+      }) ||
+      !Array.isArray(transition.trustedPublisherBindings) ||
+      transition.trustedPublisherBindings.length !== REGISTRY_PACKAGE_IDS.length ||
+      transition.trustedPublisherBindings.some((binding, index) => {
+        const packageId = REGISTRY_PACKAGE_IDS[index];
+        return !exactRecord(binding, bindingKeys) || binding.packageId !== packageId ||
+          binding.name !== TRUSTED_PUBLISHER_NAMES[packageId] ||
+          binding.provider !== "github-actions" || binding.owner !== "why7682" ||
+          binding.repository !== "pptx-compiler" ||
+          binding.workflow !== "alpha-release.yml" ||
+          binding.environment !== "npm-release" ||
+          binding.allowedAction !== "npm publish";
+      }) || !isDeepStrictEqual(transition.bootstrapToken, {
+        registry: "https://registry.npmjs.org/",
+        action: "revoke",
+        targetSelection: "operator-confirmed-unique-full-id-from-fresh-npm-token-list",
+        ambiguity: "hard-stop",
+        after: "four-exact-bindings-verified",
+        absenceEvidence: "fresh-npm-token-list-target-absent"
+      }) || !isDeepStrictEqual(transition.githubSecret, {
+        repository: "why7682/pptx-compiler",
+        scope: "environment",
+        environment: "npm-release",
+        name: "NPM_TOKEN",
+        action: "delete",
+        after: "bootstrap-token-revoked",
+        absenceEvidence: "fresh-github-environment-secret-list-name-absent"
+      }) || transition.savedConfigurationIsExecutionProof !== false ||
+      transition.completion !==
+        "four-bindings-verified-and-token-revoked-and-secret-deleted") {
+    add(findings, "release-plan-credential-transition", "/credentialTransition");
+  }
   if (!isPlainRecord(packagePlan?.repository) ||
       !isDeepStrictEqual(packagePlan.repository, ALPHA_REPOSITORY)) {
     add(findings, "release-plan-repository", "/packagePlanPath");
   }
   if (!isDeepStrictEqual(packagePlan?.releaseGuard, {
     state: "authorized",
-    decisionId: "D-049"
+    decisionId: "D-050"
   })) {
     add(findings, "release-plan-authorization", "/authorizationSource");
   }
@@ -567,6 +821,23 @@ export async function loadAlphaReleaseLock({ root = repositoryRoot } = {}) {
   return parseAlphaReleaseLockBytes(
     await readFile(path.join(root, ALPHA_RELEASE_LOCK_PATH))
   );
+}
+
+export function predecessorCoreTarballFromLock(lock) {
+  const fixed = Array.isArray(lock?.builderResults)
+    ? lock.builderResults.find((entry) =>
+      entry?.nodeVersion === ALPHA_FIXED_BUILDER.nodeVersion &&
+      entry?.npmVersion === ALPHA_FIXED_BUILDER.npmVersion)
+    : undefined;
+  const core = Array.isArray(fixed?.packages)
+    ? fixed.packages.find((entry) => entry?.packageId === "core")
+    : undefined;
+  if (lock?.schemaVersion !== 2 || lock?.lockType !== "alpha-release" ||
+      lock?.releaseVersion !== PREDECESSOR_VERSION ||
+      !isDeepStrictEqual(core, PREDECESSOR_CORE_TARBALL)) {
+    throw new Error("alpha-release-predecessor-lock");
+  }
+  return PREDECESSOR_CORE_TARBALL;
 }
 
 function expectedEvidenceFiles(item) {
@@ -1359,6 +1630,17 @@ export async function inspectAlphaReleaseCandidateSnapshot({
   if (validateAlphaReleasePlan(releasePlan, { packagePlan }).length !== 0) {
     throw new Error("alpha-release-tag-plan");
   }
+  const predecessorReleaseLockBytes = readGitTreeFile(
+    resolvedRoot,
+    tagTargetTreeOid,
+    releasePlan.predecessorRelease.releaseLock.path,
+    gitEnvironment,
+    { maximumBytes: releasePlan.predecessorRelease.releaseLock.bytes }
+  );
+  const predecessorReleaseLock = parseAlphaReleaseLockBytes(
+    predecessorReleaseLockBytes
+  );
+  predecessorCoreTarballFromLock(predecessorReleaseLock);
   const policyBytes = readGitTreeFile(
     resolvedRoot,
     tagTargetTreeOid,
@@ -1438,6 +1720,7 @@ export async function inspectAlphaReleaseCandidateSnapshot({
   const workingFiles = new Map([
     [ALPHA_RELEASE_PLAN_PATH, releasePlanBytes],
     [releasePlan.releaseLockPath, releaseLockBytes],
+    [releasePlan.predecessorRelease.releaseLock.path, predecessorReleaseLockBytes],
     ...inputBytes,
     ...sourceBytes
   ]);
@@ -1483,6 +1766,7 @@ export async function inspectAlphaReleaseCandidateSnapshot({
     releasePlan,
     packagePlan,
     releaseLock,
+    predecessorReleaseLock,
     inputBytes
   });
 }
@@ -1567,7 +1851,7 @@ export function renderAlphaGitHubReleaseBody({
       note === null || note.length < 1 || note.length > MAX_CONTROL_BYTES ||
       !GIT_OID.test(targetCommitOid) ||
       releasePlan.githubRelease.bodySource !==
-        "docs/releases/0.1.0-alpha.2.md" ||
+        "docs/releases/0.1.0-alpha.3.md" ||
       releasePlan.githubRelease.bodyProjection !==
         "locked-note-plus-release-identity-v1") {
     throw new Error("alpha-release-github-body-input");
@@ -1735,7 +2019,8 @@ async function assertAlphaReleaseDirectoryInventory(
   releaseDirectory,
   { currentLockPresent = false } = {}
 ) {
-  const expected = [path.posix.basename(ALPHA_HISTORICAL_RELEASE_LOCK.path)];
+  const expected = ALPHA_HISTORICAL_RELEASE_LOCKS.map((entry) =>
+    path.posix.basename(entry.path));
   if (currentLockPresent) expected.push(path.posix.basename(ALPHA_RELEASE_LOCK_PATH));
   expected.sort();
   let actual;
@@ -1757,62 +2042,58 @@ async function assertHistoricalAlphaReleaseLock({
 }) {
   const packagingDirectory = path.join(root, "packaging");
   const releaseDirectory = path.join(packagingDirectory, "releases");
-  const absolutePath = path.join(
-    root,
-    ...ALPHA_HISTORICAL_RELEASE_LOCK.path.split("/")
-  );
   await assertCanonicalDirectory(packagingDirectory, "alpha-release-lock-parent");
   await assertCanonicalDirectory(releaseDirectory, "alpha-release-lock-directory");
   await assertAlphaReleaseDirectoryInventory(releaseDirectory, {
     currentLockPresent
   });
 
-  let treeEntry;
-  try {
-    treeEntry = readGitTreeBlob(
-      root,
-      treeOid,
-      ALPHA_HISTORICAL_RELEASE_LOCK.path,
-      environment,
-      {
-        maximumBytes: ALPHA_HISTORICAL_RELEASE_LOCK.bytes,
-        allowedModes: [ALPHA_HISTORICAL_RELEASE_LOCK.mode]
-      }
-    );
-  } catch {
-    throw new Error("alpha-release-historical-lock-tree");
-  }
-  if (treeEntry.mode !== ALPHA_HISTORICAL_RELEASE_LOCK.mode ||
-      treeEntry.objectOid !== ALPHA_HISTORICAL_RELEASE_LOCK.blobOid ||
-      treeEntry.bytes.length !== ALPHA_HISTORICAL_RELEASE_LOCK.bytes ||
-      sha256(treeEntry.bytes) !== ALPHA_HISTORICAL_RELEASE_LOCK.sha256) {
-    throw new Error("alpha-release-historical-lock-tree");
-  }
+  for (const historicalLock of ALPHA_HISTORICAL_RELEASE_LOCKS) {
+    const absolutePath = path.join(root, ...historicalLock.path.split("/"));
+    let treeEntry;
+    try {
+      treeEntry = readGitTreeBlob(
+        root,
+        treeOid,
+        historicalLock.path,
+        environment,
+        {
+          maximumBytes: historicalLock.bytes,
+          allowedModes: [historicalLock.mode]
+        }
+      );
+    } catch {
+      throw new Error("alpha-release-historical-lock-tree");
+    }
+    if (treeEntry.mode !== historicalLock.mode ||
+        treeEntry.objectOid !== historicalLock.blobOid ||
+        treeEntry.bytes.length !== historicalLock.bytes ||
+        sha256(treeEntry.bytes) !== historicalLock.sha256) {
+      throw new Error("alpha-release-historical-lock-tree");
+    }
 
-  let before;
-  let after;
-  let workingBytes;
-  try {
-    before = await lstat(absolutePath, { bigint: true });
-    if (!before.isFile() || before.isSymbolicLink() ||
-        await realpath(absolutePath) !== path.resolve(absolutePath)) {
+    let before;
+    let after;
+    let workingBytes;
+    try {
+      before = await lstat(absolutePath, { bigint: true });
+      if (!before.isFile() || before.isSymbolicLink() ||
+          await realpath(absolutePath) !== path.resolve(absolutePath)) {
+        throw new Error("alpha-release-historical-lock-worktree");
+      }
+      workingBytes = await stableReadAlphaFile(absolutePath, historicalLock.bytes);
+      after = await lstat(absolutePath, { bigint: true });
+    } catch (error) {
+      if (error?.message === "alpha-release-historical-lock-worktree") throw error;
       throw new Error("alpha-release-historical-lock-worktree");
     }
-    workingBytes = await stableReadAlphaFile(
-      absolutePath,
-      ALPHA_HISTORICAL_RELEASE_LOCK.bytes
-    );
-    after = await lstat(absolutePath, { bigint: true });
-  } catch (error) {
-    if (error?.message === "alpha-release-historical-lock-worktree") throw error;
-    throw new Error("alpha-release-historical-lock-worktree");
-  }
-  if (!after.isFile() || after.isSymbolicLink() ||
-      !sameFileStat(before, after) ||
-      workingBytes.length !== ALPHA_HISTORICAL_RELEASE_LOCK.bytes ||
-      sha256(workingBytes) !== ALPHA_HISTORICAL_RELEASE_LOCK.sha256 ||
-      !workingBytes.equals(treeEntry.bytes)) {
-    throw new Error("alpha-release-historical-lock-worktree");
+    if (!after.isFile() || after.isSymbolicLink() ||
+        !sameFileStat(before, after) ||
+        workingBytes.length !== historicalLock.bytes ||
+        sha256(workingBytes) !== historicalLock.sha256 ||
+        !workingBytes.equals(treeEntry.bytes)) {
+      throw new Error("alpha-release-historical-lock-worktree");
+    }
   }
 }
 

@@ -94,7 +94,7 @@ test("the alpha package plan closes one guarded four-package graph", async () =>
   });
   assert.deepEqual(plan.releaseGuard, {
     state: "authorized",
-    decisionId: "D-049"
+    decisionId: "D-050"
   });
   assert.deepEqual(plan.publication, {
     registry: "https://registry.npmjs.org/",
@@ -105,7 +105,7 @@ test("the alpha package plan closes one guarded four-package graph", async () =>
   assert.deepEqual(packageById(plan, "cli").bin, {
     "pptx-compiler": "pptx-compiler.mjs"
   });
-  assert.equal(plan.namePolicy.result, "all-names-e404-not-reserved");
+  assert.equal(plan.namePolicy.result, "core-present-three-names-e404");
   assert.equal(plan.stagingRoot, ".package-stage");
 
   const graph = Object.fromEntries(plan.packages.map((item) => [
@@ -154,16 +154,16 @@ test("the readable package plan has one canonical JSON representation", () => {
   assert.deepEqual(parseAlphaPackagePlanBytes(planBytes), plan);
   const text = planBytes.toString("utf8");
   const duplicate = text.replace(
-    '  "packageVersion": "0.1.0-alpha.2",\n',
-    '  "packageVersion": "9.9.9",\n  "packageVersion": "0.1.0-alpha.2",\n'
+    '  "packageVersion": "0.1.0-alpha.3",\n',
+    '  "packageVersion": "9.9.9",\n  "packageVersion": "0.1.0-alpha.3",\n'
   );
   assert.throws(
     () => parseAlphaPackagePlanBytes(Buffer.from(duplicate)),
     /alpha-package-plan-canonical/u
   );
   const reordered = text.replace(
-    '  "schemaVersion": 3,\n  "planId": "pptx-pipeline-alpha-package-plan",\n',
-    '  "planId": "pptx-pipeline-alpha-package-plan",\n  "schemaVersion": 3,\n'
+    '  "schemaVersion": 4,\n  "planId": "pptx-pipeline-alpha-package-plan",\n',
+    '  "planId": "pptx-pipeline-alpha-package-plan",\n  "schemaVersion": 4,\n'
   );
   assert.throws(
     () => parseAlphaPackagePlanBytes(Buffer.from(reordered)),

@@ -357,9 +357,9 @@ work is preserved, and foreign content is quarantined by rename. Tarballs are
 installed together offline into an empty directory before the installed CLI
 smoke runs.
 
-The workspace root remains `private: true`. Package-plan schema 3 instead
-authorizes generated leaf manifests for the exact D-049 channel: four unscoped
-public packages at `0.1.0-alpha.2`, official npm registry, dist-tag `alpha`, and
+The workspace root remains `private: true`. The current package plan instead
+authorizes generated leaf manifests for the exact D-050 channel: four unscoped
+public packages at `0.1.0-alpha.3`, official npm registry, dist-tag `alpha`, and
 npm provenance. A local reviewed tarball is still neither a published package
 nor release evidence.
 
@@ -369,17 +369,17 @@ Authorization, candidate admission, publication, and release declaration are
 separate state transitions:
 
 ```text
-D-049 alpha.2 authorization + schema-3 package plan
+D-050 alpha.3 authorization + current package plan
   -> M4-001A non-publishing contract and adversarial verification
   -> Node 22.23.2/npm 10.9.8 and Node 24.19.0/npm 11.17.0
   -> exact four-tarball equality + create-only tracked release lock
-  -> reviewed lock merge as GitHub-verified commit S2
-  -> single-parent local attestation A2: sole parent S2, exact policy grant S2
-  -> complete reachable-history gate at current main=A2
-  -> M4-001B exact annotated v0.1.0-alpha.2 tag on unchanged S2
+  -> reviewed lock merge as GitHub-verified commit S3
+  -> single-parent local attestation A3: sole parent S3, exact policy grant S3
+  -> complete reachable-history gate at current main=A3
+  -> exact annotated v0.1.0-alpha.3 tag on unchanged S3
   -> tag-triggered Public CI and Security evidence
-  -> M4-001C core -> native-card-arrow -> public-synthetic -> CLI
-  -> official-registry byte/provenance/dist-tag reread
+  -> core -> native-card-arrow -> public-synthetic -> CLI
+  -> bounded propagation + official byte/provenance/complete-tag-map reread
   -> GitHub Release last
 ```
 
@@ -503,8 +503,10 @@ capability or enable global support.
   a pass.
 - Windows has no Node parent-directory fsync equivalent, so the durability claim
   is narrower than on POSIX.
-- D-049 authorizes four `0.1.0-alpha.2` package identities, but authorization does
-  not prove publication. Actual tag, lock, registry provenance, GitHub Release,
+- D-050 authorizes four `0.1.0-alpha.3` package versions, but authorization does
+  not prove publication. Bare npm installation is not a coherent prerelease
+  selector because core's frozen `latest` remains `alpha.2` while the other
+  identities seed at `alpha.3`; use exact versions or `@alpha`. Actual tag, lock, registry provenance, GitHub Release,
   and reviewed-to-published equality facts belong to their exact external and
   non-lock evidence owners.
 - Branch protection is deliberately deferred and is not a current repository
@@ -512,17 +514,24 @@ capability or enable global support.
 
 ## Next authorized action
 
-D-049 supplies the exact `alpha.2` release authorization. Release Gates owns
-current phase state; the architecture fixes the dependency order. M4-001B must
-require fresh dual-builder canonical tar-payload equality, bind the fixed
-builder's gzip release envelopes, create a reviewed `alpha.2` lock, and merge
-it as GitHub-verified `S2`; single-parent attestation `A2` must then exact-grant
-`S2` and pass the history gate at `main=A2` before annotated tag
-`v0.1.0-alpha.2` may target unchanged `S2`. M4-001C may complete only when
-ordered npm publication proves
-official-registry byte equality, provenance, dist-tag `alpha`, and absence of a
-`latest` assignment; the GitHub Release follows last, then all four Trusted
-Publisher bindings and bootstrap credential retirement close the phase.
+D-050 supplies the exact `alpha.3` release authorization.
+[`docs/RELEASE_GATES.md`](RELEASE_GATES.md) owns current phase state; the architecture fixes the dependency order. The release
+must admit the corrected registry/propagation contract, require fresh dual-
+builder equality, bind fixed-builder envelopes in a new lock, establish
+`S3 -> A3`, and pass tag-hosted gates before npm. Ordered publication must prove
+official bytes, certificate-bound provenance, and complete tag maps. Only the
+publish itself may assign `alpha` and seed a first identity's `latest`; no
+separate dist-tag repair exists. The GitHub Release follows last. Trusted
+Publisher closure then runs outside the existing `alpha-release.yml` workflow
+as a local interactive npm 11.17.0 procedure; the workflow does not
+automatically modify npm or GitHub settings. Each exact package is fresh-listed,
+created only from an empty list, and accepted on retry only as one normalized
+exact binding. After four fresh exact reads, the operator uniquely identifies
+and revokes the bootstrap token by full ID and fresh-proves it absent, then
+deletes and fresh-proves absent only the `NPM_TOKEN` environment secret at
+`why7682/pptx-compiler`/`npm-release`. This records configured/visible state,
+not execution proof; a future tokenless OIDC publication must prove the binding
+works.
 D-047/M3-008 branch
 protection remains deferred and must be resumed explicitly rather than folded
 into the release path by implication.

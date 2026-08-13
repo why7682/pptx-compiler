@@ -2,7 +2,7 @@
 
 ## Purpose and boundary
 
-`pptx-compiler-core` is the dependency-free `0.1.0-alpha.2` runtime for
+`pptx-compiler-core` is the dependency-free `0.1.0-alpha.3` runtime for
 contracts, secure ingestion, deterministic layout and candidate primitives,
 replay records, and honest blocked QA. It is not a CLI or general renderer.
 
@@ -29,7 +29,9 @@ broaden this package's declared surface.
 
 Core does not provide command dispatch, a native capability by itself,
 PowerPoint or Pandoc integration, arbitrary-template compatibility, delivery
-approval, or a support claim.
+approval, or a support claim. Select `pptx-compiler-core@0.1.0-alpha.3` or
+`pptx-compiler-core@alpha`; do not treat a bare install as a version-selection
+contract for this prerelease.
 
 ## Next authorized action
 
