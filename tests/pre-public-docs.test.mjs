@@ -53,7 +53,11 @@ function commandBlock(text) {
   const headingIndex = text.indexOf(heading);
   if (headingIndex === -1) return null;
   const remainder = text.slice(headingIndex + heading.length);
-  const matches = [...remainder.matchAll(/```sh\n([\s\S]*?)\n```/gu)];
+  const nextHeadingIndex = remainder.indexOf("\n## ");
+  const section = nextHeadingIndex === -1
+    ? remainder
+    : remainder.slice(0, nextHeadingIndex);
+  const matches = [...section.matchAll(/```sh\n([\s\S]*?)\n```/gu)];
   if (matches.length !== 1) return null;
   return matches[0][1].split("\n");
 }

@@ -16,6 +16,7 @@ import {
   prepareAlphaRelease,
   resolveAlphaFixedPublicationRuntime,
   verifyAlphaGitHubSource,
+  verifyAlphaPredecessorCore,
   verifyAlphaRegistryPackage,
   withAlphaSigstoreBundleVerifier
 } from "./publish-alpha-release.mjs";
@@ -267,55 +268,80 @@ export async function verifyExactAlphaGitHubRelease({
   return Object.freeze({ releaseId: reread.value.id, request });
 }
 
-async function verifyCompleteRegistry({ prepared, runtime, environment, fetchImpl }) {
-  return withAlphaSigstoreBundleVerifier({
+export async function verifyCompleteRegistry({
+  prepared,
+  runtime,
+  environment,
+  fetchImpl,
+  dependencies = {}
+}) {
+  const withVerifier = dependencies.withVerifier ?? withAlphaSigstoreBundleVerifier;
+  const verifyPredecessor = dependencies.verifyPredecessor ??
+    verifyAlphaPredecessorCore;
+  const verifyPackage = dependencies.verifyPackage ?? verifyAlphaRegistryPackage;
+  const auditRegistry = dependencies.auditRegistry ?? auditAlphaRegistrySignatures;
+  return withVerifier({
     runtime,
-    callback: async (verifyProvenanceBundle) => {
-      const packages = [];
-      for (const entry of prepared.publicationOrder) {
-        const versionUrl = new URL(
-          `${encodeURIComponent(entry.name)}/${encodeURIComponent(entry.version)}`,
-          ALPHA_PUBLICATION.registry
-        ).href;
-        let metadataResponse;
-        try {
-          metadataResponse = await fetchImpl(versionUrl, {
-            method: "GET",
-            redirect: "manual",
-            cache: "no-store",
-            signal: AbortSignal.timeout(REQUEST_TIMEOUT_MS)
-          });
-        } catch {
-          fail("alpha-github-release-registry-version");
+    callback: (verifyProvenanceBundle) => withVerifier({
+      runtime,
+      tagName: prepared.releasePlan.predecessorRelease.tagName,
+      callback: async (verifyPredecessorBundle) => {
+        await verifyPredecessor({
+          prepared,
+          currentVersionPresent: true,
+          fetchImpl,
+          verifyPredecessorBundle,
+          environment,
+          runtime
+        });
+        const packages = [];
+        for (const entry of prepared.publicationOrder) {
+          const versionUrl = new URL(
+            `${encodeURIComponent(entry.name)}/${encodeURIComponent(entry.version)}`,
+            ALPHA_PUBLICATION.registry
+          ).href;
+          let metadataResponse;
+          try {
+            metadataResponse = await fetchImpl(versionUrl, {
+              method: "GET",
+              redirect: "manual",
+              cache: "no-store",
+              signal: AbortSignal.timeout(REQUEST_TIMEOUT_MS)
+            });
+          } catch {
+            fail("alpha-github-release-registry-version");
+          }
+          if (metadataResponse.status !== 200) {
+            fail("alpha-github-release-registry-version");
+          }
+          const metadataBytes = await readResponse(
+            metadataResponse,
+            "alpha-github-release-registry-version"
+          );
+          let metadata;
+          try {
+            metadata = JSON.parse(metadataBytes.toString("utf8"));
+          } catch {
+            fail("alpha-github-release-registry-version");
+          }
+          packages.push(await verifyPackage({
+            entry,
+            reviewedBytes: prepared.tarballBytes.get(entry.packageId),
+            metadata,
+            headCommitOid: prepared.releaseTag.headCommitOid,
+            repositoryOwnerId: prepared.repositoryOwnerId,
+            verifyProvenanceBundle,
+            fetchImpl
+          }));
         }
-        if (metadataResponse.status !== 200) fail("alpha-github-release-registry-version");
-        const metadataBytes = await readResponse(
-          metadataResponse,
-          "alpha-github-release-registry-version"
-        );
-        let metadata;
-        try {
-          metadata = JSON.parse(metadataBytes.toString("utf8"));
-        } catch {
-          fail("alpha-github-release-registry-version");
-        }
-        packages.push(await verifyAlphaRegistryPackage({
-          entry,
-          reviewedBytes: prepared.tarballBytes.get(entry.packageId),
-          metadata,
-          headCommitOid: prepared.releaseTag.headCommitOid,
-          repositoryOwnerId: prepared.repositoryOwnerId,
-          verifyProvenanceBundle,
-          fetchImpl
-        }));
+        await auditRegistry({
+          publicationOrder: prepared.publicationOrder,
+          environment,
+          runtime
+        });
+        return Object.freeze(packages);
       }
-      await auditAlphaRegistrySignatures({
-        publicationOrder: prepared.publicationOrder,
-        environment,
-        runtime
-      });
-      return Object.freeze(packages);
-    }
+    })
   });
 }
 
@@ -356,13 +382,18 @@ export async function runAlphaGitHubRelease({
     releasePlan: prepared.releasePlan,
     packagePlan: prepared.packagePlan,
     releaseLock: prepared.releaseLock,
+    predecessorReleaseLock: prepared.predecessorReleaseLock,
     inputBytes: prepared.lockedInputBytes,
     releaseNoteBytes: noteBytes,
     targetCommitOid: prepared.releaseTag.headCommitOid
   });
   const runtime = await (dependencies.resolveRuntime ??
     resolveAlphaFixedPublicationRuntime)();
-  const verifyRegistry = dependencies.verifyRegistry ?? verifyCompleteRegistry;
+  const verifyRegistry = dependencies.verifyRegistry ?? ((input) =>
+    verifyCompleteRegistry({
+      ...input,
+      dependencies: dependencies.registryVerification
+    }));
   const before = await verifyRegistry({
     prepared,
     runtime,

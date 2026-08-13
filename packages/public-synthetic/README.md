@@ -2,7 +2,7 @@
 
 ## Purpose and boundary
 
-`pptx-compiler-public-synthetic` is the zero-dependency `0.1.0-alpha.2`
+`pptx-compiler-public-synthetic` is the zero-dependency `0.1.0-alpha.3`
 repository-owned conformance preset. It is a public test input, not a production
 template catalog or evidence for user presentations.
 
@@ -27,7 +27,9 @@ public-synthetic path.
 ## Limitations
 
 The package contains no private presentation, user template, renderer,
-capability executor, generic fixture corpus, or compatibility promise.
+capability executor, generic fixture corpus, or compatibility promise. Select
+exact `0.1.0-alpha.3` or `@alpha`; do not treat a bare install as a version-
+selection contract for this prerelease.
 
 ## Next authorized action
 

@@ -7,9 +7,9 @@ package candidate-alpha boundary. It does not prove hosted Linux, Windows, or
 macOS CI, platform support, publication, signing, or reviewed-to-published
 equality.
 
-M4-001 adds a stricter release-candidate boundary. D-049 authorizes the exact
-`0.1.0-alpha.2` tag and publication channel, but this ordinary checkout
-procedure still cannot
+M4-001 adds a stricter release-candidate boundary. D-050 authorizes the fresh
+`0.1.0-alpha.3` recovery after the exact partial `alpha.2` publication, but this
+ordinary checkout procedure still cannot
 prove an annotated tag, dual-builder release lock, npm provenance, official-
 registry equality, or a GitHub Release.
 
@@ -122,11 +122,49 @@ settings are owned by `packaging/alpha-package-plan.json`; phase order is owned
 by `docs/RELEASE_GATES.md`. `docs/M4-001_HANDOFF.md` records the current phase.
 Do not improvise a publish command from this human summary.
 
-M4-001A validates the release plan and its negative states without creating a
-tag or contacting a publication endpoint. M4-001B begins only after source,
-package manifests, changelog, limitations, support matrix, SBOM, and the
-state-neutral release note are frozen. The three lock-bound reader documents are
-lifecycle-state neutral. It then requires this exact order:
+### Registry facts that local mocks cannot prove
+
+Model npm as three related facts: the package identity, each immutable
+`name@version`, and the package-level mutable dist-tag map. An explicit
+`npm publish --tag alpha` controls the requested channel, but it does not make
+the package-level `latest` key optional. The official registry metadata
+contract states that every package has `latest`; the observed first
+`pptx-compiler-core` publication seeded both `alpha` and `latest`. Research the
+current upstream registry contract and CLI documentation before changing this
+model, then confirm it with the official live endpoint. A synchronous mock
+cannot establish seed-tag behavior. The upstream references are npm's
+[package-metadata contract](https://github.com/npm/registry/blob/master/docs/responses/package-metadata.md)
+and [dist-tag documentation](https://docs.npmjs.com/cli/dist-tag/).
+
+Treat registry metadata, tarball bytes, and attestations as eventually
+consistent observations, not one atomic response. The `alpha.2` core metadata
+records publication at `2026-08-13T19:43:34.408Z`; the workflow stopped around
+`19:43:35Z` during its immediate attestation check, and a later attestation
+response carried `Last-Modified: 19:44:33 GMT`. That approximately 59-second
+gap is a single observation, not an npm SLA or an exact first-visible instant:
+the suppressed child error cannot distinguish an initial 404, empty result, or
+cryptographic freshness failure. Product logic therefore uses a bounded retry
+only for the exact expected absent/incomplete propagation state, followed by
+the same strict certificate-bound check. Malformed payloads, wrong identities,
+bad signatures, unexpected tags, and timeout remain failures.
+
+The npm client is also part of the write boundary. Its normal fetch retry
+setting is not safe evidence for `npm publish`: a registry `PUT` may commit and
+then return a retryable transport/5xx result, causing one CLI invocation to send
+another `PUT`. The release subprocess therefore fixes `fetch-retries=0` and
+ignores ambient retry configuration. A nonzero publish result triggers only
+bounded read-only convergence in that process; it never triggers another
+publish call. A later invocation may write only after time-separated official-
+registry absence samples. The npm configuration reference documents the
+default retry count, and [npm/cli issue 6693](https://github.com/npm/cli/issues/6693)
+records the observed 503-then-second-PUT failure mode. This is a reusable
+publication rule, not a version-specific workaround.
+
+M4-001A's contract admission and M4-001B's immutable `alpha.2` candidate/tag
+gates are historical prerequisites. D-050's fresh `alpha.3` lane begins only
+after source, package manifests, changelog, limitations, support matrix, SBOM,
+and the state-neutral `alpha.3` note are frozen. The three lock-bound reader
+documents are lifecycle-state neutral. It requires this exact order:
 
 1. the complete canonical gate sequence;
 2. an independent guarded build/install/smoke under Node 22.23.2/npm 10.9.8;
@@ -137,16 +175,16 @@ lifecycle-state neutral. It then requires this exact order:
    complete evidence record are bound separately, while one top-level SHA-256
    binds the canonical package/source projection used for both validations,
    with only Node 24/npm 11 envelopes eligible for publication, before writing
-   create-only `packaging/releases/0.1.0-alpha.2.lock.json`;
+   create-only `packaging/releases/0.1.0-alpha.3.lock.json`;
 5. review, provenance admission, commit, and accepted-main merge of that exact
    tracked lock without changing any locked input; call that GitHub-verified
-   merge commit `S2`;
-6. exactly one repository-local public-identity attestation commit `A2` whose
-   sole parent is `S2` and whose tip-owned policy grants exact OID `S2`;
-7. the complete reachable-history gate at current `main=A2`, followed by a
-   remote comparison proving `S2` is its sole direct parent with `ahead_by=1`
+   merge commit `S3`;
+6. exactly one repository-local public-identity attestation commit `A3` whose
+   sole parent is `S3` and whose tip-owned policy grants exact OID `S3`;
+7. the complete reachable-history gate at current `main=A3`, followed by a
+   remote comparison proving `S3` is its sole direct parent with `ahead_by=1`
    and `behind_by=0`;
-8. annotated tag `v0.1.0-alpha.2` peeling to unchanged `S2` and its intended
+8. annotated tag `v0.1.0-alpha.3` peeling to unchanged `S3` and its intended
    tree; and
 9. a clean, full-history tag checkout with no shallow boundary, replace refs,
    grafts, or object alternates, followed by the complete tag gates and the
@@ -170,17 +208,112 @@ proof: the fetched v0.3 bundle must still pass fixed npm 11.17.0 Sigstore
 verification for the exact workflow/tag certificate identity and GitHub
 Actions issuer.
 
-M4-001C derives npm dependency order from the package graph: core,
-native-card-arrow, public-synthetic, then CLI. For each exact
-`0.1.0-alpha.2` name/version, `absent`
+The immutable `alpha.2` candidate followed that order through tag-hosted gates.
+Manual run `31665307969`, attempt 2, then published the exact reviewed core
+tarball and stopped before another package or GitHub Release write. Later
+independent verification downloaded 118,488 exact bytes (SHA-256
+`ed0cc4a2f66049ed9bd6823544913161377a229e290b70bb5527857520930268`),
+matched the fixed Node 24/npm 11 lock envelope, passed the bundled npm
+11.17.0/Sigstore 4.1.1 certificate check for the exact tag, source, workflow,
+issuer, and invocation, and passed isolated `npm audit signatures
+--include-attestations` with no invalid or missing entry. Those are later
+read-only facts; the original workflow did not record verifier success. The
+other three `alpha.2` versions and its GitHub Release remain absent. Preserve
+that prefix without unpublish, tag movement, dist-tag repair, or version reuse.
+
+D-050's fresh `alpha.3` lane derives npm dependency order from the package
+graph: core, native-card-arrow, public-synthetic, then CLI. For each exact
+`0.1.0-alpha.3` name/version, `absent`
 permits publishing
 only the locked tarball, `present-equal` permits continuation, and
 `present-mismatch` stops without unpublish. Completion requires downloading all
 four official-registry tarballs, matching lock bytes, validating npm
-provenance, requiring dist-tag `alpha` and no `latest`, then creating the
-GitHub Release last, then configuring all four Trusted Publisher bindings and
-retiring the bootstrap token plus GitHub `NPM_TOKEN`. The lock-bound changelog,
-limitations, and release note
+provenance, and requiring the complete expected dist-tag map: core keeps
+`latest -> 0.1.0-alpha.2` while `alpha -> 0.1.0-alpha.3`; each newly created
+other package has both `latest` and `alpha` at `0.1.0-alpha.3`. Only the exact
+`npm publish --tag alpha` operations may assign `alpha` and trigger npm's
+first-identity `latest` seed; the lane runs no separate `npm dist-tag add/rm`
+repair and otherwise only reads these pointers.
+Only then may it create the GitHub Release last.
+
+After that Release succeeds, the existing `alpha-release.yml` workflow stops;
+it does not automatically modify npm or GitHub settings. The remainder is an
+external local interactive procedure using the authenticated maintainer's
+fixed npm 11.17.0. The npm account must have package-write authority and 2FA.
+For each of `pptx-compiler-core`, `pptx-compiler-native-card-arrow`,
+`pptx-compiler-public-synthetic`, and `pptx-compiler`, begin with a new process
+and fresh `npm trust list <exact-package> --json` result from the official
+registry:
+
+```sh
+npm trust list <exact-package> --json --registry=https://registry.npmjs.org/
+```
+
+An empty JSON list permits exactly one create:
+
+```sh
+npm trust github <exact-package> \
+  --file alpha-release.yml \
+  --repository why7682/pptx-compiler \
+  --environment npm-release \
+  --allow-publish \
+  --yes \
+  --registry=https://registry.npmjs.org/
+```
+
+Do not pass `--allow-stage-publish`. Discard the create response as completion
+evidence and rerun the fresh list command. Exactly one normalized exact binding
+permits an idempotent rerun to continue without writing; a mismatch or any
+other cardinality hard-stops. Normalize the raw readback as follows:
+
+| npm JSON readback | Required project fact |
+| --- | --- |
+| `type: "github"` | provider `github-actions` |
+| `repository: "why7682/pptx-compiler"` | owner `why7682`; repository `pptx-compiler` |
+| `file: "alpha-release.yml"` | workflow filename `alpha-release.yml` |
+| `environment: "npm-release"` | environment `npm-release` |
+| sole `permissions: ["createPackage"]` | allowed action `npm publish` only |
+
+`createStagedPackage`, another permission or field value, multiple bindings,
+or a non-list response is a hard stop. The operator must repeat the fresh list
+readback for all four exact names; no cached create result completes a package.
+
+Only after four fresh exact readbacks may the operator retire the bootstrap
+credentials. First obtain a fresh `npm token list --json` inventory, uniquely
+confirm the bootstrap token's full ID, revoke only it, and take another fresh
+inventory:
+
+```sh
+npm token list --json --registry=https://registry.npmjs.org/
+npm token revoke <operator-confirmed-unique-full-id> \
+  --registry=https://registry.npmjs.org/
+npm token list --json --registry=https://registry.npmjs.org/
+```
+
+Any ambiguity is a hard stop. Revoke only the selected full ID and require a
+fresh token list in which it is absent. Only after that absence is visible may
+a GitHub-authenticated operator with permission to manage Actions environment
+secrets delete the GitHub Actions environment secret `NPM_TOKEN` from
+repository `why7682/pptx-compiler`, environment `npm-release`, and fresh-read
+that exact scope:
+
+```sh
+gh secret delete NPM_TOKEN \
+  --env npm-release \
+  --repo why7682/pptx-compiler
+gh secret list \
+  --env npm-release \
+  --repo why7682/pptx-compiler \
+  --json name
+```
+
+The fresh environment-secret list must omit exactly `NPM_TOKEN`; a repository-
+level, organization-level, or other-environment secret is out of scope. Record
+only IDs/names and absence facts, never token or secret values. npm's
+[Trusted Publisher documentation](https://docs.npmjs.com/trusted-publishers/)
+states that configuration is not validated when saved, so configured/visible
+state is not execution proof. A future exact tokenless OIDC publication is the
+first proof that the binding works. The lock-bound changelog, limitations, and release note
 remain lifecycle-state neutral; observed completion belongs in Release Gates,
 the handoff/decision/provenance records, and the official registry/GitHub state.
 

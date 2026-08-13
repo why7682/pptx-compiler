@@ -71,8 +71,9 @@
     release envelopes.
 16. publishing one package before a later package's already-observable registry
     conflict is discovered, replaying an earlier partial publication with
-    different bytes, allowing `latest` to move, or treating `npm unpublish` as
-    rollback for an irreversible registry write.
+    different bytes, confusing package identity/version/dist-tags, changing a
+    frozen `latest`, running a separate dist-tag repair, or treating
+    `npm unpublish` as rollback for an irreversible registry write.
 17. accepting a self-asserted provenance payload without proving the Sigstore
     certificate identity, allowing a workflow run from another repository,
     ref, commit, or attempt to authorize the current package, or exposing npm
@@ -81,6 +82,16 @@
     verified, or accepting an existing Release whose tag, target, prerelease
     state, body, lock identity, or package identities differ from the closed
     release plan.
+19. treating package publication and attestation visibility as synchronous,
+    retrying malformed or wrong-identity evidence as if it were propagation,
+    baking one observed delay into a service SLA, or treating synchronous mocks
+    as proof of live registry seed-tag or consistency behavior.
+20. letting the release workflow mutate post-Release npm/GitHub settings,
+    trusting a create response or stale list instead of a fresh exact readback,
+    confusing npm's raw provider/file/permission fields with the project
+    projection, revoking an ambiguously identified token, deleting a secret at
+    the wrong GitHub scope, or treating a saved Trusted Publisher binding as
+    proof that OIDC publication works.
 
 ## Default controls
 
@@ -104,12 +115,25 @@
   that publication occurred;
 - complete a read-only four-package registry admission before the first write,
   freeze admitted tarball buffers outside the reviewed stage, publish only the
-  exact dependency prefix, and never use unpublish as recovery;
+  exact dependency prefix, validate the complete package-level dist-tag map,
+  and never use unpublish or a separate `npm dist-tag add/rm` as recovery;
 - validate npm provenance cryptographically against the exact GitHub Actions
   certificate identity and issuer as well as the closed SLSA payload, package
   digest, source tag, source commit, workflow, and invocation relation;
+- bounded-retry only exact expected registry propagation states, then require
+  the same strict byte, identity, certificate, issuer, provenance, and dist-tag
+  postconditions; never widen the retry class from one live diagnostic;
 - isolate GitHub source verification, npm publication, and final GitHub Release
   declaration so no process receives both npm and GitHub write credentials;
+- after the GitHub Release succeeds, stop the existing release workflow and run
+  the credential transition only as a local interactive npm 11.17.0/operator
+  procedure: fresh-list each exact binding before deciding, create only from an
+  empty list, fresh-list again after create, and hard-stop on any non-exact or
+  non-singleton result;
+- after four fresh exact bindings, uniquely identify the bootstrap token by its
+  full ID from a fresh token list, revoke and fresh-prove that ID absent, then
+  and only then delete and fresh-prove absent the `NPM_TOKEN` Actions
+  environment secret in `why7682/pptx-compiler`/`npm-release`;
 - derive package staging only from the closed positive package plan; validate
   every source/target, export, type, bin, import alias, dependency edge, asset
   owner, mode, count, and size before copying. Installed composition receives
@@ -801,17 +825,38 @@ and compares its real tarballs with the lock. The publisher then copies the reta
 owned mode-restricted temporary directory and compares them again immediately
 before and after npm use. It never hands npm a mutable reviewed-stage pathname.
 
-Registry recovery is prefix-shaped. Before the first write, all four exact
-versions and their packuments are read. An existing version must match the
-locked bytes, metadata, provenance, and allowed dist-tag state; an absent
-version must have no conflicting `alpha` or `latest` tag. Existing packages may
-form only the exact dependency prefix. Each absent member is reread immediately
-before its write, published from the frozen buffer, reread from the official
-registry, and added to the signature-audit prefix. A byte mismatch, later
-member already present after an absent predecessor, foreign dist-tag, invalid
-signature, or unexpected registry response stops without publishing another
-member. An exact earlier prefix is resumable; `npm unpublish` is never a repair
-operation, and `latest` is never created or moved by this alpha lane.
+Registry recovery is prefix-shaped, but package identity, immutable version,
+and package-level dist-tags are distinct. Before the first write, all four
+exact versions, identities, and packuments are read. An existing version must
+match locked bytes, metadata, provenance, and its complete expected tag map;
+an absent version must fit the exact admitted identity state. Existing versions
+may form only the permitted dependency prefix. Each absent member is reread
+immediately before its write, published from the frozen buffer with
+`--tag alpha`, reread from the official registry, and added to the signature-
+audit prefix. For the `alpha.3` recovery, core must preserve
+`latest -> 0.1.0-alpha.2` while the publish assigns
+`alpha -> 0.1.0-alpha.3`; each other first-created identity must have both npm-
+seeded `latest` and requested `alpha` at `0.1.0-alpha.3`. A byte mismatch,
+wrong prefix, foreign or drifted tag, invalid signature, or unexpected response
+stops without another publish. No separate `npm dist-tag add/rm` or unpublish
+is a repair operation.
+
+Publication metadata, tarball content, and attestations are not treated as an
+atomic visibility event. Only an exact expected absent/incomplete
+post-publication state is retryable under a bounded deadline. Every retry reads
+the official endpoint and the final observation must pass the same closed
+cryptographic and metadata checks. The observed `alpha.2` delay between
+`19:43:34.408Z` publish metadata and a later `19:44:33 GMT` attestation response
+motivates this control but is neither a fixed wait nor a registry SLA; the
+initial suppressed error cannot identify the exact missing layer.
+
+The npm subprocess cannot own mutation recovery. Its built-in fetch retries
+are forced to zero because a publish `PUT` can commit before a retryable error
+is observed; repeating that request is not an idempotent recovery protocol. A
+nonzero child exit becomes an explicit outcome-uncertain state and permits only
+read-only convergence in the same process. A fresh run needs time-separated
+stable-absence observations before one new write. Ambient npm configuration,
+two adjacent 404s, or a generic retry helper cannot mint that authority.
 
 npm's signed SLSA statement is not trusted as self-description. The verifier
 requires one exact subject and one exact resolved source dependency, the locked
@@ -836,6 +881,27 @@ write authority but no npm token or OIDC publication authority. It creates or
 exactly reuses one non-draft prerelease with `make_latest` disabled and then
 rereads the Release and all bound external facts. An early or mismatched
 Release is not reconciled by deletion or overwrite.
+
+Trusted Publisher configuration is another separate state after the final
+GitHub Release. The existing `alpha-release.yml` workflow does not automatically
+modify npm or GitHub settings. A local interactive npm 11.17.0 operator runs a
+fresh `npm trust list <exact-package> --json` for each of the four exact names:
+an empty list permits one create and fresh reread, exactly one normalized exact
+binding permits an idempotent rerun, and a mismatch or other cardinality hard-
+stops. Raw `type: "github"` maps to provider `github-actions`; `file:
+"alpha-release.yml"` is the workflow filename; and sole `permissions:
+["createPackage"]` maps to allowed action npm publish. `createStagedPackage` is
+not allowed. Owner `why7682`, repository `pptx-compiler`, and environment
+`npm-release` must also be exact.
+
+After four fresh exact readbacks, a fresh `npm token list --json` must let the
+operator uniquely confirm the bootstrap token's full ID. Ambiguity hard-stops;
+revoke only that ID and fresh-prove it absent. Only then delete and fresh-prove
+absent the GitHub Actions environment secret `NPM_TOKEN` at repository
+`why7682/pptx-compiler`, environment `npm-release`; no other secret scope is in
+authority. npm does not validate the binding on save, so configured/visible
+state is not execution proof. Only a future exact tokenless OIDC publication
+can prove that the binding works.
 
 These controls do not make npm or GitHub transactions atomic. A network or
 service failure can leave an exact published prefix, which is why the recovery

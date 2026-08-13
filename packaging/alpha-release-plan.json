@@ -1,16 +1,16 @@
 {
-  "schemaVersion": 2,
+  "schemaVersion": 3,
   "planId": "pptx-compiler-alpha-release-plan",
-  "releaseVersion": "0.1.0-alpha.2",
+  "releaseVersion": "0.1.0-alpha.3",
   "packagePlanPath": "packaging/alpha-package-plan.json",
   "publicationSource": "packaging/alpha-package-plan.json#/publication",
   "authorizationSource": "packaging/alpha-package-plan.json#/releaseGuard",
-  "releaseLockPath": "packaging/releases/0.1.0-alpha.2.lock.json",
+  "releaseLockPath": "packaging/releases/0.1.0-alpha.3.lock.json",
   "sourceTag": {
-    "name": "v0.1.0-alpha.2",
+    "name": "v0.1.0-alpha.3",
     "type": "annotated",
     "targetPolicy": "exact-clean-verified-commit",
-    "message": "pptx-compiler 0.1.0-alpha.2"
+    "message": "pptx-compiler 0.1.0-alpha.3"
   },
   "builders": {
     "fixed": {
@@ -26,22 +26,148 @@
   "lockedInputs": [
     "CHANGELOG.md",
     "docs/KNOWN_LIMITATIONS.md",
-    "docs/releases/0.1.0-alpha.2.md",
+    "docs/releases/0.1.0-alpha.3.md",
     "packaging/alpha-package-plan.json",
     "policy/support-matrix.json",
     "sbom.alpha.cdx.json"
   ],
+  "predecessorRelease": {
+    "version": "0.1.0-alpha.2",
+    "tagName": "v0.1.0-alpha.2",
+    "targetCommitOid": "b884b39bdded17d7bc2ccedad159605523329bae",
+    "releaseLock": {
+      "path": "packaging/releases/0.1.0-alpha.2.lock.json",
+      "mode": "100644",
+      "blobOid": "b87a1530b574d83813b79d6ebbf2854fb7afc7fa",
+      "sha256": "922a862092d3785ccca17ba4f6740afb95bb038ae718aaed80a105d086200a31",
+      "bytes": 6218
+    },
+    "npmProvenance": {
+      "packageId": "core",
+      "predicateType": "https://slsa.dev/provenance/v1",
+      "runId": "31665307969",
+      "runAttempt": "2"
+    }
+  },
+  "registryState": {
+    "model": "package-identity-version-dist-tags",
+    "recoveryShape": "final-prefix-plus-initial-suffix",
+    "initial": [
+      {
+        "packageId": "core",
+        "identityState": "present",
+        "versionStates": {
+          "0.1.0-alpha.2": "present-exact-predecessor-lock",
+          "0.1.0-alpha.3": "absent"
+        },
+        "distTags": {
+          "alpha": "0.1.0-alpha.2",
+          "latest": "0.1.0-alpha.2"
+        }
+      },
+      {
+        "packageId": "native-card-arrow",
+        "identityState": "absent",
+        "versionStates": {
+          "0.1.0-alpha.3": "absent"
+        },
+        "distTags": {}
+      },
+      {
+        "packageId": "public-synthetic",
+        "identityState": "absent",
+        "versionStates": {
+          "0.1.0-alpha.3": "absent"
+        },
+        "distTags": {}
+      },
+      {
+        "packageId": "cli",
+        "identityState": "absent",
+        "versionStates": {
+          "0.1.0-alpha.3": "absent"
+        },
+        "distTags": {}
+      }
+    ],
+    "final": [
+      {
+        "packageId": "core",
+        "identityState": "present",
+        "versionStates": {
+          "0.1.0-alpha.2": "present-exact-predecessor-lock",
+          "0.1.0-alpha.3": "present-exact-current-lock"
+        },
+        "distTags": {
+          "alpha": "0.1.0-alpha.3",
+          "latest": "0.1.0-alpha.2"
+        }
+      },
+      {
+        "packageId": "native-card-arrow",
+        "identityState": "present",
+        "versionStates": {
+          "0.1.0-alpha.3": "present-exact-current-lock"
+        },
+        "distTags": {
+          "alpha": "0.1.0-alpha.3",
+          "latest": "0.1.0-alpha.3"
+        }
+      },
+      {
+        "packageId": "public-synthetic",
+        "identityState": "present",
+        "versionStates": {
+          "0.1.0-alpha.3": "present-exact-current-lock"
+        },
+        "distTags": {
+          "alpha": "0.1.0-alpha.3",
+          "latest": "0.1.0-alpha.3"
+        }
+      },
+      {
+        "packageId": "cli",
+        "identityState": "present",
+        "versionStates": {
+          "0.1.0-alpha.3": "present-exact-current-lock"
+        },
+        "distTags": {
+          "alpha": "0.1.0-alpha.3",
+          "latest": "0.1.0-alpha.3"
+        }
+      }
+    ]
+  },
   "recovery": {
-    "absent": "publish-reviewed-tarball",
-    "exact": "continue",
+    "absent": "publish-reviewed-tarball-once",
+    "exact": "continue-without-publish",
     "mismatch": "hard-stop",
-    "unpublish": false
+    "absenceSampling": {
+      "scope": "read-only-before-each-publish",
+      "samples": 2,
+      "delayMilliseconds": 10000
+    },
+    "stabilization": {
+      "scope": "read-only-after-publish",
+      "attempts": 7,
+      "delayMilliseconds": 10000,
+      "retryableMissing": [
+        "identity",
+        "version",
+        "tarball",
+        "provenance",
+        "registry-signature",
+        "dist-tag"
+      ]
+    },
+    "unpublish": false,
+    "distTagMutation": false
   },
   "githubRelease": {
     "order": "last",
     "requiresCompleteRegistryVerification": true,
-    "name": "pptx-compiler 0.1.0-alpha.2",
-    "bodySource": "docs/releases/0.1.0-alpha.2.md",
+    "name": "pptx-compiler 0.1.0-alpha.3",
+    "bodySource": "docs/releases/0.1.0-alpha.3.md",
     "bodyProjection": "locked-note-plus-release-identity-v1",
     "target": "source-tag-target",
     "draft": false,
@@ -50,5 +176,79 @@
     "generateReleaseNotes": false,
     "assets": "none",
     "idempotency": "create-or-exact"
+  },
+  "credentialTransition": {
+    "order": "after-github-release",
+    "execution": "external-manual-after-release",
+    "bindingEvidence": "fresh-npm-trust-list-exact",
+    "releaseWorkflowMutation": false,
+    "bindingReadback": {
+      "command": "npm trust list <exact-package-name> --json",
+      "cardinality": "exactly-one",
+      "typeProjection": "github-to-github-actions",
+      "fileProjection": "workflow-filename",
+      "permissionProjection": "createPackage-to-npm-publish"
+    },
+    "trustedPublisherBindings": [
+      {
+        "packageId": "core",
+        "name": "pptx-compiler-core",
+        "provider": "github-actions",
+        "owner": "why7682",
+        "repository": "pptx-compiler",
+        "workflow": "alpha-release.yml",
+        "environment": "npm-release",
+        "allowedAction": "npm publish"
+      },
+      {
+        "packageId": "native-card-arrow",
+        "name": "pptx-compiler-native-card-arrow",
+        "provider": "github-actions",
+        "owner": "why7682",
+        "repository": "pptx-compiler",
+        "workflow": "alpha-release.yml",
+        "environment": "npm-release",
+        "allowedAction": "npm publish"
+      },
+      {
+        "packageId": "public-synthetic",
+        "name": "pptx-compiler-public-synthetic",
+        "provider": "github-actions",
+        "owner": "why7682",
+        "repository": "pptx-compiler",
+        "workflow": "alpha-release.yml",
+        "environment": "npm-release",
+        "allowedAction": "npm publish"
+      },
+      {
+        "packageId": "cli",
+        "name": "pptx-compiler",
+        "provider": "github-actions",
+        "owner": "why7682",
+        "repository": "pptx-compiler",
+        "workflow": "alpha-release.yml",
+        "environment": "npm-release",
+        "allowedAction": "npm publish"
+      }
+    ],
+    "bootstrapToken": {
+      "registry": "https://registry.npmjs.org/",
+      "action": "revoke",
+      "targetSelection": "operator-confirmed-unique-full-id-from-fresh-npm-token-list",
+      "ambiguity": "hard-stop",
+      "after": "four-exact-bindings-verified",
+      "absenceEvidence": "fresh-npm-token-list-target-absent"
+    },
+    "githubSecret": {
+      "repository": "why7682/pptx-compiler",
+      "scope": "environment",
+      "environment": "npm-release",
+      "name": "NPM_TOKEN",
+      "action": "delete",
+      "after": "bootstrap-token-revoked",
+      "absenceEvidence": "fresh-github-environment-secret-list-name-absent"
+    },
+    "savedConfigurationIsExecutionProof": false,
+    "completion": "four-bindings-verified-and-token-revoked-and-secret-deleted"
   }
 }

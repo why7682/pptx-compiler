@@ -28,6 +28,7 @@ import {
   canonicalAlphaReleasePlanText,
   deriveAlphaPublicationOrder,
   inspectAlphaReleaseCandidateSnapshot,
+  predecessorCoreTarballFromLock,
   validateAlphaReleaseCandidate,
   validateAlphaReleaseLock,
   validateAlphaReleasePlan,
@@ -49,14 +50,20 @@ const SHA1 = /^[a-f0-9]{40}$/u;
 const GIT_OID = /^[a-f0-9]{40}$/u;
 const TOKEN = /^[!-~]{1,16384}$/u;
 const SLSA_V1 = "https://slsa.dev/provenance/v1";
+const NPM_PUBLISH_ATTESTATION =
+  "https://github.com/npm/attestation/tree/main/specs/publish/v0.1";
 const SIGSTORE_BUNDLE = "application/vnd.dev.sigstore.bundle.v0.3+json";
 const SIGSTORE_VERSION = "4.1.1";
 const SIGSTORE_CERTIFICATE_ISSUER = "https://token.actions.githubusercontent.com";
-const SIGSTORE_CERTIFICATE_IDENTITY =
-  `${ALPHA_REPOSITORY.htmlUrl}/.github/workflows/alpha-release.yml@` +
-  `refs/tags/${ALPHA_RELEASE_TAG_NAME}`;
-const SIGSTORE_CERTIFICATE_IDENTITY_PATTERN =
-  `^${SIGSTORE_CERTIFICATE_IDENTITY.replace(/[.*+?^${}()|[\]\\]/gu, "\\$&")}$`;
+const PREDECESSOR_TAG_NAME = "v0.1.0-alpha.2";
+const ADMITTED_PROVENANCE_TAGS = new Set([
+  PREDECESSOR_TAG_NAME,
+  ALPHA_RELEASE_TAG_NAME
+]);
+const REGISTRY_STABILIZATION_ATTEMPTS = 7;
+const REGISTRY_STABILIZATION_DELAY_MS = 10_000;
+const REGISTRY_ABSENCE_SAMPLES = 2;
+const REGISTRY_ABSENCE_DELAY_MS = 10_000;
 const MAX_SIGSTORE_CERTIFICATE_BYTES = 64 * 1024;
 const MAX_SIGSTORE_SIGNATURE_BYTES = 64 * 1024;
 const STAGE_ROOT = ".package-stage/reviewed";
@@ -123,6 +130,18 @@ function canonicalPositiveInteger(value) {
 
 function hash(algorithm, bytes, encoding = "hex") {
   return createHash(algorithm).update(bytes).digest(encoding);
+}
+
+function provenanceCertificateIdentity(tagName) {
+  if (!ADMITTED_PROVENANCE_TAGS.has(tagName)) {
+    fail("alpha-publication-provenance-tag");
+  }
+  return `${ALPHA_REPOSITORY.htmlUrl}/.github/workflows/alpha-release.yml@` +
+    `refs/tags/${tagName}`;
+}
+
+function exactIdentityPattern(identity) {
+  return `^${identity.replace(/[.*+?^${}()|[\]\\]/gu, "\\$&")}$`;
 }
 
 function sameStat(left, right) {
@@ -583,7 +602,6 @@ export async function verifyAlphaGitHubSource({
   if (!GIT_OID.test(headCommitOid) || !GIT_OID.test(tagObjectOid) ||
       (token !== undefined && !validToken(token)) ||
       !["absent", "ignore"].includes(githubReleaseState) ||
-      (githubReleaseState === "ignore" && !validToken(token)) ||
       typeof fetchImpl !== "function") {
     fail("alpha-publication-github-input");
   }
@@ -695,6 +713,7 @@ export async function verifyAlphaGitHubSource({
 
 export async function verifyMutableAlphaGitHubSource({
   expected,
+  githubReleaseState = "absent",
   fetchImpl = globalThis.fetch
 } = {}) {
   if (!isPlainRecord(expected) ||
@@ -705,6 +724,7 @@ export async function verifyMutableAlphaGitHubSource({
       !GIT_OID.test(expected.mainTipCommitOid) ||
       !GIT_OID.test(expected.commitOid) || !GIT_OID.test(expected.tagObjectOid) ||
       expected.tagTargetRelationToMain !== "ancestor" ||
+      !["absent", "ignore"].includes(githubReleaseState) ||
       typeof fetchImpl !== "function") {
     fail("alpha-publication-github-input");
   }
@@ -725,10 +745,13 @@ export async function verifyMutableAlphaGitHubSource({
     mainTipCommitOid: expected.mainTipCommitOid,
     tagObjectOid: expected.tagObjectOid
   });
+  const releaseOrderCheck = githubReleaseState === "absent"
+    ? verifyGitHubReleaseAbsent(fetchImpl, headers)
+    : Promise.resolve();
   const [workflowRuns, mainHistoryWorkflowRun] = await Promise.all([
     verifyTagWorkflowRuns(fetchImpl, headers, expected.commitOid),
     verifyMainHistoryWorkflowRun(fetchImpl, headers, expected.mainTipCommitOid),
-    verifyGitHubReleaseAbsent(fetchImpl, headers)
+    releaseOrderCheck
   ]);
   return Object.freeze({
     ...expected,
@@ -819,6 +842,7 @@ export async function prepareAlphaRelease({
     releasePlan,
     packagePlan,
     releaseLock,
+    predecessorReleaseLock,
     releaseTag,
     inputBytes: lockedInputs
   } = candidateSnapshot;
@@ -870,6 +894,7 @@ export async function prepareAlphaRelease({
     releasePlan,
     packagePlan,
     releaseLock,
+    predecessorReleaseLock,
     releaseTag,
     lockedInputBytes: new Map([...lockedInputs].map(([key, bytes]) => [
       key,
@@ -956,6 +981,57 @@ function assertRegistryMetadata(metadata, entry, reviewedBytes) {
   return Object.freeze({ expectedTarball, expectedAttestations });
 }
 
+function registryMetadataMissingOnly(metadata, entry, reviewedBytes) {
+  if (!isPlainRecord(metadata) || metadata.name !== entry.name ||
+      metadata.version !== entry.version || !isPlainRecord(metadata.dist)) {
+    fail("alpha-publication-registry-metadata");
+  }
+  const dist = metadata.dist;
+  const expectedIntegrity = `sha512-${hash("sha512", reviewedBytes, "base64")}`;
+  const expectedShasum = hash("sha1", reviewedBytes);
+  const expectedTarball = registryTarballUrl(entry);
+  const expectedAttestations = registryAttestationsUrl(entry);
+  let missing = false;
+  for (const key of ["tarball", "integrity", "shasum", "signatures", "attestations"]) {
+    if (!Object.hasOwn(dist, key)) missing = true;
+  }
+  if (Object.hasOwn(dist, "integrity") && dist.integrity !== expectedIntegrity) {
+    fail("alpha-publication-registry-metadata");
+  }
+  if (Object.hasOwn(dist, "shasum") &&
+      (dist.shasum !== expectedShasum || !SHA1.test(dist.shasum))) {
+    fail("alpha-publication-registry-metadata");
+  }
+  if (Object.hasOwn(dist, "tarball") &&
+      assertExactHttpsUrl(dist.tarball, expectedTarball,
+        "alpha-publication-registry-tarball-url") !== expectedTarball) {
+    fail("alpha-publication-registry-metadata");
+  }
+  if (Object.hasOwn(dist, "signatures")) {
+    if (!Array.isArray(dist.signatures)) fail("alpha-publication-registry-metadata");
+    if (dist.signatures.length === 0) missing = true;
+    if (dist.signatures.some((signature) => !isPlainRecord(signature) ||
+      typeof signature.sig !== "string" || signature.sig.length === 0 ||
+      typeof signature.keyid !== "string" || signature.keyid.length === 0)) {
+      fail("alpha-publication-registry-metadata");
+    }
+  }
+  if (Object.hasOwn(dist, "attestations")) {
+    if (!isPlainRecord(dist.attestations) ||
+        assertExactHttpsUrl(dist.attestations.url, expectedAttestations,
+          "alpha-publication-registry-attestations-url") !== expectedAttestations) {
+      fail("alpha-publication-registry-metadata");
+    }
+    if (!Object.hasOwn(dist.attestations, "provenance")) {
+      missing = true;
+    } else if (!isPlainRecord(dist.attestations.provenance) ||
+        dist.attestations.provenance.predicateType !== SLSA_V1) {
+      fail("alpha-publication-registry-metadata");
+    }
+  }
+  return missing;
+}
+
 function decodeDssePayload(value) {
   if (typeof value !== "string" || value.length < 4 || value.length > MAX_BYTES * 2 ||
       value.length % 4 !== 0 || !/^[A-Za-z0-9+/]+={0,2}$/u.test(value)) {
@@ -1009,6 +1085,92 @@ function assertKeylessSigstoreProvenanceBundle(bundle) {
   return envelope;
 }
 
+function assertPendingNpmPublishAttestation(attestation, entry, reviewedBytes) {
+  const bundle = attestation?.bundle;
+  const envelope = bundle?.dsseEnvelope;
+  const signatures = envelope?.signatures;
+  const verificationMaterial = bundle?.verificationMaterial;
+  const publicKey = verificationMaterial?.publicKey;
+  const timestamps = verificationMaterial?.timestampVerificationData;
+  const transparencyEntry = verificationMaterial?.tlogEntries?.[0];
+  const inclusionPromise = transparencyEntry?.inclusionPromise;
+  const inclusionProof = transparencyEntry?.inclusionProof;
+  const checkpoint = inclusionProof?.checkpoint;
+  const keyHint = typeof publicKey?.hint === "string" &&
+    publicKey.hint.startsWith("SHA256:")
+    ? publicKey.hint.slice("SHA256:".length)
+    : undefined;
+  if (!hasClosedOwnKeys(attestation, ["predicateType", "bundle"], [
+    "signedAccessSignatureUrl"
+  ]) || attestation.predicateType !== NPM_PUBLISH_ATTESTATION ||
+      (own(attestation, "signedAccessSignatureUrl") &&
+        attestation.signedAccessSignatureUrl !== "") ||
+      !hasClosedOwnKeys(bundle, [
+        "mediaType", "verificationMaterial", "dsseEnvelope"
+      ]) || bundle.mediaType !==
+        "application/vnd.dev.sigstore.bundle+json;version=0.2" ||
+      !hasClosedOwnKeys(envelope, ["payloadType", "payload", "signatures"]) ||
+      envelope.payloadType !== "application/vnd.in-toto+json" ||
+      !Array.isArray(signatures) || signatures.length !== 1 ||
+      !hasClosedOwnKeys(signatures[0], ["sig", "keyid"]) ||
+      !isCanonicalBase64(signatures[0].sig, MAX_SIGSTORE_SIGNATURE_BYTES) ||
+      typeof signatures[0].keyid !== "string" ||
+      !hasClosedOwnKeys(verificationMaterial, [
+        "publicKey", "tlogEntries", "timestampVerificationData"
+      ]) || !hasClosedOwnKeys(publicKey, ["hint"]) ||
+      !isCanonicalBase64(keyHint, 64) ||
+      !Array.isArray(verificationMaterial.tlogEntries) ||
+      verificationMaterial.tlogEntries.length !== 1 ||
+      !hasClosedOwnKeys(transparencyEntry, [
+        "logIndex", "logId", "kindVersion", "integratedTime",
+        "inclusionPromise", "inclusionProof", "canonicalizedBody"
+      ]) || !canonicalPositiveInteger(transparencyEntry.logIndex) ||
+      !canonicalPositiveInteger(transparencyEntry.integratedTime) ||
+      !hasClosedOwnKeys(transparencyEntry.logId, ["keyId"]) ||
+      !isCanonicalBase64(transparencyEntry.logId.keyId, 64) ||
+      !hasClosedOwnKeys(transparencyEntry.kindVersion, ["kind", "version"]) ||
+      transparencyEntry.kindVersion.kind !== "dsse" ||
+      transparencyEntry.kindVersion.version !== "0.0.1" ||
+      !hasClosedOwnKeys(inclusionPromise, ["signedEntryTimestamp"]) ||
+      !isCanonicalBase64(inclusionPromise.signedEntryTimestamp, 64 * 1024) ||
+      !hasClosedOwnKeys(inclusionProof, [
+        "logIndex", "rootHash", "treeSize", "hashes", "checkpoint"
+      ]) || !canonicalPositiveInteger(inclusionProof.logIndex) ||
+      !canonicalPositiveInteger(inclusionProof.treeSize) ||
+      !isCanonicalBase64(inclusionProof.rootHash, 64) ||
+      !Array.isArray(inclusionProof.hashes) || inclusionProof.hashes.length < 1 ||
+      inclusionProof.hashes.length > 64 ||
+      inclusionProof.hashes.some((value) => !isCanonicalBase64(value, 64)) ||
+      !hasClosedOwnKeys(checkpoint, ["envelope"]) ||
+      typeof checkpoint.envelope !== "string" || checkpoint.envelope.length < 1 ||
+      checkpoint.envelope.length > 64 * 1024 ||
+      !isCanonicalBase64(transparencyEntry.canonicalizedBody, MAX_BYTES) ||
+      !hasClosedOwnKeys(timestamps, ["rfc3161Timestamps"]) ||
+      !Array.isArray(timestamps.rfc3161Timestamps) ||
+      timestamps.rfc3161Timestamps.length !== 0) {
+    fail("alpha-publication-registry-attestations");
+  }
+  if (signatures[0].keyid !== publicKey.hint) {
+    fail("alpha-publication-registry-attestations");
+  }
+  const statement = decodeDssePayload(envelope.payload);
+  if (!hasClosedOwnKeys(statement, [
+    "_type", "subject", "predicateType", "predicate"
+  ]) || statement._type !== "https://in-toto.io/Statement/v0.1" ||
+      statement.predicateType !== NPM_PUBLISH_ATTESTATION ||
+      !Array.isArray(statement.subject) || statement.subject.length !== 1 ||
+      !hasClosedOwnKeys(statement.subject[0], ["name", "digest"]) ||
+      statement.subject[0].name !== `pkg:npm/${entry.name}@${entry.version}` ||
+      !hasClosedOwnKeys(statement.subject[0].digest, ["sha512"]) ||
+      statement.subject[0].digest.sha512 !== hash("sha512", reviewedBytes) ||
+      !hasClosedOwnKeys(statement.predicate, ["name", "version", "registry"]) ||
+      statement.predicate.name !== entry.name ||
+      statement.predicate.version !== entry.version ||
+      statement.predicate.registry !== "https://registry.npmjs.org") {
+    fail("alpha-publication-registry-attestations");
+  }
+}
+
 async function verifyAttestations(
   fetchImpl,
   entry,
@@ -1017,17 +1179,28 @@ async function verifyAttestations(
   headCommitOid,
   repositoryOwnerId,
   expectedProvenanceInvocation,
-  verifyProvenanceBundle
+  verifyProvenanceBundle,
+  tagName = ALPHA_RELEASE_TAG_NAME,
+  { allowMissing = false } = {}
 ) {
   const result = await getJson(fetchImpl, expectedUrl, {
-    code: "alpha-publication-registry-attestations"
+    code: "alpha-publication-registry-attestations",
+    allowedStatuses: allowMissing ? [200, 404] : [200]
   });
+  if (result.status === 404) return null;
   const attestations = result.value?.attestations;
   const provenances = Array.isArray(attestations)
     ? attestations.filter((attestation) =>
       isPlainRecord(attestation) && attestation.predicateType === SLSA_V1)
     : [];
+  if (allowMissing && Array.isArray(attestations) && provenances.length === 0) {
+    if (attestations.length === 0) return null;
+    if (attestations.length !== 1) fail("alpha-publication-registry-attestations");
+    assertPendingNpmPublishAttestation(attestations[0], entry, reviewedBytes);
+    return null;
+  }
   if (provenances.length !== 1 || !GIT_OID.test(headCommitOid) ||
+      !ADMITTED_PROVENANCE_TAGS.has(tagName) ||
       typeof verifyProvenanceBundle !== "function") {
     fail("alpha-publication-registry-attestations");
   }
@@ -1062,7 +1235,7 @@ async function verifyAttestations(
       subject[0]?.digest?.sha512 !== hash("sha512", reviewedBytes) ||
       buildDefinition?.buildType !==
         "https://slsa-framework.github.io/github-actions-buildtypes/workflow/v1" ||
-      workflow?.ref !== `refs/tags/${ALPHA_RELEASE_TAG_NAME}` ||
+      workflow?.ref !== `refs/tags/${tagName}` ||
       workflow?.repository !== ALPHA_REPOSITORY.htmlUrl ||
       workflow?.path !== ".github/workflows/alpha-release.yml" ||
       github?.event_name !== "workflow_dispatch" ||
@@ -1070,7 +1243,7 @@ async function verifyAttestations(
       String(github?.repository_owner_id) !== repositoryOwnerId ||
       !Array.isArray(dependencies) || dependencies.length !== 1 ||
       dependencies[0]?.uri !==
-        `git+${ALPHA_REPOSITORY.htmlUrl}@refs/tags/${ALPHA_RELEASE_TAG_NAME}` ||
+        `git+${ALPHA_REPOSITORY.htmlUrl}@refs/tags/${tagName}` ||
       !isPlainRecord(dependencies[0]?.digest) ||
       Reflect.ownKeys(dependencies[0].digest).length !== 1 ||
       dependencies[0].digest.gitCommit !== headCommitOid ||
@@ -1087,16 +1260,95 @@ async function verifyAttestations(
   return Object.freeze({ runId: invocationMatch[1], runAttempt: invocationMatch[2] });
 }
 
-async function verifyDistTags(fetchImpl, entry) {
-  const result = await getJson(fetchImpl, registryPackageUrl(entry), {
-    code: "alpha-publication-registry-packument"
-  });
-  const tags = result.value?.["dist-tags"];
-  if (!isPlainRecord(result.value) || result.value.name !== entry.name ||
-      !isPlainRecord(tags) || tags.alpha !== entry.version ||
-      Object.hasOwn(tags, "latest")) {
-    fail("alpha-publication-registry-dist-tags");
+function expectedFinalDistTags(entry) {
+  return entry.packageId === "core"
+    ? Object.freeze({ alpha: entry.version, latest: "0.1.0-alpha.2" })
+    : Object.freeze({ alpha: entry.version, latest: entry.version });
+}
+
+function expectedFinalVersions(entry) {
+  return entry.packageId === "core"
+    ? Object.freeze(["0.1.0-alpha.2", entry.version])
+    : Object.freeze([entry.version]);
+}
+
+function classifyExactStringRecord(actual, expected, { allowMissing = false } = {}) {
+  if (!isPlainRecord(actual) || !isPlainRecord(expected)) {
+    fail("alpha-publication-registry-packument");
   }
+  const expectedKeys = Object.keys(expected).sort();
+  const actualKeys = Object.keys(actual).sort();
+  if (actualKeys.some((key) => !expectedKeys.includes(key))) {
+    fail("alpha-publication-registry-packument-mismatch");
+  }
+  let missing = false;
+  for (const key of expectedKeys) {
+    if (!Object.hasOwn(actual, key)) {
+      if (allowMissing) {
+        missing = true;
+        continue;
+      }
+      fail("alpha-publication-registry-packument-missing");
+    }
+    if (actual[key] !== expected[key]) {
+      fail("alpha-publication-registry-packument-mismatch");
+    }
+  }
+  return !missing && actualKeys.length === expectedKeys.length;
+}
+
+async function verifyPackument(fetchImpl, entry, {
+  expectedDistTags = expectedFinalDistTags(entry),
+  expectedVersions = expectedFinalVersions(entry),
+  allowMissing = false,
+  allowAbsentIdentity = false,
+  pendingStates = []
+} = {}) {
+  const result = await getJson(fetchImpl, registryPackageUrl(entry), {
+    code: "alpha-publication-registry-packument",
+    allowedStatuses: allowMissing || allowAbsentIdentity ? [200, 404] : [200]
+  });
+  if (result.status === 404) {
+    if (allowMissing || allowAbsentIdentity) return null;
+    fail("alpha-publication-registry-packument-missing");
+  }
+  if (!isPlainRecord(result.value) || result.value.name !== entry.name ||
+      !Array.isArray(expectedVersions) ||
+      expectedVersions.some((version) => typeof version !== "string")) {
+    fail("alpha-publication-registry-packument");
+  }
+  const tagsPresent = Object.hasOwn(result.value, "dist-tags");
+  const versionsPresent = Object.hasOwn(result.value, "versions");
+  if ((tagsPresent && !isPlainRecord(result.value["dist-tags"])) ||
+      (versionsPresent && !isPlainRecord(result.value.versions)) ||
+      (!allowMissing && (!tagsPresent || !versionsPresent))) {
+    fail("alpha-publication-registry-packument");
+  }
+  const tags = tagsPresent ? result.value["dist-tags"] : {};
+  const versions = versionsPresent ? result.value.versions : {};
+  const expectedVersionRecord = Object.fromEntries(expectedVersions.map((version) => [
+    version,
+    version
+  ]));
+  const actualVersionRecord = Object.fromEntries(Object.keys(versions).map((version) => [
+    version,
+    version
+  ]));
+  if (allowMissing && pendingStates.some((pending) =>
+    isPlainRecord(pending) &&
+    isDeepStrictEqual(tags, pending.distTags) &&
+    isDeepStrictEqual(Object.keys(versions).sort(), [...pending.versions].sort()))) {
+    return null;
+  }
+  const tagsComplete = classifyExactStringRecord(tags, expectedDistTags, { allowMissing });
+  const versionsComplete = classifyExactStringRecord(
+    actualVersionRecord,
+    expectedVersionRecord,
+    { allowMissing }
+  );
+  return tagsPresent && versionsPresent && tagsComplete && versionsComplete
+    ? result.value
+    : null;
 }
 
 async function lookupRegistryVersion(fetchImpl, entry) {
@@ -1109,17 +1361,36 @@ async function lookupRegistryVersion(fetchImpl, entry) {
     : Object.freeze({ state: "present", metadata: result.value });
 }
 
-async function preflightAbsentRegistryPackage(fetchImpl, entry) {
-  const result = await getJson(fetchImpl, registryPackageUrl(entry), {
-    code: "alpha-publication-registry-preflight",
-    allowedStatuses: [200, 404]
+async function requireAbsentRegistryIdentity(fetchImpl, entry) {
+  const result = await verifyPackument(fetchImpl, entry, {
+    expectedDistTags: {},
+    expectedVersions: [],
+    allowAbsentIdentity: true
   });
-  if (result.status === 404) return;
-  const tags = result.value?.["dist-tags"];
-  if (!isPlainRecord(result.value) || result.value.name !== entry.name ||
-      !isPlainRecord(tags) || Object.hasOwn(tags, "latest") ||
-      Object.hasOwn(tags, ALPHA_PUBLICATION.tag)) {
-    fail("alpha-publication-registry-preflight");
+  if (result !== null) fail("alpha-publication-registry-identity-present");
+}
+
+async function requireStableAbsentRegistryVersion(
+  fetchImpl,
+  entry,
+  wait,
+  beforeFinalSample,
+  absenceSampling
+) {
+  for (let sample = 0; sample < absenceSampling.samples; sample += 1) {
+    if (sample + 1 === absenceSampling.samples) {
+      await beforeFinalSample();
+    }
+    const state = await lookupRegistryVersion(fetchImpl, entry);
+    if (state.state !== "absent") {
+      fail("alpha-publication-registry-version-race");
+    }
+    if (entry.packageId !== "core") {
+      await requireAbsentRegistryIdentity(fetchImpl, entry);
+    }
+    if (sample + 1 < absenceSampling.samples) {
+      await wait(absenceSampling.delayMilliseconds);
+    }
   }
 }
 
@@ -1131,6 +1402,11 @@ export async function verifyAlphaRegistryPackage({
   repositoryOwnerId,
   expectedProvenanceInvocation,
   verifyProvenanceBundle,
+  tagName = ALPHA_RELEASE_TAG_NAME,
+  expectedDistTags = expectedFinalDistTags(entry),
+  expectedVersions = expectedFinalVersions(entry),
+  allowMissing = false,
+  pendingPackumentStates = [],
   fetchImpl = globalThis.fetch
 } = {}) {
   if (!isPlainRecord(entry) || !Buffer.isBuffer(reviewedBytes) ||
@@ -1144,6 +1420,12 @@ export async function verifyAlphaRegistryPackage({
           !canonicalPositiveInteger(expectedProvenanceInvocation.runAttempt)))) {
     fail("alpha-publication-registry-input");
   }
+  if (!ADMITTED_PROVENANCE_TAGS.has(tagName)) {
+    fail("alpha-publication-registry-input");
+  }
+  if (allowMissing && registryMetadataMissingOnly(metadata, entry, reviewedBytes)) {
+    return null;
+  }
   const { expectedTarball, expectedAttestations } = assertRegistryMetadata(
     metadata,
     entry,
@@ -1151,9 +1433,11 @@ export async function verifyAlphaRegistryPackage({
   );
   const downloaded = await exactFetch(fetchImpl, expectedTarball, {
     code: "alpha-publication-registry-tarball",
+    allowedStatuses: allowMissing ? [200, 404] : [200],
     binary: true,
     headers: { accept: "application/octet-stream", "accept-encoding": "identity" }
   });
+  if (downloaded.status === 404) return null;
   if (!reviewedBytes.equals(downloaded.bytes)) {
     fail("alpha-publication-registry-tarball-mismatch");
   }
@@ -1165,9 +1449,18 @@ export async function verifyAlphaRegistryPackage({
     headCommitOid,
     repositoryOwnerId,
     expectedProvenanceInvocation,
-    verifyProvenanceBundle
+    verifyProvenanceBundle,
+    tagName,
+    { allowMissing }
   );
-  await verifyDistTags(fetchImpl, entry);
+  if (provenanceInvocation === null) return null;
+  const packument = await verifyPackument(fetchImpl, entry, {
+    expectedDistTags,
+    expectedVersions,
+    allowMissing,
+    pendingStates: pendingPackumentStates
+  });
+  if (packument === null) return null;
   return Object.freeze({
     packageId: entry.packageId,
     name: entry.name,
@@ -1177,11 +1470,12 @@ export async function verifyAlphaRegistryPackage({
     compressedBytes: reviewedBytes.length,
     provenance: SLSA_V1,
     provenanceInvocation,
-    distTag: "alpha"
+    distTags: Object.freeze({ ...expectedDistTags })
   });
 }
 
 export function createAlphaNpmPublishEnvironment(environment) {
+  requireModeCredentials("publish", environment);
   const retained = new Set([
     "ACTIONS_ID_TOKEN_REQUEST_TOKEN",
     "ACTIONS_ID_TOKEN_REQUEST_URL",
@@ -1213,6 +1507,7 @@ export function createAlphaNpmPublishEnvironment(environment) {
     NODE_AUTH_TOKEN: environment.NODE_AUTH_TOKEN,
     NPM_CONFIG_ACCESS: ALPHA_PUBLICATION.access,
     NPM_CONFIG_AUDIT: "false",
+    NPM_CONFIG_FETCH_RETRIES: "0",
     NPM_CONFIG_FUND: "false",
     NPM_CONFIG_IGNORE_SCRIPTS: "true",
     NPM_CONFIG_LOGLEVEL: "error",
@@ -1267,13 +1562,15 @@ export async function resolveAlphaFixedPublicationRuntime() {
 
 export async function createAlphaSigstoreBundleVerifier({
   runtime,
-  cachePath
+  cachePath,
+  tagName = ALPHA_RELEASE_TAG_NAME
 } = {}) {
   if (!isPlainRecord(runtime) || typeof runtime.npmCli !== "string" ||
       !path.isAbsolute(runtime.npmCli) ||
       runtime.nodeVersion !== ALPHA_FIXED_BUILDER.nodeVersion ||
       runtime.npmVersion !== ALPHA_FIXED_BUILDER.npmVersion ||
-      typeof cachePath !== "string" || !path.isAbsolute(cachePath)) {
+      typeof cachePath !== "string" || !path.isAbsolute(cachePath) ||
+      !ADMITTED_PROVENANCE_TAGS.has(tagName)) {
     fail("alpha-publication-sigstore-runtime");
   }
   const npmRoot = path.resolve(path.dirname(runtime.npmCli), "..");
@@ -1333,8 +1630,9 @@ export async function createAlphaSigstoreBundleVerifier({
     if (!isPlainRecord(sigstore) || typeof sigstore.createVerifier !== "function") {
       fail("alpha-publication-sigstore-runtime");
     }
+    const certificateIdentity = provenanceCertificateIdentity(tagName);
     const verifier = await sigstore.createVerifier({
-      certificateIdentityURI: SIGSTORE_CERTIFICATE_IDENTITY_PATTERN,
+      certificateIdentityURI: exactIdentityPattern(certificateIdentity),
       certificateIssuer: SIGSTORE_CERTIFICATE_ISSUER,
       ctLogThreshold: 1,
       tlogThreshold: 1,
@@ -1355,7 +1653,7 @@ export async function createAlphaSigstoreBundleVerifier({
       }
       const identity = signer?.identity;
       if (!isPlainRecord(identity) ||
-          identity.subjectAlternativeName !== SIGSTORE_CERTIFICATE_IDENTITY ||
+          identity.subjectAlternativeName !== certificateIdentity ||
           !isPlainRecord(identity.extensions) ||
           identity.extensions.issuer !== SIGSTORE_CERTIFICATE_ISSUER) {
         fail("alpha-publication-registry-attestations");
@@ -1372,7 +1670,11 @@ export async function createAlphaSigstoreBundleVerifier({
   }
 }
 
-export async function withAlphaSigstoreBundleVerifier({ runtime, callback }) {
+export async function withAlphaSigstoreBundleVerifier({
+  runtime,
+  callback,
+  tagName = ALPHA_RELEASE_TAG_NAME
+}) {
   if (typeof callback !== "function") fail("alpha-publication-sigstore-runtime");
   const temporaryRoot = await realpath(os.tmpdir());
   const cachePath = await mkdtemp(path.join(
@@ -1383,7 +1685,8 @@ export async function withAlphaSigstoreBundleVerifier({ runtime, callback }) {
     await chmod(cachePath, 0o700);
     const verifyProvenanceBundle = await createAlphaSigstoreBundleVerifier({
       runtime,
-      cachePath
+      cachePath,
+      tagName
     });
     return await callback(verifyProvenanceBundle);
   } finally {
@@ -1489,7 +1792,7 @@ async function publishWithFixedNpm({ root, entry, reviewedBytes, environment, ru
       ], {
         cwd: root,
         environment: createAlphaNpmPublishEnvironment(environment),
-        code: "alpha-publication-npm-publish"
+        code: "alpha-publication-npm-publish-outcome-uncertain"
       });
     }
   });
@@ -1573,61 +1876,109 @@ export async function auditAlphaRegistrySignatures({
   return true;
 }
 
-export async function executeAlphaRegistryPublication({
-  prepared,
-  environment,
-  fetchImpl = globalThis.fetch,
-  publishTarball = publishWithFixedNpm,
-  auditRegistry = auditAlphaRegistrySignatures,
-  beforePublish = async () => {},
-  verifyProvenanceBundle = undefined,
-  runtime = undefined
-} = {}) {
-  if (!isPlainRecord(prepared) || !Array.isArray(prepared.publicationOrder) ||
-      !(prepared.tarballBytes instanceof Map) ||
-      !canonicalPositiveInteger(prepared.repositoryOwnerId) ||
-      !canonicalPositiveInteger(prepared.provenanceRunId) ||
-      !canonicalPositiveInteger(prepared.provenanceRunAttempt) ||
-      typeof fetchImpl !== "function" || typeof publishTarball !== "function" ||
-      typeof auditRegistry !== "function" || typeof beforePublish !== "function") {
-    fail("alpha-publication-state");
+function predecessorCoreEntry(prepared, locked) {
+  const version = prepared.releasePlan?.predecessorRelease?.version;
+  if (version !== "0.1.0-alpha.2") {
+    fail("alpha-publication-predecessor-lock");
   }
-  if (verifyProvenanceBundle === undefined) {
-    return withAlphaSigstoreBundleVerifier({
-      runtime,
-      callback: (verifier) => executeAlphaRegistryPublication({
-        prepared,
-        environment,
-        fetchImpl,
-        publishTarball,
-        auditRegistry,
-        beforePublish,
-        verifyProvenanceBundle: verifier,
-        runtime
-      })
-    });
-  }
-  if (typeof verifyProvenanceBundle !== "function") {
-    fail("alpha-publication-state");
-  }
-  if (prepared.publicationOrder.some((entry, index) =>
-    entry.packageId !== EXPECTED_ORDER[index])) {
-    fail("alpha-publication-order");
-  }
+  return Object.freeze({
+    packageId: locked.packageId,
+    name: locked.name,
+    version,
+    tarball: locked.tarball
+  });
+}
 
-  // Read and validate the complete registry state before the first irreversible
-  // write. A recoverable prior attempt can only have published an exact prefix
-  // of the dependency order; a later package without its predecessor is
-  // foreign state, not a recovery case.
+export async function verifyAlphaPredecessorCore({
+  prepared,
+  currentVersionPresent,
+  fetchImpl,
+  verifyPredecessorBundle,
+  environment,
+  runtime,
+  auditRegistry = auditAlphaRegistrySignatures,
+  readLockedPredecessor = predecessorCoreTarballFromLock
+}) {
+  if (typeof auditRegistry !== "function" ||
+      typeof readLockedPredecessor !== "function") {
+    fail("alpha-publication-predecessor-signature-audit");
+  }
+  const locked = readLockedPredecessor(prepared.predecessorReleaseLock);
+  const entry = predecessorCoreEntry(prepared, locked);
+  const state = await lookupRegistryVersion(fetchImpl, entry);
+  if (state.state !== "present") fail("alpha-publication-predecessor-version");
+  const tarball = await exactFetch(fetchImpl, registryTarballUrl(entry), {
+    code: "alpha-publication-predecessor-tarball",
+    binary: true,
+    headers: { accept: "application/octet-stream", "accept-encoding": "identity" }
+  });
+  if (tarball.bytes.length !== locked.compressedBytes ||
+      hash("sha256", tarball.bytes) !== locked.sha256 ||
+      hash("sha512", tarball.bytes) !== locked.sha512) {
+    fail("alpha-publication-predecessor-tarball-mismatch");
+  }
+  const verified = await verifyAlphaRegistryPackage({
+    entry,
+    reviewedBytes: tarball.bytes,
+    metadata: state.metadata,
+    headCommitOid: prepared.releasePlan.predecessorRelease.targetCommitOid,
+    repositoryOwnerId: prepared.repositoryOwnerId,
+    expectedProvenanceInvocation: {
+      runId: prepared.releasePlan.predecessorRelease.npmProvenance.runId,
+      runAttempt: prepared.releasePlan.predecessorRelease.npmProvenance.runAttempt
+    },
+    verifyProvenanceBundle: verifyPredecessorBundle,
+    tagName: prepared.releasePlan.predecessorRelease.tagName,
+    expectedDistTags: currentVersionPresent
+      ? { alpha: prepared.packagePlan.packageVersion, latest: entry.version }
+      : { alpha: entry.version, latest: entry.version },
+    expectedVersions: currentVersionPresent
+      ? [entry.version, prepared.packagePlan.packageVersion]
+      : [entry.version],
+    fetchImpl
+  });
+  try {
+    await auditRegistry({
+      publicationOrder: [entry],
+      environment,
+      runtime
+    });
+  } catch {
+    fail("alpha-publication-predecessor-signature-audit");
+  }
+  return verified;
+}
+
+async function admitAlphaRegistryState({
+  prepared,
+  fetchImpl,
+  verifyProvenanceBundle,
+  verifyPredecessorBundle,
+  verifyPredecessor,
+  environment,
+  runtime
+}) {
   const admissions = [];
   let absentSeen = false;
   for (const entry of prepared.publicationOrder) {
     const reviewedBytes = prepared.tarballBytes.get(entry.packageId);
     if (!Buffer.isBuffer(reviewedBytes)) fail("alpha-publication-state");
     const state = await lookupRegistryVersion(fetchImpl, entry);
+    if (entry.packageId === "core") {
+      await verifyPredecessor({
+        prepared,
+        currentVersionPresent: state.state === "present",
+        fetchImpl,
+        verifyPredecessorBundle,
+        environment,
+        runtime
+      });
+    }
     if (state.state === "absent") {
       absentSeen = true;
-      await preflightAbsentRegistryPackage(fetchImpl, entry);
+      if (entry.packageId !== "core") {
+        await requireAbsentRegistryIdentity(fetchImpl, entry);
+      }
       admissions.push(Object.freeze({ state: "absent" }));
       continue;
     }
@@ -1643,6 +1994,139 @@ export async function executeAlphaRegistryPublication({
     });
     admissions.push(Object.freeze({ state: "present" }));
   }
+  return Object.freeze(admissions);
+}
+
+async function assertAlphaRegistryStates(options, expectedStates) {
+  const observed = await admitAlphaRegistryState(options);
+  if (!Array.isArray(expectedStates) || observed.length !== expectedStates.length ||
+      observed.some(({ state }, index) => state !== expectedStates[index])) {
+    fail("alpha-publication-registry-checkpoint");
+  }
+  return observed;
+}
+
+async function waitForPublishedRegistryState({
+  prepared,
+  entry,
+  reviewedBytes,
+  fetchImpl,
+  verifyProvenanceBundle,
+  wait
+}) {
+  for (let attempt = 1; attempt <= REGISTRY_STABILIZATION_ATTEMPTS; attempt += 1) {
+    const state = await lookupRegistryVersion(fetchImpl, entry);
+    const verified = state.state === "present"
+      ? await verifyAlphaRegistryPackage({
+          entry,
+          reviewedBytes,
+          metadata: state.metadata,
+          headCommitOid: prepared.releaseTag?.headCommitOid,
+          repositoryOwnerId: prepared.repositoryOwnerId,
+          expectedProvenanceInvocation: {
+            runId: prepared.provenanceRunId,
+            runAttempt: prepared.provenanceRunAttempt
+          },
+          verifyProvenanceBundle,
+          allowMissing: true,
+          pendingPackumentStates: entry.packageId === "core"
+            ? [{
+                distTags: {
+                  alpha: "0.1.0-alpha.2",
+                  latest: "0.1.0-alpha.2"
+                },
+                versions: ["0.1.0-alpha.2"]
+              }]
+            : [],
+          fetchImpl
+        })
+      : null;
+    if (verified !== null) return verified;
+    if (attempt < REGISTRY_STABILIZATION_ATTEMPTS) {
+      await wait(REGISTRY_STABILIZATION_DELAY_MS);
+    }
+  }
+  fail("alpha-publication-registry-stabilization-exhausted");
+}
+
+export async function executeAlphaRegistryPublication({
+  prepared,
+  environment,
+  fetchImpl = globalThis.fetch,
+  publishTarball = publishWithFixedNpm,
+  auditRegistry = auditAlphaRegistrySignatures,
+  beforePublish = async () => {},
+  verifyProvenanceBundle = undefined,
+  verifyPredecessorBundle = undefined,
+  verifyPredecessor = verifyAlphaPredecessorCore,
+  wait = (milliseconds) => new Promise((resolve) => setTimeout(resolve, milliseconds)),
+  runtime = undefined
+} = {}) {
+  if (!isPlainRecord(prepared) || !Array.isArray(prepared.publicationOrder) ||
+      !(prepared.tarballBytes instanceof Map) ||
+      !canonicalPositiveInteger(prepared.repositoryOwnerId) ||
+      !canonicalPositiveInteger(prepared.provenanceRunId) ||
+      !canonicalPositiveInteger(prepared.provenanceRunAttempt) ||
+      typeof fetchImpl !== "function" || typeof publishTarball !== "function" ||
+      typeof auditRegistry !== "function" || typeof beforePublish !== "function" ||
+      typeof wait !== "function" || typeof verifyPredecessor !== "function") {
+    fail("alpha-publication-state");
+  }
+  if (verifyProvenanceBundle === undefined && verifyPredecessorBundle === undefined) {
+    return withAlphaSigstoreBundleVerifier({
+      runtime,
+      tagName: ALPHA_RELEASE_TAG_NAME,
+      callback: (currentVerifier) => withAlphaSigstoreBundleVerifier({
+        runtime,
+        tagName: PREDECESSOR_TAG_NAME,
+        callback: (predecessorVerifier) => executeAlphaRegistryPublication({
+          prepared,
+          environment,
+          fetchImpl,
+          publishTarball,
+          auditRegistry,
+          beforePublish,
+          verifyProvenanceBundle: currentVerifier,
+          verifyPredecessorBundle: predecessorVerifier,
+          verifyPredecessor,
+          wait,
+          runtime
+        })
+      })
+    });
+  }
+  if (verifyPredecessorBundle === undefined &&
+      typeof verifyProvenanceBundle === "function") {
+    verifyPredecessorBundle = verifyProvenanceBundle;
+  }
+  if (typeof verifyProvenanceBundle !== "function" ||
+      typeof verifyPredecessorBundle !== "function") {
+    fail("alpha-publication-state");
+  }
+  if (prepared.publicationOrder.some((entry, index) =>
+    entry.packageId !== EXPECTED_ORDER[index])) {
+    fail("alpha-publication-order");
+  }
+  const absenceSampling = prepared.releasePlan?.recovery?.absenceSampling;
+  if (!isPlainRecord(absenceSampling) ||
+      absenceSampling.scope !== "read-only-before-each-publish" ||
+      absenceSampling.samples !== REGISTRY_ABSENCE_SAMPLES ||
+      absenceSampling.delayMilliseconds !== REGISTRY_ABSENCE_DELAY_MS) {
+    fail("alpha-publication-recovery-plan");
+  }
+
+  // Admit package identity, version bytes/provenance, and dist-tags as one
+  // closed registry state before any irreversible write. Recovery may only be
+  // an exact final prefix followed by the exact initial suffix.
+  const admissions = await admitAlphaRegistryState({
+    prepared,
+    fetchImpl,
+    verifyProvenanceBundle,
+    verifyPredecessorBundle,
+    verifyPredecessor,
+    environment,
+    runtime
+  });
   const admittedPrefixLength = admissions.findIndex(({ state }) => state === "absent");
   const presentPrefixLength = admittedPrefixLength === -1
     ? admissions.length
@@ -1667,42 +2151,91 @@ export async function executeAlphaRegistryPublication({
       fail("alpha-publication-registry-moved");
     }
     let action = "present-equal";
-    let metadata = initial.metadata;
+    let verified;
     if (initial.state === "absent") {
-      await beforePublish(entry);
+      await verifyPredecessor({
+        prepared,
+        currentVersionPresent: entry.packageId !== "core",
+        fetchImpl,
+        verifyPredecessorBundle,
+        environment,
+        runtime
+      });
       const immediate = await lookupRegistryVersion(fetchImpl, entry);
       if (immediate.state === "present") {
-        metadata = immediate.metadata;
-      } else {
-        await preflightAbsentRegistryPackage(fetchImpl, entry);
-        await publishTarball({
-          root: prepared.root,
+        verified = await verifyAlphaRegistryPackage({
           entry,
           reviewedBytes,
-          environment,
-          runtime
+          metadata: immediate.metadata,
+          headCommitOid: prepared.releaseTag?.headCommitOid,
+          repositoryOwnerId: prepared.repositoryOwnerId,
+          verifyProvenanceBundle,
+          fetchImpl
         });
-        action = "published";
-        const reread = await lookupRegistryVersion(fetchImpl, entry);
-        if (reread.state !== "present") fail("alpha-publication-registry-after-publish");
-        metadata = reread.metadata;
-      }
-    }
-    const verified = await verifyAlphaRegistryPackage({
-      entry,
-      reviewedBytes,
-      metadata,
-      headCommitOid: prepared.releaseTag?.headCommitOid,
-      repositoryOwnerId: prepared.repositoryOwnerId,
-      expectedProvenanceInvocation: action === "published"
-        ? {
-            runId: prepared.provenanceRunId,
-            runAttempt: prepared.provenanceRunAttempt
+      } else {
+        await requireStableAbsentRegistryVersion(
+          fetchImpl,
+          entry,
+          wait,
+          async () => {
+            await beforePublish(entry);
+            await assertAlphaRegistryStates({
+              prepared,
+              fetchImpl,
+              verifyProvenanceBundle,
+              verifyPredecessorBundle,
+              verifyPredecessor,
+              environment,
+              runtime
+            }, prepared.publicationOrder.map((_, entryIndex) =>
+              entryIndex < index ? "present" : "absent"));
+          },
+          absenceSampling
+        );
+        requireModeCredentials("publish", environment);
+        try {
+          await publishTarball({
+            root: prepared.root,
+            entry,
+            reviewedBytes,
+            environment,
+            runtime
+          });
+          action = "published";
+        } catch (error) {
+          if (error?.message !== "alpha-publication-npm-publish-outcome-uncertain") {
+            throw error;
           }
-        : undefined,
-      verifyProvenanceBundle,
-      fetchImpl
-    });
+          action = "recovered-after-uncertain";
+        }
+        try {
+          verified = await waitForPublishedRegistryState({
+            prepared,
+            entry,
+            reviewedBytes,
+            fetchImpl,
+            verifyProvenanceBundle,
+            wait
+          });
+        } catch (error) {
+          if (action === "recovered-after-uncertain" &&
+              error?.message === "alpha-publication-registry-stabilization-exhausted") {
+            fail("alpha-publication-npm-publish-outcome-uncertain");
+          }
+          throw error;
+        }
+      }
+    } else {
+      verified = await verifyAlphaRegistryPackage({
+        entry,
+        reviewedBytes,
+        metadata: initial.metadata,
+        headCommitOid: prepared.releaseTag?.headCommitOid,
+        repositoryOwnerId: prepared.repositoryOwnerId,
+        verifyProvenanceBundle,
+        fetchImpl
+      });
+    }
     actions.push(Object.freeze({ ...verified, action }));
     if (action === "published" || admissions[index].state === "absent") {
       await auditRegistry({
@@ -1711,12 +2244,33 @@ export async function executeAlphaRegistryPublication({
         runtime
       });
     }
+    if (index + 1 < prepared.publicationOrder.length) {
+      await assertAlphaRegistryStates({
+        prepared,
+        fetchImpl,
+        verifyProvenanceBundle,
+        verifyPredecessorBundle,
+        verifyPredecessor,
+        environment,
+        runtime
+      }, admissions.map(({ state }, admissionIndex) =>
+        admissionIndex <= index || state === "present" ? "present" : "absent"));
+    }
   }
 
+  const finalAdmissions = await admitAlphaRegistryState({
+    prepared,
+    fetchImpl,
+    verifyProvenanceBundle,
+    verifyPredecessorBundle,
+    verifyPredecessor,
+    environment,
+    runtime
+  });
+  if (finalAdmissions.some(({ state }) => state !== "present")) {
+    fail("alpha-publication-final-reread");
+  }
   const finalVerification = [];
-  const publishedPackageIds = new Set(actions
-    .filter((entry) => entry.action === "published")
-    .map((entry) => entry.packageId));
   for (const entry of prepared.publicationOrder) {
     const state = await lookupRegistryVersion(fetchImpl, entry);
     if (state.state !== "present") fail("alpha-publication-final-reread");
@@ -1726,12 +2280,6 @@ export async function executeAlphaRegistryPublication({
       metadata: state.metadata,
       headCommitOid: prepared.releaseTag?.headCommitOid,
       repositoryOwnerId: prepared.repositoryOwnerId,
-      expectedProvenanceInvocation: publishedPackageIds.has(entry.packageId)
-        ? {
-            runId: prepared.provenanceRunId,
-            runAttempt: prepared.provenanceRunAttempt
-          }
-        : undefined,
       verifyProvenanceBundle,
       fetchImpl
     }));
@@ -1777,6 +2325,7 @@ export async function runAlphaPublication({
       headCommitOid: prepared.releaseTag.headCommitOid,
       tagObjectOid: prepared.releaseTag.tagObjectOid,
       token: sourceToken,
+      githubReleaseState: "ignore",
       fetchImpl: dependencies.fetch ?? globalThis.fetch
     });
     const finalizeCandidate = dependencies.finalizeCandidate ??
@@ -1801,6 +2350,7 @@ export async function runAlphaPublication({
   const verified = await verifySource({
     headCommitOid: prepared.releaseTag.headCommitOid,
     tagObjectOid: prepared.releaseTag.tagObjectOid,
+    githubReleaseState: "ignore",
     fetchImpl: dependencies.fetch ?? globalThis.fetch
   });
   const finalizeCandidate = dependencies.finalizeCandidate ??
@@ -1811,8 +2361,6 @@ export async function runAlphaPublication({
     headCommitOid: prepared.releaseTag.headCommitOid,
     repositoryOwnerId: verified.repositoryOwnerId
   });
-  requireModeCredentials("publish", environment);
-
   const assertRuntime = dependencies.assertRuntime ?? resolveAlphaFixedPublicationRuntime;
   const runtime = await assertRuntime();
   const executePublication = dependencies.executePublication ?? executeAlphaRegistryPublication;
@@ -1848,14 +2396,22 @@ export async function runAlphaPublication({
     beforePublish: async () => {
       const verifyMutableSource = dependencies.verifyMutableSource ??
         verifyMutableAlphaGitHubSource;
-      const current = await verifyMutableSource({ expected: verified, fetchImpl });
+      const current = await verifyMutableSource({
+        expected: verified,
+        githubReleaseState: "absent",
+        fetchImpl
+      });
       assertSameSource(current, verified);
     },
     runtime
   });
   const verifyMutableSource = dependencies.verifyMutableSource ??
     verifyMutableAlphaGitHubSource;
-  const finalVerified = await verifyMutableSource({ expected: verified, fetchImpl });
+  const finalVerified = await verifyMutableSource({
+    expected: verified,
+    githubReleaseState: "ignore",
+    fetchImpl
+  });
   assertSameSource(finalVerified, verified);
   return result;
 }

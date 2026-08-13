@@ -40,6 +40,19 @@ that attempt. D-049 now authorizes the same four names at
 official registry at their own time-of-use boundaries. This dated observation
 is neither reservation nor publication evidence.
 
+## Partial publication observation — 2026-08-14
+
+The earlier four-name absence no longer describes current identity state.
+`pptx-compiler-core@0.1.0-alpha.2` now exists with exact reviewed bytes and
+later independently verified provenance; its package identity has both
+`alpha` and registry-required `latest` at that version. The other three package
+identities and exact `alpha.2` versions remain absent, and the matching GitHub
+Release remains absent. No unpublish or separate dist-tag repair occurred.
+
+D-050 authorizes fresh `0.1.0-alpha.3` publication only after another atomic
+read-only registry admission. This document records observations, not a name
+reservation, package ownership grant, or permission to overwrite a version.
+
 ## Historical working-name check
 
 The former working stem `pptx-pipeline` was initially checked on 2026-07-30 and
@@ -78,7 +91,8 @@ The checks do not reserve a package or repository name, prove that npm will
 accept a future publish, search private repositories, establish social-media or
 domain availability, or constitute a trademark clearance opinion.
 
-Re-run the official registry query immediately before first publication. If an
-unscoped name becomes unavailable, stop publication and revise the complete
-name/import/dependency plan atomically; do not publish a partially renamed
-graph.
+Re-run the official registry query immediately before creating any remaining
+package identity and before writing each new immutable version. If an unscoped
+name becomes unavailable or an exact version is occupied by different bytes,
+stop publication and revise the complete name/import/dependency plan
+atomically; do not publish a partially renamed graph.

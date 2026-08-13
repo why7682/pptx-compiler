@@ -9,7 +9,7 @@ import {
   verifyExactAlphaGitHubRelease
 } from "../scripts/create-alpha-github-release.mjs";
 
-const TAG = "v0.1.0-alpha.2";
+const TAG = "v0.1.0-alpha.3";
 const HEAD = "a".repeat(40);
 const TAG_OBJECT = "b".repeat(40);
 const MAIN = "c".repeat(40);
@@ -18,7 +18,7 @@ const BODY = "# Locked note\n\n---\n\n## Release identity\n";
 function prepared() {
   return Object.freeze({
     releasePlan: Object.freeze({
-      githubRelease: Object.freeze({ name: "pptx-compiler 0.1.0-alpha.2" })
+      githubRelease: Object.freeze({ name: "pptx-compiler 0.1.0-alpha.3" })
     }),
     releaseTag: Object.freeze({
       headCommitOid: HEAD,
@@ -75,7 +75,7 @@ function githubReleaseFetch({
         const request = {
           tag_name: TAG,
           target_commitish: HEAD,
-          name: "pptx-compiler 0.1.0-alpha.2",
+          name: "pptx-compiler 0.1.0-alpha.3",
           body: BODY
         };
         created = releaseValue(request, drift);
@@ -106,7 +106,7 @@ test("GitHub Release arguments and exact request are closed", () => {
   assert.deepEqual(alphaGitHubReleaseRequest({ prepared: prepared(), body: BODY }), {
     tag_name: TAG,
     target_commitish: HEAD,
-    name: "pptx-compiler 0.1.0-alpha.2",
+    name: "pptx-compiler 0.1.0-alpha.3",
     body: BODY,
     draft: false,
     prerelease: true,
@@ -201,7 +201,7 @@ test("Release declaration is exact-idempotent and reconciles only a 422 race", a
       prepared: prepared(), body: BODY, token: "github-token", fetchImpl: mismatch.fetch
     }), /alpha-github-release-mismatch/u);
     assert.equal(mismatch.requests.some(({ options }) =>
-      ["PATCH", "DELETE"].includes(options.method)), false);
+      ["POST", "PATCH", "DELETE"].includes(options.method)), false);
   }
 
   const moved = githubReleaseFetch({ lateDrift: { body: "changed after declaration" } });
@@ -216,7 +216,7 @@ test("Release declaration is exact-idempotent and reconciles only a 422 race", a
 test("orchestration isolates GitHub credentials and verifies source and registry twice", async () => {
   const preparedValue = {
     ...prepared(),
-    packagePlan: { packageVersion: "0.1.0-alpha.2" },
+    packagePlan: { packageVersion: "0.1.0-alpha.3" },
     releaseLock: {},
     lockedInputBytes: new Map(),
     publicationOrder: [{ packageId: "core" }],
@@ -315,5 +315,67 @@ test("orchestration isolates GitHub credentials and verifies source and registry
       environment: { ...environment, ...leaked },
       dependencies: { prepareRelease: async () => preparedValue }
     }), /alpha-github-release-credentials/u);
+  }
+});
+
+test("fresh alpha.2 predecessor drift or foreign provenance prevents every Release POST", async () => {
+  const environment = {
+    GITHUB_TOKEN: "github-token",
+    GITHUB_ACTIONS: "true",
+    GITHUB_EVENT_NAME: "workflow_dispatch",
+    GITHUB_REF: `refs/tags/${TAG}`,
+    GITHUB_REPOSITORY: "why7682/pptx-compiler"
+  };
+  for (const failure of [
+    "alpha-publication-predecessor-tarball-mismatch",
+    "alpha-publication-registry-attestations"
+  ]) {
+    let declarations = 0;
+    let predecessorChecks = 0;
+    const preparedValue = {
+      ...prepared(),
+      releasePlan: {
+        ...prepared().releasePlan,
+        predecessorRelease: { tagName: "v0.1.0-alpha.2" }
+      },
+      packagePlan: { packageVersion: "0.1.0-alpha.3" },
+      releaseLock: {},
+      predecessorReleaseLock: {},
+      lockedInputBytes: new Map(),
+      publicationOrder: [{ packageId: "core" }],
+      tarballBytes: new Map([["core", Buffer.from("tarball")]])
+    };
+    await assert.rejects(() => runAlphaGitHubRelease({
+      argv: ["--tag", TAG, "--stage-root", ".package-stage/reviewed"],
+      environment,
+      dependencies: {
+        prepareRelease: async () => preparedValue,
+        verifySource: async () => ({
+          repositoryId: "1330979133",
+          repositoryOwnerId: "1",
+          commitOid: HEAD,
+          tagObjectOid: TAG_OBJECT,
+          mainTipCommitOid: MAIN
+        }),
+        finalizeCandidate: () => {},
+        renderBody: () => BODY,
+        resolveRuntime: async () => ({ npmCli: "/fixed/npm-cli.js" }),
+        registryVerification: {
+          withVerifier: async ({ callback }) => callback(async () => true),
+          verifyPredecessor: async () => {
+            predecessorChecks += 1;
+            throw new Error(failure);
+          },
+          verifyPackage: async () => assert.fail("alpha.3 must not be reached"),
+          auditRegistry: async () => assert.fail("audit must not be reached")
+        },
+        declareRelease: async () => {
+          declarations += 1;
+          return { action: "created", releaseId: 91 };
+        }
+      }
+    }), new RegExp(failure, "u"));
+    assert.equal(predecessorChecks, 1);
+    assert.equal(declarations, 0);
   }
 });
