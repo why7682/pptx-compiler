@@ -201,15 +201,20 @@ The complete user-facing list is
 [`docs/KNOWN_LIMITATIONS.md`](KNOWN_LIMITATIONS.md). The decisive current facts
 are that arbitrary templates are unsupported, the candidate QA result is
 blocked, and no BuildArtifact is created. D-049 authorizes the exact
-`0.1.0-alpha.2` external transition but does not prove any tag, lock, package,
-provenance, dist-tag, Trusted Publisher, credential-retirement, or GitHub
-Release fact for that version.
+`0.1.0-alpha.2` external transition but does not prove its execution. A
+create-only dual-builder lock now exists as a generated candidate identity.
+Independent exact recomputation and exact provenance admission passed, and
+this checkpoint admits the lock for tracking; tag, package, registry
+provenance/signature, dist-tag, Trusted Publisher, credential-retirement, and
+GitHub Release facts remain unproved.
 
 Release Gates is the sole current release-phase owner. M4-001A contract
 admission is complete without changing support. M4-001B is in progress on a
-fresh `alpha.2` candidate boundary: its package/version projection,
-dual-builder lock, merge `S2`, attestation `A2`, history admission, tag, and
-hosted evidence must be independently established. Release Gates owns those
+fresh `alpha.2` candidate boundary: its package/version projection and local
+create-only dual-builder lock exist. Independent exact recomputation and the
+exact nine-endpoint provenance review passed, while reviewed merge `S2`,
+attestation `A2`, history admission, tag, and hosted evidence must still be
+established. Release Gates owns those
 facts and M4-001C's registry/declaration/credential-retirement phases. None of
 them changes support by itself.
 Any later support promotion must name one demonstrated user scope, update its

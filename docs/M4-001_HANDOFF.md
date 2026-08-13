@@ -25,10 +25,12 @@ M4-001 remains active at a fail-closed recovery boundary:
   run then stopped before the first npm publish. That version is retired
   unpublished and remains immutable historical evidence.
 - `M4-001B` is now in progress for the D-049-authorized replacement
-  `0.1.0-alpha.2`. It requires a fresh package/version projection, dual-builder
-  lock, reviewed merge `S2`, attestation `A2`, full-history admission,
-  annotated tag, and tag-hosted gates. None of those `alpha.2` objects is
-  asserted yet.
+  `0.1.0-alpha.2`. The fresh package/version projection and create-only
+  dual-builder lock now exist. Independent exact recomputation and the exact
+  nine-endpoint provenance review passed with 0 blocker, 0 high, and 0 medium;
+  this checkpoint admits the lock for tracking. Reviewed merge `S2` remains.
+  No `S2`, attestation `A2`, full-history admission, annotated tag, or
+  tag-hosted result is asserted yet.
 - `M4-001C` remains pending. It may begin only after complete `alpha.2`
   candidate admission, and it is not complete until ordered npm publication,
   official-registry/provenance/signature/dist-tag verification, GitHub Release
@@ -48,7 +50,7 @@ nor any M4 phase resumes it or makes it a release prerequisite.
 | Release phase order and eligibility | `docs/RELEASE_GATES.md` |
 | Current support state | `policy/support-matrix.json` |
 | User-facing delta and negative contract | `CHANGELOG.md`, `docs/KNOWN_LIMITATIONS.md`, and `docs/releases/0.1.0-alpha.2.md` |
-| Exact `alpha.2` candidate/artifact identity | Future reviewed `packaging/releases/0.1.0-alpha.2.lock.json`; no lock exists by documentation assertion |
+| Exact `alpha.2` candidate/artifact identity | Create-only `packaging/releases/0.1.0-alpha.2.lock.json`; generated from exact commit `3ddc8f36d636adfdb40c7b6a58c429543b9bd690`, independently recomputed, provenance-admitted, and included in this tracked-admission checkpoint; reviewed merge `S2` remains pending |
 | Actual npm/GitHub lifecycle state | Official registry responses, fetched npm provenance/signatures, exact GitHub tag and Release records |
 
 The package plan owns publication settings and dependency edges exactly once.
@@ -96,7 +98,7 @@ member-by-member tracked-source projection. Builder-local evidence records and
 gzip SHA-256, SHA-512, and compressed sizes remain separate. Only the fixed
 Node 24/npm 11 gzip envelopes may become publication bytes.
 
-The new create-only `packaging/releases/0.1.0-alpha.2.lock.json` must bind:
+The new create-only `packaging/releases/0.1.0-alpha.2.lock.json` binds:
 
 ```text
 schemaVersion
@@ -116,10 +118,15 @@ builderResults[{
 ```
 
 Locked inputs include the package/release plans, support matrix, SBOM,
-changelog, known limitations, and state-neutral `alpha.2` release note. The
-lock does not exist until both fixed results, exact source projection, review,
-and create-only write have succeeded. It must then be tracked and merged before
-the tag exists.
+changelog, known limitations, and state-neutral `alpha.2` release note.
+Create-only generation from exact commit
+`3ddc8f36d636adfdb40c7b6a58c429543b9bd690` wrote the schema-2 lock with
+SHA-256 `922a862092d3785ccca17ba4f6740afb95bb038ae718aaed80a105d086200a31`,
+6218 bytes, mode `100644`, and package-source projection
+`a022eb1e9a768bac7c22b0d50a7ab2c7ac11f4435f5751cd53033bc1c8b906e7`.
+Generation establishes a candidate identity, not review or admission. The lock
+must pass independent recomputation, enter exact provenance, be tracked, and be
+merged unchanged before the tag exists.
 
 ## GitHub Actions OIDC and provenance boundary
 
@@ -241,17 +248,16 @@ exists. D-049 and the OIDC correction do not change those facts.
 
 ## Next exact action
 
-1. Finish the bounded OIDC-host correction review and complete the exact
-   `0.1.0-alpha.2` package/release projection without modifying historical
-   `alpha.1` objects.
-2. Run both fixed builders; create, review, and track the fresh `alpha.2` lock.
-3. Merge the unchanged lock as GitHub-verified `S2`; append only its exact
+1. Independently recompute the fresh `alpha.2` lock, close its exact
+   provenance, and track it without changing any locked input or package-mapped
+   source.
+2. Merge the unchanged lock as GitHub-verified `S2`; append only its exact
    single-parent attestation `A2`; pass current-main history admission; create
    the annotated tag on unchanged `S2`; and require tag Public CI and Security.
-4. Only then run M4-001C's dependency-order registry state machine, complete
+3. Only then run M4-001C's dependency-order registry state machine, complete
    byte/provenance/signature/dist-tag verification, and create the GitHub
    prerelease last.
-5. Configure all four Trusted Publishers, revoke the bootstrap token, and
+4. Configure all four Trusted Publishers, revoke the bootstrap token, and
    delete GitHub `NPM_TOKEN` before marking M4-001C complete.
 
 Do not add lifecycle claims to the lock-bound changelog, limitations, or

@@ -3355,9 +3355,76 @@ notes: D-049 authorizes exactly the replacement annotated tag and GitHub
   consistent Git-backed system-temp snapshot. The copy mechanism, an allowlist,
   recursive cleanup, global Finder preference, or source-only copy grants no
   authority.
-  No alpha.2 lock, S2, A2, tag, hosted tag result, npm package,
+  At that pre-lock checkpoint, no alpha.2 lock, S2, A2, tag, hosted tag result,
   provenance/signature result, dist-tag, Trusted Publisher binding,
   credential-retirement result, or GitHub Release is claimed
+```
+
+### M4-001B `alpha.2` create-only lock checkpoint
+
+```yaml
+paths:
+  - HANDOFF.md
+  - TODO.md
+  - docs/COMPATIBILITY_POLICY.md
+  - docs/M4-001_HANDOFF.md
+  - docs/PROVENANCE_LEDGER.md
+  - docs/RELEASE_GATES.md
+  - packaging/releases/0.1.0-alpha.2.lock.json
+  - provenance/records.json
+  - tests/final-public-docs.test.mjs
+kind: generated schema-2 dual-builder candidate lock plus its narrow state and
+  exact provenance projection
+origin: the lock was deterministically written create-only from exact admitted
+  commit 3ddc8f36d636adfdb40c7b6a58c429543b9bd690, its repository-owned
+  package/release plans and six locked inputs, and the two fixed guarded builder
+  results. The other eight endpoints independently project only that generated
+  lock checkpoint, its negative lifecycle boundary, and the fail-closed
+  lock-created/review-passed document mutation contract. No predecessor source,
+  external implementation, registry payload, hosted output, presentation,
+  private fixture, generated tarball bytes, or credential entered these bytes
+original_author_or_holder: Elliot Wu
+created_or_reviewed_on: 2026-08-13
+license_or_rights_basis: MIT
+third_party_dependencies:
+  - Node.js 22.23.2 (MIT; fixed verification runtime, not vendored)
+  - npm CLI 10.9.8 (Artistic-2.0; fixed verification builder, not vendored)
+  - Node.js 24.19.0 (MIT; fixed release runtime, not vendored)
+  - npm CLI 11.17.0 (Artistic-2.0; fixed release builder, not vendored)
+private_information_review: passed; current bytes contain only approved public
+  package/repository identities, one public source commit, fixed public builder
+  versions, repository-relative input paths, byte counts, and SHA-256/SHA-512
+  boundary fingerprints. No token value, password, OTP, credential, hostname,
+  absolute local path, private fixture, source presentation, raw log/API
+  response, registry payload, or generated tarball bytes is recorded
+project_constant_removal: passed; the lock projects existing package, release,
+  support, SBOM, and reader-document authorities without adding a second package
+  graph, support root, publication order, lifecycle root, or release declaration.
+  The ambient GIT_PAGER=cat override was removed from the generator execution
+  environment to satisfy the fail-closed Git-environment boundary; no
+  source/config change occurred
+public_fixture_conformance: applicable; create-only generation produced exact
+  schema-2 lock SHA-256
+  922a862092d3785ccca17ba4f6740afb95bb038ae718aaed80a105d086200a31,
+  6218 bytes, mode 100644, with package-source projection
+  a022eb1e9a768bac7c22b0d50a7ab2c7ac11f4435f5751cd53033bc1c8b906e7.
+  It binds distinct Node 22.23.2/npm 10.9.8 and Node 24.19.0/npm 11.17.0
+  evidence/envelope identities and equal canonical decompressed tar payloads for
+  all four packages. Independent exact recomputation passed and the exact
+  nine-endpoint provenance review admits this identity for tracking
+independent_review: passed; one bounded current-byte exact-lock and
+  nine-endpoint state/contract-test review reports 0 blocker, 0 high, and
+  0 medium with Taste=good. It recomputed the lock identity and bindings, both
+  builders and all four payloads, and confirmed immutable alpha.1 history, the
+  fail-closed Git-environment wording, exact endpoint/record closure, and no
+  lifecycle overclaim
+notes: This exact nine-endpoint checkpoint contains eight modified state,
+  provenance, and contract-test authorities plus one new lock. M4-001B remains
+  IN_PROGRESS. The
+  lock is included in this tracked-admission checkpoint but is not yet merged as
+  S2. No A2, alpha.2 tag, tag-hosted result,
+  npm package, registry provenance/signature result, dist-tag, Trusted Publisher
+  binding, credential-retirement result, or GitHub Release is claimed
 ```
 
 The XML namespace, relationship-type, and MIME strings are interoperability

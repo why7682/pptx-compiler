@@ -656,9 +656,13 @@ dist-tag `alpha`; GitHub Actions npm provenance; and the post-publication
 Trusted Publisher/token-retirement transition. Authorization is not execution
 evidence. M4-001B is now in progress on the fresh `alpha.2` package projection,
 dual-builder lock, `S2`/`A2`, history relation, tag, and hosted gates. M4-001C
-remains pending. No `alpha.2` lock, tag, npm package, provenance/signature
-result, dist-tag, Trusted Publisher binding, credential-retirement result, or
-GitHub Release is asserted.
+remains pending. The create-only `alpha.2` lock now exists. Independent exact
+recomputation and the exact nine-endpoint provenance review both passed with
+0 blocker, 0 high, and 0 medium; this checkpoint admits the lock for tracking.
+Reviewed merge as `S2` remains pending. No `A2`, tag,
+tag-hosted result, npm package, registry provenance/signature result, dist-tag,
+Trusted Publisher binding, credential-retirement result, or GitHub Release is
+asserted.
 
 The bounded OIDC correction admits HTTPS with exactly one validated ASCII DNS
 label beneath `actions.githubusercontent.com`, a nonempty path, and no user
@@ -704,6 +708,22 @@ review independently recomputed its six inputs, 89 Git sources projected into
 subsequently merged as `S1`, admitted through `A1`, and tagged as described
 above. It is historical evidence and cannot become the fresh `alpha.2` lock.
 
+The fresh `alpha.2` create-only generation used exact commit
+`3ddc8f36d636adfdb40c7b6a58c429543b9bd690` and both fixed guarded builder
+results. It produced schema-2
+`packaging/releases/0.1.0-alpha.2.lock.json`, SHA-256
+`922a862092d3785ccca17ba4f6740afb95bb038ae718aaed80a105d086200a31`,
+6218 bytes, mode `100644`, with package-source projection
+`a022eb1e9a768bac7c22b0d50a7ab2c7ac11f4435f5751cd53033bc1c8b906e7`.
+Independent exact recomputation and tracked-provenance admission passed with
+0 blocker, 0 high, and 0 medium. This nine-endpoint checkpoint admits the
+generated candidate identity for tracking, but it is not yet `S2`, `A2`, a
+tag, hosted evidence, npm publication, registry verification, or a GitHub
+Release. The ambient
+`GIT_PAGER=cat` override was removed from the generator execution environment
+to satisfy the fail-closed Git-environment boundary; no source/config change
+occurred.
+
 ## Persistent presentation-skill boundary
 
 This boundary survives compaction because this file and `AGENTS.md` are on the
@@ -730,12 +750,13 @@ candidate/tag gates also completed, but that candidate is retired unpublished
 after its pre-first-publish fail-closed result. M4-001B now owns the D-049
 `alpha.2` recovery: admit the bounded OIDC-host correction; project all four
 packages to exact version `0.1.0-alpha.2`; reproduce both fixed builders; write
-and review a fresh create-only lock; merge it unchanged as GitHub-verified
+and independently review/admit the fresh create-only lock; merge it unchanged as GitHub-verified
 `S2`; append exactly one public-identity attestation `A2` whose sole parent is
 `S2` and whose tip policy exact-grants `S2`; pass the full history gate at
 `main=A2`; and only then annotate unchanged `S2` as `v0.1.0-alpha.2` and collect
-tag-hosted evidence. No `alpha.2` lock or external artifact exists by this
-handoff state.
+tag-hosted evidence. The local lock exists by this handoff state; no `S2`,
+`A2`, `alpha.2` tag, hosted result, npm package, registry result, or GitHub
+Release exists.
 
 The package plan owns publication settings and the dependency graph deriving
 `core -> native-card-arrow -> public-synthetic -> CLI`; the release plan owns
@@ -1058,8 +1079,8 @@ remain the machine command authority.
    four-package build, admission, offline joint install, and installed-CLI
    smoke under both runtime/npm pairs.
 3. Preserve D-048's `alpha.1` lock, `S1`, `A1`, tag, and hosted records without
-   movement or reuse. Continue M4-001B under D-049 by closing the OIDC-host fix,
-   exact `0.1.0-alpha.2` package projection, dual-builder lock, reviewed
+   movement or reuse. Continue M4-001B under D-049 by independently reviewing
+   and tracking the generated `0.1.0-alpha.2` lock, then close the reviewed
    `S2`/`A2` relation, history gate, annotated tag, and tag-hosted evidence.
    Only then may M4-001C publish in graph order, verify all four official-
    registry bytes/provenance/signatures/dist-tags, and create the GitHub

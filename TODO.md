@@ -1308,11 +1308,38 @@ criterion is recorded in the repository.
   lock, reviewed `S2`, sole-parent exact-grant `A2`, annotated tag, and tag-
   hosted evidence. Historical `alpha.1` objects are inputs only to the audit
   trail, never copied authority.
-- No `alpha.2` lock, `S2`, `A2`, tag, tag-hosted result, npm package,
-  provenance/signature result, dist-tag, Trusted Publisher binding, credential-
-  retirement result, or GitHub Release exists by this checkpoint. M4-001B is
-  in progress, M4-001C remains pending, support stays 0/22/3/35 with its global
-  switch false, and D-047/M3-008 remains deferred.
+- The fresh create-only `alpha.2` lock now exists. Independent exact
+  recomputation and exact nine-endpoint provenance admission passed with
+  0 blocker, 0 high, and 0 medium; this checkpoint admits the lock for
+  tracking. Reviewed merge as `S2` remains pending. No `A2`, tag, tag-hosted result,
+  npm package, registry provenance/signature result, dist-tag, Trusted Publisher
+  binding, credential-retirement result, or GitHub Release exists by this
+  checkpoint. M4-001B is in progress, M4-001C remains pending, support stays
+  0/22/3/35 with its global switch false, and D-047/M3-008 remains deferred.
+
+### M4-001B `alpha.2` create-only lock checkpoint — 2026-08-13
+
+- Exact source commit `3ddc8f36d636adfdb40c7b6a58c429543b9bd690`
+  supplied the admitted release/package plans, six locked inputs, and both
+  fixed guarded builder results. Create-only generation wrote schema-2
+  `packaging/releases/0.1.0-alpha.2.lock.json`.
+- The generated lock is 6218 bytes, mode `100644`, with SHA-256
+  `922a862092d3785ccca17ba4f6740afb95bb038ae718aaed80a105d086200a31`
+  and package-source projection
+  `a022eb1e9a768bac7c22b0d50a7ab2c7ac11f4435f5751cd53033bc1c8b906e7`.
+  It keeps both builders' evidence and gzip envelopes separate while binding
+  equal canonical decompressed tar payloads for all four packages.
+- This checkpoint records generation plus the completed independent exact-lock
+  and provenance reviews. Both report 0 blocker, 0 high, and 0 medium; the
+  nine-endpoint change admits the lock for tracking, while unchanged reviewed
+  merge as `S2` remains pending. The ambient `GIT_PAGER=cat` override was removed from the
+  generator execution environment to satisfy the fail-closed Git-environment
+  boundary; no source/config change occurred.
+- No `S2`, `A2`, annotated `alpha.2` tag, tag-hosted result, npm package,
+  registry verification, dist-tag, Trusted Publisher binding, credential
+  retirement, or GitHub Release exists. M4-001B remains `IN_PROGRESS`, M4-001C
+  remains `PENDING`, support stays unchanged, and branch protection remains
+  deferred.
 
 ## Deferred follow-through from the predecessor project
 

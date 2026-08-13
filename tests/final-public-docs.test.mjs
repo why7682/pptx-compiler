@@ -473,7 +473,7 @@ function validateFinalPublicDocuments(files, matrixDocument, packageDocument) {
     "M4-001C derives npm dependency order",
     "GitHub Release last"
   ]) || !hasOrderedPhrases(m4Handoff, [
-    "Run both fixed builders; create, review, and track the fresh `alpha.2` lock",
+    "Independently recompute the fresh `alpha.2` lock",
     "Merge the unchanged lock as GitHub-verified `S2`",
     "single-parent attestation `A2`",
     "pass current-main history admission",
@@ -504,11 +504,15 @@ function validateFinalPublicDocuments(files, matrixDocument, packageDocument) {
       !compatibility.includes("M4-001A contract\nadmission is complete") ||
       !compatibility.includes("M4-001B is in progress") ||
       !m4Handoff.includes(HISTORICAL_ALPHA1_LOCK_SHA256) ||
-      !m4HandoffProse.includes("no lock exists by documentation assertion") ||
-      !releaseGates.includes("no such lock is asserted yet") ||
+      !m4HandoffProse.includes("fresh package/version projection and create-only dual-builder lock now exist") ||
+      !m4HandoffProse.includes("Independent exact recomputation and the exact nine-endpoint provenance review passed with 0 blocker, 0 high, and 0 medium") ||
+      !releaseGates.includes("922a862092d3785ccca17ba4f6740afb95bb038ae718aaed80a105d086200a31") ||
+      !releaseGates.includes("Independent exact recomputation and the exact nine-endpoint provenance review") ||
+      !compatibilityProse.includes("local create-only dual-builder lock exist") ||
+      !compatibilityProse.includes("Independent exact recomputation and the exact nine-endpoint provenance review passed") ||
       !compatibilityProse.includes("fresh alpha.2 candidate boundary") ||
       !compatibilityProse.includes("Release Gates owns those facts and M4-001C's registry/declaration/credential-retirement phases") ||
-      /M4-001A is active|M4-001B (?:is next|remains pending)|review-pending candidate lock/iu.test(compatibility)) {
+      /M4-001A is active|M4-001B (?:is next|remains pending)|review-pending candidate lock|no (?:alpha\.2 )?lock exists|no such lock is asserted/iu.test(compatibility)) {
     findings.push(finding("final-doc-release-phase", "docs/M4-001_HANDOFF.md"));
   }
   if (!reproduction.includes("four\nreviewed public-alpha candidate tarballs") ||
@@ -712,9 +716,22 @@ test("final public-document mutations fail closed", async (t) => {
       .some(({ code }) => code === "final-doc-release-phase"), true);
   });
 
-  await t.test("the reviewed tracked-lock checkpoint regresses to next", () => {
+  await t.test("the generated lock checkpoint regresses to absent", () => {
     const value = mutateDocument("docs/M4-001_HANDOFF.md", (text) => text
-      .replace("`M4-001B` is now in progress", "`M4-001B` is next"));
+      .replace(
+        "fresh package/version projection and create-only\n  dual-builder lock now exist",
+        "fresh package/version projection exists; no alpha.2 lock exists"
+      ));
+    assert.equal(validateFinalPublicDocuments(value, supportMatrix, packagePlan)
+      .some(({ code }) => code === "final-doc-release-phase"), true);
+  });
+
+  await t.test("the completed lock review regresses to pending", () => {
+    const value = mutateDocument("docs/M4-001_HANDOFF.md", (text) => text
+      .replace(
+        "Independent exact recomputation and the exact\n  nine-endpoint provenance review passed with 0 blocker, 0 high, and 0 medium",
+        "Independent exact recomputation and provenance review remain pending"
+      ));
     assert.equal(validateFinalPublicDocuments(value, supportMatrix, packagePlan)
       .some(({ code }) => code === "final-doc-release-phase"), true);
   });

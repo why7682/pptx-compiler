@@ -27,7 +27,7 @@ alpha is a different, later boundary.
 | Release delta and state-neutral release-facing projection | `CHANGELOG.md` and `docs/releases/0.1.0-alpha.2.md` |
 | Exact tag, builders, locked inputs, recovery, and completion rules | D-049 and `packaging/alpha-release-plan.json` |
 | Release phase order and eligibility | This document |
-| Exact candidate and artifact identity | The create-only `packaging/releases/0.1.0-alpha.2.lock.json` after it is generated, reviewed, and tracked; no such lock is asserted yet |
+| Exact candidate and artifact identity | Create-only `packaging/releases/0.1.0-alpha.2.lock.json` exists with SHA-256 `922a862092d3785ccca17ba4f6740afb95bb038ae718aaed80a105d086200a31`; independent exact recomputation and provenance admission passed, and this checkpoint admits it for tracking; reviewed merge `S2` remains pending |
 
 The support matrix may block a release, but a release cannot promote the
 matrix. The package plan owns intended files, while the final reviewed tarball
@@ -67,7 +67,7 @@ registry digest cannot turn different bytes into the reviewed tarball.
 | G3 — Capability correctness | Satisfied for the exact candidate path | One opt-in native-card candidate replays readable layout facts, proves exact diff/source isolation, and produces blocked QA with no BuildArtifact. |
 | G4 — Package boundary | Satisfied for the guarded package contract | Four allowlisted public-alpha candidate tarballs install together offline and execute the installed candidate flow; fresh `alpha.2` release bytes and publication equality remain G6. |
 | G5 — Project security and maintenance | **Satisfied** | Least-privilege workflows, CodeQL, Dependency Review, private vulnerability reporting, SBOM, and public process documents are present and evidenced. Branch protection is outside this closure and remains deferred. |
-| G6 — Release evidence | **In progress under D-049** | The immutable `alpha.1` tag gates completed, but its release run stopped before the first npm publish and that candidate is retired unpublished. M4-001B now requires a fresh `alpha.2` package projection, lock, `S2`/`A2`, annotated tag, and hosted evidence. M4-001C remains pending. |
+| G6 — Release evidence | **In progress under D-049** | The immutable `alpha.1` tag gates completed, but its release run stopped before the first npm publish and that candidate is retired unpublished. The fresh `alpha.2` package projection and create-only lock now exist; exact lock review and provenance admission passed, while reviewed merge `S2`, `A2`, annotated tag, and hosted evidence remain. M4-001C remains pending. |
 
 This table is scope-sensitive. “Satisfied” for G2 or G3 refers only to the
 fixed repository-owned candidate profile. It is not arbitrary-template,
@@ -279,9 +279,17 @@ The replacement candidate must proceed in this order:
    closed raw object and source relation, then pass the complete clean-tag,
    Public CI, and Security gates.
 
-No `alpha.2` lock, `S2`, `A2`, tag, tag-hosted result, npm package, provenance
-result, dist-tag, Trusted Publisher binding, credential-retirement result, or
-GitHub Release is asserted at this checkpoint.
+Create-only generation from exact commit
+`3ddc8f36d636adfdb40c7b6a58c429543b9bd690` produced schema-2
+`packaging/releases/0.1.0-alpha.2.lock.json`, SHA-256
+`922a862092d3785ccca17ba4f6740afb95bb038ae718aaed80a105d086200a31`,
+6218 bytes, mode `100644`, and package-source projection
+`a022eb1e9a768bac7c22b0d50a7ab2c7ac11f4435f5751cd53033bc1c8b906e7`.
+Independent exact recomputation and the exact nine-endpoint provenance review
+passed with 0 blocker, 0 high, and 0 medium. This checkpoint admits the lock
+for tracking; reviewed merge as `S2` is not implied. No `A2`, tag, tag-hosted result, npm
+package, registry provenance/signature result, dist-tag, Trusted Publisher
+binding, credential-retirement result, or GitHub Release is asserted.
 
 The source identity claim remains deliberately narrow: the future exact
 annotated tag binds a GitHub-verified accepted-main commit and receives tag CI
@@ -372,9 +380,10 @@ contract. The release-critical facts are: zero supported rows, blocked QA, no
 BuildArtifact, no arbitrary-template flow, and no `0.1.0-alpha.2` publication
 evidence.
 
-M4-001A is complete. The next action is M4-001B's fresh dual-builder `alpha.2`
-projection and create-only lock. Only a reviewed `S2`/`A2` relation, annotated
-tag on unchanged `S2`, and passing tag-hosted gates may enter M4-001C's ordered
+M4-001A is complete. The next action is M4-001B's independent lock
+recomputation, exact provenance/tracking, and reviewed `S2`/`A2` relation. Only
+that relation, an annotated tag on unchanged `S2`, and passing tag-hosted gates
+may enter M4-001C's ordered
 registry state machine. If any byte or claim changes, rerun the affected gate
 rather than citing an older result. Branch protection remains separately
 deferred by D-047 and is not folded into G6.
