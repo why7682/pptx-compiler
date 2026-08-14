@@ -200,23 +200,26 @@ must project the current matrix shipped in the same reviewed commit.
 The complete user-facing list is
 [`docs/KNOWN_LIMITATIONS.md`](KNOWN_LIMITATIONS.md). The decisive current facts
 are that arbitrary templates are unsupported, the candidate QA result is
-blocked, and no BuildArtifact is created. D-050 authorizes the exact
-`0.1.0-alpha.3` forward transition but does not prove its execution. The old
-`alpha.2` candidate is immutable partial publication: exact core exists, the
-other three versions and GitHub Release do not. That lifecycle state changes no
-compatibility status.
+blocked, and no BuildArtifact is created. D-050 authorized the exact
+`0.1.0-alpha.3` forward transition; the separate lock, ref, hosted-run,
+official-registry, provenance/signature, and GitHub Release records now prove
+its completed execution. The old `alpha.2` candidate remains immutable partial
+publication: exact core exists, the other three versions and GitHub Release do
+not. Neither lifecycle state changes a compatibility status.
 
 Release Gates is the sole current release-phase owner; see
 [`docs/RELEASE_GATES.md`](RELEASE_GATES.md). M4-001A contract
 admission is complete, as is the immutable `alpha.2` candidate/tag boundary,
 without changing support. The fresh `alpha.3` boundary has admitted registry
-seed-tag and eventual-provenance behavior and has created its own exact
-dual-builder lock. Independent exact review admits only its frozen bytes for
-tracking, but the lock remains untracked and has not become `S3`. It must still
-establish `S3 -> A3`, tag, hosted evidence, registry graph, and declaration.
-Release Gates owns those facts. None changes compatibility by itself, and
-consumers must select the prerelease by exact version or `@alpha` rather than
-infer compatibility from package-level `latest`.
+seed-tag and eventual-provenance behavior and completed its exact dual-builder
+lock, verified `S3 -> A3`, annotated tag, hosted evidence, four-package registry
+graph, and GitHub-Release-last declaration. Release Gates owns the exact
+bindings and run records. The separate local procedure also completed four
+exact Trusted Publisher readbacks and retired the bootstrap token and scoped
+GitHub environment secret. Those bindings remain configured/visible state, not
+tokenless OIDC execution proof. None of this changes compatibility by itself,
+and consumers must select the prerelease by exact version or `@alpha` rather
+than infer compatibility from package-level `latest`.
 Any later support promotion must name one demonstrated user scope, update its
 exact matrix rows, and retain every unknown case as fail-closed. D-047/M3-008
 branch protection remains separately deferred.

@@ -161,12 +161,16 @@ The practical boundaries are collected in
   package graph;
 - Windows preserves create-only ordering and reconciliation but makes no
   sudden-power-loss directory-entry persistence claim;
-- D-050 authorizes the four `0.1.0-alpha.3` package versions and npm provenance,
-  but this support summary does not assert mutable external lifecycle state.
-  `alpha.2` remains an exact partial publication, and neither registry presence
-  nor package-level `latest` changes a support row.
-  Exact tag/lock identity, official-registry bytes, npm provenance, and GitHub
-  Release records own those facts and cannot change a support row.
+- D-050 authorized the four `0.1.0-alpha.3` package versions and npm provenance,
+  and that exact release boundary completed at source `S3`
+  `20f7f64faa8c8d688922896296c134b25bc58e7f`, accepted-main attestation `A3`
+  `7270ae7814583117050abac648ba96067e4fce67`, annotated tag object
+  `46c5360bd5daa48a1b493f1c9310b2358b3d6e6d`, successful release run
+  `31756489430`, and GitHub prerelease ID `370278133`. `alpha.2` remains an
+  exact partial publication, and neither registry presence nor package-level
+  `latest` changes a support row. Exact tag/lock identity, official-registry
+  bytes, npm provenance, and GitHub Release records own those facts and cannot
+  change a support row.
 
 ## Verification
 
@@ -184,11 +188,14 @@ declared state; it does not change that state.
 
 ## Next authorized action
 
-D-050 authorizes the exact `alpha.3` recovery;
-[`docs/RELEASE_GATES.md`](RELEASE_GATES.md) owns current phase state. Preserve all old versions and refs, admit the corrected seed-tag and
-eventual-provenance model, then create the fresh lock, `S3 -> A3`, tag-hosted
-evidence, ordered registry graph, and GitHub-Release-last declaration. Use exact
-versions or `@alpha`; bare `latest` is not a coherent four-package prerelease
-selector. Keep the global claim switch false and every current support status
-unchanged. D-047/M3-008 branch protection remains deferred and is not a
-release prerequisite.
+D-050's exact `alpha.3` recovery is complete; [`docs/RELEASE_GATES.md`](RELEASE_GATES.md)
+owns the satisfied G6 state. Preserve all old versions and refs, the exact
+four-package registry graph, the GitHub prerelease, and the completed
+credential retirement. The four Trusted Publisher bindings are
+configured/visible, but that state is not execution proof; only a future exact
+tokenless OIDC publication can prove the path. The next product evidence task
+is `M4-002`. It may not change the false global claim switch or any of the 60
+current support statuses without new admitted evidence. Use exact versions or
+`@alpha`; bare `latest` is not a coherent four-package prerelease selector.
+D-047/M3-008 branch protection remains deferred and is not a release
+prerequisite.

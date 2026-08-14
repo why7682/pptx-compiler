@@ -30,7 +30,7 @@ authorization does not reserve a name or prove that a registry write occurred.
 The npm availability observations above remain dated observations and reserve
 nothing.
 
-## Latest official-registry observation — 2026-08-13
+## Historical official-registry observation — 2026-08-13
 
 After the retired `alpha.1` workflow stopped before its first npm write, fresh
 official-registry reads returned E404 for all four package packuments and all
@@ -52,6 +52,26 @@ Release remains absent. No unpublish or separate dist-tag repair occurred.
 D-050 authorizes fresh `0.1.0-alpha.3` publication only after another atomic
 read-only registry admission. This document records observations, not a name
 reservation, package ownership grant, or permission to overwrite a version.
+
+## Completed four-identity observation — 2026-08-14
+
+The preceding partial-publication section is a dated historical observation,
+not current registry state. Release run `31756489430` subsequently completed
+the exact four-package `0.1.0-alpha.3` graph. Fresh official-registry reads show
+closed version sets and tag maps:
+
+- `pptx-compiler-core` contains only `0.1.0-alpha.2` and
+  `0.1.0-alpha.3`, with `alpha -> 0.1.0-alpha.3` and
+  `latest -> 0.1.0-alpha.2`;
+- `pptx-compiler-native-card-arrow`, `pptx-compiler-public-synthetic`, and
+  `pptx-compiler` each contain only `0.1.0-alpha.3`, with both `alpha` and
+  registry-seeded `latest` pointing to that version.
+
+All four exact Node 24/npm 11 tarballs, npm signatures, and certificate-bound
+provenance passed before GitHub Release `370278133` was created last. This
+records completed public identities and exact versions; it is still not a
+trademark conclusion, ownership grant for another name, or permission to
+overwrite, unpublish, or move any version or tag.
 
 ## Historical working-name check
 

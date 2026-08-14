@@ -692,28 +692,23 @@ URL text, or non-GitHub authority. It does not replace the later fixed npm
 and GitHub Actions issuer. D-047/M3-008 branch protection remains independently
 deferred.
 
-On 2026-08-13, the user confirmed that the npm account email is verified, 2FA
-is enabled, and the GitHub `npm-release` environment contains the one-time
-bootstrap `NPM_TOKEN`. This is a user-attested configuration fact, not an
-independent secret-value check and not publication evidence; no token value is
-recorded. After the four package identities and GitHub Release exist, the
-existing `alpha-release.yml` workflow stops without automatically changing npm
-or GitHub settings. A local interactive npm 11.17.0 operator starts each exact
-package with a fresh `npm trust list <exact-package> --json`: empty permits one
-create, exactly one normalized exact binding permits an idempotent retry, and
-any mismatch or other cardinality hard-stops. Raw `type: "github"` maps to
-provider `github-actions`, raw `file: "alpha-release.yml"` is the workflow
-filename, and sole `permissions: ["createPackage"]` maps to allowed action npm
-publish; `createStagedPackage` is rejected. The four bindings must also match
-owner `why7682`, repository `pptx-compiler`, and environment `npm-release`.
-After four fresh exact readbacks, a fresh `npm token list --json` must let the
-operator uniquely identify the bootstrap token's full ID; ambiguity hard-stops.
-Revoke that ID and prove it absent with another fresh list, then delete only the
-GitHub Actions environment secret `NPM_TOKEN` in repository
-`why7682/pptx-compiler` and environment `npm-release`, and prove its name absent
-with a fresh environment-secret list. npm does not validate a binding on save,
-so this release may claim configured/visible state only; a future tokenless
-OIDC publication is the first execution proof that it works.
+On 2026-08-13, the user confirmed that the npm account email was verified, 2FA
+was enabled, and the GitHub `npm-release` environment contained the one-time
+bootstrap `NPM_TOKEN`. After the complete `alpha.3` registry graph and GitHub
+Release existed, the release workflow stopped without modifying npm or GitHub
+settings. A separate local interactive npm 11.17.0 procedure then fresh-read
+exactly one Trusted Publisher binding for each of the four package names. Each
+readback normalized raw `type: "github"`, `file: "alpha-release.yml"`, and sole
+`permissions: ["createPackage"]` to provider `github-actions`, workflow
+filename `alpha-release.yml`, and allowed action npm publish only; all four
+also matched owner `why7682`, repository `pptx-compiler`, and environment
+`npm-release`, with no `createStagedPackage` permission. Only after those four
+fresh exact reads did the operator uniquely identify and revoke the bootstrap
+token by full ID and fresh-prove it absent, then delete and fresh-prove absent
+the `npm-release` environment secret `NPM_TOKEN`. No token ID or secret value is
+recorded. npm does not validate a binding on save, so this is configured/visible
+state only; a future tokenless OIDC publication is the first execution proof
+that the bindings work.
 
 M4-001A is complete on the exact 52-path contract snapshot. Git-backed frozen
 copies under Node 22.23.2/npm 10.9.8 and Node 24.19.0/npm 11.17.0 each pass
@@ -769,10 +764,23 @@ with package-source projection
 Independent no-local/no-hardlink regeneration and direct Git-tree/tar
 recomputation report 0 blocker, 0 high, and 0 medium with Taste=good. The exact
 mode-`100644`, 6218-byte file is admitted for tracking at Git blob
-`eb875526ffefc81b4bbaa2c15ed4412b31a8d026`; it remains untracked and any byte
-change invalidates the review. No `S3`, `A3`, annotated tag, hosted result, npm
-`alpha.3` publication, GitHub Release, Trusted Publisher binding,
-bootstrap-token revocation, or environment-secret deletion has occurred.
+`eb875526ffefc81b4bbaa2c15ed4412b31a8d026`. GitHub merged it unchanged as
+verified `S3=20f7f64faa8c8d688922896296c134b25bc58e7f`; exact-grant attestation
+`A3=7270ae7814583117050abac648ba96067e4fce67` is its sole child. Annotated tag
+object `46c5360bd5daa48a1b493f1c9310b2358b3d6e6d` peels to `S3`. A3 Public
+CI/Security runs `31750359756`/`31750359778` and tag Public CI/Security runs
+`31750881903`/`31750881914` passed.
+
+Manual release run `31751437354` stopped twice without destructive recovery:
+attempt 1 left only exact core `alpha.3` present after bounded registry
+stabilization exhausted, and attempt 2 failed its GitHub-repository precondition
+before another npm write. After a no-write cooldown and two time-separated
+official-state samples, fresh run `31756489430` completed all three jobs. It
+published the remaining exact packages, reverified every tarball, signature,
+certificate-bound provenance, and complete tag map, then created non-draft
+prerelease `v0.1.0-alpha.3` last as GitHub Release `370278133`, target `S3`,
+with no assets. The external Trusted Publisher and credential-retirement
+closure described above then completed. M4-001D is DONE.
 
 ## Persistent presentation-skill boundary
 
@@ -795,19 +803,20 @@ mandatory startup path:
 
 ## Immediate objective
 
-M4-001A and M4-001B are complete. `alpha.1` is retired unpublished. `alpha.2`
+M4-001A, M4-001B, and M4-001D are complete. `alpha.1` is retired unpublished. `alpha.2`
 is immutable partial history: all candidate/tag gates passed, exact reviewed
 core was published, the other three versions and GitHub Release remain absent,
 and later independent byte/provenance verification passed. Do not rerun,
 unpublish, move an old tag, reuse a version, or repair its dist-tags.
 
-M4-001D owns D-050's fresh `alpha.3` recovery. The corrected registry model,
-bounded propagation behavior, exact package/reader projection, two fixed
-builders, and independently reviewed create-only lock now exist without a
-registry write. Next, track only exact blob
-`eb875526ffefc81b4bbaa2c15ed4412b31a8d026` and merge it unchanged as `S3`,
-append sole-child exact-grant `A3`, pass history,
-annotated-tag, Public CI, and Security gates, and only then enter npm.
+M4-001D closed D-050's fresh `alpha.3` recovery. Exact `S3`, sole-child `A3`,
+the annotated tag, tag-hosted gates, all four official-registry packages,
+certificate-bound provenance/signatures, complete package-level tag maps, and
+GitHub Release `370278133` are present and exact. The four Trusted Publisher
+bindings are configured/visible, the bootstrap token is fresh-proved absent,
+and the `npm-release` environment secret `NPM_TOKEN` is fresh-proved absent.
+No additional `alpha.3` publication, tag, Release, dist-tag, token, or secret
+mutation is authorized.
 
 The package plan owns publication settings and the dependency graph deriving
 `core -> native-card-arrow -> public-synthetic -> CLI`; the release plan owns
@@ -815,7 +824,7 @@ exact tag/build/lock/recovery rules; Release Gates owns phase order. M4-001D
 uses absent/equal/mismatch recovery plus bounded expected propagation. Its exact
 publishes may assign `alpha`; npm may seed `latest` only for a first identity.
 Core's `latest` stays frozen at `alpha.2`, the other three seed at `alpha.3`,
-and no separate dist-tag mutation is authorized. The GitHub prerelease is last.
+and no separate dist-tag mutation occurred. The GitHub prerelease was last.
 The lock-bound changelog, limitations, and `alpha.3` note remain lifecycle-
 neutral; the `alpha.2` note remains immutable.
 
@@ -1131,13 +1140,12 @@ remain the machine command authority.
    four-package build, admission, offline joint install, and installed-CLI
    smoke under both runtime/npm pairs.
 3. Preserve D-048/D-049's `alpha.1` and `alpha.2` locks, refs, hosted records,
-   and exact partial registry state without movement or reuse. Continue M4-001D
-   under D-050: track only the independently admitted exact `alpha.3` lock blob
-   `eb875526ffefc81b4bbaa2c15ed4412b31a8d026`, merge it unchanged as `S3`,
-   close `S3 -> A3`, tag-hosted gates, ordered registry equality/provenance/
-   tag-map checks, and GitHub-prerelease-last declaration. Record Trusted
-   Publishers only as configured/visible with allowed action npm publish;
-   retire bootstrap credentials as authorized.
+   and exact partial registry state without movement or reuse. Preserve the
+   completed D-050 `alpha.3` lock, `S3 -> A3`, annotated tag, hosted runs,
+   four-package registry graph, GitHub Release, configured/visible Trusted
+   Publisher bindings, and retired bootstrap credentials as exact evidence.
+   Do not rerun the `alpha.3` release lane or call configuration tokenless OIDC
+   execution proof.
 4. Keep support unchanged and D-047/M3-008 branch protection deferred. D-050
    does not automatically resume it.
 5. Keep predecessor code, presentation assets, converter output, and generated

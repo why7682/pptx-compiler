@@ -3,12 +3,15 @@ import { readFile } from "node:fs/promises";
 import test from "node:test";
 
 const FINAL_DOCUMENT_PATHS = Object.freeze([
+  "HANDOFF.md",
   "README.md",
+  "TODO.md",
   "CHANGELOG.md",
   "docs/ARCHITECTURE_TARGET.md",
   "docs/COMPATIBILITY_POLICY.md",
   "docs/KNOWN_LIMITATIONS.md",
   "docs/M4-001_HANDOFF.md",
+  "docs/NAME_AVAILABILITY.md",
   "docs/RELEASE_GATES.md",
   "docs/REPRODUCIBILITY.md",
   "docs/SUPPORT_MATRIX.md",
@@ -51,6 +54,39 @@ const CURRENT_ALPHA3_LOCK_SHA256 =
   "f5e3b8ceff284b908b6febb678501f63e07d50eff041b3c60532a8f6511dd675";
 const CURRENT_ALPHA3_SOURCE_PROJECTION_SHA256 =
   "71269e5d7b25ada8f208893e57a3160766374a51bb23808b5df18893e60d9548";
+
+const CURRENT_ALPHA3_RELEASE_BINDINGS = Object.freeze([
+  "20f7f64faa8c8d688922896296c134b25bc58e7f",
+  "7270ae7814583117050abac648ba96067e4fce67",
+  "46c5360bd5daa48a1b493f1c9310b2358b3d6e6d",
+  "31750359756",
+  "31750359778",
+  "31750881903",
+  "31750881914",
+  "31751437354",
+  "31756489430",
+  "370278133"
+]);
+
+const CURRENT_ALPHA3_ENVELOPE_SHA256 = Object.freeze([
+  "60c9466bff289b72e88752bd21658f170c33d04740aac3e7cbfe1a823784905d",
+  "d66da46daf4369a51b252f971205465393ffd827a1908669d9a44dba2bfaeb63",
+  "17cc4300f012e1a93b745c7e91f6ec1a05dc3232566166f9253054d447f5358a",
+  "a3713bd6d88628148271b9122efbf7dce7d41d1a1120220fb094f6488cc30cb8"
+]);
+
+const ALPHA3_COMPLETION_DOCUMENT_PATHS = Object.freeze([
+  "HANDOFF.md",
+  "TODO.md",
+  "docs/M4-001_HANDOFF.md",
+  "docs/RELEASE_GATES.md"
+]);
+
+const ALPHA3_ENVELOPE_DOCUMENT_PATHS = Object.freeze([
+  "TODO.md",
+  "docs/M4-001_HANDOFF.md",
+  "docs/RELEASE_GATES.md"
+]);
 
 const ORDERED_SECTION_CHAINS = Object.freeze({
   "README.md": Object.freeze([
@@ -476,7 +512,7 @@ function validateFinalPublicDocuments(files, matrixDocument, packageDocument) {
       !releaseNote.includes("neither announces nor denies mutable external release state") ||
       !historicalReleaseNote.includes("Status boundary: release-state neutral") ||
       !knownLimitations.includes("This lock-bound document makes no current alpha.3 external-release assertion") ||
-      !releaseGates.includes("G6 — Release evidence | In progress under D-050")) {
+      !releaseGates.includes("G6 — Release evidence | Satisfied under D-050")) {
     findings.push(finding("final-doc-release-lifecycle", ""));
   }
   for (const relativePath of LOCK_BOUND_RELEASE_DOCUMENT_PATHS) {
@@ -526,14 +562,6 @@ function validateFinalPublicDocuments(files, matrixDocument, packageDocument) {
     "tag-triggered Public CI and Security workflows",
     "D-050's fresh `alpha.3` lane derives npm dependency order",
     "GitHub Release last"
-  ]) || !hasOrderedPhrases(m4Handoff, [
-    "Track only exact lock blob\n   `eb875526ffefc81b4bbaa2c15ed4412b31a8d026`",
-    "GitHub-verified `S3`",
-    "single-parent attestation `A3`",
-    "Pass current-main history admission",
-    "the annotated tag on unchanged\n   `S3`",
-    "dependency-order registry state machine",
-    "GitHub\n   prerelease last"
   ]) || !reproduction.includes("with `ahead_by=1`\n   and `behind_by=0`") ||
       !m4Handoff.includes("must report `ahead_by=1` and `behind_by=0`. Equality, a deeper descendant")) {
     findings.push(finding("final-doc-release-order", "docs/RELEASE_GATES.md"));
@@ -648,11 +676,39 @@ function validateFinalPublicDocuments(files, matrixDocument, packageDocument) {
   const compatibility = files.get("docs/COMPATIBILITY_POLICY.md") ?? "";
   const compatibilityProse = prose(compatibility);
   const m4HandoffProse = prose(m4Handoff);
+  for (const relativePath of ALPHA3_COMPLETION_DOCUMENT_PATHS) {
+    const text = files.get(relativePath) ?? "";
+    if (CURRENT_ALPHA3_RELEASE_BINDINGS.some((binding) => !text.includes(binding))) {
+      findings.push(finding("final-doc-alpha3-completion", relativePath));
+    }
+  }
+  for (const relativePath of ALPHA3_ENVELOPE_DOCUMENT_PATHS) {
+    const text = files.get(relativePath) ?? "";
+    if (CURRENT_ALPHA3_ENVELOPE_SHA256.some((sha256) => !text.includes(sha256))) {
+      findings.push(finding("final-doc-alpha3-registry", relativePath));
+    }
+  }
+  const alpha3TagMapFacts = [
+    "`alpha -> 0.1.0-alpha.3`; `latest -> 0.1.0-alpha.2`",
+    "`alpha/latest -> 0.1.0-alpha.3`"
+  ];
+  for (const relativePath of ["docs/M4-001_HANDOFF.md", "docs/RELEASE_GATES.md"]) {
+    const text = files.get(relativePath) ?? "";
+    if (alpha3TagMapFacts.some((fact) => !text.includes(fact))) {
+      findings.push(finding("final-doc-alpha3-registry", relativePath));
+    }
+  }
+  const nameAvailability = prose(files.get("docs/NAME_AVAILABILITY.md") ?? "");
   if (!m4Handoff.includes("`M4-001A` is complete") ||
-      !m4Handoff.includes("D-050 authorizes the fresh `0.1.0-alpha.3` four-package recovery") ||
+      !m4Handoff.includes("D-050's fresh `0.1.0-alpha.3` four-package recovery is complete") ||
       !m4Handoff.includes("`alpha.2` is a preserved partial publication, not a release") ||
+      !m4Handoff.includes("M4-001D is complete") ||
       !files.get("docs/RELEASE_GATES.md")?.includes("### M4-001A — contract admission (complete)") ||
-      !files.get("docs/RELEASE_GATES.md")?.includes("### M4-001D — fresh `alpha.3` candidate and publication (in progress)") ||
+      !files.get("docs/RELEASE_GATES.md")?.includes("### M4-001D — fresh `alpha.3` candidate and publication (complete)") ||
+      !releaseGates.includes("G6 — Release evidence | Satisfied under D-050") ||
+      !files.get("TODO.md")?.includes("| M4-001D | DONE |") ||
+      !files.get("TODO.md")?.includes("create-only lock checkpoint (historical)") ||
+      !files.get("HANDOFF.md")?.includes("M4-001D is DONE") ||
       !compatibilityProse.includes("Release Gates is the sole current release-phase owner") ||
       !compatibilityProse.includes("M4-001A contract admission") ||
       !compatibility.includes("fresh `alpha.3` boundary") ||
@@ -662,16 +718,21 @@ function validateFinalPublicDocuments(files, matrixDocument, packageDocument) {
       !m4Handoff.includes(CURRENT_ALPHA3_PRELOCK_COMMIT) ||
       !m4Handoff.includes(CURRENT_ALPHA3_LOCK_SHA256) ||
       !m4Handoff.includes(CURRENT_ALPHA3_SOURCE_PROJECTION_SHA256) ||
-      !m4Handoff.includes("The exact lock is admitted for tracking as Git blob") ||
-      !m4Handoff.includes("It remains\nuntracked; admission is not `S3`, `A3`, tag, hosted, or publication evidence") ||
       !releaseGates.includes(CURRENT_ALPHA3_LOCK_SHA256) ||
-      !releaseGates.includes("Exact Git blob eb875526ffefc81b4bbaa2c15ed4412b31a8d026 is admitted for tracking but remains untracked") ||
-      !compatibilityProse.includes("Independent exact review admits only its frozen bytes for tracking, but the lock remains untracked and has not become S3") ||
-      !releaseGates.includes("G6 — Release evidence") ||
-      !releaseGates.includes("In progress under D-050") ||
-      !compatibilityProse.includes("old alpha.2 candidate is immutable partial publication") ||
-      !compatibilityProse.includes("fresh alpha.3 boundary has admitted registry seed-tag and eventual-provenance behavior") ||
-      /M4-001A is active|M4-001D (?:is next|remains pending)|alpha\.3[^.]{0,80}(?:lock exists|review passed|tag exists|is released)/iu.test(compatibility)) {
+      !compatibilityProse.includes("old alpha.2 candidate remains immutable partial publication") ||
+      !compatibilityProse.includes("fresh alpha.3 boundary has admitted registry seed-tag and eventual-provenance behavior and completed its exact dual-builder lock") ||
+      !m4HandoffProse.includes("procedure then fresh-read exactly one normalized binding for each package") ||
+      !m4HandoffProse.includes("retired the bootstrap token only after all four reads") ||
+      !m4HandoffProse.includes("deleted the scoped GitHub secret only after token absence") ||
+      !m4HandoffProse.includes("configured/visible state, not tokenless OIDC execution proof") ||
+      !nameAvailability.includes("Release run 31756489430 subsequently completed the exact four-package 0.1.0-alpha.3 graph") ||
+      !nameAvailability.includes("GitHub Release 370278133 was created last") ||
+      !files.get("README.md")?.includes("M4-001D are complete") ||
+      !files.get("README.md")?.includes("M4-002") ||
+      !files.get("docs/ARCHITECTURE_TARGET.md")?.includes("M4-001D are complete") ||
+      !files.get("docs/ARCHITECTURE_TARGET.md")?.includes("M4-002") ||
+      !files.get("docs/SUPPORT_MATRIX.md")?.includes("M4-002") ||
+      /M4-001A is active|M4-001D (?:is next|remains pending)/iu.test(compatibility)) {
     findings.push(finding("final-doc-release-phase", "docs/M4-001_HANDOFF.md"));
   }
   if (!reproduction.includes("four\nreviewed public-alpha candidate tarballs") ||
@@ -705,11 +766,11 @@ function validateFinalPublicDocuments(files, matrixDocument, packageDocument) {
   }
 
   const nextActionRequirements = [
-    ["README.md", "0.1.0-alpha.3"],
+    ["README.md", "M4-002"],
     ["CHANGELOG.md", "D-050"],
     ["docs/KNOWN_LIMITATIONS.md", "D-050"],
-    ["docs/RELEASE_GATES.md", "M4-001D"],
-    ["docs/SUPPORT_MATRIX.md", "D-050"],
+    ["docs/RELEASE_GATES.md", "G6 is satisfied"],
+    ["docs/SUPPORT_MATRIX.md", "M4-002"],
     ["docs/releases/0.1.0-alpha.3.md", "D-050"]
   ];
   for (const [relativePath, requirement] of nextActionRequirements) {
@@ -935,31 +996,38 @@ test("final public-document mutations fail closed", async (t) => {
       .some(({ code }) => code === "final-doc-release-phase"), true);
   });
 
-  await t.test("the fresh lock is overclaimed as already admitted", () => {
+  await t.test("the completed alpha.3 phase regresses to in progress", () => {
     const value = mutateDocument("docs/M4-001_HANDOFF.md", (text) => text
       .replace(
-        "Generation establishes a candidate identity, not review or admission",
-        "Generation establishes a reviewed and admitted alpha.3 release lock"
+        "M4-001D is complete",
+        "M4-001D is in progress"
       ));
     assert.equal(validateFinalPublicDocuments(value, supportMatrix, packagePlan)
       .some(({ code }) => code === "final-doc-release-phase"), true);
   });
 
-  await t.test("the created alpha.3 lock is overclaimed as independently reviewed", () => {
+  await t.test("the successful alpha.3 release run binding disappears", () => {
     const value = mutateDocument("docs/M4-001_HANDOFF.md", (text) => text
-      .replace(
-        "The exact lock is admitted for tracking as Git blob",
-        "The exact lock is tracked and merged as S3 from Git blob"
-      ));
+      .replaceAll("31756489430", "removed-alpha3-success-run"));
     assert.equal(validateFinalPublicDocuments(value, supportMatrix, packagePlan)
-      .some(({ code }) => code === "final-doc-release-phase"), true);
+      .some(({ code }) => code === "final-doc-alpha3-completion"), true);
   });
 
-  await t.test("the active alpha.3 phase is overclaimed as released", () => {
+  await t.test("the completed alpha.3 core tag map drifts", () => {
     const value = mutateDocument("docs/M4-001_HANDOFF.md", (text) => text
       .replace(
-        "D-050 authorizes the fresh `0.1.0-alpha.3` four-package recovery",
-        "The alpha.3 tag exists and is released"
+        "`alpha -> 0.1.0-alpha.3`; `latest -> 0.1.0-alpha.2`",
+        "`alpha/latest -> 0.1.0-alpha.3`"
+      ));
+    assert.equal(validateFinalPublicDocuments(value, supportMatrix, packagePlan)
+      .some(({ code }) => code === "final-doc-alpha3-registry"), true);
+  });
+
+  await t.test("credential retirement is claimed before the four exact readbacks", () => {
+    const value = mutateDocument("docs/M4-001_HANDOFF.md", (text) => text
+      .replace(
+        "retired the bootstrap token only after\nall four reads",
+        "retired the bootstrap token before\nall four reads"
       ));
     assert.equal(validateFinalPublicDocuments(value, supportMatrix, packagePlan)
       .some(({ code }) => code === "final-doc-release-phase"), true);
