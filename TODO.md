@@ -1166,7 +1166,7 @@ criterion is recorded in the repository.
 | M4-001A | DONE | Implement and verify the fail-closed `0.1.0-alpha.1` release contract authorized by D-048, without treating authorization as execution evidence. | Package-plan schema 3, the release plan, release-lock validator, exact-tag/history admission, dual-builder tar-payload equality with fixed-builder release-envelope identity, registry recovery states, public workflow policy, documentation, provenance, and adversarial tests agree; mutable external lifecycle state remains outside the locked-input contract. |
 | M4-001B | DONE | Preserve the completed immutable `alpha.1` candidate/tag gates as retired unpublished history, then admit the fresh D-049 `0.1.0-alpha.2` package projection, dual-builder lock, reviewed merge `S2`, single-parent attestation `A2`, exact history relation, annotated tag, and tag-hosted gates. | Node 22.23.2/npm 10.9.8 and Node 24.19.0/npm 11.17.0 produced equal canonical payloads; the tracked lock, verified `S2`, sole-child exact-grant `A2`, annotated `v0.1.0-alpha.2 -> S2`, and tag Public CI/Security were admitted before npm publication. |
 | M4-001C | BLOCKED | Preserve the exact partial `alpha.2` registry prefix after attempt 2 published core and stopped; never complete that version through tag movement, repack, unpublish, or dist-tag repair. | Exact reviewed core bytes and later certificate-bound provenance are verified; the other three versions and GitHub Release remain absent; both old tags/locks and the registry write are immutable. The former no-`latest` exit condition is impossible because npm package metadata requires `latest`. |
-| M4-001D | IN_PROGRESS | Implement and execute D-050's fresh `0.1.0-alpha.3` forward recovery with registry seed-`latest` semantics and bounded provenance propagation. | A fresh dual-builder lock and `S3 -> A3`/annotated-tag/hosted chain precede publication; exact npm publish operations yield core `alpha -> alpha.3` with frozen `latest -> alpha.2`, and the three first-created identities yield `alpha/latest -> alpha.3`; all bytes and certificate-bound attestations pass, and the GitHub prerelease is last. After it succeeds, a separate local interactive npm 11.17.0 procedure fresh-readbacks four exact Trusted Publisher settings; the release workflow does not modify npm/GitHub settings. Only after four exact reads does the operator uniquely revoke the bootstrap token by full ID, prove it absent, then delete and fresh-prove absent only the `npm-release` environment's `NPM_TOKEN` in `why7682/pptx-compiler`. Configured/visible is not execution proof; only a future tokenless OIDC publish proves the bindings. No separate `npm dist-tag add/rm` or unpublish occurs. |
+| M4-001D | DONE | Implement and execute D-050's fresh `0.1.0-alpha.3` forward recovery with registry seed-`latest` semantics and bounded provenance propagation. | A fresh dual-builder lock and `S3 -> A3`/annotated-tag/hosted chain preceded publication; exact npm publish operations yielded core `alpha -> alpha.3` with frozen `latest -> alpha.2`, and the three first-created identities yielded `alpha/latest -> alpha.3`; all bytes and certificate-bound attestations passed, and the GitHub prerelease was last. A separate local interactive npm 11.17.0 procedure then fresh-read four exact Trusted Publisher settings; only afterward did the operator uniquely revoke the bootstrap token by full ID and fresh-prove it absent, then delete and fresh-prove absent only the `npm-release` environment's `NPM_TOKEN` in `why7682/pptx-compiler`. Configured/visible is not execution proof; only a future tokenless OIDC publish proves the bindings. No separate `npm dist-tag add/rm` or unpublish occurred. |
 | M4-002 | PENDING | Collect compatibility evidence without expanding claims beyond tests. | Each tested external template records only redacted feature-level results and the public fixture remains sufficient for CI. |
 | M4-003 | PENDING | Define beta and 1.0 stability, migration, deprecation, and support promises. | Compatibility policy and conformance suite enforce the promises. |
 
@@ -1419,14 +1419,15 @@ invalidated it, and D-050 plus M4-001D now own the seed-`latest` recovery model.
   visible on npm is not execution proof; a future tokenless OIDC publication is
   the first proof that the binding works.
 
-### M4-001D `alpha.3` create-only lock checkpoint — 2026-08-14
+### M4-001D `alpha.3` create-only lock checkpoint (historical) — 2026-08-14
 
 - Exact pre-lock commit
   `131b15d80b9dfc51b48092a13357348c242d4103` supplied the six frozen locked
   inputs, 89 mapped sources, and both fixed guarded builder results.
   Create-only generation wrote schema-2
   `packaging/releases/0.1.0-alpha.3.lock.json`.
-- The untracked lock is 6218 bytes, mode `100644`, with SHA-256
+- At that historical checkpoint, the untracked lock was 6218 bytes, mode
+  `100644`, with SHA-256
   `f5e3b8ceff284b908b6febb678501f63e07d50eff041b3c60532a8f6511dd675`
   and package-source projection
   `71269e5d7b25ada8f208893e57a3160766374a51bb23808b5df18893e60d9548`.
@@ -1434,14 +1435,56 @@ invalidated it, and D-050 plus M4-001D now own the seed-`latest` recovery model.
   evidence and gzip envelopes plus equal canonical decompressed tar payloads
   for all four packages.
 - Independent no-local/no-hardlink regeneration and direct Git-tree/tar
-  recomputation report 0 blocker, 0 high, and 0 medium with Taste=good. They
-  admit only the exact mode-`100644`, 6218-byte lock at Git blob
-  `eb875526ffefc81b4bbaa2c15ed4412b31a8d026` for tracking; it remains
-  untracked and any byte change requires a new dual-builder and independent
-  review. M4-001D stays `IN_PROGRESS`. No `S3`, `A3`, annotated tag, tag-hosted
-  result, npm `alpha.3` package, registry provenance/signature or dist-tag
-  result, GitHub Release, Trusted Publisher binding, bootstrap-token
-  revocation, or environment-secret deletion exists by this checkpoint.
+  recomputation reported 0 blocker, 0 high, and 0 medium with Taste=good. They
+  admitted only the exact mode-`100644`, 6218-byte lock at Git blob
+  `eb875526ffefc81b4bbaa2c15ed4412b31a8d026` for tracking; it was still
+  untracked and any byte change required a new dual-builder and independent
+  review. M4-001D stayed `IN_PROGRESS`. No `S3`, `A3`, annotated tag,
+  tag-hosted result, npm `alpha.3` package, registry provenance/signature or
+  dist-tag result, GitHub Release, Trusted Publisher binding, bootstrap-token
+  revocation, or environment-secret deletion existed at that checkpoint.
+
+### M4-001D completion — 2026-08-14
+
+- The preceding create-only checkpoint remains historical. GitHub subsequently
+  merged the unchanged lock as verified
+  `S3=20f7f64faa8c8d688922896296c134b25bc58e7f`; exact-grant attestation
+  `A3=7270ae7814583117050abac648ba96067e4fce67` is its sole child. Annotated tag
+  object `46c5360bd5daa48a1b493f1c9310b2358b3d6e6d` peels to `S3`.
+- A3 Public CI/Security runs `31750359756`/`31750359778` passed. Tag Public
+  CI/Security runs `31750881903`/`31750881914` passed on unchanged `S3`.
+- Release run `31751437354` failed closed twice without rollback or a second
+  write after an uncertain result. Attempt 1 left only exact
+  `pptx-compiler-core@0.1.0-alpha.3` present after bounded propagation
+  exhausted; attempt 2 stopped at the GitHub-repository precondition before
+  another npm write. A no-write cooldown and two time-separated exact official
+  reads preserved that one-package prefix.
+- Fresh release run `31756489430` then passed admission, completed the remaining
+  dependency-order registry suffix, reverified all four official tarballs,
+  certificate-bound provenance/signatures, and complete package-level tag maps,
+  and created GitHub Release `370278133` last. The non-draft prerelease has tag
+  `v0.1.0-alpha.3`, target `S3`, and no assets.
+- The official Node 24/npm 11 envelopes are exact: core 118555 bytes / SHA-256
+  `60c9466bff289b72e88752bd21658f170c33d04740aac3e7cbfe1a823784905d`;
+  native 11012 / `d66da46daf4369a51b252f971205465393ffd827a1908669d9a44dba2bfaeb63`;
+  public 21242 / `17cc4300f012e1a93b745c7e91f6ec1a05dc3232566166f9253054d447f5358a`;
+  CLI 13829 / `a3713bd6d88628148271b9122efbf7dce7d41d1a1120220fb094f6488cc30cb8`.
+  Core has `alpha -> 0.1.0-alpha.3` and frozen
+  `latest -> 0.1.0-alpha.2`; each other package has both `alpha` and `latest`
+  at `0.1.0-alpha.3`.
+- A separate local interactive npm 11.17.0 procedure fresh-read exactly one
+  normalized Trusted Publisher binding for each package: provider
+  `github-actions`, owner `why7682`, repository `pptx-compiler`, workflow
+  `alpha-release.yml`, environment `npm-release`, and allowed action npm publish
+  only. After all four reads, the operator uniquely revoked the bootstrap token
+  by full ID and fresh-proved it absent, then deleted and fresh-proved absent
+  only the `npm-release` environment secret `NPM_TOKEN`. No ID or secret value is
+  recorded. These bindings are configured/visible, not tokenless OIDC execution
+  proof.
+- No unpublish, old-tag movement, version reuse, separate dist-tag mutation, or
+  destructive reconciliation occurred. `alpha.1` and `alpha.2` remain immutable
+  history, support remains 0/22/3/35 with its global switch false, and
+  D-047/M3-008 remains deferred.
 
 ## Deferred follow-through from the predecessor project
 

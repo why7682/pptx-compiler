@@ -149,6 +149,17 @@ and certificate-bound provenance verification passed, while the other three
 versions and GitHub Release remained absent. This is partial historical release
 evidence, not the current four-package candidate.
 
+The completed `alpha.3` source chain is
+`S3=20f7f64faa8c8d688922896296c134b25bc58e7f` followed by sole-child
+`A3=7270ae7814583117050abac648ba96067e4fce67`; annotated tag object
+`46c5360bd5daa48a1b493f1c9310b2358b3d6e6d` peels to `S3`. A3 Public
+CI/Security runs `31750359756`/`31750359778` and tag Public CI/Security runs
+`31750881903`/`31750881914` passed. Release run `31756489430` exact-verified
+all four official npm packages and created non-draft prerelease
+[`v0.1.0-alpha.3`](https://github.com/why7682/pptx-compiler/releases/tag/v0.1.0-alpha.3)
+last as GitHub Release `370278133`, target `S3`, with no assets. Release Gates
+owns the complete lifecycle evidence and its failure/cooldown history.
+
 The machine-readable matrix currently contains 60 rows: 0 `supported`, 22
 `experimental`, 3 `manual`, and 35 `unsupported`. The six platform/runtime rows
 remain experimental because platform execution evidence alone cannot promote a
@@ -170,34 +181,25 @@ product capability or enable the global support switch.
 - Windows preserves the logical create-only state machine and flushed file
   bytes, but Node exposes no parent-directory fsync equivalent there; no sudden-
   power-loss directory-entry persistence claim is made.
-- D-050 authorizes the exact `alpha.3` recovery, but this README does not
-  assert mutable external lifecycle state. Exact tag/lock identity,
-  official-registry bytes, npm provenance, and the GitHub Release record own
-  those facts.
+- D-050 authorized the exact `alpha.3` recovery. Its completed lifecycle does
+  not change support: exact tag/lock identity, official-registry bytes, npm
+  provenance, and the GitHub Release record own those facts.
 
 ## Next authorized action
 
-D-050 authorizes annotated tag `v0.1.0-alpha.3`, the four public npm packages
-at exact `0.1.0-alpha.3` under dist-tag `alpha`, GitHub Actions npm provenance,
-the GitHub prerelease, and the post-publication credential migration. Release
-Gates records the current phase. The next chain admits the corrected registry
-model, freezes both builder results into a fresh lock, establishes reviewed
-`S3 -> A3`, passes tag-hosted gates, then publishes in dependency order with
-bounded provenance propagation and exact complete tag-map checks. The GitHub
-Release is created last. After it succeeds, the existing `alpha-release.yml`
-workflow does not automatically modify npm or GitHub settings. An external,
-local, interactive npm 11.17.0 procedure must fresh-read each exact package's
-Trusted Publisher setting, create only from an empty list, and accept an
-idempotent retry only when exactly one normalized binding matches owner
-`why7682`, repository `pptx-compiler`, workflow filename `alpha-release.yml`,
-environment `npm-release`, and allowed action npm publish only. Any mismatch
-hard-stops. After all four fresh readbacks match, the operator uniquely selects
-and revokes the bootstrap token by its full ID, proves it absent with a fresh
-token list, then deletes only the `NPM_TOKEN` environment secret from
-`why7682/pptx-compiler`'s `npm-release` environment and proves that name absent
-with a fresh secret list. These checks establish configured/visible state, not
-execution proof; only a future tokenless OIDC publication can prove the binding
-works.
+D-050 and M4-001D are complete. All four exact package identities, provenance,
+tag maps, the GitHub prerelease, four Trusted Publisher readbacks, bootstrap-
+token retirement, and `NPM_TOKEN` environment-secret deletion are recorded by
+their exact state owners. The bindings establish configured/visible state, not
+execution proof; only a future tokenless OIDC publication can prove they work.
+The release workflow does not automatically modify npm or GitHub settings; the
+completed transition was an external local interactive npm 11.17.0 procedure.
+No further `alpha.3` release mutation is authorized.
+
+The next product milestone is M4-002's bounded compatibility evidence. It must
+use only redacted feature-level results, preserve the public synthetic fixture
+as sufficient for CI, and must not promote support or generalize one candidate
+to arbitrary templates.
 Main-branch protection remains deliberately
 deferred by D-047/M3-008 and must not be claimed as active.
 

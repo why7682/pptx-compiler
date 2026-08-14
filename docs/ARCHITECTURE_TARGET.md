@@ -469,10 +469,19 @@ The canonical workflow also executes source and policy admission, declaration
 typechecking, the complete public test suite, guarded four-package creation,
 clean joint installation, the installed CLI spine, working-tree rechecks, and
 drift detection. These object-bound workflow facts preserve the earlier
-M3-004B implementation evidence. They do not cover the current uncommitted M4
-bytes or claim that every platform or capability is supported, that static
-analysis found every vulnerability, or that a registry artifact equals the
-reviewed tarball.
+M3-004B implementation evidence. They do not by themselves claim that every
+platform or capability is supported, that static analysis found every
+vulnerability, or that a registry artifact equals a reviewed tarball.
+
+The completed release chain independently binds those later facts. Verified
+`S3=20f7f64faa8c8d688922896296c134b25bc58e7f` is followed by sole-child
+`A3=7270ae7814583117050abac648ba96067e4fce67`; annotated tag object
+`46c5360bd5daa48a1b493f1c9310b2358b3d6e6d` peels to `S3`. A3 runs
+`31750359756`/`31750359778`, tag runs `31750881903`/`31750881914`, and final
+release run `31756489430` passed. The release run verified the four fixed npm
+envelopes, provenance/signatures, and complete tag maps before GitHub Release
+`370278133` was created last on `S3` with no assets. This release evidence does
+not promote a support row or make the candidate a delivery-authorized product.
 
 The normative matrix currently contains 60 rows:
 
@@ -503,8 +512,8 @@ capability or enable global support.
   a pass.
 - Windows has no Node parent-directory fsync equivalent, so the durability claim
   is narrower than on POSIX.
-- D-050 authorizes four `0.1.0-alpha.3` package versions, but authorization does
-  not prove publication. Bare npm installation is not a coherent prerelease
+- D-050 authorized four `0.1.0-alpha.3` package versions; authorization alone
+  did not prove publication. Bare npm installation is not a coherent prerelease
   selector because core's frozen `latest` remains `alpha.2` while the other
   identities seed at `alpha.3`; use exact versions or `@alpha`. Actual tag, lock, registry provenance, GitHub Release,
   and reviewed-to-published equality facts belong to their exact external and
@@ -514,24 +523,15 @@ capability or enable global support.
 
 ## Next authorized action
 
-D-050 supplies the exact `alpha.3` release authorization.
-[`docs/RELEASE_GATES.md`](RELEASE_GATES.md) owns current phase state; the architecture fixes the dependency order. The release
-must admit the corrected registry/propagation contract, require fresh dual-
-builder equality, bind fixed-builder envelopes in a new lock, establish
-`S3 -> A3`, and pass tag-hosted gates before npm. Ordered publication must prove
-official bytes, certificate-bound provenance, and complete tag maps. Only the
-publish itself may assign `alpha` and seed a first identity's `latest`; no
-separate dist-tag repair exists. The GitHub Release follows last. Trusted
-Publisher closure then runs outside the existing `alpha-release.yml` workflow
-as a local interactive npm 11.17.0 procedure; the workflow does not
-automatically modify npm or GitHub settings. Each exact package is fresh-listed,
-created only from an empty list, and accepted on retry only as one normalized
-exact binding. After four fresh exact reads, the operator uniquely identifies
-and revokes the bootstrap token by full ID and fresh-proves it absent, then
-deletes and fresh-proves absent only the `NPM_TOKEN` environment secret at
-`why7682/pptx-compiler`/`npm-release`. This records configured/visible state,
-not execution proof; a future tokenless OIDC publication must prove the binding
-works.
+D-050 and M4-001D are complete. The exact package graph, release declaration,
+four Trusted Publisher readbacks, bootstrap-token retirement, and environment-
+secret deletion require no further `alpha.3` mutation. Saved Trusted Publisher
+configuration is configured/visible state, not execution proof; a future
+tokenless OIDC publication must prove the bindings work.
+
+The next architecture work is M4-002's bounded compatibility-evidence boundary.
+It may record only redacted feature-level observations and cannot broaden the
+public input class, package graph, support matrix, or delivery authority.
 D-047/M3-008 branch
 protection remains deferred and must be resumed explicitly rather than folded
 into the release path by implication.

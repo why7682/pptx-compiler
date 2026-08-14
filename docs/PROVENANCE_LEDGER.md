@@ -3661,6 +3661,110 @@ notes: This exact nine-endpoint checkpoint contains eight modified state,
   NPM_TOKEN environment-secret deletion, or GitHub Release is claimed
 ```
 
+### M4-001D `alpha.3` post-release completion and credential closure
+
+```yaml
+paths:
+  - HANDOFF.md
+  - README.md
+  - TODO.md
+  - docs/ARCHITECTURE_TARGET.md
+  - docs/COMPATIBILITY_POLICY.md
+  - docs/M4-001_HANDOFF.md
+  - docs/NAME_AVAILABILITY.md
+  - docs/PROVENANCE_LEDGER.md
+  - docs/RELEASE_GATES.md
+  - docs/SUPPORT_MATRIX.md
+  - provenance/records.json
+  - tests/final-public-docs.test.mjs
+kind: exact post-release lifecycle projection for the completed D-050 alpha.3
+  source, hosted, registry, declaration, Trusted Publisher, and scoped
+  credential-retirement boundaries, with support and future-proof boundaries
+  unchanged
+origin: independently authored from the admitted D-050 release contract and
+  immutable release lock, GitHub source/ref and hosted-run facts, bounded
+  read-only official npm-registry and GitHub rereads, the operator's exact
+  npm 11.17.0 Trusted Publisher/token procedure, and repository-owned focused
+  document assertions. No predecessor source, external implementation, hosted
+  log bytes, raw API/registry payload, package archive, presentation, private
+  fixture, token ID/value, credential, OTP, or secret value entered these bytes
+original_author_or_holder: Elliot Wu
+created_or_reviewed_on: 2026-08-14
+license_or_rights_basis: MIT
+third_party_dependencies:
+  - Node.js 24.19.0 (MIT; fixed read-only release-verification runtime, not
+    vendored)
+  - npm CLI 11.17.0 (Artistic-2.0; fixed provenance, Trusted Publisher, and
+    token readback/management CLI, not vendored)
+  - sigstore 4.1.1 (Apache-2.0; bundled in the exact npm 11.17.0 installation,
+    used for certificate-bound provenance verification, and not vendored)
+private_information_review: passed; the exact current bytes record only public
+  repository/package identities, source/ref object IDs, hosted run and Release
+  IDs, public tarball byte counts/digests and tag maps, public provenance and
+  signature conclusions, non-secret Trusted Publisher fields, and scoped
+  credential-presence conclusions. The operator selected the target bootstrap
+  token by its unique full ID, but neither that ID nor any token/secret value,
+  password, OTP, authentication URL, raw API response, local path/hostname,
+  private fixture, presentation, or generated archive is recorded. The
+  pre-existing non-target first-alpha token is stated only as unchanged/present
+project_constant_removal: passed; this projection reuses the single D-050
+  package/release/support authorities and adds no second lifecycle root,
+  support claim, package graph, compatibility alias, workflow mutation,
+  dist-tag repair, tag movement, unpublish rollback, or credential authority.
+  Configured/visible Trusted Publisher state remains distinct from a future
+  tokenless OIDC publication proof, and D-047/M3-008 remains deferred
+public_fixture_conformance: applicable; exact lock-containing source
+  S3=20f7f64faa8c8d688922896296c134b25bc58e7f is the sole parent of exact-grant
+  accepted-main attestation A3=7270ae7814583117050abac648ba96067e4fce67.
+  Annotated tag object 46c5360bd5daa48a1b493f1c9310b2358b3d6e6d peels to unchanged S3. A3 Public
+  CI/Security runs 31750359756/31750359778 and tag Public CI/Security runs
+  31750881903/31750881914 passed. Release run 31751437354 failed closed:
+  attempt 1 published only exact core alpha.3 before bounded stabilization
+  exhausted, and attempt 2 stopped at the GitHub-repository precondition before
+  another npm write. After the no-write cooldown and two time-separated exact
+  official-state samples, fresh run 31756489430 completed all three jobs and
+  the remaining dependency-order suffix without rollback, unpublish, separate
+  dist-tag mutation, or blind republish. Fresh official-registry reads exact-
+  matched the fixed Node 24/npm 11 publication envelopes and complete tag maps:
+  core 118555 bytes / SHA-256
+  60c9466bff289b72e88752bd21658f170c33d04740aac3e7cbfe1a823784905d,
+  alpha -> 0.1.0-alpha.3 and latest -> 0.1.0-alpha.2; native 11012 /
+  d66da46daf4369a51b252f971205465393ffd827a1908669d9a44dba2bfaeb63;
+  public-synthetic 21242 /
+  17cc4300f012e1a93b745c7e91f6ec1a05dc3232566166f9253054d447f5358a;
+  and CLI 13829 /
+  a3713bd6d88628148271b9122efbf7dce7d41d1a1120220fb094f6488cc30cb8,
+  with alpha/latest -> 0.1.0-alpha.3 for each of the latter three. All four
+  exact tarballs, registry signatures, and certificate-bound SLSA v1
+  provenance passed before non-draft prerelease 370278133 was created last on
+  S3 with no assets; its exact 11153-byte body has SHA-256
+  a4bc306f5006ab3d6a4081a7b94e9ac3001cc387eeebf0d01c7d31de3e23881b.
+  After the unchanged release workflow stopped, fresh npm readbacks showed
+  exactly one binding for each package: raw type github / file
+  alpha-release.yml / repository why7682/pptx-compiler / environment
+  npm-release / sole permission createPackage, normalized to provider
+  github-actions and npm publish only, with createStagedPackage absent. Only
+  then did the operator revoke the uniquely selected target bootstrap token by
+  full ID and fresh-prove the target absent; the non-target first-alpha token
+  remained unchanged/present. A fresh GitHub environment-secret read showed
+  npm-release NPM_TOKEN absent. Focused current-byte document assertions bind
+  these facts while preserving support at 0 supported, 22 experimental,
+  3 manual, and 35 unsupported with the global support switch false
+independent_review: passed; one bounded independent read-only review of the
+  exact twelve-endpoint current-byte relation reports B0/H0/M0 with Taste=good
+  and explicitly permits closure. It confirmed the external-evidence
+  projection, exact endpoint/record closure, leakage boundary, unchanged
+  support/workflow state, and configured-visible-versus-OIDC-proof distinction
+notes: This relation contains exactly twelve modified tracked endpoints and no
+  new tracked path, so provenance/records.json remains at 291 records. It
+  records completed M4-001D evidence without modifying the release workflow or
+  authorizing another alpha.3 publication, tag, Release, dist-tag, Trusted
+  Publisher, token, or secret mutation. Alpha.1 remains retired-unpublished;
+  alpha.2 remains immutable partial-publication history; support is unchanged;
+  D-047/M3-008 remains deferred; and configured/visible Trusted Publisher state
+  is not proof of a working tokenless OIDC publication
+```
+
 The XML namespace, relationship-type, and MIME strings are interoperability
 identifiers from the public format specification. They do not convey third-
 party presentation content. The fictional `Synthetic Sans` typeface name does
